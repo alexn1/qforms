@@ -20,11 +20,11 @@ import { HttpError } from '../../../HttpError';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { home } from '../../home';
-
 import * as text from '../../text';
 import { ApplicationData } from '../../../../data';
 import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { NextFunction } from 'express';
+import { debug } from '../../../../console';
 
 const pkg = require('../../../../../package.json');
 
@@ -74,14 +74,14 @@ export class BkApplication<
     async getScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // console.debug('publicDirPath:', publicDirPath);
+        // debug('publicDirPath:', publicDirPath);
         return (await BkHelper.getFilePaths(publicDirPath, 'js')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
 
     async deinit(): Promise<void> {
-        console.debug(`Application.deinit: ${this.getName()}`);
+        debug(`Application.deinit: ${this.getName()}`);
         await super.deinit();
 
         // databases
@@ -125,7 +125,7 @@ export class BkApplication<
     }
 
     async fill(context: Context): Promise<ApplicationData> {
-        // console.debug('Application.fill');
+        // debug('Application.fill');
         const start = Date.now();
         const response = (await super.fill(context)) as ApplicationData;
 
@@ -186,7 +186,7 @@ export class BkApplication<
     }
 
     async createMenu(context: Context): Promise<void> {
-        // console.debug('Application.createMenu');
+        // debug('Application.createMenu');
         const menu: Record<string, any[]> = {};
         const nav: Record<string, any[]> = {};
 
@@ -241,7 +241,7 @@ export class BkApplication<
     }
 
     async createPage(pageLinkName: string): Promise<BkPage> {
-        // console.debug('Application.createPage', pageLinkName);
+        // debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -260,7 +260,7 @@ export class BkApplication<
     }
 
     async getPage(context: Context, pageLinkName: string): Promise<BkPage> {
-        // console.debug('Application.getPage', pageLinkName);
+        // debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -278,7 +278,7 @@ export class BkApplication<
     }
 
     async fillPages(context: Context): Promise<any[]> {
-        // console.debug('Application.fillPages', context.query.page);
+        // debug('Application.fillPages', context.query.page);
         const pages: any[] = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -295,7 +295,7 @@ export class BkApplication<
     }
 
     async authenticate(context: Context, username: string, password: string): Promise<any> {
-        console.debug('Application.authenticate');
+        debug('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -314,7 +314,7 @@ export class BkApplication<
     }
 
     async rpc(name: string, context: Context) {
-        // console.debug('Application.rpc', name, context.getReq().body);
+        // debug('Application.rpc', name, context.getReq().body);
         if (this[name]) return await this[name](context);
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
@@ -324,7 +324,7 @@ export class BkApplication<
     }
 
     /* async request(options) {
-        console.debug(colors.magenta('Application.request'), options);
+        debug(colors.magenta('Application.request'), options);
         return await axios(options);
     } */
 
@@ -333,7 +333,7 @@ export class BkApplication<
     }
 
     getEnvVarValue(name: string) {
-        // console.debug(`Application.getEnvVarValue: ${name}`);
+        // debug(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
         const obj = this.data.env[env];
@@ -360,7 +360,7 @@ export class BkApplication<
     async initContext(context: Context): Promise<void> {}
 
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
-        // console.debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
+        // debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path.basename(path.dirname(filePath));
         const fileName = path.basename(filePath, path.extname(filePath));
@@ -381,7 +381,7 @@ export class BkApplication<
     }
 
     static async loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo> {
-        // console.debug('Application.loadAppInfo', appFilePath);
+        // debug('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
@@ -389,7 +389,7 @@ export class BkApplication<
     }
 
     static async getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]> {
-        // console.debug('BkApplication.getAppInfos', appsDirPath);
+        // debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
@@ -441,20 +441,20 @@ export class BkApplication<
     addClient(webSocket: WebSocket): void {
         // add to clients
         this.clients.push(webSocket);
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
     }
 
     removeClient(webSocket: WebSocket): void {
         const i = this.clients.indexOf(webSocket);
         // @ts-ignore
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        // console.debug('i:', i);
+        // debug('i:', i);
         this.clients.splice(i, 1);
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
     }
 
     broadcastDomesticResultToClients(context: Context, result: Result): void {
-        console.debug(
+        debug(
             'Application.broadcastDomesticResultToClients',
             context.getReq()!.body.uuid,
             result,
@@ -471,7 +471,7 @@ export class BkApplication<
     }
 
     broadcastForeignResultToClients(context: Context, result: Result): void {
-        console.debug(
+        debug(
             'Application.broadcastForeignResultToClients',
             context.getReq()!.body.uuid,
             result,
@@ -521,7 +521,7 @@ export class BkApplication<
     }
 
     async handleGetFile(context: Context, next: NextFunction) {
-        // console.debug('Application.handleGetFile', context.getUri());
+        // debug('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper.exists(filePath)) {
             // context.setVersionHeaders(pkg.version, this.getVersion());

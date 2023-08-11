@@ -3,6 +3,7 @@ import { BackHostApp } from '../../BackHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
 import { AppInfo } from '../../AppInfo';
 import { Context } from '../../Context';
+import { debug } from '../../../console';
 
 export class EditorController {
     constructor(public appInfo: AppInfo, public hostApp: BackHostApp) {}
@@ -10,14 +11,14 @@ export class EditorController {
     async init(context: Context) {}
 
     async getView(params) {
-        console.debug('EditorController.getView');
+        debug('EditorController.getView');
         return {
             data: {},
         };
     }
 
     createApplicationEditor() {
-        console.debug('EditorController.createApplicationEditor');
+        debug('EditorController.createApplicationEditor');
         return new ApplicationEditor(
             this.appInfo.appFile,
             path.join(this.hostApp.backendDirPath, 'editor'),

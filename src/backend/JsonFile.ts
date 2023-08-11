@@ -1,5 +1,6 @@
 import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
+import { debug } from '../console';
 
 export class JsonFile {
     content: string | null = null;
@@ -26,7 +27,7 @@ export class JsonFile {
     }
 
     async save(): Promise<void> {
-        console.debug('JsonFile.save', this.filePath);
+        debug('JsonFile.save', this.filePath);
         this.content = JSON.stringify(this.data, null, 4);
         await BkHelper.writeFile2(this.filePath, this.content);
     }

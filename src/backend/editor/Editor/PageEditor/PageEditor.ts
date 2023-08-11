@@ -4,6 +4,7 @@ import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
 import { BkPageScheme } from '../../../viewer/BkModelScheme/BkPageScheme/BkPageScheme';
+import { debug } from '../../../../console';
 
 export class PageEditor extends Editor<BkPageScheme> {
     constructor(
@@ -36,7 +37,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     setAttr(name: string, value: string) {
-        console.debug('PageEditor.setAttr', name, value);
+        debug('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
@@ -91,7 +92,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async getCustomDirPath() {
-        console.debug('PageEditor.getCustomDirPath');
+        debug('PageEditor.getCustomDirPath');
         const customDirPath = await this.getParent<Editor>().getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }

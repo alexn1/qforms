@@ -5,38 +5,39 @@ import { DbConfig } from '../../BkDatabase';
 import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
+import { debug } from '../../../../../../console';
 
 export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     pool: { [configString: string]: Pool } = {};
     /* constructor(data, parent?) {
-        console.debug('new PostgreSqlDatabase');
+        debug('new PostgreSqlDatabase');
         super(data, parent);
     } */
 
-    /*static async create(data, parent) {
-        // console.debug('PostgreSqlDatabase.create');
+    /* static async create(data, parent) {
+        // debug('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
-    }*/
+    } */
 
     async deinit(): Promise<void> {
-        console.debug(`PostgreSqlDatabase.deinit: ${this.getName()}`);
+        debug(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
 
         for (const configString in this.pool) {
             const pool = this.pool[configString];
-            console.debug('ending pool:', configString, pool.totalCount);
+            debug('ending pool:', configString, pool.totalCount);
             await pool.end();
-            console.debug('pool ended');
+            debug('pool ended');
         }
         this.pool = {};
     }
 
     getPool(context: Context): Pool {
-        // console.debug('PostgreSqlDatabase.getPool');
+        // debug('PostgreSqlDatabase.getPool');
         const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
-            console.debug(`creating connection pool for ${this.getName()}(${configString})`);
+            debug(`creating connection pool for ${this.getName()}(${configString})`);
             this.pool[configString] = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool[configString];
@@ -47,7 +48,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async connect(context: Context): Promise<void> {
-        console.debug('PostgreSqlDatabase.connect', this.getName());
+        debug('PostgreSqlDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
         this.checkDeinited();
         const name = this.getName();
@@ -59,7 +60,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async release(context: Context): Promise<void> {
-        console.debug('PostgreSqlDatabase.release', this.getName());
+        debug('PostgreSqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         this.getConnection(context).release();
         context.connections[this.getName()] = null;
@@ -71,7 +72,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
         if (context.query.sql) {
-            console.debug(
+            debug(
                 colors.blue('PostgreSqlDatabase.queryResult'),
                 {
                     query,
@@ -82,11 +83,11 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
-            console.debug('sql:', sql);
-            console.debug('values:', values);
+            debug('sql:', sql);
+            debug('values:', values);
         }
         const result = await this.getConnection(context).query(sql, values);
-        // console.debug('cnn.query result:', result);
+        // debug('cnn.query result:', result);
         return result;
     }
 
@@ -95,16 +96,16 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
-        console.debug(
+        debug(
             colors.blue('static PostgreSqlDatabase.queryResult'),
             query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
         );
         BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        // console.debug('sql:', sql);
-        // console.debug('values:', values);
+        // debug('sql:', sql);
+        // debug('values:', values);
         const result = await pool.query(sql, values);
-        // console.debug('cnn.query result:', result);
+        // debug('cnn.query result:', result);
         return result;
     }
 
@@ -113,25 +114,25 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
-        // console.debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
+        // debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
 
     async begin(context: Context): Promise<void> {
-        console.debug('PostgreSqlDatabase.begin', this.getName());
+        debug('PostgreSqlDatabase.begin', this.getName());
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('begin');
     }
 
     async commit(context: Context): Promise<void> {
-        console.debug('PostgreSqlDatabase.commit', this.getName());
+        debug('PostgreSqlDatabase.commit', this.getName());
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('commit');
     }
 
     async rollback(context: Context, err): Promise<void> {
-        console.debug(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
+        debug(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
@@ -140,15 +141,15 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         query: string,
         params: { [name: string]: any } | null,
     ): { sql: string; values: any } {
-        // console.debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
-        // console.debug('params:', params);
+        // debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
+        // debug('params:', params);
         if (!params) {
             return { sql: query, values: null };
         }
         const usedValues = BkSqlDatabase.getUsedParams(query);
-        // console.debug('usedValues:', usedValues);
+        // debug('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
-        // console.debug('keys:', keys);
+        // debug('keys:', keys);
         const values = keys.map((key) => params[key]);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
@@ -160,13 +161,13 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     getDeleteQuery(tableName: string, rowKeyValues: any): string {
-        // console.debug('PostgreSqlDatabase.getDeleteQuery');
+        // debug('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
 
@@ -175,7 +176,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     static getUpdateQuery(tableName: string, values: any, where: any): string {
-        // console.debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
+        // debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
@@ -186,34 +187,34 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     getInsertQuery(tableName: string, values: any): string {
-        // console.debug('PostgreSqlDatabase.getInsertQuery');
+        // debug('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length) return `insert into "${tableName}" default values`;
         const columnsString = columns.map((column) => `"${column}"`).join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
 
     async getTableList(): Promise<string[]> {
-        console.debug('PostgreSqlDatabase.getTableList');
+        debug('PostgreSqlDatabase.getTableList');
         const rows = await this.query(
             `select "table_name" from information_schema.tables where table_schema = 'public'`,
         );
         const tableList = rows.map((row) => row.table_name);
-        // console.debug('tableList:', tableList);
+        // debug('tableList:', tableList);
         return tableList;
     }
 
     async getTableInfo(table: string) {
-        console.debug('PostgreSqlDatabase.getTableInfo');
+        debug('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
-        // console.debug('keyColumns:', keyColumns);
+        // debug('keyColumns:', keyColumns);
         const rows = await this.query(
             `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`,
         );
-        // console.debug('getTableInfo rows:', rows);
+        // debug('getTableInfo rows:', rows);
         const tableInfo = rows.map((row) => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
@@ -224,7 +225,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
             comment: null,
             dbType: row.data_type,
         }));
-        // console.debug('tableInfo:', tableInfo);
+        // debug('tableInfo:', tableInfo);
         return tableInfo;
     }
 
@@ -253,7 +254,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async getTableKeyColumns(table: string) {
-        console.debug('PostgreSqlDatabase.getTableKeyColumns');
+        debug('PostgreSqlDatabase.getTableKeyColumns');
         const rows = await this.query(
             `SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
@@ -272,22 +273,22 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
         return results.rows;
     }
 
-    /*getDefaultPort(): number {
+    /* getDefaultPort(): number {
         return 5432;
-    }*/
+    } */
 
     async queryAutoValues(context: Context, table: string, autoColumnTypes: any) {
-        console.debug('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
+        debug('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (!autoColumns.length) throw new Error('no auto columns');
         const queries = autoColumns.map((column) => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
-        // console.debug('query:', query);
+        // debug('query:', query);
         const result = await this.queryResult(context, query);
-        // console.debug('result:', result);
+        // debug('result:', result);
         if (result instanceof Array) {
             return autoColumns.reduce((acc, name, i) => {
-                // console.debug('name:', name);
+                // debug('name:', name);
                 const r = result[i];
                 let [{ currval: val }] = r.rows;
                 if (autoColumnTypes[name] === 'number' && typeof val === 'string')
@@ -319,16 +320,16 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
         values: any,
         autoColumnTypes: any = {},
     ): Promise<Row> {
-        console.debug(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        debug(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
-        // console.debug('insert query:', query, values);
+        // debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // console.debug('insert result:', result);
+        // debug('insert result:', result);
 
         // auto
         if (Object.keys(autoColumnTypes).length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumnTypes);
-            console.debug('auto:', auto);
+            debug('auto:', auto);
             return {
                 ...auto,
                 ...values,

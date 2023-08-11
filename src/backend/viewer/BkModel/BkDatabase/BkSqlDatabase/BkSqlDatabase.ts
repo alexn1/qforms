@@ -1,8 +1,9 @@
 import { BkDatabase } from '../BkDatabase';
+import { debug } from '../../../../../console';
 
 export abstract class BkSqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
     getUpdateQuery(tableName, values, where): string {
-        console.debug('BkSqlDatabase.getUpdateQuery', tableName);
+        debug('BkSqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
@@ -13,23 +14,23 @@ export abstract class BkSqlDatabase<TConnection = any> extends BkDatabase<TConne
     }
 
     getInsertQuery(tableName, values): string {
-        console.debug('BkSqlDatabase.getInsertQuery');
+        debug('BkSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         const columnsString = columns.join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into ${tableName}(${columnsString}) values (${valuesString})`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
 
     getDeleteQuery(tableName, rowKeyValues): string {
-        console.debug('BkSqlDatabase.getDeleteQuery');
+        debug('BkSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `${keyColumn} = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from ${tableName} where ${whereString}`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
 
@@ -43,7 +44,7 @@ export abstract class BkSqlDatabase<TConnection = any> extends BkDatabase<TConne
         const usedParams = BkSqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter((name) => paramNames.indexOf(name) === -1);
-        // console.debug('notPassedParams:', notPassedParams);
+        // debug('notPassedParams:', notPassedParams);
         if (notPassedParams.length > 0) {
             throw new Error(
                 `not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(

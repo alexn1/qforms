@@ -28,14 +28,14 @@ export class IndexModule {
                 'js',
             )
         ).map((path) => `/index/public/${path}`);
-        // console.debug('app.css:', this.css);
-        // console.debug('app.js:' , this.js);
+        // debug('app.css:', this.css);
+        // debug('app.js:' , this.js);
     }
 
     async fill() {
         const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
-        // console.debug('appInfos:', appInfos);
+        // debug('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({

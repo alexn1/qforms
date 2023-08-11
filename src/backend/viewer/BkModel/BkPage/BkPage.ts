@@ -8,6 +8,7 @@ import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { HttpError } from '../../../HttpError';
 import { BkPageScheme } from '../../BkModelScheme/BkPageScheme/BkPageScheme';
+import { debug } from '../../../../console';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -38,7 +39,7 @@ export class BkPage<
     }
 
     async fill(context: Context): Promise<any> {
-        // console.debug('Page.fill', this.constructor.name, this.getFullName());
+        // debug('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
@@ -48,7 +49,7 @@ export class BkPage<
     }
 
     async rpc(name: string, context: Context): Promise<any> {
-        console.debug('Page.rpc', name, context.getBody());
+        debug('Page.rpc', name, context.getBody());
         if (Object.prototype.hasOwnProperty.call(this, name)) {
             return await (this as any)[name](context);
         }

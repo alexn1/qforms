@@ -2383,10 +2383,11 @@ const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const JsonFile_1 = __webpack_require__(/*! ./JsonFile */ "./src/backend/JsonFile.ts");
 const ApplicationEditor_1 = __webpack_require__(/*! ./editor/Editor/ApplicationEditor/ApplicationEditor */ "./src/backend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
 const BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
+const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 class Converter {
     static async reformat(appFilePath) {
-        console.debug('Convert.reformat', appFilePath);
+        (0, console_1.debug)('Convert.reformat', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         // app
@@ -2397,7 +2398,7 @@ class Converter {
         const pageNames = appEditor
             .getData()
             .pageLinks.map((data) => BaseModel_1.BaseModel.getName(data));
-        // console.debug('pageNames:', pageNames);
+        // debug('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);
@@ -2456,7 +2457,7 @@ class EventLog {
         this.url = options === null || options === void 0 ? void 0 : options.url;
     }
     async create(event) {
-        // console.debug('EventLog.create', event);
+        // debug('EventLog.create', event);
         if (!this.pool)
             throw new Error('no pool');
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {
@@ -2512,15 +2513,16 @@ const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const express_session_1 = __importDefault(__webpack_require__(/*! express-session */ "express-session"));
 // import colors from 'colors/safe';
 const BkHelper_1 = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
+const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 class FileSessionStore extends express_session_1.default.Store {
     constructor(dirPath) {
-        // console.debug('FileSessionStore.constructor', dirPath);
+        // debug('FileSessionStore.constructor', dirPath);
         super();
         this.dirPath = dirPath;
         this.store = {};
     }
     set(sid, session, cb) {
-        console.debug('FileSessionStore.set', sid, session);
+        (0, console_1.debug)('FileSessionStore.set', sid, session);
         this.store[sid] = session;
         const sessionFilePath = path_1.default.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
@@ -2529,7 +2531,7 @@ class FileSessionStore extends express_session_1.default.Store {
         });
     }
     get(sid, cb) {
-        // console.debug('FileSessionStore.get', sid);
+        // debug('FileSessionStore.get', sid);
         const session = this.store[sid];
         if (session) {
             cb(null, session);
@@ -2553,7 +2555,7 @@ class FileSessionStore extends express_session_1.default.Store {
         }
     }
     destroy(sid, cb) {
-        console.debug('FileSessionStore.destroy', sid);
+        (0, console_1.debug)('FileSessionStore.destroy', sid);
         delete this.store[sid];
         cb(null);
     }
@@ -2598,6 +2600,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.JsonFile = void 0;
 const BkHelper_1 = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 const BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
+const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 class JsonFile {
     constructor(filePath, data = null) {
         this.filePath = filePath;
@@ -2625,7 +2628,7 @@ class JsonFile {
         this.data = JSON.parse(content);
     }
     async save() {
-        console.debug('JsonFile.save', this.filePath);
+        (0, console_1.debug)('JsonFile.save', this.filePath);
         this.content = JSON.stringify(this.data, null, 4);
         await BkHelper_1.BkHelper.writeFile2(this.filePath, this.content);
     }
@@ -2705,10 +2708,11 @@ const ws_1 = __importDefault(__webpack_require__(/*! ws */ "ws"));
 const url_1 = __importDefault(__webpack_require__(/*! url */ "url"));
 const safe_1 = __importDefault(__webpack_require__(/*! colors/safe */ "colors/safe"));
 const Context_1 = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
+const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 class WebSocketServer {
     constructor(options) {
         this.options = options;
-        // console.debug('WebSocketServer.constructor');
+        // debug('WebSocketServer.constructor');
         this.server = new ws_1.default.Server({
             server: options.httpServer,
             path: '/',
@@ -2720,10 +2724,10 @@ class WebSocketServer {
         console.error('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
-        console.debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        (0, console_1.debug)('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         console.log('wss:', safe_1.default.bgYellow(safe_1.default.black(decodeURIComponent(webSocket.upgradeReq.url))));
         const parts = url_1.default.parse(webSocket.upgradeReq.url, true);
-        // console.debug('parts.query:', parts.query);
+        // debug('parts.query:', parts.query);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)
@@ -2748,15 +2752,15 @@ class WebSocketServer {
         application.addClient(webSocket);
         // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
         context.destroy();
     }
     async onClose(webSocket, code, reason) {
-        console.debug('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
+        (0, console_1.debug)('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
         this.getHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
     async onMessage(webSocket, data, flags) {
-        console.debug('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
+        (0, console_1.debug)('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
     getHostApp() {
         return this.options.hostApp;
@@ -2818,6 +2822,7 @@ const BkHelper_1 = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/B
 const BkApplication_1 = __webpack_require__(/*! ../../../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
 const JsonFile_1 = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
 const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/backend/editor/Editor/PageEditor/PageEditor.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile, editorPath) {
         super(appFile.data, undefined, editorPath);
@@ -2828,7 +2833,7 @@ class ApplicationEditor extends Editor_1.Editor {
         return this.appFile;
     }
     static createData(params) {
-        // console.debug('ApplicationEditor.createData', params);
+        // debug('ApplicationEditor.createData', params);
         if (!params.name)
             throw new Error('no name');
         return {
@@ -2876,7 +2881,7 @@ class ApplicationEditor extends Editor_1.Editor {
         };
     }
     async save() {
-        console.debug('ApplicationEditor.save');
+        (0, console_1.debug)('ApplicationEditor.save');
         await this.appFile.save();
     }
     async removePageFile(name) {
@@ -3258,6 +3263,7 @@ const ejs = __webpack_require__(/*! ejs */ "ejs");
 const BaseModel_1 = __webpack_require__(/*! ../../BaseModel */ "./src/backend/BaseModel.ts");
 const BkHelper_1 = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
 const backend = __importStar(__webpack_require__(/*! ../../../backend */ "./src/backend/index.ts"));
+const console_1 = __webpack_require__(/*! ../../../console */ "./src/console.ts");
 class Editor extends BaseModel_1.BaseModel {
     constructor(data, parent, editorPath) {
         super(data, parent);
@@ -3269,7 +3275,7 @@ class Editor extends BaseModel_1.BaseModel {
         return this.editorPath;
     }
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-        console.debug('Editor.createFileByReplace');
+        debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await BkHelper.exists(newFilePath);
         if (exists) {
@@ -3297,7 +3303,7 @@ class Editor extends BaseModel_1.BaseModel {
         return this.constructor.name.replace('Editor', '') + 'View';
     } */
     async getFile(filePath) {
-        console.debug('Editor.getFile', filePath);
+        (0, console_1.debug)('Editor.getFile', filePath);
         const exists = await BkHelper_1.BkHelper.exists(filePath);
         if (exists) {
             return await BkHelper_1.BkHelper.readTextFile(filePath);
@@ -3311,7 +3317,7 @@ class Editor extends BaseModel_1.BaseModel {
         await BkHelper_1.BkHelper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
-        console.debug('Editor.getCustomFile', ext);
+        (0, console_1.debug)('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
@@ -3319,18 +3325,18 @@ class Editor extends BaseModel_1.BaseModel {
         const customFilePath = await this.getCustomFilePath(ext);
         await this.saveFile(customFilePath, text);
     }
-    /*moveDataSourceUp(name) {
+    /* moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);
-    }*/
-    /*moveDataSourceDown(name) {
+    } */
+    /* moveDataSourceDown(name) {
         this.moveDataColItem('dataSources', name, 1);
-    }*/
-    /*moveActionUp(name) {
+    } */
+    /* moveActionUp(name) {
         this.moveDataColItem('actions', name, -1);
-    }*/
-    /*moveActionDown(name) {
+    } */
+    /* moveActionDown(name) {
         this.moveDataColItem('actions', name, 1);
-    }*/
+    } */
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -3363,11 +3369,11 @@ class Editor extends BaseModel_1.BaseModel {
         this.addModelData('actions', data);
         return data;
     } */
-    /*createActionEditor(name) {
+    /* createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
-    }*/
+    } */
     setColData(colName, newData) {
-        // console.debug('Editor.setData', newData);
+        // debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
     createItemEditor(colName, itemName) {
@@ -3390,7 +3396,7 @@ class Editor extends BaseModel_1.BaseModel {
         this.moveDataColItem(colName, itemName, 1);
     }
     newItemData(className, colName, params) {
-        console.debug('Editor.newItemData', className, colName, params);
+        (0, console_1.debug)('Editor.newItemData', className, colName, params);
         const { name } = params;
         if (!name)
             throw new Error('no name');
@@ -3406,7 +3412,7 @@ class Editor extends BaseModel_1.BaseModel {
         throw new Error(`${this.constructor.name}.getColName not implemented`);
     }
     static createItemData(data) {
-        // console.debug('Editor.createItemData', data);
+        // debug('Editor.createItemData', data);
         try {
             const params = data['@attributes']
                 ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;
@@ -3919,6 +3925,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormEditor = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/backend/editor/Editor/Editor.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class FormEditor extends Editor_1.Editor {
     static createAttributes(params) {
         if (!params.name)
@@ -3934,7 +3941,7 @@ class FormEditor extends Editor_1.Editor {
         };
     }
     static createData(params) {
-        console.debug('FormEditor.createData', params);
+        (0, console_1.debug)('FormEditor.createData', params);
         return {
             '@class': 'Form',
             '@attributes': Object.assign({}, FormEditor.createAttributes(params)),
@@ -4012,7 +4019,7 @@ const FormEditor_1 = __webpack_require__(/*! ../FormEditor */ "./src/backend/edi
 const Editor_1 = __webpack_require__(/*! ../../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class RowFormEditor extends FormEditor_1.FormEditor {
     static createData(params) {
-        // console.debug('RowFormEditor.createData', params);
+        // debug('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',
             '@attributes': Object.assign(Object.assign({}, FormEditor_1.FormEditor.createAttributes(params)), { newMode: params.newMode ? params.newMode : '', backOnly: params.backOnly ? params.backOnly : 'false', refreshButton: params.refreshButton || 'true' }),
@@ -4043,7 +4050,7 @@ const FormEditor_1 = __webpack_require__(/*! ../FormEditor */ "./src/backend/edi
 const Editor_1 = __webpack_require__(/*! ../../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class TableFormEditor extends FormEditor_1.FormEditor {
     static createData(params) {
-        // console.debug('TableFormEditor.createData', params);
+        // debug('TableFormEditor.createData', params);
         return {
             '@class': 'TableForm',
             '@attributes': Object.assign(Object.assign({}, FormEditor_1.FormEditor.createAttributes(params)), { editMethod: params.editMethod || 'disabled', itemEditPage: params.itemEditPage || '', itemCreatePage: params.itemCreatePage || '', newRowMode: params.newRowMode || 'disabled', deleteRowMode: params.deleteRowMode || 'disabled', refreshButton: params.refreshButton || 'true' }),
@@ -4106,6 +4113,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PageEditor = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/backend/editor/Editor/Editor.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class PageEditor extends Editor_1.Editor {
     constructor(appEditor, pageFile, editorPath) {
         super(pageFile.data, appEditor, editorPath);
@@ -4133,7 +4141,7 @@ class PageEditor extends Editor_1.Editor {
         };
     }
     setAttr(name, value) {
-        console.debug('PageEditor.setAttr', name, value);
+        (0, console_1.debug)('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
@@ -4179,7 +4187,7 @@ class PageEditor extends Editor_1.Editor {
         return js;
     }
     async getCustomDirPath() {
-        console.debug('PageEditor.getCustomDirPath');
+        (0, console_1.debug)('PageEditor.getCustomDirPath');
         const customDirPath = await this.getParent().getCustomDirPath();
         return path_1.default.join(customDirPath, 'pages', this.getName());
     }
@@ -4269,7 +4277,7 @@ exports.TableEditor = void 0;
 const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class TableEditor extends Editor_1.Editor {
     static createData(params) {
-        // console.debug('TableEditor.createData', params);
+        // debug('TableEditor.createData', params);
         return {
             '@class': 'Table',
             '@attributes': {
@@ -4298,9 +4306,10 @@ exports.TableEditor = TableEditor;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ActionEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ActionEditorController extends EditorController_1.EditorController {
     async _new(params) {
-        console.debug('ActionEditorController._new');
+        (0, console_1.debug)('ActionEditorController._new');
         const appEditor = this.createApplicationEditor();
         let data;
         if (params.pageFileName) {
@@ -4467,13 +4476,14 @@ exports.ApplicationEditorController = ApplicationEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ColumnEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ColumnEditorController extends EditorController_1.EditorController {
-    /*constructor(...args) {
-        console.debug('ColumnEditorController.constructor');
+    /* constructor(...args) {
+        debug('ColumnEditorController.constructor');
         super(...args);
-    }*/
+    } */
     async save(params) {
-        console.debug('ColumnEditorController.save');
+        (0, console_1.debug)('ColumnEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -4483,7 +4493,7 @@ class ColumnEditorController extends EditorController_1.EditorController {
         return 'ok';
     }
     async _new(params) {
-        console.debug('ColumnEditorController._new');
+        (0, console_1.debug)('ColumnEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -4492,7 +4502,7 @@ class ColumnEditorController extends EditorController_1.EditorController {
         return columnData;
     }
     async delete(params) {
-        console.debug('ColumnEditorController.delete');
+        (0, console_1.debug)('ColumnEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -4517,10 +4527,11 @@ exports.ColumnEditorController = ColumnEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DataSourceEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class DataSourceEditorController extends EditorController_1.EditorController {
-    /*constructor(...args) {
+    /* constructor(...args) {
         super(...args);
-    }*/
+    } */
     async createDataSourceEditor(params) {
         let editor = this.createApplicationEditor();
         if (params.pageFileName) {
@@ -4622,7 +4633,7 @@ class DataSourceEditorController extends EditorController_1.EditorController {
         }
     }
     async save(params) {
-        console.debug('DataSourceEditorController.save');
+        (0, console_1.debug)('DataSourceEditorController.save');
         const dataSourceEditor = await this.createDataSourceEditor(params);
         dataSourceEditor.setAttr(params.attr, params.value);
         await dataSourceEditor.save();
@@ -4662,15 +4673,16 @@ exports.DataSourceEditorController = DataSourceEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DatabaseEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class DatabaseEditorController extends EditorController_1.EditorController {
     constructor() {
         super(...arguments);
         this.application = null;
     }
-    /*constructor(...args) {
+    /* constructor(...args) {
         super(...args);
         this.application = null;
-    }*/
+    } */
     async init(context) {
         await super.init(context);
         this.application = await this.hostApp.createApplication(context);
@@ -4690,7 +4702,7 @@ class DatabaseEditorController extends EditorController_1.EditorController {
         return data;
     }
     async save(params) {
-        console.debug('DatabaseEditorController.save');
+        (0, console_1.debug)('DatabaseEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         databaseEditor.setAttr(params.attr, params.value);
@@ -4752,6 +4764,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EditorController = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const ApplicationEditor_1 = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/backend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+const console_1 = __webpack_require__(/*! ../../../console */ "./src/console.ts");
 class EditorController {
     constructor(appInfo, hostApp) {
         this.appInfo = appInfo;
@@ -4759,13 +4772,13 @@ class EditorController {
     }
     async init(context) { }
     async getView(params) {
-        console.debug('EditorController.getView');
+        (0, console_1.debug)('EditorController.getView');
         return {
             data: {},
         };
     }
     createApplicationEditor() {
-        console.debug('EditorController.createApplicationEditor');
+        (0, console_1.debug)('EditorController.createApplicationEditor');
         return new ApplicationEditor_1.ApplicationEditor(this.appInfo.appFile, path_1.default.join(this.hostApp.backendDirPath, 'editor'));
     }
 }
@@ -4905,6 +4918,7 @@ exports.FieldEditorController = FieldEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormEditorController = void 0;
 const VisualEditorController_1 = __webpack_require__(/*! ../VisualEditorController */ "./src/backend/editor/EditorController/VisualEditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class FormEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
         super(...args);
@@ -4946,7 +4960,7 @@ class FormEditorController extends VisualEditorController_1.VisualEditorControll
         return 'ok';
     }
     async getView(params) {
-        console.debug('FormEditorController.getView');
+        (0, console_1.debug)('FormEditorController.getView');
         const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':
@@ -5234,13 +5248,14 @@ exports.PageLinkEditorController = PageLinkEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ParamEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ParamEditorController extends EditorController_1.EditorController {
-    /*constructor(...args) {
-        console.debug('ParamEditorController.constructor');
+    /* constructor(...args) {
+        debug('ParamEditorController.constructor');
         super(...args);
-    }*/
+    } */
     async _new(params) {
-        console.debug('ParamEditorController._new');
+        (0, console_1.debug)('ParamEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.newItemData('Param', 'params', params);
@@ -5248,7 +5263,7 @@ class ParamEditorController extends EditorController_1.EditorController {
         return data;
     }
     async save(params) {
-        console.debug('ParamEditorController.save');
+        (0, console_1.debug)('ParamEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const paramEditor = databaseEditor.createItemEditor('params', params.param);
@@ -5257,7 +5272,7 @@ class ParamEditorController extends EditorController_1.EditorController {
         return null;
     }
     async delete(params) {
-        console.debug('ParamEditorController.delete');
+        (0, console_1.debug)('ParamEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('params', params.param);
@@ -5281,12 +5296,13 @@ exports.ParamEditorController = ParamEditorController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class TableEditorController extends EditorController_1.EditorController {
-    /*constructor(...args) {
+    /* constructor(...args) {
         super(...args);
-    }*/
+    } */
     async _new(params) {
-        console.debug('TableEditorController._new');
+        (0, console_1.debug)('TableEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         // const data = databaseEditor.newTableData(params);
@@ -5295,7 +5311,7 @@ class TableEditorController extends EditorController_1.EditorController {
         return data;
     }
     async delete(params) {
-        console.debug('TableEditorController.delete');
+        (0, console_1.debug)('TableEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('tables', params.table);
@@ -5317,7 +5333,7 @@ class TableEditorController extends EditorController_1.EditorController {
         return 'ok';
     }
     async save(params) {
-        console.debug('TableEditorController.save');
+        (0, console_1.debug)('TableEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -5394,6 +5410,7 @@ const Links_1 = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
 const Scripts_1 = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
 const backend = __importStar(__webpack_require__(/*! ../index */ "./src/backend/index.ts"));
 const home_1 = __webpack_require__(/*! ./home */ "./src/backend/editor/home.tsx");
+const console_1 = __webpack_require__(/*! ../../console */ "./src/console.ts");
 const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -5433,8 +5450,8 @@ class EditorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
-        // console.debug('editor.css:', this.css);
-        // console.debug('editor.js:' , this.js);
+        // debug('editor.css:', this.css);
+        // debug('editor.js:' , this.js);
     }
     getLinks() {
         return [
@@ -5451,7 +5468,7 @@ class EditorModule {
         ];
     }
     async handleEditorGet(req, res, context) {
-        console.debug('EditorModule.handleEditorGet');
+        (0, console_1.debug)('EditorModule.handleEditorGet');
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
         // data
         const data = {
@@ -5465,7 +5482,7 @@ class EditorModule {
         res.end(html);
     }
     async handleEditorPost(req, res, context) {
-        console.debug('EditorModule.handleEditorPost', req.body);
+        (0, console_1.debug)('EditorModule.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
@@ -5483,7 +5500,7 @@ class EditorModule {
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
-        // console.debug('json result:', result);
+        // debug('json result:', result);
         if (result === undefined)
             throw new Error('handleEditorPost: result is undefined');
         res.json(result);
@@ -5678,13 +5695,13 @@ class IndexModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
-        // console.debug('app.css:', this.css);
-        // console.debug('app.js:' , this.js);
+        // debug('app.css:', this.css);
+        // debug('app.js:' , this.js);
     }
     async fill() {
         const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
-        // console.debug('appInfos:', appInfos);
+        // debug('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -5762,8 +5779,8 @@ class MonitorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
-        // console.debug('monitor.css:', this.css);
-        // console.debug('monitor.js:' , this.js);
+        // debug('monitor.css:', this.css);
+        // debug('monitor.js:' , this.js);
     }
     fill() {
         return {
@@ -5915,6 +5932,7 @@ const HttpError_1 = __webpack_require__(/*! ../../../HttpError */ "./src/backend
 const Result_1 = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
 const home_1 = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
 const text = __importStar(__webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts"));
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 const pkg = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
 class BkApplication extends BkModel_1.BkModel {
     constructor(appInfo, hostApp, env = 'local') {
@@ -5949,11 +5967,11 @@ class BkApplication extends BkModel_1.BkModel {
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // console.debug('publicDirPath:', publicDirPath);
+        // debug('publicDirPath:', publicDirPath);
         return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        console.debug(`Application.deinit: ${this.getName()}`);
+        (0, console_1.debug)(`Application.deinit: ${this.getName()}`);
         await super.deinit();
         // databases
         for (const database of this.databases) {
@@ -5990,7 +6008,7 @@ class BkApplication extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // console.debug('Application.fill');
+        // debug('Application.fill');
         const start = Date.now();
         const response = (await super.fill(context));
         response.route = context.getRoute();
@@ -6037,7 +6055,7 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     async createMenu(context) {
-        // console.debug('Application.createMenu');
+        // debug('Application.createMenu');
         const menu = {};
         const nav = {};
         // pages
@@ -6085,7 +6103,7 @@ class BkApplication extends BkModel_1.BkModel {
         return new BkPageLink_1.BkPageLink(data, this);
     }
     async createPage(pageLinkName) {
-        // console.debug('Application.createPage', pageLinkName);
+        // debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -6102,7 +6120,7 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        // console.debug('Application.getPage', pageLinkName);
+        // debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -6118,7 +6136,7 @@ class BkApplication extends BkModel_1.BkModel {
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     async fillPages(context) {
-        // console.debug('Application.fillPages', context.query.page);
+        // debug('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -6135,7 +6153,7 @@ class BkApplication extends BkModel_1.BkModel {
         return pages;
     }
     async authenticate(context, username, password) {
-        console.debug('Application.authenticate');
+        (0, console_1.debug)('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -6151,7 +6169,7 @@ class BkApplication extends BkModel_1.BkModel {
         return null;
     }
     async rpc(name, context) {
-        // console.debug('Application.rpc', name, context.getReq().body);
+        // debug('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
@@ -6161,14 +6179,14 @@ class BkApplication extends BkModel_1.BkModel {
         });
     }
     /* async request(options) {
-        console.debug(colors.magenta('Application.request'), options);
+        debug(colors.magenta('Application.request'), options);
         return await axios(options);
     } */
     getEnv() {
         return this.env;
     }
     getEnvVarValue(name) {
-        // console.debug(`Application.getEnvVarValue: ${name}`);
+        // debug(`Application.getEnvVarValue: ${name}`);
         if (!name)
             throw new Error('no name');
         const env = this.getEnv();
@@ -6194,7 +6212,7 @@ class BkApplication extends BkModel_1.BkModel {
     // to init custom context params before each request get/post
     async initContext(context) { }
     static makeAppInfoFromAppFile(appFile, distDirPath) {
-        // console.debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
+        // debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path_1.default.basename(path_1.default.dirname(filePath));
         const fileName = path_1.default.basename(filePath, path_1.default.extname(filePath));
@@ -6214,14 +6232,14 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     static async loadAppInfo(appFilePath, distDirPath) {
-        // console.debug('Application.loadAppInfo', appFilePath);
+        // debug('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
         return appInfo;
     }
     static async getAppInfos(appsDirPath, distDirPath) {
-        // console.debug('BkApplication.getAppInfos', appsDirPath);
+        // debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper_1.BkHelper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
@@ -6269,19 +6287,19 @@ class BkApplication extends BkModel_1.BkModel {
     addClient(webSocket) {
         // add to clients
         this.clients.push(webSocket);
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
     }
     removeClient(webSocket) {
         const i = this.clients.indexOf(webSocket);
         // @ts-ignore
         if (i === -1)
             throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        // console.debug('i:', i);
+        // debug('i:', i);
         this.clients.splice(i, 1);
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
     }
     broadcastDomesticResultToClients(context, result) {
-        console.debug('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        (0, console_1.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6295,7 +6313,7 @@ class BkApplication extends BkModel_1.BkModel {
         }
     }
     broadcastForeignResultToClients(context, result) {
-        console.debug('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        (0, console_1.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6340,7 +6358,7 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async handleGetFile(context, next) {
-        // console.debug('Application.handleGetFile', context.getUri());
+        // debug('Application.handleGetFile', context.getUri());
         const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper_1.BkHelper.exists(filePath)) {
             // context.setVersionHeaders(pkg.version, this.getVersion());
@@ -6432,6 +6450,7 @@ const BkPage_1 = __webpack_require__(/*! ../BkPage/BkPage */ "./src/backend/view
 const BkForm_1 = __webpack_require__(/*! ../BkForm/BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
 const BkRowForm_1 = __webpack_require__(/*! ../BkForm/BkRowForm/BkRowForm */ "./src/backend/viewer/BkModel/BkForm/BkRowForm/BkRowForm.ts");
 const BkTableForm_1 = __webpack_require__(/*! ../BkForm/BkTableForm/BkTableForm */ "./src/backend/viewer/BkModel/BkForm/BkTableForm/BkTableForm.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class BkDataSource extends BkModel_1.BkModel {
     constructor() {
         super(...arguments);
@@ -6448,7 +6467,7 @@ class BkDataSource extends BkModel_1.BkModel {
         return path_1.default.join(this.getDirPath(), `${this.getName()}.json`);
     }
     async init(context) {
-        // console.debug('DataSource.init', this.getFullName());
+        // debug('DataSource.init', this.getFullName());
         await super.init(context);
         // keyColumns
         this.keyColumns = this.getKeyColumns();
@@ -6462,7 +6481,7 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
-        // console.debug('keyColumns:', keyColumns);
+        // debug('keyColumns:', keyColumns);
         if (!keyColumns.length) {
             throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
         }
@@ -6477,7 +6496,7 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     checkKeyFields() {
         const fieldsClumns = this.getForm().fields.map((field) => field.getAttr('column'));
-        // console.debug('fieldsClumns:', fieldsClumns);
+        // debug('fieldsClumns:', fieldsClumns);
         for (const keyColumn of this.keyColumns) {
             if (!fieldsClumns.includes(keyColumn)) {
                 throw new Error(`[${this.getFullName()}]: no field with key column: ${keyColumn}`);
@@ -6503,9 +6522,9 @@ class BkDataSource extends BkModel_1.BkModel {
             .filter((column) => !!column);
         for (const rowColumn of rowColumns) {
             if (!formColumns.includes(rowColumn)) {
-                console.debug('rowColumns:', rowColumns);
-                console.debug('formColumns:', formColumns);
-                console.debug('row:', row);
+                (0, console_1.debug)('rowColumns:', rowColumns);
+                (0, console_1.debug)('formColumns:', formColumns);
+                (0, console_1.debug)('row:', row);
                 throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
             }
         }
@@ -6634,7 +6653,7 @@ class BkDataSource extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        // console.debug('DataSource.fill', this.getFullName());
+        // debug('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
         // keyColumns
         response.keyColumns = this.keyColumns;
@@ -6643,7 +6662,7 @@ class BkDataSource extends BkModel_1.BkModel {
         return response;
     }
     async getRows() {
-        // console.debug('DataSource.getRows');
+        // debug('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
         const exists = await BkHelper.exists(jsonFilePath);
         if (exists) {
@@ -6718,6 +6737,7 @@ const BkPersistentDataSource_1 = __webpack_require__(/*! ../BkPersistentDataSour
 const Result_1 = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
 const BkDataSource_1 = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
 const BkHelper_1 = __webpack_require__(/*! ../../../../../BkHelper */ "./src/backend/BkHelper.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
@@ -6775,8 +6795,8 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         // exec selectQuery
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(context), this.getSelectParams(context));
-        console.debug('rows query time:', Date.now() - start);
-        // console.debug('rows:', rows);
+        (0, console_1.debug)('rows query time:', Date.now() - start);
+        // debug('rows:', rows);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
         // count
@@ -6785,7 +6805,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             try {
                 const start = Date.now();
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getSelectParams(context));
-                console.debug('count query time:', Date.now() - start);
+                (0, console_1.debug)('count query time:', Date.now() - start);
             }
             catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -6795,7 +6815,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         return [rawRows, count];
     }
     async create(context, _values = null) {
-        console.debug('NoSqlDataSource.create');
+        (0, console_1.debug)('NoSqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -6805,30 +6825,30 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const values = _values ? _values : this.decodeRow(context.getBody().row);
-        console.debug('values', values);
+        (0, console_1.debug)('values', values);
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
-        console.debug('insertResult:', insertResult);
+        (0, console_1.debug)('insertResult:', insertResult);
         const newRow = { _id: insertResult.insertedId };
         const key = this.getKeyFromValues(newRow);
         if (!key)
             throw new Error('create: cannot calc row key');
-        console.debug('key:', key);
+        (0, console_1.debug)('key:', key);
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
-        // console.debug('keyParams:', keyParams);
+        // debug('keyParams:', keyParams);
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), keyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // console.debug('row:', row);
+        // debug('row:', row);
         const result = new Result_1.Result();
         Result_1.Result.addInsertToResult(result, databaseName, tableName, key);
         Result_1.Result.addInsertExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
     async update(context) {
-        console.debug('NoSqlDataSource.update');
+        (0, console_1.debug)('NoSqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -6837,26 +6857,26 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
-        // console.debug('changes:', changes);
+        // debug('changes:', changes);
         const key = Object.keys(changes)[0];
-        console.debug('key:', key);
+        (0, console_1.debug)('key:', key);
         const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
             $set: values,
         });
-        console.debug('updateResult', updateResult);
+        (0, console_1.debug)('updateResult', updateResult);
         // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
-        console.debug('newKey:', newKey);
+        (0, console_1.debug)('newKey:', newKey);
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // console.debug('row:', row);
+        // debug('row:', row);
         // result
         const result = new Result_1.Result();
         Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
@@ -6870,7 +6890,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const { key } = context.params;
         const filter = this.getKeyValuesFromKey(key);
         const deleteResult = await this.getDatabase().deleteOne(context, this.getAttr('table'), filter);
-        console.debug('updateResult', deleteResult);
+        (0, console_1.debug)('updateResult', deleteResult);
         const result = new Result_1.Result();
         Result_1.Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;
@@ -6957,7 +6977,7 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         return dChanges;
     }
     decodeRow(rawRow) {
-        // console.debug('PersistentDataSource.decodeRow', rawRow);
+        // debug('PersistentDataSource.decodeRow', rawRow);
         const form = this.getForm();
         if (!form)
             throw new Error('not form ds');
@@ -7002,9 +7022,10 @@ const BkPersistentDataSource_1 = __webpack_require__(/*! ../BkPersistentDataSour
 const BkDataSource_1 = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
 const BkHelper_1 = __webpack_require__(/*! ../../../../../BkHelper */ "./src/backend/BkHelper.ts");
 const Result_1 = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     async fill(context) {
-        // console.debug('SqlDataSource.fill', this.getFullName());
+        // debug('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
         if (this.isDefaultOnForm()) {
             this.checkKeyFields();
@@ -7040,7 +7061,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         return response;
     }
     getKeyColumns() {
-        // console.debug('SqlDataSource.getKeyColumns', this.getFullName());
+        // debug('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
     getCountQuery(context) {
@@ -7134,7 +7155,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         return [rawRows, count];
     }
     async create(context, _values = null) {
-        console.debug('SqlDataSource.create');
+        (0, console_1.debug)('SqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7145,22 +7166,22 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const table = this.getAttr('table');
         const values = _values ? _values : this.decodeRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
-        // console.debug('autoColumnTypes:', autoColumnTypes);
+        // debug('autoColumnTypes:', autoColumnTypes);
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
-        console.debug('newRow:', newRow);
+        (0, console_1.debug)('newRow:', newRow);
         const key = this.getKeyFromValues(newRow);
         if (!key)
             throw new Error('insert: cannot calc row key');
-        console.debug('key:', key);
+        (0, console_1.debug)('key:', key);
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
-        // console.debug('keyParams:', keyParams);
+        // debug('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
-        // console.debug('singleQuery:', singleQuery);
+        // debug('singleQuery:', singleQuery);
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        // console.debug('row:', row);
+        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
         const result = new Result_1.Result();
@@ -7169,7 +7190,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         return result;
     }
     async update(context) {
-        console.debug('SqlDataSource.update');
+        (0, console_1.debug)('SqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7178,7 +7199,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.getChanges(context);
-        // console.debug('changes:', changes);
+        // debug('changes:', changes);
         const [key] = Object.keys(changes);
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
@@ -7191,16 +7212,16 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
-        console.debug('key:', key);
-        console.debug('newKey:', newKey);
-        console.debug('newKeyParams:', newKeyParams);
+        (0, console_1.debug)('key:', key);
+        (0, console_1.debug)('newKey:', newKey);
+        (0, console_1.debug)('newKeyParams:', newKeyParams);
         // select updated row
         const selectQuery = this.getSingleQuery(context);
-        // console.debug('selectQuery:', selectQuery);
+        // debug('selectQuery:', selectQuery);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        // console.debug('row:', row);
+        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
         // result
@@ -7273,7 +7294,7 @@ class BkDatabase extends BkModel_1.BkModel {
         this.fillCollections = ['tables'];
     }
     /* constructor(data, parent?) {
-        //console.debug('Database.constructor');
+        //debug('Database.constructor');
         super(data, parent);
     } */
     async init(context) {
@@ -7290,7 +7311,7 @@ class BkDatabase extends BkModel_1.BkModel {
         return !!context.connections[this.getName()];
     }
     getConnection(context) {
-        // console.debug('Database.getConnection');
+        // debug('Database.getConnection');
         if (!context)
             throw new Error('no context');
         const name = this.getName();
@@ -7401,9 +7422,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkMongoDbDatabase = void 0;
 const mongodb_1 = __webpack_require__(/*! mongodb */ "mongodb");
 const BkNoSqlDatabase_1 = __webpack_require__(/*! ../BkNoSqlDatabase */ "./src/backend/viewer/BkModel/BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     async connect(context) {
-        console.debug('MongoDbDatabase.connect', this.getName());
+        (0, console_1.debug)('MongoDbDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
         this.checkDeinited();
@@ -7413,20 +7435,20 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         }
         const url = this.getUrl();
         const client = new mongodb_1.MongoClient(url);
-        console.debug(`MongoDbDatabase: connecting to ${url}`);
+        (0, console_1.debug)(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
         const session = client.startSession();
         context.connections[name] = { client, session };
     }
     getUrl() {
-        // console.debug('config', this.getConfig());
+        // debug('config', this.getConfig());
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
         return `mongodb://${userPassword}${host2}:${port || this.getDefaultPort()}/?directConnection=true`;
     }
     async release(context) {
-        console.debug('MongoDbDatabase.release', this.getName());
+        (0, console_1.debug)('MongoDbDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
         const { client, session } = this.getConnection(context);
@@ -7439,9 +7461,9 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
             acc[name] = name === '_id' ? new mongodb_1.ObjectId(filter[name]) : filter[name];
             return acc;
         }, {});
-        console.debug('colName', colName);
-        console.debug('_filter:', _filter);
-        console.debug('update', update);
+        (0, console_1.debug)('colName', colName);
+        (0, console_1.debug)('_filter:', _filter);
+        (0, console_1.debug)('update', update);
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
     async insertOne(context, colName, document) {
@@ -7449,7 +7471,7 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     }
     async deleteOne(context, colName, filter) {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
-        // console.debug('_filter', _filter);
+        // debug('_filter', _filter);
         return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
     static makeObjectIds(filter, names = ['_id']) {
@@ -7474,7 +7496,7 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         return result;
     }
     async queryRows(context, query, params = null) {
-        console.debug('MongoDbDatabase.query', query, params);
+        (0, console_1.debug)('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
@@ -7488,11 +7510,11 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             const rows = await result.toArray();
-            // console.debug('rows:', rows);
+            // debug('rows:', rows);
             const [firstRow] = rows;
             if (!firstRow)
                 throw new Error('queryScalar: no first row');
-            // console.debug('firstRow:', firstRow);
+            // debug('firstRow:', firstRow);
             const firstField = Object.keys(firstRow)[0];
             if (!firstField)
                 throw new Error('queryScalar: no first field');
@@ -7504,15 +7526,15 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         return 27017;
     }
     async begin(context) {
-        console.debug('MongoDbDatabase.begin');
+        (0, console_1.debug)('MongoDbDatabase.begin');
         this.getConnection(context).session.startTransaction();
     }
     async commit(context) {
-        console.debug('MongoDbDatabase.commit');
+        (0, console_1.debug)('MongoDbDatabase.commit');
         this.getConnection(context).session.commitTransaction();
     }
     async rollback(context, err) {
-        console.debug('MongoDbDatabase.rollback');
+        (0, console_1.debug)('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
     }
 }
@@ -7560,6 +7582,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkMySqlDatabase = void 0;
 const mysql_1 = __webpack_require__(/*! mysql */ "mysql");
 const BkSqlDatabase_1 = __webpack_require__(/*! ../BkSqlDatabase */ "./src/backend/viewer/BkModel/BkDatabase/BkSqlDatabase/BkSqlDatabase.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     constructor() {
         super(...arguments);
@@ -7567,10 +7590,10 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     }
     /* constructor(data, parent?) {
         super(data, parent);
-        console.debug('new MySqlDatabase');
+        debug('new MySqlDatabase');
     } */
     async deinit() {
-        console.debug(`MySqlDatabase.deinit: ${this.getName()}`);
+        (0, console_1.debug)(`MySqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
         if (this.pool !== null) {
             await new Promise((resolve) => {
@@ -7582,21 +7605,21 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
     }
     getPool() {
-        //console.debug('MySqlDatabase.getPool');
+        //debug('MySqlDatabase.getPool');
         if (!this.pool) {
-            //console.debug('creating connection pool for: ' + database);
+            //debug('creating connection pool for: ' + database);
             this.pool = (0, mysql_1.createPool)(this.getConfig());
         }
-        //console.debug('pool connections count: ' + this.pool._allConnections.length);
+        //debug('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
     getConfig() {
-        console.debug('MySqlDatabase.getConfig');
+        (0, console_1.debug)('MySqlDatabase.getConfig');
         return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: BkMySqlDatabase.queryFormat });
     }
-    /*getDefaultPort(): number {
+    /* getDefaultPort(): number {
         return 3306;
-    }*/
+    } */
     static async Pool_getConnection(pool) {
         return new Promise((resolve, reject) => {
             pool.getConnection((err, cnn) => {
@@ -7610,7 +7633,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     async queryRows(context, query, params = null) {
-        console.debug('MySqlDatabase.queryRows', query, params);
+        (0, console_1.debug)('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
@@ -7632,7 +7655,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     async queryResult(context, query, params = null) {
-        console.debug('MySqlDatabase.queryResult', query, params);
+        (0, console_1.debug)('MySqlDatabase.queryResult', query, params);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
@@ -7648,7 +7671,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     _getRows(result, fields) {
-        //console.debug('MySqlDatabase._getRows');
+        //debug('MySqlDatabase._getRows');
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
             const f = fields[j];
@@ -7672,7 +7695,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return rows;
     }
     begin(context) {
-        console.debug('MySqlDatabase.begin');
+        (0, console_1.debug)('MySqlDatabase.begin');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.beginTransaction((err) => {
@@ -7686,7 +7709,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     commit(context) {
-        console.debug('MySqlDatabase.commit');
+        (0, console_1.debug)('MySqlDatabase.commit');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.commit((err) => {
@@ -7700,7 +7723,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     rollback(context, err) {
-        console.debug('MySqlDatabase.rollback:', this.getName(), err.message);
+        (0, console_1.debug)('MySqlDatabase.rollback:', this.getName(), err.message);
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
@@ -7709,14 +7732,14 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     static queryFormat(query, params = {}) {
-        console.debug('MySqlDatabase.queryFormat', query, params);
+        (0, console_1.debug)('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return (0, mysql_1.escape)(params[name]);
             }
             throw new Error(`no query param: ${name}`);
         });
-        console.debug('real db sql: ' + sql);
+        (0, console_1.debug)('real db sql: ' + sql);
         return sql;
     }
     static typeCast(field, next) {
@@ -7726,7 +7749,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return next();
     }
     async getTableList() {
-        console.debug('MySqlDatabase.getTableList');
+        (0, console_1.debug)('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = (0, mysql_1.createConnection)(config);
@@ -7737,16 +7760,16 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
                     reject(err);
                 }
                 else {
-                    //console.debug('rows:', rows);
+                    // debug('rows:', rows);
                     const tables = rows.map((row) => row[fields[0].name]);
-                    console.debug('tables:', tables);
+                    (0, console_1.debug)('tables:', tables);
                     resolve(tables);
                 }
             });
         });
     }
     async getTableInfo(table) {
-        console.debug('MySqlDatabase.getTableInfo:', table);
+        (0, console_1.debug)('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = (0, mysql_1.createConnection)(config);
@@ -7761,7 +7784,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 }
                 else {
                     const tableInfo = rows.map((row) => {
-                        // console.debug('row:', row);
+                        // debug('row:', row);
                         return {
                             name: row.COLUMN_NAME,
                             type: this.getColumnTypeByDataType(row.COLUMN_TYPE),
@@ -7775,7 +7798,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                             // EXTRA         : row.EXTRA,
                         };
                     });
-                    console.debug('tableInfo:', tableInfo);
+                    (0, console_1.debug)('tableInfo:', tableInfo);
                     resolve(tableInfo);
                 }
             });
@@ -7797,14 +7820,14 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
-        console.debug(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        (0, console_1.debug)(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (autoColumns.length > 1)
             throw new Error('mysql does not support more than one auto increment column');
         const query = this.getInsertQuery(table, values);
-        // console.debug('insert query:', query, values);
+        // debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // console.debug('insert result:', result);
+        // debug('insert result:', result);
         if (autoColumns.length === 1) {
             if (!result.insertId)
                 throw new Error('no insertId');
@@ -7825,7 +7848,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 _row[column] = row[column];
             }
         }
-        console.debug('_row:', _row);
+        debug('_row:', _row);
         */
         /*
         const buffers = {};
@@ -7839,7 +7862,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         */
     }
     async connect(context) {
-        console.debug('MySqlDatabase.connect', this.getName());
+        (0, console_1.debug)('MySqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
         this.checkDeinited();
@@ -7850,7 +7873,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
     }
     async release(context) {
-        console.debug('MySqlDatabase.release', this.getName());
+        (0, console_1.debug)('MySqlDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
         this.getConnection(context).release();
@@ -7878,36 +7901,37 @@ exports.BkPostgreSqlDatabase = void 0;
 const colors_1 = __importDefault(__webpack_require__(/*! colors */ "colors"));
 const pg_1 = __webpack_require__(/*! pg */ "pg");
 const BkSqlDatabase_1 = __webpack_require__(/*! ../BkSqlDatabase */ "./src/backend/viewer/BkModel/BkDatabase/BkSqlDatabase/BkSqlDatabase.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     constructor() {
         super(...arguments);
         this.pool = {};
     }
     /* constructor(data, parent?) {
-        console.debug('new PostgreSqlDatabase');
+        debug('new PostgreSqlDatabase');
         super(data, parent);
     } */
-    /*static async create(data, parent) {
-        // console.debug('PostgreSqlDatabase.create');
+    /* static async create(data, parent) {
+        // debug('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
-    }*/
+    } */
     async deinit() {
-        console.debug(`PostgreSqlDatabase.deinit: ${this.getName()}`);
+        (0, console_1.debug)(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
         for (const configString in this.pool) {
             const pool = this.pool[configString];
-            console.debug('ending pool:', configString, pool.totalCount);
+            (0, console_1.debug)('ending pool:', configString, pool.totalCount);
             await pool.end();
-            console.debug('pool ended');
+            (0, console_1.debug)('pool ended');
         }
         this.pool = {};
     }
     getPool(context) {
-        // console.debug('PostgreSqlDatabase.getPool');
+        // debug('PostgreSqlDatabase.getPool');
         const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
-            console.debug(`creating connection pool for ${this.getName()}(${configString})`);
+            (0, console_1.debug)(`creating connection pool for ${this.getName()}(${configString})`);
             this.pool[configString] = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool[configString];
@@ -7916,7 +7940,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return new pg_1.Pool(config);
     }
     async connect(context) {
-        console.debug('PostgreSqlDatabase.connect', this.getName());
+        (0, console_1.debug)('PostgreSqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
         this.checkDeinited();
@@ -7928,7 +7952,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         context.connections[name] = await pool.connect();
     }
     async release(context) {
-        console.debug('PostgreSqlDatabase.release', this.getName());
+        (0, console_1.debug)('PostgreSqlDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
         this.getConnection(context).release();
@@ -7936,7 +7960,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     }
     async queryResult(context, query, params = null) {
         if (context.query.sql) {
-            console.debug(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
+            (0, console_1.debug)(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
             } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
@@ -7944,56 +7968,56 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
-            console.debug('sql:', sql);
-            console.debug('values:', values);
+            (0, console_1.debug)('sql:', sql);
+            (0, console_1.debug)('values:', values);
         }
         const result = await this.getConnection(context).query(sql, values);
-        // console.debug('cnn.query result:', result);
+        // debug('cnn.query result:', result);
         return result;
     }
     static async queryResult(pool, query, params = null) {
-        console.debug(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        (0, console_1.debug)(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        // console.debug('sql:', sql);
-        // console.debug('values:', values);
+        // debug('sql:', sql);
+        // debug('values:', values);
         const result = await pool.query(sql, values);
-        // console.debug('cnn.query result:', result);
+        // debug('cnn.query result:', result);
         return result;
     }
     async queryRows(context, query, params = null) {
-        // console.debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
+        // debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
     async begin(context) {
-        console.debug('PostgreSqlDatabase.begin', this.getName());
+        (0, console_1.debug)('PostgreSqlDatabase.begin', this.getName());
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('begin');
     }
     async commit(context) {
-        console.debug('PostgreSqlDatabase.commit', this.getName());
+        (0, console_1.debug)('PostgreSqlDatabase.commit', this.getName());
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('commit');
     }
     async rollback(context, err) {
-        console.debug(colors_1.default.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
+        (0, console_1.debug)(colors_1.default.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
     static formatQuery(query, params) {
-        // console.debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
-        // console.debug('params:', params);
+        // debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
+        // debug('params:', params);
         if (!params) {
             return { sql: query, values: null };
         }
         const usedValues = BkSqlDatabase_1.BkSqlDatabase.getUsedParams(query);
-        // console.debug('usedValues:', usedValues);
+        // debug('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
-        // console.debug('keys:', keys);
+        // debug('keys:', keys);
         const values = keys.map((key) => params[key]);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
@@ -8004,20 +8028,20 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return { sql, values };
     }
     getDeleteQuery(tableName, rowKeyValues) {
-        // console.debug('PostgreSqlDatabase.getDeleteQuery');
+        // debug('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
     getUpdateQuery(tableName, values, where) {
         return BkPostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
     static getUpdateQuery(tableName, values, where) {
-        // console.debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
+        // debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0)
@@ -8029,29 +8053,29 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
-        // console.debug('PostgreSqlDatabase.getInsertQuery');
+        // debug('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length)
             return `insert into "${tableName}" default values`;
         const columnsString = columns.map((column) => `"${column}"`).join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
     async getTableList() {
-        console.debug('PostgreSqlDatabase.getTableList');
+        (0, console_1.debug)('PostgreSqlDatabase.getTableList');
         const rows = await this.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
         const tableList = rows.map((row) => row.table_name);
-        // console.debug('tableList:', tableList);
+        // debug('tableList:', tableList);
         return tableList;
     }
     async getTableInfo(table) {
-        console.debug('PostgreSqlDatabase.getTableInfo');
+        (0, console_1.debug)('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
-        // console.debug('keyColumns:', keyColumns);
+        // debug('keyColumns:', keyColumns);
         const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
-        // console.debug('getTableInfo rows:', rows);
+        // debug('getTableInfo rows:', rows);
         const tableInfo = rows.map((row) => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
@@ -8061,7 +8085,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             comment: null,
             dbType: row.data_type,
         }));
-        // console.debug('tableInfo:', tableInfo);
+        // debug('tableInfo:', tableInfo);
         return tableInfo;
     }
     getColumnTypeByDataType(dataType) {
@@ -8088,7 +8112,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
     }
     async getTableKeyColumns(table) {
-        console.debug('PostgreSqlDatabase.getTableKeyColumns');
+        (0, console_1.debug)('PostgreSqlDatabase.getTableKeyColumns');
         const rows = await this.query(`SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
 JOIN   pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
@@ -8103,22 +8127,22 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         await client.end();
         return results.rows;
     }
-    /*getDefaultPort(): number {
+    /* getDefaultPort(): number {
         return 5432;
-    }*/
+    } */
     async queryAutoValues(context, table, autoColumnTypes) {
-        console.debug('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
+        (0, console_1.debug)('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (!autoColumns.length)
             throw new Error('no auto columns');
         const queries = autoColumns.map((column) => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
-        // console.debug('query:', query);
+        // debug('query:', query);
         const result = await this.queryResult(context, query);
-        // console.debug('result:', result);
+        // debug('result:', result);
         if (result instanceof Array) {
             return autoColumns.reduce((acc, name, i) => {
-                // console.debug('name:', name);
+                // debug('name:', name);
                 const r = result[i];
                 let [{ currval: val }] = r.rows;
                 if (autoColumnTypes[name] === 'number' && typeof val === 'string')
@@ -8140,15 +8164,15 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
-        console.debug(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        (0, console_1.debug)(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
-        // console.debug('insert query:', query, values);
+        // debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // console.debug('insert result:', result);
+        // debug('insert result:', result);
         // auto
         if (Object.keys(autoColumnTypes).length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumnTypes);
-            console.debug('auto:', auto);
+            (0, console_1.debug)('auto:', auto);
             return Object.assign(Object.assign({}, auto), values);
         }
         return Object.assign({}, values);
@@ -8183,9 +8207,10 @@ exports.BkPostgreSqlDatabase = BkPostgreSqlDatabase;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkSqlDatabase = void 0;
 const BkDatabase_1 = __webpack_require__(/*! ../BkDatabase */ "./src/backend/viewer/BkModel/BkDatabase/BkDatabase.ts");
+const console_1 = __webpack_require__(/*! ../../../../../console */ "./src/console.ts");
 class BkSqlDatabase extends BkDatabase_1.BkDatabase {
     getUpdateQuery(tableName, values, where) {
-        console.debug('BkSqlDatabase.getUpdateQuery', tableName);
+        (0, console_1.debug)('BkSqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0)
@@ -8197,22 +8222,22 @@ class BkSqlDatabase extends BkDatabase_1.BkDatabase {
         return `update ${tableName} set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
-        console.debug('BkSqlDatabase.getInsertQuery');
+        (0, console_1.debug)('BkSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         const columnsString = columns.join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into ${tableName}(${columnsString}) values (${valuesString})`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
     getDeleteQuery(tableName, rowKeyValues) {
-        console.debug('BkSqlDatabase.getDeleteQuery');
+        (0, console_1.debug)('BkSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `${keyColumn} = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from ${tableName} where ${whereString}`;
-        // console.debug('query:', query);
+        // debug('query:', query);
         return query;
     }
     static getUsedParams(query) {
@@ -8225,7 +8250,7 @@ class BkSqlDatabase extends BkDatabase_1.BkDatabase {
         const usedParams = BkSqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter((name) => paramNames.indexOf(name) === -1);
-        // console.debug('notPassedParams:', notPassedParams);
+        // debug('notPassedParams:', notPassedParams);
         if (notPassedParams.length > 0) {
             throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
         }
@@ -8352,7 +8377,7 @@ class BkDateField extends BkField_1.BkField {
         else {
             raw = BkHelper_1.BkHelper.encodeValue(value);
         }
-        // console.debug('DateField.valueToRaw', this.getFullName(), value, raw);
+        // debug('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -8360,7 +8385,7 @@ class BkDateField extends BkField_1.BkField {
         if (value && !this.isTimezone()) {
             BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
-        // console.debug('DateField.rawToValue', this.getFullName(), raw, value);
+        // debug('DateField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
@@ -8402,7 +8427,7 @@ class BkDateTimeField extends BkField_1.BkField {
         else {
             raw = BkHelper_1.BkHelper.encodeValue(value);
         }
-        // console.debug('DateTimeField.rawToValue', this.getFullName(), value, raw);
+        // debug('DateTimeField.rawToValue', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -8410,7 +8435,7 @@ class BkDateTimeField extends BkField_1.BkField {
         if (value && !this.isTimezone()) {
             BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
-        // console.debug('DateTimeField.rawToValue', this.getFullName(), raw, value);
+        // debug('DateTimeField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
@@ -8480,20 +8505,20 @@ class BkField extends BkModel_1.BkModel {
         }
     }
     dumpRowValueToParams(row, params) {
-        // console.debug('Field.dumpRowValueToParams', this.getFullName());
+        // debug('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {
             const column = this.getAttr('column');
             if (!column)
                 throw new Error('no column attr');
             const rawValue = row[column];
-            // console.debug('rawValue:', rawValue);
+            // debug('rawValue:', rawValue);
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
-            // console.debug('value:', value);
+            // debug('value:', value);
             params[fullName] = value;
         }
         catch (err) {
-            // console.debug('row:', row);
+            // debug('row:', row);
             err.message = `${fullName}: ${err.message}`;
             throw err;
         }
@@ -8817,6 +8842,7 @@ exports.BkForm = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const BkModel_1 = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 const HttpError_1 = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class BkForm extends BkModel_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
@@ -8843,7 +8869,7 @@ class BkForm extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // console.debug('Form.fill', this.constructor.name, this.getFullName());
+        // debug('Form.fill', this.constructor.name, this.getFullName());
         if (this.findDataSource('default')) {
             return super.fill(context);
         }
@@ -8873,7 +8899,7 @@ class BkForm extends BkModel_1.BkModel {
                 field.dumpRowValueToParams(row, params);
             }
         }
-        // console.debug(params);
+        // debug(params);
     }
     replaceThis(context, query) {
         return query
@@ -8899,7 +8925,7 @@ class BkForm extends BkModel_1.BkModel {
         });
     }
     async rpc(name, context) {
-        console.debug('Form.rpc', name, context.getBody());
+        (0, console_1.debug)('Form.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
@@ -8958,10 +8984,10 @@ const BkForm_1 = __webpack_require__(/*! ../BkForm */ "./src/backend/viewer/BkMo
 class BkRowForm extends BkForm_1.BkForm {
     // constructor(data, parent) {
     //     super(data, parent);
-    //     // console.debug('RowForm.constructor', this.getFullName());
+    //     // debug('RowForm.constructor', this.getFullName());
     // }
     // async fill(context) {
-    //     console.debug('RowForm.fill', this.constructor.name, this.getFullName());
+    //     debug('RowForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
     isNewMode(context) {
@@ -8997,11 +9023,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkTableForm = void 0;
 const BkForm_1 = __webpack_require__(/*! ../BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
 class BkTableForm extends BkForm_1.BkForm {
-    /*static async create(data, parent) {
+    /* static async create(data, parent) {
         return new TableForm(data, parent);
-    }*/
+    } */
     // async fill(context) {
-    //     console.debug('TableForm.fill', this.constructor.name, this.getFullName());
+    //     debug('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
     fillAttributes(response) {
@@ -9047,7 +9073,7 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async fill(context) {
-        // console.debug('Model.fill', this.constructor.name, this.getName());
+        // debug('Model.fill', this.constructor.name, this.getName());
         const response = {};
         // attributes
         this.fillAttributes(response);
@@ -9080,7 +9106,7 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async createColItems(colName, context) {
-        // console.debug(`Model.createColItems ${this.getName()}.${colName}`);
+        // debug(`Model.createColItems ${this.getName()}.${colName}`);
         for (const itemData of this.getCol(colName)) {
             await this.createColItem(colName, itemData, context);
         }
@@ -9143,6 +9169,7 @@ exports.BkPage = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const BkModel_1 = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 const HttpError_1 = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class BkPage extends BkModel_1.BkModel {
     constructor() {
         super(...arguments);
@@ -9169,7 +9196,7 @@ class BkPage extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        // console.debug('Page.fill', this.constructor.name, this.getFullName());
+        // debug('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
@@ -9178,7 +9205,7 @@ class BkPage extends BkModel_1.BkModel {
         return response;
     }
     async rpc(name, context) {
-        console.debug('Page.rpc', name, context.getBody());
+        (0, console_1.debug)('Page.rpc', name, context.getBody());
         if (Object.prototype.hasOwnProperty.call(this, name)) {
             return await this[name](context);
         }
@@ -9254,7 +9281,7 @@ exports.BkParam = void 0;
 const BkModel_1 = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 class BkParam extends BkModel_1.BkModel {
     getValue() {
-        // console.debug('Param.getValue', this.getName());
+        // debug('Param.getValue', this.getName());
         const value = this.getAttr('value');
         /* const app = this.getApp();
         return value.replace(/\{([@\w.]+)\}/g, (text, name) => {
@@ -9292,14 +9319,14 @@ class BkTable extends BkModel_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];
-        // console.debug('Table.constructor', this.getName());
+        // debug('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
     }
     async init(context) {
         await this.createColItems('columns', context);
     }
     getKeyColumns() {
-        // console.debug('Table.getKeyColumns');
+        // debug('Table.getKeyColumns');
         const keyColumns = this.columns
             .filter((column) => column.isKey())
             .map((column) => column.getName());
@@ -9352,6 +9379,7 @@ const Application_1 = __webpack_require__(/*! ../../frontend/viewer/Model/Applic
 const ApplicationController_1 = __webpack_require__(/*! ../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
 const login_1 = __webpack_require__(/*! ./login */ "./src/backend/viewer/login.tsx");
 const common_1 = __webpack_require__(/*! ../../frontend/common */ "./src/frontend/common/index.ts");
+const console_1 = __webpack_require__(/*! ../../console */ "./src/console.ts");
 const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 // to compile without using
 var viewer_1 = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
@@ -9376,11 +9404,11 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        console.debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
+        (0, console_1.debug)('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
-        console.debug('ViewerModule.css:', this.css);
-        console.debug('ViewerModule.js:', this.js);
+        (0, console_1.debug)('ViewerModule.css:', this.css);
+        (0, console_1.debug)('ViewerModule.js:', this.js);
         if (!this.js.length)
             throw new Error('no qforms js');
     }
@@ -9391,7 +9419,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        console.debug('ViewerModule.handleGet', context.getDomain(), context.query, context.getReq().url);
+        (0, console_1.debug)('ViewerModule.handleGet', context.getDomain(), context.query, context.getReq().url);
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
             !(req.session.user && req.session.user[context.getRoute()])) {
@@ -9403,7 +9431,7 @@ class ViewerModule {
         }
     }
     async handlePost(context, application) {
-        // console.debug('ViewerModule.handlePost');
+        // debug('ViewerModule.handlePost');
         const req = context.getReq();
         if (req.body.action === 'login') {
             await this.loginPost(context, application);
@@ -9425,7 +9453,7 @@ class ViewerModule {
         await this[req.body.action](context, application);
     }
     async renderHtml(bkApplication, context) {
-        console.debug('ViewerModule.renderHtml');
+        (0, console_1.debug)('ViewerModule.renderHtml');
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
         const data = await bkApplication.fill(context);
@@ -9445,12 +9473,12 @@ class ViewerModule {
             ctrl: applicationController,
         });
         const appViewHtml = server_1.default.renderToString(element);
-        // console.debug('appViewHtml:', appViewHtml);
+        // debug('appViewHtml:', appViewHtml);
         const html = bkApplication.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
     async loginGet(context, application) {
-        console.debug('ViewerModule.loginGet');
+        (0, console_1.debug)('ViewerModule.loginGet');
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
         const html = (0, login_1.login)(pkg.version, context, application, links, scripts, {
@@ -9463,7 +9491,7 @@ class ViewerModule {
         context.getRes().end(html);
     }
     async loginPost(context, application) {
-        console.debug('ViewerModule.loginPost');
+        (0, console_1.debug)('ViewerModule.loginPost');
         const req = context.getReq();
         const res = context.getRes();
         if (req.body.tzOffset === undefined)
@@ -9511,7 +9539,7 @@ class ViewerModule {
     }
     // action (index page, action by default for GET request)
     async index(context, bkApplication) {
-        console.debug('ViewerModule.index');
+        (0, console_1.debug)('ViewerModule.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -9525,7 +9553,7 @@ class ViewerModule {
     }
     // action (fill page)
     async page(context, application) {
-        console.debug('ViewerModule.page', context.getReq().body.page);
+        (0, console_1.debug)('ViewerModule.page', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         await application.connect(context);
@@ -9543,7 +9571,7 @@ class ViewerModule {
     }
     // action
     async select(context, application) {
-        console.debug('ViewerModule.select', context.getReq().body.page);
+        (0, console_1.debug)('ViewerModule.select', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         const start = Date.now();
@@ -9565,7 +9593,7 @@ class ViewerModule {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
-            console.debug('select time:', time);
+            (0, console_1.debug)('select time:', time);
             res.json({ rows, count, time });
         }
         finally {
@@ -9574,7 +9602,7 @@ class ViewerModule {
     }
     // action
     async insert(context, application) {
-        console.debug('ViewerModule.insert', context.getReq().body.page);
+        (0, console_1.debug)('ViewerModule.insert', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -9605,7 +9633,7 @@ class ViewerModule {
     }
     // action
     async update(context, application) {
-        console.debug('ViewerModule.update', context.getReq().body.page);
+        (0, console_1.debug)('ViewerModule.update', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -9636,7 +9664,7 @@ class ViewerModule {
     }
     // action
     async _delete(context, application) {
-        console.debug('ViewerModule._delete', context.getReq().body.page);
+        (0, console_1.debug)('ViewerModule._delete', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -9667,7 +9695,7 @@ class ViewerModule {
     }
     // action
     async rpc(context, application) {
-        console.debug('ViewerModule.rpc', context.getReq().body);
+        (0, console_1.debug)('ViewerModule.rpc', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -9714,7 +9742,7 @@ class ViewerModule {
     }
     // action
     async logout(context, application) {
-        console.debug('ViewerModule.logout');
+        (0, console_1.debug)('ViewerModule.logout');
         const req = context.getReq();
         const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
@@ -9726,7 +9754,7 @@ class ViewerModule {
     }
     // action
     async test(context, application) {
-        console.debug('ViewerModule.test', context.getReq().body);
+        (0, console_1.debug)('ViewerModule.test', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);

@@ -31,7 +31,7 @@ export abstract class BkPersistentDataSource<
     }
 
     decodeRow(rawRow: RawRow): Row {
-        // console.debug('PersistentDataSource.decodeRow', rawRow);
+        // debug('PersistentDataSource.decodeRow', rawRow);
         const form = this.getForm();
         if (!form) throw new Error('not form ds');
 

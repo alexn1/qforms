@@ -3,7 +3,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 
 export class BkParam extends BkModel {
     getValue() {
-        // console.debug('Param.getValue', this.getName());
+        // debug('Param.getValue', this.getName());
         const value = this.getAttr('value');
         /* const app = this.getApp();
         return value.replace(/\{([@\w.]+)\}/g, (text, name) => {

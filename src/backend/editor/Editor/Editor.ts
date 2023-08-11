@@ -5,6 +5,7 @@ import { BaseModel } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { BkModelScheme } from '../../viewer/BkModelScheme/BkModelScheme';
+import { debug } from '../../../console';
 
 export class Editor<
     TBkModelData extends BkModelScheme = BkModelScheme,
@@ -19,7 +20,7 @@ export class Editor<
     }
 
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-        console.debug('Editor.createFileByReplace');
+        debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await BkHelper.exists(newFilePath);
         if (exists) {
@@ -50,7 +51,7 @@ export class Editor<
     } */
 
     async getFile(filePath: string) {
-        console.debug('Editor.getFile', filePath);
+        debug('Editor.getFile', filePath);
         const exists = await BkHelper.exists(filePath);
         if (exists) {
             return await BkHelper.readTextFile(filePath);
@@ -66,7 +67,7 @@ export class Editor<
     }
 
     async getCustomFile(ext: string) {
-        console.debug('Editor.getCustomFile', ext);
+        debug('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
@@ -76,21 +77,21 @@ export class Editor<
         await this.saveFile(customFilePath, text);
     }
 
-    /*moveDataSourceUp(name) {
+    /* moveDataSourceUp(name) {
         this.moveDataColItem('dataSources', name, -1);
-    }*/
+    } */
 
-    /*moveDataSourceDown(name) {
+    /* moveDataSourceDown(name) {
         this.moveDataColItem('dataSources', name, 1);
-    }*/
+    } */
 
-    /*moveActionUp(name) {
+    /* moveActionUp(name) {
         this.moveDataColItem('actions', name, -1);
-    }*/
+    } */
 
-    /*moveActionDown(name) {
+    /* moveActionDown(name) {
         this.moveDataColItem('actions', name, 1);
-    }*/
+    } */
 
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
@@ -126,12 +127,12 @@ export class Editor<
         return data;
     } */
 
-    /*createActionEditor(name) {
+    /* createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
-    }*/
+    } */
 
     setColData(colName: string, newData: BkModelScheme) {
-        // console.debug('Editor.setData', newData);
+        // debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
 
@@ -160,7 +161,7 @@ export class Editor<
     }
 
     newItemData(className, colName, params) {
-        console.debug('Editor.newItemData', className, colName, params);
+        debug('Editor.newItemData', className, colName, params);
         const { name } = params;
         if (!name) throw new Error('no name');
         const editorClassName = `${className}Editor`;
@@ -176,7 +177,7 @@ export class Editor<
     }
 
     static createItemData(data) {
-        // console.debug('Editor.createItemData', data);
+        // debug('Editor.createItemData', data);
         try {
             const params = data['@attributes']
                 ? {

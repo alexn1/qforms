@@ -1,8 +1,9 @@
 import { EditorController } from '../EditorController';
+import { debug } from '../../../../console';
 
 export class ActionEditorController extends EditorController {
     async _new(params) {
-        console.debug('ActionEditorController._new');
+        debug('ActionEditorController._new');
         const appEditor = this.createApplicationEditor();
         let data;
         if (params.pageFileName) {

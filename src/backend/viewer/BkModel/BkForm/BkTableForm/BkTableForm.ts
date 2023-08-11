@@ -2,12 +2,12 @@ import { BkTableFormScheme } from '../../../BkModelScheme/BkFormScheme/BkTableFo
 import { BkForm } from '../BkForm';
 
 export class BkTableForm extends BkForm<BkTableFormScheme> {
-    /*static async create(data, parent) {
+    /* static async create(data, parent) {
         return new TableForm(data, parent);
-    }*/
+    } */
 
     // async fill(context) {
-    //     console.debug('TableForm.fill', this.constructor.name, this.getFullName());
+    //     debug('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
 

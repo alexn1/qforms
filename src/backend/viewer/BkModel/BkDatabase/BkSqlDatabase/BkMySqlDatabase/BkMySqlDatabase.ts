@@ -2,17 +2,18 @@ import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysq
 import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
+import { debug } from '../../../../../../console';
 
 export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     pool: Pool | null = null;
 
     /* constructor(data, parent?) {
         super(data, parent);
-        console.debug('new MySqlDatabase');
+        debug('new MySqlDatabase');
     } */
 
     async deinit(): Promise<void> {
-        console.debug(`MySqlDatabase.deinit: ${this.getName()}`);
+        debug(`MySqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
 
         if (this.pool !== null) {
@@ -26,26 +27,26 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     getPool(): Pool {
-        //console.debug('MySqlDatabase.getPool');
+        //debug('MySqlDatabase.getPool');
         if (!this.pool) {
-            //console.debug('creating connection pool for: ' + database);
+            //debug('creating connection pool for: ' + database);
             this.pool = createPool(this.getConfig());
         }
-        //console.debug('pool connections count: ' + this.pool._allConnections.length);
+        //debug('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
 
     getConfig(): any {
-        console.debug('MySqlDatabase.getConfig');
+        debug('MySqlDatabase.getConfig');
         return {
             ...super.getConfig(),
             queryFormat: BkMySqlDatabase.queryFormat,
         };
     }
 
-    /*getDefaultPort(): number {
+    /* getDefaultPort(): number {
         return 3306;
-    }*/
+    } */
 
     static async Pool_getConnection(pool: Pool): Promise<PoolConnection> {
         return new Promise((resolve, reject) => {
@@ -64,7 +65,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
-        console.debug('MySqlDatabase.queryRows', query, params);
+        debug('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
@@ -93,7 +94,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
-        console.debug('MySqlDatabase.queryResult', query, params);
+        debug('MySqlDatabase.queryResult', query, params);
         BkSqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
@@ -113,7 +114,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     _getRows(result, fields): any[] {
-        //console.debug('MySqlDatabase._getRows');
+        //debug('MySqlDatabase._getRows');
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
             const f = fields[j];
@@ -138,7 +139,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     begin(context: Context): Promise<void> {
-        console.debug('MySqlDatabase.begin');
+        debug('MySqlDatabase.begin');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.beginTransaction((err) => {
@@ -152,7 +153,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     commit(context: Context): Promise<void> {
-        console.debug('MySqlDatabase.commit');
+        debug('MySqlDatabase.commit');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.commit((err) => {
@@ -166,7 +167,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     rollback(context: Context, err): Promise<void> {
-        console.debug('MySqlDatabase.rollback:', this.getName(), err.message);
+        debug('MySqlDatabase.rollback:', this.getName(), err.message);
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
@@ -176,14 +177,14 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     static queryFormat(query: string, params = {}): string {
-        console.debug('MySqlDatabase.queryFormat', query, params);
+        debug('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return escape(params[name]);
             }
             throw new Error(`no query param: ${name}`);
         });
-        console.debug('real db sql: ' + sql);
+        debug('real db sql: ' + sql);
         return sql;
     }
 
@@ -195,7 +196,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     async getTableList(): Promise<string[]> {
-        console.debug('MySqlDatabase.getTableList');
+        debug('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = createConnection(config);
@@ -205,9 +206,9 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
                 if (err) {
                     reject(err);
                 } else {
-                    //console.debug('rows:', rows);
+                    // debug('rows:', rows);
                     const tables = rows.map((row) => row[fields![0].name]);
-                    console.debug('tables:', tables);
+                    debug('tables:', tables);
                     resolve(tables);
                 }
             });
@@ -215,7 +216,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     }
 
     async getTableInfo(table): Promise<any[]> {
-        console.debug('MySqlDatabase.getTableInfo:', table);
+        debug('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = createConnection(config);
@@ -229,7 +230,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                     reject(err);
                 } else {
                     const tableInfo = rows.map((row) => {
-                        // console.debug('row:', row);
+                        // debug('row:', row);
                         return {
                             name: row.COLUMN_NAME,
                             type: this.getColumnTypeByDataType(row.COLUMN_TYPE),
@@ -243,7 +244,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                             // EXTRA         : row.EXTRA,
                         };
                     });
-                    console.debug('tableInfo:', tableInfo);
+                    debug('tableInfo:', tableInfo);
                     resolve(tableInfo);
                 }
             });
@@ -267,16 +268,16 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     }
 
     async insertRow(context, table, values, autoColumnTypes = {}): Promise<Row> {
-        console.debug(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        debug(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (autoColumns.length > 1)
             throw new Error('mysql does not support more than one auto increment column');
 
         const query = this.getInsertQuery(table, values);
-        // console.debug('insert query:', query, values);
+        // debug('insert query:', query, values);
 
         const result = await this.queryResult(context, query, values);
-        // console.debug('insert result:', result);
+        // debug('insert result:', result);
         if (autoColumns.length === 1) {
             if (!result.insertId) throw new Error('no insertId');
             return {
@@ -301,7 +302,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 _row[column] = row[column];
             }
         }
-        console.debug('_row:', _row);
+        debug('_row:', _row);
         */
 
         /*
@@ -316,7 +317,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         */
     }
     async connect(context: Context): Promise<void> {
-        console.debug('MySqlDatabase.connect', this.getName());
+        debug('MySqlDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
         this.checkDeinited();
         const name = this.getName();
@@ -327,7 +328,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     }
 
     async release(context: Context): Promise<void> {
-        console.debug('MySqlDatabase.release', this.getName());
+        debug('MySqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         this.getConnection(context).release();
         context.connections[this.getName()] = null;

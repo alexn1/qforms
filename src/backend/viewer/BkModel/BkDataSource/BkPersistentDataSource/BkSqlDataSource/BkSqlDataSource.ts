@@ -6,10 +6,11 @@ import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
+import { debug } from '../../../../../../console';
 
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     async fill(context: Context) {
-        // console.debug('SqlDataSource.fill', this.getFullName());
+        // debug('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
         if (this.isDefaultOnForm()) {
@@ -52,7 +53,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     }
 
     getKeyColumns(): string[] {
-        // console.debug('SqlDataSource.getKeyColumns', this.getFullName());
+        // debug('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
 
@@ -157,7 +158,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     }
 
     async create(context: Context, _values: any = null): Promise<Result> {
-        console.debug('SqlDataSource.create');
+        debug('SqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -172,25 +173,25 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         const table = this.getAttr('table');
         const values = _values ? _values : this.decodeRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
-        // console.debug('autoColumnTypes:', autoColumnTypes);
+        // debug('autoColumnTypes:', autoColumnTypes);
 
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
-        console.debug('newRow:', newRow);
+        debug('newRow:', newRow);
 
         const key = this.getKeyFromValues(newRow);
         if (!key) throw new Error('insert: cannot calc row key');
-        console.debug('key:', key);
+        debug('key:', key);
 
         const keyParams = BkDataSource.keyToParams(key);
-        // console.debug('keyParams:', keyParams);
+        // debug('keyParams:', keyParams);
 
         const singleQuery = this.getSingleQuery(context);
-        // console.debug('singleQuery:', singleQuery);
+        // debug('singleQuery:', singleQuery);
 
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        // console.debug('row:', row);
+        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
 
@@ -201,7 +202,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     }
 
     async update(context: Context): Promise<Result> {
-        console.debug('SqlDataSource.update');
+        debug('SqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -210,7 +211,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.getChanges(context);
-        // console.debug('changes:', changes);
+        // debug('changes:', changes);
 
         const [key] = Object.keys(changes) as [Key];
         const where = this.getKeyValuesFromKey(key);
@@ -226,16 +227,16 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource.keyToParams(newKey);
-        console.debug('key:', key);
-        console.debug('newKey:', newKey);
-        console.debug('newKeyParams:', newKeyParams);
+        debug('key:', key);
+        debug('newKey:', newKey);
+        debug('newKeyParams:', newKeyParams);
 
         // select updated row
         const selectQuery = this.getSingleQuery(context);
-        // console.debug('selectQuery:', selectQuery);
+        // debug('selectQuery:', selectQuery);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        // console.debug('row:', row);
+        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
 

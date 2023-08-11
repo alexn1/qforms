@@ -3,7 +3,7 @@ import { Editor } from '../../Editor';
 
 export class TableFormEditor extends FormEditor {
     static createData(params) {
-        // console.debug('TableFormEditor.createData', params);
+        // debug('TableFormEditor.createData', params);
         return {
             '@class': 'TableForm',
             '@attributes': {

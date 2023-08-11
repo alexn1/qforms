@@ -32,7 +32,7 @@ export class EventLog {
     }
 
     private async create(event: Event) {
-        // console.debug('EventLog.create', event);
+        // debug('EventLog.create', event);
         if (!this.pool) throw new Error('no pool');
         await BkPostgreSqlDatabase.queryResult(
             this.pool,

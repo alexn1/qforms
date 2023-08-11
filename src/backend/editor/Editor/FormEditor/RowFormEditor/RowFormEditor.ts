@@ -3,7 +3,7 @@ import { Editor } from '../../Editor';
 
 export class RowFormEditor extends FormEditor {
     static createData(params) {
-        // console.debug('RowFormEditor.createData', params);
+        // debug('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',
             '@attributes': {

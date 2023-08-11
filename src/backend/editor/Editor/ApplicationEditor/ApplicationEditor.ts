@@ -7,6 +7,7 @@ import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
 import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { debug } from '../../../../console';
 
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
@@ -21,7 +22,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
     }
 
     static createData(params: Record<string, any>) {
-        // console.debug('ApplicationEditor.createData', params);
+        // debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'Application',
@@ -71,7 +72,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
     }
 
     async save() {
-        console.debug('ApplicationEditor.save');
+        debug('ApplicationEditor.save');
         await this.appFile.save();
     }
 

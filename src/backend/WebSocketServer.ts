@@ -4,6 +4,7 @@ import colors from 'colors/safe';
 
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
+import { debug } from '../console';
 
 export class WebSocketServer {
     options: any;
@@ -11,7 +12,7 @@ export class WebSocketServer {
 
     constructor(options) {
         this.options = options;
-        // console.debug('WebSocketServer.constructor');
+        // debug('WebSocketServer.constructor');
         this.server = new ws.Server({
             server: options.httpServer,
             path: '/',
@@ -25,7 +26,7 @@ export class WebSocketServer {
     }
 
     async onConnection(webSocket) {
-        console.debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
 
         console.log(
             'wss:',
@@ -33,7 +34,7 @@ export class WebSocketServer {
         );
 
         const parts = url.parse(webSocket.upgradeReq.url, true);
-        // console.debug('parts.query:', parts.query);
+        // debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
         webSocket.route = parts.query.route;
@@ -58,23 +59,17 @@ export class WebSocketServer {
 
         // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
-        // console.debug('this.clients', this.clients);
+        // debug('this.clients', this.clients);
         context.destroy();
     }
 
     async onClose(webSocket, code, reason) {
-        console.debug(
-            'WebSocketServer.onSocketClose',
-            webSocket.route,
-            webSocket.uuid,
-            code,
-            reason,
-        );
+        debug('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
         this.getHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
 
     async onMessage(webSocket, data, flags) {
-        console.debug('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
+        debug('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
 
     getHostApp(): BackHostApp {

@@ -17,6 +17,7 @@ import { ApplicationController } from '../../frontend/viewer/Controller/ModelCon
 import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
+import { debug } from '../../console';
 
 const pkg = require('../../../package.json');
 
@@ -48,11 +49,7 @@ export class ViewerModule {
     constructor(private hostApp: BackHostApp) {}
 
     async init() {
-        console.debug(
-            'ViewerModule.init',
-            'getFrontendDirPath:',
-            this.hostApp.getFrontendDirPath(),
-        );
+        debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (
             await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
@@ -65,8 +62,8 @@ export class ViewerModule {
                 'js',
             )
         ).map((path) => `/viewer/public/${path}`);
-        console.debug('ViewerModule.css:', this.css);
-        console.debug('ViewerModule.js:', this.js);
+        debug('ViewerModule.css:', this.css);
+        debug('ViewerModule.js:', this.js);
         if (!this.js.length) throw new Error('no qforms js');
     }
 
@@ -79,7 +76,7 @@ export class ViewerModule {
     }
 
     async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {
-        console.debug(
+        debug(
             'ViewerModule.handleGet',
             context.getDomain(),
             context.query,
@@ -101,7 +98,7 @@ export class ViewerModule {
     }
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
-        // console.debug('ViewerModule.handlePost');
+        // debug('ViewerModule.handlePost');
         const req = context.getReq()!;
         if (req.body.action === 'login') {
             await this.loginPost(context, application);
@@ -128,7 +125,7 @@ export class ViewerModule {
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
-        console.debug('ViewerModule.renderHtml');
+        debug('ViewerModule.renderHtml');
 
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.getLinks(), ...bkApplication.links]} />,
@@ -158,7 +155,7 @@ export class ViewerModule {
         });
 
         const appViewHtml = ReactDOMServer.renderToString(element);
-        // console.debug('appViewHtml:', appViewHtml);
+        // debug('appViewHtml:', appViewHtml);
 
         const html = bkApplication.renderIndexHtml(
             context,
@@ -174,7 +171,7 @@ export class ViewerModule {
     }
 
     async loginGet(context: Context, application: BkApplication) {
-        console.debug('ViewerModule.loginGet');
+        debug('ViewerModule.loginGet');
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.getLinks(), ...application.links]} />,
         );
@@ -192,7 +189,7 @@ export class ViewerModule {
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.loginPost');
+        debug('ViewerModule.loginPost');
         const req = context.getReq()!;
         const res = context.getRes();
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
@@ -245,7 +242,7 @@ export class ViewerModule {
 
     // action (index page, action by default for GET request)
     async index(context: Context, bkApplication: BkApplication): Promise<void> {
-        console.debug('ViewerModule.index');
+        debug('ViewerModule.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -259,7 +256,7 @@ export class ViewerModule {
 
     // action (fill page)
     async page(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.page', context.getReq()!.body.page);
+        debug('ViewerModule.page', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         await application.connect(context);
@@ -276,7 +273,7 @@ export class ViewerModule {
 
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.select', context.getReq()!.body.page);
+        debug('ViewerModule.select', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         const start = Date.now();
@@ -296,7 +293,7 @@ export class ViewerModule {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
-            console.debug('select time:', time);
+            debug('select time:', time);
             res.json({ rows, count, time });
         } finally {
             await dataSource.getDatabase().release(context);
@@ -305,7 +302,7 @@ export class ViewerModule {
 
     // action
     async insert(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.insert', context.getReq()!.body.page);
+        debug('ViewerModule.insert', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -334,7 +331,7 @@ export class ViewerModule {
 
     // action
     async update(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.update', context.getReq()!.body.page);
+        debug('ViewerModule.update', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -363,7 +360,7 @@ export class ViewerModule {
 
     // action
     async _delete(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule._delete', context.getReq()!.body.page);
+        debug('ViewerModule._delete', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -392,7 +389,7 @@ export class ViewerModule {
 
     // action
     async rpc(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.rpc', context.getReq()!.body);
+        debug('ViewerModule.rpc', context.getReq()!.body);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -435,7 +432,7 @@ export class ViewerModule {
 
     // action
     async logout(context: Context, application: BkApplication): Promise<void> {
-        console.debug('ViewerModule.logout');
+        debug('ViewerModule.logout');
         const req = context.getReq()!;
         const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
@@ -448,7 +445,7 @@ export class ViewerModule {
 
     // action
     async test(context: Context, application: BkApplication) {
-        console.debug('ViewerModule.test', context.getReq()!.body);
+        debug('ViewerModule.test', context.getReq()!.body);
         const req = context.getReq();
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);

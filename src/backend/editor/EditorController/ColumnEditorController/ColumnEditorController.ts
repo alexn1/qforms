@@ -1,13 +1,14 @@
 import { EditorController } from '../EditorController';
+import { debug } from '../../../../console';
 
 export class ColumnEditorController extends EditorController {
-    /*constructor(...args) {
-        console.debug('ColumnEditorController.constructor');
+    /* constructor(...args) {
+        debug('ColumnEditorController.constructor');
         super(...args);
-    }*/
+    } */
 
     async save(params) {
-        console.debug('ColumnEditorController.save');
+        debug('ColumnEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -18,7 +19,7 @@ export class ColumnEditorController extends EditorController {
     }
 
     async _new(params) {
-        console.debug('ColumnEditorController._new');
+        debug('ColumnEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);
@@ -28,7 +29,7 @@ export class ColumnEditorController extends EditorController {
     }
 
     async delete(params) {
-        console.debug('ColumnEditorController.delete');
+        debug('ColumnEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);

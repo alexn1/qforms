@@ -2,13 +2,14 @@ import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db
 import { BkNoSqlDatabase } from '../BkNoSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
+import { debug } from '../../../../../../console';
 
 export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     client: MongoClient;
     session: ClientSession;
 }> {
     async connect(context: Context): Promise<void> {
-        console.debug('MongoDbDatabase.connect', this.getName());
+        debug('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
         this.checkDeinited();
         const name = this.getName();
@@ -18,14 +19,14 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
 
         const url = this.getUrl();
         const client = new MongoClient(url);
-        console.debug(`MongoDbDatabase: connecting to ${url}`);
+        debug(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
         const session = client.startSession();
         context.connections[name] = { client, session };
     }
 
     getUrl() {
-        // console.debug('config', this.getConfig());
+        // debug('config', this.getConfig());
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
@@ -35,7 +36,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     async release(context: Context): Promise<void> {
-        console.debug('MongoDbDatabase.release', this.getName());
+        debug('MongoDbDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         const { client, session } = this.getConnection(context);
         session.endSession();
@@ -48,9 +49,9 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
             acc[name] = name === '_id' ? new ObjectId(filter[name]) : filter[name];
             return acc;
         }, {});
-        console.debug('colName', colName);
-        console.debug('_filter:', _filter);
-        console.debug('update', update);
+        debug('colName', colName);
+        debug('_filter:', _filter);
+        debug('update', update);
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
@@ -60,7 +61,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
 
     async deleteOne(context: Context, colName: string, filter): Promise<any> {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
-        // console.debug('_filter', _filter);
+        // debug('_filter', _filter);
         return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
 
@@ -100,7 +101,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
-        console.debug('MongoDbDatabase.query', query, params);
+        debug('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
 
         // for find() and aggregate()
@@ -122,10 +123,10 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         // for find() and aggregate()
         if (result instanceof FindCursor || result instanceof AggregationCursor) {
             const rows = await result.toArray();
-            // console.debug('rows:', rows);
+            // debug('rows:', rows);
             const [firstRow] = rows;
             if (!firstRow) throw new Error('queryScalar: no first row');
-            // console.debug('firstRow:', firstRow);
+            // debug('firstRow:', firstRow);
             const firstField = Object.keys(firstRow)[0];
             if (!firstField) throw new Error('queryScalar: no first field');
             return firstRow[firstField];
@@ -139,17 +140,17 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     async begin(context: Context): Promise<void> {
-        console.debug('MongoDbDatabase.begin');
+        debug('MongoDbDatabase.begin');
         this.getConnection(context).session.startTransaction();
     }
 
     async commit(context: Context): Promise<void> {
-        console.debug('MongoDbDatabase.commit');
+        debug('MongoDbDatabase.commit');
         this.getConnection(context).session.commitTransaction();
     }
 
     async rollback(context: Context, err): Promise<void> {
-        console.debug('MongoDbDatabase.rollback');
+        debug('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
     }
 }

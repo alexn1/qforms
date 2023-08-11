@@ -30,8 +30,8 @@ export class MonitorModule {
                 'js',
             )
         ).map((path) => `/monitor/public/${path}`);
-        // console.debug('monitor.css:', this.css);
-        // console.debug('monitor.js:' , this.js);
+        // debug('monitor.css:', this.css);
+        // debug('monitor.js:' , this.js);
     }
 
     fill() {

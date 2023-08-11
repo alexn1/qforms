@@ -1,4 +1,5 @@
 import { VisualEditorController } from '../VisualEditorController';
+import { debug } from '../../../../console';
 
 export class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
@@ -47,7 +48,7 @@ export class FormEditorController extends VisualEditorController {
     }
 
     async getView(params) {
-        console.debug('FormEditorController.getView');
+        debug('FormEditorController.getView');
         const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':

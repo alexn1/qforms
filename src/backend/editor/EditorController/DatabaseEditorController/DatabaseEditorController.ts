@@ -1,13 +1,14 @@
 import { Context } from '../../../Context';
 import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplication';
 import { EditorController } from '../EditorController';
+import { debug } from '../../../../console';
 
 export class DatabaseEditorController extends EditorController {
     application: BkApplication | null = null;
-    /*constructor(...args) {
+    /* constructor(...args) {
         super(...args);
         this.application = null;
-    }*/
+    } */
 
     async init(context: Context) {
         await super.init(context);
@@ -30,7 +31,7 @@ export class DatabaseEditorController extends EditorController {
     }
 
     async save(params) {
-        console.debug('DatabaseEditorController.save');
+        debug('DatabaseEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         databaseEditor.setAttr(params.attr, params.value);

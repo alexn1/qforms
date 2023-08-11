@@ -10,6 +10,7 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import * as backend from '../index';
 import { home } from './home';
+import { debug } from '../../console';
 
 const pkg = require('../../../package.json');
 
@@ -68,8 +69,8 @@ export class EditorModule {
                 'js',
             )
         ).map((path) => `/editor/public/${path}`);
-        // console.debug('editor.css:', this.css);
-        // console.debug('editor.js:' , this.js);
+        // debug('editor.css:', this.css);
+        // debug('editor.js:' , this.js);
     }
 
     getLinks() {
@@ -89,7 +90,7 @@ export class EditorModule {
     }
 
     async handleEditorGet(req, res, context: Context) {
-        console.debug('EditorModule.handleEditorGet');
+        debug('EditorModule.handleEditorGet');
         const appInfo = await BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
 
         // data
@@ -119,7 +120,7 @@ export class EditorModule {
     }
 
     async handleEditorPost(req: Request, res: Response, context: Context) {
-        console.debug('EditorModule.handleEditorPost', req.body);
+        debug('EditorModule.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body!.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
@@ -136,7 +137,7 @@ export class EditorModule {
         const method = req.body!.action;
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
-        // console.debug('json result:', result);
+        // debug('json result:', result);
         if (result === undefined) throw new Error('handleEditorPost: result is undefined');
         res.json(result);
     }

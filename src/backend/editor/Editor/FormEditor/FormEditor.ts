@@ -1,6 +1,7 @@
 import path from 'path';
 
 import { Editor } from '../Editor';
+import { debug } from '../../../../console';
 
 export class FormEditor extends Editor {
     static createAttributes(params): any {
@@ -17,7 +18,7 @@ export class FormEditor extends Editor {
     }
 
     static createData(params): any {
-        console.debug('FormEditor.createData', params);
+        debug('FormEditor.createData', params);
         return {
             '@class': 'Form',
             '@attributes': {

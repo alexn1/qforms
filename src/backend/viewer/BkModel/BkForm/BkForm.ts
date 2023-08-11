@@ -10,6 +10,7 @@ import { HttpError } from '../../../HttpError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
 import { BkFormScheme } from '../../BkModelScheme/BkFormScheme/BkFormScheme';
+import { debug } from '../../../../console';
 
 export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkModel<TBkFormData> {
     dataSources: BkDataSource[] = [];
@@ -42,7 +43,7 @@ export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkM
     }
 
     async fill(context: Context) {
-        // console.debug('Form.fill', this.constructor.name, this.getFullName());
+        // debug('Form.fill', this.constructor.name, this.getFullName());
         if (this.findDataSource('default')) {
             return super.fill(context);
         }
@@ -77,7 +78,7 @@ export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkM
                 field.dumpRowValueToParams(row, params);
             }
         }
-        // console.debug(params);
+        // debug(params);
     }
 
     replaceThis(context: Context, query: string): string {
@@ -105,7 +106,7 @@ export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkM
     }
 
     async rpc(name: string, context: Context) {
-        console.debug('Form.rpc', name, context.getBody());
+        debug('Form.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,

@@ -1,9 +1,10 @@
 import { EditorController } from '../EditorController';
+import { debug } from '../../../../console';
 
 export class DataSourceEditorController extends EditorController {
-    /*constructor(...args) {
+    /* constructor(...args) {
         super(...args);
-    }*/
+    } */
 
     async createDataSourceEditor(params) {
         let editor: any = this.createApplicationEditor();
@@ -103,7 +104,7 @@ export class DataSourceEditorController extends EditorController {
     }
 
     async save(params) {
-        console.debug('DataSourceEditorController.save');
+        debug('DataSourceEditorController.save');
         const dataSourceEditor = await this.createDataSourceEditor(params);
         dataSourceEditor.setAttr(params.attr, params.value);
         await dataSourceEditor.save();
