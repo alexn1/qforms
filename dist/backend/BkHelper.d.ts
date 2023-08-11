@@ -4,7 +4,7 @@ import fs from 'fs';
 import { JSONString } from '../types';
 export declare class BkHelper {
     static getRandomString(length: number): string;
-    static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string): any;
+    static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string): any[];
     static _glob(path: string): Promise<any[]>;
     static getFilePaths(dirPath: string, ext: string): Promise<string[]>;
     static currentTime(): string;

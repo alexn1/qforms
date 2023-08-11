@@ -9952,10 +9952,23 @@ exports.ru = ru_json_1.default;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.error = exports.warn = exports.log = exports.debug = exports.levels = void 0;
+exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.levels = void 0;
 exports.levels = ['debug', 'log', 'warn', 'error'];
-const QFORMS_LOG_LEVEL = process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
-const level = exports.levels.indexOf(QFORMS_LOG_LEVEL);
+/* const QFORMS_LOG_LEVEL =
+    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log'); */
+const level = exports.levels.indexOf(getLogLevelName());
+function getLogLevelName() {
+    if (typeof global === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
+    }
+    else if (typeof window === 'object') {
+        // @ts-ignore
+        return window.QFORMS_LOG_LEVEL || 'debug';
+    }
+    return exports.levels[0];
+}
+exports.getLogLevelName = getLogLevelName;
 function debug(message, ...optionalParams) {
     if (level <= exports.levels.indexOf('debug')) {
         // process.stdout.write(`${messages.join(' ')}\n`);
