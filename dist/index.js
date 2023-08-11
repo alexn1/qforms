@@ -9952,44 +9952,51 @@ exports.ru = ru_json_1.default;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.levels = void 0;
-exports.levels = ['debug', 'log', 'warn', 'error'];
+exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.getLogLevel = exports.LOG_LEVELS = void 0;
+exports.LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
 /* const QFORMS_LOG_LEVEL =
     process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log'); */
-const level = exports.levels.indexOf(getLogLevelName());
+// const level = levels.indexOf(getLogLevelName());
+function getLogLevel() {
+    return exports.LOG_LEVELS.indexOf(getLogLevelName());
+}
+exports.getLogLevel = getLogLevel;
 function getLogLevelName() {
-    if (typeof global === 'object') {
-        return (process.env.QFORMS_LOG_LEVEL ||
-            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
-    }
-    else if (typeof window === 'object') {
+    if (typeof window === 'object') {
         // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
-    return exports.levels[0];
+    else if (typeof global === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
+    }
+    return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
 function debug(message, ...optionalParams) {
-    if (level <= exports.levels.indexOf('debug')) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
         // process.stdout.write(`${messages.join(' ')}\n`);
         console.debug(message, ...optionalParams);
     }
 }
 exports.debug = debug;
-function log(...messages) {
-    if (level <= exports.levels.indexOf('log')) {
-        process.stdout.write(`${messages.join(' ')}\n`);
+function log(message, ...optionalParams) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.log(message, ...optionalParams);
     }
 }
 exports.log = log;
-function warn(...messages) {
-    if (level <= exports.levels.indexOf('log')) {
-        process.stdout.write(`${messages.join(' ')}\n`);
+function warn(message, ...optionalParams) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.warn(message, ...optionalParams);
     }
 }
 exports.warn = warn;
-function error(...messages) {
-    process.stderr.write(`${messages.join(' ')}\n`);
+function error(message, ...optionalParams) {
+    // process.stderr.write(`${messages.join(' ')}\n`);
+    console.error(message, ...optionalParams);
 }
 exports.error = error;
 
@@ -18872,12 +18879,13 @@ const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-ru
 const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 const ModelView_1 = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
 const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+const console_1 = __webpack_require__(/*! ../../../../../console */ "./src/console.ts");
 __webpack_require__(/*! ./PageView.less */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.less");
 class PageView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.debug('PageView.onActionsClick:', li);
+            // debug('PageView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -19006,7 +19014,7 @@ class PageView extends ModelView_1.ModelView {
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
     }
     render() {
-        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
+        (0, console_1.debug)('PageView.render', this.getCtrl().getModel().getFullName());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {
@@ -19018,7 +19026,7 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     componentDidMount() {
-        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         }
         else {
@@ -19026,9 +19034,9 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     focus() {
-        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
+        // debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.debug('focus', this.getElement());
+            // debug('focus', this.getElement());
             this.getElement().focus();
         }
         else {
@@ -21291,9 +21299,10 @@ const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model
 const DataSource_1 = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 const Helper_1 = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 const RowForm_1 = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
-        // console.debug('Page.constructor', options);
+        // debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
@@ -21307,11 +21316,11 @@ class Page extends Model_1.Model {
     init() {
         this.createDataSources();
         this.createForms();
-        console.debug('page options:', this.options);
-        console.debug('page params:', this.getParams());
+        (0, console_1.debug)('page options:', this.options);
+        (0, console_1.debug)('page params:', this.getParams());
     }
     deinit() {
-        // console.debug('Page.deinit', this.getFullName());
+        // debug('Page.deinit', this.getFullName());
         if (this.deinited)
             throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
@@ -21344,11 +21353,11 @@ class Page extends Model_1.Model {
         return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
     }
     setParam(name, value) {
-        // console.debug('Page.setParam', name);
+        // debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
-        console.debug('Page.update', this.getFullName());
+        (0, console_1.debug)('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -21356,7 +21365,7 @@ class Page extends Model_1.Model {
         }
     }
     discard() {
-        console.debug('Page.discard', this.getFullName());
+        (0, console_1.debug)('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof RowForm_1.RowForm) {
                 form.discard();
@@ -21421,7 +21430,7 @@ class Page extends Model_1.Model {
         return !!this.options.modal;
     }
     onFormInsert(e) {
-        console.debug('Page.onFormInsert', e);
+        (0, console_1.debug)('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = DataSource_1.DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -21430,7 +21439,7 @@ class Page extends Model_1.Model {
         }
     }
     async rpc(name, params) {
-        // console.debug('Page.rpc', this.getFullName(), name, params);
+        // debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request('POST', {

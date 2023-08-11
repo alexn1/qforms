@@ -33,9 +33,6 @@ const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 
-/* const QFORMS_LOG_LEVEL =
-    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log'); */
-
 export type Route = [
     module: 'viewer' | 'editor',
     appDirName: string,

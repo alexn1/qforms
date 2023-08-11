@@ -60,4 +60,7 @@ module.exports = {
             filename: 'css/bundle.[contenthash].css',
         }),
     ],
+    externals: {
+        global: 'global',
+    },
 };

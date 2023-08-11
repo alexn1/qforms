@@ -31903,6 +31903,63 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/console.ts":
+/*!************************!*\
+  !*** ./src/console.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LOG_LEVELS": () => (/* binding */ LOG_LEVELS),
+/* harmony export */   "debug": () => (/* binding */ debug),
+/* harmony export */   "error": () => (/* binding */ error),
+/* harmony export */   "getLogLevel": () => (/* binding */ getLogLevel),
+/* harmony export */   "getLogLevelName": () => (/* binding */ getLogLevelName),
+/* harmony export */   "log": () => (/* binding */ log),
+/* harmony export */   "warn": () => (/* binding */ warn)
+/* harmony export */ });
+const LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
+function getLogLevel() {
+    return LOG_LEVELS.indexOf(getLogLevelName());
+}
+function getLogLevelName() {
+    if (typeof window === 'object') {
+        // @ts-ignore
+        return window.QFORMS_LOG_LEVEL || 'debug';
+    }
+    else if (typeof __webpack_require__.g === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            ( true ? 'debug' : 0));
+    }
+    return 'debug';
+}
+function debug(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.debug(message, ...optionalParams);
+    }
+}
+function log(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.log(message, ...optionalParams);
+    }
+}
+function warn(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.warn(message, ...optionalParams);
+    }
+}
+function error(message, ...optionalParams) {
+    // process.stderr.write(`${messages.join(' ')}\n`);
+    console.error(message, ...optionalParams);
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/FrontHostApp.ts":
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
@@ -40674,7 +40731,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _PageView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PageView.less */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.less");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../console */ "./src/console.ts");
+/* harmony import */ var _PageView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageView.less */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.less");
+
 
 
 
@@ -40684,7 +40743,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.debug('PageView.onActionsClick:', li);
+            // debug('PageView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -40813,7 +40872,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
     }
     render() {
-        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('PageView.render', this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {
@@ -40825,7 +40884,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         }
     }
     componentDidMount() {
-        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         }
         else {
@@ -40833,9 +40892,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         }
     }
     focus() {
-        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
+        // debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.debug('focus', this.getElement());
+            // debug('focus', this.getElement());
             this.getElement().focus();
         }
         else {
@@ -43204,13 +43263,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+
 
 
 
 
 class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     constructor(data, parent, options) {
-        // console.debug('Page.constructor', options);
+        // debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
@@ -43224,11 +43285,11 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     init() {
         this.createDataSources();
         this.createForms();
-        console.debug('page options:', this.options);
-        console.debug('page params:', this.getParams());
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('page options:', this.options);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('page params:', this.getParams());
     }
     deinit() {
-        // console.debug('Page.deinit', this.getFullName());
+        // debug('Page.deinit', this.getFullName());
         if (this.deinited)
             throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
@@ -43261,11 +43322,11 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
     }
     setParam(name, value) {
-        // console.debug('Page.setParam', name);
+        // debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
-        console.debug('Page.update', this.getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -43273,7 +43334,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     discard() {
-        console.debug('Page.discard', this.getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm) {
                 form.discard();
@@ -43338,7 +43399,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return !!this.options.modal;
     }
     onFormInsert(e) {
-        console.debug('Page.onFormInsert', e);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__.DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -43347,7 +43408,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     async rpc(name, params) {
-        // console.debug('Page.rpc', this.getFullName(), name, params);
+        // debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request('POST', {

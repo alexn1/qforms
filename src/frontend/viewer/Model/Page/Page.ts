@@ -6,6 +6,7 @@ import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { Key } from '../../../../types';
 import { Application } from '../Application/Application';
+import { debug } from '../../../../console';
 
 export interface PageOptions {
     id?: string;
@@ -25,7 +26,7 @@ export class Page extends Model<PageData> {
     params: Record<string, any> = {};
 
     constructor(data: PageData, parent: Application, private options: PageOptions) {
-        // console.debug('Page.constructor', options);
+        // debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         if (options.onCreate) {
@@ -36,12 +37,12 @@ export class Page extends Model<PageData> {
     init() {
         this.createDataSources();
         this.createForms();
-        console.debug('page options:', this.options);
-        console.debug('page params:', this.getParams());
+        debug('page options:', this.options);
+        debug('page params:', this.getParams());
     }
 
     deinit() {
-        // console.debug('Page.deinit', this.getFullName());
+        // debug('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
         this.deinitForms();
@@ -81,12 +82,12 @@ export class Page extends Model<PageData> {
     }
 
     setParam(name: string, value: any) {
-        // console.debug('Page.setParam', name);
+        // debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
 
     async update() {
-        console.debug('Page.update', this.getFullName());
+        debug('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -95,7 +96,7 @@ export class Page extends Model<PageData> {
     }
 
     discard() {
-        console.debug('Page.discard', this.getFullName());
+        debug('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof RowForm) {
                 form.discard();
@@ -170,7 +171,7 @@ export class Page extends Model<PageData> {
     }
 
     onFormInsert(e) {
-        console.debug('Page.onFormInsert', e);
+        debug('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -180,7 +181,7 @@ export class Page extends Model<PageData> {
     }
 
     async rpc(name: string, params: Record<string, any>) {
-        // console.debug('Page.rpc', this.getFullName(), name, params);
+        // debug('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request('POST', {
             action: 'rpc',

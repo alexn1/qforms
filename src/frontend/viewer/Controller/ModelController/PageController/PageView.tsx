@@ -10,6 +10,7 @@ import {
 } from '../../../../common';
 import { PageController } from './PageController';
 import { FormController } from '../FormController/FormController';
+import { debug } from '../../../../../console';
 
 import './PageView.less';
 
@@ -23,7 +24,7 @@ export class PageView<
     }
 
     onActionsClick = async (li) => {
-        // console.debug('PageView.onActionsClick:', li);
+        // debug('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
@@ -266,7 +267,7 @@ export class PageView<
     }
 
     render() {
-        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
+        debug('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} ${
@@ -293,7 +294,7 @@ export class PageView<
     }
 
     componentDidMount() {
-        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         } else {
             this.focus();
@@ -301,9 +302,9 @@ export class PageView<
     }
 
     focus() {
-        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
+        // debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.debug('focus', this.getElement());
+            // debug('focus', this.getElement());
             this.getElement().focus();
         } else {
             console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);
