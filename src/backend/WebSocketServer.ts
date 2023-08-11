@@ -4,7 +4,7 @@ import colors from 'colors/safe';
 
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
-import { debug } from '../console';
+import { debug, log, error } from '../console';
 
 export class WebSocketServer {
     options: any;
@@ -22,16 +22,13 @@ export class WebSocketServer {
     }
 
     async onError(err) {
-        console.error('WebSocketServer.onError', err);
+        error('WebSocketServer.onError', err);
     }
 
     async onConnection(webSocket) {
         debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
 
-        console.log(
-            'wss:',
-            colors.bgYellow(colors.black(decodeURIComponent(webSocket.upgradeReq.url))),
-        );
+        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(webSocket.upgradeReq.url))));
 
         const parts = url.parse(webSocket.upgradeReq.url, true);
         // debug('parts.query:', parts.query);

@@ -261,7 +261,7 @@ export class BackHostApp {
 
         // error logger
         this.express.options('/error', (req: Request, res: Response, next: NextFunction) => {
-            console.log('options /error');
+            log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
             res.end();
@@ -297,7 +297,7 @@ export class BackHostApp {
         this.express.use(
             express.static(this.frontendDirPath, {
                 setHeaders: (res, fullPath, stat) => {
-                    console.log(
+                    log(
                         `static: /${path.relative(this.frontendDirPath, fullPath)} ${
                             res.statusCode
                         }`,
@@ -347,7 +347,7 @@ export class BackHostApp {
             }
             return app;
         } catch (err) {
-            console.error(
+            error(
                 'application not created, start reject loop',
                 context.getRoute(),
                 this.createAppQueue[context.getRoute()]!.length,
@@ -439,7 +439,7 @@ export class BackHostApp {
     }
 
     async logError(err: Error, req?: Request) {
-        console.log('BackHostApp.logError:', colors.red(err.message));
+        log('BackHostApp.logError:', colors.red(err.message));
         try {
             await this.eventLog.log({
                 type: 'error',
@@ -450,7 +450,7 @@ export class BackHostApp {
                 ip: req && Context.getIpFromReq(req),
             });
         } catch (err) {
-            console.error(colors.red(err));
+            error(colors.red(err));
         }
     }
 
@@ -486,12 +486,12 @@ export class BackHostApp {
                 data: JSON.stringify(req.body, null, 4),
             });
         } catch (err) {
-            console.error(colors.red(err));
+            error(colors.red(err));
         }
     } */
 
     async logEvent(context: Context, message: string, data?: object): Promise<void> {
-        console.log('BackHostApp.logEvent', message);
+        log('BackHostApp.logEvent', message);
         try {
             await this.eventLog.log({
                 type: 'log',
@@ -501,12 +501,12 @@ export class BackHostApp {
                 ip: context.getIp(),
             });
         } catch (err) {
-            console.error(colors.red(err));
+            error(colors.red(err));
         }
     }
 
     async indexGet(req: Request, res: Response, next: NextFunction) {
-        console.log(colors.magenta('indexGet'));
+        log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
             res.end(html);
@@ -516,7 +516,7 @@ export class BackHostApp {
     }
 
     async indexPost(req: Request, res: Response, next: NextFunction) {
-        console.log(colors.magenta('indexPost'), req.params);
+        log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             res.json({
@@ -531,7 +531,7 @@ export class BackHostApp {
     }
 
     async monitorGet(req: Request, res: Response, next: NextFunction) {
-        console.log(colors.magenta('monitorGet'), req.headers);
+        log(colors.magenta('monitorGet'), req.headers);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -555,7 +555,7 @@ export class BackHostApp {
         // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
 
         // log request
-        console.log(
+        log(
             // @ts-ignore
             colors.magenta.underline('GET'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
@@ -599,7 +599,7 @@ export class BackHostApp {
         debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
 
         // log request
-        console.log(
+        log(
             // @ts-ignore
             colors.magenta.underline('POST'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
@@ -646,7 +646,7 @@ export class BackHostApp {
         debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
 
         // @ts-ignore
-        console.log(colors.magenta.underline('GET'), req.originalUrl);
+        log(colors.magenta.underline('GET'), req.originalUrl);
 
         if (req.params.module === 'viewer') {
             let context: Context | null = null;
@@ -684,7 +684,7 @@ export class BackHostApp {
     async _e500(err: any, req: Request, res: Response, next: NextFunction) {
         debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
-        console.log(colors.red(err.message));
+        log(colors.red(err.message));
 
         const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
@@ -733,7 +733,7 @@ export class BackHostApp {
             try {
                 const httpServer = http.createServer(this.express);
                 const tempErrorHandler = (err: any) => {
-                    console.error('tempErrorHandler', err);
+                    error('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
                     reject(err);
                 };
@@ -748,12 +748,12 @@ export class BackHostApp {
     }
 
     async onProcessMessage(message: string) {
-        console.log('BackHostApp.onProcessMessage');
+        log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             try {
                 await this.shutdown();
             } catch (err) {
-                console.error('shutdown error:', err.message);
+                error('shutdown error:', err.message);
             }
             process.exit(0);
         }
@@ -761,41 +761,41 @@ export class BackHostApp {
 
     async onProcessSIGINT() {
         debug('BackHostApp.onProcessSIGINT');
-        console.log(' Received INT signal (Ctrl+C), shutting down gracefully...');
+        log(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
         } catch (err) {
-            console.error('shutdown error:', err.message);
+            error('shutdown error:', err.message);
             process.exit(1);
         }
     }
 
     async onProcessSIGTERM() {
         debug('BackHostApp.onProcessSIGTERM');
-        console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
             process.exit(0);
         } catch (err) {
-            console.error('shutdown error:', err.message);
+            error('shutdown error:', err.message);
             process.exit(1);
         }
     }
 
     onProcessExit(code: number) {
         debug('BackHostApp.onProcessExit:', code);
-        console.log('exit:', code);
+        log('exit:', code);
     }
 
     async onUncaughtException(err: Error, origin: string) {
-        console.error(colors.red('BackHostApp.onUncaughtException'), err);
+        error(colors.red('BackHostApp.onUncaughtException'), err);
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
 
     async onUnhandledRejection(reason: Error | any, promise: Promise<any>) {
-        console.error(colors.red('BackHostApp.onUnhandledRejection'), reason);
+        error(colors.red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
@@ -812,11 +812,11 @@ export class BackHostApp {
     }
 
     onHttpServerError(err: any) {
-        console.error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
+        error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /* if (err.code === 'EADDRINUSE') {
-            console.error(`Address ${host}:${port} in use.`);
+            error(`Address ${host}:${port} in use.`);
         } else {
-            console.error(err);
+            error(err);
         } */
     }
 
@@ -833,7 +833,7 @@ export class BackHostApp {
     async postError(req: Request, res: Response, next: (err?: Error) => void) {
         debug(colors.blue('BackHostApp.postError'), req.body.message);
 
-        console.log('client error:', colors.red(req.body.message));
+        log('client error:', colors.red(req.body.message));
 
         try {
             const data = JSON.stringify(

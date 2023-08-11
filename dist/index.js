@@ -925,7 +925,7 @@ class BackHostApp {
         // this.express.post('/test', this._postTest.bind(this));
         // error logger
         this.express.options('/error', (req, res, next) => {
-            console.log('options /error');
+            (0, console_1.log)('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
             res.end();
@@ -947,7 +947,7 @@ class BackHostApp {
         // handle static for index and monitor
         this.express.use(express_1.default.static(this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
-                console.log(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+                (0, console_1.log)(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
             },
         }));
         this.initCustomRoutes();
@@ -982,7 +982,7 @@ class BackHostApp {
             return app;
         }
         catch (err) {
-            console.error('application not created, start reject loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
+            (0, console_1.error)('application not created, start reject loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
             for (const p of this.createAppQueue[context.getRoute()]) {
                 p.reject(err);
             }
@@ -1060,7 +1060,7 @@ class BackHostApp {
         };
     }
     async logError(err, req) {
-        console.log('BackHostApp.logError:', safe_1.default.red(err.message));
+        (0, console_1.log)('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
             await this.eventLog.log({
                 type: 'error',
@@ -1072,7 +1072,7 @@ class BackHostApp {
             });
         }
         catch (err) {
-            console.error(safe_1.default.red(err));
+            (0, console_1.error)(safe_1.default.red(err));
         }
     }
     /* async logRequest(req: Request, context: Context, time) {
@@ -1107,11 +1107,11 @@ class BackHostApp {
                 data: JSON.stringify(req.body, null, 4),
             });
         } catch (err) {
-            console.error(colors.red(err));
+            error(colors.red(err));
         }
     } */
     async logEvent(context, message, data) {
-        console.log('BackHostApp.logEvent', message);
+        (0, console_1.log)('BackHostApp.logEvent', message);
         try {
             await this.eventLog.log({
                 type: 'log',
@@ -1122,11 +1122,11 @@ class BackHostApp {
             });
         }
         catch (err) {
-            console.error(safe_1.default.red(err));
+            (0, console_1.error)(safe_1.default.red(err));
         }
     }
     async indexGet(req, res, next) {
-        console.log(safe_1.default.magenta('indexGet'));
+        (0, console_1.log)(safe_1.default.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
             res.end(html);
@@ -1136,7 +1136,7 @@ class BackHostApp {
         }
     }
     async indexPost(req, res, next) {
-        console.log(safe_1.default.magenta('indexPost'), req.params);
+        (0, console_1.log)(safe_1.default.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             res.json({
@@ -1151,7 +1151,7 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        console.log(safe_1.default.magenta('monitorGet'), req.headers);
+        (0, console_1.log)(safe_1.default.magenta('monitorGet'), req.headers);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -1175,7 +1175,7 @@ class BackHostApp {
         // @ts-ignore
         // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         // log request
-        console.log(
+        (0, console_1.log)(
         // @ts-ignore
         safe_1.default.magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
         let context = null;
@@ -1219,7 +1219,7 @@ class BackHostApp {
         // @ts-ignore
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         // log request
-        console.log(
+        (0, console_1.log)(
         // @ts-ignore
         safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
         let context = null;
@@ -1265,7 +1265,7 @@ class BackHostApp {
         // @ts-ignore
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         // @ts-ignore
-        console.log(safe_1.default.magenta.underline('GET'), req.originalUrl);
+        (0, console_1.log)(safe_1.default.magenta.underline('GET'), req.originalUrl);
         if (req.params.module === 'viewer') {
             let context = null;
             try {
@@ -1300,7 +1300,7 @@ class BackHostApp {
     }
     async _e500(err, req, res, next) {
         (0, console_1.debug)(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
-        console.log(safe_1.default.red(err.message));
+        (0, console_1.log)(safe_1.default.red(err.message));
         const error = typeof err === 'string' ? new HttpError_1.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&
@@ -1341,7 +1341,7 @@ class BackHostApp {
             try {
                 const httpServer = http_1.default.createServer(this.express);
                 const tempErrorHandler = (err) => {
-                    console.error('tempErrorHandler', err);
+                    (0, console_1.error)('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
                     reject(err);
                 };
@@ -1356,52 +1356,52 @@ class BackHostApp {
         });
     }
     async onProcessMessage(message) {
-        console.log('BackHostApp.onProcessMessage');
+        (0, console_1.log)('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             try {
                 await this.shutdown();
             }
             catch (err) {
-                console.error('shutdown error:', err.message);
+                (0, console_1.error)('shutdown error:', err.message);
             }
             process.exit(0);
         }
     }
     async onProcessSIGINT() {
         (0, console_1.debug)('BackHostApp.onProcessSIGINT');
-        console.log(' Received INT signal (Ctrl+C), shutting down gracefully...');
+        (0, console_1.log)(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
         }
         catch (err) {
-            console.error('shutdown error:', err.message);
+            (0, console_1.error)('shutdown error:', err.message);
             process.exit(1);
         }
     }
     async onProcessSIGTERM() {
         (0, console_1.debug)('BackHostApp.onProcessSIGTERM');
-        console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        (0, console_1.log)('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
             process.exit(0);
         }
         catch (err) {
-            console.error('shutdown error:', err.message);
+            (0, console_1.error)('shutdown error:', err.message);
             process.exit(1);
         }
     }
     onProcessExit(code) {
         (0, console_1.debug)('BackHostApp.onProcessExit:', code);
-        console.log('exit:', code);
+        (0, console_1.log)('exit:', code);
     }
     async onUncaughtException(err, origin) {
-        console.error(safe_1.default.red('BackHostApp.onUncaughtException'), err);
+        (0, console_1.error)(safe_1.default.red('BackHostApp.onUncaughtException'), err);
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
     async onUnhandledRejection(reason, promise) {
-        console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), reason);
+        (0, console_1.error)(safe_1.default.red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
@@ -1416,11 +1416,11 @@ class BackHostApp {
         }
     }
     onHttpServerError(err) {
-        console.error(safe_1.default.red('BackHostApp.onHttpServerError'), err.code, err.message);
+        (0, console_1.error)(safe_1.default.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /* if (err.code === 'EADDRINUSE') {
-            console.error(`Address ${host}:${port} in use.`);
+            error(`Address ${host}:${port} in use.`);
         } else {
-            console.error(err);
+            error(err);
         } */
     }
     getDomainFromRequest(req) {
@@ -1437,7 +1437,7 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         (0, console_1.debug)(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        console.log('client error:', safe_1.default.red(req.body.message));
+        (0, console_1.log)('client error:', safe_1.default.red(req.body.message));
         try {
             const data = JSON.stringify({
                 headers: req.headers,
@@ -2721,11 +2721,11 @@ class WebSocketServer {
         this.server.on('connection', this.onConnection.bind(this));
     }
     async onError(err) {
-        console.error('WebSocketServer.onError', err);
+        (0, console_1.error)('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
         (0, console_1.debug)('WebSocketServer.onConnection', webSocket.upgradeReq.url);
-        console.log('wss:', safe_1.default.bgYellow(safe_1.default.black(decodeURIComponent(webSocket.upgradeReq.url))));
+        (0, console_1.log)('wss:', safe_1.default.bgYellow(safe_1.default.black(decodeURIComponent(webSocket.upgradeReq.url))));
         const parts = url_1.default.parse(webSocket.upgradeReq.url, true);
         // debug('parts.query:', parts.query);
         if (!parts.query.route)
@@ -7843,7 +7843,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             if (row[column] instanceof Object) {
                 _row[column] = '{' + column + '}';
                 files[column] = row[column];
-                console.error(row[column]);
+                error(row[column]);
             } else if (this.table.columns[column] && !this.table.columns[column].isAuto()) {
                 _row[column] = row[column];
             }

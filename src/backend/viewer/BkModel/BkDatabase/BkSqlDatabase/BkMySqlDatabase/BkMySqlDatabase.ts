@@ -2,7 +2,7 @@ import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysq
 import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
-import { debug } from '../../../../../../console';
+import { debug, error } from '../../../../../../console';
 
 export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     pool: Pool | null = null;
@@ -297,7 +297,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             if (row[column] instanceof Object) {
                 _row[column] = '{' + column + '}';
                 files[column] = row[column];
-                console.error(row[column]);
+                error(row[column]);
             } else if (this.table.columns[column] && !this.table.columns[column].isAuto()) {
                 _row[column] = row[column];
             }
