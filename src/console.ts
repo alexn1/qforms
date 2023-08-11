@@ -5,9 +5,10 @@ const QFORMS_LOG_LEVEL =
 
 const level = levels.indexOf(QFORMS_LOG_LEVEL);
 
-export function debug(...messages: any[]) {
+export function debug(message?: any, ...optionalParams: any[]) {
     if (level <= levels.indexOf('debug')) {
-        process.stdout.write(`${messages.join(' ')}\n`);
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.debug(message, ...optionalParams);
     }
 }
 

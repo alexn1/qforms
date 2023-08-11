@@ -9956,9 +9956,10 @@ exports.error = exports.warn = exports.log = exports.debug = exports.levels = vo
 exports.levels = ['debug', 'log', 'warn', 'error'];
 const QFORMS_LOG_LEVEL = process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
 const level = exports.levels.indexOf(QFORMS_LOG_LEVEL);
-function debug(...messages) {
+function debug(message, ...optionalParams) {
     if (level <= exports.levels.indexOf('debug')) {
-        process.stdout.write(`${messages.join(' ')}\n`);
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.debug(message, ...optionalParams);
     }
 }
 exports.debug = debug;
