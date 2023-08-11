@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { debug } from '../console';
+
 declare module 'express' {
     export interface Request {
         session: any;
@@ -32,7 +34,7 @@ export class Context {
     params: Record<string, any>;
 
     constructor(public options: ContextOptions = {}) {
-        // console.debug('Context', options);
+        // debug('Context', options);
 
         // query
         this.query = {
@@ -106,7 +108,7 @@ export class Context {
     }
 
     getParams(): Record<string, any> {
-        // console.debug('Context.getParams:');
+        // debug('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return {
@@ -210,7 +212,7 @@ export class Context {
     getUrl(): URL {
         const req = this.getReq()!;
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-        // console.debug('Context.getUrl', fullUrl);
+        // debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }
 

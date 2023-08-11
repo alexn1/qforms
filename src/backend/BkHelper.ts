@@ -6,6 +6,7 @@ import colors from 'colors/safe';
 import fetch from 'node-fetch';
 
 import { JSONString } from '../types';
+import { debug } from '../console';
 
 function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -18,7 +19,7 @@ function _getFilePathsSync(dirPath: string, ext: string) {
 }
 
 async function _getFilePaths2(dirPath: string, ext: string, filePaths: string[]) {
-    // console.debug('_getFilePaths2', dirPath);
+    // debug('_getFilePaths2', dirPath);
     // all files from directory
     const files = await BkHelper._glob(path.join(dirPath, '*.' + ext));
 
@@ -69,7 +70,7 @@ export class BkHelper {
     }
 
     static async getFilePaths(dirPath: string, ext: string): Promise<string[]> {
-        // console.debug('BkHelper.getFilePaths');
+        // debug('BkHelper.getFilePaths');
         const filePaths: string[] = [];
         await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map((filePath) => {
@@ -139,7 +140,7 @@ export class BkHelper {
     } */
 
     static readTextFile(path: string): Promise<string> {
-        // console.debug(colors.blue('BkHelper.readTextFile'), path);
+        // debug(colors.blue('BkHelper.readTextFile'), path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {
@@ -158,7 +159,7 @@ export class BkHelper {
         return null;
     }
     static getFileContentSync(filePath: string) {
-        // console.debug(colors.blue('BkHelper.getFileContentSync'), filePath);
+        // debug(colors.blue('BkHelper.getFileContentSync'), filePath);
         if (!fs.existsSync(filePath)) {
             return null;
         }
@@ -166,7 +167,7 @@ export class BkHelper {
     }
 
     static readBinaryFile(filePath: string) {
-        console.debug(colors.blue('BkHelper.readBinaryFile'), filePath);
+        debug(colors.blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
                 if (err) {
@@ -190,12 +191,12 @@ export class BkHelper {
     }
 
     static async createDirIfNotExists2(originalDirPath: string) {
-        // console.debug('BkHelper.createDirIfNotExists2', originalDirPath);
+        // debug('BkHelper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
             const exists = await BkHelper.exists(dirPath);
-            // console.debug('dirPath', i, dirPath, exists);
+            // debug('dirPath', i, dirPath, exists);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
             }
@@ -203,7 +204,7 @@ export class BkHelper {
     }
 
     static createDirIfNotExists(dirPath: string): Promise<void> {
-        console.debug(colors.blue('BkHelper.createDirIfNotExists'), dirPath);
+        debug(colors.blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs.exists(dirPath, (exists) => {
                 if (exists) {
@@ -222,7 +223,7 @@ export class BkHelper {
     }
 
     static createDirIfNotExistsSync(dirPath: string) {
-        // console.debug(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
+        // debug(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
         if (!fs.existsSync(dirPath)) {
             fs.mkdirSync(dirPath);
         }
@@ -296,7 +297,7 @@ export class BkHelper {
     }
 
     static exists(path: fs.PathLike): Promise<boolean> {
-        // console.debug(colors.blue('BkHelper.exists'), path);
+        // debug(colors.blue('BkHelper.exists'), path);
         return new Promise((resolve) => {
             fs.exists(path, (exists) => {
                 resolve(exists);
@@ -305,7 +306,7 @@ export class BkHelper {
     }
 
     static writeFile(filePath: string, content: string): Promise<void> {
-        console.debug(colors.blue('BkHelper.writeFile'), filePath);
+        debug(colors.blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -317,7 +318,7 @@ export class BkHelper {
         });
     }
     static writeFileSync(filePath: string, content: string) {
-        console.debug(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
+        debug(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
         return fs.writeFileSync(filePath, content, 'utf8');
     }
 
@@ -349,7 +350,7 @@ export class BkHelper {
 
     // timeOffset number in minutes
     static today(timeOffset: number) {
-        // console.debug('BkHelper.today', timeOffset);
+        // debug('BkHelper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
             ts += BkHelper.MINUTE() * timeOffset;
@@ -430,7 +431,7 @@ export class BkHelper {
     }
 
     static addMinutes(date: Date, minutes: number): void {
-        // console.debug('BkHelper.addMinutes', date, minutes);
+        // debug('BkHelper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
 
@@ -520,7 +521,7 @@ export class BkHelper {
     } */
 
     static test() {
-        console.debug('BkHelper.test');
+        debug('BkHelper.test');
     }
 
     static formatNumber(value: number) {
@@ -528,7 +529,7 @@ export class BkHelper {
     }
 
     static formatTime2(_sec: number) {
-        // console.debug('BkHelper.formatTime', sec);
+        // debug('BkHelper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -552,7 +553,7 @@ export class BkHelper {
     }
 
     static registerGlobalClass(Class: any) {
-        // console.debug('BkHelper.registerGlobalClass', Class.name);
+        // debug('BkHelper.registerGlobalClass', Class.name);
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
         global[Class.name] = Class;
     }
@@ -561,7 +562,7 @@ export class BkHelper {
         const [type, data] = value.split(';');
         const contentType = type.split(':')[1];
         const base64string = data.split(',')[1];
-        // console.debug('base64string:', base64string);
+        // debug('base64string:', base64string);
         const buffer = Buffer.from(base64string, 'base64');
         return [contentType, buffer];
     }

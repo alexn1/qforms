@@ -1,5 +1,6 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
+import { debug } from '../console';
 
 export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
     constructor(protected data: TBkModelData, private parent?: BaseModel) {
@@ -61,7 +62,7 @@ export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) {
-            // console.debug('this.data', this.data);
+            // debug('this.data', this.data);
             throw new Error(`getCol: no col ${name}`);
         }
         return arr;
