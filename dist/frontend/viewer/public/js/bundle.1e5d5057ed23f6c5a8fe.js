@@ -40247,7 +40247,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
+
 
 
 
@@ -40259,11 +40261,11 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
     constructor() {
         super(...arguments);
         this.renderGridCellView = (row, column, onCreate, onUnmount) => {
-            // console.debug('TableFormView.renderGridCellView');
+            // debug('TableFormView.renderGridCellView');
             const ctrl = this.getCtrl().getField(column.name);
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
-            // console.debug(column.name, ctrl.constructor.name);
+            // debug(column.name, ctrl.constructor.name);
             return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
@@ -40331,7 +40333,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         });
     }
     render() {
-        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }

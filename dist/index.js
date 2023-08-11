@@ -18403,16 +18403,17 @@ const FormView_1 = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer
 const DataSource_1 = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 const common_1 = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 const Helper_1 = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
 class TableFormView extends FormView_1.FormView {
     constructor() {
         super(...arguments);
         this.renderGridCellView = (row, column, onCreate, onUnmount) => {
-            // console.debug('TableFormView.renderGridCellView');
+            // debug('TableFormView.renderGridCellView');
             const ctrl = this.getCtrl().getField(column.name);
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
-            // console.debug(column.name, ctrl.constructor.name);
+            // debug(column.name, ctrl.constructor.name);
             return react_1.default.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
@@ -18480,7 +18481,7 @@ class TableFormView extends FormView_1.FormView {
         });
     }
     render() {
-        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
+        (0, console_1.debug)('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }
