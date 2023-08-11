@@ -13,6 +13,7 @@ import {
 import { TableFormController } from './TableFormController';
 import { Helper } from '../../../../../common/Helper';
 import { PageController } from '../../PageController/PageController';
+import { debug } from '../../../../../../console';
 
 import './TableFormView.less';
 
@@ -104,10 +105,10 @@ export class TableFormView<
     }
 
     renderGridCellView = (row, column, onCreate, onUnmount) => {
-        // console.debug('TableFormView.renderGridCellView');
+        // debug('TableFormView.renderGridCellView');
         const ctrl = this.getCtrl().getField(column.name);
         if (!ctrl) throw new Error(`no field: ${column.name}`);
-        // console.debug(column.name, ctrl.constructor.name);
+        // debug(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
     };
 
@@ -161,7 +162,7 @@ export class TableFormView<
     }
 
     render() {
-        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
+        debug('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return (
             <div

@@ -3,6 +3,7 @@ import { ModelView } from '../ModelView';
 import { PageController } from '../PageController/PageController';
 import { Modal, Menu, Statusbar } from '../../../../common';
 import { ApplicationController } from './ApplicationController';
+import { debug } from '../../../../../console';
 
 import './ApplicationView.less';
 
@@ -59,7 +60,7 @@ export class ApplicationView<
     }
 
     render() {
-        console.debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return (
             <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
                 {this.renderHeader()}

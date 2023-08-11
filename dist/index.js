@@ -15159,6 +15159,7 @@ const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 const ModelView_1 = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
 const PageController_1 = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
 const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+const console_1 = __webpack_require__(/*! ../../../../../console */ "./src/console.ts");
 __webpack_require__(/*! ./ApplicationView.less */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less");
 class ApplicationView extends ModelView_1.ModelView {
     renderActivePage() {
@@ -15189,7 +15190,7 @@ class ApplicationView extends ModelView_1.ModelView {
         return ((0, jsx_runtime_1.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(common_1.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
     }
     render() {
-        console.debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        (0, console_1.debug)(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }

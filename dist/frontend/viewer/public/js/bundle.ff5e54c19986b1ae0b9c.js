@@ -36900,7 +36900,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
 /* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ApplicationView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ApplicationView.less */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../console */ "./src/console.ts");
+/* harmony import */ var _ApplicationView_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ApplicationView.less */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less");
+
 
 
 
@@ -36936,7 +36938,7 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
     }
     render() {
-        console.debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }
