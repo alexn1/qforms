@@ -11,7 +11,7 @@ Module.prototype.require = function () {
 import { BackHostApp, BkHelper } from './index';
 
 async function main() {
-    // console.debug('main');
+    // debug('main');
     try {
         const backHostApp = new BackHostApp({
             ...BkHelper.getCommandLineParams(),
