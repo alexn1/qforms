@@ -9,6 +9,7 @@ Module.prototype.require = function () {
 }; */
 
 import { BackHostApp, BkHelper } from './index';
+import { debug, error } from './console';
 
 async function main() {
     // debug('main');
@@ -22,7 +23,7 @@ async function main() {
         });
         await backHostApp.run();
     } catch (err) {
-        console.error(err);
+        error(err);
         process.exit(1);
     }
 }

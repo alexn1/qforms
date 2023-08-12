@@ -2,6 +2,62 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/console.ts":
+/*!************************!*\
+  !*** ./src/console.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.getLogLevel = exports.LOG_LEVELS = void 0;
+exports.LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
+function getLogLevel() {
+    return exports.LOG_LEVELS.indexOf(getLogLevelName());
+}
+exports.getLogLevel = getLogLevel;
+function getLogLevelName() {
+    if (typeof window === 'object') {
+        // @ts-ignore
+        return window.QFORMS_LOG_LEVEL || 'debug';
+    }
+    else if (typeof global === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
+    }
+    return 'debug';
+}
+exports.getLogLevelName = getLogLevelName;
+function debug(message, ...optionalParams) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.debug(message, ...optionalParams);
+    }
+}
+exports.debug = debug;
+function log(message, ...optionalParams) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.log(message, ...optionalParams);
+    }
+}
+exports.log = log;
+function warn(message, ...optionalParams) {
+    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.warn(message, ...optionalParams);
+    }
+}
+exports.warn = warn;
+function error(message, ...optionalParams) {
+    // process.stderr.write(`${messages.join(' ')}\n`);
+    console.error(message, ...optionalParams);
+}
+exports.error = error;
+
+
+/***/ }),
+
 /***/ "./index":
 /*!**************************!*\
   !*** external "./index" ***!
@@ -58,6 +114,7 @@ Module.prototype.require = function () {
 }; */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
+const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
 async function main() {
     // debug('main');
     try {
@@ -68,7 +125,7 @@ async function main() {
         await backHostApp.run();
     }
     catch (err) {
-        console.error(err);
+        (0, console_1.error)(err);
         process.exit(1);
     }
 }
