@@ -84,17 +84,23 @@ export class BackHostApp {
         this.startTime = new Date();
     }
 
-    async run(): Promise<void> {
-        // debug(`${this.constructor.name}.run`);
+    async init() {
+        debug('BackHostApp.init');
         // this.initConsole();
-        this.initDirPaths();
         this.checkNodeVersion();
+        this.initDirPaths();
         this.checkApplicationFolder();
         this.createDirsIfNotExistsSync();
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
         await this.initHttpServer();
+    }
+
+    async run(): Promise<void> {
+        debug(`${this.constructor.name}.run`);
+        await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
+        this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();
         this.listenProcessEvents();
         log(this.composeStartMessage(this.getHost(), this.getPort()));
@@ -117,8 +123,7 @@ export class BackHostApp {
     } */
 
     async initHttpServer() {
-        this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
-        this.httpServer.on('error', this.onHttpServerError.bind(this));
+        this.httpServer = http.createServer(this.express);
     }
 
     checkNodeVersion() {
@@ -728,10 +733,9 @@ export class BackHostApp {
         res.json({foo: 'bar'});
     } */
 
-    createAndRunHttpServer(host: string, port: number): Promise<http.Server> {
+    static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
-                const httpServer = http.createServer(this.express);
                 const tempErrorHandler = (err: any) => {
                     error('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
@@ -739,7 +743,8 @@ export class BackHostApp {
                 };
                 httpServer.on('error', tempErrorHandler);
                 httpServer.listen(port, host, () => {
-                    resolve(httpServer);
+                    httpServer.off('error', tempErrorHandler);
+                    resolve();
                 });
             } catch (err) {
                 reject(err);

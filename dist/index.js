@@ -779,17 +779,22 @@ class BackHostApp {
         // debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
-    async run() {
-        // debug(`${this.constructor.name}.run`);
+    async init() {
+        (0, console_1.debug)('BackHostApp.init');
         // this.initConsole();
-        this.initDirPaths();
         this.checkNodeVersion();
+        this.initDirPaths();
         this.checkApplicationFolder();
         this.createDirsIfNotExistsSync();
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
         await this.initHttpServer();
+    }
+    async run() {
+        (0, console_1.debug)(`${this.constructor.name}.run`);
+        await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
+        this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();
         this.listenProcessEvents();
         (0, console_1.log)(this.composeStartMessage(this.getHost(), this.getPort()));
@@ -808,8 +813,7 @@ class BackHostApp {
         if (level > levels.indexOf('warn')) console.warn = () => {};
     } */
     async initHttpServer() {
-        this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
-        this.httpServer.on('error', this.onHttpServerError.bind(this));
+        this.httpServer = http_1.default.createServer(this.express);
     }
     checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
@@ -1336,10 +1340,9 @@ class BackHostApp {
         debug('postTest', req.body);
         res.json({foo: 'bar'});
     } */
-    createAndRunHttpServer(host, port) {
+    static runHttpServer(httpServer, host, port) {
         return new Promise((resolve, reject) => {
             try {
-                const httpServer = http_1.default.createServer(this.express);
                 const tempErrorHandler = (err) => {
                     (0, console_1.error)('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
@@ -1347,7 +1350,8 @@ class BackHostApp {
                 };
                 httpServer.on('error', tempErrorHandler);
                 httpServer.listen(port, host, () => {
-                    resolve(httpServer);
+                    httpServer.off('error', tempErrorHandler);
+                    resolve();
                 });
             }
             catch (err) {

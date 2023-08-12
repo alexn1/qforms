@@ -59,6 +59,7 @@ export declare class BackHostApp {
     };
     private eventLog;
     constructor(params?: BackHostAppParams);
+    init(): Promise<void>;
     run(): Promise<void>;
     getHost(): string;
     getPort(): number;
@@ -104,7 +105,7 @@ export declare class BackHostApp {
     moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;
-    createAndRunHttpServer(host: string, port: number): Promise<http.Server>;
+    static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void>;
     onProcessMessage(message: string): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): Promise<void>;

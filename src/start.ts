@@ -12,7 +12,7 @@ import { BackHostApp, BkHelper } from './index';
 import { debug, error } from './console';
 
 async function main() {
-    // debug('main');
+    debug('main');
     try {
         const backHostApp = new BackHostApp({
             ...BkHelper.getCommandLineParams(),
@@ -21,6 +21,7 @@ async function main() {
                 password: '123qwe',
             },
         });
+        await backHostApp.init();
         await backHostApp.run();
     } catch (err) {
         error(err);

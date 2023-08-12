@@ -116,12 +116,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
 const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
 async function main() {
-    // debug('main');
+    (0, console_1.debug)('main');
     try {
         const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
                 username: 'admin',
                 password: '123qwe',
             } }));
+        await backHostApp.init();
         await backHostApp.run();
     }
     catch (err) {
