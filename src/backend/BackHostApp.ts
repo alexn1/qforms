@@ -90,7 +90,7 @@ export class BackHostApp {
         this.checkNodeVersion();
         this.initDirPaths();
         this.checkApplicationFolder();
-        this.createDirsIfNotExistsSync();
+        this.createTempDirsIfNotExistSync();
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
@@ -143,7 +143,7 @@ export class BackHostApp {
         }
     }
 
-    createDirsIfNotExistsSync() {
+    createTempDirsIfNotExistSync() {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
     }

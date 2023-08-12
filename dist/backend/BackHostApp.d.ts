@@ -66,7 +66,7 @@ export declare class BackHostApp {
     initHttpServer(): Promise<void>;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
-    createDirsIfNotExistsSync(): void;
+    createTempDirsIfNotExistSync(): void;
     private createEventLog;
     initModules(): Promise<void>;
     initWebSocketServer(): void;

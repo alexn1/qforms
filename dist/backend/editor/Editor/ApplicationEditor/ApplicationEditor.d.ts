@@ -3,26 +3,47 @@ import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
 import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+export interface ApplicationAttributes {
+    formatVersion: '0.1';
+    name: string;
+    caption: string;
+    authentication: 'true' | 'false';
+    user: string;
+    password: string;
+    lang: 'en' | 'ru';
+    theme: 'standard';
+    cssBlock: string;
+    viewClass: string;
+    ctrlClass: string;
+    modelClass: string;
+}
+export interface ApplicationItems {
+    env: any;
+    databases: any;
+    dataSources: any;
+    actions: any;
+    pageLinks: any;
+}
 export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
     private appFile;
     appInfo: AppInfo;
     constructor(appFile: JsonFile, editorPath: string);
     getAppFile(): JsonFile;
-    static createData(params: Record<string, any>): {
+    static createData(params: ApplicationAttributes & ApplicationItems): {
         '@class': string;
         '@attributes': {
             formatVersion: string;
-            name: any;
-            caption: any;
-            authentication: any;
-            user: any;
-            password: any;
-            lang: any;
-            theme: any;
-            cssBlock: any;
-            viewClass: any;
-            ctrlClass: any;
-            modelClass: any;
+            name: string;
+            caption: string;
+            authentication: "true" | "false";
+            user: string;
+            password: string;
+            lang: "en" | "ru";
+            theme: "standard";
+            cssBlock: string;
+            viewClass: string;
+            ctrlClass: string;
+            modelClass: string;
         };
         env: any;
         databases: any[];

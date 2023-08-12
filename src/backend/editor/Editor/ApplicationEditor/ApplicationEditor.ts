@@ -9,6 +9,29 @@ import { PageEditor } from '../PageEditor/PageEditor';
 import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { debug } from '../../../../console';
 
+export interface ApplicationAttributes {
+    formatVersion: '0.1';
+    name: string;
+    caption: string;
+    authentication: 'true' | 'false';
+    user: string;
+    password: string;
+    lang: 'en' | 'ru';
+    theme: 'standard';
+    cssBlock: string;
+    viewClass: string;
+    ctrlClass: string;
+    modelClass: string;
+}
+
+export interface ApplicationItems {
+    env: any;
+    databases: any;
+    dataSources: any;
+    actions: any;
+    pageLinks: any;
+}
+
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
 
@@ -21,7 +44,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         return this.appFile;
     }
 
-    static createData(params: Record<string, any>) {
+    static createData(params: ApplicationAttributes & ApplicationItems) {
         // debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
@@ -136,6 +159,6 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
             dataSources: this.data.dataSources,
             actions: this.data.actions,
             pageLinks: this.data.pageLinks,
-        });
+        } as ApplicationAttributes & ApplicationItems);
     }
 }

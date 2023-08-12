@@ -1,7 +1,12 @@
 import { Editor } from '../Editor';
 
+export interface ActionAttributes {
+    name: string;
+    caption: string;
+}
+
 export class ActionEditor extends Editor {
-    static createData(params) {
+    static createData(params: ActionAttributes) {
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'Action',

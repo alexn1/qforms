@@ -785,7 +785,7 @@ class BackHostApp {
         this.checkNodeVersion();
         this.initDirPaths();
         this.checkApplicationFolder();
-        this.createDirsIfNotExistsSync();
+        this.createTempDirsIfNotExistSync();
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
@@ -828,7 +828,7 @@ class BackHostApp {
             throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
         }
     }
-    createDirsIfNotExistsSync() {
+    createTempDirsIfNotExistSync() {
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
     }
