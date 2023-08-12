@@ -676,7 +676,7 @@ class Result {
         result[dName][tName].insertEx[key] = row;
     }
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
-        // console.debug('Result.addUpdateToResult');
+        // debug('Result.addUpdateToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -686,7 +686,7 @@ class Result {
         result[dName][tName].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, dName, tName, oldKey, row) {
-        // console.debug('Result.addUpdateExToResult');
+        // debug('Result.addUpdateExToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])

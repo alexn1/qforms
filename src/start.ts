@@ -1,4 +1,4 @@
-var Module = require('module');
+/* var Module = require('module');
 var originalRequire = Module.prototype.require;
 Module.prototype.require = function () {
     if (/\.less$/.test(arguments[0])) {
@@ -6,7 +6,7 @@ Module.prototype.require = function () {
     } else {
         return originalRequire.apply(this, arguments);
     }
-};
+}; */
 
 import { BackHostApp, BkHelper } from './index';
 

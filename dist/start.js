@@ -10,16 +10,6 @@
 
 module.exports = require("./index");
 
-/***/ }),
-
-/***/ "module":
-/*!*************************!*\
-  !*** external "module" ***!
-  \*************************/
-/***/ ((module) => {
-
-module.exports = require("module");
-
 /***/ })
 
 /******/ 	});
@@ -57,20 +47,19 @@ var exports = __webpack_exports__;
   !*** ./src/start.ts ***!
   \**********************/
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var Module = __webpack_require__(/*! module */ "module");
+/* var Module = require('module');
 var originalRequire = Module.prototype.require;
 Module.prototype.require = function () {
     if (/\.less$/.test(arguments[0])) {
         // console.debug(arguments[0]);
-    }
-    else {
+    } else {
         return originalRequire.apply(this, arguments);
     }
-};
+}; */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
 async function main() {
-    // console.debug('main');
+    // debug('main');
     try {
         const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
                 username: 'admin',
