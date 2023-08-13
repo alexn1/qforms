@@ -7397,15 +7397,25 @@ class BkDatabase extends BkModel_1.BkModel {
     async getTableInfo(table) {
         throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
-    async useTransaction(context, cb) {
+    async transaction(context, cb) {
         await this.begin(context);
         try {
-            await cb();
+            const result = await cb();
             await this.commit(context);
+            return result;
         }
         catch (err) {
             await this.rollback(context, err);
             throw err;
+        }
+    }
+    async use(context, cb) {
+        await this.connect(context);
+        try {
+            return await cb();
+        }
+        finally {
+            await this.release(context);
         }
     }
 }
