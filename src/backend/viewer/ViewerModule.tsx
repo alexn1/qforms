@@ -288,16 +288,14 @@ export class ViewerModule {
         } else {
             dataSource = application.getDataSource(req.body.ds);
         }
-        await dataSource.getDatabase().connect(context);
-        try {
+
+        await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             debug('select time:', time);
             res.json({ rows, count, time });
-        } finally {
-            await dataSource.getDatabase().release(context);
-        }
+        });
     }
 
     // action
