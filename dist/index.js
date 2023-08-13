@@ -9609,31 +9609,20 @@ class ViewerModule {
         (0, console_1.debug)('ViewerModule.insert', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
-        // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
-        const database = dataSource.getDatabase();
-        await database.connect(context);
-        try {
+        await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
-            await database.begin(context);
-            try {
+            const result = await database.transaction(context, async () => {
                 const result = await dataSource.create(context);
                 if (result === undefined)
                     throw new Error('insert action: result is undefined');
-                await database.commit(context);
-                res.json(result);
-                this.hostApp.broadcastResult(application, context, result);
-            }
-            catch (err) {
-                await database.rollback(context, err);
-                throw err;
-            }
-        }
-        finally {
-            await database.release(context);
-        }
+                return result;
+            });
+            res.json(result);
+            this.hostApp.broadcastResult(application, context, result);
+        });
     }
     // action
     async update(context, application) {
