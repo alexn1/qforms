@@ -21,7 +21,7 @@ export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     static queryFormat(query: string, params?: {}): string;
     static typeCast(field: any, next: any): any;
     getTableList(): Promise<string[]>;
-    getTableInfo(table: any): Promise<any[]>;
+    getTableInfo(table: string): Promise<any[]>;
     getColumnTypeByDataType(dataType: any): string | null;
     insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<Row>;
     connect(context: Context): Promise<void>;

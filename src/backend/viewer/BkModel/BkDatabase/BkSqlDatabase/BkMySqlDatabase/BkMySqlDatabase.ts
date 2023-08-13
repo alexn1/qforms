@@ -215,7 +215,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         });
     }
 
-    async getTableInfo(table): Promise<any[]> {
+    async getTableInfo(table: string): Promise<any[]> {
         debug('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {

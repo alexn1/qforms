@@ -16,7 +16,7 @@ export declare class DatabaseEditor extends Editor {
     newParam(name: any): Promise<ParamEditor>;
     newTable(params: any): Promise<TableEditor>;
     getView(view: any): Promise<any>;
-    getTableInfo(table: any): Promise<any>;
+    getTableInfo(table: string): Promise<any>;
     moveUp(): Promise<any>;
     moveDown(): Promise<any>;
 }

@@ -123,7 +123,7 @@ export class DatabaseEditor extends Editor {
         });
     }
 
-    async getTableInfo(table) {
+    async getTableInfo(table: string) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'getTableInfo',

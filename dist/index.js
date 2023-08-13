@@ -7412,7 +7412,7 @@ class BkDatabase extends BkModel_1.BkModel {
     async use(context, cb) {
         await this.connect(context);
         try {
-            return await cb();
+            return await cb(this);
         }
         finally {
             await this.release(context);

@@ -151,7 +151,7 @@ export class BkDatabase<TConnection = any> extends BkModel<BkDatabaseScheme> {
         throw new Error(`${this.constructor.name}.getTableList not implemented`);
     }
 
-    async getTableInfo(table): Promise<any[]> {
+    async getTableInfo(table: string): Promise<any[]> {
         throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
 
@@ -170,10 +170,13 @@ export class BkDatabase<TConnection = any> extends BkModel<BkDatabaseScheme> {
         }
     }
 
-    async use<TResult = any>(context: Context, cb: () => Promise<TResult>): Promise<TResult> {
+    async use<TResult = any>(
+        context: Context,
+        cb: (db: BkDatabase) => Promise<TResult>,
+    ): Promise<TResult> {
         await this.connect(context);
         try {
-            return await cb();
+            return await cb(this);
         } finally {
             await this.release(context);
         }
