@@ -32019,13 +32019,23 @@ class FrontHostApp {
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
-        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        console.warn(`body ${FrontHostApp.composeHandlerName(data)}:`, body);
         return body;
+    }
+    static composeHandlerName(data) {
+        if (data.action === 'rpc') {
+            if (data.form)
+                return `${data.page}.${data.form}.${data.name}.${data.action}`;
+            if (data.page)
+                return `${data.page}.${data.name}.${data.action}`;
+            return `${data.name}.${data.action}`;
+        }
+        return `${data.page}.${data.form}.${data.ds}.${data.action}`;
     }
     static async doHttpRequest2(method, body) {
         console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
-        console.warn(`body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`, data);
+        console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);
         return [headers, data];
     }
     static async fetchJson(method, url, data) {
