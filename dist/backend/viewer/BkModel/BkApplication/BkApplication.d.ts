@@ -78,6 +78,5 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: NextFunction): Promise<void>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
-    useDatabase<TDb extends BkDatabase = BkDatabase, TRetVal = any>(context: Context, appDbName: string, cb: (db: TDb) => Promise<TRetVal>): Promise<TRetVal>;
     static getEnvList(data: BkApplicationScheme): string[];
 }

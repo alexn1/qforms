@@ -454,11 +454,7 @@ export class BkApplication<
     }
 
     broadcastDomesticResultToClients(context: Context, result: Result): void {
-        debug(
-            'Application.broadcastDomesticResultToClients',
-            context.getReq()!.body.uuid,
-            result,
-        );
+        debug('Application.broadcastDomesticResultToClients', context.getReq()!.body.uuid, result);
         if (!context.getReq()!.body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const uuid = context.getReq()!.body.uuid;
@@ -471,11 +467,7 @@ export class BkApplication<
     }
 
     broadcastForeignResultToClients(context: Context, result: Result): void {
-        debug(
-            'Application.broadcastForeignResultToClients',
-            context.getReq()!.body.uuid,
-            result,
-        );
+        debug('Application.broadcastForeignResultToClients', context.getReq()!.body.uuid, result);
         if (!context.getReq()!.body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const fResult = this.composeForeignResult(result);
@@ -560,20 +552,6 @@ export class BkApplication<
             data,
             appViewHtml,
         );
-    }
-
-    async useDatabase<TDb extends BkDatabase = BkDatabase, TRetVal = any>(
-        context: Context,
-        appDbName: string,
-        cb: (db: TDb) => Promise<TRetVal>,
-    ): Promise<TRetVal> {
-        const db = this.getDatabase(appDbName) as TDb;
-        await db.connect(context);
-        try {
-            return await cb(db);
-        } finally {
-            await db.release(context);
-        }
     }
 
     static getEnvList(data: BkApplicationScheme): string[] {

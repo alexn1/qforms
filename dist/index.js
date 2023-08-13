@@ -6382,16 +6382,6 @@ class BkApplication extends BkModel_1.BkModel {
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
         return (0, home_1.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
-    async useDatabase(context, appDbName, cb) {
-        const db = this.getDatabase(appDbName);
-        await db.connect(context);
-        try {
-            return await cb(db);
-        }
-        finally {
-            await db.release(context);
-        }
-    }
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
