@@ -314,7 +314,7 @@ export class BkApplication<
     }
 
     async rpc(name: string, context: Context) {
-        // debug('Application.rpc', name, context.getReq().body);
+        debug('BkApplication.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,

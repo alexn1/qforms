@@ -49,8 +49,8 @@ export class BkPage<
     }
 
     async rpc(name: string, context: Context): Promise<any> {
-        debug('Page.rpc', name, context.getBody());
-        if (Object.prototype.hasOwnProperty.call(this, name)) {
+        debug('BkPage.rpc', name, context.getBody());
+        if (this[name]) {
             return await (this as any)[name](context);
         }
         throw new HttpError({

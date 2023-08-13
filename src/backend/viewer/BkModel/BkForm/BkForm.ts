@@ -106,7 +106,7 @@ export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkM
     }
 
     async rpc(name: string, context: Context) {
-        debug('Form.rpc', name, context.getBody());
+        debug('BkForm.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,

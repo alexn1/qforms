@@ -6173,7 +6173,7 @@ class BkApplication extends BkModel_1.BkModel {
         return null;
     }
     async rpc(name, context) {
-        // debug('Application.rpc', name, context.getReq().body);
+        (0, console_1.debug)('BkApplication.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
@@ -8929,7 +8929,7 @@ class BkForm extends BkModel_1.BkModel {
         });
     }
     async rpc(name, context) {
-        (0, console_1.debug)('Form.rpc', name, context.getBody());
+        (0, console_1.debug)('BkForm.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
@@ -9209,8 +9209,8 @@ class BkPage extends BkModel_1.BkModel {
         return response;
     }
     async rpc(name, context) {
-        (0, console_1.debug)('Page.rpc', name, context.getBody());
-        if (Object.prototype.hasOwnProperty.call(this, name)) {
+        (0, console_1.debug)('BkPage.rpc', name, context.getBody());
+        if (this[name]) {
             return await this[name](context);
         }
         throw new HttpError_1.HttpError({
