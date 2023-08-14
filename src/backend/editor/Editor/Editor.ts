@@ -4,11 +4,11 @@ const ejs = require('ejs');
 import { BaseModel } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
-import { BkModelScheme } from '../../common/BkModelScheme/BkModelScheme';
+import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
 
 export class Editor<
-    TBkModelData extends BkModelScheme = BkModelScheme,
+    TBkModelData extends ModelScheme = ModelScheme,
 > extends BaseModel<TBkModelData> {
     constructor(data: TBkModelData, parent: Editor | undefined, private editorPath: string) {
         super(data, parent);
@@ -131,7 +131,7 @@ export class Editor<
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     } */
 
-    setColData(colName: string, newData: BkModelScheme) {
+    setColData(colName: string, newData: ModelScheme) {
         // debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }

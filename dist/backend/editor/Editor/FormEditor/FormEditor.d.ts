@@ -1,7 +1,11 @@
 import { Editor } from '../Editor';
-export declare class FormEditor extends Editor {
-    static createAttributes(params: any): any;
-    static createData(params: any): any;
+import { FormAttributes, FormScheme, FormItems } from '../../../common/Scheme/FormScheme';
+export type FormParams = Partial<FormAttributes> & Partial<FormItems> & {
+    name: string;
+};
+export declare class FormEditor<T extends FormScheme = FormScheme> extends Editor<T> {
+    static createAttributes(params: FormParams): FormAttributes;
+    static createData(params: FormParams): FormScheme;
     createJs(params: any): Promise<any>;
     createJsx(params: any): Promise<any>;
     createLess(params: any): Promise<any>;

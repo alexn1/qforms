@@ -1,8 +1,18 @@
 import { FormEditor } from '../FormEditor';
 import { Editor } from '../../Editor';
+import {
+    FormItems,
+    TableFormAttributes,
+    TableFormScheme,
+} from '../../../../common/Scheme/FormScheme';
 
-export class TableFormEditor extends FormEditor {
-    static createData(params) {
+export type TableFormParams = Partial<TableFormAttributes> &
+    Partial<FormItems> & {
+        name: string;
+    };
+
+export class TableFormEditor extends FormEditor<TableFormScheme> {
+    static createData(params: TableFormParams): TableFormScheme {
         // debug('TableFormEditor.createData', params);
         return {
             '@class': 'TableForm',

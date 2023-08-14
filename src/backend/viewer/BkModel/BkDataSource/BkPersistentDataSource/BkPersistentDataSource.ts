@@ -2,7 +2,7 @@ import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
-import { BkModelScheme } from '../../../../common/BkModelScheme/BkModelScheme';
+import { ModelScheme } from '../../../../common/Scheme/ModelScheme';
 import { BkModel } from '../../BkModel';
 import { Context } from '../../../../Context';
 
@@ -11,7 +11,7 @@ export abstract class BkPersistentDataSource<
 > extends BkDataSource {
     table: BkTable | null = null;
 
-    constructor(data: BkModelScheme, parent: BkModel) {
+    constructor(data: ModelScheme, parent: BkModel) {
         super(data, parent);
         if (this.getAttr('table')) {
             this.table = this.getDatabase().getTable(this.getAttr('table'));

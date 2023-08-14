@@ -1,8 +1,14 @@
 import { FormEditor } from '../FormEditor';
 import { Editor } from '../../Editor';
+import { FormItems, RowFormAttributes, RowFormScheme } from '../../../../common/Scheme/FormScheme';
 
-export class RowFormEditor extends FormEditor {
-    static createData(params) {
+export type RowFormParams = Partial<RowFormAttributes> &
+    Partial<FormItems> & {
+        name: string;
+    };
+
+export class RowFormEditor extends FormEditor<RowFormScheme> {
+    static createData(params: RowFormParams): RowFormScheme {
         // debug('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',

@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel';
-import { BkModelScheme } from '../../common/BkModelScheme/BkModelScheme';
-export declare class Editor<TBkModelData extends BkModelScheme = BkModelScheme> extends BaseModel<TBkModelData> {
+import { ModelScheme } from '../../common/Scheme/ModelScheme';
+export declare class Editor<TBkModelData extends ModelScheme = ModelScheme> extends BaseModel<TBkModelData> {
     private editorPath;
     constructor(data: TBkModelData, parent: Editor | undefined, editorPath: string);
     getEditorPath(): string;
@@ -11,7 +11,7 @@ export declare class Editor<TBkModelData extends BkModelScheme = BkModelScheme> 
     saveCustomFile(ext: string, text: string): Promise<void>;
     getCustomFilePath(ext: any): Promise<string>;
     moveDataColItem(colName: any, name: any, offset: any): void;
-    setColData(colName: string, newData: BkModelScheme): any;
+    setColData(colName: string, newData: ModelScheme): any;
     createItemEditor(colName: string, itemName: string): any;
     getCustomDirPath(): Promise<string>;
     getCollectionDirPath(): Promise<string>;

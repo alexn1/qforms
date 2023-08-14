@@ -2,9 +2,15 @@ import path from 'path';
 
 import { Editor } from '../Editor';
 import { debug } from '../../../../console';
+import { FormAttributes, FormScheme, FormItems } from '../../../common/Scheme/FormScheme';
 
-export class FormEditor extends Editor {
-    static createAttributes(params): any {
+export type FormParams = Partial<FormAttributes> &
+    Partial<FormItems> & {
+        name: string;
+    };
+
+export class FormEditor<T extends FormScheme = FormScheme> extends Editor<T> {
+    static createAttributes(params: FormParams): FormAttributes {
         if (!params.name) throw new Error('no name');
         return {
             name: params.name,
@@ -17,7 +23,7 @@ export class FormEditor extends Editor {
         };
     }
 
-    static createData(params): any {
+    static createData(params: FormParams): FormScheme {
         debug('FormEditor.createData', params);
         return {
             '@class': 'Form',

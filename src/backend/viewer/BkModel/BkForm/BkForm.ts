@@ -9,15 +9,15 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { HttpError } from '../../../HttpError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
-import { BkFormScheme } from '../../../common/BkModelScheme/BkFormScheme/BkFormScheme';
 import { debug } from '../../../../console';
+import { FormScheme } from '../../../common/Scheme/FormScheme';
 
-export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkModel<TBkFormData> {
+export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     fields: BkField[] = [];
 
-    constructor(data: TBkFormData, parent: BkPage) {
+    constructor(data: TFormScheme, parent: BkPage) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];
     }

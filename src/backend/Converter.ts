@@ -2,7 +2,7 @@ import path from 'path';
 import { JsonFile } from './JsonFile';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { BkModelScheme } from './common/BkModelScheme/BkModelScheme';
+import { ModelScheme } from './common/Scheme/ModelScheme';
 import { debug } from '../console';
 
 const BACKEND_DIR_PATH = path.join(__dirname, 'backend');
@@ -21,7 +21,7 @@ export class Converter {
         // pages
         const pageNames = appEditor
             .getData()
-            .pageLinks.map((data: BkModelScheme) => BaseModel.getName(data));
+            .pageLinks.map((data: ModelScheme) => BaseModel.getName(data));
         // debug('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {

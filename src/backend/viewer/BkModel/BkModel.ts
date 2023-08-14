@@ -1,9 +1,9 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
-import { BkModelScheme } from '../../common/BkModelScheme/BkModelScheme';
+import { ModelScheme } from '../../common/Scheme/ModelScheme';
 
 export class BkModel<
-    TBkModelData extends BkModelScheme = BkModelScheme,
+    TBkModelData extends ModelScheme = ModelScheme,
 > extends BaseModel<TBkModelData> {
     deinited = false;
     fillCollections: string[] = [];

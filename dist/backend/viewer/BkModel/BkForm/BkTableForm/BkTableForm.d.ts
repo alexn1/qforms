@@ -1,5 +1,5 @@
-import { BkTableFormScheme } from '../../../../common/BkModelScheme/BkFormScheme/BkTableFormScheme/BkTableFormScheme';
 import { BkForm } from '../BkForm';
-export declare class BkTableForm extends BkForm<BkTableFormScheme> {
+import { RowFormScheme } from '../../../../common/Scheme/FormScheme';
+export declare class BkTableForm extends BkForm<RowFormScheme> {
     fillAttributes(response: any): void;
 }

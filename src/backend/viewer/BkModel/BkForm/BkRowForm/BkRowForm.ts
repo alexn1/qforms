@@ -1,8 +1,8 @@
 import { BkForm } from '../BkForm';
 import { Context } from '../../../../Context';
-import { BkRowFormScheme } from '../../../../common/BkModelScheme/BkFormScheme/BkRowFormScheme/BkRowFormScheme';
+import { RowFormScheme } from '../../../../common/Scheme/FormScheme';
 
-export class BkRowForm extends BkForm<BkRowFormScheme> {
+export class BkRowForm extends BkForm<RowFormScheme> {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // debug('RowForm.constructor', this.getFullName());

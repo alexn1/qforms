@@ -1,7 +1,7 @@
 import { BkForm } from '../BkForm';
 import { Context } from '../../../../Context';
-import { BkRowFormScheme } from '../../../../common/BkModelScheme/BkFormScheme/BkRowFormScheme/BkRowFormScheme';
-export declare class BkRowForm extends BkForm<BkRowFormScheme> {
+import { RowFormScheme } from '../../../../common/Scheme/FormScheme';
+export declare class BkRowForm extends BkForm<RowFormScheme> {
     isNewMode(context: Context): boolean;
     fillAttributes(response: any): void;
 }

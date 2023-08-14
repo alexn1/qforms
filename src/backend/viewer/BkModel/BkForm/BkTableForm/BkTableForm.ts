@@ -1,7 +1,7 @@
-import { BkTableFormScheme } from '../../../../common/BkModelScheme/BkFormScheme/BkTableFormScheme/BkTableFormScheme';
 import { BkForm } from '../BkForm';
+import { RowFormScheme } from '../../../../common/Scheme/FormScheme';
 
-export class BkTableForm extends BkForm<BkTableFormScheme> {
+export class BkTableForm extends BkForm<RowFormScheme> {
     /* static async create(data, parent) {
         return new TableForm(data, parent);
     } */
