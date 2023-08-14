@@ -1,4 +1,5 @@
 import { ActionScheme } from './ActionScheme';
+import { PageLinkScheme } from './PageLinkScheme';
 
 export interface ApplicationAttributes {
     formatVersion: string;
@@ -20,7 +21,7 @@ export interface ApplicationItems {
     databases: any[];
     dataSources: any[];
     actions: ActionScheme[];
-    pageLinks: any[];
+    pageLinks: PageLinkScheme[];
 }
 
 export type ApplicationScheme = {

@@ -1,13 +1,9 @@
 import { Editor } from '../Editor';
+import { PageLinkAttributes, PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
+export type PageLinkParams = Partial<PageLinkAttributes> & {
+    name: string;
+};
 export declare class PageLinkEditor extends Editor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': {
-            name: any;
-            fileName: any;
-            menu: any;
-            startup: any;
-        };
-    };
+    static createData(params: PageLinkParams): PageLinkScheme;
     getColName(): string;
 }
