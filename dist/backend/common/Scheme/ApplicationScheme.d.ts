@@ -1,3 +1,4 @@
+import { ActionScheme } from './ActionScheme';
 export interface ApplicationAttributes {
     formatVersion: string;
     name: string;
@@ -16,7 +17,7 @@ export interface ApplicationItems {
     env: any;
     databases: any[];
     dataSources: any[];
-    actions: any[];
+    actions: ActionScheme[];
     pageLinks: any[];
 }
 export type ApplicationScheme = {
