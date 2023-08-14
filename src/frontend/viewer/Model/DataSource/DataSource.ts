@@ -15,6 +15,7 @@ import {
 } from '../../../../types';
 import { Result } from '../../../../Result';
 import { Field } from '../Field/Field';
+import { debug } from '../../../../console';
 
 export class DataSource extends Model {
     rows: RawRow[] | null = null;
@@ -225,7 +226,7 @@ export class DataSource extends Model {
     }
 
     getApp(): Application {
-        console.debug('DataSource.getApp', this.getFullName());
+        debug('DataSource.getApp', this.getFullName());
         if (this.getParent() instanceof Application) return this.getParent() as Application;
         if (this.getParent() instanceof Page) return this.getParent().getParent() as Application;
         if (this.getParent() instanceof Form)

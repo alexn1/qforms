@@ -39843,14 +39843,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _FormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _RowFormView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _RowFormView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RowFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less");
+
 
 
 
 
 class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
     renderToolbar() {
-        // console.debug('RowFormView.renderToolbar');
+        // debug('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.getModel().hasDefaultPersistentDataSource() &&
@@ -39872,7 +39874,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__label` }, { children: [model.getCaption(), ":", model.isNotNull() && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'red' } }, { children: "*" }))] }), `label.${name}`));
     }
     renderField(fieldCtrl) {
-        // console.debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
+        // debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__field` }, { children: this.renderFieldView(fieldCtrl) }), `field.${name}`));
     }
@@ -39887,7 +39889,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return fieldCtrl.renderView();
     }
     renderError(fieldCtrl) {
-        // console.debug('RowFormView.renderError:', fieldCtrl.state);
+        // debug('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`));
     }
@@ -39911,7 +39913,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         </div>;*/
     }
     renderGroups() {
-        // console.debug('RowFormView.renderGroups');
+        // debug('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__groups` }, { children: Object.keys(ctrl.fields)
                 .filter((name) => ctrl.getField(name).isVisible())
@@ -39920,7 +39922,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
             }) })));
     }
     render() {
-        console.debug('RowFormView.render', this.getCtrl().getModel().getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('RowFormView.render', this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} flex-column grid-gap-5`, style: this.getStyle() }, { children: [(this.getCtrl().getModel().hasDefaultPersistentDataSource() ||
                     this.getCtrl().getModel().hasActions()) &&
                     this.renderToolbar(), this.renderGroups()] })));
@@ -41363,6 +41365,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 /* harmony import */ var _Field_Field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Field/Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+
 
 
 
@@ -41637,7 +41641,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return null;
     }
     getApp() {
-        console.debug('DataSource.getApp', this.getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('DataSource.getApp', this.getFullName());
         if (this.getParent() instanceof _Application_Application__WEBPACK_IMPORTED_MODULE_3__.Application)
             return this.getParent();
         if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)

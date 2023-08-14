@@ -2,15 +2,17 @@ import { ReactNode } from 'react';
 import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
 import { RowFormController } from './RowFormController';
-import './RowFormView.less';
 import { FieldController } from '../../FieldController/FieldController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
+import { debug } from '../../../../../../console';
+
+import './RowFormView.less';
 
 export class RowFormView<
     TRowFormController extends RowFormController = RowFormController,
 > extends FormView<TRowFormController> {
     renderToolbar(): any {
-        // console.debug('RowFormView.renderToolbar');
+        // debug('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
         return (
@@ -109,7 +111,7 @@ export class RowFormView<
     }
 
     renderField(fieldCtrl: RowFormFieldController) {
-        // console.debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
+        // debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return (
             <div key={`field.${name}`} className={`${this.getCssBlockName()}__field`}>
@@ -131,7 +133,7 @@ export class RowFormView<
     }
 
     renderError(fieldCtrl: RowFormFieldController) {
-        // console.debug('RowFormView.renderError:', fieldCtrl.state);
+        // debug('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return (
             <div key={`tooltip.${name}`} className={`${this.getCssBlockName()}__error`}>
@@ -166,7 +168,7 @@ export class RowFormView<
     }
 
     renderGroups() {
-        // console.debug('RowFormView.renderGroups');
+        // debug('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
         return (
             <div className={`${this.getCssBlockName()}__groups`}>
@@ -180,7 +182,7 @@ export class RowFormView<
     }
 
     render() {
-        console.debug('RowFormView.render', this.getCtrl().getModel().getFullName());
+        debug('RowFormView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} flex-column grid-gap-5`}
