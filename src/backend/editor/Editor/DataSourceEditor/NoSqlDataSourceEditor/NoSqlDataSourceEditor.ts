@@ -1,8 +1,18 @@
 import { DataSourceEditor } from '../DataSourceEditor';
 import { Editor } from '../../Editor';
+import {
+    DataSourceItems,
+    NoSqlDataSourceAttributes,
+    NoSqlDataSourceScheme,
+} from '../../../../common/Scheme/DataSourceScheme';
 
-export class NoSqlDataSourceEditor extends DataSourceEditor {
-    static createData(params): any {
+export type NoSqlDataSourceParams = Partial<NoSqlDataSourceAttributes> &
+    Partial<DataSourceItems> & {
+        name: string;
+    };
+
+export class NoSqlDataSourceEditor extends DataSourceEditor<NoSqlDataSourceScheme> {
+    static createData(params: NoSqlDataSourceParams): NoSqlDataSourceScheme {
         return {
             '@class': 'NoSqlDataSource',
             '@attributes': {

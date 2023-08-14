@@ -1,4 +1,5 @@
 import { ActionScheme } from './ActionScheme';
+import { DataSourceScheme } from './DataSourceScheme';
 import { DatabaseScheme } from './DatabaseScheme';
 import { PageLinkScheme } from './PageLinkScheme';
 
@@ -20,7 +21,7 @@ export interface ApplicationAttributes {
 export interface ApplicationItems {
     env: any;
     databases: DatabaseScheme[];
-    dataSources: any[];
+    dataSources: DataSourceScheme[];
     actions: ActionScheme[];
     pageLinks: PageLinkScheme[];
 }

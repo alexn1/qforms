@@ -1,7 +1,12 @@
 import { Editor } from '../Editor';
+import { KeyColumnScheme } from '../../../common/Scheme/KeyColumnScheme';
 
-export class KeyColumnEditor extends Editor {
-    static createData(params) {
+export type KeyColumnParams = Partial<KeyColumnScheme> & {
+    name: string;
+};
+
+export class KeyColumnEditor extends Editor<KeyColumnScheme> {
+    static createData(params: KeyColumnParams): KeyColumnScheme {
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'KeyColumn',

@@ -1,10 +1,9 @@
 import { Editor } from '../Editor';
-export declare class KeyColumnEditor extends Editor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': {
-            name: any;
-        };
-    };
+import { KeyColumnScheme } from '../../../common/Scheme/KeyColumnScheme';
+export type KeyColumnParams = Partial<KeyColumnScheme> & {
+    name: string;
+};
+export declare class KeyColumnEditor extends Editor<KeyColumnScheme> {
+    static createData(params: KeyColumnParams): KeyColumnScheme;
     getColName(): string;
 }

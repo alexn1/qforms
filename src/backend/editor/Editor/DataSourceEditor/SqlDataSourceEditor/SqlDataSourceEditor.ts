@@ -1,8 +1,18 @@
 import { DataSourceEditor } from '../DataSourceEditor';
 import { Editor } from '../../Editor';
+import {
+    DataSourceItems,
+    SqlDataSourceAttributes,
+    SqlDataSourceScheme,
+} from '../../../../common/Scheme/DataSourceScheme';
 
-export class SqlDataSourceEditor extends DataSourceEditor {
-    static createData(params): any {
+export type SqlDataSourceParams = Partial<SqlDataSourceAttributes> &
+    DataSourceItems & {
+        name: string;
+    };
+
+export class SqlDataSourceEditor extends DataSourceEditor<SqlDataSourceScheme> {
+    static createData(params: SqlDataSourceParams): SqlDataSourceScheme {
         return {
             '@class': 'SqlDataSource',
             '@attributes': {

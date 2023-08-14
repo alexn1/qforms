@@ -1,4 +1,8 @@
 import { DataSourceEditor } from '../DataSourceEditor';
-export declare class NoSqlDataSourceEditor extends DataSourceEditor {
-    static createData(params: any): any;
+import { DataSourceItems, NoSqlDataSourceAttributes, NoSqlDataSourceScheme } from '../../../../common/Scheme/DataSourceScheme';
+export type NoSqlDataSourceParams = Partial<NoSqlDataSourceAttributes> & Partial<DataSourceItems> & {
+    name: string;
+};
+export declare class NoSqlDataSourceEditor extends DataSourceEditor<NoSqlDataSourceScheme> {
+    static createData(params: NoSqlDataSourceParams): NoSqlDataSourceScheme;
 }

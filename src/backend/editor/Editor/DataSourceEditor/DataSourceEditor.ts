@@ -3,9 +3,19 @@ import path from 'path';
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { PageEditor } from '../PageEditor/PageEditor';
 import { Editor } from '../Editor';
+import {
+    DataSourceAttributes,
+    DataSourceItems,
+    DataSourceScheme,
+} from '../../../common/Scheme/DataSourceScheme';
 
-export class DataSourceEditor extends Editor {
-    static createData(params): any {
+export type DataSourceParams = Partial<DataSourceAttributes> &
+    Partial<DataSourceItems> & {
+        name: string;
+    };
+
+export class DataSourceEditor<T extends DataSourceScheme = DataSourceScheme> extends Editor<T> {
+    static createData(params: DataSourceParams): DataSourceScheme {
         return {
             '@class': 'DataSource',
             '@attributes': {
@@ -17,7 +27,7 @@ export class DataSourceEditor extends Editor {
         };
     }
 
-    static createAttributes(params): any {
+    static createAttributes(params: DataSourceParams): any {
         if (!params.name) throw new Error('no name');
         return {
             name: params.name,

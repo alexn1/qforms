@@ -1,7 +1,11 @@
 import { Editor } from '../Editor';
-export declare class DataSourceEditor extends Editor {
-    static createData(params: any): any;
-    static createAttributes(params: any): any;
+import { DataSourceAttributes, DataSourceItems, DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
+export type DataSourceParams = Partial<DataSourceAttributes> & Partial<DataSourceItems> & {
+    name: string;
+};
+export declare class DataSourceEditor<T extends DataSourceScheme = DataSourceScheme> extends Editor<T> {
+    static createData(params: DataSourceParams): DataSourceScheme;
+    static createAttributes(params: DataSourceParams): any;
     getCollectionDirPath(): Promise<string>;
     createModelBackJs(params: any): Promise<any>;
     getColName(): string;
