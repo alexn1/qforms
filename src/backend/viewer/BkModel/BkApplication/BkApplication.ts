@@ -22,7 +22,7 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { home } from '../../home';
 import * as text from '../../text';
 import { ApplicationData } from '../../../../common/data';
-import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';
 

@@ -1,5 +1,5 @@
 import { BaseModel } from '../../BaseModel';
-import { BkModelScheme } from '../../viewer/BkModelScheme/BkModelScheme';
+import { BkModelScheme } from '../../common/BkModelScheme/BkModelScheme';
 export declare class Editor<TBkModelData extends BkModelScheme = BkModelScheme> extends BaseModel<TBkModelData> {
     private editorPath;
     constructor(data: TBkModelData, parent: Editor | undefined, editorPath: string);

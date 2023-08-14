@@ -6,23 +6,9 @@ import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplicati
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { debug } from '../../../../console';
-
-export interface ApplicationAttributes {
-    formatVersion: '0.1';
-    name: string;
-    caption: string;
-    authentication: 'true' | 'false';
-    user: string;
-    password: string;
-    lang: 'en' | 'ru';
-    theme: 'standard';
-    cssBlock: string;
-    viewClass: string;
-    ctrlClass: string;
-    modelClass: string;
-}
+import { ApplicationAttributes } from '../../../common/Attributes/ApplicationAttributes';
 
 export interface ApplicationItems {
     env: any;

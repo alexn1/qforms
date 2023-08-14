@@ -1,5 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
+import { BkModelScheme } from './common/BkModelScheme/BkModelScheme';
 export declare class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
     protected data: TBkModelData;
     private parent?;
@@ -9,8 +9,8 @@ export declare class BaseModel<TBkModelData extends BkModelScheme = BkModelSchem
     static getName(data: BkModelScheme): string;
     getClassName(): string;
     getName(): string;
-    static attributes(data: BkModelScheme): import("./viewer/BkModelScheme/BkModelScheme").BkModelAttributesScheme;
-    attributes(): import("./viewer/BkModelScheme/BkModelScheme").BkModelAttributesScheme;
+    static attributes(data: BkModelScheme): import("./common/BkModelScheme/BkModelScheme").BkModelAttributesScheme;
+    attributes(): import("./common/BkModelScheme/BkModelScheme").BkModelAttributesScheme;
     getAttr(name: string): string;
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;

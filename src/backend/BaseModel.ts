@@ -1,5 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
+import { BkModelScheme } from './common/BkModelScheme/BkModelScheme';
 import { debug } from '../console';
 
 export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {

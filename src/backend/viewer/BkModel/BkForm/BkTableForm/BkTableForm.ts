@@ -1,4 +1,4 @@
-import { BkTableFormScheme } from '../../../BkModelScheme/BkFormScheme/BkTableFormScheme/BkTableFormScheme';
+import { BkTableFormScheme } from '../../../../common/BkModelScheme/BkFormScheme/BkTableFormScheme/BkTableFormScheme';
 import { BkForm } from '../BkForm';
 
 export class BkTableForm extends BkForm<BkTableFormScheme> {

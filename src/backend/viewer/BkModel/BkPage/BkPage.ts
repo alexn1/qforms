@@ -7,7 +7,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { HttpError } from '../../../HttpError';
-import { BkPageScheme } from '../../BkModelScheme/BkPageScheme/BkPageScheme';
+import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
 import { debug } from '../../../../console';
 
 export class BkPage<

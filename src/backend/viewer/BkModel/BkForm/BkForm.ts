@@ -9,7 +9,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { HttpError } from '../../../HttpError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
-import { BkFormScheme } from '../../BkModelScheme/BkFormScheme/BkFormScheme';
+import { BkFormScheme } from '../../../common/BkModelScheme/BkFormScheme/BkFormScheme';
 import { debug } from '../../../../console';
 
 export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkModel<TBkFormData> {

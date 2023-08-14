@@ -2,7 +2,7 @@ import path from 'path';
 import { JsonFile } from './JsonFile';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
+import { BkModelScheme } from './common/BkModelScheme/BkModelScheme';
 import { debug } from '../console';
 
 const BACKEND_DIR_PATH = path.join(__dirname, 'backend');

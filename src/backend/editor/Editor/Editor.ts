@@ -4,7 +4,7 @@ const ejs = require('ejs');
 import { BaseModel } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
-import { BkModelScheme } from '../../viewer/BkModelScheme/BkModelScheme';
+import { BkModelScheme } from '../../common/BkModelScheme/BkModelScheme';
 import { debug } from '../../../console';
 
 export class Editor<

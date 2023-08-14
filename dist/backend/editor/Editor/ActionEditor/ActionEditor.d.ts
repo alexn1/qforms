@@ -1,8 +1,5 @@
 import { Editor } from '../Editor';
-export interface ActionAttributes {
-    name: string;
-    caption: string;
-}
+import { ActionAttributes } from '../../../common/Attributes/ActionAttributes';
 export declare class ActionEditor extends Editor {
     static createData(params: ActionAttributes): {
         '@class': string;

@@ -3,7 +3,7 @@ import path from 'path';
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageScheme } from '../../../viewer/BkModelScheme/BkPageScheme/BkPageScheme';
+import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
 import { debug } from '../../../../console';
 
 export class PageEditor extends Editor<BkPageScheme> {

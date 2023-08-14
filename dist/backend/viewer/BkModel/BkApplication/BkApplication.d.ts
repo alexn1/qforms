@@ -12,7 +12,7 @@ import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { ApplicationData } from '../../../../common/data';
-import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { NextFunction } from 'express';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<BkApplicationScheme> {
     private appInfo;
