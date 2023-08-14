@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { PageData } from '../../../../data';
+import { PageData } from '../../../../common/data';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';

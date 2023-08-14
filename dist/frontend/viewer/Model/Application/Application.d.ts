@@ -3,7 +3,7 @@ import { Database } from '../Database/Database';
 import { RequestBody, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
-import { ApplicationData } from '../../../../data';
+import { ApplicationData } from '../../../../common/data';
 export declare class Application extends Model<ApplicationData> {
     databases: Database[];
     dataSources: DataSource[];

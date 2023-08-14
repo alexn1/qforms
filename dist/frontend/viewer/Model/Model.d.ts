@@ -1,6 +1,6 @@
 import { EventEmitter } from '../EventEmitter';
 import { DataSource } from './DataSource/DataSource';
-import { ModelData } from '../../../data';
+import { ModelData } from '../../../common/data';
 export declare class Model<T extends ModelData = any> extends EventEmitter {
     private data;
     private parent?;

@@ -4,7 +4,7 @@ import { FrontHostApp, RequestBody, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
-import { ApplicationData } from '../../../../data';
+import { ApplicationData } from '../../../../common/data';
 
 export class Application extends Model<ApplicationData> {
     databases: Database[] = [];
