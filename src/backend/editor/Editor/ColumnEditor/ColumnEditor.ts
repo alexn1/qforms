@@ -1,7 +1,12 @@
 import { Editor } from '../Editor';
+import { ColumnAttributes, ColumnScheme } from '../../../common/Scheme/ColumnScheme';
 
-export class ColumnEditor extends Editor {
-    static createData(params) {
+export type ColumnParams = Partial<ColumnAttributes> & {
+    name: string;
+};
+
+export class ColumnEditor extends Editor<ColumnScheme> {
+    static createData(params: ColumnParams): ColumnScheme {
         if (!params.name) throw new Error('no name');
         if (params.key !== undefined && typeof params.key !== 'string') {
             throw new Error('key not string');

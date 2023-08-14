@@ -1,11 +1,9 @@
+import { TableAttributes, TableItems, TableScheme } from '../../../common/Scheme/TableScheme';
 import { Editor } from '../Editor';
-export declare class TableEditor extends Editor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': {
-            name: any;
-        };
-        columns: any[];
-    };
+export type TableParams = Partial<TableAttributes> & Partial<TableItems> & {
+    name: string;
+};
+export declare class TableEditor extends Editor<TableScheme> {
+    static createData(params: TableParams): TableScheme;
     getColName(): string;
 }
