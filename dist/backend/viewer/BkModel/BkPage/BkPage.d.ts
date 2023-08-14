@@ -4,8 +4,8 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
-import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
-export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel<BkPageScheme> {
+import { PageScheme } from '../../../common/Scheme/PageScheme';
+export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel<PageScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
     forms: BkForm[];

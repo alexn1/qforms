@@ -7,12 +7,12 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { HttpError } from '../../../HttpError';
-import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
 import { debug } from '../../../../console';
+import { PageScheme } from '../../../common/Scheme/PageScheme';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
-> extends BkModel<BkPageScheme> {
+> extends BkModel<PageScheme> {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     forms: BkForm[] = [];

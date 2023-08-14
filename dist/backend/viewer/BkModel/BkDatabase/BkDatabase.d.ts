@@ -4,7 +4,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
-import { BkDatabaseScheme } from '../../../common/BkModelScheme/BkDatabaseScheme/BkDatabaseScheme';
+import { DatabaseScheme } from '../../../common/Scheme/DatabaseScheme';
 export interface DbConfig {
     host: string;
     database: string;
@@ -12,7 +12,7 @@ export interface DbConfig {
     password: string;
     port?: number;
 }
-export declare class BkDatabase<TConnection = any> extends BkModel<BkDatabaseScheme> {
+export declare class BkDatabase<TConnection = any> extends BkModel<DatabaseScheme> {
     tables: BkTable[];
     params: BkParam[];
     fillCollections: string[];
