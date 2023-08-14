@@ -1,9 +1,6 @@
 import { DatabaseEditor } from '../DatabaseEditor';
+import { DatabaseScheme } from '../../../../common/Scheme/DatabaseScheme';
+import { DatabaseParams } from '../DatabaseEditor';
 export declare class MongoDbDatabaseEditor extends DatabaseEditor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': any;
-        params: any[];
-        tables: any[];
-    };
+    static createData(params: DatabaseParams): DatabaseScheme;
 }

@@ -1,8 +1,9 @@
-import { DatabaseEditor } from '../DatabaseEditor';
+import { DatabaseEditor, DatabaseParams } from '../DatabaseEditor';
 import { Editor } from '../../Editor';
+import { DatabaseScheme } from '../../../../common/Scheme/DatabaseScheme';
 
 export class PostgreSqlDatabaseEditor extends DatabaseEditor {
-    static createData(params) {
+    static createData(params: DatabaseParams): DatabaseScheme {
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'PostgreSqlDatabase',
