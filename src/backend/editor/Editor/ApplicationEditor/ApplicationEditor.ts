@@ -9,17 +9,16 @@ import { PageEditor } from '../PageEditor/PageEditor';
 import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 import { debug } from '../../../../console';
 import { ApplicationAttributes } from '../../../common/Attributes/ApplicationAttributes';
+import { ApplicationItems } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 
-export interface ApplicationItems {
-    env: any;
-    databases: any;
-    dataSources: any;
-    actions: any;
-    pageLinks: any;
-}
+export type ApplicationParams = Partial<ApplicationAttributes> &
+    Partial<ApplicationItems> & {
+        name: string;
+    };
 
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
+    data: BkApplicationScheme;
 
     constructor(private appFile: JsonFile, editorPath: string) {
         super(appFile.data, undefined, editorPath);
@@ -30,7 +29,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         return this.appFile;
     }
 
-    static createData(params: ApplicationAttributes & ApplicationItems) {
+    static createData(params: ApplicationParams): BkApplicationScheme {
         // debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
@@ -59,7 +58,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         };
     }
 
-    static async createAppFile(appFilePath: string, params) {
+    static async createAppFile(appFilePath: string, params: ApplicationParams) {
         const data = ApplicationEditor.createData(params);
         const appFile = new JsonFile(appFilePath, data);
         await appFile.create();
@@ -139,12 +138,12 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
 
     reformat() {
         this.data = this.appFile.data = ApplicationEditor.createData({
-            ...this.attributes(),
+            ...(this.attributes() as ApplicationAttributes),
             env: this.data.env,
             databases: this.data.databases,
             dataSources: this.data.dataSources,
             actions: this.data.actions,
             pageLinks: this.data.pageLinks,
-        } as ApplicationAttributes & ApplicationItems);
+        });
     }
 }

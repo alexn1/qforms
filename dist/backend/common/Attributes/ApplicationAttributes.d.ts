@@ -1,5 +1,5 @@
 export interface ApplicationAttributes {
-    formatVersion: '0.1';
+    formatVersion: string;
     name: string;
     caption: string;
     authentication: 'true' | 'false';

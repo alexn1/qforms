@@ -1,22 +1,12 @@
-import { BkModelScheme, BkModelAttributesScheme } from '../BkModelScheme';
-export interface BkApplicationAttributesScheme extends BkModelAttributesScheme {
-    formatVersion: string;
-    caption: string;
-    authentication: string;
-    user: string;
-    password: string;
-    lang: string;
-    theme: string;
-    cssBlock: string;
-    viewClass: string;
-    ctrlClass: string;
-    modelClass: string;
-}
-export interface BkApplicationScheme extends BkModelScheme {
-    '@attributes': BkApplicationAttributesScheme;
-    env: Record<string, any>;
+import { ApplicationAttributes } from '../../Attributes/ApplicationAttributes';
+export interface ApplicationItems {
+    env: any;
     databases: any[];
     dataSources: any[];
     actions: any[];
     pageLinks: any[];
 }
+export type BkApplicationScheme = {
+    '@class': 'Application';
+    '@attributes': ApplicationAttributes;
+} & ApplicationItems;
