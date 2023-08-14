@@ -5,7 +5,7 @@ export type ActionParams = Partial<ActionAttributes> & {
     name: string;
 };
 
-export class ActionEditor extends Editor {
+export class ActionEditor extends Editor<ActionScheme> {
     static createData(params: ActionParams): ActionScheme {
         if (!params.name) throw new Error('no name');
         return {

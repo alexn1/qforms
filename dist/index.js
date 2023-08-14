@@ -2834,6 +2834,7 @@ class ApplicationEditor extends Editor_1.Editor {
         this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile);
     }
     getAppFile() {
+        this.data;
         return this.appFile;
     }
     static createData(params) {

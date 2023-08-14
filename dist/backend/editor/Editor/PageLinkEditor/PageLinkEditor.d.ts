@@ -3,7 +3,7 @@ import { PageLinkAttributes, PageLinkScheme } from '../../../common/Scheme/PageL
 export type PageLinkParams = Partial<PageLinkAttributes> & {
     name: string;
 };
-export declare class PageLinkEditor extends Editor {
+export declare class PageLinkEditor extends Editor<PageLinkScheme> {
     static createData(params: PageLinkParams): PageLinkScheme;
     getColName(): string;
 }

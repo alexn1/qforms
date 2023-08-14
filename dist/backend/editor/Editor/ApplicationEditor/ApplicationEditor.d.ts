@@ -10,7 +10,6 @@ export type ApplicationParams = Partial<ApplicationAttributes> & Partial<Applica
 export declare class ApplicationEditor extends Editor<ApplicationScheme> {
     private appFile;
     appInfo: AppInfo;
-    data: ApplicationScheme;
     constructor(appFile: JsonFile, editorPath: string);
     getAppFile(): JsonFile;
     static createData(params: ApplicationParams): ApplicationScheme;

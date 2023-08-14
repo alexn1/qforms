@@ -6,7 +6,7 @@ export type PageLinkParams = Partial<PageLinkAttributes> & {
     name: string;
 };
 
-export class PageLinkEditor extends Editor {
+export class PageLinkEditor extends Editor<PageLinkScheme> {
     static createData(params: PageLinkParams): PageLinkScheme {
         return {
             '@class': 'PageLink',

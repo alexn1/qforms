@@ -17,7 +17,6 @@ export type ApplicationParams = Partial<ApplicationAttributes> &
 
 export class ApplicationEditor extends Editor<ApplicationScheme> {
     appInfo: AppInfo;
-    data: ApplicationScheme;
 
     constructor(private appFile: JsonFile, editorPath: string) {
         super(appFile.data, undefined, editorPath);
@@ -25,6 +24,7 @@ export class ApplicationEditor extends Editor<ApplicationScheme> {
     }
 
     getAppFile(): JsonFile {
+        this.data;
         return this.appFile;
     }
 
