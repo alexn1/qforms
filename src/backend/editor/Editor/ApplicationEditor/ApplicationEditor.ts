@@ -6,19 +6,18 @@ import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplicati
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { debug } from '../../../../console';
-import { ApplicationAttributes } from '../../../common/Attributes/ApplicationAttributes';
-import { ApplicationItems } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { ApplicationAttributes, ApplicationItems } from '../../../common/Scheme/ApplicationScheme';
 
 export type ApplicationParams = Partial<ApplicationAttributes> &
     Partial<ApplicationItems> & {
         name: string;
     };
 
-export class ApplicationEditor extends Editor<BkApplicationScheme> {
+export class ApplicationEditor extends Editor<ApplicationScheme> {
     appInfo: AppInfo;
-    data: BkApplicationScheme;
+    data: ApplicationScheme;
 
     constructor(private appFile: JsonFile, editorPath: string) {
         super(appFile.data, undefined, editorPath);
@@ -29,7 +28,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         return this.appFile;
     }
 
-    static createData(params: ApplicationParams): BkApplicationScheme {
+    static createData(params: ApplicationParams): ApplicationScheme {
         // debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
@@ -138,7 +137,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
 
     reformat() {
         this.data = this.appFile.data = ApplicationEditor.createData({
-            ...(this.attributes() as ApplicationAttributes),
+            ...this.attributes(),
             env: this.data.env,
             databases: this.data.databases,
             dataSources: this.data.dataSources,

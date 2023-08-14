@@ -1,8 +1,12 @@
 import { Editor } from '../Editor';
-import { ActionAttributes } from '../../../common/Attributes/ActionAttributes';
+import { ActionAttributes, ActionScheme } from '../../../common/Scheme/ActionScheme';
+
+export type ActionParams = Partial<ActionAttributes> & {
+    name: string;
+};
 
 export class ActionEditor extends Editor {
-    static createData(params: ActionAttributes) {
+    static createData(params: ActionParams): ActionScheme {
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'Action',

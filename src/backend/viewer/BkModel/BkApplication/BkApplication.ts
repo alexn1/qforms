@@ -22,7 +22,7 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { home } from '../../home';
 import * as text from '../../text';
 import { ApplicationData } from '../../../../common/data';
-import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';
 
@@ -30,7 +30,7 @@ const pkg = require('../../../../../package.json');
 
 export class BkApplication<
     THostApp extends BackHostApp = BackHostApp,
-> extends BkModel<BkApplicationScheme> {
+> extends BkModel<ApplicationScheme> {
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
@@ -554,7 +554,7 @@ export class BkApplication<
         );
     }
 
-    static getEnvList(data: BkApplicationScheme): string[] {
+    static getEnvList(data: ApplicationScheme): string[] {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }

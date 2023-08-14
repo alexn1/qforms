@@ -2,19 +2,18 @@ import { Editor } from '../Editor';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
-import { ApplicationAttributes } from '../../../common/Attributes/ApplicationAttributes';
-import { ApplicationItems } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
+import { ApplicationAttributes, ApplicationItems } from '../../../common/Scheme/ApplicationScheme';
 export type ApplicationParams = Partial<ApplicationAttributes> & Partial<ApplicationItems> & {
     name: string;
 };
-export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
+export declare class ApplicationEditor extends Editor<ApplicationScheme> {
     private appFile;
     appInfo: AppInfo;
-    data: BkApplicationScheme;
+    data: ApplicationScheme;
     constructor(appFile: JsonFile, editorPath: string);
     getAppFile(): JsonFile;
-    static createData(params: ApplicationParams): BkApplicationScheme;
+    static createData(params: ApplicationParams): ApplicationScheme;
     static createAppFile(appFilePath: string, params: ApplicationParams): Promise<JsonFile>;
     newPageAndPageLinkData(params: any): Promise<{
         page: {

@@ -12,9 +12,9 @@ import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { ApplicationData } from '../../../../common/data';
-import { BkApplicationScheme } from '../../../common/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
-export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<BkApplicationScheme> {
+export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {
     private appInfo;
     private hostApp;
     private env;
@@ -78,5 +78,5 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: NextFunction): Promise<void>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
-    static getEnvList(data: BkApplicationScheme): string[];
+    static getEnvList(data: ApplicationScheme): string[];
 }

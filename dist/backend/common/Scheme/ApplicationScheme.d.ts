@@ -12,3 +12,14 @@ export interface ApplicationAttributes {
     ctrlClass: string;
     modelClass: string;
 }
+export interface ApplicationItems {
+    env: any;
+    databases: any[];
+    dataSources: any[];
+    actions: any[];
+    pageLinks: any[];
+}
+export type ApplicationScheme = {
+    '@class': 'Application';
+    '@attributes': ApplicationAttributes;
+} & ApplicationItems;
