@@ -1,27 +1,15 @@
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
-export declare class PageEditor extends Editor<BkPageScheme> {
+import { PageAttributes, PageItems, PageScheme } from '../../../common/Scheme/PageScheme';
+export type PageParams = Partial<PageAttributes> & Partial<PageItems> & {
+    name: string;
+};
+export declare class PageEditor extends Editor<PageScheme> {
     private appEditor;
     pageFile: JsonFile;
     constructor(appEditor: ApplicationEditor, pageFile: JsonFile, editorPath: string);
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': {
-            formatVersion: string;
-            name: any;
-            caption: any;
-            cssBlock: any;
-            viewClass: any;
-            ctrlClass: any;
-            modelClass: any;
-            formInTab: any;
-        };
-        dataSources: any[];
-        actions: any[];
-        forms: any[];
-    };
+    static createData(params: PageParams): PageScheme;
     setAttr(name: string, value: string): void;
     save(): Promise<void>;
     createJs(params: any): Promise<any>;

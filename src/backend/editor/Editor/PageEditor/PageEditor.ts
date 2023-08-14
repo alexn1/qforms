@@ -3,10 +3,15 @@ import path from 'path';
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageScheme } from '../../../common/BkModelScheme/BkPageScheme/BkPageScheme';
 import { debug } from '../../../../console';
+import { PageAttributes, PageItems, PageScheme } from '../../../common/Scheme/PageScheme';
 
-export class PageEditor extends Editor<BkPageScheme> {
+export type PageParams = Partial<PageAttributes> &
+    Partial<PageItems> & {
+        name: string;
+    };
+
+export class PageEditor extends Editor<PageScheme> {
     constructor(
         private appEditor: ApplicationEditor,
         public pageFile: JsonFile,
@@ -15,7 +20,7 @@ export class PageEditor extends Editor<BkPageScheme> {
         super(pageFile.data, appEditor, editorPath);
     }
 
-    static createData(params) {
+    static createData(params: PageParams): PageScheme {
         return {
             '@class': 'Page',
             '@attributes': {

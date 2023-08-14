@@ -3,23 +3,8 @@ export declare class PageEditorController extends VisualEditorController {
     get(params: any): Promise<any>;
     save(params: any): Promise<null>;
     _new(params: any): Promise<{
-        page: {
-            '@class': string;
-            '@attributes': {
-                formatVersion: string;
-                name: any;
-                caption: any;
-                cssBlock: any;
-                viewClass: any;
-                ctrlClass: any;
-                modelClass: any;
-                formInTab: any;
-            };
-            dataSources: any[];
-            actions: any[];
-            forms: any[];
-        };
-        pageLink: any;
+        page: import("../../../common/Scheme/PageScheme").PageScheme;
+        pageLink: import("../../../common/Scheme/PageLinkScheme").PageLinkScheme;
     }>;
     delete(params: any): Promise<any>;
     getView(params: any): Promise<{

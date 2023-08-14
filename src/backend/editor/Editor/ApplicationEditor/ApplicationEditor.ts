@@ -5,10 +5,13 @@ import { BkHelper } from '../../../BkHelper';
 import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplication';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
-import { PageEditor } from '../PageEditor/PageEditor';
+import { PageEditor, PageParams } from '../PageEditor/PageEditor';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { debug } from '../../../../console';
 import { ApplicationAttributes, ApplicationItems } from '../../../common/Scheme/ApplicationScheme';
+import { PageLinkParams } from '../PageLinkEditor/PageLinkEditor';
+import { PageScheme } from '../../../common/Scheme/PageScheme';
+import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 
 export type ApplicationParams = Partial<ApplicationAttributes> &
     Partial<ApplicationItems> & {
@@ -64,7 +67,10 @@ export class ApplicationEditor extends Editor<ApplicationScheme> {
         return appFile;
     }
 
-    async newPageAndPageLinkData(params) {
+    async newPageAndPageLinkData(params: PageParams & PageLinkParams): Promise<{
+        page: PageScheme;
+        pageLink: PageLinkScheme;
+    }> {
         const pagesDirPath = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath = path.join(pagesDirPath, params.name);
         const pageFilePath = path.join(pageDirPath, params.name + '.json');
