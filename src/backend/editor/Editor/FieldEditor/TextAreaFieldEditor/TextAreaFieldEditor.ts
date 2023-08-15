@@ -1,7 +1,13 @@
+import {
+    TextAreaFieldAttributes,
+    TextAreaFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/TextAreaFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class TextAreaFieldEditor extends FieldEditor {
-    static createData(params) {
+export type TextAreaFieldParams = Partial<TextAreaFieldAttributes> & { name: string };
+
+export class TextAreaFieldEditor extends FieldEditor<TextAreaFieldScheme> {
+    static createData(params: TextAreaFieldParams): TextAreaFieldScheme {
         return {
             '@class': 'TextAreaField',
             '@attributes': {
