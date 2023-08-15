@@ -9,6 +9,9 @@ module.exports['copy-ejs'] = require('./gulp/copy-ejs');
 module.exports['copy-lib'] = require('./gulp/copy-lib');
 module.exports['copy-img'] = require('./gulp/copy-img');
 
+// clean
+module.exports['clean'] = require('./gulp/clean');
+
 // build
 module.exports['build-dev'] = require('./gulp/build-dev');
 module.exports['build-prod'] = require('./gulp/build-prod');
