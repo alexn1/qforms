@@ -2,9 +2,14 @@ import path from 'path';
 
 import { Editor } from '../Editor';
 import * as backend from '../../../../backend';
+import { FieldAttributes, FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
 
-export class FieldEditor extends Editor {
-    static createAttributes(params): any {
+export type FieldParams = Partial<FieldAttributes> & {
+    name: string;
+};
+
+export class FieldEditor<T extends FieldScheme = FieldScheme> extends Editor<T> {
+    static createAttributes(params: FieldParams): FieldAttributes {
         if (!params.name) throw new Error('no name');
         return {
             name: params.name,
@@ -23,7 +28,7 @@ export class FieldEditor extends Editor {
         };
     }
 
-    changeClass(newClassName) {
+    changeClass(newClassName: string) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         this.setColData(this.getColName(), newData);
         return newData;

@@ -1,7 +1,8 @@
 import { FieldEditor } from '../FieldEditor';
-export declare class CheckBoxFieldEditor extends FieldEditor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': any;
-    };
+import { CheckBoxFieldAttributes, CheckBoxFieldScheme } from '../../../../common/Scheme/FieldScheme/CheckBoxFieldScheme';
+export type CheckBoxFieldParams = Partial<CheckBoxFieldAttributes> & {
+    name: string;
+};
+export declare class CheckBoxFieldEditor extends FieldEditor<CheckBoxFieldScheme> {
+    static createData(params: CheckBoxFieldParams): CheckBoxFieldScheme;
 }
