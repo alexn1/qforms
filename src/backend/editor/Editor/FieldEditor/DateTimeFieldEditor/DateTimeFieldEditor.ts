@@ -1,7 +1,15 @@
+import {
+    DateTimeFieldAttributes,
+    DateTimeFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/DateTimeFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class DateTimeFieldEditor extends FieldEditor {
-    static createData(params) {
+export type DateTimeFieldParams = Partial<DateTimeFieldAttributes> & {
+    name: string;
+};
+
+export class DateTimeFieldEditor extends FieldEditor<DateTimeFieldScheme> {
+    static createData(params: DateTimeFieldParams): DateTimeFieldScheme {
         return {
             '@class': 'DateTimeField',
             '@attributes': {
