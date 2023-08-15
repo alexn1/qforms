@@ -1,7 +1,13 @@
+import {
+    DateFieldAttributes,
+    DateFieldSchema,
+} from '../../../../common/Scheme/FieldScheme/DateFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class DateFieldEditor extends FieldEditor {
-    static createData(params) {
+export type DateFieldParam = Partial<DateFieldAttributes> & { name: string };
+
+export class DateFieldEditor extends FieldEditor<DateFieldSchema> {
+    static createData(params: DateFieldParam): DateFieldSchema {
         return {
             '@class': 'DateField',
             '@attributes': {
