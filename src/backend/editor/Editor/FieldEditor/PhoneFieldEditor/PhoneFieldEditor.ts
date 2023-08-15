@@ -1,7 +1,13 @@
+import {
+    PhoneFieldAttributes,
+    PhoneFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/PhoneFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class PhoneFieldEditor extends FieldEditor {
-    static createData(params) {
+export type PhoneFieldParams = Partial<PhoneFieldAttributes> & { name: string };
+
+export class PhoneFieldEditor extends FieldEditor<PhoneFieldScheme> {
+    static createData(params: PhoneFieldParams): PhoneFieldScheme {
         return {
             '@class': 'PhoneField',
             '@attributes': {
