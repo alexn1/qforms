@@ -1,5 +1,6 @@
 import { ActionScheme } from './ActionScheme';
 import { DataSourceScheme } from './DataSourceScheme';
+import { FieldScheme } from './FieldScheme/FieldScheme';
 export interface FormAttributes {
     name: string;
     caption: string;
@@ -12,7 +13,7 @@ export interface FormAttributes {
 export interface FormItems {
     dataSources: DataSourceScheme[];
     actions: ActionScheme[];
-    fields: any[];
+    fields: FieldScheme[];
 }
 export type FormScheme = {
     '@class': 'Form' | 'RowForm' | 'TableForm';
