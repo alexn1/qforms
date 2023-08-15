@@ -1,7 +1,15 @@
 import { FieldEditor } from '../FieldEditor';
+import {
+    ComboBoxFieldAttributes,
+    ComboBoxFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/ComboBoxFieldScheme';
 
-export class ComboBoxFieldEditor extends FieldEditor {
-    static createData(params) {
+export type ComboBoxFieldParams = Partial<ComboBoxFieldAttributes> & {
+    name: string;
+};
+
+export class ComboBoxFieldEditor extends FieldEditor<ComboBoxFieldScheme> {
+    static createData(params: ComboBoxFieldParams): ComboBoxFieldScheme {
         return {
             '@class': 'ComboBoxField',
             '@attributes': {

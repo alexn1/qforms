@@ -14,6 +14,6 @@ export interface FieldAttributes {
     autoFocus: 'true' | 'false';
 }
 export type FieldScheme = {
-    '@class': 'Field' | 'CheckBoxField';
+    '@class': 'Field' | 'CheckBoxField' | 'CheckBoxListField' | 'ComboBoxField' | 'DateField' | 'DateTimeField' | 'FileField' | 'ImageField' | 'LabelField' | 'LinkField' | 'PasswordField' | 'PhoneField' | 'RadioField' | 'TextAreaField' | 'TextBoxField' | 'TimeField';
     '@attributes': FieldAttributes;
 };
