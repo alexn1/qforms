@@ -1,7 +1,13 @@
+import {
+    RadioFieldAttributes,
+    RadioFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/RadioFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class RadioFieldEditor extends FieldEditor {
-    static createData(params) {
+export type RadioFieldParams = Partial<RadioFieldAttributes> & { name: string };
+
+export class RadioFieldEditor extends FieldEditor<RadioFieldScheme> {
+    static createData(params: RadioFieldParams): RadioFieldScheme {
         return {
             '@class': 'RadioField',
             '@attributes': {
