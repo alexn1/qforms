@@ -1,7 +1,13 @@
+import {
+    TimeFieldAttributes,
+    TimeFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/TimeFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class TimeFieldEditor extends FieldEditor {
-    static createData(params) {
+export type TimeFieldParams = Partial<TimeFieldAttributes> & { name: string };
+
+export class TimeFieldEditor extends FieldEditor<TimeFieldScheme> {
+    static createData(params: TimeFieldParams): TimeFieldScheme {
         return {
             '@class': 'TimeField',
             '@attributes': {
