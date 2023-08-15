@@ -1,7 +1,13 @@
+import {
+    PasswordFieldAttributes,
+    PasswordFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/PasswordFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class PasswordFieldEditor extends FieldEditor {
-    static createData(params) {
+export type PasswordFieldParams = Partial<PasswordFieldAttributes> & { name: string };
+
+export class PasswordFieldEditor extends FieldEditor<PasswordFieldScheme> {
+    static createData(params: PasswordFieldParams): PasswordFieldScheme {
         return {
             '@class': 'PasswordField',
             '@attributes': {
