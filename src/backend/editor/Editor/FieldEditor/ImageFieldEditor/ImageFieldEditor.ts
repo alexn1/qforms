@@ -1,7 +1,15 @@
+import {
+    ImageFieldAttributes,
+    ImageFieldSchema,
+} from '../../../../common/Scheme/FieldScheme/ImageFieldSchema';
 import { FieldEditor } from '../FieldEditor';
 
-export class ImageFieldEditor extends FieldEditor {
-    static createData(params) {
+export type ImageFieldParams = Partial<ImageFieldAttributes> & {
+    name: string;
+};
+
+export class ImageFieldEditor extends FieldEditor<ImageFieldSchema> {
+    static createData(params: ImageFieldParams): ImageFieldSchema {
         return {
             '@class': 'ImageField',
             '@attributes': {

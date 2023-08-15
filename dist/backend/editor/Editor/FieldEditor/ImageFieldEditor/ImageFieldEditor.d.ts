@@ -1,23 +1,8 @@
+import { ImageFieldAttributes, ImageFieldSchema } from '../../../../common/Scheme/FieldScheme/ImageFieldSchema';
 import { FieldEditor } from '../FieldEditor';
-export declare class ImageFieldEditor extends FieldEditor {
-    static createData(params: any): {
-        '@class': string;
-        '@attributes': {
-            readOnly: any;
-            notNull: any;
-            name: string;
-            caption: string;
-            column: string;
-            defaultValue: string;
-            value: string;
-            param: "true" | "false";
-            visible: "true" | "false";
-            type: string;
-            width: string;
-            cssBlock: string;
-            viewClass: string;
-            ctrlClass: string;
-            autoFocus: "true" | "false";
-        };
-    };
+export type ImageFieldParams = Partial<ImageFieldAttributes> & {
+    name: string;
+};
+export declare class ImageFieldEditor extends FieldEditor<ImageFieldSchema> {
+    static createData(params: ImageFieldParams): ImageFieldSchema;
 }
