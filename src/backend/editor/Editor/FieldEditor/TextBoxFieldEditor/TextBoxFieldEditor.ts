@@ -1,7 +1,13 @@
+import {
+    TextBoxFieldAttributes,
+    TextBoxFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/TextBoxFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class TextBoxFieldEditor extends FieldEditor {
-    static createData(params) {
+export type TextBoxFieldParams = Partial<TextBoxFieldAttributes> & { name: string };
+
+export class TextBoxFieldEditor extends FieldEditor<TextBoxFieldScheme> {
+    static createData(params: TextBoxFieldParams): TextBoxFieldScheme {
         return {
             '@class': 'TextBoxField',
             '@attributes': {
