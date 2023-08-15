@@ -1,7 +1,15 @@
+import {
+    FileFieldAttributes,
+    FileFieldScheme,
+} from '../../../../common/Scheme/FieldScheme/FileFieldScheme';
 import { FieldEditor } from '../FieldEditor';
 
-export class FileFieldEditor extends FieldEditor {
-    static createData(params) {
+export type FileFieldParams = Partial<FileFieldAttributes> & {
+    name: string;
+};
+
+export class FileFieldEditor extends FieldEditor<FileFieldScheme> {
+    static createData(params: FileFieldParams): FileFieldScheme {
         return {
             '@class': 'FileField',
             '@attributes': {
