@@ -9,16 +9,9 @@ import { BkHelper } from '../../../BkHelper';
 import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
+import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
 
-export class BkField extends BkModel {
-    /* static async create(data, parent): Promise<Field> {
-        return new Field(data, parent);
-    } */
-
-    // constructor(data, parent) {
-    //     super(data, parent);
-    // }
-
+export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
     fillAttributes(response: any): void {
         response.class = this.getClassName();
         response.name = this.getAttr('name');

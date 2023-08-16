@@ -5,7 +5,8 @@ import { BkForm } from '../BkForm/BkForm';
 import { BkColumn } from '../BkColumn/BkColumn';
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
-export declare class BkField extends BkModel {
+import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
+export declare class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
     fillAttributes(response: any): void;
     getDirPath(): string;
     fillDefaultValue(context: Context, row: any): void;

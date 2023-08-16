@@ -8463,12 +8463,6 @@ const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const BkModel_1 = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 const BkHelper_1 = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
 class BkField extends BkModel_1.BkModel {
-    /* static async create(data, parent): Promise<Field> {
-        return new Field(data, parent);
-    } */
-    // constructor(data, parent) {
-    //     super(data, parent);
-    // }
     fillAttributes(response) {
         response.class = this.getClassName();
         response.name = this.getAttr('name');
