@@ -1,9 +1,9 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { ModelScheme } from './common/Scheme/ModelScheme';
-export declare class BaseModel<TBkModelData extends ModelScheme = ModelScheme> {
-    protected data: TBkModelData;
+export declare class BaseModel<TModelScheme extends ModelScheme = ModelScheme> {
+    protected data: TModelScheme;
     private parent?;
-    constructor(data: TBkModelData, parent?: BaseModel<ModelScheme> | undefined);
+    constructor(data: TModelScheme, parent?: BaseModel<ModelScheme> | undefined);
     static getClassName(data: ModelScheme): string;
     static getAttr(data: ModelScheme, name: string): string;
     static getName(data: ModelScheme): string;
@@ -15,7 +15,7 @@ export declare class BaseModel<TBkModelData extends ModelScheme = ModelScheme> {
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;
     isData(colName: string, name: string): boolean;
-    getData(): TBkModelData;
+    getData(): TModelScheme;
     getCol(name: string): any;
     getItemNames(colName: string): any;
     getColItemData(colName: string, name: string): any;

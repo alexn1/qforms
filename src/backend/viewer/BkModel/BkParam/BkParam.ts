@@ -1,7 +1,8 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
+import { ParamScheme } from '../../../common/Scheme/ParamScheme';
 
-export class BkParam extends BkModel {
+export class BkParam extends BkModel<ParamScheme> {
     getValue() {
         // debug('Param.getValue', this.getName());
         const value = this.getAttr('value');

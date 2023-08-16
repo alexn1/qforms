@@ -2,11 +2,13 @@ import { BkModel } from '../BkModel';
 import { BkColumn } from '../BkColumn/BkColumn';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
+import { TableScheme } from '../../../common/Scheme/TableScheme';
+import { BkDatabase } from '../BkDatabase/BkDatabase';
 
-export class BkTable extends BkModel {
+export class BkTable extends BkModel<TableScheme> {
     columns: BkColumn[] = [];
 
-    constructor(data, parent) {
+    constructor(data: TableScheme, parent: BkDatabase) {
         super(data, parent);
         // debug('Table.constructor', this.getName());
         this.fillCollections = ['columns'];

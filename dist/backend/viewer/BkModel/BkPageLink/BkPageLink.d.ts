@@ -1,4 +1,5 @@
 import { BkModel } from '../BkModel';
-export declare class BkPageLink extends BkModel {
+import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
+export declare class BkPageLink extends BkModel<PageLinkScheme> {
     getPageFilePath(): string;
 }

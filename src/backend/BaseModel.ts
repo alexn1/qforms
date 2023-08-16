@@ -2,8 +2,8 @@ import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { ModelScheme } from './common/Scheme/ModelScheme';
 import { debug } from '../console';
 
-export class BaseModel<TBkModelData extends ModelScheme = ModelScheme> {
-    constructor(protected data: TBkModelData, private parent?: BaseModel) {
+export class BaseModel<TModelScheme extends ModelScheme = ModelScheme> {
+    constructor(protected data: TModelScheme, private parent?: BaseModel) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
     }
 
@@ -54,7 +54,7 @@ export class BaseModel<TBkModelData extends ModelScheme = ModelScheme> {
         return !!this.getColItemData(colName, name);
     }
 
-    getData(): TBkModelData {
+    getData(): TModelScheme {
         return this.data;
     }
 
