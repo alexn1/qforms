@@ -1,6 +1,7 @@
 import { FieldData } from './FieldData';
 import { ModelData } from './ModelData';
 export interface FormData extends ModelData {
+    class: string;
     caption: string;
     visible: string;
     cssBlock: string;

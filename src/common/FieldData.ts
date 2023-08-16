@@ -1,6 +1,7 @@
 import { ModelData } from './ModelData';
 
 export interface FieldData extends ModelData {
+    class: string;
     caption: string;
     column: string;
     defaultValue: string;

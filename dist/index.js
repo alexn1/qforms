@@ -21154,7 +21154,7 @@ const Helper_1 = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/
 class Model extends EventEmitter_1.EventEmitter {
     constructor(data, parent) {
         if (!data.name)
-            throw new Error(`${data.class} no name`);
+            throw new Error(`name required for model`);
         super();
         this.data = data;
         this.parent = parent;

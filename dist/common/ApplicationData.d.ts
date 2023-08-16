@@ -2,6 +2,7 @@ import { DatabaseData } from './DatabaseData';
 import { ModelData } from './ModelData';
 import { PageData } from './PageData';
 export interface ApplicationData extends ModelData {
+    class: string;
     caption: string;
     lang: string;
     theme: string;

@@ -43171,7 +43171,7 @@ __webpack_require__.r(__webpack_exports__);
 class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
     constructor(data, parent) {
         if (!data.name)
-            throw new Error(`${data.class} no name`);
+            throw new Error(`name required for model`);
         super();
         this.data = data;
         this.parent = parent;

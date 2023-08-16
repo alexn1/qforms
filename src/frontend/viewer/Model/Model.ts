@@ -8,7 +8,7 @@ export class Model<TModelData extends ModelData = ModelData> extends EventEmitte
     dataSources: DataSource[];
 
     constructor(private data: TModelData, private parent?: Model) {
-        if (!data.name) throw new Error(`${data.class} no name`);
+        if (!data.name) throw new Error(`name required for model`);
         super();
     }
 
@@ -81,7 +81,7 @@ export class Model<TModelData extends ModelData = ModelData> extends EventEmitte
     }
 
     createDataSources() {
-        for (const data of this.data.dataSources) {
+        for (const data of this.data.dataSources!) {
             try {
                 const Class = Helper.getGlobalClass(data.class);
                 if (!Class) throw new Error(`no ${data.class} class`);
@@ -102,7 +102,7 @@ export class Model<TModelData extends ModelData = ModelData> extends EventEmitte
     }
 
     hasActions() {
-        return this.data.actions.length > 0;
+        return this.data.actions!.length > 0;
     }
 
     getParent<TModel extends Model = Model>(): TModel {
