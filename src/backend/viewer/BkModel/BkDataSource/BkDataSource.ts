@@ -12,10 +12,11 @@ import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
 import { Key, KeyRecord, Row, KeyTuple, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
+import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 
 export type ReadResult = [RawRow[], number | null];
 
-export class BkDataSource extends BkModel {
+export class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[] = [];
     rows: Row[] = [];
 

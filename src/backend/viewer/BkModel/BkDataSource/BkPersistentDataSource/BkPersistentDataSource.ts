@@ -2,16 +2,16 @@ import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
-import { ModelScheme } from '../../../../common/Scheme/ModelScheme';
 import { BkModel } from '../../BkModel';
 import { Context } from '../../../../Context';
+import { DataSourceScheme } from '../../../../common/Scheme/DataSourceScheme';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,
 > extends BkDataSource {
     table: BkTable | null = null;
 
-    constructor(data: ModelScheme, parent: BkModel) {
+    constructor(data: DataSourceScheme, parent: BkModel) {
         super(data, parent);
         if (this.getAttr('table')) {
             this.table = this.getDatabase().getTable(this.getAttr('table'));

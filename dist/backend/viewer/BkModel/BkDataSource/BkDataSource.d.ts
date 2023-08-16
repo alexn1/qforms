@@ -5,8 +5,9 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
 import { Key, KeyRecord, Row, RawRow } from '../../../../types';
+import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 export type ReadResult = [RawRow[], number | null];
-export declare class BkDataSource extends BkModel {
+export declare class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[];
     rows: Row[];
     getDirPath(): string;

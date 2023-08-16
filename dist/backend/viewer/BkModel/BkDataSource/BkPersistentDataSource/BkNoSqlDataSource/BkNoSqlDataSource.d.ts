@@ -5,11 +5,11 @@ import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { ReadResult } from '../../BkDataSource';
 import { Row, RawRow } from '../../../../../../types';
-import { ModelScheme } from '../../../../../common/Scheme/ModelScheme';
 import { BkModel } from '../../../BkModel';
+import { DataSourceScheme } from '../../../../../common/Scheme/DataSourceScheme';
 export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
-    constructor(data: ModelScheme, parent: BkModel);
+    constructor(data: DataSourceScheme, parent: BkModel);
     fill(context: Context): Promise<any>;
     read(context: Context): Promise<ReadResult>;
     create(context: Context, _values?: any): Promise<Result>;
