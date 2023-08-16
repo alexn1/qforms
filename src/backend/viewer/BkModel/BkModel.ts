@@ -3,8 +3,8 @@ import { BaseModel } from '../../BaseModel';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 
 export class BkModel<
-    TBkModelData extends ModelScheme = ModelScheme,
-> extends BaseModel<TBkModelData> {
+    TModelScheme extends ModelScheme = ModelScheme,
+> extends BaseModel<TModelScheme> {
     deinited = false;
     fillCollections: string[] = [];
 

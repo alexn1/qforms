@@ -1,6 +1,7 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
-export declare class BkColumn extends BkModel {
+import { ColumnScheme } from '../../../common/Scheme/ColumnScheme';
+export declare class BkColumn extends BkModel<ColumnScheme> {
     fillAttributes(response: any): void;
     isKey(): boolean;
     isAuto(): boolean;

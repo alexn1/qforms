@@ -1,7 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
-export declare class BkModel<TBkModelData extends ModelScheme = ModelScheme> extends BaseModel<TBkModelData> {
+export declare class BkModel<TModelScheme extends ModelScheme = ModelScheme> extends BaseModel<TModelScheme> {
     deinited: boolean;
     fillCollections: string[];
     init(context: Context): Promise<void>;
