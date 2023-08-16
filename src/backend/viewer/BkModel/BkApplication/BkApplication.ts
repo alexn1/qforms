@@ -21,7 +21,7 @@ import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { home } from '../../home';
 import * as text from '../../text';
-import { ApplicationData } from '../../../../common/data';
+import { ApplicationData } from '../../../../common/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';

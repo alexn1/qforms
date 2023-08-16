@@ -11,7 +11,7 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { ApplicationData } from '../../../../common/data';
+import { ApplicationData } from '../../../../common/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {

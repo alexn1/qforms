@@ -5,7 +5,7 @@ import { ApplicationController } from './Controller/ModelController/ApplicationC
 import { FrontHostApp, Helper, FrontHostAppOptions } from '../common';
 import { AlertController } from './Controller/AlertController/AlertController';
 import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
-import { ApplicationData } from '../../common/data';
+import { ApplicationData } from '../../common/ApplicationData';
 
 // style
 import './style/application.less';

@@ -1,6 +1,6 @@
 import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
 import { FrontHostApp, FrontHostAppOptions } from '../common';
-import { ApplicationData } from '../../common/data';
+import { ApplicationData } from '../../common/ApplicationData';
 import './style/application.less';
 import './style/field.less';
 import './style/form.less';
