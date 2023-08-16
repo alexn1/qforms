@@ -22,7 +22,7 @@ export declare class Application extends Model<ApplicationData> {
         id: number;
         login: string;
     };
-    getDomain(): any;
+    getDomain(): string;
     getVirtualPath(): string;
     rpc(name: string, params: Record<string, any>): Promise<any>;
     emitResult(result: Result, source?: any): any;

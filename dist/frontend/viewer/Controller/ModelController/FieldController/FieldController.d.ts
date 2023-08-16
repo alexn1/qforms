@@ -16,6 +16,6 @@ export declare class FieldController<TField extends Field = Field> extends Model
     getApp<TApplicationController extends ApplicationController = ApplicationController>(): TApplicationController;
     isVisible(): boolean;
     isAutoFocus(): boolean;
-    getAutocomplete(): any;
+    getAutocomplete(): string | null;
     getFormat(): string;
 }

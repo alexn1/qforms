@@ -38061,6 +38061,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
             if (value === '')
                 return 'empty string';
         }
+        return null;
     }
     getError() {
         // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
@@ -43183,9 +43184,11 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
         this.deinited = true;
     }
     static getAttr(data, name) {
+        // @ts-ignore
         return data[name];
     }
     static getCol(data, name) {
+        // @ts-ignore
         return data[name];
     }
     static getName(data) {
@@ -43198,9 +43201,11 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
         return this.data.hasOwnProperty(name);
     }
     getAttr(name) {
+        // @ts-ignore
         return this.data[name];
     }
     getCol(name) {
+        // @ts-ignore
         return this.data[name];
     }
     getClassName() {

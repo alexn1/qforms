@@ -7,5 +7,5 @@ export declare class RowFormTimeFieldController extends RowFormFieldController<T
     setValueFromWidget(widgetValue: any): void;
     getDefaultValue(): any;
     setDefaultValue2(defaultValue: any): void;
-    getPlaceholder(): any;
+    getPlaceholder(): string | null;
 }

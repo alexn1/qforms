@@ -27,7 +27,7 @@ export declare class RowFormFieldController<TField extends Field = Field> extend
     isValid(): boolean;
     validate(): void;
     refreshChangedState(): void;
-    getPlaceholder(): any;
+    getPlaceholder(): string | null;
     getError(): string | null;
     getNullErrorText(): string;
     isEditable(): boolean;

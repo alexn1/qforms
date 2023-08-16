@@ -75,6 +75,6 @@ export declare class ApplicationController extends ModelController<Application> 
     rpc(name: string, params?: {
         [name: string]: any;
     }): Promise<any>;
-    getDomain(): any;
+    getDomain(): string;
     getBaseUrl(): string;
 }

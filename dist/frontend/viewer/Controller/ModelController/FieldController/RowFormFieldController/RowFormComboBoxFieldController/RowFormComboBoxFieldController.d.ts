@@ -9,7 +9,7 @@ export declare class RowFormComboBoxFieldController extends RowFormFieldControll
         title: any;
     }[];
     getRows(): import("../../../../../../../types").RawRow[];
-    getPlaceholder(): any;
+    getPlaceholder(): string | null;
     onEditButtonClick: (e: any) => Promise<void>;
     onCreateButtonClick: (e: any) => Promise<void>;
     onListInsert: (e: any) => Promise<void>;

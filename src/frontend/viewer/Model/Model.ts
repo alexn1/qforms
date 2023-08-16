@@ -3,11 +3,11 @@ import { DataSource } from './DataSource/DataSource';
 import { Helper } from '../../common/Helper';
 import { ModelData } from '../../../common/ModelData';
 
-export class Model<T extends ModelData = any> extends EventEmitter {
+export class Model<TModelData extends ModelData = ModelData> extends EventEmitter {
     deinited: boolean = false;
     dataSources: DataSource[];
 
-    constructor(private data: T, private parent?: Model) {
+    constructor(private data: TModelData, private parent?: Model) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
     }
@@ -19,11 +19,13 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         this.deinited = true;
     }
 
-    static getAttr(data: ModelData, name: string) {
+    static getAttr(data: ModelData, name: string): string {
+        // @ts-ignore
         return data[name];
     }
 
     static getCol(data: ModelData, name: string) {
+        // @ts-ignore
         return data[name];
     }
 
@@ -39,11 +41,13 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         return this.data.hasOwnProperty(name);
     }
 
-    getAttr(name: string) {
+    getAttr(name: string): string {
+        // @ts-ignore
         return this.data[name];
     }
 
     getCol(name: string) {
+        // @ts-ignore
         return this.data[name];
     }
 
@@ -106,7 +110,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         return this.parent as TModel;
     }
 
-    getData(): T {
+    getData(): TModelData {
         return this.data;
     }
 }

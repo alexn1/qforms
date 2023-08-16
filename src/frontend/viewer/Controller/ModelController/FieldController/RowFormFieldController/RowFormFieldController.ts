@@ -208,6 +208,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
             if (value === null) return 'null';
             if (value === '') return 'empty string';
         }
+        return null;
     }
 
     getError() {

@@ -50,7 +50,7 @@ export declare class DataSource extends Model<DataSourceData> {
     updateRow(key: Key, newValues: RawRow): void;
     getTable(): import("..").Table;
     getDatabase(): import("..").Database;
-    getType(columnName: string): any;
+    getType(columnName: string): string;
     insert(row?: RawRow): Promise<any>;
     delete(key: Key): Promise<Result | null>;
     update(): Promise<Result | null>;

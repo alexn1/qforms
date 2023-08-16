@@ -16242,6 +16242,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
             if (value === '')
                 return 'empty string';
         }
+        return null;
     }
     getError() {
         // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
@@ -21166,9 +21167,11 @@ class Model extends EventEmitter_1.EventEmitter {
         this.deinited = true;
     }
     static getAttr(data, name) {
+        // @ts-ignore
         return data[name];
     }
     static getCol(data, name) {
+        // @ts-ignore
         return data[name];
     }
     static getName(data) {
@@ -21181,9 +21184,11 @@ class Model extends EventEmitter_1.EventEmitter {
         return this.data.hasOwnProperty(name);
     }
     getAttr(name) {
+        // @ts-ignore
         return this.data[name];
     }
     getCol(name) {
+        // @ts-ignore
         return this.data[name];
     }
     getClassName() {
