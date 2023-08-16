@@ -1,6 +1,8 @@
-import { ModelData } from './data';
+import { ModelData } from './ModelData';
 
 export interface ApplicationData extends ModelData {
+    caption: string;
+
     lang: string;
     theme: string;
     cssBlock: string;
@@ -28,9 +30,10 @@ export interface ApplicationData extends ModelData {
     menu: any;
     nav: any;
 
-    databases: any[];
-    pages: any[];
     params: {
         [name: string]: any;
     };
+
+    databases: any[];
+    pages: any[];
 }

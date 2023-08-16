@@ -6,6 +6,7 @@ import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
 import { Key, KeyRecord, Row, RawRow } from '../../../../types';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
+import { DataSourceData } from '../../../../common/DataSourceData';
 export type ReadResult = [RawRow[], number | null];
 export declare class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[];
@@ -29,7 +30,7 @@ export declare class BkDataSource extends BkModel<DataSourceScheme> {
     static keyToParams(key: Key, paramName?: string): KeyRecord;
     calcNewKeyValues(originalKeyValues: KeyRecord, values: any): KeyRecord;
     calcNewKey(key: Key, values: any): Key;
-    fillAttributes(response: any): void;
+    fillAttributes(response: DataSourceData): void;
     fill(context: Context): Promise<{
         rows: RawRow[];
         count: number | null;

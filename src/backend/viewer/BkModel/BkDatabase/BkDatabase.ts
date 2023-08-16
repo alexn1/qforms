@@ -5,6 +5,7 @@ import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 import { DatabaseScheme } from '../../../common/Scheme/DatabaseScheme';
+import { DatabaseData } from '../../../../common/DatabaseData';
 
 export interface DbConfig {
     host: string;
@@ -19,17 +20,12 @@ export class BkDatabase<TConnection = any> extends BkModel<DatabaseScheme> {
     params: BkParam[] = [];
     fillCollections = ['tables'];
 
-    /* constructor(data, parent?) {
-        //debug('Database.constructor');
-        super(data, parent);
-    } */
-
     async init(context: Context): Promise<void> {
         await this.createColItems('tables', context);
         await this.createColItems('params', context);
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: DatabaseData): void {
         response.name = this.getAttr('name');
     }
 

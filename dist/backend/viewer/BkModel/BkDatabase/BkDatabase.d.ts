@@ -5,6 +5,7 @@ import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 import { DatabaseScheme } from '../../../common/Scheme/DatabaseScheme';
+import { DatabaseData } from '../../../../common/DatabaseData';
 export interface DbConfig {
     host: string;
     database: string;
@@ -17,7 +18,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel<DatabaseSchem
     params: BkParam[];
     fillCollections: string[];
     init(context: Context): Promise<void>;
-    fillAttributes(response: any): void;
+    fillAttributes(response: DatabaseData): void;
     connect(context: Context): Promise<void>;
     isConnected(context: Context): boolean;
     getConnection(context: Context): TConnection;

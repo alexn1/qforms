@@ -13,6 +13,7 @@ import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
 import { Key, KeyRecord, Row, KeyTuple, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
+import { DataSourceData } from '../../../../common/DataSourceData';
 
 export type ReadResult = [RawRow[], number | null];
 
@@ -235,7 +236,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
         return this.getKeyFromValues(newKeyValues);
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: DataSourceData): void {
         response.class = this.getClassName();
         response.name = this.getAttr('name');
         if (this.isAttr('database')) {

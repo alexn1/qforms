@@ -1,9 +1,10 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { ColumnScheme } from '../../../common/Scheme/ColumnScheme';
+import { ColumnData } from '../../../../common/ColumnData';
 
 export class BkColumn extends BkModel<ColumnScheme> {
-    fillAttributes(response: any): void {
+    fillAttributes(response: ColumnData): void {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
         response.type = this.getAttr('type');

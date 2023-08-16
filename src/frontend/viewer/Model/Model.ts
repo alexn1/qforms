@@ -1,7 +1,7 @@
 import { EventEmitter } from '../EventEmitter';
 import { DataSource } from './DataSource/DataSource';
 import { Helper } from '../../common/Helper';
-import { ModelData } from '../../../common/data';
+import { ModelData } from '../../../common/ModelData';
 
 export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;

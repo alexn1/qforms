@@ -7285,10 +7285,6 @@ class BkDatabase extends BkModel_1.BkModel {
         this.params = [];
         this.fillCollections = ['tables'];
     }
-    /* constructor(data, parent?) {
-        //debug('Database.constructor');
-        super(data, parent);
-    } */
     async init(context) {
         await this.createColItems('tables', context);
         await this.createColItems('params', context);
@@ -9193,7 +9189,7 @@ class BkPage extends BkModel_1.BkModel {
     }
     async fill(context) {
         // debug('Page.fill', this.constructor.name, this.getFullName());
-        const response = await super.fill(context);
+        const response = (await super.fill(context));
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);

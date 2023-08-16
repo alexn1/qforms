@@ -9,6 +9,7 @@ import { Context } from '../../../Context';
 import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
+import { PageData } from '../../../../common/PageData';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -27,7 +28,7 @@ export class BkPage<
         return path.join(this.getParent<BkApplication>().getDirPath(), 'pages', this.getName());
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: PageData): void {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
         response.cssBlock = this.getAttr('cssBlock');
@@ -38,9 +39,9 @@ export class BkPage<
         }
     }
 
-    async fill(context: Context): Promise<any> {
+    async fill(context: Context): Promise<PageData> {
         // debug('Page.fill', this.constructor.name, this.getFullName());
-        const response = await super.fill(context);
+        const response = (await super.fill(context)) as PageData;
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
