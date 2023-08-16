@@ -4,7 +4,8 @@ import { Field } from '../../Model/Field/Field';
 import { Key, RawRow, Row } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-export declare class Form extends Model {
+import { FormData } from '../../../../common/FormData';
+export declare class Form extends Model<FormData> {
     dataSources: DataSource[];
     fields: Field[];
     init(): void;

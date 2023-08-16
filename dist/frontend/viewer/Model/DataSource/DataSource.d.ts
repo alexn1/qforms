@@ -4,7 +4,8 @@ import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Key, KeyRecord, RawRow, JSONString, ChangesByKey } from '../../../../types';
 import { Result } from '../../../../Result';
-export declare class DataSource extends Model {
+import { DataSourceData } from '../../../../common/DataSourceData';
+export declare class DataSource extends Model<DataSourceData> {
     rows: RawRow[] | null;
     rowsByKey: {
         [key: Key]: RawRow;

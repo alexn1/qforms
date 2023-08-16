@@ -1,7 +1,8 @@
 import { Model } from '../Model';
 import { Helper } from '../../../common/Helper';
+import { ColumnData } from '../../../../common/ColumnData';
 
-export class Column extends Model {
+export class Column extends Model<ColumnData> {
     constructor(data, parent) {
         super(data, parent);
         if (!this.getAttr('type')) throw new Error(`column ${this.getFullName()}: no type`);

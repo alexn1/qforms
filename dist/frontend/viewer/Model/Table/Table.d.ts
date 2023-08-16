@@ -1,7 +1,8 @@
 import { Model } from '../Model';
 import { Column } from '../Column/Column';
 import { TableResult, InsertResult, UpdateResult, DeleteResult } from '../../../../Result';
-export declare class Table extends Model {
+import { TableData } from '../../../../common/TableData';
+export declare class Table extends Model<TableData> {
     columns: Column[];
     init(): void;
     addColumn(column: Column): void;

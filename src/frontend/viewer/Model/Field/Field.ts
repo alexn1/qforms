@@ -6,12 +6,9 @@ import { DataSource } from '../DataSource/DataSource';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
+import { FieldData } from '../../../../common/FieldData';
 
-export class Field extends Model {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    // }
-
+export class Field extends Model<FieldData> {
     init() {}
 
     replaceThis(value) {

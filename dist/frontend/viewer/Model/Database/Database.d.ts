@@ -1,7 +1,8 @@
 import { Model } from '../Model';
 import { Table } from '../Table/Table';
 import { DatabaseResult } from '../../../../Result';
-export declare class Database extends Model {
+import { DatabaseData } from '../../../../common/DatabaseData';
+export declare class Database extends Model<DatabaseData> {
     tables: Table[];
     init(): void;
     addTable(table: Table): void;

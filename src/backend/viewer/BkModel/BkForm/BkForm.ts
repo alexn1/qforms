@@ -11,6 +11,7 @@ import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
+import { FormData } from '../../../../common/FormData';
 
 export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[] = [];
@@ -32,7 +33,7 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
         return path.join(this.getParent<BkPage>().getDirPath(), 'forms', this.getName());
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: FormData): void {
         response.class = this.getClassName();
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');

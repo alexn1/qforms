@@ -4,6 +4,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 import { TableScheme } from '../../../common/Scheme/TableScheme';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
+import { TableData } from '../../../../common/TableData';
 
 export class BkTable extends BkModel<TableScheme> {
     columns: BkColumn[] = [];
@@ -38,7 +39,7 @@ export class BkTable extends BkModel<TableScheme> {
         return column;
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: TableData): void {
         response.name = this.getAttr('name');
     }
 }

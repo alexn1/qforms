@@ -16,8 +16,9 @@ import {
 import { Result } from '../../../../Result';
 import { Field } from '../Field/Field';
 import { debug } from '../../../../console';
+import { DataSourceData } from '../../../../common/DataSourceData';
 
-export class DataSource extends Model {
+export class DataSource extends Model<DataSourceData> {
     rows: RawRow[] | null = null;
     rowsByKey: { [key: Key]: RawRow } | null = null;
     news: RawRow[] = [];

@@ -1,4 +1,5 @@
 import { ModelData } from './ModelData';
+import { FormData } from './FormData';
 export interface PageData extends ModelData {
     caption: string;
     cssBlock: string;
@@ -6,5 +7,5 @@ export interface PageData extends ModelData {
     ctrlClass: string;
     newMode: boolean;
     formInTab: string;
-    forms: any[];
+    forms: FormData[];
 }

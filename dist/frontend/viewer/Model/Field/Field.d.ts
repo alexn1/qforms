@@ -4,7 +4,8 @@ import { DataSource } from '../DataSource/DataSource';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-export declare class Field extends Model {
+import { FieldData } from '../../../../common/FieldData';
+export declare class Field extends Model<FieldData> {
     init(): void;
     replaceThis(value: any): any;
     fillDefaultValue(row: RawRow): void;

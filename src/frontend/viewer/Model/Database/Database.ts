@@ -2,14 +2,15 @@ import { Model } from '../Model';
 import { Table } from '../Table/Table';
 import { Helper } from '../../../common/Helper';
 import { DatabaseResult } from '../../../../Result';
+import { DatabaseData } from '../../../../common/DatabaseData';
 
-export class Database extends Model {
+export class Database extends Model<DatabaseData> {
     tables: Table[] = [];
 
     init() {
         // console.debug('Database.init', this.getName());
-        for (const data of this.getData().tables) {
-            const table = new Table(data, this);
+        for (const tableData of this.getData().tables) {
+            const table = new Table(tableData, this);
             table.init();
             this.addTable(table);
         }

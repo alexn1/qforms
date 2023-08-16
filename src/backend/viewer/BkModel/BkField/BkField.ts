@@ -10,9 +10,10 @@ import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/B
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
 import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
+import { FieldData } from '../../../../common/FieldData';
 
 export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
-    fillAttributes(response: any): void {
+    fillAttributes(response: FieldData): void {
         response.class = this.getClassName();
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
@@ -33,7 +34,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
         return path.join(this.getParent<BkForm>().getDirPath(), 'fields', this.getName());
     }
 
-    fillDefaultValue(context: Context, row) {
+    fillDefaultValue(context: Context, row: RawRow) {
         const column = this.getAttr('column');
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));

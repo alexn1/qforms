@@ -42229,8 +42229,8 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     init() {
         // console.debug('Database.init', this.getName());
-        for (const data of this.getData().tables) {
-            const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(data, this);
+        for (const tableData of this.getData().tables) {
+            const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(tableData, this);
             table.init();
             this.addTable(table);
         }
@@ -42523,9 +42523,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    // }
     init() { }
     replaceThis(value) {
         return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {

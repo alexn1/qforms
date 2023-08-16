@@ -6,10 +6,11 @@ import { BkColumn } from '../BkColumn/BkColumn';
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
 import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
+import { FieldData } from '../../../../common/FieldData';
 export declare class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
-    fillAttributes(response: any): void;
+    fillAttributes(response: FieldData): void;
     getDirPath(): string;
-    fillDefaultValue(context: Context, row: any): void;
+    fillDefaultValue(context: Context, row: RawRow): void;
     dumpRowValueToParams(row: RawRow, params: Record<string, any>): void;
     getFullName(): string;
     getApp(): BkApplication;

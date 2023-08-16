@@ -20230,8 +20230,8 @@ class Database extends Model_1.Model {
     }
     init() {
         // console.debug('Database.init', this.getName());
-        for (const data of this.getData().tables) {
-            const table = new Table_1.Table(data, this);
+        for (const tableData of this.getData().tables) {
+            const table = new Table_1.Table(tableData, this);
             table.init();
             this.addTable(table);
         }
@@ -20517,9 +20517,6 @@ const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model
 const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 const RowForm_1 = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
 class Field extends Model_1.Model {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    // }
     init() { }
     replaceThis(value) {
         return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {

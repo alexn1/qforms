@@ -7,6 +7,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 import { RawRow } from '../../../../types';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
+import { FormData } from '../../../../common/FormData';
 export declare class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -14,7 +15,7 @@ export declare class BkForm<TFormScheme extends FormScheme = FormScheme> extends
     constructor(data: TFormScheme, parent: BkPage);
     init(context: Context): Promise<void>;
     getDirPath(): string;
-    fillAttributes(response: any): void;
+    fillAttributes(response: FormData): void;
     fill(context: Context): Promise<any>;
     _getSurrogateDataSourceResponse(context: Context): {
         class: string;

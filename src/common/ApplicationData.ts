@@ -1,4 +1,6 @@
+import { DatabaseData } from './DatabaseData';
 import { ModelData } from './ModelData';
+import { PageData } from './PageData';
 
 export interface ApplicationData extends ModelData {
     caption: string;
@@ -34,6 +36,6 @@ export interface ApplicationData extends ModelData {
         [name: string]: any;
     };
 
-    databases: any[];
-    pages: any[];
+    databases: DatabaseData[];
+    pages: PageData[];
 }
