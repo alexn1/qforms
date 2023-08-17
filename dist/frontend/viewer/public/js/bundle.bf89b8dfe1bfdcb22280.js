@@ -31972,6 +31972,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+
 
 
 class FrontHostApp {
@@ -31979,7 +31981,7 @@ class FrontHostApp {
         this.options = options;
         this.alertCtrl = null;
         this.documentTitle = ''; // for run on back
-        // console.debug('FrontHostApp.constructor');
+        // debug('FrontHostApp.constructor');
     }
     init() {
         window.addEventListener('error', this.onWindowError.bind(this));
@@ -31990,7 +31992,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        console.debug('FrontHostApp.onWindowUnhandledrejection' /* , e */);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowUnhandledrejection' /* , e */);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -32002,7 +32004,7 @@ class FrontHostApp {
         }
     }
     async onWindowError(e) {
-        console.debug('FrontHostApp.onWindowError', e);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowError', e);
         try {
             e.preventDefault();
             const err = e.error;
@@ -32052,7 +32054,7 @@ class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // console.debug('headers:', headers);
+                // debug('headers:', headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -32069,14 +32071,14 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     async onWindowPopState(e) {
-        console.debug('FrontHostApp.onWindowPopState', e.state);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowPopState', e.state);
     }
     async alert(options) {
-        console.debug('FrontHostApp.alert', options);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.alert', options);
         alert(options.message);
     }
     async confirm(options) {
-        console.debug('FrontHostApp.confirm', options);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.confirm', options);
         return confirm(options.message);
     }
     setDocumentTitle(title) {
@@ -32169,6 +32171,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+
 
 
 class Helper {
@@ -32238,7 +32242,7 @@ class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.debug('raw:', raw);
+        //     // debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -32251,7 +32255,7 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // console.debug('Helper.createReactComponent', rootElement, type);
+        // debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -32262,7 +32266,7 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // console.debug('Helper.createReactComponent2', rootElement, type);
+        // debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -32342,7 +32346,7 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // console.debug('Helper.formatTime', sec);
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32369,7 +32373,7 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // console.debug('Helper.formatTime', sec);
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32411,7 +32415,7 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // console.debug('Helper.fallbackCopyTextToClipboard', text);
+        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -32427,7 +32431,7 @@ class Helper {
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
-        console.debug('Helper.copyTextToClipboard', text);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -32488,20 +32492,23 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // console.debug('Helper.registerGlobalClass', Class.name);
+        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         }
         else {
+            // @ts-ignore
             if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
+            // @ts-ignore
             global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
-        // console.debug('Helper.getGlobalClass', className);
+        // debug('Helper.getGlobalClass', className);
+        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {

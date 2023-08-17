@@ -550,7 +550,7 @@ export class DataSource extends Model<DataSourceData> {
 
     moveRow(row: RawRow, offset: number) {
         console.debug('DataSource.moveRow');
-        Helper.moveArrItem(this.rows, row, offset);
+        Helper.moveArrItem(this.rows!, row, offset);
 
         // refresh event
         const event = { source: this };

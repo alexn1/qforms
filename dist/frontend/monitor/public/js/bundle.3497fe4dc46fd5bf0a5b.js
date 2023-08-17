@@ -31183,6 +31183,63 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/console.ts":
+/*!************************!*\
+  !*** ./src/console.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LOG_LEVELS": () => (/* binding */ LOG_LEVELS),
+/* harmony export */   "debug": () => (/* binding */ debug),
+/* harmony export */   "error": () => (/* binding */ error),
+/* harmony export */   "getLogLevel": () => (/* binding */ getLogLevel),
+/* harmony export */   "getLogLevelName": () => (/* binding */ getLogLevelName),
+/* harmony export */   "log": () => (/* binding */ log),
+/* harmony export */   "warn": () => (/* binding */ warn)
+/* harmony export */ });
+const LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
+function getLogLevel() {
+    return LOG_LEVELS.indexOf(getLogLevelName());
+}
+function getLogLevelName() {
+    if (typeof window === 'object') {
+        // @ts-ignore
+        return window.QFORMS_LOG_LEVEL || 'debug';
+    }
+    else if (typeof global === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            ( true ? 'debug' : 0));
+    }
+    return 'debug';
+}
+function debug(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.debug(message, ...optionalParams);
+    }
+}
+function log(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.log(message, ...optionalParams);
+    }
+}
+function warn(message, ...optionalParams) {
+    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
+        // process.stdout.write(`${messages.join(' ')}\n`);
+        console.warn(message, ...optionalParams);
+    }
+}
+function error(message, ...optionalParams) {
+    // process.stderr.write(`${messages.join(' ')}\n`);
+    console.error(message, ...optionalParams);
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/Helper.ts":
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
@@ -31195,6 +31252,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+
 
 
 class Helper {
@@ -31264,7 +31323,7 @@ class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.debug('raw:', raw);
+        //     // debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -31277,7 +31336,7 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // console.debug('Helper.createReactComponent', rootElement, type);
+        // debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -31288,7 +31347,7 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // console.debug('Helper.createReactComponent2', rootElement, type);
+        // debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -31368,7 +31427,7 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // console.debug('Helper.formatTime', sec);
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -31395,7 +31454,7 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // console.debug('Helper.formatTime', sec);
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -31437,7 +31496,7 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // console.debug('Helper.fallbackCopyTextToClipboard', text);
+        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -31453,7 +31512,7 @@ class Helper {
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
-        console.debug('Helper.copyTextToClipboard', text);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -31514,20 +31573,23 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // console.debug('Helper.registerGlobalClass', Class.name);
+        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         }
         else {
+            // @ts-ignore
             if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
+            // @ts-ignore
             global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
-        // console.debug('Helper.getGlobalClass', className);
+        // debug('Helper.getGlobalClass', className);
+        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {

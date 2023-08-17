@@ -1,6 +1,7 @@
 import { RawRow, ChangesByKey } from '../../types';
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
+import { debug } from '../../console';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -40,7 +41,7 @@ export class FrontHostApp {
     documentTitle = ''; // for run on back
 
     constructor(protected options?: FrontHostAppOptions) {
-        // console.debug('FrontHostApp.constructor');
+        // debug('FrontHostApp.constructor');
     }
 
     init() {
@@ -54,7 +55,7 @@ export class FrontHostApp {
     }
 
     async onWindowUnhandledrejection(e) {
-        console.debug('FrontHostApp.onWindowUnhandledrejection' /* , e */);
+        debug('FrontHostApp.onWindowUnhandledrejection' /* , e */);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -66,7 +67,7 @@ export class FrontHostApp {
     }
 
     async onWindowError(e) {
-        console.debug('FrontHostApp.onWindowError', e);
+        debug('FrontHostApp.onWindowError', e);
         try {
             e.preventDefault();
             const err = e.error;
@@ -122,7 +123,7 @@ export class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {} as Record<string, string>);
-                // console.debug('headers:', headers);
+                // debug('headers:', headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -141,11 +142,11 @@ export class FrontHostApp {
     }
 
     async onWindowPopState(e) {
-        console.debug('FrontHostApp.onWindowPopState', e.state);
+        debug('FrontHostApp.onWindowPopState', e.state);
     }
 
     async alert(options: { message: string; title?: string }): Promise<void> {
-        console.debug('FrontHostApp.alert', options);
+        debug('FrontHostApp.alert', options);
         alert(options.message);
     }
 
@@ -155,7 +156,7 @@ export class FrontHostApp {
         yesButton?: string;
         noButton?: string;
     }): Promise<boolean> {
-        console.debug('FrontHostApp.confirm', options);
+        debug('FrontHostApp.confirm', options);
         return confirm(options.message);
     }
 

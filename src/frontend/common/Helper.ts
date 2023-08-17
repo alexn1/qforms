@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { JSONString, Scalar } from '../../types';
 import { ReactComponent } from './ReactComponent';
+import { debug } from '../../console';
 
 export class Helper {
     /* static currentDate() {
@@ -24,7 +25,7 @@ export class Helper {
         return [hh, mm, ss].join(':');
     } */
 
-    static formatDate(date, format) {
+    static formatDate(date: Date, format: string) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
         const D = date.getDate();
@@ -81,7 +82,7 @@ export class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.debug('raw:', raw);
+        //     // debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -103,7 +104,7 @@ export class Helper {
         props = {},
         children?,
     ): ReactComponent | undefined {
-        // console.debug('Helper.createReactComponent', rootElement, type);
+        // debug('Helper.createReactComponent', rootElement, type);
         let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
@@ -127,7 +128,7 @@ export class Helper {
         props = {},
         children?,
     ): ReactComponent | undefined {
-        // console.debug('Helper.createReactComponent2', rootElement, type);
+        // debug('Helper.createReactComponent2', rootElement, type);
         let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
@@ -202,7 +203,7 @@ export class Helper {
         return bytes.buffer;
     } */
 
-    static templateToJsString(value, params) {
+    static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
@@ -211,7 +212,7 @@ export class Helper {
         });
     }
 
-    static moveArrItem(arr, item, offset) {
+    static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
         const newIndex = oldIndex + offset;
@@ -220,8 +221,8 @@ export class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
 
-    static formatTime(_sec) {
-        // console.debug('Helper.formatTime', sec);
+    static formatTime(_sec: number) {
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -244,8 +245,8 @@ export class Helper {
         }
     }
 
-    static formatTime2(_sec) {
-        // console.debug('Helper.formatTime', sec);
+    static formatTime2(_sec: number) {
+        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -288,8 +289,8 @@ export class Helper {
         return 7 * Helper.DAY();
     }
 
-    static fallbackCopyTextToClipboard(text) {
-        // console.debug('Helper.fallbackCopyTextToClipboard', text);
+    static fallbackCopyTextToClipboard(text: string) {
+        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -305,8 +306,8 @@ export class Helper {
         activeElement.focus();
     }
 
-    static async copyTextToClipboard(text) {
-        console.debug('Helper.copyTextToClipboard', text);
+    static async copyTextToClipboard(text: string) {
+        debug('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -314,7 +315,7 @@ export class Helper {
         await navigator.clipboard.writeText(text);
     }
 
-    static addMinutes(date, minutes) {
+    static addMinutes(date: Date, minutes: number) {
         // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
@@ -323,7 +324,7 @@ export class Helper {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
 
-    static addTimezoneOffset(date) {
+    static addTimezoneOffset(date: Date) {
         Helper.addMinutes(date, date.getTimezoneOffset());
     }
 
@@ -377,22 +378,25 @@ export class Helper {
     }
 
     static registerGlobalClass(Class) {
-        // console.debug('Helper.registerGlobalClass', Class.name);
+        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name]) throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         } else {
+            // @ts-ignore
             if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
+            // @ts-ignore
             global[Class.name] = Class;
         }
     }
 
     static getGlobalClass(className: string): any {
-        // console.debug('Helper.getGlobalClass', className);
+        // debug('Helper.getGlobalClass', className);
+        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
 
-    static addClassToDocumentElement(className) {
+    static addClassToDocumentElement(className: string) {
         if (typeof document === 'object') {
             document.documentElement.classList.add(className);
         }

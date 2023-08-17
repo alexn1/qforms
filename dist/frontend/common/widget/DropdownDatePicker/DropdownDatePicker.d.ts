@@ -10,7 +10,7 @@ export declare class DropdownDatePicker extends ReactComponent {
     onDatePickerMouseDown: (e: any) => void;
     onDatePickerDateSelected: (date: any) => void;
     getFormat(): any;
-    getStringValue(): any;
+    getStringValue(): string;
     getSelectedMonth(): any[] | null;
     getSelectedDate(): any[] | null;
     getValue(): any;
