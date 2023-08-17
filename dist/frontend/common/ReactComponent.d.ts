@@ -1,4 +1,5 @@
 import { Component, RefObject } from 'react';
+import { Controller } from '../viewer/Controller/Controller';
 export interface ReactComponentProps {
     name: string;
     parent: any;
@@ -7,6 +8,7 @@ export interface ReactComponentProps {
     disabled: boolean;
     onCreate: any;
     onUnmount: any;
+    ctrl: Controller;
 }
 export interface ReactComponentState {
     classList: string[];

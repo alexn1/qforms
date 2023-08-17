@@ -36259,6 +36259,8 @@ class Controller extends _EventEmitter__WEBPACK_IMPORTED_MODULE_1__.EventEmitter
         console.error(`${this.constructor.name}.rerender no view`);
     }
     getView() {
+        if (!this.view)
+            throw new Error('no view');
         return this.view;
     }
     getViewClass() {

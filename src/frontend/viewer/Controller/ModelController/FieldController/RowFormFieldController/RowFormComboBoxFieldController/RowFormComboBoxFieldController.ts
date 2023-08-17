@@ -125,11 +125,13 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
                         const [id] = keyToKeyTuple(key);
                         // console.debug('id:', id);
                         if (this.getValue() !== id) {
-                            await this.getView().onChange(id.toString());
+                            await (this.getView() as RowFormComboBoxFieldView).onChange(
+                                id.toString(),
+                            );
                         }
                     } else {
                         if (this.getValue() !== null) {
-                            await this.getView().onChange('');
+                            await (this.getView() as RowFormComboBoxFieldView).onChange('');
                         }
                     }
                 },

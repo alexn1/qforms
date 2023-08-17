@@ -6,6 +6,7 @@ import { FormController } from '../../FormController/FormController';
 import { RowFormController } from '../../FormController/RowFormController/RowFormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
+import { RowFormFieldView } from './RowFormFieldView';
 
 export class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     state: { value: any; parseError: string | null; error: string | null; changed: boolean } = {
@@ -215,9 +216,9 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
 
         // parse validator
-        if (this.view && this.view.getWidget()) {
+        if (this.view && (this.view as RowFormFieldView).getWidget()) {
             try {
-                const widgetValue = this.view.getWidget().getValue();
+                const widgetValue = (this.view as RowFormFieldView).getWidget().getValue();
             } catch (err) {
                 return `can't parse value: ${err.message}`;
             }

@@ -1,14 +1,15 @@
 import React from 'react';
 import { EventEmitter } from '../EventEmitter';
+import { View } from './View';
 
 export abstract class Controller extends EventEmitter {
-    view: any = null;
+    view: View | null = null;
 
     /* constructor() {
         super();
     } */
 
-    onViewCreate = (view) => {
+    onViewCreate = (view: View) => {
         // console.debug('Controller.onViewCreate');
         this.view = view;
     };
@@ -21,6 +22,7 @@ export abstract class Controller extends EventEmitter {
     }
 
     getView() {
+        if (!this.view) throw new Error('no view')
         return this.view;
     }
 

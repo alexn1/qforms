@@ -27,6 +27,7 @@ import { NextFunction } from 'express';
 import { debug } from '../../../../console';
 import { ActionData } from '../../../../common/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
+import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 
 const pkg = require('../../../../../package.json');
 
@@ -160,9 +161,9 @@ export class BkApplication<
         response.uuid = uuidv4();
 
         // actions
-        response.actions = this.getCol('actions').map((data) => ({
-            name: BaseModel.getName(data),
-            caption: BaseModel.getAttr(data, 'caption'),
+        response.actions = this.getCol('actions').map((action: ActionScheme) => ({
+            name: BaseModel.getName(action),
+            caption: BaseModel.getAttr(action, 'caption'),
         }));
 
         // pages
@@ -275,8 +276,8 @@ export class BkApplication<
 
     getStartupPageLinkNames(): string[] {
         return this.getCol('pageLinks')
-            .filter((data) => BaseModel.getAttr(data, 'startup') === 'true')
-            .map((data) => BaseModel.getName(data));
+            .filter((data: PageLinkScheme) => BaseModel.getAttr(data, 'startup') === 'true')
+            .map((data: PageLinkScheme) => BaseModel.getName(data));
     }
 
     async fillPages(context: Context): Promise<any[]> {
@@ -317,6 +318,7 @@ export class BkApplication<
 
     async rpc(name: string, context: Context) {
         debug('BkApplication.rpc', name, context.getBody());
+        // @ts-ignore
         if (this[name]) return await this[name](context);
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,

@@ -14479,6 +14479,8 @@ class Controller extends EventEmitter_1.EventEmitter {
         console.error(`${this.constructor.name}.rerender no view`);
     }
     getView() {
+        if (!this.view)
+            throw new Error('no view');
         return this.view;
     }
     getViewClass() {

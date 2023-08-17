@@ -1,10 +1,11 @@
 import React from 'react';
 import { EventEmitter } from '../EventEmitter';
+import { View } from './View';
 export declare abstract class Controller extends EventEmitter {
-    view: any;
-    onViewCreate: (view: any) => void;
-    rerender(): Promise<any>;
-    getView(): any;
+    view: View | null;
+    onViewCreate: (view: View) => void;
+    rerender(): Promise<void>;
+    getView(): View<Controller>;
     getViewClass(): void;
     createElement(): React.DetailedReactHTMLElement<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 }
