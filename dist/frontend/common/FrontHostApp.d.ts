@@ -1,4 +1,4 @@
-import { RawRow, ChangesByKey } from '../../types';
+import { RawRow, ChangesByKey, Nullable } from '../../types';
 export interface FrontHostAppOptions {
     debug: boolean;
     url: URL;
@@ -20,8 +20,8 @@ export interface Location {
 export type RequestMethod = 'GET' | 'POST' | 'PATCH';
 export interface RequestBody {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'logout';
-    page?: string | null;
-    form?: string | null;
+    page?: Nullable<string>;
+    form?: Nullable<string>;
     ds?: string;
     name?: string;
     uuid?: string;

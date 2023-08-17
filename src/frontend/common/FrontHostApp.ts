@@ -1,4 +1,4 @@
-import { RawRow, ChangesByKey } from '../../types';
+import { RawRow, ChangesByKey, Nullable } from '../../types';
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
@@ -25,8 +25,8 @@ export type RequestMethod = 'GET' | 'POST' | 'PATCH';
 
 export interface RequestBody {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'logout';
-    page?: string | null;
-    form?: string | null;
+    page?: Nullable<string>;
+    form?: Nullable<string>;
     ds?: string;
     name?: string;
     uuid?: string;
