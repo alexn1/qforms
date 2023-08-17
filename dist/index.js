@@ -6091,10 +6091,10 @@ class BkApplication extends BkModel_1.BkModel {
         // actions
         const actions = this.getCol('actions');
         if (actions.length) {
-            menu['Actions'] = actions.map((actionData) => ({
+            menu['Actions'] = actions.map((action) => ({
                 type: 'action',
-                action: BaseModel_1.BaseModel.getName(actionData),
-                caption: BaseModel_1.BaseModel.getAttr(actionData, 'caption'),
+                action: BaseModel_1.BaseModel.getName(action),
+                caption: BaseModel_1.BaseModel.getAttr(action, 'caption'),
             }));
         }
         this.menu = menu;

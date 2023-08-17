@@ -7,6 +7,8 @@ import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
+import { PageData } from '../../../../../common/PageData';
+import { ModalController } from '../../ModalController/ModalController';
 
 export interface OpenPageOptions {
     name: string;
@@ -23,7 +25,7 @@ export interface OpenPageOptions {
 export class ApplicationController extends ModelController<Application> {
     lastId: number = 0;
     activePage: PageController | null = null; // active non modal page
-    modals: any[] = [];
+    modals: (PageController | ModalController)[] = [];
     statusbar: any = null;
     homePageName: string | null = null;
     webSocketClient: any = null;
@@ -91,7 +93,11 @@ export class ApplicationController extends ModelController<Application> {
         }
     }
 
-    onRequest = async (e) => {
+    onRequest = async (e: {
+        time: number;
+        remotePlatformVersion: string;
+        remoteAppVersion: string;
+    }) => {
         console.debug('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
@@ -124,7 +130,7 @@ export class ApplicationController extends ModelController<Application> {
         };
     }
 
-    createPage(pageData, options: PageOptions): PageController {
+    createPage(pageData: PageData, options: PageOptions): PageController {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         // model
@@ -179,11 +185,11 @@ export class ApplicationController extends ModelController<Application> {
         return pc;
     }
 
-    addModal(ctrl): void {
+    addModal(ctrl: PageController | ModalController): void {
         this.modals.push(ctrl);
     }
 
-    removeModal(ctrl): void {
+    removeModal(ctrl: PageController | ModalController): void {
         // console.debug('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
@@ -345,7 +351,7 @@ export class ApplicationController extends ModelController<Application> {
         if (this.activePage) this.activePage.invalidate();
         this.modals
             .filter((ctrl) => ctrl instanceof PageController)
-            .forEach((page) => page.invalidate());
+            .forEach((page) => (page as PageController).invalidate());
     }
 
     async alert(options: { message: string; title?: string }) {

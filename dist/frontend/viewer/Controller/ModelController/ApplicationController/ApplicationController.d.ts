@@ -5,6 +5,8 @@ import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
+import { PageData } from '../../../../../common/PageData';
+import { ModalController } from '../../ModalController/ModalController';
 export interface OpenPageOptions {
     name: string;
     newMode?: boolean;
@@ -20,7 +22,7 @@ export declare class ApplicationController extends ModelController<Application> 
     private frontHostApp;
     lastId: number;
     activePage: PageController | null;
-    modals: any[];
+    modals: (PageController | ModalController)[];
     statusbar: any;
     homePageName: string | null;
     webSocketClient: any;
@@ -31,13 +33,17 @@ export declare class ApplicationController extends ModelController<Application> 
     deinit(): void;
     getViewClass(): any;
     createView(rootElement: Element): void;
-    onRequest: (e: any) => Promise<void>;
+    onRequest: (e: {
+        time: number;
+        remotePlatformVersion: string;
+        remoteAppVersion: string;
+    }) => Promise<void>;
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};
-    createPage(pageData: any, options: PageOptions): PageController;
+    createPage(pageData: PageData, options: PageOptions): PageController;
     openPage(options: OpenPageOptions): Promise<PageController>;
-    addModal(ctrl: any): void;
-    removeModal(ctrl: any): void;
+    addModal(ctrl: PageController | ModalController): void;
+    removeModal(ctrl: PageController | ModalController): void;
     getNextId(): number;
     getNewId(): string;
     addPage(pc: PageController): void;
@@ -48,7 +54,11 @@ export declare class ApplicationController extends ModelController<Application> 
     getMenuItemsProp(): {
         name: string;
         title: string;
-        items: any;
+        items: {
+            type: string;
+            name: string | undefined;
+            title: string;
+        }[];
     }[];
     onStatusbarCreate: (statusbar: any) => void;
     onLogout: () => Promise<void>;
