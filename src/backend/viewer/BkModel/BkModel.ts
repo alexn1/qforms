@@ -24,7 +24,7 @@ export class BkModel<
 
     async fill(context: Context): Promise<any> {
         // debug('Model.fill', this.constructor.name, this.getName());
-        const response = {};
+        const response: ModelData = { name: '' };
 
         // attributes
         this.fillAttributes(response);
@@ -37,7 +37,7 @@ export class BkModel<
         return response;
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: ModelData): void {
         throw new Error(`${this.constructor.name}.fillAttributes not implemented`);
         /*response.class = this.getClassName();
         for (const name in this.attributes()) {

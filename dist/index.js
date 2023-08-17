@@ -9067,7 +9067,7 @@ class BkModel extends BaseModel_1.BaseModel {
     }
     async fill(context) {
         // debug('Model.fill', this.constructor.name, this.getName());
-        const response = {};
+        const response = { name: '' };
         // attributes
         this.fillAttributes(response);
         // collections

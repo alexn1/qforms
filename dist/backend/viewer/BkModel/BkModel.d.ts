@@ -1,6 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
+import { ModelData } from '../../../common/ModelData';
 export declare class BkModel<TModelScheme extends ModelScheme = ModelScheme> extends BaseModel<TModelScheme> {
     deinited: boolean;
     fillCollections: string[];
@@ -10,7 +11,7 @@ export declare class BkModel<TModelScheme extends ModelScheme = ModelScheme> ext
     fill(context: Context): Promise<any>;
     fillAttributes(response: any): void;
     isBackOnly(): boolean;
-    fillCollection(response: any, colName: string, context: Context): Promise<void>;
+    fillCollection(response: ModelData, colName: string, context: Context): Promise<void>;
     createColItems(colName: string, context: Context): Promise<void>;
     createColItem(colName: string, itemData: any, context: Context): Promise<void>;
     createChildModel(colName: string, itemData: any): Promise<any>;
