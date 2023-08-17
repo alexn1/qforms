@@ -395,12 +395,12 @@ export class ApplicationController extends ModelController<Application> {
         return '/';
     }
 
-    async openModal(ctrl) {
+    async openModal(ctrl: ModalController | PageController) {
         this.addModal(ctrl);
         await this.rerender();
     }
 
-    async closeModal(ctrl) {
+    async closeModal(ctrl: ModalController | PageController) {
         this.removeModal(ctrl);
         await this.rerender();
     }

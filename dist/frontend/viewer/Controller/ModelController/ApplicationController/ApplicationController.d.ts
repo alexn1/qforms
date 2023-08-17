@@ -78,8 +78,8 @@ export declare class ApplicationController extends ModelController<Application> 
         noButton?: string;
     }): Promise<boolean>;
     getRootPath(): string;
-    openModal(ctrl: any): Promise<void>;
-    closeModal(ctrl: any): Promise<void>;
+    openModal(ctrl: ModalController | PageController): Promise<void>;
+    closeModal(ctrl: ModalController | PageController): Promise<void>;
     getHostApp(): FrontHostApp;
     connect(): Promise<void>;
     rpc(name: string, params?: {
