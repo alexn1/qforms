@@ -1,6 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
+import { ModelData } from '../../../common/ModelData';
 
 export class BkModel<
     TModelScheme extends ModelScheme = ModelScheme,
@@ -48,7 +49,7 @@ export class BkModel<
         return this.isAttr('backOnly') && this.getAttr('backOnly') === 'true';
     }
 
-    async fillCollection(response: any, colName: string, context: Context): Promise<void> {
+    async fillCollection(response: ModelData, colName: string, context: Context): Promise<void> {
         if (!this[colName]) return;
         response[colName] = [];
         for (const model of this[colName]) {

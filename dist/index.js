@@ -6035,9 +6035,9 @@ class BkApplication extends BkModel_1.BkModel {
         // uuid
         response.uuid = (0, uuid_1.v4)();
         // actions
-        response.actions = this.getCol('actions').map((data) => ({
-            name: BaseModel_1.BaseModel.getName(data),
-            caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
+        response.actions = this.getCol('actions').map((action) => ({
+            name: BaseModel_1.BaseModel.getName(action),
+            caption: BaseModel_1.BaseModel.getAttr(action, 'caption'),
         }));
         // pages
         response.pages = await this.fillPages(context);
@@ -6172,6 +6172,7 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async rpc(name, context) {
         (0, console_1.debug)('BkApplication.rpc', name, context.getBody());
+        // @ts-ignore
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
