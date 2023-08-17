@@ -37,3 +37,7 @@ export const keyTupleToKey = (keyArray: KeyTuple): Key => {
 export const keyToKeyTuple = (key: Key): KeyTuple => {
     return JSON.parse(key);
 };
+
+export type Nullable<T> = T | null;
+
+export type Undefinable<T> = T | undefined;

@@ -28,3 +28,5 @@ export type Visibility = 'visible' | 'hidden';
 export type Display = 'block' | 'none';
 export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
 export declare const keyToKeyTuple: (key: Key) => KeyTuple;
+export type Nullable<T> = T | null;
+export type Undefinable<T> = T | undefined;
