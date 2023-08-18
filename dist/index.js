@@ -9426,7 +9426,8 @@ class ViewerModule {
     async handlePost(context, application) {
         // debug('ViewerModule.handlePost');
         const req = context.getReq();
-        if (req.body.action === 'login') {
+        const body = context.getBody();
+        if (body.action === 'login') {
             await this.loginPost(context, application);
         }
         else {

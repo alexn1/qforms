@@ -18,6 +18,7 @@ import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
+import { RequestBody } from '../../types';
 
 const pkg = require('../../../package.json');
 
@@ -100,7 +101,8 @@ export class ViewerModule {
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
         const req = context.getReq()!;
-        if (req.body.action === 'login') {
+        const body = context.getBody() as RequestBody;
+        if (body.action === 'login') {
             await this.loginPost(context, application);
         } else {
             if (

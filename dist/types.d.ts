@@ -30,3 +30,15 @@ export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
 export declare const keyToKeyTuple: (key: Key) => KeyTuple;
 export type Nullable<T> = T | null;
 export type Undefinable<T> = T | undefined;
+export interface RequestBody {
+    action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
+    page?: Nullable<string>;
+    form?: Nullable<string>;
+    ds?: string;
+    name?: string;
+    uuid?: string;
+    changes?: ChangesByKey;
+    params?: Record<string, any>;
+    row?: RawRow;
+    newMode?: boolean;
+}

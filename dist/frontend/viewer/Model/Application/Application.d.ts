@@ -1,6 +1,7 @@
+import { RequestBody } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
-import { RequestBody, RequestMethod } from '../../../common';
+import { RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { ApplicationData } from '../../../../common/ApplicationData';

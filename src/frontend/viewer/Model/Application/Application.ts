@@ -1,6 +1,7 @@
+import { RequestBody } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
-import { FrontHostApp, RequestBody, RequestMethod } from '../../../common';
+import { FrontHostApp, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
