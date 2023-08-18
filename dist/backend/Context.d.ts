@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { RequestBody } from '../types';
 declare module 'express' {
     interface Request {
         session: any;
@@ -41,7 +42,7 @@ export declare class Context {
     getParams(): Record<string, any>;
     getReq(): Request | undefined;
     getRes(): Response;
-    getBody(): any;
+    getBody(): RequestBody;
     getModule(): string;
     getDomain(): string;
     getAppDirName(): string;

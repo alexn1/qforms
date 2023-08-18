@@ -171,7 +171,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
 
         const database = this.getAttr('database');
         const table = this.getAttr('table');
-        const values = _values ? _values : this.decodeRow(context.getBody().row);
+        const values = _values ? _values : this.decodeRow(context.getBody().row!);
         const autoColumnTypes = this.getAutoColumnTypes();
         // debug('autoColumnTypes:', autoColumnTypes);
 

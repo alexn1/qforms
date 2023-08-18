@@ -18,8 +18,8 @@ export abstract class BkPersistentDataSource<
         }
     }
 
-    getChanges(context: Context) {
-        return this.decodeChanges(context.getBody().changes);
+    getChanges(context: Context): Record<Key, any> {
+        return this.decodeChanges(context.getBody().changes!);
     }
 
     decodeChanges(changes: ChangesByKey): Record<Key, any> {

@@ -101,7 +101,7 @@ export class ViewerModule {
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
         const req = context.getReq()!;
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody();
         if (body.action === 'login') {
             await this.loginPost(context, application);
         } else {

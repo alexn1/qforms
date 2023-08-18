@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { debug } from '../console';
+import { RequestBody } from '../types';
 
 declare module 'express' {
     export interface Request {
@@ -131,7 +132,7 @@ export class Context {
         return this.options.res;
     }
 
-    getBody(): any {
+    getBody(): RequestBody {
         return this.getReq()!.body;
     }
 
