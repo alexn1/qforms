@@ -9,9 +9,9 @@ Module.prototype.require = function () {
 }; */
 
 import { BackHostApp, BkHelper } from './index';
-import { debug, error } from './console';
+import { debug } from './console';
 
-async function main() {
+async function main(...argv: string[]): Promise<number | undefined> {
     debug('main');
     try {
         const backHostApp = new BackHostApp({
@@ -24,8 +24,8 @@ async function main() {
         await backHostApp.init();
         await backHostApp.run();
     } catch (err) {
-        error(err);
-        process.exit(1);
+        console.error(err.message);
+        return 1;
     }
 }
-main();
+main(...process.argv).then((code) => process.exit(code));
