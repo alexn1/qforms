@@ -25,6 +25,7 @@ import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, log, warn, error } from '../console';
+import { Nullable } from '../types';
 
 const pkg = require('../../package.json');
 
@@ -566,7 +567,7 @@ export class BackHostApp {
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
         );
 
-        let context: Context | null = null;
+        let context: Nullable<Context> = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
@@ -611,7 +612,7 @@ export class BackHostApp {
             `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
         );
 
-        let context: Context | null = null;
+        let context: Nullable<Context> = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
@@ -654,7 +655,7 @@ export class BackHostApp {
         log(colors.magenta.underline('GET'), req.originalUrl);
 
         if (req.params.module === 'viewer') {
-            let context: Context | null = null;
+            let context: Nullable<Context> = null;
             try {
                 context = new Context({
                     req,

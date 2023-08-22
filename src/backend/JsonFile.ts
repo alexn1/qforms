@@ -1,9 +1,10 @@
 import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
 import { debug } from '../console';
+import { Nullable } from '../types';
 
 export class JsonFile {
-    content: string | null = null;
+    content: Nullable<string> = null;
 
     constructor(public filePath: string, public data: any = null) {}
 
