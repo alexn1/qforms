@@ -115,7 +115,7 @@ Module.prototype.require = function () {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
 const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
-async function main() {
+async function main(...argv) {
     (0, console_1.debug)('main');
     try {
         const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
@@ -126,11 +126,14 @@ async function main() {
         await backHostApp.run();
     }
     catch (err) {
-        (0, console_1.error)(err);
-        process.exit(1);
+        console.error(err.message);
+        return 1;
     }
 }
-main();
+main(...process.argv).then((code) => {
+    if (code)
+        process.exit(code);
+});
 
 })();
 

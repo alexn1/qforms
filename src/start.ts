@@ -28,4 +28,6 @@ async function main(...argv: string[]): Promise<number | undefined> {
         return 1;
     }
 }
-main(...process.argv).then((code) => process.exit(code));
+main(...process.argv).then((code) => {
+    if (code) process.exit(code);
+});
