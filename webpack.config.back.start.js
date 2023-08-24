@@ -35,6 +35,7 @@ module.exports = {
                             resolveJsonModule: true,
                             strictNullChecks: true,
                             noImplicitAny: false,
+                            experimentalDecorators: true,
                         },
                     },
                 },

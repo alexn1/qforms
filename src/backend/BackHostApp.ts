@@ -24,8 +24,9 @@ import { BaseModel } from './BaseModel';
 import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
-import { debug, log, warn, error } from '../console';
+import { debug, log, error } from '../console';
 import { Nullable } from '../types';
+import { logCall } from '../decorators';
 
 const pkg = require('../../package.json');
 
@@ -85,8 +86,9 @@ export class BackHostApp {
         this.startTime = new Date();
     }
 
+    @logCall
     async init() {
-        debug('BackHostApp.init');
+        // debug('BackHostApp.init');
         // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
@@ -98,8 +100,9 @@ export class BackHostApp {
         await this.initHttpServer();
     }
 
+    @logCall
     async run(): Promise<void> {
-        debug(`${this.constructor.name}.run`);
+        // debug(`${this.constructor.name}.run`);
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();

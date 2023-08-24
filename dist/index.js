@@ -738,6 +738,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -766,6 +772,7 @@ const BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseMo
 const EventLog_1 = __webpack_require__(/*! ./EventLog */ "./src/backend/EventLog.ts");
 const EmptyPromise_1 = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/EmptyPromise.ts");
 const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
+const decorators_1 = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
@@ -780,7 +787,7 @@ class BackHostApp {
         this.startTime = new Date();
     }
     async init() {
-        (0, console_1.debug)('BackHostApp.init');
+        // debug('BackHostApp.init');
         // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
@@ -792,7 +799,7 @@ class BackHostApp {
         await this.initHttpServer();
     }
     async run() {
-        (0, console_1.debug)(`${this.constructor.name}.run`);
+        // debug(`${this.constructor.name}.run`);
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();
@@ -1533,6 +1540,12 @@ class BackHostApp {
         return this.params.frontLogUrl;
     }
 }
+__decorate([
+    decorators_1.logCall
+], BackHostApp.prototype, "init", null);
+__decorate([
+    decorators_1.logCall
+], BackHostApp.prototype, "run", null);
 exports.BackHostApp = BackHostApp;
 
 
@@ -9953,6 +9966,30 @@ function error(message, ...optionalParams) {
     console.error(message, ...optionalParams);
 }
 exports.error = error;
+
+
+/***/ }),
+
+/***/ "./src/decorators.ts":
+/*!***************************!*\
+  !*** ./src/decorators.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.logCall = void 0;
+const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
+function logCall(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    descriptor.value = async function (...args) {
+        (0, console_1.debug)(`- ${this.constructor.name}.${propertyKey} -`);
+        return originalMethod.apply(this, args);
+    };
+    return descriptor;
+}
+exports.logCall = logCall;
 
 
 /***/ }),
@@ -21903,6 +21940,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./types */ "./src/types.ts"), exports);
 __exportStar(__webpack_require__(/*! ./Result */ "./src/Result.ts"), exports);
+__exportStar(__webpack_require__(/*! ./decorators */ "./src/decorators.ts"), exports);
 // backend
 __exportStar(__webpack_require__(/*! ./backend */ "./src/backend/index.ts"), exports);
 // frontend

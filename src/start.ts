@@ -8,10 +8,10 @@ Module.prototype.require = function () {
     }
 }; */
 
-import { BackHostApp, BkHelper } from './index';
+import { BackHostApp, BkHelper, Optional } from './index';
 import { debug } from './console';
 
-async function main(...argv: string[]): Promise<number | undefined> {
+async function main(...argv: string[]): Promise<Optional<number>> {
     debug('main');
     try {
         const backHostApp = new BackHostApp({
