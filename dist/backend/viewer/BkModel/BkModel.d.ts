@@ -1,7 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
-import { ModelData } from '../../../common/ModelData';
+import { ModelData } from '../../../common/ModelData/ModelData';
 export declare class BkModel<TModelScheme extends ModelScheme = ModelScheme> extends BaseModel<TModelScheme> {
     deinited: boolean;
     fillCollections: string[];

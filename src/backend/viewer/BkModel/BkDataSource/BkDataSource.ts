@@ -13,7 +13,7 @@ import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
 import { Key, KeyRecord, Row, KeyTuple, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
-import { DataSourceData } from '../../../../common/DataSourceData';
+import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 
 export type ReadResult = [RawRow[], number | null];
 

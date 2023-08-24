@@ -21,11 +21,11 @@ import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { home } from '../../home';
 import * as text from '../../text';
-import { ApplicationData, MenuItem } from '../../../../common/ApplicationData';
+import { ApplicationData, MenuItem } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';
-import { ActionData } from '../../../../common/ActionData';
+import { ActionData } from '../../../../common/ModelData/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 

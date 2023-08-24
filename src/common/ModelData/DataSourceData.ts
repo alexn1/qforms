@@ -1,4 +1,4 @@
-import { RawRow } from '../types';
+import { RawRow } from '../../types';
 import { ModelData } from './ModelData';
 
 export interface DataSourceData extends ModelData {

@@ -1,7 +1,7 @@
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
-import { ApplicationData } from '../../common/ApplicationData';
+import { ApplicationData } from '../../common/ModelData/ApplicationData';
 
 export const home = (
     application: BkApplication,

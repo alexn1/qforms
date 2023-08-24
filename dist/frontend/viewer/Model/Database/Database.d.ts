@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { Table } from '../Table/Table';
 import { DatabaseResult } from '../../../../Result';
-import { DatabaseData } from '../../../../common/DatabaseData';
+import { DatabaseData } from '../../../../common/ModelData/DatabaseData';
 export declare class Database extends Model<DatabaseData> {
     tables: Table[];
     init(): void;

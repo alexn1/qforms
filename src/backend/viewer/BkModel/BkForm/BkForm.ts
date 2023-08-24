@@ -11,7 +11,7 @@ import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
-import { FormData } from '../../../../common/FormData';
+import { FormData } from '../../../../common/ModelData/FormData';
 
 export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[] = [];

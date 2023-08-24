@@ -16,7 +16,7 @@ import {
 import { Result } from '../../../../Result';
 import { Field } from '../Field/Field';
 import { debug } from '../../../../console';
-import { DataSourceData } from '../../../../common/DataSourceData';
+import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 
 export class DataSource extends Model<DataSourceData> {
     rows: RawRow[] | null = null;

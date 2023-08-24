@@ -4,7 +4,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 import { TableScheme } from '../../../common/Scheme/TableScheme';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
-import { TableData } from '../../../../common/TableData';
+import { TableData } from '../../../../common/ModelData/TableData';
 export declare class BkTable extends BkModel<TableScheme> {
     columns: BkColumn[];
     constructor(data: TableScheme, parent: BkDatabase);

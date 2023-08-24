@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Table } from '../Table/Table';
 import { Helper } from '../../../common/Helper';
 import { DatabaseResult } from '../../../../Result';
-import { DatabaseData } from '../../../../common/DatabaseData';
+import { DatabaseData } from '../../../../common/ModelData/DatabaseData';
 
 export class Database extends Model<DatabaseData> {
     tables: Table[] = [];

@@ -9,7 +9,7 @@ import { Context } from '../../../Context';
 import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
-import { PageData } from '../../../../common/PageData';
+import { PageData } from '../../../../common/ModelData/PageData';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,

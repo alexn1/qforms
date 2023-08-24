@@ -6,7 +6,7 @@ import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
 import { Key, KeyRecord, Row, RawRow } from '../../../../types';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
-import { DataSourceData } from '../../../../common/DataSourceData';
+import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 export type ReadResult = [RawRow[], number | null];
 export declare class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[];

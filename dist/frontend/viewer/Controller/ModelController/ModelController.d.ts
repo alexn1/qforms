@@ -4,7 +4,7 @@ export declare abstract class ModelController<TModel extends Model = Model> exte
     private model;
     private parent?;
     deinited: boolean;
-    constructor(model: TModel, parent?: ModelController<Model<import("../../../../common/ModelData").ModelData>> | undefined);
+    constructor(model: TModel, parent?: ModelController<Model<import("../../../../common/ModelData/ModelData").ModelData>> | undefined);
     init(): void;
     deinit(): void;
     getModel(): TModel;

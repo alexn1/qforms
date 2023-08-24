@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Column } from '../Column/Column';
 import { Helper } from '../../../common/Helper';
 import { TableResult, InsertResult, UpdateResult, DeleteResult } from '../../../../Result';
-import { TableData } from '../../../../common/TableData';
+import { TableData } from '../../../../common/ModelData/TableData';
 
 export class Table extends Model<TableData> {
     columns: Column[] = [];

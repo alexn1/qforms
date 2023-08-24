@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { PageData } from '../../../../common/PageData';
+import { PageData } from '../../../../common/ModelData/PageData';
 import { Form } from '../Form/Form';
 import { Key } from '../../../../types';
 import { Application } from '../Application/Application';

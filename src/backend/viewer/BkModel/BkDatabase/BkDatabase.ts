@@ -5,7 +5,7 @@ import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 import { DatabaseScheme } from '../../../common/Scheme/DatabaseScheme';
-import { DatabaseData } from '../../../../common/DatabaseData';
+import { DatabaseData } from '../../../../common/ModelData/DatabaseData';
 
 export interface DbConfig {
     host: string;

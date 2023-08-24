@@ -10,7 +10,7 @@ import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/B
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
 import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
-import { FieldData } from '../../../../common/FieldData';
+import { FieldData } from '../../../../common/ModelData/FieldData';
 
 export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
     fillAttributes(response: FieldData): void {

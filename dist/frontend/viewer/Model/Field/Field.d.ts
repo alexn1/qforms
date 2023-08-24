@@ -4,7 +4,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-import { FieldData } from '../../../../common/FieldData';
+import { FieldData } from '../../../../common/ModelData/FieldData';
 export declare class Field extends Model<FieldData> {
     init(): void;
     replaceThis(value: any): any;

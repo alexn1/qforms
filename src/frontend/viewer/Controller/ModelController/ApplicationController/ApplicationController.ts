@@ -7,7 +7,7 @@ import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
-import { PageData } from '../../../../../common/PageData';
+import { PageData } from '../../../../../common/ModelData/PageData';
 import { ModalController } from '../../ModalController/ModalController';
 
 export interface OpenPageOptions {
