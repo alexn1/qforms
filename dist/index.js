@@ -1161,7 +1161,7 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta('monitorGet'), req.headers);
+        (0, console_1.log)(safe_1.default.magenta('monitorGet') /* , req.headers */);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');

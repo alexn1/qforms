@@ -539,7 +539,7 @@ export class BackHostApp {
     }
 
     async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        log(colors.magenta('monitorGet'), req.headers);
+        log(colors.magenta('monitorGet') /* , req.headers */);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
