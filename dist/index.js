@@ -786,8 +786,8 @@ class BackHostApp {
         // debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
+    // @trackTime
     async init() {
-        // debug('BackHostApp.init');
         // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
@@ -799,7 +799,6 @@ class BackHostApp {
         await this.initHttpServer();
     }
     async run() {
-        // debug(`${this.constructor.name}.run`);
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();
@@ -1379,7 +1378,6 @@ class BackHostApp {
         }
     }
     async onProcessSIGINT() {
-        (0, console_1.debug)('BackHostApp.onProcessSIGINT');
         (0, console_1.log)(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
@@ -1391,7 +1389,6 @@ class BackHostApp {
         }
     }
     async onProcessSIGTERM() {
-        (0, console_1.debug)('BackHostApp.onProcessSIGTERM');
         (0, console_1.log)('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -1522,9 +1519,7 @@ class BackHostApp {
             }
         }
     }
-    static test() {
-        (0, console_1.debug)('BackHostApp.test');
-    }
+    static test() { }
     getDistDirPath() {
         return this.distDirPath;
     }
@@ -1541,11 +1536,20 @@ class BackHostApp {
     }
 }
 __decorate([
-    decorators_1.logCall
+    decorators_1.debugCall
 ], BackHostApp.prototype, "init", null);
 __decorate([
-    decorators_1.logCall
+    decorators_1.debugCall
 ], BackHostApp.prototype, "run", null);
+__decorate([
+    decorators_1.debugCall
+], BackHostApp.prototype, "onProcessSIGINT", null);
+__decorate([
+    decorators_1.debugCall
+], BackHostApp.prototype, "onProcessSIGTERM", null);
+__decorate([
+    decorators_1.debugCall
+], BackHostApp, "test", null);
 exports.BackHostApp = BackHostApp;
 
 
@@ -9979,17 +9983,28 @@ exports.error = error;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logCall = void 0;
+exports.trackTime = exports.debugCall = void 0;
 const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
-function logCall(target, propertyKey, descriptor) {
+function debugCall(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args) {
-        (0, console_1.debug)(`- ${this.constructor.name}.${propertyKey} -`);
+        (0, console_1.debug)(`${this.constructor.name}.${propertyKey}`);
         return originalMethod.apply(this, args);
     };
     return descriptor;
 }
-exports.logCall = logCall;
+exports.debugCall = debugCall;
+function trackTime(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    descriptor.value = async function (...args) {
+        const start = Date.now();
+        const result = originalMethod.apply(this, args);
+        (0, console_1.debug)(`${this.constructor.name}.${propertyKey} time: ${Date.now() - start} ms`);
+        return result;
+    };
+    return descriptor;
+}
+exports.trackTime = trackTime;
 
 
 /***/ }),

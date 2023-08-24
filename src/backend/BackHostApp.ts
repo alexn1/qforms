@@ -21,12 +21,12 @@ import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { Scalar } from '../types';
+import { Optional, Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, log, error } from '../console';
 import { Nullable } from '../types';
-import { logCall } from '../decorators';
+import { debugCall, trackTime } from '../decorators';
 
 const pkg = require('../../package.json');
 
@@ -86,9 +86,9 @@ export class BackHostApp {
         this.startTime = new Date();
     }
 
-    @logCall
-    async init() {
-        // debug('BackHostApp.init');
+    // @trackTime
+    @debugCall
+    async init(): Promise<void> {
         // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
@@ -100,9 +100,8 @@ export class BackHostApp {
         await this.initHttpServer();
     }
 
-    @logCall
+    @debugCall
     async run(): Promise<void> {
-        // debug(`${this.constructor.name}.run`);
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.initWebSocketServer();
@@ -126,11 +125,11 @@ export class BackHostApp {
         if (level > levels.indexOf('warn')) console.warn = () => {};
     } */
 
-    async initHttpServer() {
+    async initHttpServer(): Promise<void> {
         this.httpServer = http.createServer(this.express);
     }
 
-    checkNodeVersion() {
+    checkNodeVersion(): void {
         const [majorNodeVersion] = process.versions.node.split('.');
         // debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
@@ -141,22 +140,22 @@ export class BackHostApp {
         }
     }
 
-    checkApplicationFolder() {
+    checkApplicationFolder(): void {
         if (!fs.existsSync(this.appsDirPath)) {
             throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
         }
     }
 
-    createTempDirsIfNotExistSync() {
+    createTempDirsIfNotExistSync(): void {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
     }
 
-    private createEventLog() {
+    private createEventLog(): void {
         this.eventLog = new EventLog(this.params.logger);
     }
 
-    async initModules() {
+    async initModules(): Promise<void> {
         // indexModule
         this.indexModule = new IndexModule(this);
         await this.indexModule.init();
@@ -174,14 +173,14 @@ export class BackHostApp {
         await this.editorModule.init();
     }
 
-    initWebSocketServer() {
+    initWebSocketServer(): void {
         this.wsServer = new WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
         });
     }
 
-    initDirPaths() {
+    initDirPaths(): void {
         this.appsDirPath = path.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.backendDirPath = BACKEND_DIR_PATH;
@@ -213,7 +212,7 @@ export class BackHostApp {
         return message;
     }
 
-    listenProcessEvents() {
+    listenProcessEvents(): void {
         process.on('message', this.onProcessMessage.bind(this));
         process.on('SIGINT', this.onProcessSIGINT.bind(this));
         process.on('SIGTERM', this.onProcessSIGTERM.bind(this));
@@ -222,7 +221,7 @@ export class BackHostApp {
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
-    getSecretSync() {
+    getSecretSync(): string {
         const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
         let secret;
         secret = BkHelper.getFileContentSync(secretFilePath);
@@ -234,7 +233,7 @@ export class BackHostApp {
         return secret;
     }
 
-    initExpressServer() {
+    initExpressServer(): void {
         // create
         this.express = express();
 
@@ -380,7 +379,7 @@ export class BackHostApp {
         return this.applications[route];
     }
 
-    getAppFilePath(context: Context) {
+    getAppFilePath(context: Context): string {
         return path.join(
             this.appsDirPath,
             context.getAppDirName(),
@@ -415,7 +414,7 @@ export class BackHostApp {
         return BkApplication;
     }
 
-    async createApp(req: Request) {
+    async createApp(req: Request): Promise<AppInfo[]> {
         debug('BackHostApp.createApp');
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
@@ -447,7 +446,7 @@ export class BackHostApp {
         };
     }
 
-    async logError(err: Error, req?: Request) {
+    async logError(err: Error, req?: Request): Promise<void> {
         log('BackHostApp.logError:', colors.red(err.message));
         try {
             await this.eventLog.log({
@@ -514,7 +513,7 @@ export class BackHostApp {
         }
     }
 
-    async indexGet(req: Request, res: Response, next: NextFunction) {
+    async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
@@ -524,7 +523,7 @@ export class BackHostApp {
         }
     }
 
-    async indexPost(req: Request, res: Response, next: NextFunction) {
+    async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
         log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
@@ -539,7 +538,7 @@ export class BackHostApp {
         }
     }
 
-    async monitorGet(req: Request, res: Response, next: NextFunction) {
+    async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         log(colors.magenta('monitorGet'), req.headers);
         try {
             if (!this.params.monitor) {
@@ -559,7 +558,7 @@ export class BackHostApp {
         }
     }
 
-    async moduleGet(req: Request, res: Response, next: NextFunction) {
+    async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
 
@@ -603,7 +602,7 @@ export class BackHostApp {
         }
     }
 
-    async modulePost(req: Request, res: Response, next: NextFunction) {
+    async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
 
@@ -650,7 +649,7 @@ export class BackHostApp {
         }
     }
 
-    async moduleGetFile(req: Request, res: Response, next: NextFunction) {
+    async moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
 
@@ -680,7 +679,7 @@ export class BackHostApp {
         }
     }
 
-    async _e404(req: Request, res: Response, next: NextFunction) {
+    async _e404(req: Request, res: Response, next: NextFunction): Promise<void> {
         debug(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(
             new HttpError({
@@ -690,7 +689,7 @@ export class BackHostApp {
         );
     }
 
-    async _e500(err: any, req: Request, res: Response, next: NextFunction) {
+    async _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void> {
         debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
         log(colors.red(err.message));
@@ -756,7 +755,7 @@ export class BackHostApp {
         });
     }
 
-    async onProcessMessage(message: string) {
+    async onProcessMessage(message: string): Promise<void> {
         log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             try {
@@ -768,8 +767,8 @@ export class BackHostApp {
         }
     }
 
-    async onProcessSIGINT() {
-        debug('BackHostApp.onProcessSIGINT');
+    @debugCall
+    async onProcessSIGINT(): Promise<void> {
         log(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
@@ -780,8 +779,8 @@ export class BackHostApp {
         }
     }
 
-    async onProcessSIGTERM() {
-        debug('BackHostApp.onProcessSIGTERM');
+    @debugCall
+    async onProcessSIGTERM(): Promise<void> {
         log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -797,19 +796,19 @@ export class BackHostApp {
         log('exit:', code);
     }
 
-    async onUncaughtException(err: Error, origin: string) {
+    async onUncaughtException(err: Error, origin: string): Promise<void> {
         error(colors.red('BackHostApp.onUncaughtException'), err);
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
 
-    async onUnhandledRejection(reason: Error | any, promise: Promise<any>) {
+    async onUnhandledRejection(reason: Error | any, promise: Promise<any>): Promise<void> {
         error(colors.red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
 
-    async shutdown() {
+    async shutdown(): Promise<void> {
         debug('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
@@ -820,7 +819,7 @@ export class BackHostApp {
         }
     }
 
-    onHttpServerError(err: any) {
+    onHttpServerError(err: any): void {
         error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /* if (err.code === 'EADDRINUSE') {
             error(`Address ${host}:${port} in use.`);
@@ -829,7 +828,7 @@ export class BackHostApp {
         } */
     }
 
-    getDomainFromRequest(req: any): string | null {
+    getDomainFromRequest(req: any): Nullable<string> {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
@@ -839,7 +838,7 @@ export class BackHostApp {
         return domain;
     }
 
-    async postError(req: Request, res: Response, next: (err?: Error) => void) {
+    async postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void> {
         debug(colors.blue('BackHostApp.postError'), req.body.message);
 
         log('client error:', colors.red(req.body.message));
@@ -868,11 +867,11 @@ export class BackHostApp {
         }
     }
 
-    getFrontendDirPath() {
+    getFrontendDirPath(): string {
         return this.frontendDirPath;
     }
 
-    initCustomRoutes() {}
+    initCustomRoutes(): void {}
 
     alias(
         method: 'get' | 'post',
@@ -902,12 +901,12 @@ export class BackHostApp {
         });
     }
 
-    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>) {
+    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>): void {
         this.alias('get', path, route, 'moduleGet', query);
         this.alias('post', path, route, 'modulePost', query);
     }
 
-    getNodeEnv(): string | null {
+    getNodeEnv(): Nullable<string> {
         return process.env.NODE_ENV || null;
     }
 
@@ -919,11 +918,11 @@ export class BackHostApp {
         return !this.isDevelopment();
     }
 
-    getParams() {
+    getParams(): BackHostAppParams {
         return this.params;
     }
 
-    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result) {
+    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void {
         debug('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
@@ -935,9 +934,8 @@ export class BackHostApp {
         }
     }
 
-    static test() {
-        debug('BackHostApp.test');
-    }
+    @debugCall
+    static test(): void {}
 
     getDistDirPath(): string {
         return this.distDirPath;
@@ -949,11 +947,11 @@ export class BackHostApp {
         return distDirPath;
     }
 
-    getLogger() {
+    getLogger(): EventLog {
         return this.eventLog;
     }
 
-    getFrontLogUrl() {
+    getFrontLogUrl(): Optional<string> {
         return this.params.frontLogUrl;
     }
 }

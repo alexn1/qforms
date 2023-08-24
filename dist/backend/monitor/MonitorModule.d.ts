@@ -6,7 +6,7 @@ export declare class MonitorModule {
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     fill(): {
-        nodeEnv: string | null;
+        nodeEnv: import("../..").Nullable<string>;
         uptime: number;
         applications: {
             route: string;

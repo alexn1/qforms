@@ -10,9 +10,10 @@ import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
-import { Scalar } from '../types';
+import { Optional, Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
+import { Nullable } from '../types';
 export type Route = [
     module: 'viewer' | 'editor',
     appDirName: string,
@@ -73,7 +74,7 @@ export declare class BackHostApp {
     initDirPaths(): void;
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;
-    getSecretSync(): any;
+    getSecretSync(): string;
     initExpressServer(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
@@ -114,13 +115,13 @@ export declare class BackHostApp {
     onUnhandledRejection(reason: Error | any, promise: Promise<any>): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
-    getDomainFromRequest(req: any): string | null;
+    getDomainFromRequest(req: any): Nullable<string>;
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
     alias(method: 'get' | 'post', path: string, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
     getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>): void;
-    getNodeEnv(): string | null;
+    getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): BackHostAppParams;
@@ -129,5 +130,5 @@ export declare class BackHostApp {
     getDistDirPath(): string;
     makeDistDirPathForApp(appFilePath: string): string;
     getLogger(): EventLog;
-    getFrontLogUrl(): string | undefined;
+    getFrontLogUrl(): Optional<string>;
 }
