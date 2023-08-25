@@ -18,7 +18,6 @@ function getLogLevel() {
 exports.getLogLevel = getLogLevel;
 function getLogLevelName() {
     if (typeof window === 'object') {
-        // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
     else if (typeof global === 'object') {
@@ -30,27 +29,23 @@ function getLogLevelName() {
 exports.getLogLevelName = getLogLevelName;
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.debug(message, ...optionalParams);
     }
 }
 exports.debug = debug;
 function log(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.log(message, ...optionalParams);
     }
 }
 exports.log = log;
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.warn(message, ...optionalParams);
     }
 }
 exports.warn = warn;
 function error(message, ...optionalParams) {
-    // process.stderr.write(`${messages.join(' ')}\n`);
     console.error(message, ...optionalParams);
 }
 exports.error = error;
@@ -103,15 +98,6 @@ var exports = __webpack_exports__;
   !*** ./src/start.ts ***!
   \**********************/
 
-/* var Module = require('module');
-var originalRequire = Module.prototype.require;
-Module.prototype.require = function () {
-    if (/\.less$/.test(arguments[0])) {
-        // console.debug(arguments[0]);
-    } else {
-        return originalRequire.apply(this, arguments);
-    }
-}; */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
 const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");

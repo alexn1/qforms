@@ -676,7 +676,6 @@ class Result {
         result[dName][tName].insertEx[key] = row;
     }
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
-        // debug('Result.addUpdateToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -686,7 +685,6 @@ class Result {
         result[dName][tName].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, dName, tName, oldKey, row) {
-        // debug('Result.addUpdateExToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -783,12 +781,9 @@ class BackHostApp {
         this.params = params;
         this.applications = {};
         this.createAppQueue = {};
-        // debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
-    // @trackTime
     async init() {
-        // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
         this.checkApplicationFolder();
@@ -811,19 +806,11 @@ class BackHostApp {
     getPort() {
         return this.params.port || LISTEN_PORT;
     }
-    /* initConsole() {
-        const levels = ['debug', 'log', 'warn', 'error'];
-        const level = levels.indexOf(QFORMS_LOG_LEVEL);
-        if (level > levels.indexOf('debug')) console.debug = () => {};
-        if (level > levels.indexOf('log')) console.log = () => {};
-        if (level > levels.indexOf('warn')) console.warn = () => {};
-    } */
     async initHttpServer() {
         this.httpServer = http_1.default.createServer(this.express);
     }
     checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
-        // debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
             throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
@@ -842,16 +829,12 @@ class BackHostApp {
         this.eventLog = new EventLog_1.EventLog(this.params.logger);
     }
     async initModules() {
-        // indexModule
         this.indexModule = new IndexModule_1.IndexModule(this);
         await this.indexModule.init();
-        // monitorModule
         this.monitorModule = new MonitorModule_1.MonitorModule(this);
         await this.monitorModule.init();
-        // viewerModule
         this.viewerModule = new ViewerModule_1.ViewerModule(this);
         await this.viewerModule.init();
-        // editorModule
         this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
     }
@@ -908,14 +891,9 @@ class BackHostApp {
         return secret;
     }
     initExpressServer() {
-        // create
         this.express = (0, express_1.default)();
-        // init
         this.express.set('handleException', this.params.handleException || true);
-        // this.express.set('view engine', 'ejs');
-        // this.express.set('views', backendDirPath);
         this.express.enable('strict routing');
-        // middlewares
         this.express.use(body_parser_1.default.json({
             limit: '20mb',
             reviver: BkHelper_1.BkHelper.dateTimeReviver,
@@ -925,15 +903,10 @@ class BackHostApp {
         this.express.use((0, express_session_1.default)({
             store: new FileSessionStore_1.FileSessionStore(this.sessionDirPath),
             secret: this.getSecretSync(),
-            // @ts-ignore
             key: 'sid',
             resave: false,
             saveUninitialized: false,
         }));
-        // test
-        // this.express.get( '/test', this._getTest.bind(this));
-        // this.express.post('/test', this._postTest.bind(this));
-        // error logger
         this.express.options('/error', (req, res, next) => {
             (0, console_1.log)('options /error');
             res.header('Access-Control-Allow-Origin', '*');
@@ -941,41 +914,28 @@ class BackHostApp {
             res.end();
         });
         this.express.post('/error', this.postError.bind(this));
-        // index module
         if (this.isDevelopment()) {
-            // google chrome always redirect from /index to /index/ even with disabled cache
-            // so we use /index2
             this.express.get('/index2', this.indexGet.bind(this));
             this.express.post('/index2', this.indexPost.bind(this));
         }
-        // monitor module
         this.express.get('/monitor', this.monitorGet.bind(this));
-        // viewer/editor module
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
-        // handle static for index and monitor
         this.express.use(express_1.default.static(this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
                 (0, console_1.log)(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
             },
         }));
         this.initCustomRoutes();
-        // 404 and 500 error handlers
         this.express.use(this._e404.bind(this));
         this.express.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(context) {
-        // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
-            /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
-                await application.deinit();
-                return this.applications[route] = await this.createApplication(context);
-            } */
             return application;
         }
-        // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
             (0, console_1.debug)('application is creating:', context.getRoute());
             const promise = EmptyPromise_1.EmptyPromise.create();
@@ -1019,15 +979,12 @@ class BackHostApp {
         const appFilePath = this.getAppFilePath(context);
         const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(appFilePath, distDirPath);
-        // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
-        // application
         const application = new ApplicationClass(appInfo, this, context.getEnv());
         await application.init(context);
         return application;
     }
     getApplicationClass(appInfo) {
-        // debug('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel_1.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -1085,41 +1042,6 @@ class BackHostApp {
             (0, console_1.error)(safe_1.default.red(err));
         }
     }
-    /* async logRequest(req: Request, context: Context, time) {
-        if (!this.logPool) return;
-        try {
-            const application = this.getApplication(context);
-            let args = '';
-            if (req.body.params) {
-                args = Object.keys(req.body.params)
-                    .map((name) => `${name}: ${req.body.params[name]}`)
-                    .join(', ');
-            } else if (req.body.row) {
-                args = Object.keys(req.body.row)
-                    .map((name) => `${name}: ${req.body.row[name]}`)
-                    .join(', ');
-            }
-            let message = [
-                application.getName(),
-                ...(req.body.page ? [req.body.page] : []),
-                ...(req.body.form ? [req.body.form] : []),
-                ...(req.body.ds ? [req.body.ds] : []),
-                `${req.body.action}(${args})`,
-            ].join('.');
-            if (time) {
-                message += `, time: ${time}`;
-            }
-            await this.logger.createLog({
-                type: 'log',
-                source: 'server',
-                ip: Context.getIpFromReq(req),
-                message: message,
-                data: JSON.stringify(req.body, null, 4),
-            });
-        } catch (err) {
-            error(colors.red(err));
-        }
-    } */
     async logEvent(context, message, data) {
         (0, console_1.log)('BackHostApp.logEvent', message);
         try {
@@ -1161,7 +1083,7 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta('monitorGet') /* , req.headers */);
+        (0, console_1.log)(safe_1.default.magenta('monitorGet'));
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -1182,12 +1104,7 @@ class BackHostApp {
         }
     }
     async moduleGet(req, res, next) {
-        // @ts-ignore
-        // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-        // log request
-        (0, console_1.log)(
-        // @ts-ignore
-        safe_1.default.magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
+        (0, console_1.log)(safe_1.default.magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1226,12 +1143,8 @@ class BackHostApp {
         }
     }
     async modulePost(req, res, next) {
-        // @ts-ignore
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-        // log request
-        (0, console_1.log)(
-        // @ts-ignore
-        safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        (0, console_1.log)(safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1242,7 +1155,6 @@ class BackHostApp {
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePost(context, application);
-                // await this.logRequest(req, context, time);
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
@@ -1252,7 +1164,6 @@ class BackHostApp {
                         domain: this.getDomainFromRequest(req),
                     });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
-                    // await this.logRequest(req, context, time);
                 }
                 else {
                     next();
@@ -1272,9 +1183,7 @@ class BackHostApp {
         }
     }
     async moduleGetFile(req, res, next) {
-        // @ts-ignore
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
-        // @ts-ignore
         (0, console_1.log)(safe_1.default.magenta.underline('GET'), req.originalUrl);
         if (req.params.module === 'viewer') {
             let context = null;
@@ -1337,15 +1246,6 @@ class BackHostApp {
         }
         await this.logError(error, req);
     }
-    /* _getTest(req, res, next) {
-        debug('getTest');
-        res.setHeader('Content-Type', 'text/plain;charset=utf-8');
-        res.end('getTest');
-    } */
-    /* _postTest(req, res, next) {
-        debug('postTest', req.body);
-        res.json({foo: 'bar'});
-    } */
     static runHttpServer(httpServer, host, port) {
         return new Promise((resolve, reject) => {
             try {
@@ -1418,18 +1318,12 @@ class BackHostApp {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            // debug('route:', route);
             const application = this.applications[route];
             await application.deinit();
         }
     }
     onHttpServerError(err) {
         (0, console_1.error)(safe_1.default.red('BackHostApp.onHttpServerError'), err.code, err.message);
-        /* if (err.code === 'EADDRINUSE') {
-            error(`Address ${host}:${port} in use.`);
-        } else {
-            error(err);
-        } */
     }
     getDomainFromRequest(req) {
         if (!req)
@@ -1483,11 +1377,9 @@ class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    // @ts-ignore
                     req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }
-            // @ts-ignore
             await this[cb](req, res, next);
         });
     }
@@ -1619,7 +1511,6 @@ class BaseModel {
             throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) {
-            // debug('this.data', this.data);
             throw new Error(`getCol: no col ${name}`);
         }
         return arr;
@@ -1702,16 +1593,11 @@ function _getFilePathsSync(dirPath, ext) {
     return filePaths;
 }
 async function _getFilePaths2(dirPath, ext, filePaths) {
-    // debug('_getFilePaths2', dirPath);
-    // all files from directory
     const files = await BkHelper._glob(path_1.default.join(dirPath, '*.' + ext));
-    // pushing files to output array
     files.forEach((item) => {
         filePaths.push(item);
     });
-    // all directories from directory
     const dirs = await BkHelper._glob(path_1.default.join(dirPath, '*/'));
-    // for each dir push files to output array
     for (let i = 0; i < dirs.length; i++) {
         const subDirPath = dirs[i];
         await _getFilePaths2(subDirPath, ext, filePaths);
@@ -1748,7 +1634,6 @@ class BkHelper {
         });
     }
     static async getFilePaths(dirPath, ext) {
-        // debug('BkHelper.getFilePaths');
         const filePaths = [];
         await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map((filePath) => {
@@ -1765,33 +1650,8 @@ class BkHelper {
                 arrS[i] = '0' + arrS[i];
             }
         }
-        /*
-        let hh = now.getHours();
-        let mm = now.getMinutes();
-        let ss = now.getSeconds();
-
-        let _hh = hh.toString();
-        let _mm = mm.toString();
-        let _ss = ss.toString();
-
-        if (hh < 10) _hh = '0' + _hh;
-        if (mm < 10) _mm = '0' + mm;
-        if (ss < 10) _ss = '0' + ss;
-
-
-        return [_hh, _mm, _ss].join(':');*/
         return arrS.join(':');
     }
-    /* static currentDate() {
-        const now = new Date();
-        let dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
-        let mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-    /* static currentDateTime() {
-        return BkHelper.currentDate() + ' ' + BkHelper.currentTime();
-    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
@@ -1800,18 +1660,7 @@ class BkHelper {
             return 'undefined';
         });
     }
-    /* static replaceKey(obj, key1, key2) {
-        const keys   = Object.keys(obj);
-        const values = _.filter(obj, () => {return true;});
-        const index  = keys.indexOf(key1);
-        if (index !== -1) {
-            keys[index] = key2;
-            obj = _.object(keys, values);
-        }
-        return obj;
-    } */
     static readTextFile(path) {
-        // debug(colors.blue('BkHelper.readTextFile'), path);
         return new Promise((resolve, reject) => {
             fs_1.default.readFile(path, 'utf8', (err, content) => {
                 if (err) {
@@ -1830,7 +1679,6 @@ class BkHelper {
         return null;
     }
     static getFileContentSync(filePath) {
-        // debug(colors.blue('BkHelper.getFileContentSync'), filePath);
         if (!fs_1.default.existsSync(filePath)) {
             return null;
         }
@@ -1861,12 +1709,10 @@ class BkHelper {
         return BkHelper.createPath(arr.slice(0, arr.length - 1));
     }
     static async createDirIfNotExists2(originalDirPath) {
-        // debug('BkHelper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
             const exists = await BkHelper.exists(dirPath);
-            // debug('dirPath', i, dirPath, exists);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
             }
@@ -1893,29 +1739,10 @@ class BkHelper {
         });
     }
     static createDirIfNotExistsSync(dirPath) {
-        // debug(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
         if (!fs_1.default.existsSync(dirPath)) {
             fs_1.default.mkdirSync(dirPath);
         }
     }
-    /* static moveObjProp(obj, prop, offset) {
-        const keys     = _.keys(obj);
-        const values   = _.values(obj);
-        const oldIndex = keys.indexOf(prop);
-        if (oldIndex === -1) {
-            throw new Error('cannot find element');
-        }
-        const newIndex = oldIndex + offset;
-        if (newIndex < 0) {
-            throw new Error('cannot up top element');
-        }
-        if (newIndex > values.length - 1) {
-            throw new Error('cannot down bottom element');
-        }
-        keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
-        values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
-        return _.object(keys, values);
-    } */
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1)
@@ -1927,27 +1754,6 @@ class BkHelper {
             throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-    /* static getTempSubDirPath3(tempDirPath) {
-        return new Promise((resolve, reject) => {
-            const subDirName = BkHelper.getRandomString(8);
-            const tempSubSirPath = path.join(tempDirPath, subDirName);
-            fs.exists(tempSubSirPath, exists => {
-                if (!exists) {
-                    fs.mkdir(tempSubSirPath, err => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(tempSubSirPath);
-                        }
-                    });
-                } else {
-                    BkHelper.getTempSubDirPath(tempDirPath, () => {
-                        resolve();
-                    });
-                }
-            });
-        });
-    } */
     static copyFile3(source, target) {
         return new Promise((resolve, reject) => {
             const rd = fs_1.default.createReadStream(source);
@@ -1965,7 +1771,6 @@ class BkHelper {
         });
     }
     static exists(path) {
-        // debug(colors.blue('BkHelper.exists'), path);
         return new Promise((resolve) => {
             fs_1.default.exists(path, (exists) => {
                 resolve(exists);
@@ -1986,7 +1791,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0, console_1.debug)(safe_1.default.blue('BkHelper.writeFileSync'), filePath /* , content */);
+        (0, console_1.debug)(safe_1.default.blue('BkHelper.writeFileSync'), filePath);
         return fs_1.default.writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -2013,9 +1818,7 @@ class BkHelper {
             });
         });
     }
-    // timeOffset number in minutes
     static today(timeOffset) {
-        // debug('BkHelper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
             ts += BkHelper.MINUTE() * timeOffset;
@@ -2087,7 +1890,6 @@ class BkHelper {
         });
     }
     static addMinutes(date, minutes) {
-        // debug('BkHelper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -2153,16 +1955,6 @@ class BkHelper {
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
-    /* static createEmptyPromise<T = any>(): EmptyPromise<T> {
-        let _resolve, _reject;
-        const promise = new EmptyPromise<T>(function (resolve, reject) {
-            _resolve = resolve;
-            _reject = reject;
-        });
-        promise.resolve = _resolve;
-        promise.reject = _reject;
-        return promise;
-    } */
     static test() {
         (0, console_1.debug)('BkHelper.test');
     }
@@ -2170,7 +1962,6 @@ class BkHelper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
     static formatTime2(_sec) {
-        // debug('BkHelper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -2180,13 +1971,10 @@ class BkHelper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -2197,7 +1985,6 @@ class BkHelper {
         }
     }
     static registerGlobalClass(Class) {
-        // debug('BkHelper.registerGlobalClass', Class.name);
         if (global[Class.name])
             throw new Error(`global.${Class.name} already used`);
         global[Class.name] = Class;
@@ -2206,7 +1993,6 @@ class BkHelper {
         const [type, data] = value.split(';');
         const contentType = type.split(':')[1];
         const base64string = data.split(',')[1];
-        // debug('base64string:', base64string);
         const buffer = Buffer.from(base64string, 'base64');
         return [contentType, buffer];
     }
@@ -2239,25 +2025,17 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Context = void 0;
 class Context {
     constructor(options = {}) {
-        // debug('Context', options);
         this.options = options;
         this.connections = {};
         this.querytime = { params: {} };
-        // query
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
-        // params
         this.params = Object.assign({}, (this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}));
-        // files
         this.files = {};
         if (this.getReq() && this.getReq().files) {
             for (const name in this.getReq().files) {
                 this.files[name] = this.getReq().files[name].buffer;
             }
         }
-        // connections
-        // this.connections = {};
-        // querytime
-        // this.querytime = { params: {} };
     }
     getRoute() {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -2293,13 +2071,11 @@ class Context {
         return Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
     }
     getParams() {
-        // debug('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
-        // if (!this.options.req) throw new Error('getRes: no req');
         return this.options.req;
     }
     getRes() {
@@ -2374,7 +2150,6 @@ class Context {
     getUrl() {
         const req = this.getReq();
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-        // debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }
     static getIpFromReq(req) {
@@ -2411,16 +2186,12 @@ class Converter {
         (0, console_1.debug)('Convert.reformat', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
-        // app
         const appEditor = new ApplicationEditor_1.ApplicationEditor(appFile, path_1.default.join(BACKEND_DIR_PATH, 'editor'));
         appEditor.reformat();
         await appEditor.save();
-        // pages
         const pageNames = appEditor
             .getData()
             .pageLinks.map((data) => BaseModel_1.BaseModel.getName(data));
-        // debug('pageNames:', pageNames);
-        // const pageName = pageNames[0];
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);
             pageEditor.reformat();
@@ -2478,7 +2249,6 @@ class EventLog {
         this.url = options === null || options === void 0 ? void 0 : options.url;
     }
     async create(event) {
-        // debug('EventLog.create', event);
         if (!this.pool)
             throw new Error('no pool');
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {
@@ -2532,12 +2302,10 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FileSessionStore = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const express_session_1 = __importDefault(__webpack_require__(/*! express-session */ "express-session"));
-// import colors from 'colors/safe';
 const BkHelper_1 = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 class FileSessionStore extends express_session_1.default.Store {
     constructor(dirPath) {
-        // debug('FileSessionStore.constructor', dirPath);
         super();
         this.dirPath = dirPath;
         this.store = {};
@@ -2552,7 +2320,6 @@ class FileSessionStore extends express_session_1.default.Store {
         });
     }
     get(sid, cb) {
-        // debug('FileSessionStore.get', sid);
         const session = this.store[sid];
         if (session) {
             cb(null, session);
@@ -2733,7 +2500,6 @@ const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 class WebSocketServer {
     constructor(options) {
         this.options = options;
-        // debug('WebSocketServer.constructor');
         this.server = new ws_1.default.Server({
             server: options.httpServer,
             path: '/',
@@ -2748,7 +2514,6 @@ class WebSocketServer {
         (0, console_1.debug)('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         (0, console_1.log)('wss:', safe_1.default.bgYellow(safe_1.default.black(decodeURIComponent(webSocket.upgradeReq.url))));
         const parts = url_1.default.parse(webSocket.upgradeReq.url, true);
-        // debug('parts.query:', parts.query);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)
@@ -2771,9 +2536,7 @@ class WebSocketServer {
         });
         const application = await this.getHostApp().createApplicationIfNotExists(context);
         application.addClient(webSocket);
-        // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
-        // debug('this.clients', this.clients);
         context.destroy();
     }
     async onClose(webSocket, code, reason) {
@@ -2855,7 +2618,6 @@ class ApplicationEditor extends Editor_1.Editor {
         return this.appFile;
     }
     static createData(params) {
-        // debug('ApplicationEditor.createData', params);
         if (!params.name)
             throw new Error('no name');
         return {
@@ -3296,21 +3058,6 @@ class Editor extends BaseModel_1.BaseModel {
             throw new Error(`${this.constructor.name}: no editorPath`);
         return this.editorPath;
     }
-    /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-        debug('Editor.createFileByReplace');
-        emptyTemplate = emptyTemplate || '';
-        const exists = await BkHelper.exists(newFilePath);
-        if (exists) {
-            throw new Error(`File ${path.basename(newFilePath)} already exist.`);
-        }
-        const template = await BkHelper.readTextFile(templateFilePath);
-        let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
-        if (text === '') {
-            text = emptyTemplate;
-        }
-        await BkHelper.writeFile2(newFilePath, text);
-        return text;
-    } */
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await BkHelper_1.BkHelper.exists(newFilePath);
         if (exists) {
@@ -3321,9 +3068,6 @@ class Editor extends BaseModel_1.BaseModel {
         await BkHelper_1.BkHelper.writeFile2(newFilePath, content);
         return content;
     }
-    /* getViewName() {
-        return this.constructor.name.replace('Editor', '') + 'View';
-    } */
     async getFile(filePath) {
         (0, console_1.debug)('Editor.getFile', filePath);
         const exists = await BkHelper_1.BkHelper.exists(filePath);
@@ -3347,18 +3091,6 @@ class Editor extends BaseModel_1.BaseModel {
         const customFilePath = await this.getCustomFilePath(ext);
         await this.saveFile(customFilePath, text);
     }
-    /* moveDataSourceUp(name) {
-        this.moveDataColItem('dataSources', name, -1);
-    } */
-    /* moveDataSourceDown(name) {
-        this.moveDataColItem('dataSources', name, 1);
-    } */
-    /* moveActionUp(name) {
-        this.moveDataColItem('actions', name, -1);
-    } */
-    /* moveActionDown(name) {
-        this.moveDataColItem('actions', name, 1);
-    } */
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
@@ -3372,30 +3104,10 @@ class Editor extends BaseModel_1.BaseModel {
         }
         return path_1.default.join(customDirPath, this.getName() + '.' + ext);
     }
-    /* createDataSourceEditor(name) {
-        const data = this.getColItemData('dataSources', name);
-        const className = BaseModel.getClassName(data);
-        const DataSourceClass = backend[`${className}Editor`];
-        return new DataSourceClass(data, this);
-    } */
     moveDataColItem(colName, name, offset) {
         BkHelper_1.BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
-    /* async newActionData(params) {
-        if (!params.name) throw new Error('no name');
-        const name = params.name;
-        if (this.getColItemData('actions', name)) {
-            throw new Error(`action ${name} already exists`);
-        }
-        const data = backend.ActionEditor.createData(params);
-        this.addModelData('actions', data);
-        return data;
-    } */
-    /* createActionEditor(name) {
-        return new backend.ActionEditor(this.getColItemData('actions', name), this);
-    } */
     setColData(colName, newData) {
-        // debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
     createItemEditor(colName, itemName) {
@@ -3434,7 +3146,6 @@ class Editor extends BaseModel_1.BaseModel {
         throw new Error(`${this.constructor.name}.getColName not implemented`);
     }
     static createItemData(data) {
-        // debug('Editor.createItemData', data);
         try {
             const params = data['@attributes']
                 ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;
@@ -3849,9 +3560,7 @@ class RadioFieldEditor extends FieldEditor_1.FieldEditor {
     static createData(params) {
         return {
             '@class': 'RadioField',
-            '@attributes': Object.assign(Object.assign({}, FieldEditor_1.FieldEditor.createAttributes(params)), { readOnly: params.readOnly ? params.readOnly : 'false', notNull: params.notNull ? params.notNull : 'false', 
-                // placeholder   : params.placeholder    ? params.placeholder    :             '',
-                dataSourceName: params.dataSourceName ? params.dataSourceName : '', valueColumn: params.valueColumn ? params.valueColumn : '', displayColumn: params.displayColumn ? params.displayColumn : '' }),
+            '@attributes': Object.assign(Object.assign({}, FieldEditor_1.FieldEditor.createAttributes(params)), { readOnly: params.readOnly ? params.readOnly : 'false', notNull: params.notNull ? params.notNull : 'false', dataSourceName: params.dataSourceName ? params.dataSourceName : '', valueColumn: params.valueColumn ? params.valueColumn : '', displayColumn: params.displayColumn ? params.displayColumn : '' }),
         };
     }
 }
@@ -4041,7 +3750,6 @@ const FormEditor_1 = __webpack_require__(/*! ../FormEditor */ "./src/backend/edi
 const Editor_1 = __webpack_require__(/*! ../../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class RowFormEditor extends FormEditor_1.FormEditor {
     static createData(params) {
-        // debug('RowFormEditor.createData', params);
         return {
             '@class': 'RowForm',
             '@attributes': Object.assign(Object.assign({}, FormEditor_1.FormEditor.createAttributes(params)), { newMode: params.newMode ? params.newMode : '', backOnly: params.backOnly ? params.backOnly : 'false', refreshButton: params.refreshButton || 'true' }),
@@ -4072,7 +3780,6 @@ const FormEditor_1 = __webpack_require__(/*! ../FormEditor */ "./src/backend/edi
 const Editor_1 = __webpack_require__(/*! ../../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class TableFormEditor extends FormEditor_1.FormEditor {
     static createData(params) {
-        // debug('TableFormEditor.createData', params);
         return {
             '@class': 'TableForm',
             '@attributes': Object.assign(Object.assign({}, FormEditor_1.FormEditor.createAttributes(params)), { editMethod: params.editMethod || 'disabled', itemEditPage: params.itemEditPage || '', itemCreatePage: params.itemCreatePage || '', newRowMode: params.newRowMode || 'disabled', deleteRowMode: params.deleteRowMode || 'disabled', refreshButton: params.refreshButton || 'true' }),
@@ -4299,7 +4006,6 @@ exports.TableEditor = void 0;
 const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/backend/editor/Editor/Editor.ts");
 class TableEditor extends Editor_1.Editor {
     static createData(params) {
-        // debug('TableEditor.createData', params);
         return {
             '@class': 'Table',
             '@attributes': {
@@ -4461,7 +4167,6 @@ class ApplicationEditorController extends VisualEditorController_1.VisualEditorC
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const appEditor = this.createApplicationEditor();
-            // @ts-ignore
             result.data.js = await appEditor.getCustomFile('js');
         }
         return result;
@@ -4500,10 +4205,6 @@ exports.ColumnEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ColumnEditorController extends EditorController_1.EditorController {
-    /* constructor(...args) {
-        debug('ColumnEditorController.constructor');
-        super(...args);
-    } */
     async save(params) {
         (0, console_1.debug)('ColumnEditorController.save');
         const appEditor = this.createApplicationEditor();
@@ -4551,9 +4252,6 @@ exports.DataSourceEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class DataSourceEditorController extends EditorController_1.EditorController {
-    /* constructor(...args) {
-        super(...args);
-    } */
     async createDataSourceEditor(params) {
         let editor = this.createApplicationEditor();
         if (params.pageFileName) {
@@ -4609,21 +4307,18 @@ class DataSourceEditorController extends EditorController_1.EditorController {
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                // form data source
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveItemUp('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
             else {
-                // page data source
                 pageEditor.moveItemUp('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
         }
         else {
-            // app data source
             appEditor.moveItemUp('dataSources', params.dataSource);
             await appEditor.save();
             return null;
@@ -4634,21 +4329,18 @@ class DataSourceEditorController extends EditorController_1.EditorController {
         if (params.page) {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
-                // form data source
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
                 formEditor.moveItemDown('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
             else {
-                // page data source
                 pageEditor.moveItemDown('dataSources', params.dataSource);
                 await pageEditor.save();
                 return null;
             }
         }
         else {
-            // app data source
             appEditor.moveItemDown('dataSources', params.dataSource);
             await appEditor.save();
             return null;
@@ -4669,11 +4361,6 @@ class DataSourceEditorController extends EditorController_1.EditorController {
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
-            /*case 'QueryView.ejs':
-                const dataSourceEditor = await this.createDataSourceEditor(params);
-                const backendJs = await dataSourceEditor.getCustomFile('back.js');
-                result.data.backendJs = backendJs;
-                return result;*/
             default:
                 return result;
         }
@@ -4701,10 +4388,6 @@ class DatabaseEditorController extends EditorController_1.EditorController {
         super(...arguments);
         this.application = null;
     }
-    /* constructor(...args) {
-        super(...args);
-        this.application = null;
-    } */
     async init(context) {
         await super.init(context);
         this.application = await this.hostApp.createApplication(context);
@@ -4712,14 +4395,6 @@ class DatabaseEditorController extends EditorController_1.EditorController {
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const data = appEditor.newItemData(params.class, 'databases', params);
-        /*
-        if (params.params) {
-            const databaseEditor = appEditor.createItemEditor('databases', params.name);
-            for (const name in params.params) {
-                const param = params.params[name];
-                databaseEditor.newItemData('Param', 'params', param);
-            }
-        }*/
         await appEditor.save();
         return data;
     }
@@ -4740,10 +4415,7 @@ class DatabaseEditorController extends EditorController_1.EditorController {
     async getView(params) {
         const result = await super.getView(params);
         if (params.view === 'DatabaseView/DatabaseView.html') {
-            // database
             const database = this.application.getDatabase(params.database);
-            // tables
-            // @ts-ignore
             result.data.tables = await database.getTableList();
         }
         return result;
@@ -4821,9 +4493,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FieldEditorController = void 0;
 const VisualEditorController_1 = __webpack_require__(/*! ../VisualEditorController */ "./src/backend/editor/EditorController/VisualEditorController.ts");
 class FieldEditorController extends VisualEditorController_1.VisualEditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -4865,11 +4534,8 @@ class FieldEditorController extends VisualEditorController_1.VisualEditorControl
             const pageEditor = await appEditor.getPage(params.page);
             const formEditor = pageEditor.createItemEditor('forms', params.form);
             const fieldEditor = formEditor.createItemEditor('fields', params.field);
-            // @ts-ignore
             result.data.js = await fieldEditor.getCustomFile('js');
-            // @ts-ignore
             result.data.jsx = await fieldEditor.getCustomFile('jsx');
-            // @ts-ignore
             result.data.less = await fieldEditor.getCustomFile('less');
             return result;
         }
@@ -4942,9 +4608,6 @@ exports.FormEditorController = void 0;
 const VisualEditorController_1 = __webpack_require__(/*! ../VisualEditorController */ "./src/backend/editor/EditorController/VisualEditorController.ts");
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class FormEditorController extends VisualEditorController_1.VisualEditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
@@ -4989,11 +4652,8 @@ class FormEditorController extends VisualEditorController_1.VisualEditorControll
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                // @ts-ignore
                 result.data.js = await formEditor.getCustomFile('js');
-                // @ts-ignore
                 result.data.jsx = await formEditor.getCustomFile('jsx');
-                // @ts-ignore
                 result.data.less = await formEditor.getCustomFile('less');
                 return result;
             default:
@@ -5053,9 +4713,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KeyColumnEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
 class KeyColumnEditorController extends EditorController_1.EditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         if (params.page) {
@@ -5140,9 +4797,6 @@ const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
 const VisualEditorController_1 = __webpack_require__(/*! ../VisualEditorController */ "./src/backend/editor/EditorController/VisualEditorController.ts");
 const BkHelper_1 = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
 class PageEditorController extends VisualEditorController_1.VisualEditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
     async get(params) {
         const pageFilePath = path_1.default.join(this.appInfo.dirPath, params.fileName);
         const content = await BkHelper_1.BkHelper.readTextFile(pageFilePath);
@@ -5174,11 +4828,8 @@ class PageEditorController extends VisualEditorController_1.VisualEditorControll
             case 'VisualView.html':
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
-                // @ts-ignore
                 result.data.js = await pageEditor.getCustomFile('js');
-                // @ts-ignore
                 result.data.jsx = await pageEditor.getCustomFile('jsx');
-                // @ts-ignore
                 result.data.less = await pageEditor.getCustomFile('less');
                 return result;
             default:
@@ -5235,7 +4886,6 @@ const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src
 class PageLinkEditorController extends EditorController_1.EditorController {
     async save(params) {
         const appEditor = this.createApplicationEditor();
-        //const pageLinkEditor = appEditor.createPageLinkEditor(params.pageLink);
         const pageLinkEditor = appEditor.createItemEditor('pageLinks', params.pageLink);
         pageLinkEditor.setAttr(params.attr, params.value);
         await appEditor.save();
@@ -5272,10 +4922,6 @@ exports.ParamEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class ParamEditorController extends EditorController_1.EditorController {
-    /* constructor(...args) {
-        debug('ParamEditorController.constructor');
-        super(...args);
-    } */
     async _new(params) {
         (0, console_1.debug)('ParamEditorController._new');
         const appEditor = this.createApplicationEditor();
@@ -5320,14 +4966,10 @@ exports.TableEditorController = void 0;
 const EditorController_1 = __webpack_require__(/*! ../EditorController */ "./src/backend/editor/EditorController/EditorController.ts");
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class TableEditorController extends EditorController_1.EditorController {
-    /* constructor(...args) {
-        super(...args);
-    } */
     async _new(params) {
         (0, console_1.debug)('TableEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
-        // const data = databaseEditor.newTableData(params);
         const data = databaseEditor.newItemData('Table', 'tables', params);
         await appEditor.save();
         return data;
@@ -5472,8 +5114,6 @@ class EditorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
-        // debug('editor.css:', this.css);
-        // debug('editor.js:' , this.js);
     }
     getLinks() {
         return [
@@ -5492,7 +5132,6 @@ class EditorModule {
     async handleEditorGet(req, res, context) {
         (0, console_1.debug)('EditorModule.handleEditorGet');
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
-        // data
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.hostApp.getNodeEnv(),
@@ -5522,7 +5161,6 @@ class EditorModule {
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
-        // debug('json result:', result);
         if (result === undefined)
             throw new Error('handleEditorPost: result is undefined');
         res.json(result);
@@ -5564,7 +5202,7 @@ ${scripts}
         await editorFrontHostApp.run();
     });
 </script>-->
-<script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+<script type="application/json">${JSON.stringify(data)}</script>
 </head>
 <body class="editor__body">
 <div class="editor__root"></div>
@@ -5681,9 +5319,7 @@ __exportStar(__webpack_require__(/*! ./BackHostApp */ "./src/backend/BackHostApp
 __exportStar(__webpack_require__(/*! ./Converter */ "./src/backend/Converter.ts"), exports);
 __exportStar(__webpack_require__(/*! ./JsonFile */ "./src/backend/JsonFile.ts"), exports);
 __exportStar(__webpack_require__(/*! ./AppInfo */ "./src/backend/AppInfo.ts"), exports);
-// viewer
 __exportStar(__webpack_require__(/*! ./viewer */ "./src/backend/viewer/index.ts"), exports);
-// editor
 __exportStar(__webpack_require__(/*! ./editor */ "./src/backend/editor/index.ts"), exports);
 
 
@@ -5717,13 +5353,10 @@ class IndexModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
-        // debug('app.css:', this.css);
-        // debug('app.js:' , this.js);
     }
     async fill() {
         const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
-        // debug('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -5739,11 +5372,10 @@ class IndexModule {
         return this.js;
     }
     async render() {
-        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
         const data = await this.fill();
-        const data2 = JSON.stringify(data /*, null, 4*/);
+        const data2 = JSON.stringify(data);
         return `<!DOCTYPE html>
 <html>
 <head>
@@ -5801,8 +5433,6 @@ class MonitorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
-        // debug('monitor.css:', this.css);
-        // debug('monitor.js:' , this.js);
     }
     fill() {
         return {
@@ -5820,12 +5450,9 @@ class MonitorModule {
                     }),
                     clients: app.clients.map((webSocket) => {
                         return {
-                            // @ts-ignore
                             uuid: webSocket.uuid,
-                            // @ts-ignore
                             userId: webSocket.userId,
                             ip: BkHelper_1.BkHelper.getWebSocketIP(webSocket),
-                            // @ts-ignore
                             version: webSocket.customFields.version,
                         };
                     }),
@@ -5858,10 +5485,9 @@ class MonitorModule {
             this.checkCredentials(req));
     }
     render() {
-        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
-        const data = JSON.stringify(this.fill() /*, null, 4*/);
+        const data = JSON.stringify(this.fill());
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">
 <head>
@@ -5986,13 +5612,11 @@ class BkApplication extends BkModel_1.BkModel {
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // debug('publicDirPath:', publicDirPath);
         return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
         (0, console_1.debug)(`Application.deinit: ${this.getName()}`);
         await super.deinit();
-        // databases
         for (const database of this.databases) {
             await database.deinit();
         }
@@ -6027,7 +5651,6 @@ class BkApplication extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // debug('Application.fill');
         const start = Date.now();
         const response = (await super.fill(context));
         response.route = context.getRoute();
@@ -6041,28 +5664,19 @@ class BkApplication extends BkModel_1.BkModel {
         await this.fillCollection(response, 'databases', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'dataSources', context);
-        // nodeEnv
         response.nodeEnv = this.getHostApp().getNodeEnv();
-        // text
         response.text = this.getText();
-        // menu
         response.menu = this.menu;
-        // nav
         response.nav = this.nav;
-        // uuid
         response.uuid = (0, uuid_1.v4)();
-        // actions
         response.actions = this.getCol('actions').map((action) => ({
             name: BaseModel_1.BaseModel.getName(action),
             caption: BaseModel_1.BaseModel.getAttr(action, 'caption'),
         }));
-        // pages
         response.pages = await this.fillPages(context);
-        // user
         response.user = this.isAuthentication()
             ? await this.getClientUserFromServerUser(context)
             : null;
-        // time
         response.time = Date.now() - start;
         return response;
     }
@@ -6074,10 +5688,8 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     async createMenu(context) {
-        // debug('Application.createMenu');
         const menu = {};
         const nav = {};
-        // pages
         const pageLinkNames = this.getItemNames('pageLinks');
         for (const pageLinkName of pageLinkNames) {
             const pageLink = this.createPageLink(pageLinkName);
@@ -6086,7 +5698,6 @@ class BkApplication extends BkModel_1.BkModel {
                 const pageFilePath = pageLink.getPageFilePath();
                 const pageFile = new JsonFile_1.JsonFile(pageFilePath);
                 await pageFile.read();
-                // menu
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
                 }
@@ -6095,7 +5706,6 @@ class BkApplication extends BkModel_1.BkModel {
                     page: pageLink.getAttr('name'),
                     caption: pageFile.getAttr('caption'),
                 });
-                // nav
                 if (!nav[pageLinkMenu]) {
                     nav[pageLinkMenu] = [];
                 }
@@ -6105,7 +5715,6 @@ class BkApplication extends BkModel_1.BkModel {
                 });
             }
         }
-        // actions
         const actions = this.getCol('actions');
         if (actions.length) {
             menu['Actions'] = actions.map((action) => ({
@@ -6122,7 +5731,6 @@ class BkApplication extends BkModel_1.BkModel {
         return new BkPageLink_1.BkPageLink(data, this);
     }
     async createPage(pageLinkName) {
-        // debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -6139,7 +5747,6 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        // debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -6155,7 +5762,6 @@ class BkApplication extends BkModel_1.BkModel {
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     async fillPages(context) {
-        // debug('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -6189,7 +5795,6 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async rpc(name, context) {
         (0, console_1.debug)('BkApplication.rpc', name, context.getBody());
-        // @ts-ignore
         if (this[name])
             return await this[name](context);
         throw new HttpError_1.HttpError({
@@ -6198,15 +5803,10 @@ class BkApplication extends BkModel_1.BkModel {
             context,
         });
     }
-    /* async request(options) {
-        debug(colors.magenta('Application.request'), options);
-        return await axios(options);
-    } */
     getEnv() {
         return this.env;
     }
     getEnvVarValue(name) {
-        // debug(`Application.getEnvVarValue: ${name}`);
         if (!name)
             throw new Error('no name');
         const env = this.getEnv();
@@ -6229,10 +5829,8 @@ class BkApplication extends BkModel_1.BkModel {
             throw new Error(`no database with name: ${name}`);
         return db;
     }
-    // to init custom context params before each request get/post
     async initContext(context) { }
     static makeAppInfoFromAppFile(appFile, distDirPath) {
-        // debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path_1.default.basename(path_1.default.dirname(filePath));
         const fileName = path_1.default.basename(filePath, path_1.default.extname(filePath));
@@ -6252,14 +5850,12 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     static async loadAppInfo(appFilePath, distDirPath) {
-        // debug('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
         return appInfo;
     }
     static async getAppInfos(appsDirPath, distDirPath) {
-        // debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper_1.BkHelper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
@@ -6290,7 +5886,6 @@ class BkApplication extends BkModel_1.BkModel {
             }
         }
         catch (err) {
-            // if some databases already connected successfully
             for (const db of this.databases) {
                 if (db.isConnected(context)) {
                     await db.release(context);
@@ -6305,18 +5900,13 @@ class BkApplication extends BkModel_1.BkModel {
         }
     }
     addClient(webSocket) {
-        // add to clients
         this.clients.push(webSocket);
-        // debug('this.clients', this.clients);
     }
     removeClient(webSocket) {
         const i = this.clients.indexOf(webSocket);
-        // @ts-ignore
         if (i === -1)
             throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        // debug('i:', i);
         this.clients.splice(i, 1);
-        // debug('this.clients', this.clients);
     }
     broadcastDomesticResultToClients(context, result) {
         (0, console_1.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
@@ -6326,7 +5916,6 @@ class BkApplication extends BkModel_1.BkModel {
             throw new Error('no result');
         const uuid = context.getReq().body.uuid;
         for (const webSocket of this.clients) {
-            // @ts-ignore
             if (webSocket.uuid !== uuid) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
@@ -6342,7 +5931,6 @@ class BkApplication extends BkModel_1.BkModel {
         if (fResult) {
             const uuid = context.getReq().body.uuid;
             for (const webSocket of this.clients) {
-                // @ts-ignore
                 if (webSocket.uuid !== uuid) {
                     webSocket.send(JSON.stringify({ type: 'result', data: fResult }));
                 }
@@ -6378,22 +5966,14 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async handleGetFile(context, next) {
-        // debug('Application.handleGetFile', context.getUri());
         const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper_1.BkHelper.exists(filePath)) {
-            // context.setVersionHeaders(pkg.version, this.getVersion());
             context.getRes().sendFile(filePath);
         }
         else {
-            // next();
             context.getRes().status(404).end('Not Found');
             await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
-        /*
-        if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-            throw new HttpError({message: 'not authenticated', context});
-        }
-        */
     }
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
         return (0, home_1.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
@@ -6467,9 +6047,6 @@ class BkDataSource extends BkModel_1.BkModel {
         this.keyColumns = [];
         this.rows = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
     getDirPath() {
         return path_1.default.join(this.getParent().getDirPath(), 'dataSources', this.getName());
     }
@@ -6477,11 +6054,8 @@ class BkDataSource extends BkModel_1.BkModel {
         return path_1.default.join(this.getDirPath(), `${this.getName()}.json`);
     }
     async init(context) {
-        // debug('DataSource.init', this.getFullName());
         await super.init(context);
-        // keyColumns
         this.keyColumns = this.getKeyColumns();
-        // rows
         const jsonFilePath = this.getJsonFilePath();
         const exists = await BkHelper_1.BkHelper.exists(jsonFilePath);
         if (exists) {
@@ -6491,7 +6065,6 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
-        // debug('keyColumns:', keyColumns);
         if (!keyColumns.length) {
             throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
         }
@@ -6506,7 +6079,6 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     checkKeyFields() {
         const fieldsClumns = this.getForm().fields.map((field) => field.getAttr('column'));
-        // debug('fieldsClumns:', fieldsClumns);
         for (const keyColumn of this.keyColumns) {
             if (!fieldsClumns.includes(keyColumn)) {
                 throw new Error(`[${this.getFullName()}]: no field with key column: ${keyColumn}`);
@@ -6516,7 +6088,6 @@ class BkDataSource extends BkModel_1.BkModel {
     checkRow(row) {
         this.checkKeyColumns(row);
         if (this.isDefaultOnForm()) {
-            // this.checkNotUsedColumns(row);
             this.checkFields(row);
         }
     }
@@ -6663,22 +6234,12 @@ class BkDataSource extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        // debug('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
-        // keyColumns
         response.keyColumns = this.keyColumns;
-        // rows from JSON file
         response.rows = await this.getRows();
         return response;
     }
     async getRows() {
-        // debug('DataSource.getRows');
-        /* const jsonFilePath = this.getJsonFilePath();
-        const exists = await BkHelper.exists(jsonFilePath);
-        if (exists) {
-            const content = await BkHelper.readTextFile(jsonFilePath);
-            return JSON.parse(content);
-        } */
         return this.rows;
     }
     isOnForm() {
@@ -6760,7 +6321,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (this.isDefaultOnForm()) {
             this.checkKeyFields();
         }
-        // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.getParent().isNewMode(context)) {
             const limit = this.getLimit();
             if (limit) {
@@ -6794,7 +6354,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
-        // rows
         const limit = this.getLimit();
         if (limit) {
             if (!context.params.frame)
@@ -6802,14 +6361,11 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             context.setParam('skip', (context.params.frame - 1) * limit);
             context.setParam('limit', limit);
         }
-        // exec selectQuery
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(context), this.getSelectParams(context));
         (0, console_1.debug)('rows query time:', Date.now() - start);
-        // debug('rows:', rows);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
-        // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
@@ -6844,14 +6400,11 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             throw new Error('create: cannot calc row key');
         (0, console_1.debug)('key:', key);
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
-        // debug('keyParams:', keyParams);
-        // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), keyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // debug('row:', row);
         const result = new Result_1.Result();
         Result_1.Result.addInsertToResult(result, databaseName, tableName, key);
         Result_1.Result.addInsertExToResult(result, databaseName, tableName, key, rawRow);
@@ -6867,7 +6420,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
-        // debug('changes:', changes);
         const key = Object.keys(changes)[0];
         (0, console_1.debug)('key:', key);
         const filter = this.getKeyValuesFromKey(key);
@@ -6876,18 +6428,14 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             $set: values,
         });
         (0, console_1.debug)('updateResult', updateResult);
-        // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
         (0, console_1.debug)('newKey:', newKey);
-        // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // debug('row:', row);
-        // result
         const result = new Result_1.Result();
         Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
         Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
@@ -6923,8 +6471,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
     checkRow(row) {
         this.checkKeyColumns(row);
         if (this.isDefaultOnForm()) {
-            // this.checkNotUsedColumns(row);
-            // this.checkFields(row);
         }
     }
     encodeRow(row) {
@@ -6987,7 +6533,6 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         return dChanges;
     }
     decodeRow(rawRow) {
-        // debug('PersistentDataSource.decodeRow', rawRow);
         const form = this.getForm();
         if (!form)
             throw new Error('not form ds');
@@ -7035,12 +6580,10 @@ const Result_1 = __webpack_require__(/*! ../../../../../../Result */ "./src/Resu
 const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     async fill(context) {
-        // debug('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
         if (this.isDefaultOnForm()) {
             this.checkKeyFields();
         }
-        // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.getParent().isNewMode(context)) {
             const limit = this.getLimit();
             if (limit) {
@@ -7071,7 +6614,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         return response;
     }
     getKeyColumns() {
-        // debug('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
     getCountQuery(context) {
@@ -7107,25 +6649,12 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     templateQuery(context, _query) {
         const params = this.getSelectParams(context);
         let query = _query;
-        // replace [param] to value
         query = _query.replace(/\[([\w.@]+)\]/g, (text, name) => {
             if (params[name]) {
                 return params[name];
             }
             return text;
         });
-        // replace array param to ('itemA', 'itemB')
-        /* for (const name of Object.keys(params)) {
-            if (Array.isArray(params[name])) {
-                const items = params[name].map(item => {
-                    const type = typeof item;
-                    if (type === 'number') return item;
-                    if (type === 'string') return `'${item}'`;
-                    throw new Error(`wrong type for array item: ${type}`);
-                });
-                query = query.replaceAll(`{${name}}`, `(${items})`);
-            }
-        } */
         return query;
     }
     getSelectParams(context) {
@@ -7135,7 +6664,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
-        // rows
         const limit = this.getLimit();
         if (limit) {
             if (!context.params.frame)
@@ -7150,7 +6678,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
-        // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
@@ -7176,7 +6703,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const table = this.getAttr('table');
         const values = _values ? _values : this.decodeRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
-        // debug('autoColumnTypes:', autoColumnTypes);
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
         (0, console_1.debug)('newRow:', newRow);
         const key = this.getKeyFromValues(newRow);
@@ -7184,14 +6710,10 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             throw new Error('insert: cannot calc row key');
         (0, console_1.debug)('key:', key);
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
-        // debug('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
-        // debug('singleQuery:', singleQuery);
-        // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
         const result = new Result_1.Result();
@@ -7209,32 +6731,25 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.getChanges(context);
-        // debug('changes:', changes);
         const [key] = Object.keys(changes);
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
-        // update row
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
         const _values = BkHelper_1.BkHelper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = BkHelper_1.BkHelper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
-        // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
         (0, console_1.debug)('key:', key);
         (0, console_1.debug)('newKey:', newKey);
         (0, console_1.debug)('newKeyParams:', newKeyParams);
-        // select updated row
         const selectQuery = this.getSingleQuery(context);
-        // debug('selectQuery:', selectQuery);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        // debug('row:', row);
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // result
         const result = new Result_1.Result();
         Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
         Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
@@ -7260,9 +6775,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         response.database = this.getAttr('database');
         response.table = this.getAttr('table');
     }
-    /* getDbType(column): string {
-        return this.getTable().getColumn(column).getDbType();
-    } */
     getAutoColumns() {
         if (!this.table)
             throw new Error('getAutoColumns: no table');
@@ -7317,7 +6829,6 @@ class BkDatabase extends BkModel_1.BkModel {
         return !!context.connections[this.getName()];
     }
     getConnection(context) {
-        // debug('Database.getConnection');
         if (!context)
             throw new Error('no context');
         const name = this.getName();
@@ -7457,7 +6968,6 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         context.connections[name] = { client, session };
     }
     getUrl() {
-        // debug('config', this.getConfig());
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
@@ -7487,7 +6997,6 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     }
     async deleteOne(context, colName, filter) {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
-        // debug('_filter', _filter);
         return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
     static makeObjectIds(filter, names = ['_id']) {
@@ -7503,34 +7012,27 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     }
     async queryResult(context, query, params = null) {
         const db = this.getDbLink(context);
-        // eval query as function
         const fn = query.trim().substring(0, 5) === 'async'
             ? eval(query)
             : eval(`(db, params, ObjectId) => (${query})`);
-        // exec query
         const result = await fn(db, params, mongodb_1.ObjectId);
         return result;
     }
     async queryRows(context, query, params = null) {
         (0, console_1.debug)('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
-        // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             return await result.toArray();
         }
-        // for findOne query
         return [result];
     }
     async queryScalar(context, query, params = null) {
         const result = await this.queryResult(context, query, params);
-        // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             const rows = await result.toArray();
-            // debug('rows:', rows);
             const [firstRow] = rows;
             if (!firstRow)
                 throw new Error('queryScalar: no first row');
-            // debug('firstRow:', firstRow);
             const firstField = Object.keys(firstRow)[0];
             if (!firstField)
                 throw new Error('queryScalar: no first field');
@@ -7604,10 +7106,6 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         super(...arguments);
         this.pool = null;
     }
-    /* constructor(data, parent?) {
-        super(data, parent);
-        debug('new MySqlDatabase');
-    } */
     async deinit() {
         (0, console_1.debug)(`MySqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
@@ -7621,21 +7119,15 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
     }
     getPool() {
-        //debug('MySqlDatabase.getPool');
         if (!this.pool) {
-            //debug('creating connection pool for: ' + database);
             this.pool = (0, mysql_1.createPool)(this.getConfig());
         }
-        //debug('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
     getConfig() {
         (0, console_1.debug)('MySqlDatabase.getConfig');
         return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: BkMySqlDatabase.queryFormat });
     }
-    /* getDefaultPort(): number {
-        return 3306;
-    } */
     static async Pool_getConnection(pool) {
         return new Promise((resolve, reject) => {
             pool.getConnection((err, cnn) => {
@@ -7660,7 +7152,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
                 }
                 else {
                     if (nest) {
-                        const rows = this._getRows(result, fields); // for duplicate column names
+                        const rows = this._getRows(result, fields);
                         resolve(rows);
                     }
                     else {
@@ -7687,7 +7179,6 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     _getRows(result, fields) {
-        //debug('MySqlDatabase._getRows');
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
             const f = fields[j];
@@ -7776,7 +7267,6 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
                     reject(err);
                 }
                 else {
-                    // debug('rows:', rows);
                     const tables = rows.map((row) => row[fields[0].name]);
                     (0, console_1.debug)('tables:', tables);
                     resolve(tables);
@@ -7800,7 +7290,6 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 }
                 else {
                     const tableInfo = rows.map((row) => {
-                        // debug('row:', row);
                         return {
                             name: row.COLUMN_NAME,
                             type: this.getColumnTypeByDataType(row.COLUMN_TYPE),
@@ -7809,9 +7298,6 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                             nullable: row.IS_NULLABLE === 'YES',
                             comment: row.COLUMN_COMMENT,
                             dbType: row.COLUMN_TYPE,
-                            // COLUMN_TYPE   : row.COLUMN_TYPE,
-                            // COLUMN_DEFAULT: row.COLUMN_DEFAULT,
-                            // EXTRA         : row.EXTRA,
                         };
                     });
                     (0, console_1.debug)('tableInfo:', tableInfo);
@@ -7841,41 +7327,13 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         if (autoColumns.length > 1)
             throw new Error('mysql does not support more than one auto increment column');
         const query = this.getInsertQuery(table, values);
-        // debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // debug('insert result:', result);
         if (autoColumns.length === 1) {
             if (!result.insertId)
                 throw new Error('no insertId');
             return Object.assign({ [autoColumns[0]]: result.insertId }, values);
         }
         return Object.assign({}, values);
-        /*const key = JSON.stringify([result.insertId]);
-        return key;*/
-        /*
-        const _row = {};
-        const files = {};
-        for (const column in row) {
-            if (row[column] instanceof Object) {
-                _row[column] = '{' + column + '}';
-                files[column] = row[column];
-                error(row[column]);
-            } else if (this.table.columns[column] && !this.table.columns[column].isAuto()) {
-                _row[column] = row[column];
-            }
-        }
-        debug('_row:', _row);
-        */
-        /*
-        const buffers = {};
-        const names = Object.keys(files);
-        for (let i = 0; i < names.length; i++) {
-            const name = names[i];
-            const file = files[name];
-            const buffer = await this.getBuffer(context, file);
-            buffers[name] = buffer;
-        }
-        */
     }
     async connect(context) {
         (0, console_1.debug)('MySqlDatabase.connect', this.getName());
@@ -7923,14 +7381,6 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         super(...arguments);
         this.pool = {};
     }
-    /* constructor(data, parent?) {
-        debug('new PostgreSqlDatabase');
-        super(data, parent);
-    } */
-    /* static async create(data, parent) {
-        // debug('PostgreSqlDatabase.create');
-        return new PostgreSqlDatabase(data, parent);
-    } */
     async deinit() {
         (0, console_1.debug)(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
@@ -7943,7 +7393,6 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         this.pool = {};
     }
     getPool(context) {
-        // debug('PostgreSqlDatabase.getPool');
         const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
@@ -7979,7 +7428,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             (0, console_1.debug)(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
-            } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+            });
         }
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
@@ -7988,21 +7437,16 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             (0, console_1.debug)('values:', values);
         }
         const result = await this.getConnection(context).query(sql, values);
-        // debug('cnn.query result:', result);
         return result;
     }
     static async queryResult(pool, query, params = null) {
-        (0, console_1.debug)(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        (0, console_1.debug)(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        // debug('sql:', sql);
-        // debug('values:', values);
         const result = await pool.query(sql, values);
-        // debug('cnn.query result:', result);
         return result;
     }
     async queryRows(context, query, params = null) {
-        // debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
@@ -8025,15 +7469,11 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         await this.getConnection(context).query('rollback');
     }
     static formatQuery(query, params) {
-        // debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
-        // debug('params:', params);
         if (!params) {
             return { sql: query, values: null };
         }
         const usedValues = BkSqlDatabase_1.BkSqlDatabase.getUsedParams(query);
-        // debug('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
-        // debug('keys:', keys);
         const values = keys.map((key) => params[key]);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
@@ -8044,20 +7484,17 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return { sql, values };
     }
     getDeleteQuery(tableName, rowKeyValues) {
-        // debug('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
-        // debug('query:', query);
         return query;
     }
     getUpdateQuery(tableName, values, where) {
         return BkPostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
     static getUpdateQuery(tableName, values, where) {
-        // debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0)
@@ -8069,29 +7506,24 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
-        // debug('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length)
             return `insert into "${tableName}" default values`;
         const columnsString = columns.map((column) => `"${column}"`).join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
-        // debug('query:', query);
         return query;
     }
     async getTableList() {
         (0, console_1.debug)('PostgreSqlDatabase.getTableList');
         const rows = await this.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
         const tableList = rows.map((row) => row.table_name);
-        // debug('tableList:', tableList);
         return tableList;
     }
     async getTableInfo(table) {
         (0, console_1.debug)('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
-        // debug('keyColumns:', keyColumns);
         const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
-        // debug('getTableInfo rows:', rows);
         const tableInfo = rows.map((row) => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
@@ -8101,7 +7533,6 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             comment: null,
             dbType: row.data_type,
         }));
-        // debug('tableInfo:', tableInfo);
         return tableInfo;
     }
     getColumnTypeByDataType(dataType) {
@@ -8143,9 +7574,6 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         await client.end();
         return results.rows;
     }
-    /* getDefaultPort(): number {
-        return 5432;
-    } */
     async queryAutoValues(context, table, autoColumnTypes) {
         (0, console_1.debug)('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
@@ -8153,12 +7581,9 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
             throw new Error('no auto columns');
         const queries = autoColumns.map((column) => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
-        // debug('query:', query);
         const result = await this.queryResult(context, query);
-        // debug('result:', result);
         if (result instanceof Array) {
             return autoColumns.reduce((acc, name, i) => {
-                // debug('name:', name);
                 const r = result[i];
                 let [{ currval: val }] = r.rows;
                 if (autoColumnTypes[name] === 'number' && typeof val === 'string')
@@ -8182,10 +7607,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
     async insertRow(context, table, values, autoColumnTypes = {}) {
         (0, console_1.debug)(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
-        // debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // debug('insert result:', result);
-        // auto
         if (Object.keys(autoColumnTypes).length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumnTypes);
             (0, console_1.debug)('auto:', auto);
@@ -8243,7 +7665,6 @@ class BkSqlDatabase extends BkDatabase_1.BkDatabase {
         const columnsString = columns.join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into ${tableName}(${columnsString}) values (${valuesString})`;
-        // debug('query:', query);
         return query;
     }
     getDeleteQuery(tableName, rowKeyValues) {
@@ -8253,7 +7674,6 @@ class BkSqlDatabase extends BkDatabase_1.BkDatabase {
             .map((keyColumn) => `${keyColumn} = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from ${tableName} where ${whereString}`;
-        // debug('query:', query);
         return query;
     }
     static getUsedParams(query) {
@@ -8266,7 +7686,6 @@ class BkSqlDatabase extends BkDatabase_1.BkDatabase {
         const usedParams = BkSqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter((name) => paramNames.indexOf(name) === -1);
-        // debug('notPassedParams:', notPassedParams);
         if (notPassedParams.length > 0) {
             throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
         }
@@ -8376,9 +7795,7 @@ class BkDateField extends BkField_1.BkField {
         response.readOnly = this.getAttr('readOnly');
         response.notNull = this.getAttr('notNull');
         response.format = this.getAttr('format');
-        // if (this.isAttr('timezone')) {
         response.timezone = this.getAttr('timezone');
-        // }
         response.placeholder = this.getAttr('placeholder');
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur = this.getAttr('validateOnBlur');
@@ -8393,7 +7810,6 @@ class BkDateField extends BkField_1.BkField {
         else {
             raw = BkHelper_1.BkHelper.encodeValue(value);
         }
-        // debug('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -8401,7 +7817,6 @@ class BkDateField extends BkField_1.BkField {
         if (value && !this.isTimezone()) {
             BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
-        // debug('DateField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
@@ -8443,7 +7858,6 @@ class BkDateTimeField extends BkField_1.BkField {
         else {
             raw = BkHelper_1.BkHelper.encodeValue(value);
         }
-        // debug('DateTimeField.rawToValue', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -8451,7 +7865,6 @@ class BkDateTimeField extends BkField_1.BkField {
         if (value && !this.isTimezone()) {
             BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
-        // debug('DateTimeField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }
@@ -8515,20 +7928,16 @@ class BkField extends BkModel_1.BkModel {
         }
     }
     dumpRowValueToParams(row, params) {
-        // debug('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {
             const column = this.getAttr('column');
             if (!column)
                 throw new Error('no column attr');
             const rawValue = row[column];
-            // debug('rawValue:', rawValue);
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
-            // debug('value:', value);
             params[fullName] = value;
         }
         catch (err) {
-            // debug('row:', row);
             err.message = `${fullName}: ${err.message}`;
             throw err;
         }
@@ -8561,7 +7970,6 @@ class BkField extends BkModel_1.BkModel {
         if (!this.getAttr('column'))
             throw new Error(`${this.getFullName()}: column attr is empty`);
         const defaultDataSource = this.getForm().getDataSource('default');
-        // if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
         return defaultDataSource.getTable().getColumn(this.getAttr('column'));
     }
     getType() {
@@ -8879,11 +8287,9 @@ class BkForm extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // debug('Form.fill', this.constructor.name, this.getFullName());
         if (this.findDataSource('default')) {
             return super.fill(context);
         }
-        // surrogate data source response
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
         const response = await super.fill(context);
@@ -8909,7 +8315,6 @@ class BkForm extends BkModel_1.BkModel {
                 field.dumpRowValueToParams(row, params);
             }
         }
-        // debug(params);
     }
     replaceThis(context, query) {
         return query
@@ -8992,14 +8397,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkRowForm = void 0;
 const BkForm_1 = __webpack_require__(/*! ../BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
 class BkRowForm extends BkForm_1.BkForm {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    //     // debug('RowForm.constructor', this.getFullName());
-    // }
-    // async fill(context) {
-    //     debug('RowForm.fill', this.constructor.name, this.getFullName());
-    //     return super.fill(context);
-    // }
     isNewMode(context) {
         if (this.isAttr('newMode')) {
             const newMode = this.getAttr('newMode');
@@ -9033,13 +8430,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BkTableForm = void 0;
 const BkForm_1 = __webpack_require__(/*! ../BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
 class BkTableForm extends BkForm_1.BkForm {
-    /* static async create(data, parent) {
-        return new TableForm(data, parent);
-    } */
-    // async fill(context) {
-    //     debug('TableForm.fill', this.constructor.name, this.getFullName());
-    //     return super.fill(context);
-    // }
     fillAttributes(response) {
         super.fillAttributes(response);
         response.editMethod = this.getAttr('editMethod');
@@ -9083,11 +8473,8 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async fill(context) {
-        // debug('Model.fill', this.constructor.name, this.getName());
         const response = { name: '' };
-        // attributes
         this.fillAttributes(response);
-        // collections
         for (const colName of this.fillCollections) {
             await this.fillCollection(response, colName, context);
         }
@@ -9095,10 +8482,6 @@ class BkModel extends BaseModel_1.BaseModel {
     }
     fillAttributes(response) {
         throw new Error(`${this.constructor.name}.fillAttributes not implemented`);
-        /*response.class = this.getClassName();
-        for (const name in this.attributes()) {
-            response[name] = this.getAttr(name);
-        }*/
     }
     isBackOnly() {
         return this.isAttr('backOnly') && this.getAttr('backOnly') === 'true';
@@ -9116,7 +8499,6 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async createColItems(colName, context) {
-        // debug(`Model.createColItems ${this.getName()}.${colName}`);
         for (const itemData of this.getCol(colName)) {
             await this.createColItem(colName, itemData, context);
         }
@@ -9135,7 +8517,6 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async createChildModel(colName, itemData) {
-        // app custom class
         const modelClass = BaseModel_1.BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -9143,7 +8524,6 @@ class BkModel extends BaseModel_1.BaseModel {
                 throw new Error(`no global class ${modelClass}`);
             return new CustomClass(itemData, this);
         }
-        // lib class
         const className = BaseModel_1.BaseModel.getClassName(itemData);
         const backend = __webpack_require__(/*! ../../../backend */ "./src/backend/index.ts");
         const Class = backend[`Bk${className}`];
@@ -9206,7 +8586,6 @@ class BkPage extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        // debug('Page.fill', this.constructor.name, this.getFullName());
         const response = (await super.fill(context));
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
@@ -9291,12 +8670,7 @@ exports.BkParam = void 0;
 const BkModel_1 = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 class BkParam extends BkModel_1.BkModel {
     getValue() {
-        // debug('Param.getValue', this.getName());
         const value = this.getAttr('value');
-        /* const app = this.getApp();
-        return value.replace(/\{([@\w.]+)\}/g, (text, name) => {
-            return app.getEnvVarValue(name);
-        }); */
         try {
             return eval(value);
         }
@@ -9329,18 +8703,15 @@ class BkTable extends BkModel_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];
-        // debug('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
     }
     async init(context) {
         await this.createColItems('columns', context);
     }
     getKeyColumns() {
-        // debug('Table.getKeyColumns');
         const keyColumns = this.columns
             .filter((column) => column.isKey())
             .map((column) => column.getName());
-        // const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
         if (keyColumns.length === 0)
             throw new Error(`no key columns in table: ${this.getName()}`);
         return keyColumns;
@@ -9391,14 +8762,12 @@ const login_1 = __webpack_require__(/*! ./login */ "./src/backend/viewer/login.t
 const common_1 = __webpack_require__(/*! ../../frontend/common */ "./src/frontend/common/index.ts");
 const console_1 = __webpack_require__(/*! ../../console */ "./src/console.ts");
 const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
-// to compile without using
 var viewer_1 = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
 Object.defineProperty(exports, "TableForm", ({ enumerable: true, get: function () { return viewer_1.TableForm; } }));
 Object.defineProperty(exports, "NoSqlDataSource", ({ enumerable: true, get: function () { return viewer_1.NoSqlDataSource; } }));
 Object.defineProperty(exports, "TextBoxField", ({ enumerable: true, get: function () { return viewer_1.TextBoxField; } }));
 Object.defineProperty(exports, "TableFormTextBoxFieldController", ({ enumerable: true, get: function () { return viewer_1.TableFormTextBoxFieldController; } }));
 Object.defineProperty(exports, "RowForm", ({ enumerable: true, get: function () { return viewer_1.RowForm; } }));
-// post actions
 const ACTIONS = [
     'page',
     'select',
@@ -9441,7 +8810,6 @@ class ViewerModule {
         }
     }
     async handlePost(context, application) {
-        // debug('ViewerModule.handlePost');
         const req = context.getReq();
         const body = context.getBody();
         if (body.action === 'login') {
@@ -9468,23 +8836,19 @@ class ViewerModule {
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
         const data = await bkApplication.fill(context);
-        // frontHostApp
         const frontHostApp = new common_1.FrontHostApp({
             debug: context.isDebugMode(),
             url: context.getUrl(),
             cookies: context.getCookies(),
         });
-        // application
         const application = new Application_1.Application(data);
         application.init();
-        // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();
         const element = react_1.default.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
         const appViewHtml = server_1.default.renderToString(element);
-        // debug('appViewHtml:', appViewHtml);
         const html = bkApplication.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
@@ -9511,7 +8875,6 @@ class ViewerModule {
             throw new Error('no username');
         if (req.body.password === undefined)
             throw new Error('no password');
-        // const application = this.getApplication(context);
         await application.connect(context);
         try {
             const user = await application.authenticate(context, req.body.username, req.body.password);
@@ -9530,7 +8893,6 @@ class ViewerModule {
                 this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                // const users = await application.getUsers(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
                 const html = (0, login_1.login)(pkg.version, context, application, links, scripts, {
@@ -9548,7 +8910,6 @@ class ViewerModule {
             await application.release(context);
         }
     }
-    // action (index page, action by default for GET request)
     async index(context, bkApplication) {
         (0, console_1.debug)('ViewerModule.index');
         const res = context.getRes();
@@ -9562,7 +8923,6 @@ class ViewerModule {
             await bkApplication.release(context);
         }
     }
-    // action (fill page)
     async page(context, application) {
         (0, console_1.debug)('ViewerModule.page', context.getReq().body.page);
         const req = context.getReq();
@@ -9580,7 +8940,6 @@ class ViewerModule {
             await application.release(context);
         }
     }
-    // action
     async select(context, application) {
         (0, console_1.debug)('ViewerModule.select', context.getReq().body.page);
         const req = context.getReq();
@@ -9607,7 +8966,6 @@ class ViewerModule {
             res.json({ rows, count, time });
         });
     }
-    // action
     async insert(context, application) {
         (0, console_1.debug)('ViewerModule.insert', context.getReq().body.page);
         const req = context.getReq();
@@ -9627,7 +8985,6 @@ class ViewerModule {
             this.hostApp.broadcastResult(application, context, result);
         });
     }
-    // action
     async update(context, application) {
         (0, console_1.debug)('ViewerModule.update', context.getReq().body.page);
         const req = context.getReq();
@@ -9647,7 +9004,6 @@ class ViewerModule {
             this.hostApp.broadcastResult(application, context, result);
         });
     }
-    // action
     async _delete(context, application) {
         (0, console_1.debug)('ViewerModule._delete', context.getReq().body.page);
         const req = context.getReq();
@@ -9667,13 +9023,10 @@ class ViewerModule {
             this.hostApp.broadcastResult(application, context, result);
         });
     }
-    // action
     async rpc(context, application) {
         (0, console_1.debug)('ViewerModule.rpc', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
-        // const application = this.getApplication(context);
-        // await application.initContext(context);
         let model;
         if (req.body.page) {
             if (req.body.form) {
@@ -9714,7 +9067,6 @@ class ViewerModule {
             res.json({ errorMessage });
         }
     }
-    // action
     async logout(context, application) {
         (0, console_1.debug)('ViewerModule.logout');
         const req = context.getReq();
@@ -9726,13 +9078,10 @@ class ViewerModule {
         await BkHelper_1.BkHelper.Session_save(req.session);
         res.json(null);
     }
-    // action
     async test(context, application) {
         (0, console_1.debug)('ViewerModule.test', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
-        // const result = await Test[req.body.name](req, res, context, application);
-        // if (result === undefined) throw new Error('test action: result is undefined');
         res.json(null);
     }
     async handleGetFile(context, application, next) {
@@ -9779,7 +9128,7 @@ const home = (application, context, applicationController, qformsVersion, links,
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+    <script type="application/json">${JSON.stringify(data)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
     <div class="${application.getViewClassName()}__root">${appViewHtml}</div>
@@ -9884,7 +9233,7 @@ ${scripts}
         await frontHostApp.run();
     });
 </script>
-<script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+<script type="application/json">${JSON.stringify(data)}</script>
 </head>
 <body class="${application.getLoginViewClassName()}__body">
 <div class="${application.getLoginViewClassName()}__root"></div>
@@ -9934,7 +9283,6 @@ function getLogLevel() {
 exports.getLogLevel = getLogLevel;
 function getLogLevelName() {
     if (typeof window === 'object') {
-        // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
     else if (typeof global === 'object') {
@@ -9946,27 +9294,23 @@ function getLogLevelName() {
 exports.getLogLevelName = getLogLevelName;
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.debug(message, ...optionalParams);
     }
 }
 exports.debug = debug;
 function log(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.log(message, ...optionalParams);
     }
 }
 exports.log = log;
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.warn(message, ...optionalParams);
     }
 }
 exports.warn = warn;
 function error(message, ...optionalParams) {
-    // process.stderr.write(`${messages.join(' ')}\n`);
     console.error(message, ...optionalParams);
 }
 exports.error = error;
@@ -10026,8 +9370,7 @@ class FrontHostApp {
     constructor(options) {
         this.options = options;
         this.alertCtrl = null;
-        this.documentTitle = ''; // for run on back
-        // debug('FrontHostApp.constructor');
+        this.documentTitle = '';
     }
     init() {
         window.addEventListener('error', this.onWindowError.bind(this));
@@ -10038,7 +9381,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        (0, console_1.debug)('FrontHostApp.onWindowUnhandledrejection' /* , e */);
+        (0, console_1.debug)('FrontHostApp.onWindowUnhandledrejection');
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -10055,7 +9398,6 @@ class FrontHostApp {
             e.preventDefault();
             const err = e.error;
             this.logError(err);
-            // await this.alert({message: err.message});
         }
         catch (err) {
             console.error(`onWindowError error: ${err.message}`);
@@ -10100,7 +9442,6 @@ class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // debug('headers:', headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -10185,7 +9526,6 @@ class FrontHostApp {
         if (typeof window === 'object') {
             return Search_1.Search.getObj();
         }
-        // @ts-ignore
         return Object.fromEntries(this.getOptions().url.searchParams);
     }
     getCookie(name) {
@@ -10223,23 +9563,6 @@ const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "react-dom"));
 const console_1 = __webpack_require__(/*! ../../console */ "./src/console.ts");
 class Helper {
-    /* static currentDate() {
-        const now = new Date();
-        let dd = now.getDate();if (dd < 10) dd = '0' + dd;
-        let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-    /* static currentDateTime() {
-        return Helper.currentDate() + ' ' + Helper.currentTime();
-    } */
-    /* static currentTime() {
-        const now = new Date();
-        let hh = now.getHours();if (hh < 10) hh = '0' + hh;
-        let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
-        let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-        return [hh, mm, ss].join(':');
-    } */
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -10260,7 +9583,6 @@ class Helper {
     }
     static today() {
         const now = new Date();
-        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         return Helper.getStartOfDay(now);
     }
     static getStartOfDay(date) {
@@ -10286,12 +9608,7 @@ class Helper {
         return obj;
     }
     static decodeValue(raw) {
-        // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
-        // } catch (err) {
-        //     // debug('raw:', raw);
-        //     throw err;
-        // }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -10302,7 +9619,6 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -10313,14 +9629,12 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
-        // ReactDOM.render(reactRootElement, rootElement);
         react_dom_1.default.hydrate(reactRootElement, rootElement);
         return component;
     }
@@ -10334,45 +9648,6 @@ class Helper {
             reader.readAsDataURL(file);
         });
     }
-    /* static readFileAsArrayBuffer(file) {
-        return new Promise(resolve => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsArrayBuffer(file);
-        });
-    } */
-    /* static convertBufferToBase64string(buffer) {
-        const array = new Uint8Array(buffer);
-        const binaryString = String.fromCharCode.apply(null, array);
-        return window.btoa(binaryString);
-    } */
-    /* static createObjectUrl(buffer) {
-        const blob = new Blob([new Uint8Array(buffer)]);
-        return window.URL.createObjectURL(blob);
-    } */
-    // append file as filed and all not file as json string
-    /* static createFormData(body) {
-        const formData = new FormData();
-        const fields = {};
-        for (const name in body) {
-            if (body[name] instanceof File) {
-                formData.append(name, body[name]);
-            } else {
-                fields[name] = body[name];
-            }
-        }
-        formData.append('__json', JSON.stringify(fields));
-        return formData;
-    } */
-    /* static base64ToArrayBuffer(base64) {
-        const binaryString = window.atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes.buffer;
-    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -10393,7 +9668,6 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -10403,13 +9677,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -10420,7 +9691,6 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -10430,13 +9700,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -10462,11 +9729,10 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
-        textArea.style.top = '0'; // Avoid scrolling to bottom
+        textArea.style.top = '0';
         textArea.style.left = '0';
         textArea.style.position = 'fixed';
         document.body.appendChild(textArea);
@@ -10474,7 +9740,6 @@ class Helper {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        // @ts-ignore
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
@@ -10486,7 +9751,6 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
-        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -10501,19 +9765,10 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    // static inIframe(): boolean {
-    //     return false;
-    //     /* try {
-    //         return window.self !== window.top;
-    //     } catch (e) {
-    //         return false;
-    //     } */
-    // }
     static setCookie(name, value, time) {
         let expires = '';
         if (time) {
             const date = new Date(time);
-            // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
@@ -10539,23 +9794,18 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         }
         else {
-            // @ts-ignore
             if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
-            // @ts-ignore
             global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
-        // debug('Helper.getGlobalClass', className);
-        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {
@@ -10621,7 +9871,6 @@ class ReactComponent extends react_1.Component {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.debug(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
         return new Promise((resolve) => {
@@ -10650,15 +9899,10 @@ class ReactComponent extends react_1.Component {
         this.allowRerender = true;
     }
     componentWillUnmount() {
-        // console.debug('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /* componentDidMount() {
-        console.debug('ReactComponent.componentDidMount', this.constructor.name);
-    } */
     isEnabled() {
-        // console.debug('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
     }
     isDisabled() {
@@ -10671,7 +9915,6 @@ class ReactComponent extends react_1.Component {
         return false;
     }
     disable() {
-        // console.debug('ReactComponent.disable');
         if (!this.state)
             throw new Error('no state');
         this.setState({ disabled: true });
@@ -10684,7 +9927,6 @@ class ReactComponent extends react_1.Component {
 }
 exports.ReactComponent = ReactComponent;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ReactComponent = ReactComponent;
 }
 
@@ -10754,7 +9996,6 @@ const ArrowIcon = (props) => {
 };
 exports.ArrowIcon = ArrowIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ArrowIcon = exports.ArrowIcon;
 }
 
@@ -10803,7 +10044,6 @@ class CancelIcon extends React.Component {
 }
 exports.CancelIcon = CancelIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CancelIcon = CancelIcon;
 }
 
@@ -10826,7 +10066,6 @@ const CloseIcon = (props) => {
 };
 exports.CloseIcon = CloseIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CloseIcon = exports.CloseIcon;
 }
 
@@ -10850,7 +10089,6 @@ const CloseIcon2 = (props) => {
 };
 exports.CloseIcon2 = CloseIcon2;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CloseIcon2 = exports.CloseIcon2;
 }
 
@@ -10899,7 +10137,6 @@ class DateIcon extends React.Component {
 }
 exports.DateIcon = DateIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DateIcon = DateIcon;
 }
 
@@ -10948,7 +10185,6 @@ class DeleteIcon extends React.Component {
 }
 exports.DeleteIcon = DeleteIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DeleteIcon = DeleteIcon;
 }
 
@@ -10997,7 +10233,6 @@ class DoneIcon extends React.Component {
 }
 exports.DoneIcon = DoneIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DoneIcon = DoneIcon;
 }
 
@@ -11047,7 +10282,6 @@ class DownIcon extends React.Component {
 }
 exports.DownIcon = DownIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DoneIcon = DoneIcon;
 }
 
@@ -11096,7 +10330,6 @@ class EditIcon extends React.Component {
 }
 exports.EditIcon = EditIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.EditIcon = EditIcon;
 }
 
@@ -11120,7 +10353,6 @@ const LeftIcon = (props) => {
 };
 exports.LeftIcon = LeftIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.LeftIcon = exports.LeftIcon;
 }
 
@@ -11170,7 +10402,6 @@ class LocationIcon extends React.Component {
 }
 exports.LocationIcon = LocationIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.LocationIcon = LocationIcon;
 }
 
@@ -11219,7 +10450,6 @@ class MoreVertIcon extends React.Component {
 }
 exports.MoreVertIcon = MoreVertIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.MoreVertIcon = MoreVertIcon;
 }
 
@@ -11242,7 +10472,6 @@ const OpenInNewIcon = () => {
 };
 exports.OpenInNewIcon = OpenInNewIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.OpenInNewIcon = exports.OpenInNewIcon;
 }
 
@@ -11291,7 +10520,6 @@ class PasswordIcon extends React.Component {
 }
 exports.PasswordIcon = PasswordIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PasswordIcon = PasswordIcon;
 }
 
@@ -11341,7 +10569,6 @@ class PhoneIcon extends React.Component {
 }
 exports.PhoneIcon = PhoneIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PhoneIcon = PhoneIcon;
 }
 
@@ -11365,7 +10592,6 @@ const RightIcon = (props) => {
 };
 exports.RightIcon = RightIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.RightIcon = exports.RightIcon;
 }
 
@@ -11414,7 +10640,6 @@ class SettingsIcon extends React.Component {
 }
 exports.SettingsIcon = SettingsIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.SettingsIcon = SettingsIcon;
 }
 
@@ -11463,7 +10688,6 @@ class TimeIcon extends React.Component {
 }
 exports.TimeIcon = TimeIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TimeIcon = TimeIcon;
 }
 
@@ -11512,7 +10736,6 @@ class VisibilityIcon extends React.Component {
 }
 exports.VisibilityIcon = VisibilityIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.VisibilityIcon = VisibilityIcon;
 }
 
@@ -11561,7 +10784,6 @@ class VisibilityOffIcon extends React.Component {
 }
 exports.VisibilityOffIcon = VisibilityOffIcon;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.VisibilityOffIcon = VisibilityOffIcon;
 }
 
@@ -11642,9 +10864,7 @@ __exportStar(__webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/Fr
 __exportStar(__webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts"), exports);
 __exportStar(__webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts"), exports);
-// icon
 __exportStar(__webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts"), exports);
-// widget
 __exportStar(__webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts"), exports);
 
 
@@ -11666,7 +10886,6 @@ const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/wid
 __webpack_require__(/*! ./Box.less */ "./src/frontend/common/widget/Box/Box.less");
 class Box extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Box.constructor', props);
         super(props);
         this.update = () => {
             console.debug('Box.update');
@@ -11678,9 +10897,6 @@ class Box extends ReactComponent_1.ReactComponent {
             backgroundColor: 'purple',
         };
     }
-    // componentWillMount() {
-    //     console.debug('Box.componentWillMount');
-    // }
     componentDidMount() {
         console.debug('Box.componentDidMount');
     }
@@ -11701,7 +10917,6 @@ class Box extends ReactComponent_1.ReactComponent {
 }
 exports.Box = Box;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Box = Box;
 }
 
@@ -11723,27 +10938,11 @@ const react_1 = __webpack_require__(/*! react */ "react");
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class Button extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
         this.el = (0, react_1.createRef)();
     }
-    /*isDisabled() {
-        if (this.props.disabled !== undefined) return this.props.disabled;
-        if (this.props.enabled !== undefined) return !this.props.enabled;
-        return this.state.disabled;
-    }*/
-    /*isEnabled() {
-        return !this.isDisabled();
-    }*/
-    /*disable() {
-        this.setState({disabled: true});
-    }*/
-    /*enable() {
-        this.setState({disabled: false});
-    }*/
     isVisible() {
-        // return this.props.visible === undefined ? true : this.props.visible;
         if (this.props.visible !== undefined)
             return this.props.visible;
         return true;
@@ -11755,13 +10954,11 @@ class Button extends ReactComponent_1.ReactComponent {
         };
     }
     render() {
-        // console.debug('Button.render', this.props.title, this.props);
         return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
 exports.Button = Button;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Button = Button;
 }
 
@@ -11785,7 +10982,6 @@ class CheckBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (e) => {
-            // console.debug('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
                 this.setState((prevState) => {
                     if (this.props.onChange) {
@@ -11815,8 +11011,6 @@ class CheckBox extends ReactComponent_1.ReactComponent {
         return this.state.checked;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
     }
@@ -11829,7 +11023,6 @@ class CheckBox extends ReactComponent_1.ReactComponent {
 }
 exports.CheckBox = CheckBox;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CheckBox = CheckBox;
 }
 
@@ -11852,10 +11045,8 @@ class CheckBoxList extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onCheckBoxChange = (e) => {
-            // console.debug('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
             const checked = e.target.checked;
             const itemValue = e.target.dataset.value;
-            // console.debug('itemValue:', itemValue);
             this.setState((prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
@@ -11873,7 +11064,6 @@ class CheckBoxList extends ReactComponent_1.ReactComponent {
                     }
                     value.splice(value.indexOf(itemValue), 1);
                 }
-                // console.debug('value:', value);
                 return { value };
             }, () => {
                 if (this.props.onChange) {
@@ -11900,9 +11090,6 @@ class CheckBoxList extends ReactComponent_1.ReactComponent {
         return `${this.props.name}.${value}`;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // console.debug('nextProps.value:', nextProps.value);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -11916,7 +11103,6 @@ class CheckBoxList extends ReactComponent_1.ReactComponent {
 }
 exports.CheckBoxList = CheckBoxList;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CheckBoxList = CheckBoxList;
 }
 
@@ -11937,17 +11123,14 @@ const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-ru
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class ComboBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         this.onChange = async (e) => {
-            // console.debug('ComboBox.onChange', e.target.value, typeof e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
             }
         };
         this.onMouseDown = async (e) => {
-            // console.debug('ComboBox.onMouseDown', e.button);
             if (this.props.onMouseDown) {
                 await this.props.onMouseDown(e);
             }
@@ -11980,27 +11163,22 @@ class ComboBox extends ReactComponent_1.ReactComponent {
         }
         if (value === null)
             throw new Error('null is wrong value for ComboBox');
-        // console.debug('combobox value:', value);
         return value;
     }
     getValue() {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('ComboBox.render', this.state.value);
         return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
                     this.props.items.map((item) => ((0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
 exports.ComboBox = ComboBox;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ComboBox = ComboBox;
 }
 
@@ -12023,18 +11201,8 @@ const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/
 const LeftIcon_1 = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 const RightIcon_1 = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
 __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
-// props
-//  visible boolean true
-//  selectedDate array [2021, 0, 1]
-//  minDate array [2021, 0, 1]
-//  onMouseDown function
-//  onDateSelected function
-//  getDateStyle function
-//  selectToday boolean false
-//  highlightedDate array [2021, 0, 1]
 class DatePicker extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('DatePicker.constructor', props);
         super(props);
         this.onClick = (e) => {
             console.debug('DatePicker.onClick', e.target);
@@ -12043,13 +11211,11 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             }
         };
         this.onMouseDown = (e) => {
-            // console.debug('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
         this.onNextClick = (e) => {
-            // console.debug('DatePicker.next');
             this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
@@ -12059,7 +11225,6 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             });
         };
         this.onPrevClick = (e) => {
-            // console.debug('DatePicker.prev');
             this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
@@ -12095,7 +11260,6 @@ class DatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
     calcSelectedMonth() {
-        // console.debug('DatePicker.calcSelectedMonth', this.props.selectedDate);
         if (this.props.selectedDate) {
             return [this.props.selectedDate[0], this.props.selectedDate[1]];
         }
@@ -12106,10 +11270,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             const dates = [Helper_1.Helper.today().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
-            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
-            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
             const date = new Date(Math.min(...dates));
-            // console.debug('date:', date);
             return [date.getFullYear(), date.getMonth()];
         }
     }
@@ -12130,15 +11291,14 @@ class DatePicker extends ReactComponent_1.ReactComponent {
     createSelectedDate() {
         if (!this.isDateSelected())
             throw new Error('date not selected');
-        // @ts-ignore
         return new Date(...this.props.selectedDate);
     }
     isDateSelected() {
         return !!this.props.selectedDate;
     }
     getFirstDateOfTable() {
-        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
-        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1);
+        date.setDate(date.getDate() - DatePicker.getDay(date));
         return date;
     }
     createMinDate() {
@@ -12162,20 +11322,17 @@ class DatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
     onDateClick(target) {
-        // console.debug('DatePicker.onDateClick', target.dataset.date);
         if (this.props.onDateSelected) {
             this.props.onDateSelected(JSON.parse(target.dataset.date));
         }
     }
     render() {
-        // console.debug('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = Helper_1.Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
-        // @ts-ignore
         const highlightedDate = this.props.highlightedDate
-            ? // @ts-ignore
+            ?
                 new Date(...this.props.highlightedDate)
             : null;
         return ((0, jsx_runtime_1.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0, jsx_runtime_1.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon_1.RightIcon, { size: 18 }) }))] })) })), (0, jsx_runtime_1.jsx)("thead", { children: (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0, jsx_runtime_1.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0, jsx_runtime_1.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
@@ -12211,7 +11368,6 @@ class DatePicker extends ReactComponent_1.ReactComponent {
 }
 exports.DatePicker = DatePicker;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DatePicker = DatePicker;
 }
 
@@ -12237,28 +11393,23 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onButtonClick = (e) => {
-            // console.debug('DropdownButton.onButtonClick');
             this.setState((state) => ({ open: !state.open }));
         };
         this.onButtonBlur = (e) => {
-            // console.debug('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onKeyDown = (e) => {
-            // console.debug('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onUlMouseDown = (e) => {
-            // console.debug('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
         this.onLiClick = async (e) => {
-            // console.debug('DropdownButton.onLiClick', e.currentTarget);
             const li = e.currentTarget;
             this.setState({ open: false }, () => {
                 if (this.props.onClick) {
@@ -12274,7 +11425,6 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
     isEnabled() {
         if (this.props.enabled !== undefined)
             return this.props.enabled;
-        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return !this.state.disabled;
     }
     render() {
@@ -12306,45 +11456,35 @@ const DateIcon_1 = __webpack_require__(/*! ../../icon/DateIcon */ "./src/fronten
 const CloseIcon2_1 = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 const DatePicker_1 = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
 __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
-// oldDates boolean true
 class DropdownDatePicker extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('DropdownDatePicker.constructor', props);
         super(props);
         this.onInputClick = (e) => {
-            // console.debug('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
             this.setState((prevState) => ({ open: !prevState.open }));
         };
         this.onInputKeyDown = (e) => {
-            // console.debug('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onCloseDown = async (e) => {
-            // console.debug('DropdownDatePicker.onCloseDown', e);
             this.setState({ value: null });
             if (this.props.onChange) {
                 this.props.onChange(null);
             }
         };
         this.onBlur = (e) => {
-            // console.debug('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onDatePickerMouseDown = (e) => {
-            // console.debug('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
-            // e.stopPropagation();
-            // return false;
         };
         this.onDatePickerDateSelected = (date) => {
-            // console.debug('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
             if (this.props.onChange) {
@@ -12360,8 +11500,6 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         }
     }
     getFormat() {
-        // if (this.props.format) return this.props.format;
-        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
         return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
     }
     getStringValue() {
@@ -12378,14 +11516,6 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         }
         return '';
     }
-    /*getMinDate() {
-        if (this.props.getMinDate) {
-            return this.props.getMinDate();
-        } else if (this.props.oldDates === false) {
-            return DatePicker.getTodayArr();
-        }
-        return null;
-    }*/
     getSelectedMonth() {
         if (this.getValue()) {
             return [this.getValue().getFullYear(), this.getValue().getMonth()];
@@ -12406,8 +11536,6 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -12424,14 +11552,9 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0, jsx_runtime_1.jsx)(DateIcon_1.DateIcon, {}) })));
     }
     renderDatePicker() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) })), (0, jsx_runtime_1.jsx)(DatePicker_1.DatePicker
-                // minDate={this.getMinDate()}
-                , { 
-                    // minDate={this.getMinDate()}
-                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) })), (0, jsx_runtime_1.jsx)(DatePicker_1.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
-        // console.debug('DropdownDatePicker.render', this.props, this.state);
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
     }
     isDebugMode() {
@@ -12440,7 +11563,6 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
 }
 exports.DropdownDatePicker = DropdownDatePicker;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DropdownDatePicker = DropdownDatePicker;
 }
 
@@ -12486,7 +11608,6 @@ class Expand extends ReactComponent_1.ReactComponent {
 }
 exports.Expand = Expand;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Expand = Expand;
 }
 
@@ -12535,15 +11656,13 @@ const GridCell_1 = __webpack_require__(/*! ../GridCell/GridCell */ "./src/fronte
 __webpack_require__(/*! ./Grid.less */ "./src/frontend/common/widget/Grid/Grid.less");
 class Grid extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Grid.constructor', props);
         super(props);
         this.onCellMouseDown = async (e) => {
             console.debug('Grid.onCellMouseDown', this.isLink());
-            e.preventDefault(); // prevent text selection on double click
+            e.preventDefault();
             if (this.isDisabled())
                 return;
             this.getElement().focus();
-            // if (this.isLink()) return;
             const button = e.button;
             const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
             const row = this.props.rows[i];
@@ -12555,33 +11674,27 @@ class Grid extends ReactComponent_1.ReactComponent {
         };
         this.onRowMouseDown = async (e) => {
             console.debug('Grid.onRowMouseDown', this.isLink());
-            // if (this.isLink()) return;
             const key = e.currentTarget.dataset.row;
             await this.selectRow(key);
         };
         this.onCellDoubleClick = async (e) => {
-            // console.debug('Grid.onCellDoubleClick');
             const button = e.button;
             const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.debug('row:', row);
             if (button === 0 && this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onRowDoubleClick = async (e) => {
-            // console.debug('Grid.onRowDoubleClick');
             const i = parseInt(e.currentTarget.dataset.r);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.debug('row:', row);
             if (this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onKeyDown = async (e) => {
-            // console.debug('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
             if (this.isDisabled())
                 return;
             switch (e.keyCode) {
@@ -12624,19 +11737,16 @@ class Grid extends ReactComponent_1.ReactComponent {
             if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
                 return;
             this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
-            // @ts-ignore
             this.state.resized = Date.now();
             await this.rerender();
         };
         this.onCellViewCreate = (c) => {
-            // console.debug('Grid.onCellViewCreate', c.props.column.name);
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
                 this.columns[columnName] = [];
             this.columns[columnName].push(c);
         };
         this.onCellViewUnmount = (c) => {
-            // console.debug('Grid.onCellViewUnmount', c.props.column.name);
             const columnName = c.props.column.name;
             const i = this.columns[columnName].indexOf(c);
             if (i === -1)
@@ -12644,7 +11754,6 @@ class Grid extends ReactComponent_1.ReactComponent {
             this.columns[columnName].splice(i, 1);
         };
         this.onBodyScroll = async (e) => {
-            // console.debug('Grid.onBodyScroll', e.target.scrollLeft);
             this.head.current.scrollLeft = e.target.scrollLeft;
         };
         this.onLinkClick = async (e) => {
@@ -12652,11 +11761,6 @@ class Grid extends ReactComponent_1.ReactComponent {
             if (e.ctrlKey)
                 return;
             e.preventDefault();
-            /* if (!this.isLink()) return;
-            const key = e.currentTarget.dataset.key;
-            if (this.props.onLinkClick) {
-                await this.props.onLinkClick(key);
-            } */
         };
         this.state = {
             key: this.props.selectedKey || null,
@@ -12666,7 +11770,7 @@ class Grid extends ReactComponent_1.ReactComponent {
             columnWidth: {},
             resized: Date.now(),
         };
-        this.columns = {}; // each column is the array of each cell view
+        this.columns = {};
         this.el = React.createRef();
         this.head = React.createRef();
     }
@@ -12674,15 +11778,12 @@ class Grid extends ReactComponent_1.ReactComponent {
         return this.state.column;
     }
     setActiveColumn(column) {
-        // @ts-ignore
         this.state.column = column;
     }
     getActiveRowKey() {
         return this.state.key;
     }
     setActiveRowKey(key) {
-        // console.debug('Grid.setActiveRowKey', key);
-        // @ts-ignore
         this.state.key = key;
     }
     isRowActive(i, key) {
@@ -12742,7 +11843,6 @@ class Grid extends ReactComponent_1.ReactComponent {
         console.debug('Grid.onEnter');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.debug(row, key);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
@@ -12751,13 +11851,11 @@ class Grid extends ReactComponent_1.ReactComponent {
         console.debug('Grid.onDelete');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.debug(row, key);
         if (this.props.onDeleteKeyDown) {
             await this.props.onDeleteKeyDown(row, key);
         }
     }
     async selectCell(key, j) {
-        // console.debug('Grid.selectCell', key, j);
         if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
             return;
         this.setActiveRowKey(key);
@@ -12770,7 +11868,6 @@ class Grid extends ReactComponent_1.ReactComponent {
         }
     }
     async selectRow(key) {
-        // console.debug('Grid.selectRow', key);
         if (this.getActiveRowKey() === key)
             return;
         this.setActiveRowKey(key);
@@ -12816,7 +11913,6 @@ class Grid extends ReactComponent_1.ReactComponent {
         return ((0, jsx_runtime_1.jsx)(GridCell_1.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -12825,7 +11921,6 @@ class Grid extends ReactComponent_1.ReactComponent {
         return true;
     }
     render() {
-        // console.debug('Grid.render', this.props.name);
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0, jsx_runtime_1.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
@@ -12834,7 +11929,6 @@ class Grid extends ReactComponent_1.ReactComponent {
 }
 exports.Grid = Grid;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Grid = Grid;
 }
 
@@ -12903,7 +11997,6 @@ class GridCell extends ReactComponent_1.ReactComponent {
 }
 exports.GridCell = GridCell;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.GridCell = GridCell;
 }
 
@@ -12927,7 +12020,6 @@ class GridRow extends ReactComponent_1.ReactComponent {
         return this.props.active && this.props.activeColumn === j;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -12942,7 +12034,6 @@ class GridRow extends ReactComponent_1.ReactComponent {
         return true;
     }
     render() {
-        // console.debug('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
@@ -12953,7 +12044,6 @@ class GridRow extends ReactComponent_1.ReactComponent {
 }
 exports.GridRow = GridRow;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.GridRow = GridRow;
 }
 
@@ -13006,7 +12096,6 @@ class Image extends ReactComponent_1.ReactComponent {
 }
 exports.Image = Image;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Image = Image;
 }
 
@@ -13028,24 +12117,17 @@ const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/
 __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
 class Menu extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Menu.constructor', props);
         super(props);
         this.onMenuClick = async (e) => {
-            // console.debug('Menu.onMenuClick', e.currentTarget.dataset.menu);
             await this.toggleMenu(e.currentTarget.dataset.menu);
         };
         this.onBlur = async (e) => {
-            // console.debug('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
         this.onMouseDown = (e) => {
-            // console.debug('Menu.onMouseDown');
             e.preventDefault();
-            // e.stopPropagation();
-            // return false;
         };
         this.onMenuItemClick = async (e) => {
-            // console.debug('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
             e.persist();
             const { menu, type, name } = e.target.dataset;
             await this.closeMenu(menu);
@@ -13072,7 +12154,6 @@ class Menu extends ReactComponent_1.ReactComponent {
 }
 exports.Menu = Menu;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Menu = Menu;
 }
 
@@ -13099,7 +12180,6 @@ class Modal extends ReactComponent_1.ReactComponent {
 }
 exports.Modal = Modal;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Modal = Modal;
 }
 
@@ -13178,7 +12258,6 @@ class Password extends ReactComponent_1.ReactComponent {
         return this.state.value;
     }
     _setValue(value) {
-        // @ts-ignore
         this.state.value = value;
         this.forceUpdate();
         if (this.props.onChange) {
@@ -13186,7 +12265,6 @@ class Password extends ReactComponent_1.ReactComponent {
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -13199,7 +12277,6 @@ class Password extends ReactComponent_1.ReactComponent {
 }
 exports.Password = Password;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Password = Password;
 }
 
@@ -13226,8 +12303,6 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onKeyPress = (e) => {
-            // console.debug('PhoneBox.onKeyPress', e.key, e.target.value);
-            // console.debug('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
                 e.preventDefault();
             }
@@ -13238,33 +12313,23 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
             }
         };
         this.onChange = (e) => {
-            // console.debug('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
             const len = e.target.value.length;
-            // console.debug('start/end/len:', start, end, len);
-            // disable edition in middle
             if (start !== end || start !== len) {
                 return;
             }
-            // value pipeline
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // state
-            // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(value);
-            this.setState({ value: this.state.value }); // for render only
-            // event
+            this.setState({ value: this.state.value });
             if (this.props.onChange) {
                 this.props.onChange(value);
             }
         };
         this.onBlur = (e) => {
-            // console.debug('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // console.debug('value:', value);
-            // event
             if (this.props.onBlur) {
                 this.props.onBlur(value);
             }
@@ -13278,15 +12343,12 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
         return PhoneBox.clearValue(this.state.value);
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
-            // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
         }
         return true;
     }
     render() {
-        // console.debug('TextBox.render');
         return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     static clearValue(value) {
@@ -13308,9 +12370,7 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
     }
     static formatPhoneNumber(_value) {
         const value = PhoneBox.clearValue(_value);
-        // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        // console.debug('arr:', arr);
         if (arr) {
             if (arr[5]) {
                 return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
@@ -13333,7 +12393,6 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
 }
 exports.PhoneBox = PhoneBox;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PhoneBox = PhoneBox;
 }
 
@@ -13354,10 +12413,8 @@ const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-ru
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class Radio extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Radio.constructor', props.value);
         super(props);
         this.onChange = async (e) => {
-            // console.debug('Radio.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
@@ -13397,8 +12454,6 @@ class Radio extends ReactComponent_1.ReactComponent {
         return false;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -13435,7 +12490,6 @@ class Select extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onKeyDown = async (e) => {
-            // console.debug('Select.onKeyDown');
             if (this.isVisible()) {
                 this.setState({ visible: false });
                 e.stopPropagation();
@@ -13451,9 +12505,7 @@ class Select extends ReactComponent_1.ReactComponent {
             else {
                 if (!this.isVisible()) {
                     const [selected] = this.el.current.querySelectorAll('li.selected');
-                    // console.debug('selected:', selected);
                     if (selected) {
-                        // console.debug('selected.offsetTop:', selected.offsetTop);
                         const scrollTop = selected.offsetTop -
                             this.dropdown.current.getBoundingClientRect().height / 2 +
                             selected.getBoundingClientRect().height / 2;
@@ -13477,7 +12529,6 @@ class Select extends ReactComponent_1.ReactComponent {
         this.onDropdownClick = async (e) => {
             console.debug('Select.onDropdownClick', e.target.offsetTop);
             const value = JSON.parse(e.target.dataset.value);
-            // console.debug('value:', value);
             this.setState({ value: value, visible: false }, async () => {
                 if (this.props.onChange) {
                     await this.props.onChange(value.toString());
@@ -13502,7 +12553,6 @@ class Select extends ReactComponent_1.ReactComponent {
         return this.state.visible;
     }
     getInitialValue() {
-        // console.debug('Select.getInitialValue', this.props.value);
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
@@ -13531,7 +12581,6 @@ class Select extends ReactComponent_1.ReactComponent {
         }
         if (value === null)
             throw new Error('null is wrong value for Select');
-        // console.debug('select value:', value);
         return value;
     }
     getValue() {
@@ -13555,12 +12604,9 @@ class Select extends ReactComponent_1.ReactComponent {
         const item = this.getItems().find((item) => item.value === value);
         if (!item)
             throw new Error(`cannot find item by value: ${value}`);
-        // console.debug('item:', item);
         return item.title || item.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -13586,13 +12632,11 @@ class Select extends ReactComponent_1.ReactComponent {
                 })] })));
     }
     render() {
-        // console.debug('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
     }
 }
 exports.Select = Select;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Select = Select;
 }
 
@@ -13619,7 +12663,6 @@ class Slider extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onPrevClick = (e) => {
-            // console.debug('Slider.onPrevClick');
             this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
@@ -13629,7 +12672,6 @@ class Slider extends ReactComponent_1.ReactComponent {
             });
         };
         this.onNextClick = (e) => {
-            // console.debug('Slider.onNextClick');
             this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
@@ -13655,14 +12697,12 @@ class Slider extends ReactComponent_1.ReactComponent {
         this.state = { image: 0, classList: null };
     }
     render() {
-        // console.debug('Slider.render', this.props.images);
         const images = this.props.images || [];
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon_1.LeftIcon, {}) }))), images.length > 1 && ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon_1.RightIcon, {}) }))), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) }))] })));
     }
 }
 exports.Slider = Slider;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Slider = Slider;
 }
 
@@ -13684,7 +12724,6 @@ const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/
 __webpack_require__(/*! ./Statusbar.less */ "./src/frontend/common/widget/Statusbar/Statusbar.less");
 class Statusbar extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('Statusbar.constructor', props);
         super(props);
         this.state = {};
     }
@@ -13697,7 +12736,6 @@ class Statusbar extends ReactComponent_1.ReactComponent {
 }
 exports.Statusbar = Statusbar;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Statusbar = Statusbar;
 }
 
@@ -13721,7 +12759,6 @@ class Tab extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -13736,10 +12773,8 @@ class Tab extends ReactComponent_1.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -13771,7 +12806,6 @@ class Tab extends ReactComponent_1.ReactComponent {
 }
 exports.Tab = Tab;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tab = Tab;
 }
 
@@ -13795,7 +12829,6 @@ class Tab2 extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -13810,10 +12843,8 @@ class Tab2 extends ReactComponent_1.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -13845,7 +12876,6 @@ class Tab2 extends ReactComponent_1.ReactComponent {
 }
 exports.Tab2 = Tab2;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tab2 = Tab2;
 }
 
@@ -13866,10 +12896,8 @@ const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-ru
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class TextArea extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('TextArea.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.debug('TextArea.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 this.props.onChange(e.target.value);
@@ -13883,19 +12911,15 @@ class TextArea extends ReactComponent_1.ReactComponent {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('TextArea.render');
         return ((0, jsx_runtime_1.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
     }
 }
 exports.TextArea = TextArea;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TextArea = TextArea;
 }
 
@@ -13917,10 +12941,8 @@ const react_1 = __webpack_require__(/*! react */ "react");
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class TextBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('TextBox.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.debug('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
         this.el = (0, react_1.createRef)();
@@ -13932,28 +12954,22 @@ class TextBox extends ReactComponent_1.ReactComponent {
         return this.state.value;
     }
     _setValue(value) {
-        // @ts-ignore
         this.state.value = value;
-        // this.setState({value: this.state.value});   // rerender
         this.forceUpdate();
         if (this.props.onChange) {
             this.props.onChange(value);
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('TextBox.render');
         return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
 exports.TextBox = TextBox;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TextBox = TextBox;
 }
 
@@ -13978,17 +12994,14 @@ const react_1 = __importDefault(__webpack_require__(/*! react */ "react"));
 const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class TimeBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.debug('TimeBox.constructor', props);
         super(props);
         this.onKeyPress = (event) => {
-            // console.debug('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
                 console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -13997,10 +13010,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.debug('after:', target.selectionStart, target.selectionEnd);
-                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -14014,13 +13024,11 @@ class TimeBox extends ReactComponent_1.ReactComponent {
                         console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
@@ -14030,7 +13038,6 @@ class TimeBox extends ReactComponent_1.ReactComponent {
                     console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -14072,28 +13079,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
     setValue(value) {
         this.setState({ value: TimeBox.getStringValue(value) });
     }
-    /*onKeyDown = event => {
-        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
-        const mask = '00:00';
-        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
-        if (event.which < 96 || event.which > 105) {
-            console.debug('cancel');
-            event.stopPropagation();
-            event.preventDefault();
-        }
-
-        if (event.target.value.length + 1 > mask.length) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    }*/
-    /*onKeyUp = event => {
-        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
-        event.stopPropagation();
-        event.preventDefault();
-    }*/
     static getStringValue(value) {
-        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -14108,8 +13094,6 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.debug('TimeBox.getIntegerValue', stringValue);
-        // try {
         if (stringValue === '')
             return null;
         const arr = stringValue.split(':');
@@ -14128,10 +13112,6 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         if (mm > 59)
             throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
         return hh * 60 + mm;
-        // } catch (err) {
-        //     console.error(err.message);
-        //     return NaN;
-        // }
     }
     static splitTime(value) {
         const hours = Math.floor(value / 60);
@@ -14139,9 +13119,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
-            // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
             return true;
         }
@@ -14154,16 +13132,11 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return false;
     }
     render() {
-        // console.debug('TimeBox.render', this.state.value);
-        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
-            // onKeyDown={this.onKeyDown}
-            // onKeyUp={this.onKeyUp}
-            onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
+        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
     }
 }
 exports.TimeBox = TimeBox;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TimeBox = TimeBox;
 }
 
@@ -14193,7 +13166,6 @@ class TimeBox2 extends TimeBox_1.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();
@@ -14209,12 +13181,7 @@ class TimeBox2 extends TimeBox_1.TimeBox {
         return this.inputEl.current;
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', 
-                    // id={this.props.id}
-                    readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
-                    // onKeyDown={this.onKeyDown}
-                    // onKeyUp={this.onKeyUp}
-                    onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0, jsx_runtime_1.jsx)(TimeIcon_1.TimeIcon, {}) }))] })));
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0, jsx_runtime_1.jsx)(TimeIcon_1.TimeIcon, {}) }))] })));
     }
 }
 exports.TimeBox2 = TimeBox2;
@@ -14236,18 +13203,12 @@ const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-ru
 const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 __webpack_require__(/*! ./Tooltip.less */ "./src/frontend/common/widget/Tooltip/Tooltip.less");
 class Tooltip extends ReactComponent_1.ReactComponent {
-    // constructor(props) {
-    //     console.debug('Tooltip.constructor', props);
-    //     super(props);
-    // }
     render() {
-        // console.debug('Tooltip.render', this.state, this.props);
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0, jsx_runtime_1.jsx)("div", { children: "tooltip" }), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
 exports.Tooltip = Tooltip;
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tooltip = Tooltip;
 }
 
@@ -14406,7 +13367,7 @@ class AlertView extends View_1.View {
         this.el = react_1.default.createRef();
     }
     getHeaderStyle() {
-        return this.getCtrl().options.titleStyle /* || {color: 'red'}*/;
+        return this.getCtrl().options.titleStyle;
     }
     render() {
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__content flex-column` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title`, style: this.getHeaderStyle() }, { children: this.getCtrl().options.title || 'Alert' })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: this.getCtrl().onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon2, {}) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max` }, { children: this.getCtrl().options.message })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(common_1.Button, { classList: [`${this.getCssBlockName()}__ok-button`], title: 'OK', onClick: this.getCtrl().onOkButtonClick }) }))] })) })) })));
@@ -14488,7 +13449,6 @@ class ConfirmView extends View_1.View {
         this.el = react_1.default.createRef();
     }
     render() {
-        // console.debug('ConfirmView.render', this.getCtrl().options);
         if (!this.getCtrl().options.yesButton)
             throw new Error('no yesButton option');
         if (!this.getCtrl().options.noButton)
@@ -14523,11 +13483,7 @@ class Controller extends EventEmitter_1.EventEmitter {
     constructor() {
         super(...arguments);
         this.view = null;
-        /* constructor() {
-            super();
-        } */
         this.onViewCreate = (view) => {
-            // console.debug('Controller.onViewCreate');
             this.view = view;
         };
     }
@@ -14546,7 +13502,6 @@ class Controller extends EventEmitter_1.EventEmitter {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
     createElement() {
-        // @ts-ignore
         return react_1.default.createElement(this.getViewClass(), {
             ctrl: this,
             onCreate: this.onViewCreate,
@@ -14625,10 +13580,7 @@ class LoginView extends View_1.View {
     constructor(props) {
         super(props);
         this.onLoginFormSubmit = (e) => {
-            // console.debug('LoginView.onLoginFormSubmit');
-            // @ts-ignore
             document.querySelector('.LoginView__button').disabled = true;
-            // e.preventDefault();
         };
         this.onChange = (e) => {
             this.errMsgRef.current.innerHTML = '';
@@ -14642,7 +13594,6 @@ class LoginView extends View_1.View {
         return this.getCtrl().getFrontHostApp().getData().title;
     }
     render() {
-        // console.debug('LoginView.render');
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)(common_1.Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) })));
     }
 }
@@ -14665,7 +13616,6 @@ const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/f
 const ImageDialogView_1 = __webpack_require__(/*! ./ImageDialogView */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.tsx");
 class ImageDialogController extends ModalController_1.ModalController {
     constructor(options) {
-        // console.debug('ImageDialogController.constructor', options);
         super(options);
         this.onCloseClick = async (e) => {
             await this.close();
@@ -14791,7 +13741,7 @@ class ApplicationController extends ModelController_1.ModelController {
         super(model);
         this.frontHostApp = frontHostApp;
         this.lastId = 0;
-        this.activePage = null; // active non modal page
+        this.activePage = null;
         this.modals = [];
         this.statusbar = null;
         this.homePageName = null;
@@ -14801,8 +13751,6 @@ class ApplicationController extends ModelController_1.ModelController {
             if (this.statusbar) {
                 this.statusbar.setLastQueryTime(e.time);
             }
-            // console.debug('e.remoteAppVersion', e.remoteAppVersion);
-            // console.debug('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
             if (this.getModel().getData().versions.app &&
                 this.getModel().getData().versions.app !== e.remoteAppVersion) {
                 this.createVersionNotificationIfNotExists();
@@ -14846,12 +13794,6 @@ class ApplicationController extends ModelController_1.ModelController {
         }
     }
     static create(model, frontHostApp) {
-        // console.debug(
-        //     'ApplicationController.create',
-        //     'debug:',
-        //     this.getHostApp().isDebugMode(),
-        //     model,
-        // );
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
@@ -14862,9 +13804,7 @@ class ApplicationController extends ModelController_1.ModelController {
         return new ApplicationController(model, frontHostApp);
     }
     init() {
-        // console.debug('ApplicationController.init');
         super.init();
-        // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
         const pageData = this.getModel().getData().pages[0];
         this.activePage = pageData
@@ -14873,13 +13813,10 @@ class ApplicationController extends ModelController_1.ModelController {
                 params: this.getGlobalParams(),
             })
             : null;
-        // this.frontHostApp.setDocumentTitle(this.getTitle());
-        // Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }
     deinit() {
-        // this.getModel().off('logout', this.onLogout);
         this.getModel().off('request', this.onRequest);
         super.deinit();
     }
@@ -14887,7 +13824,6 @@ class ApplicationController extends ModelController_1.ModelController {
         return super.getViewClass() || ApplicationView_1.ApplicationView;
     }
     createView(rootElement) {
-        // console.debug('ApplicationController.createView');
         this.view = common_1.Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
@@ -14897,7 +13833,6 @@ class ApplicationController extends ModelController_1.ModelController {
         }
     }
     createVersionNotificationIfNotExists() {
-        // console.debug('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
@@ -14905,21 +13840,16 @@ class ApplicationController extends ModelController_1.ModelController {
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         }
         else {
-            // console.debug(`version notification already exists`);
         }
     }
     getGlobalParams() {
-        return {
-        // foo: 'bar'
-        };
+        return {};
     }
     createPage(pageData, options) {
         if (options.modal === undefined)
             throw new Error('no options.modal');
-        // model
         const pageModel = new Page_1.Page(pageData, this.getModel(), options);
         pageModel.init();
-        // controller
         const pc = PageController_1.PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
         return pc;
@@ -14928,10 +13858,7 @@ class ApplicationController extends ModelController_1.ModelController {
         console.debug('ApplicationController.openPage', options);
         if (!options.name)
             throw new Error('no name');
-        // if (options.key) throw new Error('openPage: key param is deprecated');
-        // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
-        // console.debug('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
             return pageController;
@@ -14942,21 +13869,17 @@ class ApplicationController extends ModelController_1.ModelController {
             newMode: !!options.newMode,
             params: options.params || {},
         });
-        // modal by default
         if (options.modal === undefined) {
             options.modal = true;
         }
         if (!options.onClose) {
             const activeElement = document.activeElement;
             options.onClose = () => {
-                // @ts-ignore
                 if (activeElement)
                     activeElement.focus();
             };
         }
         const pc = this.createPage(pageData, options);
-        // console.debug('pc:', pc);
-        // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
         return pc;
@@ -14965,7 +13888,6 @@ class ApplicationController extends ModelController_1.ModelController {
         this.modals.push(ctrl);
     }
     removeModal(ctrl) {
-        // console.debug('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1)
             throw new Error(`cannot find modal: ${ctrl.getId()}`);
@@ -15016,9 +13938,7 @@ class ApplicationController extends ModelController_1.ModelController {
         console.debug('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
-        // console.debug('ApplicationController.getMenuItemsProp');
         return [
-            // pages & actions
             ...(this.getModel().getData().menu
                 ? Object.keys(this.getModel().getData().menu).map((key) => ({
                     name: key,
@@ -15032,7 +13952,6 @@ class ApplicationController extends ModelController_1.ModelController {
                     })),
                 }))
                 : []),
-            // user
             ...(this.getModel().getUser()
                 ? [
                     {
@@ -15050,12 +13969,6 @@ class ApplicationController extends ModelController_1.ModelController {
                 : []),
         ];
     }
-    /*getFocusCtrl() {
-        if (this.modals.length > 0) {
-            return this.modals[this.modals.length - 1];
-        }
-        return this.activePage;
-    }*/
     getActivePageName() {
         if (this.activePage) {
             return this.activePage.getModel().getName();
@@ -15070,7 +13983,6 @@ class ApplicationController extends ModelController_1.ModelController {
         });
     }
     getTitle() {
-        // console.debug('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
             return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
         }
@@ -15092,7 +14004,6 @@ class ApplicationController extends ModelController_1.ModelController {
             return await this.frontHostApp.alert(options);
         }
         finally {
-            // @ts-ignore
             if (activeElement)
                 activeElement.focus();
         }
@@ -15112,7 +14023,6 @@ class ApplicationController extends ModelController_1.ModelController {
             return await this.frontHostApp.confirm(options);
         }
         finally {
-            // @ts-ignore
             if (activeElement)
                 activeElement.focus();
         }
@@ -15144,14 +14054,6 @@ class ApplicationController extends ModelController_1.ModelController {
     }
     async rpc(name, params = {}) {
         const result = await this.getModel().rpc(name, params);
-        /*if (result.errorMessage) {
-            this.getHostApp().logError(new Error(result.errorMessage));
-            await this.alert({
-                title     : this.getModel().getText().application.error,
-                titleStyle: {color: 'red'},
-                message   : result.errorMessage
-            });
-        }*/
         return result;
     }
     getDomain() {
@@ -15239,7 +14141,6 @@ const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/f
 const Helper_1 = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 class FieldController extends ModelController_1.ModelController {
     static create(model, parent) {
-        // console.debug('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
@@ -15256,7 +14157,6 @@ class FieldController extends ModelController_1.ModelController {
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
-        // console.debug('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -15276,11 +14176,7 @@ class FieldController extends ModelController_1.ModelController {
         }
     }
     stringToValue(stringValue) {
-        // console.debug('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
-        // if (stringValue === undefined) return undefined;
-        // if (stringValue === null) return null;
         const fieldType = this.getModel().getType();
-        // console.debug('fieldType:', fieldType);
         if (stringValue.trim() === '')
             return null;
         if (fieldType === 'object' || fieldType === 'boolean') {
@@ -15306,9 +14202,6 @@ class FieldController extends ModelController_1.ModelController {
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
-    /* getParent<TFormController extends FormController = FormController>(): TFormController {
-        return super.getParent() as TFormController;
-    } */
     getForm() {
         return this.getParent();
     }
@@ -15409,7 +14302,6 @@ class RowFormCheckBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     render() {
-        // console.debug('RowFormCheckBoxFieldView.render');
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.CheckBox, { onCreate: this.onWidgetCreate, checked: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: this.onCheckBoxChange }) })));
     }
@@ -15440,7 +14332,6 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController_1.RowFor
             await this.rerender();
         };
         this.onListUpdate = async (e) => {
-            // console.debug('RowFormCheckBoxListFieldController.onListUpdate');
             await this.rerender();
         };
         this.onListDelete = async (e) => {
@@ -15448,7 +14339,6 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController_1.RowFor
         };
     }
     init() {
-        // console.debug('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getDataSource();
         dataSource.on('insert', this.onListInsert);
@@ -15469,9 +14359,7 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController_1.RowFor
         return this.getModel().getDataSource().getRows();
     }
     getValueForWidget() {
-        // console.debug('RowFormCheckBoxListFieldController.getValueForWidget');
         const value = this.getValue();
-        // console.debug('value:', value);
         return value;
     }
     setValueFromWidget(widgetValue) {
@@ -15551,8 +14439,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             console.debug('RowFormComboBoxFieldController.onEditButtonClick');
             const itemEditPage = this.getModel().getAttr('itemEditPage');
             const value = this.getValue();
-            // console.debug('itemEditPage', itemEditPage);
-            // console.debug('value:', value);
             if (itemEditPage && value) {
                 await this.openPage({
                     name: itemEditPage,
@@ -15578,18 +14464,15 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             else {
                 throw new Error(`wrong newRowMode value: ${newRowMode}`);
             }
-            // page
             const pc = await this.openPage({
                 name: createPageName,
                 newMode: true,
             });
-            // form
             const form = pc.getModel().getForm(itemCreateForm);
             const onInsert = async (e) => {
                 form.off('insert', onInsert);
                 const [key] = e.inserts;
                 const [id] = Helper_1.Helper.decodeValue(key);
-                // console.debug('id:', id);
                 await this.onChange(id.toString());
             };
             form.on('insert', onInsert);
@@ -15599,14 +14482,12 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             await this.rerender();
         };
         this.onListUpdate = async (e) => {
-            // console.debug('RowFormComboBoxFieldController.onListUpdate');
             await this.rerender();
         };
         this.onListDelete = async (e) => {
             await this.rerender();
         };
         this.onItemSelect = async (e) => {
-            // console.debug('RowFormComboBoxFieldController.onItemSelect');
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
@@ -15618,7 +14499,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
                     onSelect: async (key) => {
                         if (key) {
                             const [id] = (0, types_1.keyToKeyTuple)(key);
-                            // console.debug('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
                             }
@@ -15634,7 +14514,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
         };
     }
     init() {
-        // console.debug('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();
         dataSource.on('insert', this.onListInsert);
@@ -15696,7 +14575,6 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onChange = async (widgetValue) => {
-            // console.debug('RowFormComboBoxFieldView.onChange', widgetValue);
             this.rerender();
             await this.getCtrl().onChange(widgetValue);
         };
@@ -15719,9 +14597,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
     renderSelect() {
         const ctrl = this.getCtrl();
-        return ((0, jsx_runtime_1.jsx)(common_1.Select, { classList: [`${this.getCssBlockName()}__select`], onCreate: this.onWidgetCreate, 
-            // nullable={ctrl.getModel().isNullable()}
-            value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: this.onChange, items: ctrl.getItems(), placeholder: ctrl.getPlaceholder(), onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null }));
+        return ((0, jsx_runtime_1.jsx)(common_1.Select, { classList: [`${this.getCssBlockName()}__select`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: this.onChange, items: ctrl.getItems(), placeholder: ctrl.getPlaceholder(), onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null }));
     }
     renderEditButton() {
         const ctrl = this.getCtrl();
@@ -15732,7 +14608,6 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" })));
     }
     render() {
-        // console.debug('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderSelect(), this.getCtrl().getModel().getAttr('itemEditPage') &&
                     !!this.getCtrl().getValue() &&
                     this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()] })));
@@ -15790,9 +14665,7 @@ __webpack_require__(/*! ./RowFormDateFieldView.less */ "./src/frontend/viewer/Co
 class RowFormDateFieldView extends RowFormFieldView_1.RowFormFieldView {
     render() {
         const ctrl = this.getCtrl();
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
-                // getMinDate={this.props.getMinDate}
-                minDate: this.props.minDate, debug: ctrl.getApp().getHostApp().isDebugMode() }) })));
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, minDate: this.props.minDate, debug: ctrl.getApp().getHostApp().isDebugMode() }) })));
     }
 }
 exports.RowFormDateFieldView = RowFormDateFieldView;
@@ -15820,21 +14693,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         this.widget2 = null;
         this.defaultValue = 0;
         this.onView2Create = (widget2) => {
-            // console.debug('RowFormDateTimeFieldController.onView2Create', widget2);
             this.widget2 = widget2;
         };
-        /*_onChange(widgetValue) {
-            // console.debug('RowFormDateTimeFieldController._onChange', this.widget2);
-            if (widgetValue !== null) {
-                setTimeout(() => {
-                    const input = this.widget2.getInputElement();
-                    input.focus();
-                    input.setSelectionRange(0, input.value.length);
-                }, 0);
-            }
-        }*/
         this.onChange2 = (widgetValue, fireEvent = true) => {
-            // console.debug('RowFormDateTimeFieldController.onChange2', widgetValue);
             this.resetErrors();
             this.resetErrors2();
             this.rerender();
@@ -15847,16 +14708,13 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                 console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
-            // validate
             if (!this.state.parseError2) {
                 this.validate2();
                 if (this.isValid()) {
                     this.copyValueToModel();
                 }
             }
-            // changed
             this.refreshChangedState();
-            // event
             if (fireEvent) {
                 try {
                     this.emit('change', { value: widgetValue });
@@ -15873,7 +14731,6 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                 return;
             this.resetErrors2();
             this.rerender();
-            // get value from widget
             try {
                 this.setValueFromView2(widgetValue);
             }
@@ -15881,16 +14738,13 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                 console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
-            // validate
             if (!this.state.parseError2) {
                 this.validate2();
                 if (this.isValid()) {
                     this.copyValueToModel();
                 }
             }
-            // changed
             this.refreshChangedState();
-            // event
             if (fireEvent) {
                 try {
                     this.emit('change', { value: widgetValue });
@@ -15911,13 +14765,10 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         return this.getValue();
     }
     getValueForTime() {
-        // console.debug('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
             const value = date.getHours() * 60 + date.getMinutes();
-            // console.debug('value:', value);
             if (value !== this.defaultValue) {
-                // console.debug('not equal to default value', value, this.defaultValue);
                 return value;
             }
         }
@@ -15943,7 +14794,6 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         return this.defaultValue;
     }
     setDefaultValue2(defaultValue) {
-        // console.debug('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
             this.defaultValue = common_1.TimeBox.getIntegerValue(defaultValue);
         }
@@ -15970,12 +14820,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         this.state.value.setHours(h, m);
     }
     validate2() {
-        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
         this.state.error2 = this.getError2();
     }
     getError2() {
-        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
-        // parse validator
         if (this.widget2) {
             try {
                 const widgetValue = this.widget2.getValue();
@@ -16006,7 +14853,6 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         return this.state.parseError2 === null && this.state.error2 === null;
     }
     refill() {
-        // console.debug('RowFormDateTimeFieldController.refill');
         if (!this.widget2)
             return;
         super.refill();
@@ -16059,7 +14905,6 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onClear2 = async () => {
-            // console.debug('RowFormDateTimeFieldView.onClear2');
             this.getCtrl().onChange2(null);
         };
     }
@@ -16074,9 +14919,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
     renderDatePart() {
         const ctrl = this.getCtrl();
-        return ((0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
-            // getMinDate={this.props.getMinDate}
-            highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().getHostApp().isDebugMode() }));
+        return ((0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().getHostApp().isDebugMode() }));
     }
     renderTimePart() {
         const ctrl = this.getCtrl();
@@ -16086,7 +14929,6 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         return this.getCtrl().state.value ? 'datetime' : 'date';
     }
     render() {
-        // console.debug('RowFormDateTimeFieldView.render');
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getMode()}`, style: this.getStyle(this.getCtrl().getRow()) }, { children: [this.renderDatePart(), this.renderTimePart()] })));
     }
 }
@@ -16121,10 +14963,8 @@ class RowFormFieldController extends FieldController_1.FieldController {
         };
         this.onChange = async (widgetValue, fireEvent = true) => {
             console.debug('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
-            // this._onChange(widgetValue);
             this.resetErrors();
             this.rerender();
-            // get value from widget
             try {
                 this.setValueFromWidget(widgetValue);
             }
@@ -16132,16 +14972,13 @@ class RowFormFieldController extends FieldController_1.FieldController {
                 console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
                 this.state.parseError = err.message;
             }
-            // validate
             if (!this.state.parseError && this.isValidateOnChange()) {
                 this.validate();
                 if (this.isValid()) {
                     this.copyValueToModel();
                 }
             }
-            // changed
             this.refreshChangedState();
-            // event
             if (fireEvent) {
                 try {
                     this.emit('change', { value: widgetValue });
@@ -16156,11 +14993,9 @@ class RowFormFieldController extends FieldController_1.FieldController {
             console.debug('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
             if (!this.isEditable())
                 return;
-            // this.resetErrors();
-            this.rerender(); // to clear field focus class
+            this.rerender();
             if (!this.isValidateOnBlur())
                 return;
-            // get value from widget
             try {
                 this.setValueFromWidget(widgetValue);
             }
@@ -16168,16 +15003,13 @@ class RowFormFieldController extends FieldController_1.FieldController {
                 console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
                 this.state.parseError = err.message;
             }
-            // validate
             if (!this.state.parseError && this.isValidateOnBlur()) {
                 this.validate();
                 if (this.isValid()) {
                     this.copyValueToModel();
                 }
             }
-            // changed
             this.refreshChangedState();
-            // event
             if (fireEvent) {
                 try {
                     this.emit('change', { value: widgetValue });
@@ -16190,20 +15022,16 @@ class RowFormFieldController extends FieldController_1.FieldController {
         };
         this.onChangePure = async (value, fireEvent = true) => {
             console.debug('RowFormFieldController.onChangePure', JSON.stringify(value));
-            // value
             this.setValue(value);
             this.resetErrors();
             this.rerender();
-            // validate
             if (this.isValidateOnChange()) {
                 this.validate();
                 if (this.isValid()) {
                     this.copyValueToModel();
                 }
             }
-            // changed
             this.refreshChangedState();
-            // event
             if (fireEvent) {
                 try {
                     this.emit('change', { value });
@@ -16214,21 +15042,13 @@ class RowFormFieldController extends FieldController_1.FieldController {
                 this.getParent().onFieldChange({ source: this });
             }
         };
-        /* this.state = {
-            value: null,
-            parseError: null,
-            error: null,
-            changed: false,
-        }; */
     }
     init() {
         const row = this.getRow();
         const value = this.getModel().getValue(row);
         this.setValue(value);
-        // console.debug(this.getModel().getFullName(), value);
     }
     refill() {
-        // console.debug('RowFormFieldController.refill', this.getModel().getFullName());
         if (!this.view)
             return;
         const value = this.getModel().getValue(this.getRow());
@@ -16244,45 +15064,34 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return this.getParent();
     }
     copyValueToModel() {
-        // console.debug('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
     }
-    /*_onChange(widgetValue) {
-
-    }*/
     putValue(widgetValue) {
-        // console.debug('RowFormFieldController.putValue', widgetValue);
         this.onChange(widgetValue, false);
     }
     getValueForWidget() {
         const value = this.getValue();
-        // console.debug('value:', this.getModel().getFullName(), value, typeof value);
         return this.valueToString(value);
     }
     setValueFromWidget(widgetValue) {
-        // console.debug('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
         if (typeof widgetValue !== 'string')
             throw new Error(`${this.getModel().getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
         const value = this.stringToValue(widgetValue);
-        // console.debug('value:', value);
         this.setValue(value);
     }
     setValue(value) {
-        // console.debug('RowFormFieldController.setValue', this.getModel().getFullName(), value);
         this.state.value = value;
     }
     getValue() {
         return this.state.value;
     }
     isChanged() {
-        // console.debug('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {
         return this.state.parseError === null && this.state.error === null;
     }
     validate() {
-        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
         if (this.isVisible()) {
             this.state.error = this.getError();
         }
@@ -16291,7 +15100,6 @@ class RowFormFieldController extends FieldController_1.FieldController {
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {
-        // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
         if (this.getModel().getAttr('placeholder'))
             return this.getModel().getAttr('placeholder');
         if (this.getApp().getHostApp().isDebugMode()) {
@@ -16306,8 +15114,6 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return null;
     }
     getError() {
-        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
-        // parse validator
         if (this.view && this.view.getWidget()) {
             try {
                 const widgetValue = this.view.getWidget().getValue();
@@ -16316,7 +15122,6 @@ class RowFormFieldController extends FieldController_1.FieldController {
                 return `can't parse value: ${err.message}`;
             }
         }
-        // null validator
         const value = this.getValue();
         if (this.getModel().isNotNull() && (value === null || value === undefined)) {
             return this.getNullErrorText();
@@ -16334,7 +15139,6 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return this.state.parseError !== null;
     }
     calcChangedState(row) {
-        // console.debug('RowFormFieldController.calcChangedState', this.getModel().getFullName());
         if (!row)
             throw new Error('FieldController: no row');
         if (this.isParseError()) {
@@ -16489,7 +15293,6 @@ class RowFormFileFieldView extends RowFormFieldView_1.RowFormFieldView {
             const file = e.target.files[0];
             if (file) {
                 const widgetValue = (await common_1.Helper.readFileAsDataURL(file));
-                // console.debug('widgetValue:', widgetValue);
                 this.getCtrl().onChange(widgetValue);
             }
         };
@@ -16514,12 +15317,6 @@ class RowFormFileFieldView extends RowFormFieldView_1.RowFormFieldView {
             this.getInput().click();
         };
     }
-    /* constructor(props) {
-        super(props);
-        // this.image = React.createRef();
-        // this.div = React.createRef();
-        // this.input = React.createRef();
-    } */
     getImage() {
         return this.image.current;
     }
@@ -16542,11 +15339,9 @@ class RowFormFileFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0, jsx_runtime_1.jsx)(common_1.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0, jsx_runtime_1.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: common_1.Helper.formatNumber(value.length) }))] }))) : ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0, jsx_runtime_1.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0, jsx_runtime_1.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
     }
     componentDidMount() {
-        // console.debug('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.debug('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 }
@@ -16583,7 +15378,6 @@ class RowFormLinkFieldController extends RowFormFieldController_1.RowFormFieldCo
                     },
                 });
             }
-            // @ts-ignore
             this.emit({ source: this });
         };
     }
@@ -16625,7 +15419,6 @@ class RowFormLinkFieldView extends RowFormFieldView_1.RowFormFieldView {
         const ctrl = this.getCtrl();
         let href = ctrl.getValueForWidget();
         let displayValue = ctrl.getValueForWidget();
-        // valueOfDisplayColumn
         const valueOfDisplayColumn = ctrl.getDisplayValue();
         if (valueOfDisplayColumn) {
             displayValue = valueOfDisplayColumn;
@@ -16634,7 +15427,6 @@ class RowFormLinkFieldView extends RowFormFieldView_1.RowFormFieldView {
         if (pageName) {
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, (0, types_1.keyTupleToKey)([value]));
-            // console.debug('href:', link);
         }
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
     }
@@ -16686,7 +15478,6 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor(props) {
         super(props);
         this.onCloseClick = async (e) => {
-            // console.debug('RowFormPasswordFieldView.onCloseClick');
             const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({ value: '' });
@@ -16694,12 +15485,10 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
             this.getWidget().getElement().focus();
         };
         this.onFocus = async (e) => {
-            // console.debug('RowFormPasswordFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.debug('RowFormPasswordFieldView.onBlur');
             this.removeCssClass('focus');
             await this.rerender();
         };
@@ -16716,14 +15505,12 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     isCloseVisible() {
-        // console.debug('RowFormPasswordFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.debug('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
     render() {
@@ -16760,7 +15547,6 @@ class RowFormPhoneFieldController extends RowFormFieldController_1.RowFormFieldC
         const error = super.getError();
         if (error)
             return error;
-        // russian phone format validator
         const value = this.getValue();
         if (value && value.substr(0, 2) === '+7' && value.length < 12) {
             return this.getPhoneFormatErrorText();
@@ -16802,7 +15588,6 @@ class RowFormPhoneFieldView extends RowFormFieldView_1.RowFormFieldView {
             await this.rerender();
         };
         this.onBlur = async (value) => {
-            // console.debug('RowFormPhoneFieldView.onBlur', value);
             this.removeCssClass('focus');
             this.getCtrl().onBlur(value);
         };
@@ -16827,7 +15612,6 @@ class RowFormPhoneFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0, jsx_runtime_1.jsx)(common_1.PhoneIcon, {}) })));
     }
     render() {
-        // console.debug('RowFormPhoneFieldView.render');
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
     }
 }
@@ -16856,7 +15640,6 @@ class RowFormRadioFieldController extends RowFormFieldController_1.RowFormFieldC
     getItems() {
         try {
             return this.getRows().map((row) => ({
-                // value: this.valueToString(this.getModel().getValueValue(row)),
                 value: this.getModel().getValueValue(row),
                 title: this.getModel().getDisplayValue(row),
             }));
@@ -16891,11 +15674,6 @@ const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src
 __webpack_require__(/*! ./RowFormRadioFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less");
 class RowFormRadioFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
-        /*onChange = async widgetValue => {
-            // console.debug('RowFormRadioFieldView.onChange', widgetValue);
-            this.rerender();
-            await this.getCtrl().onChange(widgetValue);
-        }*/
         super(...arguments);
         this.onClick = async (e) => {
             console.debug('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
@@ -16905,22 +15683,7 @@ class RowFormRadioFieldView extends RowFormFieldView_1.RowFormFieldView {
             }
         };
     }
-    /*render() {
-        return <div className={this.getCssClassNames()}>
-            <Radio  classList={[
-                        `${this.getCssBlockName()}__radio`,
-                        ...(!this.getCtrl().isEditable() ? ['readOnly'] : [])
-                    ]}
-                    name={this.getCtrl().getModel().getFullName()}
-                    items={this.getCtrl().getItems()}
-                    value={this.getCtrl().getValueForWidget()}
-                    readOnly={!this.getCtrl().isEditable()}
-                    onChange={this.onChange}
-            />
-        </div>;
-    }*/
     render() {
-        // console.debug('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         const value = this.getCtrl().getValue();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.getCtrl()
                 .getItems()
@@ -16976,12 +15739,10 @@ class RowFormTextAreaFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor(props) {
         super(props);
         this.onFocus = async (e) => {
-            // console.debug('RowFormTextAreaFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.debug('RowFormTextAreaFieldView.onBlur');
             this.removeCssClass('focus');
             await this.rerender();
         };
@@ -16990,7 +15751,6 @@ class RowFormTextAreaFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     render() {
-        // console.debug('RowFormTextAreaFieldView.render', this.state);
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.getModel().getRows(), cols: ctrl.getModel().getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
     }
@@ -17048,12 +15808,10 @@ class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
             }, 0);
         };
         this.onFocus = async (e) => {
-            // console.debug('RowFormTextBoxFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.debug('RowFormTextBoxFieldView.onBlur');
             const value = e.target.value;
             this.removeCssClass('focus');
             this.getCtrl().onBlur(value);
@@ -17063,7 +15821,6 @@ class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     isCloseVisible() {
-        // console.debug('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
@@ -17104,10 +15861,6 @@ class RowFormTimeFieldController extends RowFormFieldController_1.RowFormFieldCo
         super(...arguments);
         this.defaultValue = null;
     }
-    /* constructor(...args) {
-        super(...args);
-        this.defaultValue = null;
-    } */
     getViewClass() {
         return super.getViewClass() || RowFormTimeFieldView_1.RowFormTimeFieldView;
     }
@@ -17133,7 +15886,6 @@ class RowFormTimeFieldController extends RowFormFieldController_1.RowFormFieldCo
         }
     }
     getPlaceholder() {
-        // console.debug('CarReservefromTimeController.getPlaceholder', this.defaultValue);
         if (this.defaultValue !== null)
             return common_1.TimeBox.getStringValue(this.defaultValue);
         return super.getPlaceholder();
@@ -17164,20 +15916,14 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         super(...arguments);
         this.onCloseClick = async (e) => {
             console.debug('RowFormTimeFieldView.onCloseClick');
-            /*const ctrl = this.getCtrl();
-            this.getWidget().state.value = '';
-            this.getWidget().setState({value: ''});
-            ctrl.onChange(null);*/
         };
     }
     isCloseVisible() {
-        // console.debug('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly)
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.debug('this.getWidget().state.value:', ctrl.view.state.value);
         return this.getWidget().state.value !== '';
     }
     render() {
@@ -17263,7 +16009,6 @@ class TableFormComboBoxFieldController extends TableFormFieldController_1.TableF
     constructor() {
         super(...arguments);
         this.onListUpdate = async (e) => {
-            // console.debug('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
             this.getForm().invalidate();
             await this.getForm().rerender();
         };
@@ -17449,7 +16194,6 @@ exports.TableFormFieldController = void 0;
 const FieldController_1 = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
 class TableFormFieldController extends FieldController_1.FieldController {
     getValueForWidget(row) {
-        // console.debug('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.getModel().getValue(row));
     }
     getForm() {
@@ -17485,7 +16229,6 @@ class TableFormFieldView extends FieldView_1.FieldView {
         this.span = react_1.default.createRef();
     }
     getSpanOffsetWidth() {
-        // console.debug('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         if (!this.span.current)
             return 0;
         return this.span.current.offsetWidth;
@@ -17665,7 +16408,6 @@ const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/c
 const FieldController_1 = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
 class FormController extends ModelController_1.ModelController {
     static create(model, parent) {
-        // console.debug('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
@@ -17690,7 +16432,6 @@ class FormController extends ModelController_1.ModelController {
         }
     }
     deinit() {
-        // console.debug('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -17709,7 +16450,6 @@ class FormController extends ModelController_1.ModelController {
         return false;
     }
     async onFieldChange(e) {
-        // console.debug('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
     getUpdated() {
@@ -17768,7 +16508,6 @@ class FormView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.debug('FormView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -17872,23 +16611,18 @@ class RowFormController extends FormController_1.FormController {
                     changedFields.push(name);
                 }
             }
-            // console.debug('changedFields:', changedFields);
             this.getModel().discard(changedFields);
-            // refill changed fields
             changedFields.forEach((name) => {
                 this.fields[name].refill();
             });
-            // ui
             this.calcState();
             if (this.getModel().hasDefaultPersistentDataSource()) {
                 this.state.mode = 'view';
             }
             this.rerender();
-            // event
             this.getParent().onFormDiscard(this);
         };
         this.onRefreshClick = async () => {
-            // console.debug('RowFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
         };
         this.onEditClick = (e) => {
@@ -17916,7 +16650,6 @@ class RowFormController extends FormController_1.FormController {
         }
     }
     deinit() {
-        // console.debug('RowFormController.deinit', this.getModel().getFullName());
         this.getModel().off('refresh', this.onModelRefresh);
         this.getModel().off('insert', this.onModelInsert);
         this.getModel().off('update', this.onModelUpdate);
@@ -17926,9 +16659,6 @@ class RowFormController extends FormController_1.FormController {
         this.state.hasNew = this.getModel().hasNew();
         this.state.changed = this.isChanged();
         this.state.valid = this.isValid();
-        // console.debug('hasNew:', hasNew);
-        // console.debug('changed:', changed);
-        // console.debug('valid:', valid);
     }
     refill() {
         console.debug('RowFormController.refill', this.getModel().getFullName());
@@ -17937,7 +16667,6 @@ class RowFormController extends FormController_1.FormController {
         }
     }
     isValid() {
-        // console.debug('RowFormController.isValid', this.getModel().getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
             if (!field.isValid())
@@ -17946,7 +16675,6 @@ class RowFormController extends FormController_1.FormController {
         return true;
     }
     validate() {
-        // console.debug('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].validate();
         }
@@ -17958,7 +16686,6 @@ class RowFormController extends FormController_1.FormController {
         }
     }
     isChanged() {
-        // console.debug('RowFormController.isChanged', this.getModel().getFullName());
         if (this.getModel().isChanged())
             return true;
         for (const name in this.fields) {
@@ -17969,13 +16696,11 @@ class RowFormController extends FormController_1.FormController {
         return false;
     }
     async onFieldChange(e) {
-        // console.debug('RowFormController.onFieldChange', this.getModel().getFullName());
         this.calcState();
         this.invalidate();
         await super.onFieldChange(e);
     }
     getViewClass() {
-        // console.debug('RowFormController.getViewClass', this.getModel().getFullName());
         return super.getViewClass() || RowFormView_1.RowFormView;
     }
     getActiveRow() {
@@ -18023,14 +16748,12 @@ const console_1 = __webpack_require__(/*! ../../../../../../console */ "./src/co
 __webpack_require__(/*! ./RowFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less");
 class RowFormView extends FormView_1.FormView {
     renderToolbar() {
-        // debug('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.getModel().hasDefaultPersistentDataSource() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.getModel().hasDefaultPersistentDataSource() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.save }) }), "save")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.getModel().hasDefaultPersistentDataSource() &&
                     ctrl.getModel().getAttr('refreshButton') === 'true' && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.refresh }) }), "refresh")), this.isActionsVisible() && ctrl.getModel().hasActions() && ((0, jsx_runtime_1.jsx)(common_1.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0, jsx_runtime_1.jsx)(common_1.MoreVertIcon, {}) })))] })));
     }
     isActionsEnabled() {
-        // return this.getCtrl().state.mode === 'view';
         return true;
     }
     isActionsVisible() {
@@ -18045,7 +16768,6 @@ class RowFormView extends FormView_1.FormView {
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__label` }, { children: [model.getCaption(), ":", model.isNotNull() && (0, jsx_runtime_1.jsx)("span", Object.assign({ style: { color: 'red' } }, { children: "*" }))] }), `label.${name}`));
     }
     renderField(fieldCtrl) {
-        // debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__field` }, { children: this.renderFieldView(fieldCtrl) }), `field.${name}`));
     }
@@ -18053,38 +16775,20 @@ class RowFormView extends FormView_1.FormView {
         return RowFormView.renderFieldView(fieldCtrl);
     }
     static renderFieldView(fieldCtrl) {
-        /*return React.createElement(fieldCtrl.getViewClass(), {
-            onCreate: fieldCtrl.onViewCreate,
-            ctrl: fieldCtrl,
-        });*/
         return fieldCtrl.renderView();
     }
     renderError(fieldCtrl) {
-        // debug('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0, jsx_runtime_1.jsx)(common_1.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`));
     }
     renderGroup(fieldCtrl) {
-        /*return (
-            <>
-                {this.renderLabel(fieldCtrl)}
-                {this.renderField(fieldCtrl)}
-                {this.renderError(fieldCtrl)}
-            </>
-        );*/
         return [
             this.renderLabel(fieldCtrl),
             this.renderField(fieldCtrl),
             this.renderError(fieldCtrl),
         ];
-        /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
-            {this.renderLabel(fieldCtrl)}
-            {this.renderField(fieldCtrl)}
-            {this.renderError(fieldCtrl)}
-        </div>;*/
     }
     renderGroups() {
-        // debug('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__groups` }, { children: Object.keys(ctrl.fields)
                 .filter((name) => ctrl.getField(name).isVisible())
@@ -18136,8 +16840,6 @@ class TableFormController extends FormController_1.FormController {
         this.onRefreshClick = async (e) => {
             console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
-            // console.error('refresh error handler:', err.message);
-            // alert(err.message);
         };
         this.onDeleteClick = async (e) => {
             console.debug('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
@@ -18149,16 +16851,7 @@ class TableFormController extends FormController_1.FormController {
             }
         };
         this.onGridCellDblClick = async (row, key) => {
-            // console.debug('TableFormController.onGridCellDblClick', row);
-            // const bodyCell = e.bodyCell;
-            // const row = bodyCell.bodyRow.dbRow;
-            // console.debug('row:', row);
-            // const key = this.getModel().getDefaultDataSource().getRowKey(row);
-            // console.debug('key:', key);
             switch (this.getModel().getAttr('editMethod')) {
-                // case 'table':
-                //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
-                // break;
                 case 'form':
                     if (this.getPage().getModel().isSelectMode()) {
                         await this.getPage().selectRow(key);
@@ -18235,12 +16928,10 @@ class TableFormController extends FormController_1.FormController {
             await this.rerender();
         };
         this.onGridSelectionChange = async (key) => {
-            // console.debug('TableFormController.onGridSelectionChange', key);
             this.invalidate();
             await this.getPage().rerender();
         };
         this.isRowSelected = () => {
-            // console.debug('TableFormController.isRowSelected');
             return !!this.grid && !!this.grid.getActiveRowKey();
         };
         this.onFrameChanged = async (value) => {
@@ -18276,33 +16967,18 @@ class TableFormController extends FormController_1.FormController {
     }
     init() {
         super.init();
-        // this.parent.on('hide', this.onHidePage);
-        // this.parent.on('show', this.onShowPage);
         this.getModel().on('refresh', this.onModelRefresh);
         this.getModel().on('update', this.onModelUpdate);
         this.getModel().on('delete', this.onModelDelete);
         this.getModel().on('insert', this.onModelInsert);
     }
     deinit() {
-        // this.parent.off('hide', this.onHidePage);
-        // this.parent.off('show', this.onShowPage);
         this.getModel().off('refresh', this.onModelRefresh);
         this.getModel().off('update', this.onModelUpdate);
         this.getModel().off('delete', this.onModelDelete);
         this.getModel().off('insert', this.onModelInsert);
         super.deinit();
     }
-    /*onHidePage = async () => {
-        this.grid.saveScroll();
-    }*/
-    /*onShowPage = async () => {
-        console.debug('TableFormController.onShowPage', this.getModel().getFullName());
-        if (!this.grid.isHidden()) {
-            this.grid.restoreScroll();
-            this.grid.focus();
-            // console.debug('document.activeElement:', document.activeElement);
-        }
-    }*/
     async new() {
         if (this.getModel().getAttr('newRowMode') === 'oneclick') {
             const row = {};
@@ -18341,7 +17017,6 @@ class TableFormController extends FormController_1.FormController {
             const [key] = result[database][table].insert;
             await this.openPage({
                 name: this.getModel().getAttr('itemEditPage'),
-                // key  : key,
                 modal: true,
                 params: Object.assign({}, DataSource_1.DataSource.keyToParams(key)),
             });
@@ -18358,14 +17033,12 @@ class TableFormController extends FormController_1.FormController {
             const [key] = result[database][table].insert;
             await this.openPage({
                 name: this.getModel().getAttr('itemCreatePage'),
-                // key  : key,
                 modal: true,
                 params: Object.assign({}, DataSource_1.DataSource.keyToParams(key)),
             });
         }
     }
     async edit(key) {
-        // console.debug('TableForm.edit', this.getModel().getFullName(), key);
         if (!this.getModel().getAttr('itemEditPage')) {
             throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }
@@ -18377,8 +17050,6 @@ class TableFormController extends FormController_1.FormController {
             });
         }
         catch (err) {
-            // console.error(`${this.getModel().getFullName()}: edit form error handler:`, err);
-            // alert(`${this.getModel().getFullName()}: ${err.message}`);
             err.message = `${this.getModel().getFullName()} edit: ${err.message}`;
             throw err;
         }
@@ -18437,11 +17108,9 @@ class TableFormView extends FormView_1.FormView {
     constructor() {
         super(...arguments);
         this.renderGridCellView = (row, column, onCreate, onUnmount) => {
-            // debug('TableFormView.renderGridCellView');
             const ctrl = this.getCtrl().getField(column.name);
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
-            // debug(column.name, ctrl.constructor.name);
             return react_1.default.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
@@ -18557,7 +17226,6 @@ class ModelController extends Controller_1.Controller {
         return this.getModel().getCaption();
     }
     getViewClass() {
-        // console.debug(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
         const model = this.getModel();
         if (!model.isAttr('viewClass')) {
             throw new Error(`${this.constructor.name} not supports view`);
@@ -18682,11 +17350,9 @@ class PageController extends ModelController_1.ModelController {
             const name = this.getModel().getName();
             const key = this.getModel().getKey();
             const link = this.createOpenInNewLink(name, key);
-            // console.debug('link', link);
             window.open(link, '_blank');
         };
         this.onKeyDown = async (e) => {
-            // console.debug('PageController.onKeyDown', this.getModel().getFullName(), e);
             if (e.key === 'Escape') {
                 if (this.isModal()) {
                     await this.close();
@@ -18710,7 +17376,6 @@ class PageController extends ModelController_1.ModelController {
         this.id = id;
     }
     static create(model, parent, id, options = null) {
-        // console.debug('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
@@ -18718,7 +17383,6 @@ class PageController extends ModelController_1.ModelController {
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent, id, options);
         }
-        // @ts-ignore
         return new PageController(model, parent, id, options);
     }
     init() {
@@ -18741,11 +17405,7 @@ class PageController extends ModelController_1.ModelController {
             .createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
-        // console.debug('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
-        // console.debug('changed:', changed);
-        // const valid = this.isValid();
-        // console.debug('valid:', valid);
         if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
@@ -18766,7 +17426,6 @@ class PageController extends ModelController_1.ModelController {
         }
     }
     isValid() {
-        // console.debug('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -18775,7 +17434,6 @@ class PageController extends ModelController_1.ModelController {
         return true;
     }
     async onFormChange(e) {
-        // console.debug('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
@@ -18788,7 +17446,6 @@ class PageController extends ModelController_1.ModelController {
     }
     onFormInsert(e) {
         console.debug('PageController.onFormInsert:', this.getModel().getFullName());
-        // console.debug('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -18807,10 +17464,8 @@ class PageController extends ModelController_1.ModelController {
         return await this.getApp().openPage(options);
     }
     isChanged() {
-        // console.debug('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.debug(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
@@ -18912,7 +17567,6 @@ class PageView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // debug('PageView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -18932,8 +17586,6 @@ class PageView extends ModelView_1.ModelView {
     isToolbar() {
         const model = this.getCtrl().getModel();
         return model.hasActions();
-        //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
-        //|| model.isSelectMode();
     }
     getFormTabs(forms) {
         return forms.map((form) => {
@@ -18992,9 +17644,6 @@ class PageView extends ModelView_1.ModelView {
         const model = ctrl.getModel();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: model.hasActions() && this.renderActionsDropdownButton() })));
     }
-    /* shouldComponentUpdate(nextProps, nextState) {
-        return false;
-    } */
     renderTableForms() {
         const tableForms = this.getTableForms();
         if (tableForms.length === 1) {
@@ -19053,7 +17702,6 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     componentDidMount() {
-        // debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         }
         else {
@@ -19061,9 +17709,7 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     focus() {
-        // debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // debug('focus', this.getElement());
             this.getElement().focus();
         }
         else {
@@ -19092,7 +17738,6 @@ class View extends common_1.ReactComponent {
         super(props);
         if (!props.ctrl)
             throw new Error(`${this.constructor.name}: no ctrl`);
-        // if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
     }
     getCtrl() {
         return this.props.ctrl;
@@ -19189,27 +17834,21 @@ class EventEmitter {
         this.list = {};
     }
     on(name, cb) {
-        // console.debug('EventEmitter.on', name);
         if (!this.list[name]) {
             this.list[name] = [];
         }
         this.list[name].push(cb);
     }
     off(name, cb) {
-        // console.debug('EventEmitter.off', name);
         const i = this.list[name].indexOf(cb);
         if (i === -1) {
             throw new Error(`cannot find cb for ${name}`);
         }
-        // console.debug(i);
         this.list[name].splice(i, 1);
     }
     async emit(name, e) {
-        // console.debug('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
-            // @ts-ignore
             const results = await Promise.allSettled(this.list[name].map((cb) => cb(e)));
-            // console.debug('results:', results);
             for (const result of results) {
                 if (result.status === 'rejected') {
                     throw result.reason;
@@ -19285,12 +17924,9 @@ class Application extends Model_1.Model {
         this.dataSources = [];
     }
     init() {
-        // console.debug('Application.init');
         if (!this.getData().theme)
             throw new Error('no theme attr');
-        // databases
         this.createDatabases();
-        // data sources
         this.createDataSources();
     }
     createDatabases() {
@@ -19302,7 +17938,6 @@ class Application extends Model_1.Model {
     }
     deinit() {
         this.deinitDataSources();
-        // TODO: add deinit on opened pages
         super.deinit();
     }
     addDatabase(database) {
@@ -19315,12 +17950,10 @@ class Application extends Model_1.Model {
         this.emit('logout', { source: this });
     }
     async request(method, body) {
-        // console.warn('Application.request', data);
         const start = Date.now();
         const [headers, data] = await common_1.FrontHostApp.doHttpRequest2(method, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
-        // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
         this.emit('request', {
             time: Date.now() - start,
             remotePlatformVersion: headers['qforms-platform-version'],
@@ -19332,7 +17965,6 @@ class Application extends Model_1.Model {
         return this.databases.find((database) => database.getName() === name);
     }
     getDatabase(name) {
-        // console.debug('Application.getDatabase', name);
         const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database: ${name}`);
@@ -19370,8 +18002,6 @@ class Application extends Model_1.Model {
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
-        // console.debug('promises:', promises);
-        // @ts-ignore
         return Promise.allSettled(promises);
     }
     getNodeEnv() {
@@ -19412,7 +18042,6 @@ class Column extends Model_1.Model {
         }
     }
     init() {
-        // console.debug('Column.init', this.getFullName());
     }
     getType() {
         return this.getAttr('type');
@@ -19456,7 +18085,6 @@ class DataSource extends Model_1.Model {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
             if (e.source === this) {
-                // console.error('onTableInsert stop self insert', this.getFullName());
                 return;
             }
             console.debug('DataSource.onTableInsert', this.getFullName(), e);
@@ -19471,10 +18099,8 @@ class DataSource extends Model_1.Model {
                 const newValues = e.source.getRow(key);
                 const newRow = {};
                 DataSource.copyNewValues(newRow, newValues);
-                // console.debug('newRow:', newRow);
                 this.addRow(newRow);
             }
-            // events
             if (this.getParent() instanceof Form_1.Form) {
                 this.getForm().onDataSourceInsert(e);
             }
@@ -19484,7 +18110,6 @@ class DataSource extends Model_1.Model {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
             if (e.source === this) {
-                // console.error('onTableUpdate stop self update', this.getFullName());
                 return;
             }
             console.debug('DataSource.onTableUpdate', this.getFullName(), e);
@@ -19497,7 +18122,6 @@ class DataSource extends Model_1.Model {
                     this.updateRow(key, sourceRow);
                 }
             }
-            // events
             if (this.getParent() instanceof Form_1.Form) {
                 this.getForm().onDataSourceUpdate(e);
             }
@@ -19507,7 +18131,6 @@ class DataSource extends Model_1.Model {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source === this) {
-                // console.error('onTableDelete stop self update', this.getFullName());
                 return;
             }
             console.debug('DataSource.onTableDelete', this.getFullName(), e);
@@ -19518,7 +18141,6 @@ class DataSource extends Model_1.Model {
                     this.removeRow(key);
                 }
             }
-            // events
             if (this.getParent() instanceof Form_1.Form) {
                 this.getForm().onDataSourceDelete(e);
             }
@@ -19532,7 +18154,6 @@ class DataSource extends Model_1.Model {
         }
     }
     init() {
-        // console.debug('DataSource.init', this.getFullName(), this.getClassName());
         this.setRows(this.getData().rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
@@ -19571,23 +18192,13 @@ class DataSource extends Model_1.Model {
         return this.rows.length;
     }
     fillRowsByKey() {
-        // console.debug('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
         for (let i = 0; i < this.rows.length; i++) {
             const row = this.rows[i];
             const key = this.getRowKey(row);
             this.rowsByKey[key] = row;
         }
-        // console.debug('this.rowsByKey:', this.getFullName(), this.rowsByKey);
     }
-    // deinit() {
-    //     console.debug('DataSource.deinit', this.getFullName());
-    //     super.deinit();
-    // }
-    /*getType(column) {
-        // console.debug('DataSource.getType', this.getClassName(), column);
-        throw new Error('DataSource column type not implemented');
-    }*/
     discardRowColumn(row, column) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             delete this.changes.get(row)[column];
@@ -19599,7 +18210,6 @@ class DataSource extends Model_1.Model {
         this.changes.get(row)[column] = newValue;
     }
     setValue(row, column, value) {
-        // console.debug('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
         if (typeof value === 'object' && value !== null) {
@@ -19608,7 +18218,6 @@ class DataSource extends Model_1.Model {
         if (row[column] !== value) {
             this.changeRowColumn(row, column, value);
             if (row[column] === undefined && value === null) {
-                // workaround for new rows
                 this.discardRowColumn(row, column);
             }
         }
@@ -19617,21 +18226,17 @@ class DataSource extends Model_1.Model {
         }
         if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length)
             this.changes.delete(row);
-        // console.debug('changes:', this.changes);
     }
     isChanged() {
-        // console.debug('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
     hasNew() {
         return !!this.news.length;
     }
     isRowColumnChanged(row, column) {
-        // console.debug('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
     getValue(row, column) {
-        // console.debug('DataSource.getValue', column);
         let value;
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             value = this.changes.get(row)[column];
@@ -19642,7 +18247,6 @@ class DataSource extends Model_1.Model {
         if (value !== undefined && typeof value !== 'string') {
             throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`);
         }
-        // console.debug('DataSource.getValue:', value);
         return value;
     }
     getKeyValues(row) {
@@ -19652,7 +18256,6 @@ class DataSource extends Model_1.Model {
         }, {});
     }
     getRowKey(row) {
-        // console.debug('DataSource.getRowKey', row);
         const arr = [];
         for (const column of this.getData().keyColumns) {
             if (row[column] === undefined)
@@ -19720,21 +18323,9 @@ class DataSource extends Model_1.Model {
             return this.getParent().getParent().getParent().getParent();
         throw new Error(`unknown parent: ${this.getParent().constructor.name}(${this.getParent().getFullName()})`);
     }
-    /*getNamespace() {
-        if (this.parent instanceof Form) {
-            return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
-        }
-        if (this.parent instanceof Page) {
-            return this.parent.getName() + '.' + this.getName();
-        }
-        return this.getName();
-    }*/
     getRow(key) {
         return this.rowsByKey[key] || null;
     }
-    /*getRowByKey(key) {
-        return this.rowsByKey[key] || null;
-    }*/
     getRows() {
         if (!this.rows)
             throw new Error('no rows');
@@ -19796,14 +18387,11 @@ class DataSource extends Model_1.Model {
         if (!row)
             throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const newKey = this.getRowKey(newValues);
-        DataSource.copyNewValues(row, newValues); // copy new values to original row object
+        DataSource.copyNewValues(row, newValues);
         if (key !== newKey) {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
         }
-        // console.debug(`key: ${key} to ${newKey}`);
-        // console.debug('this.rowsByKey:', this.rowsByKey);
-        // console.debug('this.getData().rows:', this.getData().rows);
     }
     getTable() {
         if (!this.getAttr('table'))
@@ -19811,15 +18399,12 @@ class DataSource extends Model_1.Model {
         return this.getDatabase().getTable(this.getAttr('table'));
     }
     getDatabase() {
-        // console.debug('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
         if (!this.getAttr('database'))
             throw new Error(`${this.getFullName()}: database attr empty`);
         return this.getApp().getDatabase(this.getAttr('database'));
     }
     getType(columnName) {
-        // console.debug('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
-        // console.debug('type:', type);
         return type;
     }
     async insert(row) {
@@ -19829,13 +18414,10 @@ class DataSource extends Model_1.Model {
         const inserts = [];
         for (const row of this.news) {
             const newValues = this.getRowWithChanges(row);
-            // console.debug('newValues:', newValues);
             DataSource.copyNewValues(row, newValues);
-            // console.debug('row:', row);
             const key = this.getRowKey(row);
             if (!key)
                 throw new Error('invalid insert row, no key');
-            // console.debug('key:', key);
             inserts.push(key);
         }
         this.changes.clear();
@@ -19845,7 +18427,6 @@ class DataSource extends Model_1.Model {
         this.news = [];
         console.debug('rows:', this.getRows());
         console.debug('inserts:', inserts);
-        // events
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceInsert({ source: this, inserts });
         }
@@ -19868,7 +18449,6 @@ class DataSource extends Model_1.Model {
         if (!key)
             throw new Error('no key');
         this.removeRow(key);
-        // events
         const deletes = [key];
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceDelete({ source: this, deletes });
@@ -19896,22 +18476,15 @@ class DataSource extends Model_1.Model {
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const changes = this.getChangesByKey();
-        // console.debug('changes:', changes);
-        // apply changes to rows
         const updates = {};
         for (const key in changes) {
-            // console.debug('key:', key);
             const row = this.getRow(key);
-            // console.debug('row:', row);
             const newValues = this.getRowWithChanges(row);
-            // console.debug('newValues:', newValues);
             const newKey = this.getRowKey(newValues);
-            // console.debug('newKey:', newKey);
             this.updateRow(key, newValues);
             updates[key] = newKey;
         }
         this.changes.clear();
-        // events
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceUpdate({ source: this, updates });
         }
@@ -19937,7 +18510,6 @@ class DataSource extends Model_1.Model {
     moveRow(row, offset) {
         console.debug('DataSource.moveRow');
         common_1.Helper.moveArrItem(this.rows, row, offset);
-        // refresh event
         const event = { source: this };
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceRefresh(event);
@@ -20023,24 +18595,17 @@ const DataSource_1 = __webpack_require__(/*! ../DataSource */ "./src/frontend/vi
 const Form_1 = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
 class PersistentDataSource extends DataSource_1.DataSource {
     constructor() {
-        /* constructor(data, parent) {
-            super(data, parent);
-        } */
         super(...arguments);
         this.onTableUpdate = async (e) => {
             console.debug('PersistentDataSource.onTableUpdate', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
             if (e.source === this) {
-                // console.error('onTableUpdate stop self update', this.getFullName());
                 return;
             }
-            // console.debug('updates:', e.updates);
             if (!Object.keys(e.updates).length)
                 throw new Error(`${this.getFullName()}: no updates`);
-            // update rows
             await this.refill();
-            // events
             if (this.getParent() instanceof Form_1.Form) {
                 this.getForm().onDataSourceUpdate(e);
             }
@@ -20051,12 +18616,9 @@ class PersistentDataSource extends DataSource_1.DataSource {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
             if (e.source === this) {
-                // console.error('onTableInsert stop self insert', this.getFullName());
                 return;
             }
-            // update rows
             await this.refill();
-            // events
             if (this.getParent() instanceof Form_1.Form) {
                 this.getForm().onDataSourceInsert(e);
             }
@@ -20067,7 +18629,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source === this) {
-                // console.error('onTableDelete stop self delete', this.getFullName());
                 return;
             }
             await this.refill();
@@ -20089,12 +18650,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
             this.emit('refresh', e);
         };
     }
-    /*init() {
-        super.init();
-    }*/
-    /*deinit() {
-        super.deinit();
-    }*/
     async insert(row) {
         console.debug('PersistentDataSource.insert', row);
         const database = this.getAttr('database');
@@ -20108,7 +18663,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
             form: this.getForm().getName(),
             row: this.getRowWithChanges(row),
         });
-        // key & values
         const [key] = Object.keys(result[database][table].insertEx);
         if (!key)
             throw new Error('no inserted row key');
@@ -20116,15 +18670,9 @@ class PersistentDataSource extends DataSource_1.DataSource {
         for (const column in values) {
             row[column] = values[column];
         }
-        // console.debug('key:', key);
-        // console.debug('row:', row);
-        // clear news & changes
         this.news.splice(this.news.indexOf(row), 1);
-        // console.debug('this.news:', this.news);
         this.changes.clear();
-        // add new row to rows
         this.addRow(row);
-        // events
         const event = { source: this, inserts: result[database][table].insert };
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceInsert(event);
@@ -20144,7 +18692,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
         }
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
-        // specific to PersistentDataSource
         const result = await this.getApp().request('POST', {
             action: 'update',
             uuid: this.getApp().getAttr('uuid'),
@@ -20156,10 +18703,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
         if (!key)
             throw new Error('no updated row');
         const newValues = result[database][table].updateEx[key];
-        // const newKey = this.getRowKey(newValues);
         this.changes.clear();
         this.updateRow(key, newValues);
-        // events
         const event = { source: this, updates: result[database][table].update };
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceUpdate(event);
@@ -20185,7 +18730,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
             params: { key },
         });
         await this.refill();
-        // events
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof Form_1.Form) {
             this.getForm().onDataSourceDelete(event);
@@ -20240,7 +18784,6 @@ class PersistentDataSource extends DataSource_1.DataSource {
         });
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
-        // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
     isPersistent() {
@@ -20291,7 +18834,6 @@ class Database extends Model_1.Model {
         this.tables = [];
     }
     init() {
-        // console.debug('Database.init', this.getName());
         for (const tableData of this.getData().tables) {
             const table = new Table_1.Table(tableData, this);
             table.init();
@@ -20492,12 +19034,10 @@ class DateField extends Field_1.Field {
         return this.getAttr('format');
     }
     rawToValue(raw) {
-        // console.debug('DateField.rawToValue', this.getFullName(), raw);
         const value = common_1.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
             common_1.Helper.addTimezoneOffset(value);
         }
-        // console.debug('DateField.rawToValue:', raw, value);
         return value;
     }
     valueToRaw(value) {
@@ -20510,7 +19050,6 @@ class DateField extends Field_1.Field {
         else {
             rawValue = common_1.Helper.encodeValue(value);
         }
-        // console.debug('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }
@@ -20541,7 +19080,6 @@ class DateTimeField extends Field_1.Field {
         if (value && this.getAttr('timezone') === 'false') {
             common_1.Helper.addTimezoneOffset(value);
         }
-        // console.debug('DateTimeField.rawToValue:', value);
         return value;
     }
     valueToRaw(value) {
@@ -20549,13 +19087,11 @@ class DateTimeField extends Field_1.Field {
         if (value && this.getAttr('timezone') === 'false') {
             const v = common_1.Helper.cloneDate(value);
             common_1.Helper.removeTimezoneOffset(v);
-            // console.debug('date without timezone:', v);
             rawValue = common_1.Helper.encodeValue(v);
         }
         else {
             rawValue = common_1.Helper.encodeValue(value);
         }
-        // console.debug('DateTimeField.valueToRaw', rawValue);
         return rawValue;
     }
 }
@@ -20591,7 +19127,6 @@ class Field extends Model_1.Model {
         });
     }
     fillDefaultValue(row) {
-        // console.debug('Field.fillDefaultValue', this.getFullName());
         const column = this.getAttr('column');
         if (!column)
             return;
@@ -20599,8 +19134,6 @@ class Field extends Model_1.Model {
         const js = common_1.Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string')
             throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
-        // console.debug('js', this.getFullName(), js);
-        // module.Helper
         try {
             const value = eval(js);
             if (value !== undefined) {
@@ -20612,19 +19145,14 @@ class Field extends Model_1.Model {
         }
     }
     valueToPageParams(row) {
-        // console.debug('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
-            // we need to dump value to param without meta info such as timezone prop
             const value = this.getValue(row);
             const rawValue = this.valueToRaw(value);
-            // console.debug('value:', value);
-            // console.debug('rawValue:', rawValue);
             const paramValue = rawValue !== undefined ? common_1.Helper.decodeValue(rawValue) : undefined;
             this.getPage().setParam(this.getFullName(), paramValue);
         }
     }
     isChanged(row) {
-        // console.debug('Field.isChanged', this.getFullName());
         if (!this.getAttr('column'))
             throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
@@ -20633,7 +19161,6 @@ class Field extends Model_1.Model {
         return !!this.getAttr('column');
     }
     getValue(row) {
-        // console.debug('Field.getValue', this.getFullName(), row);
         if (!row && this.getParent() instanceof RowForm_1.RowForm) {
             row = this.getForm().getRow();
         }
@@ -20657,7 +19184,6 @@ class Field extends Model_1.Model {
         else {
             throw new Error(`${this.getFullName()}: no column and no value in field`);
         }
-        // use rawValue
         if (rawValue === undefined)
             return undefined;
         if (rawValue === null)
@@ -20671,7 +19197,6 @@ class Field extends Model_1.Model {
         }
     }
     setValue(row, value) {
-        // console.debug('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column'))
             throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
@@ -20765,7 +19290,6 @@ class Field extends Model_1.Model {
     }
 }
 exports.Field = Field;
-// Helper.registerGlobalClass(Field);
 
 
 /***/ }),
@@ -20982,13 +19506,8 @@ class Form extends Model_1.Model {
         this.dataSources = [];
         this.fields = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
     init() {
-        // data sources
         this.createDataSources();
-        // fields
         for (const data of this.getData().fields) {
             const Class = common_1.Helper.getGlobalClass(data.class);
             if (!Class)
@@ -20999,7 +19518,6 @@ class Form extends Model_1.Model {
         }
     }
     deinit() {
-        // console.debug('Form.deinit:', this.getFullName());
         this.deinitDataSources();
         for (const field of this.fields) {
             field.deinit();
@@ -21012,20 +19530,16 @@ class Form extends Model_1.Model {
         }
     }
     onDataSourceRefresh(e) {
-        // console.debug('Form.onDataSourceRefresh', this.getFullName());
         this.emit('refresh', e);
     }
     onDataSourceInsert(e) {
-        // console.debug('Form.onDataSourceInsert', this.getFullName());
         this.getPage().onFormInsert(e);
         this.emit('insert', e);
     }
     onDataSourceUpdate(e) {
-        // console.debug('Form.onDataSourceUpdate', this.getFullName());
         this.emit('update', e);
     }
     onDataSourceDelete(e) {
-        // console.debug('Form.onDataSourceDelete', this.getFullName());
         this.emit('delete', e);
     }
     async update() {
@@ -21037,11 +19551,9 @@ class Form extends Model_1.Model {
         await this.getDefaultDataSource().update();
     }
     isChanged() {
-        // console.debug('Form.isChanged', this.getFullName());
         return this.getDefaultDataSource().isChanged();
     }
     hasNew() {
-        // console.debug('Form.hasNew', this.getFullName());
         return this.getDefaultDataSource().hasNew();
     }
     async rpc(name, params) {
@@ -21124,7 +19636,7 @@ class RowForm extends Form_1.Form {
         if (this.isNewMode()) {
             this.getDefaultDataSource().newRow(this.createRow());
         }
-        this.fillParams(this.getRow()); // dump row values to page params
+        this.fillParams(this.getRow());
     }
     isNewMode() {
         const newMode = this.getAttr('newMode');
@@ -21151,7 +19663,6 @@ class RowForm extends Form_1.Form {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
     getKey() {
-        // console.debug('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
         if (dataSource.isPersistent()) {
             const row = this.getRow();
@@ -21228,11 +19739,9 @@ class Model extends EventEmitter_1.EventEmitter {
         this.deinited = true;
     }
     static getAttr(data, name) {
-        // @ts-ignore
         return data[name];
     }
     static getCol(data, name) {
-        // @ts-ignore
         return data[name];
     }
     static getName(data) {
@@ -21245,11 +19754,9 @@ class Model extends EventEmitter_1.EventEmitter {
         return this.data.hasOwnProperty(name);
     }
     getAttr(name) {
-        // @ts-ignore
         return this.data[name];
     }
     getCol(name) {
-        // @ts-ignore
         return this.data[name];
     }
     getClassName() {
@@ -21331,8 +19838,6 @@ const RowForm_1 = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/fron
 const console_1 = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
-        // debug('Page.constructor', options);
-        // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
         this.dataSources = [];
@@ -21349,7 +19854,6 @@ class Page extends Model_1.Model {
         (0, console_1.debug)('page params:', this.getParams());
     }
     deinit() {
-        // debug('Page.deinit', this.getFullName());
         if (this.deinited)
             throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
@@ -21360,7 +19864,6 @@ class Page extends Model_1.Model {
         return this.options;
     }
     createForms() {
-        // forms
         for (const data of this.getData().forms) {
             const FormClass = Helper_1.Helper.getGlobalClass(Model_1.Model.getClassName(data));
             if (!FormClass)
@@ -21375,14 +19878,10 @@ class Page extends Model_1.Model {
             form.deinit();
         }
     }
-    /*getId() {
-        return this.options.id;
-    }*/
     getParams() {
         return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
     }
     setParam(name, value) {
-        // debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
@@ -21461,14 +19960,13 @@ class Page extends Model_1.Model {
     onFormInsert(e) {
         (0, console_1.debug)('Page.onFormInsert', e);
         for (const key of e.inserts) {
-            const keyParams = DataSource_1.DataSource.keyToParams(key); // key params to page params
+            const keyParams = DataSource_1.DataSource.keyToParams(key);
             for (const name in keyParams) {
                 this.setParam(name, keyParams[name]);
             }
         }
     }
     async rpc(name, params) {
-        // debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request('POST', {
@@ -21522,12 +20020,7 @@ class Table extends Model_1.Model {
         super(...arguments);
         this.columns = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-        this.columns = [];
-    } */
     init() {
-        // console.debug('Table.init', this.getFullName());
         for (const data of this.getData().columns) {
             const column = new Column_1.Column(data, this);
             column.init();
@@ -21640,7 +20133,6 @@ const ApplicationController_1 = __webpack_require__(/*! ./Controller/ModelContro
 const common_1 = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
 const AlertController_1 = __webpack_require__(/*! ./Controller/AlertController/AlertController */ "./src/frontend/viewer/Controller/AlertController/AlertController.ts");
 const ConfirmController_1 = __webpack_require__(/*! ./Controller/ConfirmController/ConfirmController */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts");
-// style
 __webpack_require__(/*! ./style/application.less */ "./src/frontend/viewer/style/application.less");
 __webpack_require__(/*! ./style/field.less */ "./src/frontend/viewer/style/field.less");
 __webpack_require__(/*! ./style/form.less */ "./src/frontend/viewer/style/form.less");
@@ -21649,7 +20141,6 @@ __webpack_require__(/*! ./style/paging.less */ "./src/frontend/viewer/style/pagi
 __webpack_require__(/*! ./style/toolbar-button.less */ "./src/frontend/viewer/style/toolbar-button.less");
 __webpack_require__(/*! ./style/toolbar-dropdown-button.less */ "./src/frontend/viewer/style/toolbar-dropdown-button.less");
 __webpack_require__(/*! ./style/version-notification.less */ "./src/frontend/viewer/style/version-notification.less");
-// common style
 __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
 __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
 __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
@@ -21670,20 +20161,16 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
     }
     async run() {
         console.debug('ViewerFrontHostApp.run', this.getData());
-        // application
         const application = new Application_1.Application(this.getData());
         application.init();
-        // applicationController
         const applicationController = (this.applicationController = ApplicationController_1.ApplicationController.create(application, this));
         applicationController.init();
-        // view
         const rootElementName = `.${applicationController.getViewClass().name}__root`;
         const rootElement = document.querySelector(rootElementName);
         if (!rootElement) {
             throw new Error(`no root element: ${rootElementName}`);
         }
         applicationController.createView(rootElement);
-        // connect
         try {
             await applicationController.connect();
         }
@@ -21692,7 +20179,6 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         }
     }
     async onWindowPopState(e) {
-        // console.debug('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
     }
     logError(err) {
@@ -21735,12 +20221,10 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                             react_dom_1.default.unmountComponentAtNode(root);
                             resolve();
                         } })));
-                    // console.debug('ctrl:', ctrl);
                     const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), {
                         ctrl,
                         key: 0,
                     });
-                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('alert already exists'));
@@ -21764,9 +20248,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                             react_dom_1.default.unmountComponentAtNode(root);
                             resolve(result);
                         } })));
-                    // console.debug('ctrl:', ctrl);
                     const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
-                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('confirm already exists'));
@@ -21796,7 +20278,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WebSocketClient = void 0;
 class WebSocketClient {
     constructor(options = {}) {
-        // console.debug('WebSocketClient.constructor', options);
         this.options = options;
         if (!options.applicationController)
             throw new Error('no options.applicationController');
@@ -21805,8 +20286,8 @@ class WebSocketClient {
         this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
         this.webSocket = null;
         this.refreshTimeoutId = null;
-        this.RECONNECT_TIMEOUT = 10; // sec
-        this.REFRESH_TIMEOUT = 60 * 60; // sec
+        this.RECONNECT_TIMEOUT = 10;
+        this.REFRESH_TIMEOUT = 60 * 60;
     }
     createUriParamsString(options) {
         const params = {
@@ -21836,7 +20317,6 @@ class WebSocketClient {
         });
     }
     async onRefreshTimeout() {
-        // console.debug('WebSocketClient.onRefreshTimeout');
         this.refreshTimeoutId = null;
         this.send('ping');
         this.startRefreshTimeout();
@@ -21922,9 +20402,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts"), exports);
 __exportStar(__webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts"), exports);
-// Model
 __exportStar(__webpack_require__(/*! ./Model */ "./src/frontend/viewer/Model/index.ts"), exports);
-// Controller
 __exportStar(__webpack_require__(/*! ./Controller */ "./src/frontend/viewer/Controller/index.ts"), exports);
 
 
@@ -21956,9 +20434,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./types */ "./src/types.ts"), exports);
 __exportStar(__webpack_require__(/*! ./Result */ "./src/Result.ts"), exports);
 __exportStar(__webpack_require__(/*! ./decorators */ "./src/decorators.ts"), exports);
-// backend
 __exportStar(__webpack_require__(/*! ./backend */ "./src/backend/index.ts"), exports);
-// frontend
 __exportStar(__webpack_require__(/*! ./frontend */ "./src/frontend/index.ts"), exports);
 
 

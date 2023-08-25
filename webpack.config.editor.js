@@ -50,6 +50,8 @@ module.exports = {
                             moduleResolution: 'node',
                             noImplicitAny: false,
                             strictNullChecks: true,
+                            removeComments: true,
+                            experimentalDecorators: true,
                         },
                     },
                 },

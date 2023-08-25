@@ -36,6 +36,8 @@ module.exports = {
                             moduleResolution: 'node',
                             noImplicitAny: false,
                             strictNullChecks: true,
+                            removeComments: true,
+                            experimentalDecorators: true,
                         },
                     },
                 },
@@ -61,6 +63,6 @@ module.exports = {
         }),
     ],
     node: {
-        global: false
-    }
+        global: false,
+    },
 };

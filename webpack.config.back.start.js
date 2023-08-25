@@ -36,6 +36,7 @@ module.exports = {
                             strictNullChecks: true,
                             noImplicitAny: false,
                             experimentalDecorators: true,
+                            removeComments: true,
                         },
                     },
                 },

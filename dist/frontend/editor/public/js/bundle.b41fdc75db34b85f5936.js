@@ -31697,7 +31697,6 @@ function getLogLevel() {
 }
 function getLogLevelName() {
     if (typeof window === 'object') {
-        // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
     else if (typeof global === 'object') {
@@ -31708,24 +31707,20 @@ function getLogLevelName() {
 }
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.debug(message, ...optionalParams);
     }
 }
 function log(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.log(message, ...optionalParams);
     }
 }
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.warn(message, ...optionalParams);
     }
 }
 function error(message, ...optionalParams) {
-    // process.stderr.write(`${messages.join(' ')}\n`);
     console.error(message, ...optionalParams);
 }
 
@@ -31752,8 +31747,7 @@ class FrontHostApp {
     constructor(options) {
         this.options = options;
         this.alertCtrl = null;
-        this.documentTitle = ''; // for run on back
-        // debug('FrontHostApp.constructor');
+        this.documentTitle = '';
     }
     init() {
         window.addEventListener('error', this.onWindowError.bind(this));
@@ -31764,7 +31758,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowUnhandledrejection' /* , e */);
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowUnhandledrejection');
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -31781,7 +31775,6 @@ class FrontHostApp {
             e.preventDefault();
             const err = e.error;
             this.logError(err);
-            // await this.alert({message: err.message});
         }
         catch (err) {
             console.error(`onWindowError error: ${err.message}`);
@@ -31826,7 +31819,6 @@ class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // debug('headers:', headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -31911,7 +31903,6 @@ class FrontHostApp {
         if (typeof window === 'object') {
             return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
         }
-        // @ts-ignore
         return Object.fromEntries(this.getOptions().url.searchParams);
     }
     getCookie(name) {
@@ -31948,23 +31939,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Helper {
-    /* static currentDate() {
-        const now = new Date();
-        let dd = now.getDate();if (dd < 10) dd = '0' + dd;
-        let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-    /* static currentDateTime() {
-        return Helper.currentDate() + ' ' + Helper.currentTime();
-    } */
-    /* static currentTime() {
-        const now = new Date();
-        let hh = now.getHours();if (hh < 10) hh = '0' + hh;
-        let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
-        let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-        return [hh, mm, ss].join(':');
-    } */
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -31985,7 +31959,6 @@ class Helper {
     }
     static today() {
         const now = new Date();
-        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         return Helper.getStartOfDay(now);
     }
     static getStartOfDay(date) {
@@ -32011,12 +31984,7 @@ class Helper {
         return obj;
     }
     static decodeValue(raw) {
-        // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
-        // } catch (err) {
-        //     // debug('raw:', raw);
-        //     throw err;
-        // }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -32027,7 +31995,6 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -32038,14 +32005,12 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
-        // ReactDOM.render(reactRootElement, rootElement);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
         return component;
     }
@@ -32059,45 +32024,6 @@ class Helper {
             reader.readAsDataURL(file);
         });
     }
-    /* static readFileAsArrayBuffer(file) {
-        return new Promise(resolve => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsArrayBuffer(file);
-        });
-    } */
-    /* static convertBufferToBase64string(buffer) {
-        const array = new Uint8Array(buffer);
-        const binaryString = String.fromCharCode.apply(null, array);
-        return window.btoa(binaryString);
-    } */
-    /* static createObjectUrl(buffer) {
-        const blob = new Blob([new Uint8Array(buffer)]);
-        return window.URL.createObjectURL(blob);
-    } */
-    // append file as filed and all not file as json string
-    /* static createFormData(body) {
-        const formData = new FormData();
-        const fields = {};
-        for (const name in body) {
-            if (body[name] instanceof File) {
-                formData.append(name, body[name]);
-            } else {
-                fields[name] = body[name];
-            }
-        }
-        formData.append('__json', JSON.stringify(fields));
-        return formData;
-    } */
-    /* static base64ToArrayBuffer(base64) {
-        const binaryString = window.atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes.buffer;
-    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -32118,7 +32044,6 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32128,13 +32053,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -32145,7 +32067,6 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32155,13 +32076,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -32187,11 +32105,10 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
-        textArea.style.top = '0'; // Avoid scrolling to bottom
+        textArea.style.top = '0';
         textArea.style.left = '0';
         textArea.style.position = 'fixed';
         document.body.appendChild(textArea);
@@ -32199,7 +32116,6 @@ class Helper {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        // @ts-ignore
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
@@ -32211,7 +32127,6 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
-        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -32226,19 +32141,10 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    // static inIframe(): boolean {
-    //     return false;
-    //     /* try {
-    //         return window.self !== window.top;
-    //     } catch (e) {
-    //         return false;
-    //     } */
-    // }
     static setCookie(name, value, time) {
         let expires = '';
         if (time) {
             const date = new Date(time);
-            // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
@@ -32264,23 +32170,18 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         }
         else {
-            // @ts-ignore
             if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
-            // @ts-ignore
             global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
-        // debug('Helper.getGlobalClass', className);
-        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {
@@ -32346,7 +32247,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.debug(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
         return new Promise((resolve) => {
@@ -32375,15 +32275,10 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         this.allowRerender = true;
     }
     componentWillUnmount() {
-        // console.debug('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /* componentDidMount() {
-        console.debug('ReactComponent.componentDidMount', this.constructor.name);
-    } */
     isEnabled() {
-        // console.debug('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
     }
     isDisabled() {
@@ -32396,7 +32291,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return false;
     }
     disable() {
-        // console.debug('ReactComponent.disable');
         if (!this.state)
             throw new Error('no state');
         this.setState({ disabled: true });
@@ -32408,7 +32302,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ReactComponent = ReactComponent;
 }
 
@@ -32477,7 +32370,6 @@ const ArrowIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ArrowIcon = ArrowIcon;
 }
 
@@ -32504,7 +32396,6 @@ class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CancelIcon = CancelIcon;
 }
 
@@ -32527,7 +32418,6 @@ const CloseIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CloseIcon = CloseIcon;
 }
 
@@ -32551,7 +32441,6 @@ const CloseIcon2 = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CloseIcon2 = CloseIcon2;
 }
 
@@ -32578,7 +32467,6 @@ class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DateIcon = DateIcon;
 }
 
@@ -32605,7 +32493,6 @@ class DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DeleteIcon = DeleteIcon;
 }
 
@@ -32632,7 +32519,6 @@ class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DoneIcon = DoneIcon;
 }
 
@@ -32660,7 +32546,6 @@ class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DoneIcon = DoneIcon;
 }
 
@@ -32687,7 +32572,6 @@ class EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.EditIcon = EditIcon;
 }
 
@@ -32711,7 +32595,6 @@ const LeftIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.LeftIcon = LeftIcon;
 }
 
@@ -32739,7 +32622,6 @@ class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.LocationIcon = LocationIcon;
 }
 
@@ -32766,7 +32648,6 @@ class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.MoreVertIcon = MoreVertIcon;
 }
 
@@ -32789,7 +32670,6 @@ const OpenInNewIcon = () => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.OpenInNewIcon = OpenInNewIcon;
 }
 
@@ -32816,7 +32696,6 @@ class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PasswordIcon = PasswordIcon;
 }
 
@@ -32844,7 +32723,6 @@ class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PhoneIcon = PhoneIcon;
 }
 
@@ -32868,7 +32746,6 @@ const RightIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
 };
 if (typeof window === 'object') {
-    // @ts-ignore
     window.RightIcon = RightIcon;
 }
 
@@ -32895,7 +32772,6 @@ class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.SettingsIcon = SettingsIcon;
 }
 
@@ -32922,7 +32798,6 @@ class TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TimeIcon = TimeIcon;
 }
 
@@ -32949,7 +32824,6 @@ class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.VisibilityIcon = VisibilityIcon;
 }
 
@@ -32976,7 +32850,6 @@ class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.VisibilityOffIcon = VisibilityOffIcon;
 }
 
@@ -33127,9 +33000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// icon
 
-// widget
 
 
 
@@ -33155,7 +33026,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('Box.constructor', props);
         super(props);
         this.update = () => {
             console.debug('Box.update');
@@ -33167,9 +33037,6 @@ class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             backgroundColor: 'purple',
         };
     }
-    // componentWillMount() {
-    //     console.debug('Box.componentWillMount');
-    // }
     componentDidMount() {
         console.debug('Box.componentDidMount');
     }
@@ -33189,7 +33056,6 @@ class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Box = Box;
 }
 
@@ -33214,27 +33080,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.debug('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
         this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
     }
-    /*isDisabled() {
-        if (this.props.disabled !== undefined) return this.props.disabled;
-        if (this.props.enabled !== undefined) return !this.props.enabled;
-        return this.state.disabled;
-    }*/
-    /*isEnabled() {
-        return !this.isDisabled();
-    }*/
-    /*disable() {
-        this.setState({disabled: true});
-    }*/
-    /*enable() {
-        this.setState({disabled: false});
-    }*/
     isVisible() {
-        // return this.props.visible === undefined ? true : this.props.visible;
         if (this.props.visible !== undefined)
             return this.props.visible;
         return true;
@@ -33246,12 +33096,10 @@ class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         };
     }
     render() {
-        // console.debug('Button.render', this.props.title, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Button = Button;
 }
 
@@ -33278,7 +33126,6 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     constructor(props) {
         super(props);
         this.onChange = (e) => {
-            // console.debug('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
                 this.setState((prevState) => {
                     if (this.props.onChange) {
@@ -33308,8 +33155,6 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         return this.state.checked;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
     }
@@ -33321,7 +33166,6 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CheckBox = CheckBox;
 }
 
@@ -33346,10 +33190,8 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
     constructor(props) {
         super(props);
         this.onCheckBoxChange = (e) => {
-            // console.debug('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
             const checked = e.target.checked;
             const itemValue = e.target.dataset.value;
-            // console.debug('itemValue:', itemValue);
             this.setState((prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
@@ -33367,7 +33209,6 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
                     }
                     value.splice(value.indexOf(itemValue), 1);
                 }
-                // console.debug('value:', value);
                 return { value };
             }, () => {
                 if (this.props.onChange) {
@@ -33394,9 +33235,6 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
         return `${this.props.name}.${value}`;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // console.debug('nextProps.value:', nextProps.value);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -33409,7 +33247,6 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.CheckBoxList = CheckBoxList;
 }
 
@@ -33432,17 +33269,14 @@ __webpack_require__.r(__webpack_exports__);
 
 class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         this.onChange = async (e) => {
-            // console.debug('ComboBox.onChange', e.target.value, typeof e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
             }
         };
         this.onMouseDown = async (e) => {
-            // console.debug('ComboBox.onMouseDown', e.button);
             if (this.props.onMouseDown) {
                 await this.props.onMouseDown(e);
             }
@@ -33475,26 +33309,21 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         }
         if (value === null)
             throw new Error('null is wrong value for ComboBox');
-        // console.debug('combobox value:', value);
         return value;
     }
     getValue() {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('ComboBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
                     this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ComboBox = ComboBox;
 }
 
@@ -33523,18 +33352,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// props
-//  visible boolean true
-//  selectedDate array [2021, 0, 1]
-//  minDate array [2021, 0, 1]
-//  onMouseDown function
-//  onDateSelected function
-//  getDateStyle function
-//  selectToday boolean false
-//  highlightedDate array [2021, 0, 1]
 class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('DatePicker.constructor', props);
         super(props);
         this.onClick = (e) => {
             console.debug('DatePicker.onClick', e.target);
@@ -33543,13 +33362,11 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             }
         };
         this.onMouseDown = (e) => {
-            // console.debug('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
         this.onNextClick = (e) => {
-            // console.debug('DatePicker.next');
             this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
@@ -33559,7 +33376,6 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             });
         };
         this.onPrevClick = (e) => {
-            // console.debug('DatePicker.prev');
             this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
@@ -33595,7 +33411,6 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
         return true;
     }
     calcSelectedMonth() {
-        // console.debug('DatePicker.calcSelectedMonth', this.props.selectedDate);
         if (this.props.selectedDate) {
             return [this.props.selectedDate[0], this.props.selectedDate[1]];
         }
@@ -33606,10 +33421,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
-            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
-            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
             const date = new Date(Math.min(...dates));
-            // console.debug('date:', date);
             return [date.getFullYear(), date.getMonth()];
         }
     }
@@ -33630,15 +33442,14 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     createSelectedDate() {
         if (!this.isDateSelected())
             throw new Error('date not selected');
-        // @ts-ignore
         return new Date(...this.props.selectedDate);
     }
     isDateSelected() {
         return !!this.props.selectedDate;
     }
     getFirstDateOfTable() {
-        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
-        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1);
+        date.setDate(date.getDate() - DatePicker.getDay(date));
         return date;
     }
     createMinDate() {
@@ -33662,20 +33473,17 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
         return true;
     }
     onDateClick(target) {
-        // console.debug('DatePicker.onDateClick', target.dataset.date);
         if (this.props.onDateSelected) {
             this.props.onDateSelected(JSON.parse(target.dataset.date));
         }
     }
     render() {
-        // console.debug('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
-        // @ts-ignore
         const highlightedDate = this.props.highlightedDate
-            ? // @ts-ignore
+            ?
                 new Date(...this.props.highlightedDate)
             : null;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
@@ -33710,7 +33518,6 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DatePicker = DatePicker;
 }
 
@@ -33741,28 +33548,23 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactC
     constructor(props) {
         super(props);
         this.onButtonClick = (e) => {
-            // console.debug('DropdownButton.onButtonClick');
             this.setState((state) => ({ open: !state.open }));
         };
         this.onButtonBlur = (e) => {
-            // console.debug('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onKeyDown = (e) => {
-            // console.debug('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onUlMouseDown = (e) => {
-            // console.debug('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
         this.onLiClick = async (e) => {
-            // console.debug('DropdownButton.onLiClick', e.currentTarget);
             const li = e.currentTarget;
             this.setState({ open: false }, () => {
                 if (this.props.onClick) {
@@ -33778,7 +33580,6 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactC
     isEnabled() {
         if (this.props.enabled !== undefined)
             return this.props.enabled;
-        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return !this.state.disabled;
     }
     render() {
@@ -33817,45 +33618,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// oldDates boolean true
 class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('DropdownDatePicker.constructor', props);
         super(props);
         this.onInputClick = (e) => {
-            // console.debug('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
             this.setState((prevState) => ({ open: !prevState.open }));
         };
         this.onInputKeyDown = (e) => {
-            // console.debug('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onCloseDown = async (e) => {
-            // console.debug('DropdownDatePicker.onCloseDown', e);
             this.setState({ value: null });
             if (this.props.onChange) {
                 this.props.onChange(null);
             }
         };
         this.onBlur = (e) => {
-            // console.debug('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onDatePickerMouseDown = (e) => {
-            // console.debug('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
-            // e.stopPropagation();
-            // return false;
         };
         this.onDatePickerDateSelected = (date) => {
-            // console.debug('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
             if (this.props.onChange) {
@@ -33871,8 +33662,6 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         }
     }
     getFormat() {
-        // if (this.props.format) return this.props.format;
-        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
         return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
     }
     getStringValue() {
@@ -33889,14 +33678,6 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         }
         return '';
     }
-    /*getMinDate() {
-        if (this.props.getMinDate) {
-            return this.props.getMinDate();
-        } else if (this.props.oldDates === false) {
-            return DatePicker.getTodayArr();
-        }
-        return null;
-    }*/
     getSelectedMonth() {
         if (this.getValue()) {
             return [this.getValue().getFullYear(), this.getValue().getMonth()];
@@ -33917,8 +33698,6 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -33935,14 +33714,9 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
     }
     renderDatePicker() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker
-                // minDate={this.getMinDate()}
-                , { 
-                    // minDate={this.getMinDate()}
-                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
-        // console.debug('DropdownDatePicker.render', this.props, this.state);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
     }
     isDebugMode() {
@@ -33950,7 +33724,6 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.DropdownDatePicker = DropdownDatePicker;
 }
 
@@ -33999,7 +33772,6 @@ class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Expand = Expand;
 }
 
@@ -34032,15 +33804,13 @@ __webpack_require__.r(__webpack_exports__);
 
 class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.debug('Grid.constructor', props);
         super(props);
         this.onCellMouseDown = async (e) => {
             console.debug('Grid.onCellMouseDown', this.isLink());
-            e.preventDefault(); // prevent text selection on double click
+            e.preventDefault();
             if (this.isDisabled())
                 return;
             this.getElement().focus();
-            // if (this.isLink()) return;
             const button = e.button;
             const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
             const row = this.props.rows[i];
@@ -34052,33 +33822,27 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         };
         this.onRowMouseDown = async (e) => {
             console.debug('Grid.onRowMouseDown', this.isLink());
-            // if (this.isLink()) return;
             const key = e.currentTarget.dataset.row;
             await this.selectRow(key);
         };
         this.onCellDoubleClick = async (e) => {
-            // console.debug('Grid.onCellDoubleClick');
             const button = e.button;
             const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.debug('row:', row);
             if (button === 0 && this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onRowDoubleClick = async (e) => {
-            // console.debug('Grid.onRowDoubleClick');
             const i = parseInt(e.currentTarget.dataset.r);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.debug('row:', row);
             if (this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onKeyDown = async (e) => {
-            // console.debug('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
             if (this.isDisabled())
                 return;
             switch (e.keyCode) {
@@ -34121,19 +33885,16 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
                 return;
             this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
-            // @ts-ignore
             this.state.resized = Date.now();
             await this.rerender();
         };
         this.onCellViewCreate = (c) => {
-            // console.debug('Grid.onCellViewCreate', c.props.column.name);
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
                 this.columns[columnName] = [];
             this.columns[columnName].push(c);
         };
         this.onCellViewUnmount = (c) => {
-            // console.debug('Grid.onCellViewUnmount', c.props.column.name);
             const columnName = c.props.column.name;
             const i = this.columns[columnName].indexOf(c);
             if (i === -1)
@@ -34141,7 +33902,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.columns[columnName].splice(i, 1);
         };
         this.onBodyScroll = async (e) => {
-            // console.debug('Grid.onBodyScroll', e.target.scrollLeft);
             this.head.current.scrollLeft = e.target.scrollLeft;
         };
         this.onLinkClick = async (e) => {
@@ -34149,11 +33909,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             if (e.ctrlKey)
                 return;
             e.preventDefault();
-            /* if (!this.isLink()) return;
-            const key = e.currentTarget.dataset.key;
-            if (this.props.onLinkClick) {
-                await this.props.onLinkClick(key);
-            } */
         };
         this.state = {
             key: this.props.selectedKey || null,
@@ -34163,7 +33918,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             columnWidth: {},
             resized: Date.now(),
         };
-        this.columns = {}; // each column is the array of each cell view
+        this.columns = {};
         this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
@@ -34171,15 +33926,12 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return this.state.column;
     }
     setActiveColumn(column) {
-        // @ts-ignore
         this.state.column = column;
     }
     getActiveRowKey() {
         return this.state.key;
     }
     setActiveRowKey(key) {
-        // console.debug('Grid.setActiveRowKey', key);
-        // @ts-ignore
         this.state.key = key;
     }
     isRowActive(i, key) {
@@ -34239,7 +33991,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         console.debug('Grid.onEnter');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.debug(row, key);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
@@ -34248,13 +33999,11 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         console.debug('Grid.onDelete');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.debug(row, key);
         if (this.props.onDeleteKeyDown) {
             await this.props.onDeleteKeyDown(row, key);
         }
     }
     async selectCell(key, j) {
-        // console.debug('Grid.selectCell', key, j);
         if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
             return;
         this.setActiveRowKey(key);
@@ -34267,7 +34016,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async selectRow(key) {
-        // console.debug('Grid.selectRow', key);
         if (this.getActiveRowKey() === key)
             return;
         this.setActiveRowKey(key);
@@ -34313,7 +34061,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -34322,7 +34069,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return true;
     }
     render() {
-        // console.debug('Grid.render', this.props.name);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
@@ -34330,7 +34076,6 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Grid = Grid;
 }
 
@@ -34380,7 +34125,6 @@ class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.GridCell = GridCell;
 }
 
@@ -34406,7 +34150,6 @@ class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
         return this.props.active && this.props.activeColumn === j;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -34421,7 +34164,6 @@ class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
         return true;
     }
     render() {
-        // console.debug('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
@@ -34431,7 +34173,6 @@ class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.GridRow = GridRow;
 }
 
@@ -34484,7 +34225,6 @@ class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Image = Image;
 }
 
@@ -34509,24 +34249,17 @@ __webpack_require__.r(__webpack_exports__);
 
 class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('Menu.constructor', props);
         super(props);
         this.onMenuClick = async (e) => {
-            // console.debug('Menu.onMenuClick', e.currentTarget.dataset.menu);
             await this.toggleMenu(e.currentTarget.dataset.menu);
         };
         this.onBlur = async (e) => {
-            // console.debug('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
         this.onMouseDown = (e) => {
-            // console.debug('Menu.onMouseDown');
             e.preventDefault();
-            // e.stopPropagation();
-            // return false;
         };
         this.onMenuItemClick = async (e) => {
-            // console.debug('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
             e.persist();
             const { menu, type, name } = e.target.dataset;
             await this.closeMenu(menu);
@@ -34552,7 +34285,6 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Menu = Menu;
 }
 
@@ -34581,7 +34313,6 @@ class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Modal = Modal;
 }
 
@@ -34644,7 +34375,6 @@ class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return this.state.value;
     }
     _setValue(value) {
-        // @ts-ignore
         this.state.value = value;
         this.forceUpdate();
         if (this.props.onChange) {
@@ -34652,7 +34382,6 @@ class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -34664,7 +34393,6 @@ class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Password = Password;
 }
 
@@ -34691,8 +34419,6 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     constructor(props) {
         super(props);
         this.onKeyPress = (e) => {
-            // console.debug('PhoneBox.onKeyPress', e.key, e.target.value);
-            // console.debug('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
                 e.preventDefault();
             }
@@ -34703,33 +34429,23 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
             }
         };
         this.onChange = (e) => {
-            // console.debug('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
             const len = e.target.value.length;
-            // console.debug('start/end/len:', start, end, len);
-            // disable edition in middle
             if (start !== end || start !== len) {
                 return;
             }
-            // value pipeline
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // state
-            // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(value);
-            this.setState({ value: this.state.value }); // for render only
-            // event
+            this.setState({ value: this.state.value });
             if (this.props.onChange) {
                 this.props.onChange(value);
             }
         };
         this.onBlur = (e) => {
-            // console.debug('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // console.debug('value:', value);
-            // event
             if (this.props.onBlur) {
                 this.props.onBlur(value);
             }
@@ -34743,15 +34459,12 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return PhoneBox.clearValue(this.state.value);
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
-            // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
         }
         return true;
     }
     render() {
-        // console.debug('TextBox.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     static clearValue(value) {
@@ -34773,9 +34486,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     }
     static formatPhoneNumber(_value) {
         const value = PhoneBox.clearValue(_value);
-        // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        // console.debug('arr:', arr);
         if (arr) {
             if (arr[5]) {
                 return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
@@ -34797,7 +34508,6 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.PhoneBox = PhoneBox;
 }
 
@@ -34820,10 +34530,8 @@ __webpack_require__.r(__webpack_exports__);
 
 class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('Radio.constructor', props.value);
         super(props);
         this.onChange = async (e) => {
-            // console.debug('Radio.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
@@ -34863,8 +34571,6 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
         return false;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -34903,7 +34609,6 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
     constructor(props) {
         super(props);
         this.onKeyDown = async (e) => {
-            // console.debug('Select.onKeyDown');
             if (this.isVisible()) {
                 this.setState({ visible: false });
                 e.stopPropagation();
@@ -34919,9 +34624,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
             else {
                 if (!this.isVisible()) {
                     const [selected] = this.el.current.querySelectorAll('li.selected');
-                    // console.debug('selected:', selected);
                     if (selected) {
-                        // console.debug('selected.offsetTop:', selected.offsetTop);
                         const scrollTop = selected.offsetTop -
                             this.dropdown.current.getBoundingClientRect().height / 2 +
                             selected.getBoundingClientRect().height / 2;
@@ -34945,7 +34648,6 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         this.onDropdownClick = async (e) => {
             console.debug('Select.onDropdownClick', e.target.offsetTop);
             const value = JSON.parse(e.target.dataset.value);
-            // console.debug('value:', value);
             this.setState({ value: value, visible: false }, async () => {
                 if (this.props.onChange) {
                     await this.props.onChange(value.toString());
@@ -34970,7 +34672,6 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         return this.state.visible;
     }
     getInitialValue() {
-        // console.debug('Select.getInitialValue', this.props.value);
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
@@ -34999,7 +34700,6 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         }
         if (value === null)
             throw new Error('null is wrong value for Select');
-        // console.debug('select value:', value);
         return value;
     }
     getValue() {
@@ -35023,12 +34723,9 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         const item = this.getItems().find((item) => item.value === value);
         if (!item)
             throw new Error(`cannot find item by value: ${value}`);
-        // console.debug('item:', item);
         return item.title || item.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -35054,12 +34751,10 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
                 })] })));
     }
     render() {
-        // console.debug('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Select = Select;
 }
 
@@ -35092,7 +34787,6 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
     constructor(props) {
         super(props);
         this.onPrevClick = (e) => {
-            // console.debug('Slider.onPrevClick');
             this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
@@ -35102,7 +34796,6 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
             });
         };
         this.onNextClick = (e) => {
-            // console.debug('Slider.onNextClick');
             this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
@@ -35128,13 +34821,11 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
         this.state = { image: 0, classList: null };
     }
     render() {
-        // console.debug('Slider.render', this.props.images);
         const images = this.props.images || [];
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Slider = Slider;
 }
 
@@ -35159,7 +34850,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('Statusbar.constructor', props);
         super(props);
         this.state = {};
     }
@@ -35171,7 +34861,6 @@ class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompon
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Statusbar = Statusbar;
 }
 
@@ -35198,7 +34887,6 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -35213,10 +34901,8 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -35247,7 +34933,6 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tab = Tab;
 }
 
@@ -35274,7 +34959,6 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -35289,10 +34973,8 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -35323,7 +35005,6 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tab2 = Tab2;
 }
 
@@ -35346,10 +35027,8 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.debug('TextArea.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.debug('TextArea.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 this.props.onChange(e.target.value);
@@ -35363,18 +35042,14 @@ class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('TextArea.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TextArea = TextArea;
 }
 
@@ -35399,10 +35074,8 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.debug('TextBox.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.debug('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
         this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
@@ -35414,27 +35087,21 @@ class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return this.state.value;
     }
     _setValue(value) {
-        // @ts-ignore
         this.state.value = value;
-        // this.setState({value: this.state.value});   // rerender
         this.forceUpdate();
         if (this.props.onChange) {
             this.props.onChange(value);
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.debug('TextBox.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TextBox = TextBox;
 }
 
@@ -35459,17 +35126,14 @@ __webpack_require__.r(__webpack_exports__);
 
 class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.debug('TimeBox.constructor', props);
         super(props);
         this.onKeyPress = (event) => {
-            // console.debug('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
                 console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -35478,10 +35142,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.debug('after:', target.selectionStart, target.selectionEnd);
-                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -35495,13 +35156,11 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                         console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
@@ -35511,7 +35170,6 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                     console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -35553,28 +35211,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     setValue(value) {
         this.setState({ value: TimeBox.getStringValue(value) });
     }
-    /*onKeyDown = event => {
-        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
-        const mask = '00:00';
-        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
-        if (event.which < 96 || event.which > 105) {
-            console.debug('cancel');
-            event.stopPropagation();
-            event.preventDefault();
-        }
-
-        if (event.target.value.length + 1 > mask.length) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    }*/
-    /*onKeyUp = event => {
-        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
-        event.stopPropagation();
-        event.preventDefault();
-    }*/
     static getStringValue(value) {
-        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -35589,8 +35226,6 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.debug('TimeBox.getIntegerValue', stringValue);
-        // try {
         if (stringValue === '')
             return null;
         const arr = stringValue.split(':');
@@ -35609,10 +35244,6 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         if (mm > 59)
             throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
         return hh * 60 + mm;
-        // } catch (err) {
-        //     console.error(err.message);
-        //     return NaN;
-        // }
     }
     static splitTime(value) {
         const hours = Math.floor(value / 60);
@@ -35620,9 +35251,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
-            // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
             return true;
         }
@@ -35635,15 +35264,10 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return false;
     }
     render() {
-        // console.debug('TimeBox.render', this.state.value);
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
-            // onKeyDown={this.onKeyDown}
-            // onKeyUp={this.onKeyUp}
-            onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.TimeBox = TimeBox;
 }
 
@@ -35676,7 +35300,6 @@ class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();
@@ -35692,12 +35315,7 @@ class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
         return this.inputEl.current;
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', 
-                    // id={this.props.id}
-                    readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
-                    // onKeyDown={this.onKeyDown}
-                    // onKeyUp={this.onKeyUp}
-                    onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
     }
 }
 
@@ -35721,17 +35339,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    // constructor(props) {
-    //     console.debug('Tooltip.constructor', props);
-    //     super(props);
-    // }
     render() {
-        // console.debug('Tooltip.render', this.state, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.Tooltip = Tooltip;
 }
 
@@ -35861,7 +35473,6 @@ class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         };
     }
     render() {
-        // console.debug('ActionList.render', this.state.item);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item
                 ? this.state.item.getActions().map((action) => {
                     return { name: action.action, title: action.caption };
@@ -35916,7 +35527,6 @@ class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
             });
@@ -36071,7 +35681,6 @@ class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewActionView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -36141,7 +35750,6 @@ class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36209,7 +35817,6 @@ class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCompon
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 class: this.class.getValue(),
@@ -36283,7 +35890,6 @@ class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewDatabaseView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),
@@ -36365,7 +35971,6 @@ class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewFieldView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),
@@ -36462,7 +36067,6 @@ class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -36538,7 +36142,6 @@ class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCom
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 page: this.page.getValue(),
                 class: this.class.getValue(),
@@ -36621,7 +36224,6 @@ class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36689,7 +36291,6 @@ class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewPageView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -36764,7 +36365,6 @@ class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36832,7 +36432,6 @@ class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36872,9 +36471,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EdActionController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     getActions() {
         return [
             { action: 'moveUp', caption: 'Move Up' },
@@ -36927,9 +36523,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EdColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     getActions() {
         return [{ action: 'delete', caption: 'Delete' }];
     }
@@ -36955,15 +36548,6 @@ class EdColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__
         propList.options['auto'] = ['true', 'false'];
         propList.options['nullable'] = ['true', 'false'];
         propList.options['type'] = ['', 'string', 'number', 'boolean', 'object', 'date'];
-        /*propList.options['dbType']   = [
-            '',
-            'integer',
-            'character varying',
-            'boolean',
-            'timestamp with time zone',
-            'text',
-            'json',
-        ];*/
         return propList;
     }
     async delete() {
@@ -37018,7 +36602,6 @@ class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MOD
     }
     getStyle() {
         return {
-            // fontWeight: 'bold',
             color: 'brown',
         };
     }
@@ -37083,7 +36666,6 @@ class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MOD
             list: {},
             options: {},
         };
-        // list
         for (const name in this.model.data['@attributes']) {
             if (!['countQuery', 'singleQuery', 'multipleQuery', 'selectQuery'].includes(name)) {
                 propList.list[name] = this.model.data['@attributes'][name];
@@ -37099,7 +36681,6 @@ class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MOD
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
-        // console.debug('DataSourceController.onSaveClick', name, value);
         await this.model.setValue(name, value);
     }
     async delete() {
@@ -37137,7 +36718,6 @@ class EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
-            // console.debug('NoSqlDataSourceView.onChange');
             await this.rerender();
         };
         this.onSaveClick = async (e) => {
@@ -37218,7 +36798,6 @@ class EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.E
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
-            // console.debug('SqlDataSourceView.onChange');
             await this.rerender();
         };
         this.onSaveClick = async (e) => {
@@ -37316,7 +36895,6 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
             const data = await this.model.getTableInfo(tableName);
             this.tableInfo = data.tableInfo;
             this.document.view.rerender();
-            // console.debug('tableInfo:', this.tableInfo);
         };
         this.onCreateTableClick = (e) => {
             console.debug('DatabaseController.onCreateTableClick');
@@ -37342,7 +36920,6 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
     }
     getStyle() {
         return {
-            // fontWeight: 'bold',
             color: 'purple',
         };
     }
@@ -37437,8 +37014,6 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
-        // console.debug('data:', result.data);
-        // @ts-ignore
         document.treeWidgetItems = result.data.tables
             .sort()
             .map((tableName) => ({ getTitle: () => tableName }));
@@ -37464,7 +37039,6 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
         await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
         tableController.view.parent.open();
         this.view.rerender();
-        // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
     }
     async delete() {
         console.debug('DatabaseController.delete', this.getTitle());
@@ -37501,7 +37075,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderGrid() {
-        // console.debug('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
                 { name: 'name', title: 'name', width: 100 },
@@ -37514,7 +37087,6 @@ class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
             ], rows: ctrl.tableInfo, getRowKey: (row) => row.name }));
     }
     render() {
-        // console.debug('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdDatabaseView frame' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" })))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] })));
@@ -37571,7 +37143,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class EdDocumentView extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
     static createCM(textarea, value) {
-        // @ts-ignore
         const cm = CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
             styleActiveLine: true,
@@ -37685,14 +37256,6 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
             },
         }));
     }
-    /*static async getView(view) {
-        console.debug('TableController.getView', view);
-        return FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : 'getView',
-            params    : {view : view}
-        });
-    }*/
     static async getView(view) {
         return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Table',
@@ -37715,7 +37278,6 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
                     formCaption: values.caption || values.name,
                 });
                 const params = formWizard.getFormParams();
-                // console.debug('params:', params);
                 const databaseController = this.parent;
                 const applicationController = databaseController.parent;
                 const pageLinkController = applicationController.findPageLink(values.page);
@@ -37723,9 +37285,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
                     await pageLinkController.loadPage();
                 }
                 const pageController = pageLinkController.pageController;
-                // console.debug('pageController:', pageController);
                 const form = await pageController.model.newForm(params);
-                // console.debug('form:', form);
                 const formController = pageController.createForm(form);
                 await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                 formController.view.parent.open();
@@ -37822,7 +37382,6 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
         this.dataSources = [];
         this.actions = [];
         this.pageLinks = [];
-        // items
         this.opened = true;
         this.items = [
             { getTitle: () => 'Databases', items: this.databases },
@@ -37890,10 +37449,8 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
     }
     async newDatabaseAction() {
         console.debug('ApplicationController.newDatabaseAction');
-        // @ts-ignore
         await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
             onCreate: async (values) => {
-                // console.debug('values: ', values);
                 const database = await this.model.newDatabase({
                     class: values.class,
                     name: values.name,
@@ -37908,7 +37465,6 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
                 await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
                 databaseController.view.parent.open();
                 this.view.rerender();
-                // @ts-ignore
                 _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
             },
         }));
@@ -37955,7 +37511,6 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
         return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
     }
     getDocumentViewClass() {
-        // @ts-ignore
         return _EdVisualView__WEBPACK_IMPORTED_MODULE_8__.EdVisualView;
     }
 }
@@ -37982,15 +37537,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EdFieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
     getStyle() {
         return {
-            // fontWeight: 'bold',
             color: 'blue',
         };
     }
@@ -38101,7 +37652,6 @@ class EdFormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
     }
     getStyle() {
         return {
-            // fontWeight: 'bold',
             color: 'green',
         };
     }
@@ -38270,7 +37820,6 @@ class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
         ];
     }
     init() {
-        // console.debug('PageController.init');
         this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
         this.model.actions.forEach((action) => this.createAction(action));
         this.model.forms.forEach((form) => this.createForm(form));
@@ -38445,7 +37994,7 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         return document;
     }
     async onControllerSave(value) {
-        console.debug('ApplicationController.onControllerSave' /*, value*/);
+        console.debug('ApplicationController.onControllerSave');
         const result = await this.model.saveController(value);
         this.data.js = result.js;
         this.document.view.rerender();
@@ -38458,7 +38007,6 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         return dataSource;
     }
     removeDataSource(dataSourceController) {
-        // console.debug('VisualController.removeDataSource', dataSourceController.getTitle());
         const i = this.dataSources.indexOf(dataSourceController);
         if (i === -1)
             throw new Error('no such dataSourceController');
@@ -38471,7 +38019,6 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         return action;
     }
     removeAction(actionController) {
-        // console.debug('VisualController.removeAction', actionController.getTitle());
         const i = this.actions.indexOf(actionController);
         if (i === -1)
             throw new Error('no such actionController');
@@ -38531,7 +38078,6 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
             await ctrl.onControllerSave(this.cm.getValue());
         };
         this.onChange = async (instance, changeObj) => {
-            // console.debug('VisualView.onChange', this.isChanged());
             await this.rerender();
         };
         this.textarea = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -38543,7 +38089,6 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         return null;
     }
     componentDidMount() {
-        // console.debug('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
             this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
@@ -38551,7 +38096,6 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         }
     }
     componentDidUpdate() {
-        // console.debug('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !this.cm) {
@@ -38559,7 +38103,6 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         }
     }
     componentWillUnmount() {
-        // console.debug('VisualView.componentWillUnmount');
         if (this.cm) {
             this.cm.off('change', this.onChange);
         }
@@ -38596,9 +38139,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EdKeyColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     getActions() {
         return [{ action: 'delete', caption: 'Delete' }];
     }
@@ -38652,9 +38192,7 @@ class EdModelController {
         return this.model.getName();
     }
     getStyle() {
-        return {
-        // fontWeight: 'bold',
-        };
+        return {};
     }
     getPropList() {
         return {
@@ -38665,9 +38203,6 @@ class EdModelController {
     async setProperty(name, value) {
         await this.model.setValue(name, value);
     }
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.model.getName() === name);
-    }*/
     async doAction(name) {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
@@ -38715,7 +38250,6 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
     }
     getStyle() {
         return {
-            // fontWeight: 'bold',
             color: 'red',
         };
     }
@@ -38728,14 +38262,11 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
             throw new Error('page already loaded');
         const pageLink = this.model;
         const pageData = await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.fetchPageData(pageLink.getFileName());
-        // page
         const page = new _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor(pageData, pageLink);
         page.init();
-        // pageController
         const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
-        // console.debug('pageController:', pageController);
         this.view.rerender();
     }
     getActions() {
@@ -38779,9 +38310,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EdParamController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     getActions() {
         return [{ action: 'delete', caption: 'Delete' }];
     }
@@ -38831,20 +38359,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
-    /* async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : 'getView',
-            params    : {
-                view : view,
-                page : this.data !== undefined ? this.form.page.getName() : null,
-                form : this.data !== undefined ? this.form.getName()      : null,
-            }
-        });
-    } */
     getParams() {
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__.FormEditor) {
             return {
@@ -38864,7 +38378,6 @@ class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         };
     }
     async setValue(name, value) {
-        //console.debug('ActionEditor.setValue', name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'save',
@@ -38938,19 +38451,15 @@ class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     }
     init() {
         console.debug('ApplicationEditor.init', this.data);
-        // databases
         for (const data of this.data.databases) {
             this.createDatabase(data);
         }
-        // dataSources
         for (const data of this.data.dataSources) {
             this.createDataSource(data);
         }
-        // actions
         for (const data of this.data.actions) {
             this.createAction(data);
         }
-        // pageLinks
         for (const data of this.data.pageLinks) {
             this.createPageLink(data);
         }
@@ -38988,7 +38497,6 @@ class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.pageLinks.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'save',
@@ -39088,8 +38596,6 @@ class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return this.createDataSource(data);
     }
     async newAction(params) {
-        // params['pageFileName'] = this.page.pageLink.getFileName();
-        // params['form']         = this.getName();
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: '_new',
@@ -39128,7 +38634,6 @@ class ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.table = table;
     }
     async setValue(name, value) {
-        //console.debug('ColumnEditor.setValue', name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'save',
@@ -39225,7 +38730,6 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const args = {
             controller: 'DataSource',
             action: 'save',
@@ -39236,13 +38740,10 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.form = this.parent.getName();
-            // @ts-ignore
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39258,13 +38759,10 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.form = this.parent.getName();
-            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39300,13 +38798,10 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.form = this.parent.getName();
-            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39320,13 +38815,10 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.form = this.parent.getName();
-            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39342,13 +38834,10 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
-            // @ts-ignore
             args.params.form = this.parent.getName();
         }
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39367,17 +38856,14 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         };
         if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
             args.params.pageFileName =
                 this instanceof DataSourceEditor ? this.parent.pageLink.getFileName() : undefined;
         }
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
             args.params.pageFileName =
                 this instanceof DataSourceEditor
                     ? this.parent.page.pageLink.getFileName()
                     : undefined;
-            // @ts-ignore
             args.params.form = this instanceof DataSourceEditor ? this.parent.getName() : undefined;
         }
         return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
@@ -39454,11 +38940,9 @@ class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.tables = [];
     }
     init() {
-        // params
         for (const data of this.data.params) {
             this.createParam(data);
         }
-        // tables
         for (const data of this.data.tables) {
             this.createTable(data);
         }
@@ -39490,7 +38974,6 @@ class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.tables.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'save',
@@ -39636,30 +39119,13 @@ class Editor {
     setAttr(name, value) {
         this.data['@attributes'][name] = value;
     }
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.getName() === name);
-    }*/
-    /*createDataSource(data) {
-        const dataSource = new DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }*/
     removeDataSource(dataSource) {
-        // console.debug('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1)
             throw new Error('no such dataSource');
         this.dataSources.splice(i, 1);
     }
-    /*createAction(data) {
-        const action = new ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }*/
     removeAction(action) {
-        // console.debug('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);
         if (i === -1)
             throw new Error('no such action');
@@ -39690,7 +39156,6 @@ class FieldEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.form = form;
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'save',
@@ -39860,15 +39325,12 @@ class FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.actions = [];
     }
     init() {
-        // dataSources
         for (const data of this.data.dataSources) {
             this.createDataSource(data);
         }
-        // actions
         for (const data of this.data.actions) {
             this.createAction(data);
         }
-        // fields
         for (const data of this.data.fields) {
             this.createField(data);
         }
@@ -39899,7 +39361,6 @@ class FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.fields.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'save',
@@ -40081,7 +39542,6 @@ class KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.dataSource = dataSource;
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action: 'save',
@@ -40157,15 +39617,12 @@ class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.forms = [];
     }
     init() {
-        // data sources
         for (const data of this.data.dataSources) {
             this.createDataSource(data);
         }
-        // actions
         for (const data of this.data.actions) {
             this.createAction(data);
         }
-        // forms
         for (const data of this.data.forms) {
             this.createForm(data);
         }
@@ -40196,7 +39653,6 @@ class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.forms.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'save',
@@ -40301,7 +39757,6 @@ class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     }
     async newAction(params) {
         params['pageFileName'] = this.pageLink.getFileName();
-        // params['form']         = this.getName();
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: '_new',
@@ -40334,7 +39789,6 @@ class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.application = parent;
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'save',
@@ -40397,7 +39851,6 @@ class ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.database = database;
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'save',
@@ -40519,7 +39972,6 @@ class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'save',
@@ -40569,7 +40021,6 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         super();
         this.onItemOpen2 = async (item) => {
             console.debug('EditorFrontHostApp.onItemOpen2', item.getTitle());
-            // console.debug('parent:', item.view.parent);
             if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
@@ -40591,7 +40042,6 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         this.onPropertyGrid2Change = (name, value) => {
             console.debug('EditorFrontHostApp.onPropertyGrid2Change', name, value);
             const controller = this.treeWidget2.getSelectedItem();
-            // console.debug('controller', controller);
             controller.setProperty(name, value);
         };
         this.onItemDoubleClick2 = async (item) => {
@@ -40625,7 +40075,6 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         this.onActionClick = async (actionName) => {
             console.debug('EditorFrontHostApp.onActionClick', actionName);
             const item = this.treeWidget2.getSelectedItem();
-            // console.debug('item', item);
             const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
             await controller.doAction(actionName);
         };
@@ -40633,29 +40082,24 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         if (!data)
             throw new Error('no data');
         this.data = data;
-        // @ts-ignore
         EditorFrontHostApp.editorApp = this;
         this.runAppLink = runAppLink;
         this.view = null;
         this.actionList = null;
         this.treeWidget2 = null;
-        this.pg = null; // property grid
-        this.items = null; // treeWidget2 items
+        this.pg = null;
+        this.items = null;
         this.tabWidget = null;
         this.documents = [];
         this.modal = null;
     }
     async run() {
         console.debug('EditorFrontHostApp.run');
-        // app
         const app = new _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__.ApplicationEditor(this.data.app);
         app.init();
-        // console.debug('app:', app);
-        // application controller
         const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.EdApplicationController(app, this);
         applicationController.init();
         this.items = [applicationController];
-        // view
         this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(document.querySelector('.editor__root'), _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView, { ctrl: this, key: 'editor' });
     }
     deinit() { }
@@ -40680,11 +40124,9 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         });
     }
     fillActions(item) {
-        // console.debug('EditorFrontHostApp.fillActions');
         this.actionList.setState({ item });
     }
     clearActions() {
-        // console.debug('EditorFrontHostApp.clearActions');
         this.actionList.setState({ item: null });
     }
     async openDocument(controller) {
@@ -40693,7 +40135,6 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         if (!document) {
             document = await controller.createDocument();
             this.documents.push(document);
-            // console.debug('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
         await this.view.rerender();
@@ -40705,10 +40146,6 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         console.debug('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
-        /* if (modalController.view.el) {
-            console.debug('element', modalController.view.getElement());
-            modalController.view.getElement().focus();
-        } */
     }
     async onModalClose() {
         console.debug('EditorFrontHostApp.onModalClose');
@@ -40752,7 +40189,6 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
             return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["no document view for ", document.controller.constructor.name] });
         }
         return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
-            // @ts-ignore
             onCreate: (c) => (document.view = c),
             document: document,
             ctrl: document.controller,
@@ -40861,7 +40297,6 @@ class FormWizard {
         return 'TextBoxField';
     }
     getField(column) {
-        // console.debug('FormWizard.getField', column);
         let field = {
             class: this.getFieldClass(column),
             name: column.name,
@@ -40887,11 +40322,6 @@ class FormWizard {
         return field;
     }
     getFields() {
-        /*let fields = {};
-        this.getColumns().forEach(column => {
-            fields[column.name] = this.getField(column);
-        });
-        return fields;*/
         return this.getColumns().map((column) => this.getField(column));
     }
     getColumns() {
@@ -41016,7 +40446,6 @@ class PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (name, value) => {
-            // console.debug('PropertyGrid.onChange', name, value);
             if (this.props.onChange) {
                 this.props.onChange(name, value);
             }
@@ -41084,19 +40513,16 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onDivMouseDown = (e) => {
-            // console.debug('TreeItem.onDivMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             tree.select(item);
         };
         this.onDivDoubleClick = (e) => {
-            // console.debug('TreeItem.onDivDoubleClick');
             const item = this.props.item;
             const tree = this.props.tree;
             tree.onDoubleClick(item);
         };
         this.onNodeMouseDown = (e) => {
-            // console.debug('TreeItem.onNodeMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             const opened = this.state.opened;
@@ -41124,7 +40550,6 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
     open() {
         console.debug('TreeItem.open', this.props.item.getTitle());
-        // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();
@@ -41134,7 +40559,6 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     render() {
-        // console.debug('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
@@ -41143,7 +40567,6 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : undefined, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: (c) => {
-                            // console.debug('onCreate', this.props.item.getTitle(), item.getTitle());
                             c.parent = this;
                             item.view = c;
                         } }, item.getTitle()))) }))] }), title));
@@ -41191,7 +40614,6 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         });
     }
     onDoubleClick(item) {
-        // console.debug('TreeWidget.onDoubleClick', item);
         if (this.props.onItemDoubleClick)
             this.props.onItemDoubleClick(item);
     }
@@ -41210,7 +40632,7 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
-        console.debug('TreeWidget.render' /*, this.props.items*/);
+        console.debug('TreeWidget.render');
         const items = this.props.items;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: (c) => (item.view = c) }, item.getTitle()))) }) })));
     }
@@ -41298,12 +40720,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
 /* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
 
-// style
 
 
 
 
-// common style
 
 
 

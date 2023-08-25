@@ -31205,7 +31205,6 @@ function getLogLevel() {
 }
 function getLogLevelName() {
     if (typeof window === 'object') {
-        // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
     else if (typeof global === 'object') {
@@ -31216,24 +31215,20 @@ function getLogLevelName() {
 }
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.debug(message, ...optionalParams);
     }
 }
 function log(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.log(message, ...optionalParams);
     }
 }
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        // process.stdout.write(`${messages.join(' ')}\n`);
         console.warn(message, ...optionalParams);
     }
 }
 function error(message, ...optionalParams) {
-    // process.stderr.write(`${messages.join(' ')}\n`);
     console.error(message, ...optionalParams);
 }
 
@@ -31257,23 +31252,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Helper {
-    /* static currentDate() {
-        const now = new Date();
-        let dd = now.getDate();if (dd < 10) dd = '0' + dd;
-        let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-    /* static currentDateTime() {
-        return Helper.currentDate() + ' ' + Helper.currentTime();
-    } */
-    /* static currentTime() {
-        const now = new Date();
-        let hh = now.getHours();if (hh < 10) hh = '0' + hh;
-        let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
-        let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-        return [hh, mm, ss].join(':');
-    } */
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -31294,7 +31272,6 @@ class Helper {
     }
     static today() {
         const now = new Date();
-        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         return Helper.getStartOfDay(now);
     }
     static getStartOfDay(date) {
@@ -31320,12 +31297,7 @@ class Helper {
         return obj;
     }
     static decodeValue(raw) {
-        // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
-        // } catch (err) {
-        //     // debug('raw:', raw);
-        //     throw err;
-        // }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -31336,7 +31308,6 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -31347,14 +31318,12 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
-        // ReactDOM.render(reactRootElement, rootElement);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
         return component;
     }
@@ -31368,45 +31337,6 @@ class Helper {
             reader.readAsDataURL(file);
         });
     }
-    /* static readFileAsArrayBuffer(file) {
-        return new Promise(resolve => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsArrayBuffer(file);
-        });
-    } */
-    /* static convertBufferToBase64string(buffer) {
-        const array = new Uint8Array(buffer);
-        const binaryString = String.fromCharCode.apply(null, array);
-        return window.btoa(binaryString);
-    } */
-    /* static createObjectUrl(buffer) {
-        const blob = new Blob([new Uint8Array(buffer)]);
-        return window.URL.createObjectURL(blob);
-    } */
-    // append file as filed and all not file as json string
-    /* static createFormData(body) {
-        const formData = new FormData();
-        const fields = {};
-        for (const name in body) {
-            if (body[name] instanceof File) {
-                formData.append(name, body[name]);
-            } else {
-                fields[name] = body[name];
-            }
-        }
-        formData.append('__json', JSON.stringify(fields));
-        return formData;
-    } */
-    /* static base64ToArrayBuffer(base64) {
-        const binaryString = window.atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes.buffer;
-    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -31427,7 +31357,6 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -31437,13 +31366,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -31454,7 +31380,6 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -31464,13 +31389,10 @@ class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
         if (h < 10)
             h = '0' + h;
-        // @ts-ignore
         if (m < 10)
             m = '0' + m;
-        // @ts-ignore
         if (s < 10)
             s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
@@ -31496,11 +31418,10 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
-        textArea.style.top = '0'; // Avoid scrolling to bottom
+        textArea.style.top = '0';
         textArea.style.left = '0';
         textArea.style.position = 'fixed';
         document.body.appendChild(textArea);
@@ -31508,7 +31429,6 @@ class Helper {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        // @ts-ignore
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
@@ -31520,7 +31440,6 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
-        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -31535,19 +31454,10 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    // static inIframe(): boolean {
-    //     return false;
-    //     /* try {
-    //         return window.self !== window.top;
-    //     } catch (e) {
-    //         return false;
-    //     } */
-    // }
     static setCookie(name, value, time) {
         let expires = '';
         if (time) {
             const date = new Date(time);
-            // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
@@ -31573,23 +31483,18 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
         }
         else {
-            // @ts-ignore
             if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
-            // @ts-ignore
             global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
-        // debug('Helper.getGlobalClass', className);
-        // @ts-ignore
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {
@@ -31655,7 +31560,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.debug(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
         return new Promise((resolve) => {
@@ -31684,15 +31588,10 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         this.allowRerender = true;
     }
     componentWillUnmount() {
-        // console.debug('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /* componentDidMount() {
-        console.debug('ReactComponent.componentDidMount', this.constructor.name);
-    } */
     isEnabled() {
-        // console.debug('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
     }
     isDisabled() {
@@ -31705,7 +31604,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return false;
     }
     disable() {
-        // console.debug('ReactComponent.disable');
         if (!this.state)
             throw new Error('no state');
         this.setState({ disabled: true });
@@ -31717,7 +31615,6 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }
 }
 if (typeof window === 'object') {
-    // @ts-ignore
     window.ReactComponent = ReactComponent;
 }
 
