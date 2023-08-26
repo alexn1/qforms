@@ -772,6 +772,7 @@ const EmptyPromise_1 = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/
 const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 const decorators_1 = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
 const pConsole_1 = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+const e500_1 = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
@@ -1235,15 +1236,7 @@ class BackHostApp {
                 ? error.message
                 : 'Internal Software Error';
             const stack = this.isDevelopment() && error.status !== 404 ? error.stack : '';
-            res.end(`<!DOCTYPE html>
-<html>
-<title>${status} ${message}</title>
-<body>
-    <h1>${message}</h1>
-    <h2>${status}</h2>
-    <pre>${stack}</pre>
-</body>
-</html>`);
+            res.end((0, e500_1.e500)(status, message, stack));
         }
         await this.logError(error, req);
     }
@@ -2557,6 +2550,32 @@ class WebSocketServer {
     }
 }
 exports.WebSocketServer = WebSocketServer;
+
+
+/***/ }),
+
+/***/ "./src/backend/e500.ts":
+/*!*****************************!*\
+  !*** ./src/backend/e500.ts ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.e500 = void 0;
+function e500(status, message, stack) {
+    return `<!DOCTYPE html>
+<html>
+<title>${status} ${message}</title>
+    <body>
+        <h1>${message}</h1>
+        <h2>${status}</h2>
+        <pre>${stack}</pre>
+    </body>
+</html>`;
+}
+exports.e500 = e500;
 
 
 /***/ }),
@@ -8789,11 +8808,8 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        (0, console_1.debug)('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
-        (0, console_1.debug)('ViewerModule.css:', this.css);
-        (0, console_1.debug)('ViewerModule.js:', this.js);
         if (!this.js.length)
             throw new Error('no qforms js');
     }

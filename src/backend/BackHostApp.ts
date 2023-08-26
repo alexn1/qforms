@@ -28,6 +28,7 @@ import { debug, log, error } from '../console';
 import { Nullable } from '../types';
 import { logCall, trackTime } from '../decorators';
 import { LogLevel } from '../pConsole';
+import { e500 } from './e500';
 
 const pkg = require('../../package.json');
 
@@ -696,21 +697,13 @@ export class BackHostApp {
                     : 'Internal Software Error',
             );
         } else {
-            const status = error.status || 500;
-            const message =
+            const status: number = error.status || 500;
+            const message: string =
                 this.isDevelopment() || error.status === 404
                     ? error.message
                     : 'Internal Software Error';
-            const stack = this.isDevelopment() && error.status !== 404 ? error.stack : '';
-            res.end(`<!DOCTYPE html>
-<html>
-<title>${status} ${message}</title>
-<body>
-    <h1>${message}</h1>
-    <h2>${status}</h2>
-    <pre>${stack}</pre>
-</body>
-</html>`);
+            const stack: string = this.isDevelopment() && error.status !== 404 ? error.stack : '';
+            res.end(e500(status, message, stack));
         }
         await this.logError(error, req);
     }
@@ -757,7 +750,6 @@ export class BackHostApp {
         }
     }
 
-    // @logCall(LogLevel.debug)
     async onProcessSIGINT(): Promise<void> {
         debug('\nBackHostApp.onProcessSIGINT');
         log('Received INT signal (Ctrl+C), shutting down gracefully...');

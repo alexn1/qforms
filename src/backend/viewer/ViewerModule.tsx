@@ -50,7 +50,7 @@ export class ViewerModule {
     constructor(private hostApp: BackHostApp) {}
 
     async init() {
-        debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
+        // debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (
             await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
@@ -63,8 +63,8 @@ export class ViewerModule {
                 'js',
             )
         ).map((path) => `/viewer/public/${path}`);
-        debug('ViewerModule.css:', this.css);
-        debug('ViewerModule.js:', this.js);
+        // debug('ViewerModule.css:', this.css);
+        // debug('ViewerModule.js:', this.js);
         if (!this.js.length) throw new Error('no qforms js');
     }
 
