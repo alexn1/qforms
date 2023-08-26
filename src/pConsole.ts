@@ -2,6 +2,8 @@
  * Proxy Console (pConsole)
  */
 
+const LOG_LEVEL_EV_NAME = 'QFORMS_LOG_LEVEL';
+
 export enum LogLevel {
     debug = 'debug',
     log = 'log',
@@ -14,10 +16,10 @@ export const LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.
 export function getLogLevelName() {
     if (typeof window === 'object') {
         // @ts-ignore
-        return window.QFORMS_LOG_LEVEL || 'debug';
+        return window[LOG_LEVEL_EV_NAME] || 'debug';
     } else if (typeof global === 'object') {
         return (
-            process.env.QFORMS_LOG_LEVEL ||
+            process.env[LOG_LEVEL_EV_NAME] ||
             (process.env.NODE_ENV === 'development' ? 'debug' : 'log')
         );
     }

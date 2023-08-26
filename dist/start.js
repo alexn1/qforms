@@ -11,6 +11,7 @@
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.pConsole = exports.getLogLevelName = exports.LogLevels = exports.LogLevel = void 0;
+const LOG_LEVEL_EV_NAME = 'QFORMS_LOG_LEVEL';
 var LogLevel;
 (function (LogLevel) {
     LogLevel["debug"] = "debug";
@@ -21,10 +22,10 @@ var LogLevel;
 exports.LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
 function getLogLevelName() {
     if (typeof window === 'object') {
-        return window.QFORMS_LOG_LEVEL || 'debug';
+        return window[LOG_LEVEL_EV_NAME] || 'debug';
     }
     else if (typeof global === 'object') {
-        return (process.env.QFORMS_LOG_LEVEL ||
+        return (process.env[LOG_LEVEL_EV_NAME] ||
             (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
     }
     return 'debug';
