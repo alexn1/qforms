@@ -45,11 +45,11 @@ export class IndexModule {
         };
     }
 
-    getLinks() {
+    getLinks(): string[] {
         return this.css;
     }
 
-    getScripts() {
+    getScripts(): string[] {
         return this.js;
     }
 

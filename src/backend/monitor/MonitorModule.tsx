@@ -64,11 +64,11 @@ export class MonitorModule {
         };
     }
 
-    getLinks() {
+    getLinks(): string[] {
         return this.css;
     }
 
-    getScripts() {
+    getScripts(): string[] {
         return this.js;
     }
 

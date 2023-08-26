@@ -14,6 +14,7 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
+import { Link } from '../../../../types';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {
     private appInfo;
     private hostApp;
@@ -24,7 +25,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     pages: {
         [pageLinkName: string]: BkPage;
     };
-    links: any[];
+    links: Array<Link | string>;
     scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
@@ -32,7 +33,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
-    getLinks(context: Context): Promise<any[]>;
+    getLinks(context: Context): Promise<Array<Link | string>>;
     getScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
     getDirPath(): string;

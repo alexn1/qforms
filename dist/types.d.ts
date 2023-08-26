@@ -42,3 +42,7 @@ export interface RequestBody {
     row?: RawRow;
     newMode?: boolean;
 }
+export interface Link {
+    href: string;
+    rel: string;
+}

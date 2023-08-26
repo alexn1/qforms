@@ -68,11 +68,11 @@ export class ViewerModule {
         if (!this.js.length) throw new Error('no qforms js');
     }
 
-    getLinks() {
+    getLinks(): string[] {
         return this.css;
     }
 
-    getScripts() {
+    getScripts(): string[] {
         return this.js;
     }
 

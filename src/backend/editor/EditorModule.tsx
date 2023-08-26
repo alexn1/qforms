@@ -73,7 +73,7 @@ export class EditorModule {
         // debug('editor.js:' , this.js);
     }
 
-    getLinks() {
+    getLinks(): string[] {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',

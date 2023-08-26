@@ -28,6 +28,7 @@ import { debug } from '../../../../console';
 import { ActionData } from '../../../../common/ModelData/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
+import { Link } from '../../../../types';
 
 const pkg = require('../../../../../package.json');
 
@@ -38,7 +39,7 @@ export class BkApplication<
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
     pages: { [pageLinkName: string]: BkPage } = {};
-    links: any[];
+    links: Array<Link | string>;
     scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
@@ -67,7 +68,7 @@ export class BkApplication<
         return this.hostApp;
     }
 
-    async getLinks(context: Context): Promise<any[]> {
+    async getLinks(context: Context): Promise<Array<Link | string>> {
         const virtualPath = context.getVirtualPath();
         return (await BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
