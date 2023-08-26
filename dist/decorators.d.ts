@@ -1,2 +1,3 @@
-export declare function debugCall(target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor;
+import { LogLevel } from './pConsole';
+export declare function logCall(level: LogLevel): (target: any, propertyKey: string, descriptor: PropertyDescriptor) => PropertyDescriptor;
 export declare function trackTime(target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor;

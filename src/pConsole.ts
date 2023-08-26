@@ -1,4 +1,15 @@
-export const LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
+/*
+ * Proxy Console (pConsole)
+ */
+
+export enum LogLevel {
+    debug = 'debug',
+    log = 'log',
+    warn = 'warn',
+    error = 'error',
+}
+
+export const LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
 
 export function getLogLevelName() {
     if (typeof window === 'object') {
@@ -18,8 +29,8 @@ export const pConsole = new Proxy(console, {
         // @ts-ignore
         if (typeof target[prop] === 'function') {
             return function (...args: any[]) {
-                const methodLevel = LOG_LEVELS.indexOf(prop as string);
-                const logLevel = LOG_LEVELS.indexOf(getLogLevelName());
+                const methodLevel = LogLevels.indexOf(prop as LogLevel);
+                const logLevel = LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
                     // @ts-ignore
                     return target[prop].apply(receiver, args);

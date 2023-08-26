@@ -26,7 +26,8 @@ import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, log, error } from '../console';
 import { Nullable } from '../types';
-import { debugCall, trackTime } from '../decorators';
+import { logCall, trackTime } from '../decorators';
+import { LogLevel } from '../pConsole';
 
 const pkg = require('../../package.json');
 
@@ -87,7 +88,7 @@ export class BackHostApp {
     }
 
     // @trackTime
-    @debugCall
+    @logCall(LogLevel.debug)
     async init(): Promise<void> {
         // this.initConsole();
         this.checkNodeVersion();
@@ -100,7 +101,7 @@ export class BackHostApp {
         await this.initHttpServer();
     }
 
-    @debugCall
+    @logCall(LogLevel.debug)
     async run(): Promise<void> {
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
@@ -767,9 +768,10 @@ export class BackHostApp {
         }
     }
 
-    @debugCall
+    // @logCall(LogLevel.debug)
     async onProcessSIGINT(): Promise<void> {
-        log(' Received INT signal (Ctrl+C), shutting down gracefully...');
+        debug('\nBackHostApp.onProcessSIGINT');
+        log('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
@@ -779,7 +781,7 @@ export class BackHostApp {
         }
     }
 
-    @debugCall
+    @logCall(LogLevel.debug)
     async onProcessSIGTERM(): Promise<void> {
         log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
@@ -808,8 +810,8 @@ export class BackHostApp {
         await this.logError(reason);
     }
 
+    @logCall(LogLevel.debug)
     async shutdown(): Promise<void> {
-        debug('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
@@ -934,7 +936,7 @@ export class BackHostApp {
         }
     }
 
-    @debugCall
+    @logCall(LogLevel.debug)
     static test(): void {}
 
     getDistDirPath(): string {

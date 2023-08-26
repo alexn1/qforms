@@ -9,10 +9,10 @@ Module.prototype.require = function () {
 }; */
 
 import { BackHostApp, BkHelper, Optional } from './index';
-import { debug } from './console';
+import { pConsole } from './pConsole';
 
-async function main(...argv: string[]): Promise<Optional<number>> {
-    debug('main');
+async function start(...argv: string[]): Promise<Optional<number>> {
+    pConsole.debug('start');
     try {
         const backHostApp = new BackHostApp({
             ...BkHelper.getCommandLineParams(),
@@ -28,6 +28,7 @@ async function main(...argv: string[]): Promise<Optional<number>> {
         return 1;
     }
 }
-main(...process.argv).then((code) => {
+
+start(...process.argv).then((code) => {
     if (code) process.exit(code);
 });

@@ -771,6 +771,7 @@ const EventLog_1 = __webpack_require__(/*! ./EventLog */ "./src/backend/EventLog
 const EmptyPromise_1 = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/EmptyPromise.ts");
 const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 const decorators_1 = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+const pConsole_1 = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
@@ -1279,7 +1280,8 @@ class BackHostApp {
         }
     }
     async onProcessSIGINT() {
-        (0, console_1.log)(' Received INT signal (Ctrl+C), shutting down gracefully...');
+        (0, console_1.debug)('\nBackHostApp.onProcessSIGINT');
+        (0, console_1.log)('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
@@ -1315,7 +1317,6 @@ class BackHostApp {
         await this.logError(reason);
     }
     async shutdown() {
-        (0, console_1.debug)('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
@@ -1429,19 +1430,19 @@ class BackHostApp {
     }
 }
 __decorate([
-    decorators_1.debugCall
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "init", null);
 __decorate([
-    decorators_1.debugCall
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "run", null);
 __decorate([
-    decorators_1.debugCall
-], BackHostApp.prototype, "onProcessSIGINT", null);
-__decorate([
-    decorators_1.debugCall
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
 __decorate([
-    decorators_1.debugCall
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+], BackHostApp.prototype, "shutdown", null);
+__decorate([
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp, "test", null);
 exports.BackHostApp = BackHostApp;
 
@@ -9328,23 +9329,25 @@ exports.error = error;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.trackTime = exports.debugCall = void 0;
-const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
-function debugCall(target, propertyKey, descriptor) {
-    const originalMethod = descriptor.value;
-    descriptor.value = async function (...args) {
-        (0, console_1.debug)(`${this.constructor.name}.${propertyKey}`);
-        return originalMethod.apply(this, args);
+exports.trackTime = exports.logCall = void 0;
+const pConsole_1 = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
+function logCall(level) {
+    return function (target, propertyKey, descriptor) {
+        const originalMethod = descriptor.value;
+        descriptor.value = async function (...args) {
+            pConsole_1.pConsole[level](`${this.constructor.name}.${propertyKey}`);
+            return originalMethod.apply(this, args);
+        };
+        return descriptor;
     };
-    return descriptor;
 }
-exports.debugCall = debugCall;
+exports.logCall = logCall;
 function trackTime(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args) {
         const start = Date.now();
         const result = originalMethod.apply(this, args);
-        (0, console_1.debug)(`${this.constructor.name}.${propertyKey} time: ${Date.now() - start} ms`);
+        pConsole_1.pConsole.debug(`${this.constructor.name}.${propertyKey} time: ${Date.now() - start} ms`);
         return result;
     };
     return descriptor;
@@ -20434,9 +20437,55 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./types */ "./src/types.ts"), exports);
 __exportStar(__webpack_require__(/*! ./Result */ "./src/Result.ts"), exports);
-__exportStar(__webpack_require__(/*! ./decorators */ "./src/decorators.ts"), exports);
 __exportStar(__webpack_require__(/*! ./backend */ "./src/backend/index.ts"), exports);
 __exportStar(__webpack_require__(/*! ./frontend */ "./src/frontend/index.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./src/pConsole.ts":
+/*!*************************!*\
+  !*** ./src/pConsole.ts ***!
+  \*************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.pConsole = exports.getLogLevelName = exports.LogLevels = exports.LogLevel = void 0;
+var LogLevel;
+(function (LogLevel) {
+    LogLevel["debug"] = "debug";
+    LogLevel["log"] = "log";
+    LogLevel["warn"] = "warn";
+    LogLevel["error"] = "error";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+exports.LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
+function getLogLevelName() {
+    if (typeof window === 'object') {
+        return window.QFORMS_LOG_LEVEL || 'debug';
+    }
+    else if (typeof global === 'object') {
+        return (process.env.QFORMS_LOG_LEVEL ||
+            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
+    }
+    return 'debug';
+}
+exports.getLogLevelName = getLogLevelName;
+exports.pConsole = new Proxy(console, {
+    get: function (target, prop, receiver) {
+        if (typeof target[prop] === 'function') {
+            return function (...args) {
+                const methodLevel = exports.LogLevels.indexOf(prop);
+                const logLevel = exports.LogLevels.indexOf(getLogLevelName());
+                if (methodLevel >= logLevel) {
+                    return target[prop].apply(receiver, args);
+                }
+            };
+        }
+        return target[prop];
+    },
+});
 
 
 /***/ }),

@@ -2,20 +2,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/console.ts":
-/*!************************!*\
-  !*** ./src/console.ts ***!
-  \************************/
+/***/ "./src/pConsole.ts":
+/*!*************************!*\
+  !*** ./src/pConsole.ts ***!
+  \*************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.getLogLevel = exports.LOG_LEVELS = void 0;
-exports.LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
-function getLogLevel() {
-    return exports.LOG_LEVELS.indexOf(getLogLevelName());
-}
-exports.getLogLevel = getLogLevel;
+exports.pConsole = exports.getLogLevelName = exports.LogLevels = exports.LogLevel = void 0;
+var LogLevel;
+(function (LogLevel) {
+    LogLevel["debug"] = "debug";
+    LogLevel["log"] = "log";
+    LogLevel["warn"] = "warn";
+    LogLevel["error"] = "error";
+})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
+exports.LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
 function getLogLevelName() {
     if (typeof window === 'object') {
         return window.QFORMS_LOG_LEVEL || 'debug';
@@ -27,28 +30,20 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
-function debug(message, ...optionalParams) {
-    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
-        console.debug(message, ...optionalParams);
-    }
-}
-exports.debug = debug;
-function log(message, ...optionalParams) {
-    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        console.log(message, ...optionalParams);
-    }
-}
-exports.log = log;
-function warn(message, ...optionalParams) {
-    if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        console.warn(message, ...optionalParams);
-    }
-}
-exports.warn = warn;
-function error(message, ...optionalParams) {
-    console.error(message, ...optionalParams);
-}
-exports.error = error;
+exports.pConsole = new Proxy(console, {
+    get: function (target, prop, receiver) {
+        if (typeof target[prop] === 'function') {
+            return function (...args) {
+                const methodLevel = exports.LogLevels.indexOf(prop);
+                const logLevel = exports.LogLevels.indexOf(getLogLevelName());
+                if (methodLevel >= logLevel) {
+                    return target[prop].apply(receiver, args);
+                }
+            };
+        }
+        return target[prop];
+    },
+});
 
 
 /***/ }),
@@ -100,9 +95,9 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
-const console_1 = __webpack_require__(/*! ./console */ "./src/console.ts");
-async function main(...argv) {
-    (0, console_1.debug)('main');
+const pConsole_1 = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
+async function start(...argv) {
+    pConsole_1.pConsole.debug('start');
     try {
         const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
                 username: 'admin',
@@ -116,7 +111,7 @@ async function main(...argv) {
         return 1;
     }
 }
-main(...process.argv).then((code) => {
+start(...process.argv).then((code) => {
     if (code)
         process.exit(code);
 });
