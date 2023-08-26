@@ -11,29 +11,11 @@ module.exports = {
         path: path.resolve(__dirname, './dist/frontend/monitor/public'),
         filename: 'js/bundle.[contenthash].js',
     },
-    /*resolve: {
-        extensions: ['.jsx', '.js'],
-    },*/
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
-            /* {
-                test: /\.(js)x?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                ['@babel/preset-react', {runtime: 'automatic'}],
-                            ]
-                        }
-
-                    },
-                ],
-            },*/
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
