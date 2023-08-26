@@ -64,13 +64,13 @@ export declare class BackHostApp {
     run(): Promise<void>;
     getHost(): string;
     getPort(): number;
-    initHttpServer(): Promise<void>;
+    createHttpServer(): void;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
     createTempDirsIfNotExistSync(): void;
     private createEventLog;
     initModules(): Promise<void>;
-    initWebSocketServer(): void;
+    createWebSocketServer(): void;
     initDirPaths(): void;
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;

@@ -90,7 +90,6 @@ export class BackHostApp {
     // @trackTime
     @logCall(LogLevel.debug)
     async init(): Promise<void> {
-        // this.initConsole();
         this.checkNodeVersion();
         this.initDirPaths();
         this.checkApplicationFolder();
@@ -98,14 +97,14 @@ export class BackHostApp {
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
-        await this.initHttpServer();
+        this.createHttpServer();
     }
 
     @logCall(LogLevel.debug)
     async run(): Promise<void> {
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
-        this.initWebSocketServer();
+        this.createWebSocketServer();
         this.listenProcessEvents();
         log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
@@ -118,15 +117,7 @@ export class BackHostApp {
         return this.params.port || LISTEN_PORT;
     }
 
-    /* initConsole() {
-        const levels = ['debug', 'log', 'warn', 'error'];
-        const level = levels.indexOf(QFORMS_LOG_LEVEL);
-        if (level > levels.indexOf('debug')) console.debug = () => {};
-        if (level > levels.indexOf('log')) console.log = () => {};
-        if (level > levels.indexOf('warn')) console.warn = () => {};
-    } */
-
-    async initHttpServer(): Promise<void> {
+    createHttpServer(): void {
         this.httpServer = http.createServer(this.express);
     }
 
@@ -174,7 +165,7 @@ export class BackHostApp {
         await this.editorModule.init();
     }
 
-    initWebSocketServer(): void {
+    createWebSocketServer(): void {
         this.wsServer = new WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
@@ -240,8 +231,6 @@ export class BackHostApp {
 
         // init
         this.express.set('handleException', this.params.handleException ?? true);
-        // this.express.set('view engine', 'ejs');
-        // this.express.set('views', backendDirPath);
         this.express.enable('strict routing');
 
         // middlewares
@@ -415,8 +404,8 @@ export class BackHostApp {
         return BkApplication;
     }
 
+    @logCall(LogLevel.debug)
     async createApp(req: Request): Promise<AppInfo[]> {
-        debug('BackHostApp.createApp');
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
         const folder = req.body.folder;
@@ -756,8 +745,8 @@ export class BackHostApp {
         });
     }
 
+    @logCall(LogLevel.debug)
     async onProcessMessage(message: string): Promise<void> {
-        log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             try {
                 await this.shutdown();

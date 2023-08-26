@@ -792,12 +792,12 @@ class BackHostApp {
         this.createEventLog();
         this.initExpressServer();
         await this.initModules();
-        await this.initHttpServer();
+        this.createHttpServer();
     }
     async run() {
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
-        this.initWebSocketServer();
+        this.createWebSocketServer();
         this.listenProcessEvents();
         (0, console_1.log)(this.composeStartMessage(this.getHost(), this.getPort()));
     }
@@ -807,7 +807,7 @@ class BackHostApp {
     getPort() {
         return this.params.port || LISTEN_PORT;
     }
-    async initHttpServer() {
+    createHttpServer() {
         this.httpServer = http_1.default.createServer(this.express);
     }
     checkNodeVersion() {
@@ -839,7 +839,7 @@ class BackHostApp {
         this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
     }
-    initWebSocketServer() {
+    createWebSocketServer() {
         this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
@@ -997,7 +997,6 @@ class BackHostApp {
         return BkApplication_1.BkApplication;
     }
     async createApp(req) {
-        (0, console_1.debug)('BackHostApp.createApp');
         if (!req.body.folder)
             throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name)
@@ -1268,7 +1267,6 @@ class BackHostApp {
         });
     }
     async onProcessMessage(message) {
-        (0, console_1.log)('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
             try {
                 await this.shutdown();
@@ -1435,6 +1433,12 @@ __decorate([
 __decorate([
     (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "run", null);
+__decorate([
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+], BackHostApp.prototype, "createApp", null);
+__decorate([
+    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+], BackHostApp.prototype, "onProcessMessage", null);
 __decorate([
     (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
