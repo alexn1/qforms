@@ -53,7 +53,7 @@ export declare class FrontHostApp {
         [name: string]: any;
     } | null): string;
     getOptions(): FrontHostAppOptions;
-    filterSearch(names: string[]): string;
+    filterSearch(...names: string[]): string;
     getSearchParams(): any;
     getCookie(name: string): string | undefined;
     getLocation(): Location;

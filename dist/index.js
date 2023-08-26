@@ -9513,18 +9513,18 @@ class FrontHostApp {
         }
         return this.options;
     }
-    filterSearch(names) {
+    filterSearch(...names) {
         if (typeof window === 'object') {
-            return Search_1.Search.filter(names);
+            return Search_1.Search.filter(...names);
         }
         const newObj = {};
         const obj = this.getOptions().url.searchParams;
         for (const name of names) {
             if (obj.hasOwnProperty(name)) {
-                newObj[name] = obj[name];
+                newObj[name] = obj.get(name);
             }
         }
-        return Search_1.Search.objToString(newObj);
+        return new URLSearchParams(newObj).toString();
     }
     getSearchParams() {
         if (typeof window === 'object') {
@@ -9960,15 +9960,7 @@ class Search {
             return acc;
         }, {});
     }
-    static objToString(obj) {
-        const search = Object.keys(obj)
-            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
-            .join('&');
-        if (!search)
-            return '';
-        return `?${search}`;
-    }
-    static filter(names) {
+    static filter(...names) {
         const newObj = {};
         const obj = Search.getObj();
         for (const name of names) {
@@ -9976,7 +9968,7 @@ class Search {
                 newObj[name] = obj[name];
             }
         }
-        return Search.objToString(newObj);
+        return new URLSearchParams(newObj).toString();
     }
 }
 exports.Search = Search;

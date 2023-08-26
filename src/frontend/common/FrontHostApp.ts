@@ -192,18 +192,19 @@ export class FrontHostApp {
         return this.options;
     }
 
-    filterSearch(names: string[]): string {
+    filterSearch(...names: string[]): string {
         if (typeof window === 'object') {
-            return Search.filter(names);
+            return Search.filter(...names);
         }
-        const newObj = {};
+        const newObj: Record<string, string> = {};
         const obj = this.getOptions().url.searchParams;
         for (const name of names) {
             if (obj.hasOwnProperty(name)) {
-                newObj[name] = obj[name];
+                newObj[name] = obj.get(name)!;
             }
         }
-        return Search.objToString(newObj);
+        // return Search.objToString(newObj);
+        return new URLSearchParams(newObj).toString();
     }
 
     getSearchParams() {
