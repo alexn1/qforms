@@ -238,7 +238,7 @@ export class BackHostApp {
         this.express = express();
 
         // init
-        this.express.set('handleException', this.params.handleException || true);
+        this.express.set('handleException', this.params.handleException ?? true);
         // this.express.set('view engine', 'ejs');
         // this.express.set('views', backendDirPath);
         this.express.enable('strict routing');

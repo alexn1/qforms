@@ -891,8 +891,9 @@ class BackHostApp {
         return secret;
     }
     initExpressServer() {
+        var _a;
         this.express = (0, express_1.default)();
-        this.express.set('handleException', this.params.handleException || true);
+        this.express.set('handleException', (_a = this.params.handleException) !== null && _a !== void 0 ? _a : true);
         this.express.enable('strict routing');
         this.express.use(body_parser_1.default.json({
             limit: '20mb',
