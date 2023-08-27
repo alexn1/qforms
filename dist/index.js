@@ -9546,7 +9546,7 @@ class FrontHostApp {
                 newObj[name] = obj.get(name);
             }
         }
-        return new URLSearchParams(newObj).toString();
+        return Search_1.Search.objToString(newObj);
     }
     getSearchParams() {
         if (typeof window === 'object') {
@@ -9982,6 +9982,14 @@ class Search {
             return acc;
         }, {});
     }
+    static objToString(obj) {
+        const search = Object.keys(obj)
+            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
+            .join('&');
+        if (!search)
+            return '';
+        return `?${search}`;
+    }
     static filter(...names) {
         const newObj = {};
         const obj = Search.getObj();
@@ -9990,7 +9998,7 @@ class Search {
                 newObj[name] = obj[name];
             }
         }
-        return new URLSearchParams(newObj).toString();
+        return Search.objToString(newObj);
     }
 }
 exports.Search = Search;

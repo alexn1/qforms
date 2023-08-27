@@ -11,13 +11,13 @@ export class Search {
             }, {} as Record<string, string>);
     }
 
-    /* static objToString(obj) {
+    static objToString(obj) {
         const search = Object.keys(obj)
             .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
             .join('&');
         if (!search) return '';
         return `?${search}`;
-    } */
+    }
 
     static filter(...names: string[]): string {
         const newObj: Record<string, string> = {};
@@ -27,7 +27,6 @@ export class Search {
                 newObj[name] = obj[name];
             }
         }
-        // return Search.objToString(newObj);
-        return new URLSearchParams(newObj).toString();
+        return Search.objToString(newObj);
     }
 }

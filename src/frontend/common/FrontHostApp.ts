@@ -203,8 +203,7 @@ export class FrontHostApp {
                 newObj[name] = obj.get(name)!;
             }
         }
-        // return Search.objToString(newObj);
-        return new URLSearchParams(newObj).toString();
+        return Search.objToString(newObj);
     }
 
     getSearchParams() {
