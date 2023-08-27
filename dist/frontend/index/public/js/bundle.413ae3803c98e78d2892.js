@@ -32044,28 +32044,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class Search {
     static getObj() {
-        if (!window.location.search.split('?')[1])
-            return {};
-        return window.location.search
-            .split('?')[1]
-            .split('&')
-            .reduce((acc, item) => {
-            const kv = item.split('=');
-            acc[kv[0]] = decodeURIComponent(kv[1]);
-            return acc;
-        }, {});
+        const params = new URLSearchParams(window.location.search);
+        const obj = {};
+        for (const [name, value] of params) {
+            obj[name] = value;
+        }
+        return obj;
     }
     static objToString(obj) {
-        const search = Object.keys(obj)
-            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
-            .join('&');
+        const search = new URLSearchParams(obj).toString();
         if (!search)
             return '';
         return `?${search}`;
     }
     static filter(...names) {
-        const newObj = {};
         const obj = Search.getObj();
+        const newObj = {};
         for (const name of names) {
             if (obj.hasOwnProperty(name)) {
                 newObj[name] = obj[name];

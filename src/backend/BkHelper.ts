@@ -520,10 +520,6 @@ export class BkHelper {
         return promise;
     } */
 
-    static test() {
-        debug('BkHelper.test');
-    }
-
     static formatNumber(value: number) {
         return new Intl.NumberFormat('ru-RU').format(value);
     }

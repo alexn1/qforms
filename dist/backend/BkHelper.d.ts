@@ -48,7 +48,6 @@ export declare class BkHelper {
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any[]): any[];
-    static test(): void;
     static formatNumber(value: number): string;
     static formatTime2(_sec: number): string;
     static registerGlobalClass(Class: any): void;
