@@ -1,6 +1,6 @@
 import { LogLevel, pConsole } from './pConsole';
 
-export function logCall(level: LogLevel) {
+export function log(level: LogLevel) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = async function (...args: any[]) {
@@ -11,7 +11,7 @@ export function logCall(level: LogLevel) {
     };
 }
 
-export function trackTime(
+export function time(
     target: any,
     propertyKey: string,
     descriptor: PropertyDescriptor,

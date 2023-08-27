@@ -800,7 +800,7 @@ class BackHostApp {
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.createWebSocketServer();
         this.listenProcessEvents();
-        (0, console_1.log)(this.composeStartMessage(this.getHost(), this.getPort()));
+        pConsole_1.pConsole.log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
     getHost() {
         return this.params.host || LISTEN_HOST;
@@ -911,7 +911,7 @@ class BackHostApp {
             saveUninitialized: false,
         }));
         this.express.options('/error', (req, res, next) => {
-            (0, console_1.log)('options /error');
+            pConsole_1.pConsole.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
             res.end();
@@ -927,7 +927,7 @@ class BackHostApp {
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express_1.default.static(this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
-                (0, console_1.log)(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+                pConsole_1.pConsole.log(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
             },
         }));
         this.initCustomRoutes();
@@ -1029,7 +1029,7 @@ class BackHostApp {
         };
     }
     async logError(err, req) {
-        (0, console_1.log)('BackHostApp.logError:', safe_1.default.red(err.message));
+        pConsole_1.pConsole.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
             await this.eventLog.log({
                 type: 'error',
@@ -1045,7 +1045,7 @@ class BackHostApp {
         }
     }
     async logEvent(context, message, data) {
-        (0, console_1.log)('BackHostApp.logEvent', message);
+        pConsole_1.pConsole.log('BackHostApp.logEvent', message);
         try {
             await this.eventLog.log({
                 type: 'log',
@@ -1060,7 +1060,7 @@ class BackHostApp {
         }
     }
     async indexGet(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta('indexGet'));
+        pConsole_1.pConsole.log(safe_1.default.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
             res.end(html);
@@ -1070,7 +1070,7 @@ class BackHostApp {
         }
     }
     async indexPost(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta('indexPost'), req.params);
+        pConsole_1.pConsole.log(safe_1.default.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             res.json({
@@ -1085,7 +1085,7 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta('monitorGet'));
+        pConsole_1.pConsole.log(safe_1.default.magenta('monitorGet'));
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -1106,7 +1106,7 @@ class BackHostApp {
         }
     }
     async moduleGet(req, res, next) {
-        (0, console_1.log)(safe_1.default.magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
+        pConsole_1.pConsole.log(safe_1.default.magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1146,7 +1146,7 @@ class BackHostApp {
     }
     async modulePost(req, res, next) {
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-        (0, console_1.log)(safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        pConsole_1.pConsole.log(safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1186,7 +1186,7 @@ class BackHostApp {
     }
     async moduleGetFile(req, res, next) {
         (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
-        (0, console_1.log)(safe_1.default.magenta.underline('GET'), req.originalUrl);
+        (0, decorators_1.log)(safe_1.default.magenta.underline('GET'), req.originalUrl);
         if (req.params.module === 'viewer') {
             let context = null;
             try {
@@ -1221,7 +1221,7 @@ class BackHostApp {
     }
     async _e500(err, req, res, next) {
         (0, console_1.debug)(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
-        (0, console_1.log)(safe_1.default.red(err.message));
+        pConsole_1.pConsole.log(safe_1.default.red(err.message));
         const error = typeof err === 'string' ? new HttpError_1.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&
@@ -1272,7 +1272,7 @@ class BackHostApp {
     }
     async onProcessSIGINT() {
         (0, console_1.debug)('\nBackHostApp.onProcessSIGINT');
-        (0, console_1.log)('Received INT signal (Ctrl+C), shutting down gracefully...');
+        pConsole_1.pConsole.log('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
@@ -1283,7 +1283,7 @@ class BackHostApp {
         }
     }
     async onProcessSIGTERM() {
-        (0, console_1.log)('Received SIGTERM (kill) signal, shutting down forcefully.');
+        pConsole_1.pConsole.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
             process.exit(0);
@@ -1295,7 +1295,7 @@ class BackHostApp {
     }
     onProcessExit(code) {
         (0, console_1.debug)('BackHostApp.onProcessExit:', code);
-        (0, console_1.log)('exit:', code);
+        pConsole_1.pConsole.log('exit:', code);
     }
     async onUncaughtException(err, origin) {
         (0, console_1.error)(safe_1.default.red('BackHostApp.onUncaughtException'), err);
@@ -1332,7 +1332,7 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         (0, console_1.debug)(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        (0, console_1.log)('client error:', safe_1.default.red(req.body.message));
+        pConsole_1.pConsole.log('client error:', safe_1.default.red(req.body.message));
         try {
             const data = JSON.stringify({
                 headers: req.headers,
@@ -1421,25 +1421,25 @@ class BackHostApp {
     }
 }
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "init", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "run", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "createApp", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessMessage", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "shutdown", null);
 __decorate([
-    (0, decorators_1.logCall)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp, "test", null);
 exports.BackHostApp = BackHostApp;
 
@@ -9349,9 +9349,9 @@ exports.error = error;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.trackTime = exports.logCall = void 0;
+exports.time = exports.log = void 0;
 const pConsole_1 = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
-function logCall(level) {
+function log(level) {
     return function (target, propertyKey, descriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = async function (...args) {
@@ -9361,8 +9361,8 @@ function logCall(level) {
         return descriptor;
     };
 }
-exports.logCall = logCall;
-function trackTime(target, propertyKey, descriptor) {
+exports.log = log;
+function time(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args) {
         const start = Date.now();
@@ -9372,7 +9372,7 @@ function trackTime(target, propertyKey, descriptor) {
     };
     return descriptor;
 }
-exports.trackTime = trackTime;
+exports.time = time;
 
 
 /***/ }),

@@ -24,10 +24,10 @@ import { BaseModel } from './BaseModel';
 import { Optional, Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
-import { debug, log, error } from '../console';
+import { debug, error } from '../console';
 import { Nullable } from '../types';
-import { logCall, trackTime } from '../decorators';
-import { LogLevel } from '../pConsole';
+import { log, time } from '../decorators';
+import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 
 const pkg = require('../../package.json');
@@ -88,8 +88,8 @@ export class BackHostApp {
         this.startTime = new Date();
     }
 
-    // @trackTime
-    @logCall(LogLevel.debug)
+    // @time
+    @log(LogLevel.debug)
     async init(): Promise<void> {
         this.checkNodeVersion();
         this.initDirPaths();
@@ -101,13 +101,13 @@ export class BackHostApp {
         this.createHttpServer();
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     async run(): Promise<void> {
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.createWebSocketServer();
         this.listenProcessEvents();
-        log(this.composeStartMessage(this.getHost(), this.getPort()));
+        pConsole.log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
 
     getHost(): string {
@@ -260,7 +260,7 @@ export class BackHostApp {
 
         // error logger
         this.express.options('/error', (req: Request, res: Response, next: NextFunction) => {
-            log('options /error');
+            pConsole.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
             res.end();
@@ -296,7 +296,7 @@ export class BackHostApp {
         this.express.use(
             express.static(this.frontendDirPath, {
                 setHeaders: (res, fullPath, stat) => {
-                    log(
+                    pConsole.log(
                         `static: /${path.relative(this.frontendDirPath, fullPath)} ${
                             res.statusCode
                         }`,
@@ -405,7 +405,7 @@ export class BackHostApp {
         return BkApplication;
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     async createApp(req: Request): Promise<AppInfo[]> {
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
@@ -438,7 +438,7 @@ export class BackHostApp {
     }
 
     async logError(err: Error, req?: Request): Promise<void> {
-        log('BackHostApp.logError:', colors.red(err.message));
+        pConsole.log('BackHostApp.logError:', colors.red(err.message));
         try {
             await this.eventLog.log({
                 type: 'error',
@@ -490,7 +490,7 @@ export class BackHostApp {
     } */
 
     async logEvent(context: Context, message: string, data?: object): Promise<void> {
-        log('BackHostApp.logEvent', message);
+        pConsole.log('BackHostApp.logEvent', message);
         try {
             await this.eventLog.log({
                 type: 'log',
@@ -505,7 +505,7 @@ export class BackHostApp {
     }
 
     async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        log(colors.magenta('indexGet'));
+        pConsole.log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
             res.end(html);
@@ -515,7 +515,7 @@ export class BackHostApp {
     }
 
     async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        log(colors.magenta('indexPost'), req.params);
+        pConsole.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             res.json({
@@ -530,7 +530,7 @@ export class BackHostApp {
     }
 
     async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        log(colors.magenta('monitorGet') /* , req.headers */);
+        pConsole.log(colors.magenta('monitorGet') /* , req.headers */);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -554,7 +554,7 @@ export class BackHostApp {
         // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
 
         // log request
-        log(
+        pConsole.log(
             // @ts-ignore
             colors.magenta.underline('GET'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
@@ -598,7 +598,7 @@ export class BackHostApp {
         debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
 
         // log request
-        log(
+        pConsole.log(
             // @ts-ignore
             colors.magenta.underline('POST'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
@@ -683,7 +683,7 @@ export class BackHostApp {
     async _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void> {
         debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
-        log(colors.red(err.message));
+        pConsole.log(colors.red(err.message));
 
         const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
@@ -738,7 +738,7 @@ export class BackHostApp {
         });
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     async onProcessMessage(message: string): Promise<void> {
         if (message === 'shutdown') {
             try {
@@ -752,7 +752,7 @@ export class BackHostApp {
 
     async onProcessSIGINT(): Promise<void> {
         debug('\nBackHostApp.onProcessSIGINT');
-        log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        pConsole.log('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
@@ -762,9 +762,9 @@ export class BackHostApp {
         }
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     async onProcessSIGTERM(): Promise<void> {
-        log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        pConsole.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
             process.exit(0);
@@ -776,7 +776,7 @@ export class BackHostApp {
 
     onProcessExit(code: number) {
         debug('BackHostApp.onProcessExit:', code);
-        log('exit:', code);
+        pConsole.log('exit:', code);
     }
 
     async onUncaughtException(err: Error, origin: string): Promise<void> {
@@ -791,7 +791,7 @@ export class BackHostApp {
         await this.logError(reason);
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     async shutdown(): Promise<void> {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
@@ -824,7 +824,7 @@ export class BackHostApp {
     async postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void> {
         debug(colors.blue('BackHostApp.postError'), req.body.message);
 
-        log('client error:', colors.red(req.body.message));
+        pConsole.log('client error:', colors.red(req.body.message));
 
         try {
             const data = JSON.stringify(
@@ -917,7 +917,7 @@ export class BackHostApp {
         }
     }
 
-    @logCall(LogLevel.debug)
+    @log(LogLevel.debug)
     static test(): void {}
 
     getDistDirPath(): string {
