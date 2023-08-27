@@ -88,8 +88,8 @@ export class BackHostApp {
         this.startTime = new Date();
     }
 
-    // @time
     @log(LogLevel.debug)
+    @time
     async init(): Promise<void> {
         this.checkNodeVersion();
         this.initDirPaths();
@@ -102,6 +102,7 @@ export class BackHostApp {
     }
 
     @log(LogLevel.debug)
+    @time
     async run(): Promise<void> {
         await BackHostApp.runHttpServer(this.httpServer, this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));

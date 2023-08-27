@@ -1421,10 +1421,12 @@ class BackHostApp {
     }
 }
 __decorate([
-    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug),
+    decorators_1.time
 ], BackHostApp.prototype, "init", null);
 __decorate([
-    (0, decorators_1.log)(pConsole_1.LogLevel.debug)
+    (0, decorators_1.log)(pConsole_1.LogLevel.debug),
+    decorators_1.time
 ], BackHostApp.prototype, "run", null);
 __decorate([
     (0, decorators_1.log)(pConsole_1.LogLevel.debug)
@@ -9367,7 +9369,7 @@ function time(target, propertyKey, descriptor) {
     descriptor.value = async function (...args) {
         const start = Date.now();
         const result = originalMethod.apply(this, args);
-        pConsole_1.pConsole.debug(`${this.constructor.name}.${propertyKey} time: ${Date.now() - start} ms`);
+        pConsole_1.pConsole.debug(`${this.constructor.name}.${propertyKey}: [${Date.now() - start} ms]`);
         return result;
     };
     return descriptor;

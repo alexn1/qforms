@@ -20,7 +20,7 @@ export function time(
     descriptor.value = async function (...args: any[]) {
         const start = Date.now();
         const result = originalMethod.apply(this, args);
-        pConsole.debug(`${this.constructor.name}.${propertyKey} time: ${Date.now() - start} ms`);
+        pConsole.debug(`${this.constructor.name}.${propertyKey}: [${Date.now() - start} ms]`);
         return result;
     };
     return descriptor;
