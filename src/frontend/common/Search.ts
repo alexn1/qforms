@@ -6,14 +6,20 @@ export class Search {
             .split('&')
             .reduce((acc, item) => {
                 const kv = item.split('=');
-                acc[kv[0]] = decodeURIComponent(kv[1]);
+                acc[kv[0]] = kv[1] && decodeURIComponent(kv[1]);
                 return acc;
             }, {} as Record<string, string>);
     }
 
     static objToString(obj) {
         const search = Object.keys(obj)
-            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
+            .map((name) => {
+                console.debug(obj, name, obj[name]);
+                if (obj[name] !== undefined) {
+                    return `${name}=${encodeURIComponent(obj[name])}`;
+                }
+                return `${name}`;
+            })
             .join('&');
         if (!search) return '';
         return `?${search}`;
