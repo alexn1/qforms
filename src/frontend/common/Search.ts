@@ -1,33 +1,22 @@
 export class Search {
     static getObj(): Record<string, string> {
-        if (!window.location.search.split('?')[1]) return {};
-        return window.location.search
-            .split('?')[1]
-            .split('&')
-            .reduce((acc, item) => {
-                const kv = item.split('=');
-                acc[kv[0]] = kv[1] && decodeURIComponent(kv[1]);
-                return acc;
-            }, {} as Record<string, string>);
+        const params = new URLSearchParams(window.location.search);
+        const obj: Record<string, string> = {};
+        for (const [name, value] of params) {
+            obj[name] = value;
+        }
+        return obj;
     }
 
-    static objToString(obj) {
-        const search = Object.keys(obj)
-            .map((name) => {
-                console.debug(obj, name, obj[name]);
-                if (obj[name] !== undefined) {
-                    return `${name}=${encodeURIComponent(obj[name])}`;
-                }
-                return `${name}`;
-            })
-            .join('&');
+    static objToString(obj: Record<string, string>) {
+        const search = new URLSearchParams(obj).toString();
         if (!search) return '';
         return `?${search}`;
     }
 
     static filter(...names: string[]): string {
-        const newObj: Record<string, string> = {};
         const obj = Search.getObj();
+        const newObj: Record<string, string> = {};
         for (const name of names) {
             if (obj.hasOwnProperty(name)) {
                 newObj[name] = obj[name];
