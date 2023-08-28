@@ -44,7 +44,7 @@ export declare class BkHelper {
     static fillArray(n: number): number[];
     static formatDate(date: Date, format: string): string;
     static getFirstField(object: any): any;
-    static getCommandLineParams(): any;
+    static argvAsKeyValue(argv: string[], slice?: number): Record<string, string>;
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any[]): any[];

@@ -475,13 +475,14 @@ export class BkHelper {
         return object[key];
     }
 
-    static getCommandLineParams() {
-        return process.argv
+    static argvAsKeyValue(argv: string[], slice: number = 2): Record<string, string> {
+        return argv
+            .slice(slice)
             .map((arg) => arg.split('='))
-            .reduce((acc, [name, value]) => {
-                acc[name] = value;
-                return acc;
-            }, {} as any);
+            .reduce((rec, [key, value]) => {
+                rec[key] = value;
+                return rec;
+            }, {} as Record<string, string>);
     }
 
     static getWebSocketIP(webSocket: any) {

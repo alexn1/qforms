@@ -97,13 +97,14 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const index_1 = __webpack_require__(/*! ./index */ "./index");
 const pConsole_1 = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
+const MONITOR_CONFIG = {
+    username: 'admin',
+    password: '123qwe',
+};
 async function start(...argv) {
     pConsole_1.pConsole.debug('start');
     try {
-        const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
-                username: 'admin',
-                password: '123qwe',
-            } }));
+        const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.argvAsKeyValue(argv)), { monitor: MONITOR_CONFIG }));
         await backHostApp.init();
         await backHostApp.run();
     }

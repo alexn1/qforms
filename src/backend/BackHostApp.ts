@@ -84,7 +84,7 @@ export class BackHostApp {
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
-        // debug('BackHostApp.constructor');
+        debug('BackHostApp.constructor', params);
         this.startTime = new Date();
     }
 

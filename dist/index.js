@@ -783,6 +783,7 @@ class BackHostApp {
         this.params = params;
         this.applications = {};
         this.createAppQueue = {};
+        (0, console_1.debug)('BackHostApp.constructor', params);
         this.startTime = new Date();
     }
     async init() {
@@ -1926,12 +1927,13 @@ class BkHelper {
             throw new Error('getFirstField: no fields');
         return object[key];
     }
-    static getCommandLineParams() {
-        return process.argv
+    static argvAsKeyValue(argv, slice = 2) {
+        return argv
+            .slice(slice)
             .map((arg) => arg.split('='))
-            .reduce((acc, [name, value]) => {
-            acc[name] = value;
-            return acc;
+            .reduce((rec, [key, value]) => {
+            rec[key] = value;
+            return rec;
         }, {});
     }
     static getWebSocketIP(webSocket) {
