@@ -371,9 +371,17 @@ export class BackHostApp {
         return this.applications[route];
     }
 
-    getAppFilePath(context: Context): string {
+    getSrcAppFilePath(context: Context): string {
         return path.join(
             this.appsDirPath,
+            context.getAppDirName(),
+            context.getAppFileName() + '.json',
+        );
+    }
+
+    getDistAppFilePath(context: Context): string {
+        return path.join(
+            this.distDirPath,
             context.getAppDirName(),
             context.getAppFileName() + '.json',
         );
@@ -382,9 +390,9 @@ export class BackHostApp {
     async createApplication(context: Context): Promise<BkApplication> {
         debug(`BackHostApp.createApplication: ${context.getRoute()}`);
 
-        const appFilePath = this.getAppFilePath(context);
-        const distDirPath = this.makeDistDirPathForApp(appFilePath);
-        const appInfo = await BkApplication.loadAppInfo(appFilePath, distDirPath);
+        const appFilePath = this.getDistAppFilePath(context);
+        // const distDirPath = this.makeDistDirPathForApp(appFilePath);
+        const appInfo = await BkApplication.loadAppInfo(appFilePath /* , distDirPath */);
 
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
@@ -407,7 +415,7 @@ export class BackHostApp {
     }
 
     @log(LogLevel.debug)
-    async createApp(req: Request): Promise<AppInfo[]> {
+    async createAppInfos(req: Request): Promise<AppInfo[]> {
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
         const folder = req.body.folder;
@@ -416,8 +424,8 @@ export class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await BkHelper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const distDirPath = this.makeDistDirPathForApp(appFilePath);
-        const appInfos = await BkApplication.getAppInfos(this.appsDirPath, distDirPath);
+        // const distDirPath = this.makeDistDirPathForApp(appFilePath);
+        const appInfos = await BkApplication.getAppInfos(this.appsDirPath /* , distDirPath */);
         return appInfos;
     }
 
@@ -518,7 +526,7 @@ export class BackHostApp {
     async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
         pConsole.log(colors.magenta('indexPost'), req.params);
         try {
-            const appInfos = await this.createApp(req);
+            const appInfos = await this.createAppInfos(req);
             res.json({
                 appInfos: appInfos.map((appInfo) => ({
                     fullName: appInfo.fullName,
@@ -921,15 +929,15 @@ export class BackHostApp {
     @log(LogLevel.debug)
     static test(): void {}
 
-    getDistDirPath(): string {
+    /* getDistDirPath(): string {
         return this.distDirPath;
-    }
+    } */
 
-    makeDistDirPathForApp(appFilePath: string): string {
+    /* makeDistDirPathForApp(appFilePath: string): string {
         const dirName = path.basename(path.dirname(appFilePath));
         const distDirPath = path.join(this.getDistDirPath(), dirName);
         return distDirPath;
-    }
+    } */
 
     getLogger(): EventLog {
         return this.eventLog;

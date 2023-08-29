@@ -79,10 +79,11 @@ export declare class BackHostApp {
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
     getApplicationByRoute(route: string): BkApplication;
-    getAppFilePath(context: Context): string;
+    getSrcAppFilePath(context: Context): string;
+    getDistAppFilePath(context: Context): string;
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
-    createApp(req: Request): Promise<AppInfo[]>;
+    createAppInfos(req: Request): Promise<AppInfo[]>;
     composeContextData(err: Error, req: Request): {
         headers: any;
         method: string;
@@ -127,8 +128,6 @@ export declare class BackHostApp {
     getParams(): BackHostAppParams;
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     static test(): void;
-    getDistDirPath(): string;
-    makeDistDirPathForApp(appFilePath: string): string;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
 }

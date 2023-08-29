@@ -975,14 +975,16 @@ class BackHostApp {
     getApplicationByRoute(route) {
         return this.applications[route];
     }
-    getAppFilePath(context) {
+    getSrcAppFilePath(context) {
         return path_1.default.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
+    }
+    getDistAppFilePath(context) {
+        return path_1.default.join(this.distDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     async createApplication(context) {
         (0, console_1.debug)(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appFilePath = this.getAppFilePath(context);
-        const distDirPath = this.makeDistDirPathForApp(appFilePath);
-        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(appFilePath, distDirPath);
+        const appFilePath = this.getDistAppFilePath(context);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(appFilePath);
         const ApplicationClass = this.getApplicationClass(appInfo);
         const application = new ApplicationClass(appInfo, this, context.getEnv());
         await application.init(context);
@@ -998,7 +1000,7 @@ class BackHostApp {
         }
         return BkApplication_1.BkApplication;
     }
-    async createApp(req) {
+    async createAppInfos(req) {
         if (!req.body.folder)
             throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name)
@@ -1009,8 +1011,7 @@ class BackHostApp {
         const appFilePath = path_1.default.join(appDirPath, name + '.json');
         await BkHelper_1.BkHelper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
-        const distDirPath = this.makeDistDirPathForApp(appFilePath);
-        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, distDirPath);
+        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;
     }
     composeContextData(err, req) {
@@ -1073,7 +1074,7 @@ class BackHostApp {
     async indexPost(req, res, next) {
         pConsole_1.pConsole.log(safe_1.default.magenta('indexPost'), req.params);
         try {
-            const appInfos = await this.createApp(req);
+            const appInfos = await this.createAppInfos(req);
             res.json({
                 appInfos: appInfos.map((appInfo) => ({
                     fullName: appInfo.fullName,
@@ -1406,14 +1407,6 @@ class BackHostApp {
         }
     }
     static test() { }
-    getDistDirPath() {
-        return this.distDirPath;
-    }
-    makeDistDirPathForApp(appFilePath) {
-        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
-        const distDirPath = path_1.default.join(this.getDistDirPath(), dirName);
-        return distDirPath;
-    }
     getLogger() {
         return this.eventLog;
     }
@@ -1431,7 +1424,7 @@ __decorate([
 ], BackHostApp.prototype, "run", null);
 __decorate([
     (0, decorators_1.log)(pConsole_1.LogLevel.debug)
-], BackHostApp.prototype, "createApp", null);
+], BackHostApp.prototype, "createAppInfos", null);
 __decorate([
     (0, decorators_1.log)(pConsole_1.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessMessage", null);
@@ -5157,7 +5150,7 @@ class EditorModule {
     }
     async handleEditorGet(req, res, context) {
         (0, console_1.debug)('EditorModule.handleEditorGet');
-        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.hostApp.getNodeEnv(),
@@ -5180,7 +5173,7 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;
@@ -5381,8 +5374,7 @@ class IndexModule {
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
     }
     async fill() {
-        const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
-        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
+        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -5638,6 +5630,7 @@ class BkApplication extends BkModel_1.BkModel {
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
+        (0, console_1.debug)('publicDirPath:', publicDirPath);
         return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
@@ -5650,14 +5643,9 @@ class BkApplication extends BkModel_1.BkModel {
     getDirPath() {
         return this.appInfo.dirPath;
     }
-    getDistDirPath() {
-        return this.appInfo.distDirPath;
-    }
     getPublicDirPath() {
-        const distDirPath = this.getDistDirPath();
-        if (!distDirPath)
-            throw new Error('no distDirPath');
-        return path_1.default.join(distDirPath, 'public');
+        const dirPath = this.getDirPath();
+        return path_1.default.join(dirPath, 'public');
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
@@ -5856,7 +5844,7 @@ class BkApplication extends BkModel_1.BkModel {
         return db;
     }
     async initContext(context) { }
-    static makeAppInfoFromAppFile(appFile, distDirPath) {
+    static makeAppInfoFromAppFile(appFile) {
         const { data, filePath } = appFile;
         const dirName = path_1.default.basename(path_1.default.dirname(filePath));
         const fileName = path_1.default.basename(filePath, path_1.default.extname(filePath));
@@ -5872,21 +5860,21 @@ class BkApplication extends BkModel_1.BkModel {
             fileNameExt: path_1.default.basename(filePath),
             extName: path_1.default.extname(filePath),
             dirPath: path_1.default.resolve(path_1.default.dirname(filePath)),
-            distDirPath,
         };
     }
-    static async loadAppInfo(appFilePath, distDirPath) {
+    static async loadAppInfo(appFilePath) {
+        (0, console_1.debug)('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
-    static async getAppInfos(appsDirPath, distDirPath) {
+    static async getAppInfos(appsDirPath) {
         const appFilesPaths = await BkHelper_1.BkHelper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await BkApplication.loadAppInfo(appFilePath, distDirPath);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath);
             if (appInfo) {
                 appInfos.push(appInfo);
             }
@@ -8811,6 +8799,8 @@ class ViewerModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
+        (0, console_1.debug)('ViewerModule.css:', this.css);
+        (0, console_1.debug)('ViewerModule.js:', this.js);
         if (!this.js.length)
             throw new Error('no qforms js');
     }

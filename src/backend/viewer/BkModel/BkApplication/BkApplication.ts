@@ -78,7 +78,7 @@ export class BkApplication<
     async getScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // debug('publicDirPath:', publicDirPath);
+        debug('publicDirPath:', publicDirPath);
         return (await BkHelper.getFilePaths(publicDirPath, 'js')).map(
             (src) => `${virtualPath}/${src}`,
         );
@@ -98,14 +98,15 @@ export class BkApplication<
         return this.appInfo.dirPath;
     }
 
-    getDistDirPath(): string | undefined {
+    /* getDistDirPath(): string | undefined {
         return this.appInfo.distDirPath;
-    }
+    } */
 
     getPublicDirPath(): string {
-        const distDirPath = this.getDistDirPath();
-        if (!distDirPath) throw new Error('no distDirPath');
-        return path.join(distDirPath, 'public');
+        // const distDirPath = this.getDistDirPath();
+        const dirPath = this.getDirPath();
+        // if (!dirPath) throw new Error('no dirPath');
+        return path.join(dirPath, 'public');
     }
 
     getText(): any {
@@ -364,7 +365,7 @@ export class BkApplication<
     // to init custom context params before each request get/post
     async initContext(context: Context): Promise<void> {}
 
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
+    static makeAppInfoFromAppFile(appFile: JsonFile /* , distDirPath?: string */): AppInfo {
         // debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path.basename(path.dirname(filePath));
@@ -381,25 +382,25 @@ export class BkApplication<
             fileNameExt: path.basename(filePath),
             extName: path.extname(filePath),
             dirPath: path.resolve(path.dirname(filePath)),
-            distDirPath,
+            // distDirPath,
         };
     }
 
-    static async loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo> {
-        // debug('Application.loadAppInfo', appFilePath);
+    static async loadAppInfo(appFilePath: string/* , distDirPath?: string */): Promise<AppInfo> {
+        debug('Application.loadAppInfo', appFilePath/* , distDirPath */);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile/* , distDirPath */);
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]> {
+    static async getAppInfos(appsDirPath: string/* , distDirPath?: string */): Promise<AppInfo[]> {
         // debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await BkApplication.loadAppInfo(appFilePath, distDirPath);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath/* , distDirPath */);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

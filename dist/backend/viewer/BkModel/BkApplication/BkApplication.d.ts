@@ -37,7 +37,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
-    getDistDirPath(): string | undefined;
     getPublicDirPath(): string;
     getText(): any;
     getVersion(): string | null;
@@ -61,9 +60,9 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo;
-    static loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo>;
-    static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
+    static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
+    static loadAppInfo(appFilePath: string): Promise<AppInfo>;
+    static getAppInfos(appsDirPath: string): Promise<AppInfo[]>;
     findDataSource(name: string): BkDataSource | undefined;
     getDataSource(name: string): BkDataSource;
     getViewClassName(): string;

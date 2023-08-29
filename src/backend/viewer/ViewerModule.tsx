@@ -63,8 +63,8 @@ export class ViewerModule {
                 'js',
             )
         ).map((path) => `/viewer/public/${path}`);
-        // debug('ViewerModule.css:', this.css);
-        // debug('ViewerModule.js:', this.js);
+        debug('ViewerModule.css:', this.css);
+        debug('ViewerModule.js:', this.js);
         if (!this.js.length) throw new Error('no qforms js');
     }
 
