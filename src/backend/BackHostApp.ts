@@ -313,6 +313,8 @@ export class BackHostApp {
         this.express.use(this._e500.bind(this));
     }
 
+    // создание приложения длительный процесс, если во время создания приложения
+    // будет вызвара createApplicationIfNotExists, то её будет возвращён пустой промис
     async createApplicationIfNotExists(context: Context): Promise<BkApplication> {
         // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const route = context.getRoute();
@@ -333,6 +335,12 @@ export class BackHostApp {
             return promise;
         }
 
+        return await this.beginCreateApplication(context);
+    }
+
+    // создаём приложение и после создание уведомляем всех ждущих
+    async beginCreateApplication(context: Context): Promise<BkApplication> {
+        const route = context.getRoute();
         this.createAppQueue[route] = [];
         try {
             const app = (this.applications[route] = await this.createApplication(context));

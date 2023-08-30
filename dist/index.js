@@ -947,6 +947,10 @@ class BackHostApp {
             this.createAppQueue[route].push(promise);
             return promise;
         }
+        return await this.beginCreateApplication(context);
+    }
+    async beginCreateApplication(context) {
+        const route = context.getRoute();
         this.createAppQueue[route] = [];
         try {
             const app = (this.applications[route] = await this.createApplication(context));
@@ -1059,7 +1063,7 @@ class BackHostApp {
             });
         }
         catch (err) {
-            (0, console_1.error)(safe_1.default.red(err));
+            pConsole_1.pConsole.error(safe_1.default.red(err));
         }
     }
     async indexGet(req, res, next) {

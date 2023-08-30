@@ -77,6 +77,7 @@ export declare class BackHostApp {
     getSecretSync(): string;
     initExpressServer(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
+    beginCreateApplication(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
     getApplicationByRoute(route: string): BkApplication;
     getSrcAppFilePath(context: Context): string;
