@@ -936,34 +936,35 @@ class BackHostApp {
         this.express.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(context) {
-        const application = this.applications[context.getRoute()];
+        const route = context.getRoute();
+        const application = this.applications[route];
         if (application) {
             return application;
         }
-        if (Array.isArray(this.createAppQueue[context.getRoute()])) {
-            (0, console_1.debug)('application is creating:', context.getRoute());
+        if (Array.isArray(this.createAppQueue[route])) {
+            (0, console_1.debug)('application is creating:', route);
             const promise = EmptyPromise_1.EmptyPromise.create();
-            this.createAppQueue[context.getRoute()].push(promise);
+            this.createAppQueue[route].push(promise);
             return promise;
         }
-        this.createAppQueue[context.getRoute()] = [];
+        this.createAppQueue[route] = [];
         try {
-            const app = (this.applications[context.getRoute()] = await this.createApplication(context));
-            (0, console_1.debug)('application created, start resolve loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
-            for (const p of this.createAppQueue[context.getRoute()]) {
+            const app = (this.applications[route] = await this.createApplication(context));
+            (0, console_1.debug)('application created, start resolve loop', route, this.createAppQueue[route].length);
+            for (const p of this.createAppQueue[route]) {
                 p.resolve(app);
             }
             return app;
         }
         catch (err) {
-            (0, console_1.error)('application not created, start reject loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
-            for (const p of this.createAppQueue[context.getRoute()]) {
+            (0, console_1.error)('application not created, start reject loop', route, this.createAppQueue[route].length);
+            for (const p of this.createAppQueue[route]) {
                 p.reject(err);
             }
             throw err;
         }
         finally {
-            this.createAppQueue[context.getRoute()] = null;
+            this.createAppQueue[route] = null;
         }
     }
     getApplication(context) {

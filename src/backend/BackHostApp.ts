@@ -315,7 +315,8 @@ export class BackHostApp {
 
     async createApplicationIfNotExists(context: Context): Promise<BkApplication> {
         // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
-        const application = this.applications[context.getRoute()];
+        const route = context.getRoute();
+        const application = this.applications[route];
         if (application) {
             /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
                 await application.deinit();
@@ -325,39 +326,37 @@ export class BackHostApp {
         }
 
         // if creating application
-        if (Array.isArray(this.createAppQueue[context.getRoute()])) {
-            debug('application is creating:', context.getRoute());
+        if (Array.isArray(this.createAppQueue[route])) {
+            debug('application is creating:', route);
             const promise = EmptyPromise.create();
-            this.createAppQueue[context.getRoute()]!.push(promise);
+            this.createAppQueue[route]!.push(promise);
             return promise;
         }
 
-        this.createAppQueue[context.getRoute()] = [];
+        this.createAppQueue[route] = [];
         try {
-            const app = (this.applications[context.getRoute()] = await this.createApplication(
-                context,
-            ));
+            const app = (this.applications[route] = await this.createApplication(context));
             debug(
                 'application created, start resolve loop',
-                context.getRoute(),
-                this.createAppQueue[context.getRoute()]!.length,
+                route,
+                this.createAppQueue[route]!.length,
             );
-            for (const p of this.createAppQueue[context.getRoute()]!) {
+            for (const p of this.createAppQueue[route]!) {
                 p.resolve(app);
             }
             return app;
         } catch (err) {
             error(
                 'application not created, start reject loop',
-                context.getRoute(),
-                this.createAppQueue[context.getRoute()]!.length,
+                route,
+                this.createAppQueue[route]!.length,
             );
-            for (const p of this.createAppQueue[context.getRoute()]!) {
+            for (const p of this.createAppQueue[route]!) {
                 p.reject(err);
             }
             throw err;
         } finally {
-            this.createAppQueue[context.getRoute()] = null;
+            this.createAppQueue[route] = null;
         }
     }
 
@@ -509,7 +508,7 @@ export class BackHostApp {
                 ip: context.getIp(),
             });
         } catch (err) {
-            error(colors.red(err));
+            pConsole.error(colors.red(err));
         }
     }
 
