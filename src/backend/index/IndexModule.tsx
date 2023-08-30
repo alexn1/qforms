@@ -1,5 +1,4 @@
 import path from 'path';
-
 import ReactDOMServer from 'react-dom/server';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import { BkHelper } from '../BkHelper';
