@@ -17325,6 +17325,7 @@ exports.ModelView = ModelView;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PageController = void 0;
+const types_1 = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
 const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
 const Helper_1 = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 const FormController_1 = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
@@ -17503,19 +17504,17 @@ class PageController extends ModelController_1.ModelController {
     async onActionClick(name) {
         console.debug('PageController.onActionClick', name);
     }
+    getKeyPart(key) {
+        const arr = (0, types_1.keyToKeyTuple)(key);
+        if (arr.length === 1 && typeof arr[0] === 'number') {
+            return `#${arr[0]}`;
+        }
+        return `${key}`;
+    }
     getTitle() {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart = null;
-        if (key) {
-            const arr = JSON.parse(key);
-            if (arr.length === 1 && typeof arr[0] === 'number') {
-                keyPart = `#${arr[0]}`;
-            }
-            else {
-                keyPart = `${key}`;
-            }
-        }
+        const keyPart = key ? this.getKeyPart(key) : null;
         return [
             model.getCaption(),
             ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),

@@ -1,4 +1,4 @@
-import { Key } from '../../../../../types';
+import { Key, keyToKeyTuple } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Helper } from '../../../../common/Helper';
 import { FormController } from '../FormController/FormController';
@@ -223,18 +223,18 @@ export class PageController<
         }
     };
 
+    getKeyPart(key: Key): string {
+        const arr = keyToKeyTuple(key);
+        if (arr.length === 1 && typeof arr[0] === 'number') {
+            return `#${arr[0]}`;
+        }
+        return `${key}`;
+    }
+
     getTitle(): string {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart: string | null = null;
-        if (key) {
-            const arr = JSON.parse(key);
-            if (arr.length === 1 && typeof arr[0] === 'number') {
-                keyPart = `#${arr[0]}`;
-            } else {
-                keyPart = `${key}`;
-            }
-        }
+        const keyPart = key ? this.getKeyPart(key) : null;
         return [
             model.getCaption(),
             ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
