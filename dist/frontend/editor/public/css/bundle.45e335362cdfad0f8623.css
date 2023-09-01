@@ -1,15 +1,9 @@
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
-  \**********************************************************************************************************************************/
 .Box {
   background-color: blue;
   height: 200px;
   width: 200px;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
-  \********************************************************************************************************************************************/
 div.CheckBox {
   display: inline-block;
   width: 16px;
@@ -24,9 +18,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab/Tab.less ***!
-  \**********************************************************************************************************************************/
 .Tab {
   display: flex;
   flex-direction: column;
@@ -152,9 +143,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 3px solid var(--accent-color);
 }
 
-/*!********************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
-  \********************************************************************************************************************************************************/
 .DropdownButton {
   position: relative;
   display: inline-block;
@@ -202,16 +190,10 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/GridCell/GridCell.less ***!
-  \********************************************************************************************************************************************/
 .Grid__td.active > .GridCell {
   color: white;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Grid/Grid.less ***!
-  \************************************************************************************************************************************/
 .Grid {
   font-family: sans-serif;
   font-size: 12px;
@@ -348,9 +330,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #e1f0fc !important;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Modal/Modal.less ***!
-  \**************************************************************************************************************************************/
 .Modal {
   position: fixed;
   z-index: 3;
@@ -368,9 +347,6 @@ div.CheckBox:not(.disabled):hover {
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Password/Password.less ***!
-  \********************************************************************************************************************************************/
 .Password {
   position: relative;
 }
@@ -415,9 +391,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #333;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
-  \************************************************************************************************************************************/
 .Menu {
   overflow: hidden;
   background-color: #333;
@@ -468,9 +441,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #ddd;
 }
 
-/*!**********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Statusbar/Statusbar.less ***!
-  \**********************************************************************************************************************************************/
 .Statusbar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -479,9 +449,6 @@ div.CheckBox:not(.disabled):hover {
   font-size: small;
 }
 
-/*!******************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tooltip/Tooltip.less ***!
-  \******************************************************************************************************************************************/
 .Tooltip {
   display: inline-block;
   position: relative;
@@ -570,9 +537,6 @@ div.CheckBox:not(.disabled):hover {
   opacity: 1;
 }
 
-/*!************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DatePicker/DatePicker.less ***!
-  \************************************************************************************************************************************************/
 .DatePicker {
   color: #333;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -652,9 +616,6 @@ div.CheckBox:not(.disabled):hover {
   border: 1px solid orange;
 }
 
-/*!****************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
-  \****************************************************************************************************************************************************************/
 .DropdownDatePicker {
   position: relative;
 }
@@ -758,9 +719,6 @@ div.CheckBox:not(.disabled):hover {
   }
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Select/Select.less ***!
-  \****************************************************************************************************************************************/
 .Select {
   position: relative;
 }
@@ -833,9 +791,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab2/Tab2.less ***!
-  \************************************************************************************************************************************/
 .Tab2 {
   display: flex;
   flex-direction: column;
@@ -891,9 +846,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 2px solid var(--accent-color);
 }
 
-/*!****************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
-  \****************************************************************************************************************************************************/
 .TimeBox2 {
   position: relative;
 }
@@ -932,9 +884,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Image/Image.less ***!
-  \**************************************************************************************************************************************/
 .Image {
   cursor: pointer;
 }
@@ -951,9 +900,6 @@ div.CheckBox:not(.disabled):hover {
   z-index: 100;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Slider/Slider.less ***!
-  \****************************************************************************************************************************************/
 .Slider {
   width: 100%;
   height: 100%;
@@ -1050,9 +996,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #eee;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Expand/Expand.less ***!
-  \****************************************************************************************************************************************/
 .Expand {
   padding: 5px 0;
 }
@@ -1081,9 +1024,6 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 10px;
 }
 
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less ***!
-  \*****************************************************************************************************************************************************************************************************/
 .EdSqlDataSourceView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1099,9 +1039,6 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
-  \*******************************************************************************************************************************************************************************************************/
 .EdNoSqlDataSourceView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1117,9 +1054,6 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less ***!
-  \****************************************************************************************************************************************************************************************/
 .EdTableView {
   height: 100%;
   background-color: white;
@@ -1132,9 +1066,6 @@ div.CheckBox:not(.disabled):hover {
   right: 0;
 }
 
-/*!*****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/TreeWidget/TreeWidget.less ***!
-  \*****************************************************************************************************************************************/
 .TreeWidget {
   cursor: default;
   -moz-user-select: none;
@@ -1177,9 +1108,6 @@ div.CheckBox:not(.disabled):hover {
   background-position: 0 -11px;
 }
 
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less ***!
-  \**********************************************************************************************************************************************************************************************/
 .EdDatabaseView {
   height: 100%;
   background-color: white;
@@ -1200,9 +1128,6 @@ div.CheckBox:not(.disabled):hover {
   right: 0;
 }
 
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less ***!
-  \******************************************************************************************************************************************************************************************/
 .EdVisualView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1217,9 +1142,6 @@ div.CheckBox:not(.disabled):hover {
   font-size: 14px;
 }
 
-/*!*********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/PropertyGrid/PropertyGrid.less ***!
-  \*********************************************************************************************************************************************/
 .PropertyGrid {
   background-color: #eee;
   overflow: auto;
@@ -1248,18 +1170,12 @@ div.CheckBox:not(.disabled):hover {
   width: 100%;
 }
 
-/*!*************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/EdModalView.less ***!
-  \*************************************************************************************************************************************************/
 .EdModalView {
   background-color: white;
   width: 300px;
   margin: auto;
 }
 
-/*!**************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/NewModelView.less ***!
-  \**************************************************************************************************************************************************/
 .NewModelView {
   display: flex;
   flex-direction: column;
@@ -1292,9 +1208,6 @@ div.CheckBox:not(.disabled):hover {
   grid-gap: 10px;
 }
 
-/*!*************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
-  \*************************************************************************************************************************************************************/
 .EditorFrontHostAppView {
   height: 100%;
   font-family: sans-serif;
@@ -1312,9 +1225,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #d3d3d3;
 }
 
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/editor.less ***!
-  \********************************************************************************************************************************/
 .editor {
   height: 100%;
 }
@@ -1326,18 +1236,12 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/error.less ***!
-  \*******************************************************************************************************************************/
 .error,
 .error:focus {
   box-shadow: 0 0 2px red !important;
   color: red;
 }
 
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/global.less ***!
-  \********************************************************************************************************************************/
 hr {
   margin: 10px 0;
 }
@@ -1345,48 +1249,30 @@ nav {
   margin: 0 !important;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/tree-bar.less ***!
-  \**********************************************************************************************************************************/
 .tree-bar {
   padding: 5px;
   background-color: #f5f5f5;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/ellipsis.less ***!
-  \**********************************************************************************************************************************/
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex.less ***!
-  \******************************************************************************************************************************/
 .flex {
   display: flex;
 }
 
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-column.less ***!
-  \*************************************************************************************************************************************/
 .flex-column {
   display: flex;
   flex-direction: column;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-max.less ***!
-  \**********************************************************************************************************************************/
 .flex-max {
   flex: 1 1 auto;
 }
 
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/frame.less ***!
-  \*******************************************************************************************************************************/
 .frame {
   position: relative;
   overflow: hidden;
@@ -1415,17 +1301,11 @@ nav {
   overflow-y: scroll;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/full.less ***!
-  \******************************************************************************************************************************/
 .full {
   height: 100%;
   width: 100%;
 }
 
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/global.less ***!
-  \********************************************************************************************************************************/
 *,
 *:before,
 *:after {
@@ -1441,23 +1321,14 @@ svg {
   display: block;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-5.less ***!
-  \************************************************************************************************************************************/
 .grid-gap-5 {
   grid-gap: 5px;
 }
 
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-10.less ***!
-  \*************************************************************************************************************************************/
 .grid-gap-10 {
   grid-gap: 10px;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/wait.less ***!
-  \******************************************************************************************************************************/
 .wait,
 .wait * {
   cursor: wait !important;
