@@ -3,7 +3,7 @@ console.log('PersonsPersonsFirstNameTableFormTextBoxFieldView');
 class PersonsPersonsFirstNameTableFormTextBoxFieldView extends TableFormTextBoxFieldView {
     getStyle(row) {
         const value = this.getCtrl().getModel().getValue(row);
-        let color = null;
+        let color = undefined;
         if (value === 'alex') {
             color = 'red';
         }
