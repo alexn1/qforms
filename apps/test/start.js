@@ -1,6 +1,6 @@
 const { BackHostApp, BkHelper } = require('../../dist');
 
-require('./public/js/app');
+require('./public/js/TestApplicationController');
 
 async function start(...argv) {
     console.debug('start');
