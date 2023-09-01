@@ -27,28 +27,28 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "host",
-                        "value": "localhost"
+                        "value": "\"localhost\""
                     }
                 },
                 {
                     "@class": "Param",
                     "@attributes": {
                         "name": "database",
-                        "value": "sample"
+                        "value": "\"sample\""
                     }
                 },
                 {
                     "@class": "Param",
                     "@attributes": {
                         "name": "user",
-                        "value": "root"
+                        "value": "\"root\""
                     }
                 },
                 {
                     "@class": "Param",
                     "@attributes": {
                         "name": "password",
-                        "value": "example"
+                        "value": "\"example\""
                     }
                 }
             ],
