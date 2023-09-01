@@ -12,7 +12,7 @@
         "cssBlock": "",
         "viewClass": "",
         "ctrlClass": "TestApplicationController",
-        "modelClass": ""
+        "modelClass": "TestBkApplication"
     },
     "env": {},
     "databases": [],
