@@ -26,7 +26,7 @@
                 "editMethod": "form",
                 "itemEditPage": "Person",
                 "itemCreatePage": "",
-                "newRowMode": "disabled",
+                "newRowMode": "editform",
                 "deleteRowMode": "disabled",
                 "refreshButton": "true"
             },
