@@ -19,3 +19,6 @@ module.exports['build-prod'] = require('./gulp/build-prod');
 // docker
 module.exports['docker-build'] = require('./gulp/docker-build');
 module.exports['docker-run'] = require('./gulp/docker-run');
+
+// convert
+module.exports['convert'] = require('./gulp/convert');
