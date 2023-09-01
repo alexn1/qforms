@@ -10,6 +10,7 @@
         "build": "npx gulp build-dev",
         "start": "NODE_ENV=development node dist/start.js",
         "start:test": "NODE_ENV=development node apps/test/start.js port=7001",
+        "start:test:nodemon": "NODE_ENV=development nodemon --watch apps/test apps/test/start.js port=7001",
         "start:apps": "NODE_ENV=development QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js",
         "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/start.js",
         "webpack-back-index": "NODE_ENV=development webpack --config webpack.config.back.index.js",
