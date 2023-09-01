@@ -40039,6 +40039,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.Model
         return false;
     }
 }
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(PageController);
 
 
 /***/ }),

@@ -287,3 +287,5 @@ export class PageController<
         return false;
     }
 }
+
+Helper.registerGlobalClass(PageController);
