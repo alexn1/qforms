@@ -134,7 +134,7 @@
                         "visible": "true",
                         "type": "",
                         "width": "",
-                        "cssBlock": "",
+                        "cssBlock": "TableFormTextBoxFieldView",
                         "viewClass": "PersonsPersonsFirstNameTableFormTextBoxFieldView",
                         "ctrlClass": "",
                         "autoFocus": "false",
