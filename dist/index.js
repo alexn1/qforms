@@ -16393,6 +16393,7 @@ common_1.Helper.registerGlobalClass(TableFormTextBoxFieldController);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFormTextBoxFieldView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 const TableFormFieldView_1 = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
 __webpack_require__(/*! ./TableFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less");
 class TableFormTextBoxFieldView extends TableFormFieldView_1.TableFormFieldView {
@@ -16403,6 +16404,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView_1.TableFormFieldView 
     }
 }
 exports.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+common_1.Helper.registerGlobalClass(TableFormTextBoxFieldView);
 
 
 /***/ }),

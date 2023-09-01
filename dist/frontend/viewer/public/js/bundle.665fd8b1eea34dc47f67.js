@@ -38852,18 +38852,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormTextBoxFieldView": () => (/* binding */ TableFormTextBoxFieldView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
-/* harmony import */ var _TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TableFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TableFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less");
 
 
 
-class TableFormTextBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+
+class TableFormTextBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_2__.TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(TableFormTextBoxFieldView);
 
 
 /***/ }),

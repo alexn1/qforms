@@ -1,3 +1,4 @@
+import { Helper } from '../../../../../../common';
 import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormTextBoxFieldController } from './TableFormTextBoxFieldController';
 
@@ -16,3 +17,5 @@ export class TableFormTextBoxFieldView extends TableFormFieldView<TableFormTextB
         );
     }
 }
+
+Helper.registerGlobalClass(TableFormTextBoxFieldView);

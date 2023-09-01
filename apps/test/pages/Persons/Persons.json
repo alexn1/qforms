@@ -135,7 +135,7 @@
                         "type": "",
                         "width": "",
                         "cssBlock": "",
-                        "viewClass": "",
+                        "viewClass": "PersonsPersonsFirstNameTableFormTextBoxFieldView",
                         "ctrlClass": "",
                         "autoFocus": "false",
                         "readOnly": "false",
