@@ -8,9 +8,9 @@
     ],
     "scripts": {
         "build": "npx gulp build-dev",
-        "start": "NODE_ENV=development LISTEN_PORT=7001 node dist/start.js",
+        "start": "NODE_ENV=development node dist/start.js",
+        "start:test": "NODE_ENV=development node apps/test/start.js",
         "start:apps": "NODE_ENV=development QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps node dist/start.js",
-        "start:test": "NODE_ENV=development node apps/test/start.js port=7001",
         "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/start.js",
         "webpack-back-index": "NODE_ENV=development webpack --config webpack.config.back.index.js",
         "webpack-back-start": "NODE_ENV=development webpack --config webpack.config.back.start.js",
