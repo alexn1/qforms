@@ -39805,19 +39805,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PageController": () => (/* binding */ PageController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
-/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
-/* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
-/* harmony import */ var _PageView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
+/* harmony import */ var _PageView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
 
 
 
 
 
 
-class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+
+class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.ModelController {
     constructor(model, parent, id) {
         super(model, parent);
         this.forms = [];
@@ -39878,7 +39880,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     static create(model, parent, id, options = null) {
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
+            const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent, id, options);
@@ -39887,7 +39889,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     init() {
         for (const form of this.getModel().forms) {
-            const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__.FormController.create(form, this);
+            const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_3__.FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
         }
@@ -39902,7 +39904,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     createOpenInNewLink(pageName, key) {
         return this.getApp()
             .getHostApp()
-            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
+            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
     }
     async close() {
         const changed = this.isChanged();
@@ -39920,7 +39922,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     validate() {
         for (const form of this.forms) {
-            if (form instanceof _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__.RowFormController) {
+            if (form instanceof _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__.RowFormController) {
                 form.validate();
             }
         }
@@ -39975,7 +39977,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return this.getParent();
     }
     getViewClass() {
-        return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_5__.PageView;
+        return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_6__.PageView;
     }
     findForm(name) {
         return this.forms.find((form) => form.getModel().getName() === name);
@@ -39989,19 +39991,17 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async onActionClick(name) {
         console.debug('PageController.onActionClick', name);
     }
+    getKeyPart(key) {
+        const arr = (0,_types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple)(key);
+        if (arr.length === 1 && typeof arr[0] === 'number') {
+            return `#${arr[0]}`;
+        }
+        return `${key}`;
+    }
     getTitle() {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart = null;
-        if (key) {
-            const arr = JSON.parse(key);
-            if (arr.length === 1 && typeof arr[0] === 'number') {
-                keyPart = `#${arr[0]}`;
-            }
-            else {
-                keyPart = `${key}`;
-            }
-        }
+        const keyPart = key ? this.getKeyPart(key) : null;
         return [
             model.getCaption(),
             ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
