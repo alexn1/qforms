@@ -1,0 +1,173 @@
+{
+    "@class": "Page",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "Person",
+        "caption": "Person",
+        "cssBlock": "",
+        "viewClass": "",
+        "ctrlClass": "",
+        "modelClass": "",
+        "formInTab": "false"
+    },
+    "dataSources": [],
+    "actions": [],
+    "forms": [
+        {
+            "@class": "RowForm",
+            "@attributes": {
+                "name": "Person",
+                "caption": "Person",
+                "visible": "true",
+                "cssBlock": "",
+                "viewClass": "",
+                "ctrlClass": "",
+                "modelClass": "",
+                "newMode": "",
+                "backOnly": "false",
+                "refreshButton": "true"
+            },
+            "dataSources": [
+                {
+                    "@class": "SqlDataSource",
+                    "@attributes": {
+                        "name": "default",
+                        "database": "default",
+                        "table": "person",
+                        "modelClass": "",
+                        "singleQuery": "select\n    \"id\",\n    \"created\",\n    \"updated\",\n    \"first_name\",\n    \"last_name\"\nfrom \"person\"\nwhere id = {key}",
+                        "multipleQuery": "select\n    \"id\",\n    \"created\",\n    \"updated\",\n    \"first_name\",\n    \"last_name\"\nfrom \"person\"\norder by \"id\"\nlimit {limit}\noffset {offset}",
+                        "countQuery": "select count(*) from \"person\"",
+                        "limit": ""
+                    },
+                    "keyColumns": []
+                }
+            ],
+            "actions": [],
+            "fields": [
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "id",
+                        "caption": "id",
+                        "column": "id",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "true",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                },
+                {
+                    "@class": "DateField",
+                    "@attributes": {
+                        "name": "created",
+                        "caption": "created",
+                        "column": "created",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "format": "{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}",
+                        "timezone": "true",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false"
+                    }
+                },
+                {
+                    "@class": "DateField",
+                    "@attributes": {
+                        "name": "updated",
+                        "caption": "updated",
+                        "column": "updated",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "format": "{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}",
+                        "timezone": "true",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false"
+                    }
+                },
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "first_name",
+                        "caption": "first_name",
+                        "column": "first_name",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                },
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "last_name",
+                        "caption": "last_name",
+                        "column": "last_name",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                }
+            ]
+        }
+    ]
+}

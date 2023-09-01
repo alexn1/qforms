@@ -15,17 +15,134 @@
         "modelClass": "TestBkApplication"
     },
     "env": {},
-    "databases": [],
+    "databases": [
+        {
+            "@class": "PostgreSqlDatabase",
+            "@attributes": {
+                "name": "default",
+                "modelClass": ""
+            },
+            "params": [
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "\"localhost\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "\"demo\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "\"postgres\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "\"example\""
+                    }
+                }
+            ],
+            "tables": [
+                {
+                    "@class": "Table",
+                    "@attributes": {
+                        "name": "person"
+                    },
+                    "columns": [
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "id",
+                                "caption": "id",
+                                "type": "number",
+                                "dbType": "integer",
+                                "key": "true",
+                                "auto": "true",
+                                "nullable": "false"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "created",
+                                "caption": "created",
+                                "type": "date",
+                                "dbType": "timestamp with time zone",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "updated",
+                                "caption": "updated",
+                                "type": "date",
+                                "dbType": "timestamp with time zone",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "first_name",
+                                "caption": "first_name",
+                                "type": "string",
+                                "dbType": "character varying",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "last_name",
+                                "caption": "last_name",
+                                "type": "string",
+                                "dbType": "character varying",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "dataSources": [],
     "actions": [],
     "pageLinks": [
         {
             "@class": "PageLink",
             "@attributes": {
-                "name": "Page1",
-                "fileName": "pages/Page1/Page1.json",
+                "name": "Persons",
+                "fileName": "pages/Persons/Persons.json",
                 "menu": "Pages",
                 "startup": "true"
+            }
+        },
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Person",
+                "fileName": "pages/Person/Person.json",
+                "menu": "",
+                "startup": "false"
             }
         }
     ]
