@@ -18,7 +18,6 @@ import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
-import { RequestBody } from '../../types';
 
 const pkg = require('../../../package.json');
 
@@ -33,11 +32,11 @@ export {
 
 // post actions
 const ACTIONS = [
+    'insert', // insert     create
+    'select', // select     read
+    'update', // update     update
+    '_delete', // delete    delete
     'page',
-    'select', // select
-    'insert', // insert
-    'update', // update
-    '_delete', // delete
     'rpc',
     'logout',
     'test',

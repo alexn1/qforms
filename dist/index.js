@@ -8788,11 +8788,11 @@ Object.defineProperty(exports, "TextBoxField", ({ enumerable: true, get: functio
 Object.defineProperty(exports, "TableFormTextBoxFieldController", ({ enumerable: true, get: function () { return viewer_1.TableFormTextBoxFieldController; } }));
 Object.defineProperty(exports, "RowForm", ({ enumerable: true, get: function () { return viewer_1.RowForm; } }));
 const ACTIONS = [
-    'page',
-    'select',
     'insert',
+    'select',
     'update',
     '_delete',
+    'page',
     'rpc',
     'logout',
     'test',
