@@ -3,5 +3,5 @@ export type Reject = (reason?: any) => void;
 export declare class EmptyPromise<T = any> extends Promise<T> {
     resolve: Resolve<T>;
     reject: Reject;
-    constructor();
+    static create<T = any>(): EmptyPromise<T>;
 }

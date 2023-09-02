@@ -943,7 +943,7 @@ class BackHostApp {
         }
         if (Array.isArray(this.createAppQueue[route])) {
             (0, console_1.debug)('application is creating:', route);
-            const promise = new EmptyPromise_1.EmptyPromise();
+            const promise = EmptyPromise_1.EmptyPromise.create();
             this.createAppQueue[route].push(promise);
             return promise;
         }
@@ -2213,11 +2213,16 @@ exports.Converter = Converter;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EmptyPromise = void 0;
 class EmptyPromise extends Promise {
-    constructor() {
-        super((resolve, reject) => {
-            this.resolve = resolve;
-            this.reject = reject;
+    static create() {
+        let _resolve;
+        let _reject;
+        const emptyPromise = new EmptyPromise((resolve, reject) => {
+            _resolve = resolve;
+            _reject = reject;
         });
+        emptyPromise.resolve = _resolve;
+        emptyPromise.reject = _reject;
+        return emptyPromise;
     }
 }
 exports.EmptyPromise = EmptyPromise;

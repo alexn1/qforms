@@ -326,7 +326,7 @@ export class BackHostApp {
         // if creating application
         if (Array.isArray(this.createAppQueue[route])) {
             debug('application is creating:', route);
-            const promise = new EmptyPromise<BkApplication>();
+            const promise = EmptyPromise.create<BkApplication>();
             this.createAppQueue[route]!.push(promise);
             return promise;
         }
