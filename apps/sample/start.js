@@ -1,8 +1,8 @@
 const { BackHostApp, BkHelper } = require('../../dist');
 
-require('./TestBkApplication');
+require('./SampleBkApplication');
 
-require('./public/js/TestApplicationController');
+require('./public/js/SampleApplicationController');
 require('./public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView');
 
 async function start(...argv) {

@@ -2,8 +2,8 @@
     "@class": "Application",
     "@attributes": {
         "formatVersion": "0.1",
-        "name": "test",
-        "caption": "test",
+        "name": "sample",
+        "caption": "sample",
         "authentication": "false",
         "user": "admin",
         "password": "admin",
@@ -11,8 +11,8 @@
         "theme": "standard",
         "cssBlock": "",
         "viewClass": "",
-        "ctrlClass": "TestApplicationController",
-        "modelClass": "TestBkApplication"
+        "ctrlClass": "SampleApplicationController",
+        "modelClass": "SampleBkApplication"
     },
     "env": {},
     "databases": [
