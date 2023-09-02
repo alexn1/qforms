@@ -314,16 +314,12 @@ export class BackHostApp {
     }
 
     // создание приложения длительный процесс, если во время создания приложения
-    // будет вызвара createApplicationIfNotExists, то её будет возвращён пустой промис
+    // будет вызвара createApplicationIfNotExists, то ей будет возвращён пустой промис
     async createApplicationIfNotExists(context: Context): Promise<BkApplication> {
         // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const route = context.getRoute();
         const application = this.applications[route];
         if (application) {
-            /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
-                await application.deinit();
-                return this.applications[route] = await this.createApplication(context);
-            } */
             return application;
         }
 
