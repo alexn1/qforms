@@ -80,7 +80,7 @@ export class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    createAppQueue: { [route: string]: EmptyPromise[] | null } = {};
+    createAppQueue: { [route: string]: Nullable<Array<EmptyPromise<BkApplication>>> } = {};
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
@@ -326,7 +326,7 @@ export class BackHostApp {
         // if creating application
         if (Array.isArray(this.createAppQueue[route])) {
             debug('application is creating:', route);
-            const promise = EmptyPromise.create();
+            const promise = new EmptyPromise<BkApplication>();
             this.createAppQueue[route]!.push(promise);
             return promise;
         }
