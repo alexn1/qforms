@@ -2214,14 +2214,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EmptyPromise = void 0;
 class EmptyPromise extends Promise {
     static create() {
-        let _resolve, _reject;
-        const promise = new EmptyPromise(function (resolve, reject) {
+        let _resolve;
+        let _reject;
+        const emptyPromise = new EmptyPromise((resolve, reject) => {
             _resolve = resolve;
             _reject = reject;
         });
-        promise.resolve = _resolve;
-        promise.reject = _reject;
-        return promise;
+        emptyPromise.resolve = _resolve;
+        emptyPromise.reject = _reject;
+        return emptyPromise;
     }
 }
 exports.EmptyPromise = EmptyPromise;

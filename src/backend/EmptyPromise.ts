@@ -1,21 +1,19 @@
-import { Nullable } from '../types';
-
 export type Resolve<T = any> = (value: T | PromiseLike<T>) => void;
 export type Reject = (reason?: any) => void;
 
 export class EmptyPromise<T = any> extends Promise<T> {
-    resolve: Nullable<Resolve<T>>;
-    reject: Nullable<Reject>;
+    resolve: Resolve<T>;
+    reject: Reject;
 
     static create<T = any>(): EmptyPromise<T> {
-        let _resolve: Nullable<Resolve<T>> = null;
-        let _reject: Nullable<Reject> = null;
+        let _resolve: Resolve<T>;
+        let _reject: Reject;
         const emptyPromise = new EmptyPromise<T>((resolve, reject) => {
             _resolve = resolve;
             _reject = reject;
         });
-        emptyPromise.resolve = _resolve;
-        emptyPromise.reject = _reject;
+        emptyPromise.resolve = _resolve!;
+        emptyPromise.reject = _reject!;
         return emptyPromise;
     }
 }
