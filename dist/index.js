@@ -5793,8 +5793,9 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async fillPages(context) {
         const pages = [];
-        if (context.query.page) {
-            const page = await this.getPage(context, context.query.page);
+        const pageLinkName = context.query.page;
+        if (pageLinkName) {
+            const page = await this.getPage(context, pageLinkName);
             const response = await page.fill(context);
             pages.push(response);
         }

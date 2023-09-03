@@ -29,6 +29,7 @@ import { ActionData } from '../../../../common/ModelData/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link } from '../../../../types';
+import { PageData } from '../../../../common/ModelData/PageData';
 
 const pkg = require('../../../../../package.json');
 
@@ -284,9 +285,10 @@ export class BkApplication<
 
     async fillPages(context: Context): Promise<any[]> {
         // debug('Application.fillPages', context.query.page);
-        const pages: any[] = [];
-        if (context.query.page) {
-            const page = await this.getPage(context, context.query.page);
+        const pages: PageData[] = [];
+        const pageLinkName: string = context.query.page;
+        if (pageLinkName) {
+            const page = await this.getPage(context, pageLinkName);
             const response = await page.fill(context);
             pages.push(response);
         } else {
@@ -386,21 +388,21 @@ export class BkApplication<
         };
     }
 
-    static async loadAppInfo(appFilePath: string/* , distDirPath?: string */): Promise<AppInfo> {
-        debug('Application.loadAppInfo', appFilePath/* , distDirPath */);
+    static async loadAppInfo(appFilePath: string /* , distDirPath?: string */): Promise<AppInfo> {
+        debug('Application.loadAppInfo', appFilePath /* , distDirPath */);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile/* , distDirPath */);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile /* , distDirPath */);
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath: string/* , distDirPath?: string */): Promise<AppInfo[]> {
+    static async getAppInfos(appsDirPath: string /* , distDirPath?: string */): Promise<AppInfo[]> {
         // debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await BkApplication.loadAppInfo(appFilePath/* , distDirPath */);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath /* , distDirPath */);
             if (appInfo) {
                 appInfos.push(appInfo);
             }
