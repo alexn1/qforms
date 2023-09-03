@@ -7,8 +7,8 @@ class SampleBackHostApp extends BackHostApp {
             ['viewer', 'sample', 'sample', 'local', 'localhost'],
             {
                 page: 'Page1',
-                0: null, // id
-                1: null, // some words and numbers seprated by minus
+                id: '0', // id
+                title: '1', // some words and numbers seprated by minus
             },
         );
     }

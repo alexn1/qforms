@@ -122,6 +122,7 @@ export declare class BackHostApp {
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
     alias(method: 'get' | 'post', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
+    static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;
     getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;

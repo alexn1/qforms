@@ -1376,18 +1376,22 @@ class BackHostApp {
                 req.params.domain = domain;
             }
             if (query) {
-                for (const name in query) {
-                    const value = query[name];
-                    if (value === null) {
-                        req.query[name] = req.params[name];
-                    }
-                    else {
-                        req.query[name] = req.params[value] || value;
-                    }
-                }
+                Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
             }
             await this[cb](req, res, next);
         });
+    }
+    static getQueryFromParams(req, query) {
+        return Object.keys(query).reduce((acc, name) => {
+            const value = query[name];
+            if (value === null) {
+                acc[name] = req.params[name];
+            }
+            else {
+                acc[name] = req.params[value] || value;
+            }
+            return acc;
+        }, {});
     }
     getPostAlias(path, route, query) {
         this.alias('get', path, route, 'moduleGet', query);
@@ -8824,7 +8828,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        pConsole_1.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().params, context.getReq().url, context.query);
+        pConsole_1.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.query);
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
             !(req.session.user && req.session.user[context.getRoute()])) {

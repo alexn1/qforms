@@ -886,19 +886,27 @@ export class BackHostApp {
                 req.params.domain = domain;
             }
             if (query) {
-                for (const name in query) {
-                    const value = query[name];
-                    if (value === null) {
-                        req.query[name] = req.params[name];
-                    } else {
-                        // @ts-ignore
-                        req.query[name] = req.params[value] || value;
-                    }
-                }
+                Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
             }
             // @ts-ignore
             await this[cb](req, res, next);
         });
+    }
+
+    static getQueryFromParams(
+        req: Request,
+        query: Record<string, Nullable<Scalar>>,
+    ): Record<string, any> {
+        return Object.keys(query).reduce((acc, name) => {
+            const value = query[name];
+            if (value === null) {
+                acc[name] = req.params[name];
+            } else {
+                // @ts-ignore
+                acc[name] = req.params[value] || value;
+            }
+            return acc;
+        }, {} as Record<string, any>);
     }
 
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void {

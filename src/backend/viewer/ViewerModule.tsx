@@ -80,8 +80,8 @@ export class ViewerModule {
         pConsole.debug(
             'ViewerModule.handleGet',
             context.getDomain(),
-            context.getReq()!.params,
             context.getReq()!.url,
+            context.getReq()!.params,
             context.query,
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
