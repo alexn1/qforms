@@ -1,14 +1,14 @@
-const { BackHostApp, BkHelper } = require('../../dist');
+const { BkHelper } = require('../../dist');
+const { SampleBackHostApp } = require('./SampleBackHostApp');
 
 require('./SampleBkApplication');
-
 require('./public/js/SampleApplicationController');
 require('./public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView');
 
 async function start(...argv) {
     console.debug('start');
     try {
-        const backHostApp = new BackHostApp({
+        const backHostApp = new SampleBackHostApp({
             ...BkHelper.argvAsKeyValue(argv),
         });
         await backHostApp.init();

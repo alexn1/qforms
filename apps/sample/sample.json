@@ -144,6 +144,15 @@
                 "menu": "",
                 "startup": "false"
             }
+        },
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Page1",
+                "fileName": "pages/Page1/Page1.json",
+                "menu": "Pages",
+                "startup": "false"
+            }
         }
     ]
 }

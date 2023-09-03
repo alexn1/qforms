@@ -18,6 +18,7 @@ import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
+import { pConsole } from '../../pConsole';
 
 const pkg = require('../../../package.json');
 
@@ -76,11 +77,12 @@ export class ViewerModule {
     }
 
     async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {
-        debug(
+        pConsole.debug(
             'ViewerModule.handleGet',
             context.getDomain(),
-            context.query,
+            context.getReq()!.params,
             context.getReq()!.url,
+            context.query,
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
 
