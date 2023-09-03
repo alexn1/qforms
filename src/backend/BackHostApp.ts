@@ -870,7 +870,7 @@ export class BackHostApp {
 
     alias(
         method: 'get' | 'post',
-        path: string,
+        path: string | RegExp,
         [module, appDirName, appFileName, env, domain]: Route,
         cb: string,
         query?: Record<string, Scalar | null>,
@@ -887,8 +887,13 @@ export class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    // @ts-ignore
-                    req.query[name] = query[name] ? query[name] : req.params[name];
+                    const value = query[name];
+                    if (value === null) {
+                        req.query[name] = req.params[name];
+                    } else {
+                        // @ts-ignore
+                        req.query[name] = req.params[value] || value;
+                    }
                 }
             }
             // @ts-ignore
@@ -896,7 +901,7 @@ export class BackHostApp {
         });
     }
 
-    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>): void {
+    getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void {
         this.alias('get', path, route, 'moduleGet', query);
         this.alias('post', path, route, 'modulePost', query);
     }

@@ -1377,7 +1377,13 @@ class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    req.query[name] = query[name] ? query[name] : req.params[name];
+                    const value = query[name];
+                    if (value === null) {
+                        req.query[name] = req.params[name];
+                    }
+                    else {
+                        req.query[name] = req.params[value] || value;
+                    }
                 }
             }
             await this[cb](req, res, next);

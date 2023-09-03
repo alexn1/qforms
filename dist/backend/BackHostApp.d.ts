@@ -121,8 +121,8 @@ export declare class BackHostApp {
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
-    alias(method: 'get' | 'post', path: string, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
-    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>): void;
+    alias(method: 'get' | 'post', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
+    getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;
     getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;
     isProduction(): boolean;
