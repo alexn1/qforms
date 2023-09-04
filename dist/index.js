@@ -6361,7 +6361,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             response.count = 0;
             return response;
         }
-        if (this.getLimit()) {
+        if (this.getLimit() && !context.params.frame) {
             context.params.frame = 1;
         }
         try {
@@ -6624,7 +6624,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             response.count = 0;
             return response;
         }
-        if (this.getLimit()) {
+        if (this.getLimit() && !context.params.frame) {
             context.params.frame = 1;
         }
         try {

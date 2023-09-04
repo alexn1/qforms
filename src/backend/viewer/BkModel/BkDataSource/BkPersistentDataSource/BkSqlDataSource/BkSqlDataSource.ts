@@ -28,7 +28,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
             return response;
         }
 
-        if (this.getLimit()) {
+        if (this.getLimit() && !context.params.frame) {
             context.params.frame = 1;
         }
 

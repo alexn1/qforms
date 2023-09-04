@@ -39,7 +39,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             return response;
         }
 
-        if (this.getLimit()) {
+        if (this.getLimit() && !context.params.frame) {
             context.params.frame = 1;
         }
 
