@@ -5791,20 +5791,20 @@ class BkApplication extends BkModel_1.BkModel {
             .filter((data) => BaseModel_1.BaseModel.getAttr(data, 'startup') === 'true')
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
-    async fillPages(context) {
-        const pages = [];
+    getPageLinksToFill(context) {
         const pageLinkName = context.query.page;
         if (pageLinkName) {
+            return [pageLinkName];
+        }
+        return this.getStartupPageLinkNames();
+    }
+    async fillPages(context) {
+        const pages = [];
+        const pageLinksNames = this.getPageLinksToFill(context);
+        for (const pageLinkName of pageLinksNames) {
             const page = await this.getPage(context, pageLinkName);
             const response = await page.fill(context);
             pages.push(response);
-        }
-        else {
-            for (const pageLinkName of this.getStartupPageLinkNames()) {
-                const page = await this.getPage(context, pageLinkName);
-                const response = await page.fill(context);
-                pages.push(response);
-            }
         }
         return pages;
     }

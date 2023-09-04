@@ -15,6 +15,7 @@ import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { Link } from '../../../../types';
+import { PageData } from '../../../../common/ModelData/PageData';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {
     private appInfo;
     private hostApp;
@@ -49,7 +50,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     authorizePage(user: any, pageName: string): boolean;
     getPage(context: Context, pageLinkName: string): Promise<BkPage>;
     getStartupPageLinkNames(): string[];
-    fillPages(context: Context): Promise<any[]>;
+    getPageLinksToFill(context: Context): string[];
+    fillPages(context: Context): Promise<PageData[]>;
     authenticate(context: Context, username: string, password: string): Promise<any>;
     isAuthentication(): boolean;
     getUsers(context: Context): Promise<null>;
