@@ -46,7 +46,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getClientUserFromServerUser(context: Context): Promise<any>;
     createMenu(context: Context): Promise<void>;
     createPageLink(name: string): BkPageLink;
-    createPage(pageLinkName: string): Promise<BkPage>;
+    createPage(context: Context, pageLinkName: string): Promise<BkPage>;
     authorizePage(user: any, pageName: string): boolean;
     getPage(context: Context, pageLinkName: string): Promise<BkPage>;
     getStartupPageLinkNames(): string[];

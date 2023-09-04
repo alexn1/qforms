@@ -5760,7 +5760,7 @@ class BkApplication extends BkModel_1.BkModel {
         const data = this.getColItemData('pageLinks', name);
         return new BkPageLink_1.BkPageLink(data, this);
     }
-    async createPage(pageLinkName) {
+    async createPage(context, pageLinkName) {
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -5769,8 +5769,8 @@ class BkApplication extends BkModel_1.BkModel {
         const pageFilePath = path_1.default.join(this.getDirPath(), relFilePath);
         const content = await BkHelper_1.BkHelper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
-        const page = await this.createChildModel('pages', data);
-        await page.init();
+        const page = (await this.createChildModel('pages', data));
+        await page.init(context);
         return page;
     }
     authorizePage(user, pageName) {
@@ -5784,7 +5784,7 @@ class BkApplication extends BkModel_1.BkModel {
         if (this.pages[pageLinkName]) {
             return this.pages[pageLinkName];
         }
-        return (this.pages[pageLinkName] = await this.createPage(pageLinkName));
+        return (this.pages[pageLinkName] = await this.createPage(context, pageLinkName));
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')

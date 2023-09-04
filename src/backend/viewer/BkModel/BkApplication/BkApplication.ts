@@ -246,7 +246,7 @@ export class BkApplication<
         return new BkPageLink(data, this);
     }
 
-    async createPage(pageLinkName: string): Promise<BkPage> {
+    async createPage(context: Context, pageLinkName: string): Promise<BkPage> {
         // debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
@@ -256,8 +256,8 @@ export class BkApplication<
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await BkHelper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
-        const page = await this.createChildModel('pages', data);
-        await page.init();
+        const page = (await this.createChildModel('pages', data)) as BkPage;
+        await page.init(context);
         return page;
     }
 
@@ -274,7 +274,7 @@ export class BkApplication<
         if (this.pages[pageLinkName]) {
             return this.pages[pageLinkName];
         }
-        return (this.pages[pageLinkName] = await this.createPage(pageLinkName));
+        return (this.pages[pageLinkName] = await this.createPage(context, pageLinkName));
     }
 
     getStartupPageLinkNames(): string[] {
