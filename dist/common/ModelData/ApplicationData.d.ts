@@ -34,7 +34,7 @@ export interface ApplicationData extends ModelData {
     text: any;
     menu: Record<string, MenuItem[]>;
     nav: any;
-    params: {
+    params?: {
         [name: string]: any;
     };
     databases: DatabaseData[];

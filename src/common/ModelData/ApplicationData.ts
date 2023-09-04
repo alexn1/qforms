@@ -39,7 +39,7 @@ export interface ApplicationData extends ModelData {
     menu: Record<string, MenuItem[]>;
     nav: any;
 
-    params: {
+    params?: {
         [name: string]: any;
     };
 
