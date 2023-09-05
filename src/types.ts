@@ -65,3 +65,10 @@ export interface Link {
     href: string;
     rel: string;
 }
+
+export interface Access {
+    create: boolean;
+    read: boolean;
+    update: boolean;
+    delete: boolean;
+}

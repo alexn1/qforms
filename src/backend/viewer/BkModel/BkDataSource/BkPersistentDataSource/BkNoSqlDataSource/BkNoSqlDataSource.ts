@@ -39,8 +39,8 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             return response;
         }
 
-        if (this.getLimit() && !context.params.frame) {
-            context.params.frame = 1;
+        if (this.getLimit() && !context.getParam('frame')) {
+            context.setParam('frame', 1);
         }
 
         try {
@@ -57,7 +57,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         }
 
         if (this.getLimit()) {
-            response.limit = context.params.limit;
+            response.limit = context.getParam('limit') as number;
         }
 
         return response;
@@ -71,8 +71,9 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         // rows
         const limit = this.getLimit();
         if (limit) {
-            if (!context.params.frame) throw new Error('no frame param');
-            context.setParam('skip', (context.params.frame - 1) * limit);
+            const frame = context.getParam('frame') as number;
+            if (!frame) throw new Error('no frame param');
+            context.setParam('skip', (frame - 1) * limit);
             context.setParam('limit', limit);
         }
 
@@ -204,7 +205,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             throw new Error(`${this.getFullName()}: access denied`);
         }
 
-        const { key } = context.params as { key: Key };
+        const key = context.getParam('key') as Key;
         const filter = this.getKeyValuesFromKey(key);
         const deleteResult = await this.getDatabase().deleteOne(
             context,

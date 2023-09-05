@@ -25,7 +25,7 @@ export class Context {
     files: {
         [name: string]: any;
     } = {};
-    params: Record<string, any>;
+    private params: Record<string, any>;
     querytimeParams: Record<string, any> = {}; // for runtime query params
 
     constructor(public options: ContextOptions = {}) {
@@ -184,8 +184,16 @@ export class Context {
         }
     }
 
+    getParam(name: string): any {
+        return this.params[name];
+    }
+
     setParam(name: string, value: any): void {
         this.params[name] = value;
+    }
+
+    getParams(): Record<string, any> {
+        return this.params;
     }
 
     getAllParam(name: string): any {

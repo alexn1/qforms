@@ -136,7 +136,7 @@ export class EditorModule {
         await ctrl.init(context);
         const method = req.body!.action;
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
-        const result = await ctrl[method](context.params);
+        const result = await ctrl[method](context.getParams());
         // debug('json result:', result);
         if (result === undefined) throw new Error('handleEditorPost: result is undefined');
         res.json(result);

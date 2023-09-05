@@ -23,7 +23,7 @@ export declare class Context {
     files: {
         [name: string]: any;
     };
-    params: Record<string, any>;
+    private params;
     querytimeParams: Record<string, any>;
     constructor(options?: ContextOptions);
     getRoute(): string;
@@ -48,7 +48,9 @@ export declare class Context {
     getHost(): string;
     getProtocol(): string;
     setVersionHeaders(platformVersion: string, appVersion: Nullable<string>): void;
+    getParam(name: string): any;
     setParam(name: string, value: any): void;
+    getParams(): Record<string, any>;
     getAllParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;

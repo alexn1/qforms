@@ -4,10 +4,10 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
-import { Key, KeyRecord, Row, RawRow } from '../../../../types';
+import { Key, KeyRecord, Row, RawRow, Access, Nullable } from '../../../../types';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
-export type ReadResult = [RawRow[], number | null];
+export type ReadResult = [RawRow[], Nullable<number>];
 export declare class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[];
     rows: Row[];
@@ -46,12 +46,7 @@ export declare class BkDataSource extends BkModel<DataSourceScheme> {
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     getForm(): BkForm;
-    getAccess(context: Context): {
-        create: boolean;
-        read: boolean;
-        update: boolean;
-        delete: boolean;
-    };
+    getAccess(context: Context): Access;
     getDatabase(): BkDatabase;
     getLimit(): number | null;
 }

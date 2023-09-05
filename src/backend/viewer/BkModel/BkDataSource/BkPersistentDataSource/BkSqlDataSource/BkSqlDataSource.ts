@@ -4,7 +4,7 @@ import { BkHelper } from '../../../../../BkHelper';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
-import { Key } from '../../../../../../types';
+import { JSONString, Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 import { debug } from '../../../../../../console';
 
@@ -28,8 +28,8 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
             return response;
         }
 
-        if (this.getLimit() && !context.params.frame) {
-            context.params.frame = 1;
+        if (this.getLimit() && !context.getParam('frame')) {
+            context.setParam('frame', 1);
         }
 
         try {
@@ -46,7 +46,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         }
 
         if (this.getLimit()) {
-            response.limit = context.params.limit;
+            response.limit = context.getParam('limit') as number;
         }
 
         return response;
@@ -126,9 +126,10 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         // rows
         const limit = this.getLimit();
         if (limit) {
-            if (!context.params.frame) throw new Error('no frame param');
-            context.params.offset = (context.params.frame - 1) * limit;
-            context.params.limit = limit;
+            const frame = context.getParam('frame') as number;
+            if (!frame) throw new Error('no frame param');
+            context.setParam('offset', (frame - 1) * limit);
+            context.setParam('limit', limit);
         }
         const query = this.isDefaultOnRowForm()
             ? this.getSingleQuery(context)
@@ -252,7 +253,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
             throw new Error(`${this.getFullName()}: access denied`);
         }
 
-        const { key } = context.params;
+        const key = context.getParam('key') as Key;
         const keyValues = this.getKeyValuesFromKey(key);
         const database = this.getAttr('database');
         const table = this.getAttr('table');

@@ -2156,8 +2156,14 @@ class Context {
             this.getRes().setHeader('qforms-app-version', appVersion);
         }
     }
+    getParam(name) {
+        return this.params[name];
+    }
     setParam(name, value) {
         this.params[name] = value;
+    }
+    getParams() {
+        return this.params;
     }
     getAllParam(name) {
         const params = this.getAllParams();
@@ -5206,7 +5212,7 @@ class EditorModule {
         const method = req.body.action;
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
-        const result = await ctrl[method](context.params);
+        const result = await ctrl[method](context.getParams());
         if (result === undefined)
             throw new Error('handleEditorPost: result is undefined');
         res.json(result);
@@ -6374,8 +6380,8 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             response.count = 0;
             return response;
         }
-        if (this.getLimit() && !context.params.frame) {
-            context.params.frame = 1;
+        if (this.getLimit() && !context.getParam('frame')) {
+            context.setParam('frame', 1);
         }
         try {
             const [rows, count] = await this.read(context);
@@ -6390,7 +6396,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
         }
         if (this.getLimit()) {
-            response.limit = context.params.limit;
+            response.limit = context.getParam('limit');
         }
         return response;
     }
@@ -6400,9 +6406,10 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         }
         const limit = this.getLimit();
         if (limit) {
-            if (!context.params.frame)
+            const frame = context.getParam('frame');
+            if (!frame)
                 throw new Error('no frame param');
-            context.setParam('skip', (context.params.frame - 1) * limit);
+            context.setParam('skip', (frame - 1) * limit);
             context.setParam('limit', limit);
         }
         const start = Date.now();
@@ -6489,7 +6496,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (this.getAccess(context).delete !== true) {
             throw new Error(`${this.getFullName()}: access denied`);
         }
-        const { key } = context.params;
+        const key = context.getParam('key');
         const filter = this.getKeyValuesFromKey(key);
         const deleteResult = await this.getDatabase().deleteOne(context, this.getAttr('table'), filter);
         (0, console_1.debug)('updateResult', deleteResult);
@@ -6637,8 +6644,8 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             response.count = 0;
             return response;
         }
-        if (this.getLimit() && !context.params.frame) {
-            context.params.frame = 1;
+        if (this.getLimit() && !context.getParam('frame')) {
+            context.setParam('frame', 1);
         }
         try {
             const [rows, count] = await this.read(context);
@@ -6653,7 +6660,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
         }
         if (this.getLimit()) {
-            response.limit = context.params.limit;
+            response.limit = context.getParam('limit');
         }
         return response;
     }
@@ -6710,10 +6717,11 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         }
         const limit = this.getLimit();
         if (limit) {
-            if (!context.params.frame)
+            const frame = context.getParam('frame');
+            if (!frame)
                 throw new Error('no frame param');
-            context.params.offset = (context.params.frame - 1) * limit;
-            context.params.limit = limit;
+            context.setParam('offset', (frame - 1) * limit);
+            context.setParam('limit', limit);
         }
         const query = this.isDefaultOnRowForm()
             ? this.getSingleQuery(context)
@@ -6803,7 +6811,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (this.getAccess(context).delete !== true) {
             throw new Error(`${this.getFullName()}: access denied`);
         }
-        const { key } = context.params;
+        const key = context.getParam('key');
         const keyValues = this.getKeyValuesFromKey(key);
         const database = this.getAttr('database');
         const table = this.getAttr('table');

@@ -10,12 +10,12 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
-import { Key, KeyRecord, Row, KeyTuple, RawRow } from '../../../../types';
+import { Key, KeyRecord, Row, KeyTuple, RawRow, Access, Nullable } from '../../../../types';
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 
-export type ReadResult = [RawRow[], number | null];
+export type ReadResult = [RawRow[], Nullable<number>];
 
 export class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[] = [];
@@ -309,12 +309,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
         return this.getParent();
     }
 
-    getAccess(context: Context): {
-        create: boolean;
-        read: boolean;
-        update: boolean;
-        delete: boolean;
-    } {
+    getAccess(context: Context): Access {
         return {
             create: true,
             read: true,
