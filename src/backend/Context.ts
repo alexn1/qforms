@@ -5,7 +5,7 @@ import { ServerUser } from './viewer';
 
 export type RequestEx = Request & {
     session: any;
-    files: Record<string, any>;
+    // files: Record<string, any>;
 };
 
 export interface ContextOptions {
@@ -19,13 +19,16 @@ export interface ContextOptions {
 }
 
 export class Context {
+    private params: Record<string, any>;
+
     connections: {
         [name: string]: any;
     } = {};
-    files: {
+
+    /* files: {
         [name: string]: any;
-    } = {};
-    private params: Record<string, any>;
+    } = {}; */
+
     // querytimeParams: Record<string, any> = {}; // for runtime query params
 
     constructor(public options: ContextOptions = {}) {
@@ -39,11 +42,11 @@ export class Context {
         };
 
         // files
-        if (req && req.files) {
+        /* if (req && req.files) {
             for (const name in req.files) {
                 this.files[name] = req.files[name].buffer;
             }
-        }
+        } */
     }
 
     getRoute(): string {
@@ -88,9 +91,7 @@ export class Context {
     }
 
     getQuery(): ParsedQs {
-        const req = this.getReq();
-        if (!req) throw new Error('context: no req');
-        return req.query;
+        return this.getReq()?.query || {};
     }
 
     getAllParams(): Record<string, any> {
@@ -119,7 +120,7 @@ export class Context {
 
     getBody(): RequestBody {
         const req = this.getReq();
-        if (!req) throw new Error('getBody: not request');
+        if (!req) throw new Error('getBody: no req');
         return req.body;
     }
 

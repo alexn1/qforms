@@ -4,7 +4,6 @@ import { Nullable, Optional, RequestBody } from '../types';
 import { ServerUser } from './viewer';
 export type RequestEx = Request & {
     session: any;
-    files: Record<string, any>;
 };
 export interface ContextOptions {
     domain?: Nullable<string>;
@@ -17,13 +16,10 @@ export interface ContextOptions {
 }
 export declare class Context {
     options: ContextOptions;
+    private params;
     connections: {
         [name: string]: any;
     };
-    files: {
-        [name: string]: any;
-    };
-    private params;
     constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;

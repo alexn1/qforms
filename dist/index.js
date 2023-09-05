@@ -2035,14 +2035,8 @@ class Context {
     constructor(options = {}) {
         this.options = options;
         this.connections = {};
-        this.files = {};
         const req = this.getReq();
         this.params = Object.assign({}, (req && req.body.params ? req.body.params : {}));
-        if (req && req.files) {
-            for (const name in req.files) {
-                this.files[name] = req.files[name].buffer;
-            }
-        }
     }
     getRoute() {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -2080,10 +2074,8 @@ class Context {
         return this.getReq().cookies || {};
     }
     getQuery() {
-        const req = this.getReq();
-        if (!req)
-            throw new Error('context: no req');
-        return req.query;
+        var _a;
+        return ((_a = this.getReq()) === null || _a === void 0 ? void 0 : _a.query) || {};
     }
     getAllParams() {
         const user = this.getUser();
@@ -2101,7 +2093,7 @@ class Context {
     getBody() {
         const req = this.getReq();
         if (!req)
-            throw new Error('getBody: not request');
+            throw new Error('getBody: no req');
         return req.body;
     }
     getModule() {
