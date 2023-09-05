@@ -1939,9 +1939,9 @@ class BkHelper {
         return argv
             .slice(slice)
             .map((arg) => arg.split('='))
-            .reduce((rec, [key, value]) => {
-            rec[key] = value;
-            return rec;
+            .reduce((record, [key, value]) => {
+            record[key] = value;
+            return record;
         }, {});
     }
     static getWebSocketIP(webSocket) {

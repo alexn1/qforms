@@ -479,9 +479,9 @@ export class BkHelper {
         return argv
             .slice(slice)
             .map((arg) => arg.split('='))
-            .reduce((rec, [key, value]) => {
-                rec[key] = value;
-                return rec;
+            .reduce((record: Record<string, string>, [key, value]: [string, string]) => {
+                record[key] = value;
+                return record;
             }, {} as Record<string, string>);
     }
 
@@ -521,11 +521,11 @@ export class BkHelper {
         return promise;
     } */
 
-    static formatNumber(value: number) {
+    static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 
-    static formatTime2(_sec: number) {
+    static formatTime2(_sec: number): string {
         // debug('BkHelper.formatTime', sec);
         let sec = _sec;
         let sign = '';
@@ -549,7 +549,7 @@ export class BkHelper {
         }
     }
 
-    static registerGlobalClass(Class: any) {
+    static registerGlobalClass(Class: any): void {
         // debug('BkHelper.registerGlobalClass', Class.name);
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
         global[Class.name] = Class;
@@ -564,7 +564,7 @@ export class BkHelper {
         return [contentType, buffer];
     }
 
-    static async post(url: string, data: any) {
+    static async post(url: string, data: any): Promise<any> {
         const response = await fetch(url, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
