@@ -68,7 +68,7 @@ export class BaseModel<TModelScheme extends ModelScheme = ModelScheme> {
         return arr;
     }
 
-    getItemNames(colName: string) {
+    getItemNames(colName: string): string[] {
         return this.getCol(colName).map((data: ModelScheme) => BaseModel.getName(data));
     }
 

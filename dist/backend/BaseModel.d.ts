@@ -17,7 +17,7 @@ export declare class BaseModel<TModelScheme extends ModelScheme = ModelScheme> {
     isData(colName: string, name: string): boolean;
     getData(): TModelScheme;
     getCol(name: string): any;
-    getItemNames(colName: string): any;
+    getItemNames(colName: string): string[];
     getColItemData(colName: string, name: string): any;
     removeColData(colName: string, name: string): any;
     static findColDataByName(col: any[], name: string): any;
