@@ -6,6 +6,7 @@ import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
+import { Optional } from '../../../../types';
 export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel<PageScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -16,8 +17,8 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     fill(context: Context): Promise<PageData>;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): TBkApplication;
-    findForm(name: string): BkForm | undefined;
+    findForm(name: string): Optional<BkForm>;
     getForm(name: string): BkForm;
-    findDataSource(name: string): BkDataSource | undefined;
+    findDataSource(name: string): Optional<BkDataSource>;
     getDataSource(name: string): BkDataSource;
 }

@@ -10,6 +10,7 @@ import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
+import { Optional } from '../../../../types';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -51,7 +52,7 @@ export class BkPage<
 
     async rpc(name: string, context: Context): Promise<any> {
         debug('BkPage.rpc', name, context.getBody());
-        if (this[name]) {
+        if ((this as any)[name]) {
             return await (this as any)[name](context);
         }
         throw new HttpError({
@@ -65,7 +66,7 @@ export class BkPage<
         return this.getParent();
     }
 
-    findForm(name: string): BkForm | undefined {
+    findForm(name: string): Optional<BkForm> {
         return this.forms.find((form) => form.getName() === name);
     }
 
@@ -75,7 +76,7 @@ export class BkPage<
         return form;
     }
 
-    findDataSource(name: string): BkDataSource | undefined {
+    findDataSource(name: string): Optional<BkDataSource> {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
