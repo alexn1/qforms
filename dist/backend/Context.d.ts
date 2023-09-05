@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RequestBody } from '../types';
+import { Nullable, Optional, RequestBody } from '../types';
 declare module 'express' {
     interface Request {
         session: any;
@@ -8,7 +8,7 @@ declare module 'express' {
     }
 }
 export interface ContextOptions {
-    domain?: string | null;
+    domain?: Nullable<string>;
     req?: Request;
     res?: Response;
     module?: string;
@@ -33,14 +33,12 @@ export declare class Context {
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): any;
-    getClientTimezoneOffset(): number | null;
-    getTimeOffset(): number | null;
-    getCookies(): {
-        [name: string]: string;
-    };
-    getQuery(): any;
+    getClientTimezoneOffset(): Nullable<number>;
+    getTimeOffset(): Nullable<number>;
+    getCookies(): Record<string, string>;
+    getQuery(): Record<string, any>;
     getParams(): Record<string, any>;
-    getReq(): Request | undefined;
+    getReq(): Optional<Request>;
     getRes(): Response;
     getBody(): RequestBody;
     getModule(): string;
@@ -52,7 +50,7 @@ export declare class Context {
     getIp(): string;
     getHost(): string;
     getProtocol(): string;
-    setVersionHeaders(platformVersion: string, appVersion: string | null): void;
+    setVersionHeaders(platformVersion: string, appVersion: Nullable<string>): void;
     setParam(name: string, value: any): void;
     getParam(name: string): any;
     isDebugMode(): boolean;

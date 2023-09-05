@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-
-import { debug } from '../console';
-import { RequestBody } from '../types';
+import { Nullable, Optional, RequestBody } from '../types';
 
 declare module 'express' {
     export interface Request {
@@ -12,7 +10,7 @@ declare module 'express' {
 }
 
 export interface ContextOptions {
-    domain?: string | null;
+    domain?: Nullable<string>;
     req?: Request;
     res?: Response;
     module?: string;
@@ -54,12 +52,6 @@ export class Context {
                 this.files[name] = this.getReq()!.files[name].buffer;
             }
         }
-
-        // connections
-        // this.connections = {};
-
-        // querytime
-        // this.querytime = { params: {} };
     }
 
     getRoute(): string {
@@ -78,7 +70,7 @@ export class Context {
         return null;
     }
 
-    getClientTimezoneOffset(): number | null {
+    getClientTimezoneOffset(): Nullable<number> {
         if (
             this.getReq()!.session.tzOffset !== undefined &&
             this.getReq()!.session.tzOffset !== null
@@ -88,7 +80,7 @@ export class Context {
         return null;
     }
 
-    getTimeOffset(): number | null {
+    getTimeOffset(): Nullable<number> {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
         if (clientTimezoneOffset !== null) {
             return new Date().getTimezoneOffset() - clientTimezoneOffset;
@@ -96,13 +88,13 @@ export class Context {
         return null;
     }
 
-    getCookies(): { [name: string]: string } {
+    getCookies(): Record<string, string> {
         return {
             ...(this.getReq() && this.getReq()!.cookies ? this.getReq()!.cookies : {}),
         };
     }
 
-    getQuery(): any {
+    getQuery(): Record<string, any> {
         return {
             ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
         };
@@ -122,7 +114,7 @@ export class Context {
         };
     }
 
-    getReq(): Request | undefined {
+    getReq(): Optional<Request> {
         // if (!this.options.req) throw new Error('getRes: no req');
         return this.options.req;
     }
@@ -190,7 +182,7 @@ export class Context {
         return this.getReq()!.headers['x-forwarded-proto'] || 'http';
     }
 
-    setVersionHeaders(platformVersion: string, appVersion: string | null): void {
+    setVersionHeaders(platformVersion: string, appVersion: Nullable<string>): void {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
         if (appVersion) {
             this.getRes().setHeader('qforms-app-version', appVersion);
