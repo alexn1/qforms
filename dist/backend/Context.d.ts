@@ -1,9 +1,11 @@
+/// <reference types="express-session" />
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
 import { ServerUser } from './viewer';
+import { Session } from './Session';
 export type RequestEx = Request & {
-    session: any;
+    session: Session;
 };
 export interface ContextOptions {
     domain?: Nullable<string>;
@@ -24,7 +26,7 @@ export declare class Context {
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): Nullable<ServerUser>;
-    getSession(): any;
+    getSession(): import("express-session").Session & Partial<import("express-session").SessionData> & Session;
     getClientTimezoneOffset(): Nullable<number>;
     getTimeOffset(): Nullable<number>;
     getCookies(): Record<string, string>;

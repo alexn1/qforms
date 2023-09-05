@@ -2,9 +2,10 @@ import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
 import { ServerUser } from './viewer';
+import { Session } from './Session';
 
 export type RequestEx = Request & {
-    session: any;
+    session: Session;
     // files: Record<string, any>;
 };
 
@@ -61,13 +62,14 @@ export class Context {
         const route = this.getRoute();
         const req = this.getReq();
         if (!req) return null;
-        if (req.session.user && req.session.user[route]) {
-            return req.session.user[route];
+        const session = this.getSession()
+        if (session.user && session.user[route]) {
+            return session.user[route];
         }
         return null;
     }
 
-    getSession(): any {
+    getSession() {
         return this.getReq()!.session;
     }
 

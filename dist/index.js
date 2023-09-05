@@ -1887,18 +1887,6 @@ class BkHelper {
     static WEEK() {
         return 7 * BkHelper.DAY();
     }
-    static Session_save(session) {
-        return new Promise((resolve, reject) => {
-            session.save((err) => {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve();
-                }
-            });
-        });
-    }
     static addMinutes(date, minutes) {
         date.setMinutes(date.getMinutes() + minutes);
     }
@@ -2049,8 +2037,9 @@ class Context {
         const req = this.getReq();
         if (!req)
             return null;
-        if (req.session.user && req.session.user[route]) {
-            return req.session.user[route];
+        const session = this.getSession();
+        if (session.user && session.user[route]) {
+            return session.user[route];
         }
         return null;
     }
@@ -2492,6 +2481,37 @@ const Scripts = ({ scripts }) => {
         }) }));
 };
 exports.Scripts = Scripts;
+
+
+/***/ }),
+
+/***/ "./src/backend/Session.ts":
+/*!********************************!*\
+  !*** ./src/backend/Session.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Session_save = exports.Session_deleteUser = void 0;
+function Session_deleteUser(session, route) {
+    delete session.user[route];
+}
+exports.Session_deleteUser = Session_deleteUser;
+function Session_save(session) {
+    return new Promise((resolve, reject) => {
+        session.save((err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
+}
+exports.Session_save = Session_save;
 
 
 /***/ }),
@@ -8805,6 +8825,7 @@ const login_1 = __webpack_require__(/*! ./login */ "./src/backend/viewer/login.t
 const common_1 = __webpack_require__(/*! ../../frontend/common */ "./src/frontend/common/index.ts");
 const console_1 = __webpack_require__(/*! ../../console */ "./src/console.ts");
 const pConsole_1 = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+const Session_1 = __webpack_require__(/*! ../Session */ "./src/backend/Session.ts");
 const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 var viewer_1 = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
 Object.defineProperty(exports, "TableForm", ({ enumerable: true, get: function () { return viewer_1.TableForm; } }));
@@ -8843,8 +8864,9 @@ class ViewerModule {
     async handleGet(context, bkApplication) {
         pConsole_1.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const req = context.getReq();
+        const session = context.getSession();
         if (bkApplication.isAuthentication() &&
-            !(req.session.user && req.session.user[context.getRoute()])) {
+            !(session.user && session.user[context.getRoute()])) {
             await this.loginGet(context, bkApplication);
         }
         else {
@@ -8853,14 +8875,13 @@ class ViewerModule {
         }
     }
     async handlePost(context, application) {
-        const req = context.getReq();
         const body = context.getBody();
         if (body.action === 'login') {
             await this.loginPost(context, application);
         }
         else {
-            if (application.isAuthentication() &&
-                !(req.session.user && req.session.user[context.getRoute()])) {
+            const user = context.getUser();
+            if (application.isAuthentication() && !user) {
                 throw new HttpError_1.HttpError({ message: 'Unauthorized', status: 401, context });
             }
             await this.handleAction(context, application);
@@ -8927,12 +8948,12 @@ class ViewerModule {
                     throw new Error('no user id');
                 if (!user.name)
                     throw new Error('no user name');
-                if (req.session.user === undefined) {
-                    req.session.user = {};
-                }
-                req.session.ip = context.getIp();
-                req.session.tzOffset = JSON.parse(body.tzOffset);
-                req.session.user[context.getRoute()] = user;
+                const session = context.getSession();
+                if (session.user === undefined)
+                    session.user = {};
+                session.user[context.getRoute()] = user;
+                session.ip = context.getIp();
+                session.tzOffset = JSON.parse(body.tzOffset);
                 res.redirect(req.url);
                 this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
@@ -9109,20 +9130,19 @@ class ViewerModule {
     }
     async logout(context, application) {
         (0, console_1.debug)('ViewerModule.logout');
-        const req = context.getReq();
-        const res = context.getRes();
-        if (!req.session.user || !req.session.user[context.getRoute()]) {
-            throw new Error(`no user for route ${context.getRoute()}`);
+        const user = context.getUser();
+        const route = context.getRoute();
+        if (!user) {
+            throw new Error(`no user for route ${route}`);
         }
-        delete req.session.user[context.getRoute()];
-        await BkHelper_1.BkHelper.Session_save(req.session);
-        res.json(null);
+        const session = context.getSession();
+        (0, Session_1.Session_deleteUser)(session, route);
+        await (0, Session_1.Session_save)(session);
+        context.getRes().json(null);
     }
     async test(context, application) {
         (0, console_1.debug)('ViewerModule.test', context.getReq().body);
-        const req = context.getReq();
-        const res = context.getRes();
-        res.json(null);
+        context.getRes().json(null);
     }
     async handleGetFile(context, application, next) {
         await application.handleGetFile(context, next);

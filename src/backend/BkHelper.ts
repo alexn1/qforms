@@ -418,18 +418,6 @@ export class BkHelper {
         return 7 * BkHelper.DAY();
     }
 
-    static Session_save(session: any): Promise<void> {
-        return new Promise((resolve, reject) => {
-            session.save((err: any) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-    }
-
     static addMinutes(date: Date, minutes: number): void {
         // debug('BkHelper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);

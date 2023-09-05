@@ -20,6 +20,7 @@ import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
 import { LoginRequestBody, RequestBody } from '../../types';
+import { Session_deleteUser, Session_save } from '../Session';
 
 const pkg = require('../../../package.json');
 
@@ -89,9 +90,11 @@ export class ViewerModule {
 
         const req = context.getReq()!;
 
+        const session = context.getSession();
+
         if (
             bkApplication.isAuthentication() &&
-            !(req.session.user && req.session.user[context.getRoute()])
+            !(session.user && session.user[context.getRoute()])
         ) {
             await this.loginGet(context, bkApplication);
         } else {
@@ -102,15 +105,12 @@ export class ViewerModule {
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
-        const req = context.getReq()!;
         const body = context.getBody();
         if (body.action === 'login') {
             await this.loginPost(context, application);
         } else {
-            if (
-                application.isAuthentication() &&
-                !(req.session.user && req.session.user[context.getRoute()])
-            ) {
+            const user = context.getUser();
+            if (application.isAuthentication() && !user) {
                 throw new HttpError({ message: 'Unauthorized', status: 401, context });
             }
 
@@ -206,12 +206,12 @@ export class ViewerModule {
             if (user) {
                 if (!user.id) throw new Error('no user id');
                 if (!user.name) throw new Error('no user name');
-                if (req.session.user === undefined) {
-                    req.session.user = {};
-                }
-                req.session.ip = context.getIp();
-                req.session.tzOffset = JSON.parse(body.tzOffset);
-                req.session.user[context.getRoute()] = user;
+                const session = context.getSession();
+                if (session.user === undefined) session.user = {};
+                session.user[context.getRoute()] = user;
+                session.ip = context.getIp();
+                session.tzOffset = JSON.parse(body.tzOffset);
+
                 res.redirect(req.url);
                 this.getHostApp().logEvent(
                     context,
@@ -401,24 +401,23 @@ export class ViewerModule {
     // action
     async logout(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.logout');
-        const req = context.getReq()!;
-        const res = context.getRes();
-        if (!req.session.user || !req.session.user[context.getRoute()]) {
-            throw new Error(`no user for route ${context.getRoute()}`);
+        const user = context.getUser();
+        const route = context.getRoute();
+        if (!user) {
+            throw new Error(`no user for route ${route}`);
         }
-        delete req.session.user[context.getRoute()];
-        await BkHelper.Session_save(req.session);
-        res.json(null);
+        const session = context.getSession();
+        Session_deleteUser(session, route);
+        await Session_save(session);
+        context.getRes().json(null);
     }
 
     // action
     async test(context: Context, application: BkApplication) {
         debug('ViewerModule.test', context.getReq()!.body);
-        const req = context.getReq();
-        const res = context.getRes();
-        // const result = await Test[req.body.name](req, res, context, application);
+        // const result = await Test[req.body.name](context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
-        res.json(null);
+        context.getRes().json(null);
     }
 
     async handleGetFile(context: Context, application: BkApplication, next: NextFunction) {

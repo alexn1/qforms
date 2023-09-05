@@ -36,7 +36,6 @@ export declare class BkHelper {
     static HOUR(): number;
     static DAY(): number;
     static WEEK(): number;
-    static Session_save(session: any): Promise<void>;
     static addMinutes(date: Date, minutes: number): void;
     static removeTimezoneOffset(date: Date): void;
     static addTimezoneOffset(date: Date): void;
