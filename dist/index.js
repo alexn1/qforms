@@ -2036,7 +2036,6 @@ class Context {
         this.options = options;
         this.connections = {};
         this.files = {};
-        this.querytimeParams = {};
         const req = this.getReq();
         this.params = Object.assign({}, (req && req.body.params ? req.body.params : {}));
         if (req && req.files) {
@@ -2089,7 +2088,7 @@ class Context {
     getAllParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
-        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), this.querytimeParams), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
+        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
         return this.options.req;
@@ -6393,7 +6392,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
+            this.getParent().dumpRowToParams(response.rows[0], context);
         }
         if (this.getLimit()) {
             response.limit = context.getParam('limit');
@@ -6657,7 +6656,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
+            this.getParent().dumpRowToParams(response.rows[0], context);
         }
         if (this.getLimit()) {
             response.limit = context.getParam('limit');
@@ -7979,7 +7978,7 @@ class BkField extends BkModel_1.BkModel {
             throw new Error(`[${this.getFullName()}] fillDefaultValue eval error: ${e.toString()}`);
         }
     }
-    dumpRowValueToParams(row, params) {
+    dumpRowValueToParams(row, context) {
         const fullName = this.getFullName();
         try {
             const column = this.getAttr('column');
@@ -7987,7 +7986,7 @@ class BkField extends BkModel_1.BkModel {
                 throw new Error('no column attr');
             const rawValue = row[column];
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
-            params[fullName] = value;
+            context.setParam(fullName, value);
         }
         catch (err) {
             err.message = `${fullName}: ${err.message}`;
@@ -8343,7 +8342,7 @@ class BkForm extends BkModel_1.BkModel {
             return super.fill(context);
         }
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
-        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytimeParams);
+        this.dumpRowToParams(dataSourceResponse.rows[0], context);
         const response = await super.fill(context);
         response.dataSources.push(dataSourceResponse);
         return response;
@@ -8361,10 +8360,10 @@ class BkForm extends BkModel_1.BkModel {
             rows: [row],
         };
     }
-    dumpRowToParams(row, params) {
+    dumpRowToParams(row, context) {
         for (const field of this.fields) {
             if (field.isParam()) {
-                field.dumpRowValueToParams(row, params);
+                field.dumpRowValueToParams(row, context);
             }
         }
     }

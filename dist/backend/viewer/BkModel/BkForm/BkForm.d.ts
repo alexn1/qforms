@@ -23,7 +23,7 @@ export declare class BkForm<TFormScheme extends FormScheme = FormScheme> extends
         keyColumns: string[];
         rows: RawRow[];
     };
-    dumpRowToParams(row: RawRow, params: Record<string, any>): void;
+    dumpRowToParams(row: RawRow, context: Context): void;
     replaceThis(context: Context, query: string): string;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): BkApplication;

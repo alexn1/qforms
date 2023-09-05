@@ -51,7 +51,7 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
 
         // surrogate data source response
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
-        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytimeParams);
+        this.dumpRowToParams(dataSourceResponse.rows[0], context);
         const response = await super.fill(context);
         response.dataSources.push(dataSourceResponse);
 
@@ -73,10 +73,10 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
         };
     }
 
-    dumpRowToParams(row: RawRow, params: Record<string, any>) {
+    dumpRowToParams(row: RawRow, context: Context) {
         for (const field of this.fields) {
             if (field.isParam()) {
-                field.dumpRowValueToParams(row, params);
+                field.dumpRowValueToParams(row, context);
             }
         }
         // debug(params);

@@ -24,7 +24,6 @@ export declare class Context {
         [name: string]: any;
     };
     private params;
-    querytimeParams: Record<string, any>;
     constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;

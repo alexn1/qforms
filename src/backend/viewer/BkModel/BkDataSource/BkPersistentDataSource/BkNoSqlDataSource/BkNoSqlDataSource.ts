@@ -53,7 +53,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         }
 
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent<BkForm>().dumpRowToParams(response.rows[0], context.querytimeParams);
+            this.getParent<BkForm>().dumpRowToParams(response.rows[0], context);
         }
 
         if (this.getLimit()) {

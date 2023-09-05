@@ -26,7 +26,7 @@ export class Context {
         [name: string]: any;
     } = {};
     private params: Record<string, any>;
-    querytimeParams: Record<string, any> = {}; // for runtime query params
+    // querytimeParams: Record<string, any> = {}; // for runtime query params
 
     constructor(public options: ContextOptions = {}) {
         // debug('Context', options);
@@ -101,7 +101,7 @@ export class Context {
             ...this.getCookies(),
             ...this.getQuery(),
             ...this.params,
-            ...this.querytimeParams,
+            // ...this.querytimeParams,
             ...(user ? { userId: user.id, userName: user.name } : {}),
             ...(timeOffset !== null ? { timeOffset } : {}),
         };

@@ -11,7 +11,7 @@ export declare class BkField<TFieldScheme extends FieldScheme = FieldScheme> ext
     fillAttributes(response: FieldData): void;
     getDirPath(): string;
     fillDefaultValue(context: Context, row: RawRow): void;
-    dumpRowValueToParams(row: RawRow, params: Record<string, any>): void;
+    dumpRowValueToParams(row: RawRow, context: Context): void;
     getFullName(): string;
     getApp(): BkApplication;
     getPage(): BkPage;

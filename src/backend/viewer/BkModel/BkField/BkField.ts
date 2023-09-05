@@ -51,7 +51,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
         }
     }
 
-    dumpRowValueToParams(row: RawRow, params: Record<string, any>) {
+    dumpRowValueToParams(row: RawRow, context: Context) {
         // debug('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {
@@ -61,7 +61,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
             // debug('rawValue:', rawValue);
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
             // debug('value:', value);
-            params[fullName] = value;
+            context.setParam(fullName, value);
         } catch (err) {
             // debug('row:', row);
             err.message = `${fullName}: ${err.message}`;
