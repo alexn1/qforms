@@ -3,8 +3,7 @@ import { Nullable, Optional, RequestBody } from '../types';
 
 export type RequestEx = Request & {
     session: any;
-    headers: any;
-    files: any;
+    files: Record<string, any>;
 };
 
 export interface ContextOptions {
@@ -173,11 +172,11 @@ export class Context {
     }
 
     getHost(): string {
-        return this.getReq()!.headers.host;
+        return this.getReq()!.headers.host!;
     }
 
     getProtocol(): string {
-        return this.getReq()!.headers['x-forwarded-proto'] || 'http';
+        return (this.getReq()!.headers['x-forwarded-proto'] as string) || 'http';
     }
 
     setVersionHeaders(platformVersion: string, appVersion: Nullable<string>): void {

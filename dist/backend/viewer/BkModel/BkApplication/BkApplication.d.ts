@@ -14,8 +14,16 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
-import { Link } from '../../../../types';
+import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
+export interface ServerUser {
+    id: number;
+    name: string;
+}
+export interface ClientUser {
+    id: number;
+    login: string;
+}
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {
     private appInfo;
     private hostApp;
@@ -43,8 +51,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getVersion(): string | null;
     fillAttributes(response: ApplicationData): void;
     fill(context: Context): Promise<ApplicationData>;
-    getClientUserFromServerUser(context: Context): Promise<any>;
-    createMenu(context: Context): Promise<void>;
+    getClientUserFromServerUser(context: Context): Promise<ClientUser>;
+    createMenu(ctx: Context): Promise<void>;
     createPageLink(name: string): BkPageLink;
     createPage(context: Context, pageLinkName: string): Promise<BkPage>;
     authorizePage(user: any, pageName: string): boolean;
@@ -52,7 +60,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getStartupPageLinkNames(): string[];
     getPageLinksToFill(context: Context): string[];
     fillPages(context: Context): Promise<PageData[]>;
-    authenticate(context: Context, username: string, password: string): Promise<any>;
+    authenticate(ctx: Context, username: string, password: string): Promise<Nullable<ServerUser>>;
     isAuthentication(): boolean;
     getUsers(context: Context): Promise<null>;
     rpc(name: string, context: Context): Promise<any>;

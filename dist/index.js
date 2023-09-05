@@ -5717,7 +5717,7 @@ class BkApplication extends BkModel_1.BkModel {
             login: user.name,
         };
     }
-    async createMenu(context) {
+    async createMenu(ctx) {
         const menu = {};
         const nav = {};
         const pageLinkNames = this.getItemNames('pageLinks');
@@ -5808,7 +5808,7 @@ class BkApplication extends BkModel_1.BkModel {
         }
         return pages;
     }
-    async authenticate(context, username, password) {
+    async authenticate(ctx, username, password) {
         (0, console_1.debug)('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {

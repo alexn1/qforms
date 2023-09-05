@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
 export type RequestEx = Request & {
     session: any;
-    headers: any;
-    files: any;
+    files: Record<string, any>;
 };
 export interface ContextOptions {
     domain?: Nullable<string>;

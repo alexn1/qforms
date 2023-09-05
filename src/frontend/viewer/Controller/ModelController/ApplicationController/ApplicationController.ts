@@ -270,7 +270,7 @@ export class ApplicationController extends ModelController<Application> {
                       {
                           name: 'user',
                           title: `${this.getModel().getDomain()}/${
-                              this.getModel().getUser().login
+                              this.getModel().getUser()!.login
                           }`,
                           items: [
                               {

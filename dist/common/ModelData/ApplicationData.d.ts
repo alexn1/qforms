@@ -1,3 +1,5 @@
+import { ClientUser } from '../../backend';
+import { Nullable } from '../../types';
 import { DatabaseData } from './DatabaseData';
 import { ModelData } from './ModelData';
 import { PageData } from './PageData';
@@ -26,11 +28,7 @@ export interface ApplicationData extends ModelData {
     nodeEnv: string | null;
     time: number;
     uuid: string;
-    user: {
-        [name: string]: any;
-        id: number;
-        login: string;
-    };
+    user: Nullable<ClientUser>;
     text: any;
     menu: Record<string, MenuItem[]>;
     nav: any;

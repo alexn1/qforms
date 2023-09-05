@@ -28,10 +28,20 @@ import { debug } from '../../../../console';
 import { ActionData } from '../../../../common/ModelData/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
-import { Link } from '../../../../types';
+import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 
 const pkg = require('../../../../../package.json');
+
+export interface ServerUser {
+    id: number;
+    name: string;
+}
+
+export interface ClientUser {
+    id: number;
+    login: string;
+}
 
 export class BkApplication<
     THostApp extends BackHostApp = BackHostApp,
@@ -183,7 +193,7 @@ export class BkApplication<
         return response;
     }
 
-    async getClientUserFromServerUser(context: Context): Promise<any> {
+    async getClientUserFromServerUser(context: Context): Promise<ClientUser> {
         const user = context.getUser();
         return {
             id: user.id,
@@ -191,7 +201,7 @@ export class BkApplication<
         };
     }
 
-    async createMenu(context: Context): Promise<void> {
+    async createMenu(ctx: Context): Promise<void> {
         // debug('Application.createMenu');
         const menu: Record<string, MenuItem[]> = {};
         const nav: Record<string, any[]> = {};
@@ -303,7 +313,11 @@ export class BkApplication<
         return pages;
     }
 
-    async authenticate(context: Context, username: string, password: string): Promise<any> {
+    async authenticate(
+        ctx: Context,
+        username: string,
+        password: string,
+    ): Promise<Nullable<ServerUser>> {
         debug('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {

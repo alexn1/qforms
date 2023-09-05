@@ -18,11 +18,7 @@ export declare class Application extends Model<ApplicationData> {
     findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     getText(): any;
-    getUser(): {
-        [name: string]: any;
-        id: number;
-        login: string;
-    };
+    getUser(): import("../../../../types").Nullable<import("../../../..").ClientUser>;
     getDomain(): string;
     getVirtualPath(): string;
     rpc(name: string, params: Record<string, any>): Promise<any>;
