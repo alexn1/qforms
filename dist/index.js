@@ -7476,7 +7476,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         context.connections[this.getName()] = null;
     }
     async queryResult(context, query, params = null) {
-        if (context.getQuery().sql) {
+        if (context.getReq() && context.getQuery().sql) {
             (0, console_1.debug)(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
@@ -7484,7 +7484,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        if (context.getQuery().sql) {
+        if (context.getReq() && context.getQuery().sql) {
             (0, console_1.debug)('sql:', sql);
             (0, console_1.debug)('values:', values);
         }
