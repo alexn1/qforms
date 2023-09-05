@@ -19,39 +19,34 @@ export interface ContextOptions {
 }
 
 export class Context {
-    /* query: {
-        [name: string]: any;
-    }; */
     connections: {
         [name: string]: any;
     } = {};
     files: {
         [name: string]: any;
-    };
+    } = {};
     querytime: any = { params: {} };
     params: Record<string, any>;
 
     constructor(public options: ContextOptions = {}) {
         // debug('Context', options);
 
-        // query
-        /* this.query = {
-            ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
-        }; */
+        const req = this.getReq();
 
         // params
         this.params = {
-            ...(this.getReq() && this.getReq()!.body.params ? this.getReq()!.body.params : {}),
+            ...(req && req.body.params ? req.body.params : {}),
         };
 
         // files
-        this.files = {};
-        if (this.getReq() && this.getReq()!.files) {
-            for (const name in this.getReq()!.files) {
-                this.files[name] = this.getReq()!.files[name].buffer;
+        if (req && req.files) {
+            for (const name in req.files) {
+                this.files[name] = req.files[name].buffer;
             }
         }
     }
+
+
 
     getRoute(): string {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -71,29 +66,27 @@ export class Context {
         return null;
     }
 
+    getSession(): any {
+        return this.getReq()!.session;
+    }
 
     getClientTimezoneOffset(): Nullable<number> {
-        if (
-            this.getReq()!.session.tzOffset !== undefined &&
-            this.getReq()!.session.tzOffset !== null
-        ) {
-            return this.getReq()!.session.tzOffset;
+        if (typeof this.getSession().tzOffset === 'number') {
+            return this.getSession().tzOffset;
         }
         return null;
     }
 
     getTimeOffset(): Nullable<number> {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
-        if (clientTimezoneOffset !== null) {
-            return new Date().getTimezoneOffset() - clientTimezoneOffset;
+        if (clientTimezoneOffset === null) {
+            return null;
         }
-        return null;
+        return new Date().getTimezoneOffset() - clientTimezoneOffset;
     }
 
     getCookies(): Record<string, string> {
-        return {
-            ...(this.getReq() && this.getReq()!.cookies ? this.getReq()!.cookies : {}),
-        };
+        return this.getReq()!.cookies || {};
     }
 
     getQuery(): ParsedQs {
@@ -127,7 +120,9 @@ export class Context {
     }
 
     getBody(): RequestBody {
-        return this.getReq()!.body;
+        const req = this.getReq();
+        if (!req) throw new Error('getBody: not request');
+        return req.body;
     }
 
     getModule(): string {

@@ -29,6 +29,7 @@ export declare class Context {
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): Nullable<ServerUser>;
+    getSession(): any;
     getClientTimezoneOffset(): Nullable<number>;
     getTimeOffset(): Nullable<number>;
     getCookies(): Record<string, string>;

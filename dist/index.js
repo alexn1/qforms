@@ -2035,12 +2035,13 @@ class Context {
     constructor(options = {}) {
         this.options = options;
         this.connections = {};
-        this.querytime = { params: {} };
-        this.params = Object.assign({}, (this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}));
         this.files = {};
-        if (this.getReq() && this.getReq().files) {
-            for (const name in this.getReq().files) {
-                this.files[name] = this.getReq().files[name].buffer;
+        this.querytime = { params: {} };
+        const req = this.getReq();
+        this.params = Object.assign({}, (req && req.body.params ? req.body.params : {}));
+        if (req && req.files) {
+            for (const name in req.files) {
+                this.files[name] = req.files[name].buffer;
             }
         }
     }
@@ -2060,22 +2061,24 @@ class Context {
         }
         return null;
     }
+    getSession() {
+        return this.getReq().session;
+    }
     getClientTimezoneOffset() {
-        if (this.getReq().session.tzOffset !== undefined &&
-            this.getReq().session.tzOffset !== null) {
-            return this.getReq().session.tzOffset;
+        if (typeof this.getSession().tzOffset === 'number') {
+            return this.getSession().tzOffset;
         }
         return null;
     }
     getTimeOffset() {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
-        if (clientTimezoneOffset !== null) {
-            return new Date().getTimezoneOffset() - clientTimezoneOffset;
+        if (clientTimezoneOffset === null) {
+            return null;
         }
-        return null;
+        return new Date().getTimezoneOffset() - clientTimezoneOffset;
     }
     getCookies() {
-        return Object.assign({}, (this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}));
+        return this.getReq().cookies || {};
     }
     getQuery() {
         const req = this.getReq();
@@ -2097,7 +2100,10 @@ class Context {
         return this.options.res;
     }
     getBody() {
-        return this.getReq().body;
+        const req = this.getReq();
+        if (!req)
+            throw new Error('getBody: not request');
+        return req.body;
     }
     getModule() {
         if (this.options.module) {
