@@ -2036,7 +2036,6 @@ class Context {
         this.options = options;
         this.connections = {};
         this.querytime = { params: {} };
-        this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
         this.params = Object.assign({}, (this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}));
         this.files = {};
         if (this.getReq() && this.getReq().files) {
@@ -2053,8 +2052,11 @@ class Context {
     }
     getUser() {
         const route = this.getRoute();
-        if (this.getReq().session.user && this.getReq().session.user[route]) {
-            return this.getReq().session.user[route];
+        const req = this.getReq();
+        if (!req)
+            return null;
+        if (req.session.user && req.session.user[route]) {
+            return req.session.user[route];
         }
         return null;
     }
@@ -2076,12 +2078,15 @@ class Context {
         return Object.assign({}, (this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}));
     }
     getQuery() {
-        return Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
+        const req = this.getReq();
+        if (!req)
+            throw new Error('context: no req');
+        return req.query;
     }
     getParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
-        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
+        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
         return this.options.req;
@@ -2153,7 +2158,7 @@ class Context {
         return params[name];
     }
     isDebugMode() {
-        return this.query['debug'] === '1';
+        return this.getQuery()['debug'] === '1';
     }
     getUrl() {
         const req = this.getReq();
@@ -5712,6 +5717,8 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async getClientUserFromServerUser(context) {
         const user = context.getUser();
+        if (!user)
+            throw new Error('getClientUserFromServerUser: no server user');
         return {
             id: user.id,
             login: user.name,
@@ -5792,7 +5799,7 @@ class BkApplication extends BkModel_1.BkModel {
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     getPageLinksToFill(context) {
-        const pageLinkName = context.query.page;
+        const pageLinkName = context.getParams().page;
         if (pageLinkName) {
             return [pageLinkName];
         }
@@ -7455,7 +7462,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         context.connections[this.getName()] = null;
     }
     async queryResult(context, query, params = null) {
-        if (context.query.sql) {
+        if (context.getQuery().sql) {
             (0, console_1.debug)(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
@@ -7463,7 +7470,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        if (context.query.sql) {
+        if (context.getQuery().sql) {
             (0, console_1.debug)('sql:', sql);
             (0, console_1.debug)('values:', values);
         }
@@ -8829,7 +8836,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        pConsole_1.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.query);
+        pConsole_1.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
             !(req.session.user && req.session.user[context.getRoute()])) {
@@ -8892,7 +8899,7 @@ class ViewerModule {
             text: application.getText(),
             title: application.getTitle(context),
             errMsg: null,
-            username: context.query.username,
+            username: context.getQuery().username,
         });
         context.getRes().end(html);
     }
@@ -9136,7 +9143,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.home = void 0;
 const home = (application, context, applicationController, qformsVersion, links, scripts, data, appViewHtml) => {
     return `<!DOCTYPE html>
-<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''} ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr('lang')}">
+<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.getQuery().debug === '1' ? 'debug' : ''} ${context.getQuery().frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr('lang')}">
 <head>
     <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->

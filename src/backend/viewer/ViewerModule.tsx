@@ -83,7 +83,7 @@ export class ViewerModule {
             context.getDomain(),
             context.getReq()!.url,
             context.getReq()!.params,
-            context.query,
+            context.getQuery(),
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
 
@@ -186,7 +186,7 @@ export class ViewerModule {
             text: application.getText(),
             title: application.getTitle(context),
             errMsg: null,
-            username: context.query.username,
+            username: context.getQuery().username,
         });
         context.getRes().end(html);
     }

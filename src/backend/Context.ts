@@ -1,5 +1,7 @@
+import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
+import { ServerUser } from './viewer';
 
 export type RequestEx = Request & {
     session: any;
@@ -17,9 +19,9 @@ export interface ContextOptions {
 }
 
 export class Context {
-    query: {
+    /* query: {
         [name: string]: any;
-    };
+    }; */
     connections: {
         [name: string]: any;
     } = {};
@@ -33,9 +35,9 @@ export class Context {
         // debug('Context', options);
 
         // query
-        this.query = {
+        /* this.query = {
             ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
-        };
+        }; */
 
         // params
         this.params = {
@@ -59,13 +61,16 @@ export class Context {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
     }
 
-    getUser(): any {
+    getUser(): Nullable<ServerUser> {
         const route = this.getRoute();
-        if (this.getReq()!.session.user && this.getReq()!.session.user[route]) {
-            return this.getReq()!.session.user[route];
+        const req = this.getReq();
+        if (!req) return null;
+        if (req.session.user && req.session.user[route]) {
+            return req.session.user[route];
         }
         return null;
     }
+
 
     getClientTimezoneOffset(): Nullable<number> {
         if (
@@ -91,10 +96,10 @@ export class Context {
         };
     }
 
-    getQuery(): Record<string, any> {
-        return {
-            ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
-        };
+    getQuery(): ParsedQs {
+        const req = this.getReq();
+        if (!req) throw new Error('context: no req');
+        return req.query;
     }
 
     getParams(): Record<string, any> {
@@ -103,7 +108,7 @@ export class Context {
         const timeOffset = this.getTimeOffset();
         return {
             ...this.getCookies(),
-            ...this.query,
+            ...this.getQuery(),
             ...this.params,
             ...(this.querytime ? this.querytime.params : {}),
             ...(user ? { userId: user.id, userName: user.name } : {}),
@@ -196,7 +201,7 @@ export class Context {
     }
 
     isDebugMode(): boolean {
-        return this.query['debug'] === '1';
+        return this.getQuery()['debug'] === '1';
     }
 
     getUrl(): URL {

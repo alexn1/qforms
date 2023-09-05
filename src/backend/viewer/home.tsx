@@ -15,8 +15,8 @@ export const home = (
 ) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
-        context.query.debug === '1' ? 'debug' : ''
-    } ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr(
+        context.getQuery().debug === '1' ? 'debug' : ''
+    } ${context.getQuery().frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr(
         'lang',
     )}">
 <head>

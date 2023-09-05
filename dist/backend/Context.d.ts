@@ -1,5 +1,7 @@
+import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
+import { ServerUser } from './viewer';
 export type RequestEx = Request & {
     session: any;
     files: Record<string, any>;
@@ -15,9 +17,6 @@ export interface ContextOptions {
 }
 export declare class Context {
     options: ContextOptions;
-    query: {
-        [name: string]: any;
-    };
     connections: {
         [name: string]: any;
     };
@@ -29,11 +28,11 @@ export declare class Context {
     constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;
-    getUser(): any;
+    getUser(): Nullable<ServerUser>;
     getClientTimezoneOffset(): Nullable<number>;
     getTimeOffset(): Nullable<number>;
     getCookies(): Record<string, string>;
-    getQuery(): Record<string, any>;
+    getQuery(): ParsedQs;
     getParams(): Record<string, any>;
     getReq(): Optional<RequestEx>;
     getRes(): Response;

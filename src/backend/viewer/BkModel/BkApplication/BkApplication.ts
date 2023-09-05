@@ -195,6 +195,7 @@ export class BkApplication<
 
     async getClientUserFromServerUser(context: Context): Promise<ClientUser> {
         const user = context.getUser();
+        if (!user) throw new Error('getClientUserFromServerUser: no server user');
         return {
             id: user.id,
             login: user.name,
@@ -294,7 +295,7 @@ export class BkApplication<
     }
 
     getPageLinksToFill(context: Context): string[] {
-        const pageLinkName: string = context.query.page;
+        const pageLinkName = context.getParams().page as string;
         if (pageLinkName) {
             return [pageLinkName];
         }
