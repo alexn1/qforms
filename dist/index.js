@@ -8855,12 +8855,12 @@ class ViewerModule {
         }
     }
     async handleAction(context, application) {
-        const req = context.getReq();
-        if (ACTIONS.indexOf(req.body.action) === -1) {
-            throw new Error(`unknown action: ${req.body.action}`);
+        const { action } = context.getBody();
+        if (ACTIONS.indexOf(action) === -1) {
+            throw new Error(`unknown action: ${action}`);
         }
         context.setVersionHeaders(pkg.version, application.getVersion());
-        await this[req.body.action](context, application);
+        await this[action](context, application);
     }
     async renderHtml(bkApplication, context) {
         (0, console_1.debug)('ViewerModule.renderHtml');
@@ -8898,17 +8898,18 @@ class ViewerModule {
     }
     async loginPost(context, application) {
         (0, console_1.debug)('ViewerModule.loginPost');
+        const body = context.getBody();
         const req = context.getReq();
         const res = context.getRes();
-        if (req.body.tzOffset === undefined)
+        if (body.tzOffset === undefined)
             throw new Error('no tzOffset');
-        if (req.body.username === undefined)
+        if (body.username === undefined)
             throw new Error('no username');
-        if (req.body.password === undefined)
+        if (body.password === undefined)
             throw new Error('no password');
         await application.connect(context);
         try {
-            const user = await application.authenticate(context, req.body.username, req.body.password);
+            const user = await application.authenticate(context, body.username, body.password);
             if (user) {
                 if (!user.id)
                     throw new Error('no user id');
@@ -8918,7 +8919,7 @@ class ViewerModule {
                     req.session.user = {};
                 }
                 req.session.ip = context.getIp();
-                req.session.tzOffset = JSON.parse(req.body.tzOffset);
+                req.session.tzOffset = JSON.parse(body.tzOffset);
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
                 this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
@@ -8931,8 +8932,8 @@ class ViewerModule {
                     text: application.getText(),
                     title: application.getTitle(context),
                     errMsg: application.getText().login.WrongUsernameOrPassword,
-                    username: req.body.username,
-                    password: req.body.password,
+                    username: body.username,
+                    password: body.password,
                 });
                 res.status(401).end(html);
             }
@@ -8956,12 +8957,12 @@ class ViewerModule {
     }
     async page(context, application) {
         (0, console_1.debug)('ViewerModule.page', context.getReq().body.page);
-        const req = context.getReq();
+        const body = context.getBody();
         const res = context.getRes();
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, req.body.page);
+            const page = await application.getPage(context, body.page);
             const response = await page.fill(context);
             if (response === undefined)
                 throw new Error('page action: response is undefined');
@@ -8973,36 +8974,35 @@ class ViewerModule {
     }
     async select(context, application) {
         (0, console_1.debug)('ViewerModule.select', context.getReq().body.page);
-        const req = context.getReq();
-        const res = context.getRes();
+        const body = context.getBody();
         const start = Date.now();
         let dataSource;
-        if (req.body.page) {
-            const page = await application.getPage(context, req.body.page);
-            if (req.body.form) {
-                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
+        if (body.page) {
+            const page = await application.getPage(context, body.page);
+            if (body.form) {
+                dataSource = page.getForm(body.form).getDataSource(body.ds);
             }
             else {
-                dataSource = page.getDataSource(req.body.ds);
+                dataSource = page.getDataSource(body.ds);
             }
         }
         else {
-            dataSource = application.getDataSource(req.body.ds);
+            dataSource = application.getDataSource(body.ds);
         }
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             (0, console_1.debug)('select time:', time);
-            res.json({ rows, count, time });
+            context.getRes().json({ rows, count, time });
         });
     }
     async insert(context, application) {
         (0, console_1.debug)('ViewerModule.insert', context.getReq().body.page);
-        const req = context.getReq();
+        const body = context.getBody();
         const res = context.getRes();
-        const page = await application.getPage(context, req.body.page);
-        const form = page.getForm(req.body.form);
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
@@ -9018,10 +9018,9 @@ class ViewerModule {
     }
     async update(context, application) {
         (0, console_1.debug)('ViewerModule.update', context.getReq().body.page);
-        const req = context.getReq();
-        const res = context.getRes();
-        const page = await application.getPage(context, req.body.page);
-        const form = page.getForm(req.body.form);
+        const body = context.getBody();
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
@@ -9031,16 +9030,15 @@ class ViewerModule {
                     throw new Error('action update: result is undefined');
                 return result;
             });
-            res.json(result);
+            context.getRes().json(result);
             this.hostApp.broadcastResult(application, context, result);
         });
     }
     async _delete(context, application) {
         (0, console_1.debug)('ViewerModule._delete', context.getReq().body.page);
-        const req = context.getReq();
-        const res = context.getRes();
-        const page = await application.getPage(context, req.body.page);
-        const form = page.getForm(req.body.form);
+        const body = context.getBody();
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
@@ -9050,29 +9048,28 @@ class ViewerModule {
                     throw new Error('delete result is undefined');
                 return result;
             });
-            res.json(result);
+            context.getRes().json(result);
             this.hostApp.broadcastResult(application, context, result);
         });
     }
+    static async getModel(context, application) {
+        const body = context.getBody();
+        if (body.page) {
+            const page = await application.getPage(context, body.page);
+            if (body.form) {
+                return page.getForm(body.form);
+            }
+            return page;
+        }
+        return application;
+    }
     async rpc(context, application) {
         (0, console_1.debug)('ViewerModule.rpc', context.getReq().body);
-        const req = context.getReq();
+        const body = context.getBody();
         const res = context.getRes();
-        let model;
-        if (req.body.page) {
-            if (req.body.form) {
-                const page = await application.getPage(context, req.body.page);
-                model = page.getForm(req.body.form);
-            }
-            else {
-                model = await application.getPage(context, req.body.page);
-            }
-        }
-        else {
-            model = application;
-        }
+        const model = await ViewerModule.getModel(context, application);
         try {
-            const result = await model.rpc(req.body.name, context);
+            const result = await model.rpc(body.name, context);
             if (result === undefined)
                 throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
@@ -9092,9 +9089,9 @@ class ViewerModule {
         }
         catch (err) {
             const errorMessage = err.message;
-            err.message = `rpc error ${req.body.name}: ${err.message}`;
+            err.message = `rpc error ${body.name}: ${err.message}`;
             err.context = context;
-            await this.hostApp.logError(err, req);
+            await this.hostApp.logError(err, context.getReq());
             res.json({ errorMessage });
         }
     }

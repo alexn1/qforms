@@ -1,6 +1,7 @@
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
+import { BkModel } from './BkModel/BkModel';
 import { NextFunction } from 'connect';
 export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, RowForm, } from '../../frontend/viewer';
 export declare class ViewerModule {
@@ -23,6 +24,7 @@ export declare class ViewerModule {
     insert(context: Context, application: BkApplication): Promise<void>;
     update(context: Context, application: BkApplication): Promise<void>;
     _delete(context: Context, application: BkApplication): Promise<void>;
+    static getModel(context: Context, application: BkApplication): Promise<BkModel>;
     rpc(context: Context, application: BkApplication): Promise<void>;
     logout(context: Context, application: BkApplication): Promise<void>;
     test(context: Context, application: BkApplication): Promise<void>;

@@ -42,6 +42,11 @@ export interface RequestBody {
     row?: RawRow;
     newMode?: boolean;
 }
+export interface LoginRequestBody extends RequestBody {
+    tzOffset: JSONString;
+    username: string;
+    password: string;
+}
 export interface Link {
     href: string;
     rel: string;
