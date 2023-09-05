@@ -23,8 +23,8 @@ export declare class Context {
     files: {
         [name: string]: any;
     };
-    querytime: any;
     params: Record<string, any>;
+    querytimeParams: Record<string, any>;
     constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;

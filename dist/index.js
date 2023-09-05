@@ -2036,7 +2036,7 @@ class Context {
         this.options = options;
         this.connections = {};
         this.files = {};
-        this.querytime = { params: {} };
+        this.querytimeParams = {};
         const req = this.getReq();
         this.params = Object.assign({}, (req && req.body.params ? req.body.params : {}));
         if (req && req.files) {
@@ -2089,7 +2089,7 @@ class Context {
     getParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
-        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
+        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), this.querytimeParams), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
         return this.options.req;
@@ -6387,7 +6387,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent().dumpRowToParams(response.rows[0], context.querytime.params);
+            this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
         }
         if (this.getLimit()) {
             response.limit = context.params.limit;
@@ -6650,7 +6650,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent().dumpRowToParams(response.rows[0], context.querytime.params);
+            this.getParent().dumpRowToParams(response.rows[0], context.querytimeParams);
         }
         if (this.getLimit()) {
             response.limit = context.params.limit;
@@ -8335,7 +8335,7 @@ class BkForm extends BkModel_1.BkModel {
             return super.fill(context);
         }
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
-        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
+        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytimeParams);
         const response = await super.fill(context);
         response.dataSources.push(dataSourceResponse);
         return response;

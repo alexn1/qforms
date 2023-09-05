@@ -51,7 +51,7 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
 
         // surrogate data source response
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
-        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytime.params);
+        this.dumpRowToParams(dataSourceResponse.rows[0], context.querytimeParams);
         const response = await super.fill(context);
         response.dataSources.push(dataSourceResponse);
 

@@ -25,8 +25,8 @@ export class Context {
     files: {
         [name: string]: any;
     } = {};
-    querytime: any = { params: {} };
     params: Record<string, any>;
+    querytimeParams: Record<string, any> = {}; // for runtime query params
 
     constructor(public options: ContextOptions = {}) {
         // debug('Context', options);
@@ -45,8 +45,6 @@ export class Context {
             }
         }
     }
-
-
 
     getRoute(): string {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -103,7 +101,7 @@ export class Context {
             ...this.getCookies(),
             ...this.getQuery(),
             ...this.params,
-            ...(this.querytime ? this.querytime.params : {}),
+            ...this.querytimeParams,
             ...(user ? { userId: user.id, userName: user.name } : {}),
             ...(timeOffset !== null ? { timeOffset } : {}),
         };
