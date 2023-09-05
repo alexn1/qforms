@@ -93,7 +93,7 @@ export class Context {
         return req.query;
     }
 
-    getParams(): Record<string, any> {
+    getAllParams(): Record<string, any> {
         // debug('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
@@ -188,8 +188,8 @@ export class Context {
         this.params[name] = value;
     }
 
-    getParam(name: string): any {
-        const params = this.getParams();
+    getAllParam(name: string): any {
+        const params = this.getAllParams();
         return params[name];
     }
 

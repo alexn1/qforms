@@ -34,7 +34,7 @@ export declare class Context {
     getTimeOffset(): Nullable<number>;
     getCookies(): Record<string, string>;
     getQuery(): ParsedQs;
-    getParams(): Record<string, any>;
+    getAllParams(): Record<string, any>;
     getReq(): Optional<RequestEx>;
     getRes(): Response;
     getBody(): RequestBody;
@@ -49,7 +49,7 @@ export declare class Context {
     getProtocol(): string;
     setVersionHeaders(platformVersion: string, appVersion: Nullable<string>): void;
     setParam(name: string, value: any): void;
-    getParam(name: string): any;
+    getAllParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;
     static getIpFromReq(req: Request): string;

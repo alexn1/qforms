@@ -231,7 +231,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     }
 
     getSelectParams(context: Context) {
-        return context.getParams();
+        return context.getAllParams();
     }
 
     checkRow(row: Row) {

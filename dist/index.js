@@ -2086,7 +2086,7 @@ class Context {
             throw new Error('context: no req');
         return req.query;
     }
-    getParams() {
+    getAllParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), this.querytimeParams), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
@@ -2159,8 +2159,8 @@ class Context {
     setParam(name, value) {
         this.params[name] = value;
     }
-    getParam(name) {
-        const params = this.getParams();
+    getAllParam(name) {
+        const params = this.getAllParams();
         return params[name];
     }
     isDebugMode() {
@@ -5805,7 +5805,7 @@ class BkApplication extends BkModel_1.BkModel {
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     getPageLinksToFill(context) {
-        const pageLinkName = context.getParams().page;
+        const pageLinkName = context.getAllParams().page;
         if (pageLinkName) {
             return [pageLinkName];
         }
@@ -6510,7 +6510,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         return query;
     }
     getSelectParams(context) {
-        return context.getParams();
+        return context.getAllParams();
     }
     checkRow(row) {
         this.checkKeyColumns(row);
@@ -6702,7 +6702,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         return query;
     }
     getSelectParams(context) {
-        return context.getParams();
+        return context.getAllParams();
     }
     async read(context) {
         if (this.getAccess(context).read !== true) {
@@ -7958,7 +7958,7 @@ class BkField extends BkModel_1.BkModel {
         if (!column)
             return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
-        const params = context.getParams();
+        const params = context.getAllParams();
         const js = BkHelper_1.BkHelper.templateToJsString(defaultValue, params);
         let value;
         try {

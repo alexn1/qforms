@@ -115,7 +115,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     }
 
     getSelectParams(context: Context) {
-        return context.getParams();
+        return context.getAllParams();
     }
 
     async read(context: Context): Promise<ReadResult> {

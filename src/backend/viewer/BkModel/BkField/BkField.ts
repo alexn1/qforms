@@ -38,7 +38,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
         const column = this.getAttr('column');
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
-        const params = context.getParams();
+        const params = context.getAllParams();
         const js = BkHelper.templateToJsString(defaultValue, params);
         let value;
         try {
