@@ -1,13 +1,11 @@
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
 
-declare module 'express' {
-    export interface Request {
-        session: any;
-        headers: any;
-        files: any;
-    }
-}
+export type RequestEx = Request & {
+    session: any;
+    headers: any;
+    files: any;
+};
 
 export interface ContextOptions {
     domain?: Nullable<string>;
@@ -114,9 +112,9 @@ export class Context {
         };
     }
 
-    getReq(): Optional<Request> {
+    getReq(): Optional<RequestEx> {
         // if (!this.options.req) throw new Error('getRes: no req');
-        return this.options.req;
+        return this.options.req as RequestEx;
     }
 
     getRes(): Response {
@@ -209,8 +207,8 @@ export class Context {
         return new URL(fullUrl);
     }
 
-    static getIpFromReq(req: Request) {
-        return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    static getIpFromReq(req: Request): string {
+        return (req.headers['x-forwarded-for'] as string) || req.connection.remoteAddress!;
     }
 
     destroy(): void {}

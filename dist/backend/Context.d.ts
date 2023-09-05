@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
 import { Nullable, Optional, RequestBody } from '../types';
-declare module 'express' {
-    interface Request {
-        session: any;
-        headers: any;
-        files: any;
-    }
-}
+export type RequestEx = Request & {
+    session: any;
+    headers: any;
+    files: any;
+};
 export interface ContextOptions {
     domain?: Nullable<string>;
     req?: Request;
@@ -38,7 +36,7 @@ export declare class Context {
     getCookies(): Record<string, string>;
     getQuery(): Record<string, any>;
     getParams(): Record<string, any>;
-    getReq(): Optional<Request>;
+    getReq(): Optional<RequestEx>;
     getRes(): Response;
     getBody(): RequestBody;
     getModule(): string;
@@ -55,6 +53,6 @@ export declare class Context {
     getParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;
-    static getIpFromReq(req: Request): any;
+    static getIpFromReq(req: Request): string;
     destroy(): void;
 }

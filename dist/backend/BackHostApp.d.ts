@@ -86,9 +86,9 @@ export declare class BackHostApp {
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
     createAppInfos(req: Request): Promise<AppInfo[]>;
     composeContextData(err: Error, req: Request): {
-        headers: any;
+        headers: http.IncomingHttpHeaders;
         method: string;
-        host: any;
+        host: string | undefined;
         originalUrl: string;
         uri: string;
         platformVersion: any;
