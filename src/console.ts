@@ -14,14 +14,14 @@ export function getLogLevelName() {
     return 'debug';
 }
 
-function isTest() {
+function isJest() {
     return typeof jest !== 'undefined';
 }
 
 export function debug(message?: any, ...optionalParams: any[]) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
         // process.stdout.write(`${messages.join(' ')}\n`);
-        if (isTest()) {
+        if (isJest()) {
             process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
         } else {
             console.debug(message, ...optionalParams);
@@ -32,7 +32,7 @@ export function debug(message?: any, ...optionalParams: any[]) {
 export function log(message?: any, ...optionalParams: any[]) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
         // process.stdout.write(`${messages.join(' ')}\n`);
-        if (isTest()) {
+        if (isJest()) {
             process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
         } else {
             console.log(message, ...optionalParams);
@@ -43,13 +43,17 @@ export function log(message?: any, ...optionalParams: any[]) {
 export function warn(message?: any, ...optionalParams: any[]) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
         // process.stdout.write(`${messages.join(' ')}\n`);
-        console.warn(message, ...optionalParams);
+        if (isJest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        } else {
+            console.warn(message, ...optionalParams);
+        }
     }
 }
 
 export function error(message?: any, ...optionalParams: any[]) {
     // process.stderr.write(`${messages.join(' ')}\n`);
-    if (isTest()) {
+    if (isJest()) {
         process.stderr.write(`${[message, ...optionalParams].join(' ')}\n`);
     } else {
         console.error(message, ...optionalParams);

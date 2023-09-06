@@ -9552,12 +9552,12 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
-function isTest() {
+function isJest() {
     return typeof jest !== 'undefined';
 }
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
-        if (isTest()) {
+        if (isJest()) {
             process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
         }
         else {
@@ -9568,7 +9568,7 @@ function debug(message, ...optionalParams) {
 exports.debug = debug;
 function log(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        if (isTest()) {
+        if (isJest()) {
             process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
         }
         else {
@@ -9579,12 +9579,17 @@ function log(message, ...optionalParams) {
 exports.log = log;
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        console.warn(message, ...optionalParams);
+        if (isJest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.warn(message, ...optionalParams);
+        }
     }
 }
 exports.warn = warn;
 function error(message, ...optionalParams) {
-    if (isTest()) {
+    if (isJest()) {
         process.stderr.write(`${[message, ...optionalParams].join(' ')}\n`);
     }
     else {
@@ -20745,7 +20750,7 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
-function isTest() {
+function isJest() {
     return typeof jest !== 'undefined';
 }
 exports.pConsole = new Proxy(console, {
@@ -20755,7 +20760,7 @@ exports.pConsole = new Proxy(console, {
                 const methodLevel = exports.LogLevels.indexOf(prop);
                 const logLevel = exports.LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
-                    if (!isTest()) {
+                    if (!isJest()) {
                         return target[prop].apply(receiver, args);
                     }
                     if (prop === 'error') {

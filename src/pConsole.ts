@@ -23,7 +23,7 @@ export function getLogLevelName() {
     return 'debug';
 }
 
-function isTest() {
+function isJest() {
     return typeof jest !== 'undefined';
 }
 
@@ -36,7 +36,7 @@ export const pConsole = new Proxy(console, {
                 const logLevel = LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
                     // @ts-ignore
-                    if (!isTest()) {
+                    if (!isJest()) {
                         return target[prop].apply(receiver, args);
                     }
                     if (prop === 'error') {
