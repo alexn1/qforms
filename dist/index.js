@@ -9036,7 +9036,6 @@ class ViewerModule {
     async insert(context, application) {
         (0, console_1.debug)('ViewerModule.insert', context.getReq().body.page);
         const body = context.getBody();
-        const res = context.getRes();
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
@@ -9048,7 +9047,7 @@ class ViewerModule {
                     throw new Error('insert action: result is undefined');
                 return result;
             });
-            res.json(result);
+            context.getRes().json(result);
             this.hostApp.broadcastResult(application, context, result);
         });
     }

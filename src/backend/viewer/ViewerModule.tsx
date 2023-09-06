@@ -19,7 +19,14 @@ import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { BaseDTO, LoginDTO, PageActionDTO, RequestBody, SelectActionDTO } from '../../types';
+import {
+    BaseDTO,
+    InsertActionDTO,
+    LoginDTO,
+    PageActionDTO,
+    RequestBody,
+    SelectActionDTO,
+} from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
 const pkg = require('../../../package.json');
@@ -300,10 +307,9 @@ export class ViewerModule {
     // action
     async insert(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.insert', context.getReq()!.body.page);
-        const body = context.getBody() as RequestBody;
-        const res = context.getRes();
-        const page = await application.getPage(context, body.page!);
-        const form = page.getForm(body.form!);
+        const body = context.getBody() as InsertActionDTO;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
@@ -312,7 +318,7 @@ export class ViewerModule {
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 return result;
             });
-            res.json(result);
+            context.getRes().json(result);
             this.hostApp.broadcastResult(application, context, result);
         });
     }
