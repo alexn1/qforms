@@ -62,7 +62,7 @@ export class Context {
         const route = this.getRoute();
         const req = this.getReq();
         if (!req) return null;
-        const session = this.getSession()
+        const session = this.getSession();
         if (session.user && session.user[route]) {
             return session.user[route];
         }
@@ -96,6 +96,10 @@ export class Context {
         return this.getReq()?.query || {};
     }
 
+    getBody(): any {
+        return this.getReq()?.body || {};
+    }
+
     getAllParams(): Record<string, any> {
         // debug('Context.getParams:');
         const user = this.getUser();
@@ -120,11 +124,7 @@ export class Context {
         return this.options.res;
     }
 
-    getBody(): RequestBody {
-        const req = this.getReq();
-        if (!req) throw new Error('getBody: no req');
-        return req.body;
-    }
+
 
     getModule(): string {
         if (this.options.module) {

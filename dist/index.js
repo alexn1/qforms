@@ -2066,6 +2066,10 @@ class Context {
         var _a;
         return ((_a = this.getReq()) === null || _a === void 0 ? void 0 : _a.query) || {};
     }
+    getBody() {
+        var _a;
+        return ((_a = this.getReq()) === null || _a === void 0 ? void 0 : _a.body) || {};
+    }
     getAllParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
@@ -2078,12 +2082,6 @@ class Context {
         if (!this.options.res)
             throw new Error('getRes: no res');
         return this.options.res;
-    }
-    getBody() {
-        const req = this.getReq();
-        if (!req)
-            throw new Error('getBody: no req');
-        return req.body;
     }
     getModule() {
         if (this.options.module) {

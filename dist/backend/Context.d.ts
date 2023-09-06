@@ -1,7 +1,7 @@
 /// <reference types="express-session" />
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Nullable, Optional, RequestBody } from '../types';
+import { Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 export type RequestEx = Request & {
@@ -31,10 +31,10 @@ export declare class Context {
     getTimeOffset(): Nullable<number>;
     getCookies(): Record<string, string>;
     getQuery(): ParsedQs;
+    getBody(): any;
     getAllParams(): Record<string, any>;
     getReq(): Optional<RequestEx>;
     getRes(): Response;
-    getBody(): RequestBody;
     getModule(): string;
     getDomain(): string;
     getAppDirName(): string;
