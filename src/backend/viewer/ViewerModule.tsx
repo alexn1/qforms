@@ -354,7 +354,7 @@ export class ViewerModule {
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const result = await database.transaction<Result>(context, async () => {
-                const result = await dataSource!.delete(context);
+                const result = await dataSource.delete(context);
                 if (result === undefined) throw new Error('delete result is undefined');
                 return result;
             });

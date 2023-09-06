@@ -30,6 +30,9 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
+function isJest() {
+    return typeof jest !== 'undefined';
+}
 exports.pConsole = new Proxy(console, {
     get: function (target, prop, receiver) {
         if (typeof target[prop] === 'function') {
@@ -37,7 +40,15 @@ exports.pConsole = new Proxy(console, {
                 const methodLevel = exports.LogLevels.indexOf(prop);
                 const logLevel = exports.LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
-                    return target[prop].apply(receiver, args);
+                    if (!isJest()) {
+                        return target[prop].apply(receiver, args);
+                    }
+                    if (prop === 'error') {
+                        process.stderr.write(`${args.join(` `)}\n`);
+                    }
+                    else {
+                        process.stdout.write(`${args.join(` `)}\n`);
+                    }
                 }
             };
         }

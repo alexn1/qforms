@@ -31932,23 +31932,46 @@ function getLogLevelName() {
     }
     return 'debug';
 }
+function isJest() {
+    return typeof jest !== 'undefined';
+}
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
-        console.debug(message, ...optionalParams);
+        if (isJest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.debug(message, ...optionalParams);
+        }
     }
 }
 function log(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        console.log(message, ...optionalParams);
+        if (isJest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.log(message, ...optionalParams);
+        }
     }
 }
 function warn(message, ...optionalParams) {
     if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        console.warn(message, ...optionalParams);
+        if (isJest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.warn(message, ...optionalParams);
+        }
     }
 }
 function error(message, ...optionalParams) {
-    console.error(message, ...optionalParams);
+    if (isJest()) {
+        process.stderr.write(`${[message, ...optionalParams].join(' ')}\n`);
+    }
+    else {
+        console.error(message, ...optionalParams);
+    }
 }
 
 
