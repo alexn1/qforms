@@ -117,7 +117,7 @@ export declare class BackHostApp {
     onUnhandledRejection(reason: Error | any, promise: Promise<any>): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
-    getDomainFromRequest(req: any): Nullable<string>;
+    getDomainFromRequest(req: Request): Nullable<string>;
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;

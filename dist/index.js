@@ -782,9 +782,9 @@ class BackHostApp {
     constructor(params = {}) {
         this.params = params;
         this.applications = {};
+        this.startTime = new Date();
         this.createAppQueue = {};
         (0, console_1.debug)('BackHostApp.constructor', params);
-        this.startTime = new Date();
     }
     async init() {
         this.checkNodeVersion();

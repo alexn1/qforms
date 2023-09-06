@@ -75,17 +75,18 @@ export class BackHostApp {
     runtimeDirPath: string;
     sessionDirPath: string;
 
+    // module
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
-    startTime: Date;
+
+    startTime: Date = new Date();
     createAppQueue: { [route: string]: Nullable<Array<EmptyPromise<BkApplication>>> } = {};
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
         debug('BackHostApp.constructor', params);
-        this.startTime = new Date();
     }
 
     @log(LogLevel.debug)
@@ -785,7 +786,7 @@ export class BackHostApp {
         } */
     }
 
-    getDomainFromRequest(req: any): Nullable<string> {
+    getDomainFromRequest(req: Request): Nullable<string> {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
@@ -860,7 +861,7 @@ export class BackHostApp {
         req: Request,
         query: Record<string, Nullable<Scalar>>,
     ): Record<string, any> {
-        return Object.keys(query).reduce((acc, name) => {
+        return Object.keys(query).reduce((acc: Record<string, any>, name: string) => {
             const value = query[name];
             if (value === null) {
                 acc[name] = req.params[name];
@@ -907,16 +908,6 @@ export class BackHostApp {
 
     @log(LogLevel.debug)
     static test(): void {}
-
-    /* getDistDirPath(): string {
-        return this.distDirPath;
-    } */
-
-    /* makeDistDirPathForApp(appFilePath: string): string {
-        const dirName = path.basename(path.dirname(appFilePath));
-        const distDirPath = path.join(this.getDistDirPath(), dirName);
-        return distDirPath;
-    } */
 
     getLogger(): EventLog {
         return this.eventLog;
