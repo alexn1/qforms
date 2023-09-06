@@ -9100,11 +9100,11 @@ class ViewerModule {
     }
     async rpc(context, application) {
         (0, console_1.debug)('ViewerModule.rpc', context.getReq().body);
-        const body = context.getBody();
+        const dto = context.getBody();
         const res = context.getRes();
         const model = await ViewerModule.getModel(context, application);
         try {
-            const result = await model.rpc(body.name, context);
+            const result = await model.rpc(dto.name, context);
             if (result === undefined)
                 throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
@@ -9124,7 +9124,7 @@ class ViewerModule {
         }
         catch (err) {
             const errorMessage = err.message;
-            err.message = `rpc error ${body.name}: ${err.message}`;
+            err.message = `rpc error ${dto.name}: ${err.message}`;
             err.context = context;
             await this.hostApp.logError(err, context.getReq());
             res.json({ errorMessage });

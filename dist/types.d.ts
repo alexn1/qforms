@@ -58,9 +58,10 @@ export interface DeleteActionDto extends BaseDto {
     page: string;
     form: string;
 }
-export interface ModelDto extends BaseDto {
+export interface RpcActionDto extends BaseDto {
     page: string;
     form: string;
+    name: string;
 }
 export interface RequestBody extends BaseDto {
     page?: Nullable<string>;

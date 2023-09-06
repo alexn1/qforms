@@ -24,9 +24,9 @@ import {
     DeleteActionDto,
     InsertActionDto,
     LoginDTO,
-    ModelDto,
     PageActionDTO,
     RequestBody,
+    RpcActionDto,
     SelectActionDto,
     UpdateActionDto,
 } from '../../types';
@@ -365,7 +365,7 @@ export class ViewerModule {
     }
 
     static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
-        const body = context.getBody() as ModelDto;
+        const body = context.getBody() as RpcActionDto;
         if (body.page) {
             const page = await application.getPage(context, body.page);
             if (body.form) {
@@ -379,11 +379,11 @@ export class ViewerModule {
     // action
     async rpc(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.rpc', context.getReq()!.body);
-        const body = context.getBody() as RequestBody;
+        const dto = context.getBody() as RpcActionDto;
         const res = context.getRes();
         const model = await ViewerModule.getModel(context, application);
         try {
-            const result = await model.rpc(body.name!, context);
+            const result = await model.rpc(dto.name!, context);
             if (result === undefined) throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
                 const [response, _result] = result;
@@ -400,7 +400,7 @@ export class ViewerModule {
             }
         } catch (err: any) {
             const errorMessage = err.message;
-            err.message = `rpc error ${body.name}: ${err.message}`;
+            err.message = `rpc error ${dto.name}: ${err.message}`;
             err.context = context;
             await this.hostApp.logError(err, context.getReq());
             res.json({ errorMessage });
