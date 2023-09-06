@@ -1,6 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
@@ -68,11 +68,11 @@ module.exports = {
         ],
     },
     plugins: [
-        // new CopyPlugin({
-        //     patterns: [
-        //         { from: '**/*.ejs', context: 'src' },
-        //         { from: 'frontend/lib/**/*', context: 'src' },
-        //     ],
-        // }),
+        new CopyPlugin({
+            patterns: [
+                { from: '**/*.ejs', context: 'src' },
+                { from: 'frontend/lib/**/*', context: 'src' },
+            ],
+        }),
     ],
 };

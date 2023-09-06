@@ -2,7 +2,7 @@ const Lib = require('./Lib');
 
 module.exports = async () => {
     await Lib.exec('npx gulp clean');
-    await Lib.exec('npx gulp copy-ejs');
+    // await Lib.exec('npx gulp copy-ejs');
     await Lib.exec('npx gulp copy-lib');
     await Lib.exec('npx gulp copy-img');
     // await Lib.exec('tsc --build tsconfig.back.json');
