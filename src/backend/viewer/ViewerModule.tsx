@@ -26,6 +26,7 @@ import {
     PageActionDTO,
     RequestBody,
     SelectActionDTO,
+    UpdateActionDTO,
 } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
@@ -326,9 +327,9 @@ export class ViewerModule {
     // action
     async update(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.update', context.getReq()!.body.page);
-        const body = context.getBody() as RequestBody;
-        const page = await application.getPage(context, body.page!);
-        const form = page.getForm(body.form!);
+        const body = context.getBody() as UpdateActionDTO;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);

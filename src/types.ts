@@ -67,6 +67,11 @@ export interface InsertActionDTO extends BaseDTO {
     form: string;
 }
 
+export interface UpdateActionDTO extends BaseDTO {
+    page: string;
+    form: string;
+}
+
 export interface RequestBody extends BaseDTO {
     page?: Nullable<string>;
     form?: Nullable<string>;
