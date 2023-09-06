@@ -1,19 +1,30 @@
+const { test, describe, expect, beforeAll, afterAll } = require('@jest/globals');
 const { inspect } = require('util');
 const supertest = require('supertest');
 const { BackHostApp } = require('../dist');
 
-test('app', async () => {
-    const app = new BackHostApp({ port: 7002 });
-    await app.init();
-    // await app.run();
-    const httpServer = app.getHttpServer();
-    // console.debug(`httpServer`, inspect(httpServer, false, 1));
+describe('app', () => {
+    let app;
+    let httpServer;
+    beforeAll(async () => {
+        app = new BackHostApp({ port: 7002 });
+        await app.init();
+        httpServer = app.getHttpServer();
+        // console.debug(`httpServer`, inspect(httpServer, false, 1));
+        // await app.run();
+    });
 
-    /* const { status, text } = await supertest(httpServer).get('/monitor');
-    console.debug('status:', status);
-    console.debug('text:', text); */
+    afterAll(() => {});
 
-    const { status, text } = await supertest(httpServer).get('/viewer/test/test/local/localhost/');
-    console.debug('status:', status);
-    console.debug('text:', text);
+    test('/monitor', async () => {
+        const { status } = await supertest(httpServer).get('/monitor');
+        expect(status).toBe(200);
+    });
+
+    test('/viewer/test/test/local/localhost/', async () => {
+        const { status: status2 } = await supertest(httpServer).get(
+            '/viewer/test/test/local/localhost/',
+        );
+        expect(status2).toBe(200);
+    });
 });
