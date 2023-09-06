@@ -20,14 +20,15 @@ import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
 import {
-    BaseDTO,
-    DeleteActionDTO,
-    InsertActionDTO,
+    BaseDto,
+    DeleteActionDto,
+    InsertActionDto,
     LoginDTO,
+    ModelDto,
     PageActionDTO,
     RequestBody,
-    SelectActionDTO,
-    UpdateActionDTO,
+    SelectActionDto,
+    UpdateActionDto,
 } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
@@ -114,7 +115,7 @@ export class ViewerModule {
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
-        const { action } = context.getBody() as BaseDTO;
+        const { action } = context.getBody() as BaseDto;
         if (action === 'login') {
             await this.loginPost(context, application);
         } else {
@@ -128,7 +129,7 @@ export class ViewerModule {
     }
 
     async handleAction(context: Context, application: BkApplication) {
-        const { action } = context.getBody() as BaseDTO;
+        const { action } = context.getBody() as BaseDto;
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
@@ -283,7 +284,7 @@ export class ViewerModule {
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.select', context.getReq()!.body.page);
-        const body = context.getBody() as SelectActionDTO;
+        const body = context.getBody() as SelectActionDto;
         const start = Date.now();
         let dataSource: BkDataSource;
         if (body.page) {
@@ -309,7 +310,7 @@ export class ViewerModule {
     // action
     async insert(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.insert', context.getReq()!.body.page);
-        const body = context.getBody() as InsertActionDTO;
+        const body = context.getBody() as InsertActionDto;
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
@@ -328,7 +329,7 @@ export class ViewerModule {
     // action
     async update(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.update', context.getReq()!.body.page);
-        const body = context.getBody() as UpdateActionDTO;
+        const body = context.getBody() as UpdateActionDto;
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
@@ -347,7 +348,7 @@ export class ViewerModule {
     // action
     async _delete(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule._delete', context.getReq()!.body.page);
-        const body = context.getBody() as DeleteActionDTO;
+        const body = context.getBody() as DeleteActionDto;
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
@@ -364,7 +365,7 @@ export class ViewerModule {
     }
 
     static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody() as ModelDto;
         if (body.page) {
             const page = await application.getPage(context, body.page);
             if (body.form) {

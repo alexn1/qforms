@@ -30,35 +30,39 @@ export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
 export declare const keyToKeyTuple: (key: Key) => KeyTuple;
 export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
-export interface BaseDTO {
+export interface BaseDto {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
 }
-export interface LoginDTO extends BaseDTO {
+export interface LoginDTO extends BaseDto {
     tzOffset: JSONString;
     username: string;
     password: string;
 }
-export interface PageActionDTO extends BaseDTO {
+export interface PageActionDTO extends BaseDto {
     page: string;
 }
-export interface SelectActionDTO extends BaseDTO {
+export interface SelectActionDto extends BaseDto {
     page: string;
     form: string;
     ds: string;
 }
-export interface InsertActionDTO extends BaseDTO {
+export interface InsertActionDto extends BaseDto {
     page: string;
     form: string;
 }
-export interface UpdateActionDTO extends BaseDTO {
+export interface UpdateActionDto extends BaseDto {
     page: string;
     form: string;
 }
-export interface DeleteActionDTO extends BaseDTO {
+export interface DeleteActionDto extends BaseDto {
     page: string;
     form: string;
 }
-export interface RequestBody extends BaseDTO {
+export interface ModelDto extends BaseDto {
+    page: string;
+    form: string;
+}
+export interface RequestBody extends BaseDto {
     page?: Nullable<string>;
     form?: Nullable<string>;
     ds?: string;
