@@ -1,2 +1,8 @@
 "tsc-build": "tsc --build tsconfig.back.json",
 "tsc-build-watch": "tsc --build tsconfig.back.json --watch"
+
+// await Lib.exec('tsc --build tsconfig.back.json');
+
+// await Lib.exec('npx gulp copy-ejs');
+// await Lib.exec('npx gulp copy-lib');
+// await Lib.exec('npx gulp copy-img');

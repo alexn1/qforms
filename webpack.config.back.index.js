@@ -72,6 +72,7 @@ module.exports = {
             patterns: [
                 { from: '**/*.ejs', context: 'src' },
                 { from: 'frontend/lib/**/*', context: 'src' },
+                { from: 'frontend/**/*.ico', context: 'src' },
             ],
         }),
     ],
