@@ -99,6 +99,7 @@
         "null-loader": "^4.0.1",
         "prettier": "^2.8.4",
         "should": "^7.0.4",
+        "supertest": "^6.3.3",
         "terser-webpack-plugin": "^5.3.6",
         "through": "^2.3.8",
         "ts-jest": "^29.0.5",

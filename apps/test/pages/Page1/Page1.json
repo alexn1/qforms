@@ -1,0 +1,16 @@
+{
+    "@class": "Page",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "Page1",
+        "caption": "Page1",
+        "cssBlock": "",
+        "viewClass": "",
+        "ctrlClass": "",
+        "modelClass": "",
+        "formInTab": "false"
+    },
+    "dataSources": [],
+    "actions": [],
+    "forms": []
+}

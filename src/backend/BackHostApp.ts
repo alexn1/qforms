@@ -925,4 +925,8 @@ export class BackHostApp {
     getFrontLogUrl(): Optional<string> {
         return this.params.frontLogUrl;
     }
+
+    getHttpServer(): http.Server {
+        return this.httpServer;
+    }
 }

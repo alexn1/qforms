@@ -1428,6 +1428,9 @@ class BackHostApp {
     getFrontLogUrl() {
         return this.params.frontLogUrl;
     }
+    getHttpServer() {
+        return this.httpServer;
+    }
 }
 __decorate([
     (0, decorators_1.log)(pConsole_1.LogLevel.debug),

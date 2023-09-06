@@ -132,4 +132,5 @@ export declare class BackHostApp {
     static test(): void;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
+    getHttpServer(): http.Server;
 }
