@@ -13,6 +13,6 @@ EXPOSE 7000
 
 VOLUME ["/app/apps", "/app/runtime"]
 
-ENV NODE_ENV development
+ENV NODE_ENV dev
 
 CMD ["node", "dist/start.js"]

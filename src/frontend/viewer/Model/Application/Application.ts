@@ -122,7 +122,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     isDevelopment(): boolean {
-        return this.getNodeEnv() === 'development';
+        return this.getNodeEnv() === 'dev';
     }
 
     getRoute(): string {

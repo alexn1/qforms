@@ -9,10 +9,7 @@ export function getLogLevelName() {
         // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     } else if (typeof global === 'object') {
-        return (
-            process.env.QFORMS_LOG_LEVEL ||
-            (process.env.NODE_ENV === 'development' ? 'debug' : 'log')
-        );
+        return process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'dev' ? 'debug' : 'log');
     }
     return 'debug';
 }

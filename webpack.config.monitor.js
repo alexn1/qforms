@@ -3,7 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    mode: process.env.NODE_ENV || 'production',
+    mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
     devtool: false,
     entry: './src/frontend/monitor/main.ts',
     output: {

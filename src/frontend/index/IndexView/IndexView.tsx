@@ -88,14 +88,14 @@ export class IndexView extends ReactComponent {
                                 onClick={ctrl.run}>
                                 Run
                             </Button>
-                            {ctrl.data.nodeEnv === 'development' && (
+                            {ctrl.data.nodeEnv === 'dev' && (
                                 <Button
                                     classList={['btn', 'btn-default', 'btn-block']}
                                     onClick={ctrl.edit}>
                                     Edit
                                 </Button>
                             )}
-                            {ctrl.data.nodeEnv === 'development' && (
+                            {ctrl.data.nodeEnv === 'dev' && (
                                 <Button
                                     classList={['btn', 'btn-default', 'btn-block']}
                                     onClick={ctrl.btnCreate_Click}>

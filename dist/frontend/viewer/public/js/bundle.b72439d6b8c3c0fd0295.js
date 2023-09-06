@@ -31928,8 +31928,7 @@ function getLogLevelName() {
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
     else if (typeof global === 'object') {
-        return (process.env.QFORMS_LOG_LEVEL ||
-            ( true ? 'debug' : 0));
+        return process.env.QFORMS_LOG_LEVEL || ( false ? 0 : 'log');
     }
     return 'debug';
 }
@@ -40591,7 +40590,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.getData().nodeEnv;
     }
     isDevelopment() {
-        return this.getNodeEnv() === 'development';
+        return this.getNodeEnv() === 'dev';
     }
     getRoute() {
         return this.getAttr('route');

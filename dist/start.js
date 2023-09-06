@@ -25,8 +25,7 @@ function getLogLevelName() {
         return window[LOG_LEVEL_EV_NAME] || 'debug';
     }
     else if (typeof global === 'object') {
-        return (process.env[LOG_LEVEL_EV_NAME] ||
-            (process.env.NODE_ENV === 'development' ? 'debug' : 'log'));
+        return process.env[LOG_LEVEL_EV_NAME] || (process.env.NODE_ENV === 'dev' ? 'debug' : 'log');
     }
     return 'debug';
 }

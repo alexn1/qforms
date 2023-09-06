@@ -16,7 +16,7 @@ module.exports = {
         library: 'qforms',
         umdNamedDefine: true,
     },
-    mode: process.env.NODE_ENV || 'production',
+    mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
     devtool: false,
     module: {
         rules: [

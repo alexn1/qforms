@@ -882,7 +882,7 @@ export class BackHostApp {
     }
 
     isDevelopment(): boolean {
-        return this.getNodeEnv() === 'development';
+        return this.getNodeEnv() === 'dev';
     }
 
     isProduction(): boolean {

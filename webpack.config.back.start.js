@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: 'start.js',
     },
-    mode: process.env.NODE_ENV || 'production',
+    mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
     devtool: false,
     module: {
         rules: [
