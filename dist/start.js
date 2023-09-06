@@ -111,6 +111,10 @@ const MONITOR_CONFIG = {
     username: 'admin',
     password: '123qwe',
 };
+start(...process.argv).then((code) => {
+    if (code)
+        process.exit(code);
+});
 async function start(...argv) {
     pConsole_1.pConsole.debug('start');
     try {
@@ -123,10 +127,6 @@ async function start(...argv) {
         return 1;
     }
 }
-start(...process.argv).then((code) => {
-    if (code)
-        process.exit(code);
-});
 
 })();
 
