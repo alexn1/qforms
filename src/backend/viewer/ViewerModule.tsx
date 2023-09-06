@@ -19,7 +19,7 @@ import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { LoginRequestBody, RequestBody } from '../../types';
+import { BaseDTO, LoginDTO, RequestBody } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
 const pkg = require('../../../package.json');
@@ -105,7 +105,7 @@ export class ViewerModule {
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody() as BaseDTO;
         if (body.action === 'login') {
             await this.loginPost(context, application);
         } else {
@@ -193,7 +193,7 @@ export class ViewerModule {
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.loginPost');
-        const body = context.getBody() as LoginRequestBody;
+        const body = context.getBody() as LoginDTO;
         const req = context.getReq()!;
         const res = context.getRes();
         if (body.tzOffset === undefined) throw new Error('no tzOffset');

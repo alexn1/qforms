@@ -42,8 +42,11 @@ export type Nullable<T> = T | null;
 
 export type Optional<T> = T | undefined;
 
-export interface RequestBody {
+export interface BaseDTO {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
+}
+
+export interface RequestBody extends BaseDTO {
     page?: Nullable<string>;
     form?: Nullable<string>;
     ds?: string;
@@ -55,7 +58,7 @@ export interface RequestBody {
     newMode?: boolean;
 }
 
-export interface LoginRequestBody extends RequestBody {
+export interface LoginDTO extends BaseDTO {
     tzOffset: JSONString;
     username: string;
     password: string;
