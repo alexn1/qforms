@@ -88,3 +88,7 @@ export interface Access {
     update: boolean;
     delete: boolean;
 }
+export interface EditorPostDto {
+    controller: string;
+    action: string;
+}

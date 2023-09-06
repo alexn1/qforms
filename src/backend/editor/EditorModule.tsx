@@ -11,6 +11,7 @@ import { Scripts } from '../Scripts';
 import * as backend from '../index';
 import { home } from './home';
 import { debug } from '../../console';
+import { EditorPostDto } from '../../types';
 
 const pkg = require('../../../package.json');
 
@@ -121,20 +122,21 @@ export class EditorModule {
 
     async handleEditorPost(req: Request, res: Response, context: Context) {
         debug('EditorModule.handleEditorPost', req.body);
-        if (EDITOR_CONTROLLERS.indexOf(req.body!.controller) === -1) {
-            throw new Error(`unknown controller: ${req.body.controller}`);
+        const body = req.body as EditorPostDto;
+        if (EDITOR_CONTROLLERS.indexOf(body.controller) === -1) {
+            throw new Error(`unknown controller: ${body.controller}`);
         }
-        if (EDITOR_ACTIONS.indexOf(req.body!.action) === -1) {
-            throw new Error(`unknown action ${req.body!.action}`);
+        if (EDITOR_ACTIONS.indexOf(body.action) === -1) {
+            throw new Error(`unknown action ${body.action}`);
         }
-        const editorControllerClassName = `${req.body!.controller}EditorController`;
+        const editorControllerClassName = `${body.controller}EditorController`;
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
 
         const appInfo = await BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
-        const method = req.body!.action;
+        const method = body.action;
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.getParams());
         // debug('json result:', result);

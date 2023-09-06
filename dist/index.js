@@ -5205,20 +5205,21 @@ class EditorModule {
     }
     async handleEditorPost(req, res, context) {
         (0, console_1.debug)('EditorModule.handleEditorPost', req.body);
-        if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
-            throw new Error(`unknown controller: ${req.body.controller}`);
+        const body = req.body;
+        if (EDITOR_CONTROLLERS.indexOf(body.controller) === -1) {
+            throw new Error(`unknown controller: ${body.controller}`);
         }
-        if (EDITOR_ACTIONS.indexOf(req.body.action) === -1) {
-            throw new Error(`unknown action ${req.body.action}`);
+        if (EDITOR_ACTIONS.indexOf(body.action) === -1) {
+            throw new Error(`unknown action ${body.action}`);
         }
-        const editorControllerClassName = `${req.body.controller}EditorController`;
+        const editorControllerClassName = `${body.controller}EditorController`;
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
-        const method = req.body.action;
+        const method = body.action;
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.getParams());
