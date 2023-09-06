@@ -6,14 +6,11 @@ import { BkHelper } from './BkHelper';
 import { debug } from '../console';
 
 export class FileSessionStore extends Store {
-    store: Record<string, SessionData>;
-    dirPath: string;
+    store: Record<string, SessionData> = {};
 
-    constructor(dirPath: string) {
+    constructor(private dirPath: string) {
         // debug('FileSessionStore.constructor', dirPath);
         super();
-        this.dirPath = dirPath;
-        this.store = {};
     }
 
     set(sid: string, session: SessionData, cb: (err?: any) => void) {
@@ -21,9 +18,9 @@ export class FileSessionStore extends Store {
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        BkHelper.writeFile(sessionFilePath, content).then(() => {
-            cb(null);
-        });
+        BkHelper.writeFile(sessionFilePath, content)
+            .then(() => cb(null))
+            .catch((err) => cb(err));
     }
 
     get(sid: string, cb: (err: any, session?: SessionData | null) => void) {

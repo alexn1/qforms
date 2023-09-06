@@ -2322,9 +2322,9 @@ class FileSessionStore extends express_session_1.Store {
         this.store[sid] = session;
         const sessionFilePath = path_1.default.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        BkHelper_1.BkHelper.writeFile(sessionFilePath, content).then(() => {
-            cb(null);
-        });
+        BkHelper_1.BkHelper.writeFile(sessionFilePath, content)
+            .then(() => cb(null))
+            .catch((err) => cb(err));
     }
     get(sid, cb) {
         const session = this.store[sid];
