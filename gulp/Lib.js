@@ -54,7 +54,7 @@ class Lib {
         });
     }
 
-    static async exec(cmd) {
+    static async exec(cmd, quiet = true) {
         console.log(cmd);
         return new Promise((resolve, reject) => {
             const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
@@ -65,7 +65,7 @@ class Lib {
                     resolve();
                 }
             });
-            childProcess.stdout.on('data', (data) => process.stdout.write(data));
+            if (!quiet) childProcess.stdout.on('data', (data) => process.stdout.write(data));
             childProcess.stderr.on('data', (data) => process.stderr.write(data));
             childProcess.on('exit:', (code) => {
                 // console.debug('exit:', code, typeof code);
