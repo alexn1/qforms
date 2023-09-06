@@ -8,7 +8,7 @@ export interface EventLogOptions {
     };
     url?: string;
 }
-export interface Event {
+export interface EVEvent {
     type: 'log' | 'warn' | 'error';
     source: 'client' | 'server';
     message: string;
@@ -21,6 +21,6 @@ export declare class EventLog {
     private url?;
     constructor(options?: EventLogOptions);
     private create;
-    log(event: Event): Promise<string | null | undefined>;
+    log(event: EVEvent): Promise<string | null | undefined>;
     private logToEventLog;
 }

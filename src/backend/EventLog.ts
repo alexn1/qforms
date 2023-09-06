@@ -13,7 +13,7 @@ export interface EventLogOptions {
     url?: string;
 }
 
-export interface Event {
+export interface EVEvent {
     type: 'log' | 'warn' | 'error';
     source: 'client' | 'server';
     message: string;
@@ -31,7 +31,7 @@ export class EventLog {
         this.url = options?.url;
     }
 
-    private async create(event: Event) {
+    private async create(event: EVEvent) {
         // debug('EventLog.create', event);
         if (!this.pool) throw new Error('no pool');
         await BkPostgreSqlDatabase.queryResult(
@@ -49,7 +49,7 @@ export class EventLog {
         );
     }
 
-    public async log(event: Event) {
+    public async log(event: EVEvent) {
         if (this.pool) {
             await this.create(event);
         }

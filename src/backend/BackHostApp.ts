@@ -22,7 +22,7 @@ import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
 import { CreateAppDto, Optional, Scalar } from '../types';
-import { EventLog, EventLogOptions } from './EventLog';
+import { EVEvent, EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, error } from '../console';
 import { Nullable } from '../types';
@@ -463,42 +463,6 @@ export class BackHostApp {
         }
     }
 
-    /* async logRequest(req: Request, context: Context, time) {
-        if (!this.logPool) return;
-        try {
-            const application = this.getApplication(context);
-            let args = '';
-            if (req.body.params) {
-                args = Object.keys(req.body.params)
-                    .map((name) => `${name}: ${req.body.params[name]}`)
-                    .join(', ');
-            } else if (req.body.row) {
-                args = Object.keys(req.body.row)
-                    .map((name) => `${name}: ${req.body.row[name]}`)
-                    .join(', ');
-            }
-            let message = [
-                application.getName(),
-                ...(req.body.page ? [req.body.page] : []),
-                ...(req.body.form ? [req.body.form] : []),
-                ...(req.body.ds ? [req.body.ds] : []),
-                `${req.body.action}(${args})`,
-            ].join('.');
-            if (time) {
-                message += `, time: ${time}`;
-            }
-            await this.logger.createLog({
-                type: 'log',
-                source: 'server',
-                ip: Context.getIpFromReq(req),
-                message: message,
-                data: JSON.stringify(req.body, null, 4),
-            });
-        } catch (err) {
-            error(colors.red(err));
-        }
-    } */
-
     async logEvent(context: Context, message: string, data?: object): Promise<void> {
         pConsole.log('BackHostApp.logEvent', message);
         try {
@@ -833,8 +797,9 @@ export class BackHostApp {
 
     async postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void> {
         debug(colors.blue('BackHostApp.postError'), req.body.message);
+        const body = req.body as EVEvent;
 
-        pConsole.log('client error:', colors.red(req.body.message));
+        pConsole.log('client error:', colors.red(body.message));
 
         try {
             const data = JSON.stringify(
@@ -846,12 +811,12 @@ export class BackHostApp {
                 4,
             );
             await this.eventLog.log({
-                type: req.body.type,
-                source: req.body.source,
-                message: req.body.message,
-                stack: req.body.stack,
-                data: `${req.body.data}\n${data}`,
-                ip: req.body.ip || Context.getIpFromReq(req),
+                type: body.type,
+                source: body.source,
+                message: body.message,
+                stack: body.stack,
+                data: `${body.data}\n${data}`,
+                ip: body.ip || Context.getIpFromReq(req),
             });
             res.header('Access-Control-Allow-Origin', '*');
             res.end('ok');

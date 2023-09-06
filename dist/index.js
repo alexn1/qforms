@@ -1338,19 +1338,20 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         (0, console_1.debug)(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        pConsole_1.pConsole.log('client error:', safe_1.default.red(req.body.message));
+        const body = req.body;
+        pConsole_1.pConsole.log('client error:', safe_1.default.red(body.message));
         try {
             const data = JSON.stringify({
                 headers: req.headers,
                 domain: this.getDomainFromRequest(req),
             }, null, 4);
             await this.eventLog.log({
-                type: req.body.type,
-                source: req.body.source,
-                message: req.body.message,
-                stack: req.body.stack,
-                data: `${req.body.data}\n${data}`,
-                ip: req.body.ip || Context_1.Context.getIpFromReq(req),
+                type: body.type,
+                source: body.source,
+                message: body.message,
+                stack: body.stack,
+                data: `${body.data}\n${data}`,
+                ip: body.ip || Context_1.Context.getIpFromReq(req),
             });
             res.header('Access-Control-Allow-Origin', '*');
             res.end('ok');
