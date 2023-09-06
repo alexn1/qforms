@@ -6,6 +6,7 @@ const { BackHostApp } = require('../dist');
 describe('app', () => {
     let app;
     let httpServer;
+
     beforeAll(async () => {
         app = new BackHostApp({ port: 7002 });
         await app.init();
