@@ -21,6 +21,7 @@ import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
 import {
     BaseDTO,
+    DeleteActionDTO,
     InsertActionDTO,
     LoginDTO,
     PageActionDTO,
@@ -346,9 +347,9 @@ export class ViewerModule {
     // action
     async _delete(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule._delete', context.getReq()!.body.page);
-        const body = context.getBody() as RequestBody;
-        const page = await application.getPage(context, body.page!);
-        const form = page.getForm(body.form!);
+        const body = context.getBody() as DeleteActionDTO;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
