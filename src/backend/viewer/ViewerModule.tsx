@@ -193,16 +193,17 @@ export class ViewerModule {
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.loginPost');
-        const body = context.getBody() as LoginDTO;
+        const { tzOffset, username, password } = context.getBody() as LoginDTO;
+        if (tzOffset === undefined) throw new Error('no tzOffset');
+        if (username === undefined) throw new Error('no username');
+        if (password === undefined) throw new Error('no password');
+
         const req = context.getReq()!;
         const res = context.getRes();
-        if (body.tzOffset === undefined) throw new Error('no tzOffset');
-        if (body.username === undefined) throw new Error('no username');
-        if (body.password === undefined) throw new Error('no password');
 
         await application.connect(context);
         try {
-            const user = await application.authenticate(context, body.username, body.password);
+            const user = await application.authenticate(context, username, password);
             if (user) {
                 if (!user.id) throw new Error('no user id');
                 if (!user.name) throw new Error('no user name');
@@ -210,7 +211,7 @@ export class ViewerModule {
                 if (session.user === undefined) session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = JSON.parse(body.tzOffset);
+                session.tzOffset = JSON.parse(tzOffset);
 
                 res.redirect(req.url);
                 this.getHostApp().logEvent(
@@ -230,8 +231,8 @@ export class ViewerModule {
                     text: application.getText(),
                     title: application.getTitle(context),
                     errMsg: application.getText().login.WrongUsernameOrPassword,
-                    username: body.username,
-                    password: body.password,
+                    username: username,
+                    password: password,
                 });
                 res.status(401).end(html);
             }
