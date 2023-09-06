@@ -3,7 +3,7 @@ const { inspect } = require('util');
 const supertest = require('supertest');
 const { BackHostApp } = require('../dist');
 
-describe('app', () => {
+describe('BackHostApp', () => {
     let app;
     let httpServer;
 

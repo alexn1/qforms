@@ -23,6 +23,10 @@ export function getLogLevelName() {
     return 'debug';
 }
 
+function isTest() {
+    return typeof jest !== 'undefined';
+}
+
 export const pConsole = new Proxy(console, {
     get: function (target, prop, receiver) {
         // @ts-ignore
@@ -32,7 +36,14 @@ export const pConsole = new Proxy(console, {
                 const logLevel = LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
                     // @ts-ignore
-                    return target[prop].apply(receiver, args);
+                    if (!isTest()) {
+                        return target[prop].apply(receiver, args);
+                    }
+                    if (prop === 'error') {
+                        process.stderr.write(`${args.join(` `)}\n`);
+                    } else {
+                        process.stdout.write(`${args.join(` `)}\n`);
+                    }
                 }
             };
         }

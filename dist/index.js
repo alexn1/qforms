@@ -9552,15 +9552,28 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
+function isTest() {
+    return typeof jest !== 'undefined';
+}
 function debug(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('debug')) {
-        console.debug(message, ...optionalParams);
+        if (isTest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.debug(message, ...optionalParams);
+        }
     }
 }
 exports.debug = debug;
 function log(message, ...optionalParams) {
     if (getLogLevel() <= exports.LOG_LEVELS.indexOf('log')) {
-        console.log(message, ...optionalParams);
+        if (isTest()) {
+            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
+        }
+        else {
+            console.log(message, ...optionalParams);
+        }
     }
 }
 exports.log = log;
@@ -9571,7 +9584,12 @@ function warn(message, ...optionalParams) {
 }
 exports.warn = warn;
 function error(message, ...optionalParams) {
-    console.error(message, ...optionalParams);
+    if (isTest()) {
+        process.stderr.write(`${[message, ...optionalParams].join(' ')}\n`);
+    }
+    else {
+        console.error(message, ...optionalParams);
+    }
 }
 exports.error = error;
 
@@ -20727,6 +20745,9 @@ function getLogLevelName() {
     return 'debug';
 }
 exports.getLogLevelName = getLogLevelName;
+function isTest() {
+    return typeof jest !== 'undefined';
+}
 exports.pConsole = new Proxy(console, {
     get: function (target, prop, receiver) {
         if (typeof target[prop] === 'function') {
@@ -20734,7 +20755,15 @@ exports.pConsole = new Proxy(console, {
                 const methodLevel = exports.LogLevels.indexOf(prop);
                 const logLevel = exports.LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
-                    return target[prop].apply(receiver, args);
+                    if (!isTest()) {
+                        return target[prop].apply(receiver, args);
+                    }
+                    if (prop === 'error') {
+                        process.stderr.write(`${args.join(` `)}\n`);
+                    }
+                    else {
+                        process.stdout.write(`${args.join(` `)}\n`);
+                    }
                 }
             };
         }
@@ -21027,7 +21056,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.36.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev node apps/sample/start.js port=7001","start:sample:nodemon":"NODE_ENV=dev nodemon --watch apps/sample apps/sample/start.js port=7001","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.36.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev node apps/sample/start.js port=7001","start:sample:nodemon":"NODE_ENV=dev nodemon --watch apps/sample apps/sample/start.js port=7001","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 
