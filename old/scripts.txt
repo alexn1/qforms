@@ -1,0 +1,2 @@
+"tsc-build": "tsc --build tsconfig.back.json",
+"tsc-build-watch": "tsc --build tsconfig.back.json --watch"
