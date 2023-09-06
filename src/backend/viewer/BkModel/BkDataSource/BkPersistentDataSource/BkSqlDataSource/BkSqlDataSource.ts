@@ -4,7 +4,7 @@ import { BkHelper } from '../../../../../BkHelper';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
-import { JSONString, Key } from '../../../../../../types';
+import { JSONString, Key, RequestBody } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 import { debug } from '../../../../../../console';
 
@@ -172,7 +172,8 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
 
         const database = this.getAttr('database');
         const table = this.getAttr('table');
-        const values = _values ? _values : this.decodeRow(context.getBody().row!);
+        const body = context.getBody() as RequestBody;
+        const values = _values ? _values : this.decodeRow(body.row!);
         const autoColumnTypes = this.getAutoColumnTypes();
         // debug('autoColumnTypes:', autoColumnTypes);
 

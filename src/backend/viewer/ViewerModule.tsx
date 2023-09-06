@@ -105,7 +105,7 @@ export class ViewerModule {
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         if (body.action === 'login') {
             await this.loginPost(context, application);
         } else {
@@ -119,7 +119,7 @@ export class ViewerModule {
     }
 
     async handleAction(context: Context, application: BkApplication) {
-        const { action } = context.getBody();
+        const { action } = context.getBody() as RequestBody;
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
@@ -257,7 +257,7 @@ export class ViewerModule {
     // action (fill page)
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const res = context.getRes();
         await application.connect(context);
         try {
@@ -274,7 +274,7 @@ export class ViewerModule {
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.select', context.getReq()!.body.page);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const start = Date.now();
         let dataSource: BkDataSource;
         if (body.page) {
@@ -300,7 +300,7 @@ export class ViewerModule {
     // action
     async insert(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.insert', context.getReq()!.body.page);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const res = context.getRes();
         const page = await application.getPage(context, body.page!);
         const form = page.getForm(body.form!);
@@ -320,7 +320,7 @@ export class ViewerModule {
     // action
     async update(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.update', context.getReq()!.body.page);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const page = await application.getPage(context, body.page!);
         const form = page.getForm(body.form!);
         const dataSource = form.getDataSource('default');
@@ -339,7 +339,7 @@ export class ViewerModule {
     // action
     async _delete(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule._delete', context.getReq()!.body.page);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const page = await application.getPage(context, body.page!);
         const form = page.getForm(body.form!);
         const dataSource = form.getDataSource('default');
@@ -356,7 +356,7 @@ export class ViewerModule {
     }
 
     static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         if (body.page) {
             const page = await application.getPage(context, body.page);
             if (body.form) {
@@ -370,7 +370,7 @@ export class ViewerModule {
     // action
     async rpc(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.rpc', context.getReq()!.body);
-        const body = context.getBody();
+        const body = context.getBody() as RequestBody;
         const res = context.getRes();
         const model = await ViewerModule.getModel(context, application);
         try {

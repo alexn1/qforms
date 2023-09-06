@@ -8,7 +8,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { HttpError } from '../../../HttpError';
 import { Context } from '../../../Context';
-import { JSONString, RawRow } from '../../../../types';
+import { JSONString, RawRow, RequestBody } from '../../../../types';
 import { debug } from '../../../../console';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
 import { FormData } from '../../../../common/ModelData/FormData';
@@ -129,7 +129,8 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
     }
 
     isNewMode(context: Context): boolean {
-        return !!context.getBody().newMode;
+        const body = context.getBody() as RequestBody;
+        return !!body.newMode;
     }
 
     findField(name: string): BkField | undefined {

@@ -6452,7 +6452,8 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         }
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const values = _values ? _values : this.decodeRow(context.getBody().row);
+        const body = context.getBody();
+        const values = _values ? _values : this.decodeRow(body.row);
         (0, console_1.debug)('values', values);
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
         (0, console_1.debug)('insertResult:', insertResult);
@@ -6481,7 +6482,8 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const changes = this.decodeChanges(context.getBody().changes);
+        const body = context.getBody();
+        const changes = this.decodeChanges(body.changes);
         const key = Object.keys(changes)[0];
         (0, console_1.debug)('key:', key);
         const filter = this.getKeyValuesFromKey(key);
@@ -6585,7 +6587,8 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         }
     }
     getChanges(context) {
-        return this.decodeChanges(context.getBody().changes);
+        const body = context.getBody();
+        return this.decodeChanges(body.changes);
     }
     decodeChanges(changes) {
         const dChanges = {};
@@ -6764,7 +6767,8 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         }
         const database = this.getAttr('database');
         const table = this.getAttr('table');
-        const values = _values ? _values : this.decodeRow(context.getBody().row);
+        const body = context.getBody();
+        const values = _values ? _values : this.decodeRow(body.row);
         const autoColumnTypes = this.getAutoColumnTypes();
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
         (0, console_1.debug)('newRow:', newRow);
@@ -8422,7 +8426,8 @@ class BkForm extends BkModel_1.BkModel {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
     isNewMode(context) {
-        return !!context.getBody().newMode;
+        const body = context.getBody();
+        return !!body.newMode;
     }
     findField(name) {
         return this.fields.find((field) => field.getName() === name);
@@ -8653,7 +8658,8 @@ class BkPage extends BkModel_1.BkModel {
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        response.newMode = !!context.getBody().newMode;
+        const body = context.getBody();
+        response.newMode = !!body.newMode;
         return response;
     }
     async rpc(name, context) {
