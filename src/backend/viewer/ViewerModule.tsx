@@ -19,7 +19,7 @@ import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { BaseDTO, LoginDTO, RequestBody } from '../../types';
+import { BaseDTO, LoginDTO, PageActionDTO, RequestBody } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
 const pkg = require('../../../package.json');
@@ -258,12 +258,12 @@ export class ViewerModule {
     // action (fill page)
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody() as PageActionDTO;
         const res = context.getRes();
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, body.page!);
+            const page = await application.getPage(context, body.page);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
             res.json({ page: response });

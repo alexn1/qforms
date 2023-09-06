@@ -33,6 +33,14 @@ export type Optional<T> = T | undefined;
 export interface BaseDTO {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
 }
+export interface LoginDTO extends BaseDTO {
+    tzOffset: JSONString;
+    username: string;
+    password: string;
+}
+export interface PageActionDTO extends BaseDTO {
+    page: string;
+}
 export interface RequestBody extends BaseDTO {
     page?: Nullable<string>;
     form?: Nullable<string>;
@@ -43,11 +51,6 @@ export interface RequestBody extends BaseDTO {
     params?: Record<string, any>;
     row?: RawRow;
     newMode?: boolean;
-}
-export interface LoginDTO extends BaseDTO {
-    tzOffset: JSONString;
-    username: string;
-    password: string;
 }
 export interface Link {
     href: string;
