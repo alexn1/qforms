@@ -105,8 +105,8 @@ export class ViewerModule {
 
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
-        const body = context.getBody() as BaseDTO;
-        if (body.action === 'login') {
+        const { action } = context.getBody() as BaseDTO;
+        if (action === 'login') {
             await this.loginPost(context, application);
         } else {
             const user = context.getUser();
@@ -119,7 +119,7 @@ export class ViewerModule {
     }
 
     async handleAction(context: Context, application: BkApplication) {
-        const { action } = context.getBody() as RequestBody;
+        const { action } = context.getBody() as BaseDTO;
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
