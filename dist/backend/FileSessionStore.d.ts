@@ -1,9 +1,9 @@
-import session from 'express-session';
-export declare class FileSessionStore extends session.Store {
-    store: any;
+import { Store, SessionData } from 'express-session';
+export declare class FileSessionStore extends Store {
+    store: Record<string, SessionData>;
     dirPath: string;
     constructor(dirPath: string);
-    set(sid: any, session: any, cb: any): void;
-    get(sid: any, cb: any): void;
-    destroy(sid: any, cb: any): void;
+    set(sid: string, session: SessionData, cb: (err?: any) => void): void;
+    get(sid: string, cb: (err: any, session?: SessionData | null) => void): void;
+    destroy(sid: string, cb: (err?: any) => void): void;
 }

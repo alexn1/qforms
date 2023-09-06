@@ -2308,10 +2308,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FileSessionStore = void 0;
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
-const express_session_1 = __importDefault(__webpack_require__(/*! express-session */ "express-session"));
+const express_session_1 = __webpack_require__(/*! express-session */ "express-session");
 const BkHelper_1 = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
-class FileSessionStore extends express_session_1.default.Store {
+class FileSessionStore extends express_session_1.Store {
     constructor(dirPath) {
         super();
         this.dirPath = dirPath;

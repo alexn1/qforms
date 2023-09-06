@@ -1,12 +1,12 @@
 import path from 'path';
-import session from 'express-session';
+import { Store, SessionData } from 'express-session';
 // import colors from 'colors/safe';
 
 import { BkHelper } from './BkHelper';
 import { debug } from '../console';
 
-export class FileSessionStore extends session.Store {
-    store: any;
+export class FileSessionStore extends Store {
+    store: Record<string, SessionData>;
     dirPath: string;
 
     constructor(dirPath: string) {
@@ -16,7 +16,7 @@ export class FileSessionStore extends session.Store {
         this.store = {};
     }
 
-    set(sid, session, cb) {
+    set(sid: string, session: SessionData, cb: (err?: any) => void) {
         debug('FileSessionStore.set', sid, session);
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
@@ -26,7 +26,7 @@ export class FileSessionStore extends session.Store {
         });
     }
 
-    get(sid, cb) {
+    get(sid: string, cb: (err: any, session?: SessionData | null) => void) {
         // debug('FileSessionStore.get', sid);
         const session = this.store[sid];
         if (session) {
@@ -48,7 +48,7 @@ export class FileSessionStore extends session.Store {
         }
     }
 
-    destroy(sid, cb) {
+    destroy(sid: string, cb: (err?: any) => void) {
         debug('FileSessionStore.destroy', sid);
         delete this.store[sid];
         cb(null);
