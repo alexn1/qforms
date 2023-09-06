@@ -41,6 +41,11 @@ export interface LoginDTO extends BaseDTO {
 export interface PageActionDTO extends BaseDTO {
     page: string;
 }
+export interface SelectActionDTO extends BaseDTO {
+    page: string;
+    form: string;
+    ds: string;
+}
 export interface RequestBody extends BaseDTO {
     page?: Nullable<string>;
     form?: Nullable<string>;

@@ -8995,7 +8995,6 @@ class ViewerModule {
     async page(context, application) {
         (0, console_1.debug)('ViewerModule.page', context.getReq().body.page);
         const body = context.getBody();
-        const res = context.getRes();
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -9003,7 +9002,7 @@ class ViewerModule {
             const response = await page.fill(context);
             if (response === undefined)
                 throw new Error('page action: response is undefined');
-            res.json({ page: response });
+            context.getRes().json({ page: response });
         }
         finally {
             await application.release(context);

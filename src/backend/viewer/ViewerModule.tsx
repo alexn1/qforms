@@ -19,7 +19,7 @@ import { FrontHostApp } from '../../frontend/common';
 import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { BaseDTO, LoginDTO, PageActionDTO, RequestBody } from '../../types';
+import { BaseDTO, LoginDTO, PageActionDTO, RequestBody, SelectActionDTO } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 
 const pkg = require('../../../package.json');
@@ -259,14 +259,13 @@ export class ViewerModule {
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
         const body = context.getBody() as PageActionDTO;
-        const res = context.getRes();
         await application.connect(context);
         try {
             await application.initContext(context);
             const page = await application.getPage(context, body.page);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
-            res.json({ page: response });
+            context.getRes().json({ page: response });
         } finally {
             await application.release(context);
         }
@@ -275,18 +274,18 @@ export class ViewerModule {
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.select', context.getReq()!.body.page);
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody() as SelectActionDTO;
         const start = Date.now();
         let dataSource: BkDataSource;
         if (body.page) {
             const page = await application.getPage(context, body.page);
             if (body.form) {
-                dataSource = page.getForm(body.form).getDataSource(body.ds!);
+                dataSource = page.getForm(body.form).getDataSource(body.ds);
             } else {
-                dataSource = page.getDataSource(body.ds!);
+                dataSource = page.getDataSource(body.ds);
             }
         } else {
-            dataSource = application.getDataSource(body.ds!);
+            dataSource = application.getDataSource(body.ds);
         }
 
         await dataSource.getDatabase().use(context, async (database) => {
