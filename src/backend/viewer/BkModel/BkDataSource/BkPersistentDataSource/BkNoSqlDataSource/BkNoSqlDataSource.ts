@@ -4,7 +4,14 @@ import { BkTable } from '../../../BkTable/BkTable';
 import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
-import { Key, Row, RawRow, JSONString, RequestBody } from '../../../../../../types';
+import {
+    Key,
+    Row,
+    RawRow,
+    JSONString,
+    UpdateActionDto,
+    InsertActionDto,
+} from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
 import { BkForm } from '../../../BkForm/BkForm';
 import { BkModel } from '../../../BkModel';
@@ -123,8 +130,8 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const body = context.getBody() as RequestBody;
-        const values = _values ? _values : this.decodeRow(body.row!);
+        const body = context.getBody() as InsertActionDto;
+        const values = _values ? _values : this.decodeRow(body.row);
         debug('values', values);
 
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
@@ -165,8 +172,8 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const body = context.getBody() as RequestBody;
-        const changes = this.decodeChanges(body.changes!);
+        const body = context.getBody() as UpdateActionDto;
+        const changes = this.decodeChanges(body.changes);
         // debug('changes:', changes);
 
         const key = Object.keys(changes)[0] as Key;

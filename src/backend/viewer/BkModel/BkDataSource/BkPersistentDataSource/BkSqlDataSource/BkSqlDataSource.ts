@@ -4,7 +4,7 @@ import { BkHelper } from '../../../../../BkHelper';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
-import { JSONString, Key, RequestBody } from '../../../../../../types';
+import { InsertActionDto, Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 import { debug } from '../../../../../../console';
 
@@ -172,8 +172,8 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
 
         const database = this.getAttr('database');
         const table = this.getAttr('table');
-        const body = context.getBody() as RequestBody;
-        const values = _values ? _values : this.decodeRow(body.row!);
+        const body = context.getBody() as InsertActionDto;
+        const values = _values ? _values : this.decodeRow(body.row);
         const autoColumnTypes = this.getAutoColumnTypes();
         // debug('autoColumnTypes:', autoColumnTypes);
 

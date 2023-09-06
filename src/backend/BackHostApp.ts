@@ -21,7 +21,7 @@ import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { Optional, Scalar } from '../types';
+import { CreateAppDto, Optional, Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, error } from '../console';
@@ -419,16 +419,14 @@ export class BackHostApp {
 
     @log(LogLevel.debug)
     async createAppInfos(req: Request): Promise<AppInfo[]> {
-        if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
-        if (!req.body.name) throw new Error('name required: ' + req.body.name);
-        const folder = req.body.folder;
-        const name = req.body.name;
+        const { folder, name } = req.body as CreateAppDto;
+        if (!folder) throw new Error(`folder required: ${folder}`);
+        if (!name) throw new Error(`name required: ${name}`);
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
         await BkHelper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        // const distDirPath = this.makeDistDirPathForApp(appFilePath);
-        const appInfos = await BkApplication.getAppInfos(this.appsDirPath /* , distDirPath */);
+        const appInfos = await BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;
     }
 

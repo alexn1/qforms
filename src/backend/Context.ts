@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Nullable, Optional, RequestBody } from '../types';
+import { Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 
@@ -123,8 +123,6 @@ export class Context {
         if (!this.options.res) throw new Error('getRes: no res');
         return this.options.res;
     }
-
-
 
     getModule(): string {
         if (this.options.module) {

@@ -1,4 +1,4 @@
-import { Key } from '../../../../../types';
+import { Key, PageActionDto } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -162,7 +162,7 @@ export class ApplicationController extends ModelController<Application> {
             page: options.name,
             newMode: !!options.newMode,
             params: options.params || {},
-        });
+        } as PageActionDto);
 
         // modal by default
         if (options.modal === undefined) {

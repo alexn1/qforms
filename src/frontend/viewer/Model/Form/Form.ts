@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { Key, RawRow, Row, Scalar } from '../../../../types';
+import { Key, RawRow, Row, RpcActionDto, Scalar } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { FormData } from '../../../../common/ModelData/FormData';
@@ -95,7 +95,7 @@ export class Form extends Model<FormData> {
             form: this.getName(),
             name: name,
             params: params,
-        });
+        } as RpcActionDto);
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }

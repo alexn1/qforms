@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import { Key, RawRow } from '../../../../../types';
+import { DeleteActionDto, InsertActionDto, Key, RawRow, SelectActionDto, UpdateActionDto } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
 
@@ -28,7 +28,7 @@ export class PersistentDataSource extends DataSource {
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             row: this.getRowWithChanges(row),
-        });
+        } as InsertActionDto);
 
         // key & values
         const [key] = Object.keys(result[database][table].insertEx!) as [Key];
@@ -72,11 +72,11 @@ export class PersistentDataSource extends DataSource {
         // specific to PersistentDataSource
         const result: Result = await this.getApp().request('POST', {
             action: 'update',
-            uuid: this.getApp().getAttr('uuid'),            
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
-        });
+        } as UpdateActionDto);
 
         const [key] = Object.keys(result[database][table].updateEx!) as [Key];
         if (!key) throw new Error('no updated row');
@@ -106,11 +106,11 @@ export class PersistentDataSource extends DataSource {
         }
         const result: Result = await this.getApp().request('POST', {
             action: '_delete',
-            uuid: this.getApp().getAttr('uuid'),            
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             params: { key },
-        });
+        } as DeleteActionDto);
         await this.refill();
 
         // events
@@ -228,7 +228,7 @@ export class PersistentDataSource extends DataSource {
         await this.fill(this.lastFrame);
     }
 
-    async select(params = {}) {
+    async select(params: Record<string, any> = {}) {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
@@ -241,7 +241,7 @@ export class PersistentDataSource extends DataSource {
                 ...this.getPageParams(),
                 ...params,
             },
-        });
+        } as SelectActionDto);
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
         return data;

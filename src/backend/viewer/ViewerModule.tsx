@@ -23,9 +23,8 @@ import {
     BaseDto,
     DeleteActionDto,
     InsertActionDto,
-    LoginDTO,
-    PageActionDTO,
-    RequestBody,
+    LoginDto,
+    PageActionDto,
     RpcActionDto,
     SelectActionDto,
     UpdateActionDto,
@@ -203,7 +202,7 @@ export class ViewerModule {
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.loginPost');
-        const { tzOffset, username, password } = context.getBody() as LoginDTO;
+        const { tzOffset, username, password } = context.getBody() as LoginDto;
         if (tzOffset === undefined) throw new Error('no tzOffset');
         if (username === undefined) throw new Error('no username');
         if (password === undefined) throw new Error('no password');
@@ -268,7 +267,7 @@ export class ViewerModule {
     // action (fill page)
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
-        const body = context.getBody() as PageActionDTO;
+        const body = context.getBody() as PageActionDto;
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -383,7 +382,7 @@ export class ViewerModule {
         const res = context.getRes();
         const model = await ViewerModule.getModel(context, application);
         try {
-            const result = await model.rpc(dto.name!, context);
+            const result = await model.rpc(dto.name, context);
             if (result === undefined) throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
                 const [response, _result] = result;

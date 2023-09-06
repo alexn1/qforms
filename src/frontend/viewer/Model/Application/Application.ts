@@ -1,4 +1,4 @@
-import { RequestBody } from '../../../../types';
+import { RpcActionDto } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp, RequestMethod } from '../../../common';
@@ -51,7 +51,7 @@ export class Application extends Model<ApplicationData> {
         this.emit('logout', { source: this });
     }
 
-    async request(method: RequestMethod, body: RequestBody) {
+    async request(method: RequestMethod, body: any) {
         // console.warn('Application.request', data);
         const start = Date.now();
         const [headers, data] = await FrontHostApp.doHttpRequest2(method, body);
@@ -101,7 +101,7 @@ export class Application extends Model<ApplicationData> {
             name: name,
             params: params,
             uuid: this.getAttr('uuid'),
-        });
+        } as RpcActionDto);
         if (response.errorMessage) throw new Error(response.errorMessage);
         return response;
     }

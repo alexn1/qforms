@@ -4,7 +4,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
-import { Key } from '../../../../types';
+import { Key, RpcActionDto } from '../../../../types';
 import { Application } from '../Application/Application';
 import { debug } from '../../../../console';
 
@@ -189,7 +189,7 @@ export class Page extends Model<PageData> {
             page: this.getName(),
             name: name,
             params: params,
-        });
+        } as RpcActionDto);
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }

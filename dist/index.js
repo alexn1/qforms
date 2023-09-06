@@ -1006,12 +1006,11 @@ class BackHostApp {
         return BkApplication_1.BkApplication;
     }
     async createAppInfos(req) {
-        if (!req.body.folder)
-            throw new Error('folder required: ' + req.body.folder);
-        if (!req.body.name)
-            throw new Error('name required: ' + req.body.name);
-        const folder = req.body.folder;
-        const name = req.body.name;
+        const { folder, name } = req.body;
+        if (!folder)
+            throw new Error(`folder required: ${folder}`);
+        if (!name)
+            throw new Error(`name required: ${name}`);
         const appDirPath = path_1.default.join(this.appsDirPath, folder);
         const appFilePath = path_1.default.join(appDirPath, name + '.json');
         await BkHelper_1.BkHelper.createDirIfNotExists(appDirPath);

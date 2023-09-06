@@ -46,53 +46,57 @@ export interface BaseDto {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
 }
 
-export interface LoginDTO extends BaseDto {
+export interface LoginDto extends BaseDto {
     tzOffset: JSONString;
     username: string;
     password: string;
 }
 
-export interface PageActionDTO extends BaseDto {
+export interface PageActionDto extends BaseDto {
     page: string;
+    params: Record<string, any>;
+    newMode: boolean;
 }
 
 export interface SelectActionDto extends BaseDto {
     page: string;
     form: string;
     ds: string;
+    params: Record<string, any>;
 }
 
 export interface InsertActionDto extends BaseDto {
     page: string;
     form: string;
+    row: RawRow;
+    uuid: string;
 }
 
 export interface UpdateActionDto extends BaseDto {
     page: string;
     form: string;
+    uuid: string;
+    changes: ChangesByKey;
 }
 
 export interface DeleteActionDto extends BaseDto {
     page: string;
     form: string;
+    uuid: string;
+    params: Record<string, any>;
 }
 
 export interface RpcActionDto extends BaseDto {
     page: string;
     form: string;
     name: string;
+    uuid: string;
+    params: Record<string, any>;
 }
 
-export interface RequestBody extends BaseDto {
-    page?: Nullable<string>;
-    form?: Nullable<string>;
-    ds?: string;
-    name?: string;
-    uuid?: string;
-    changes?: ChangesByKey;
-    params?: Record<string, any>;
-    row?: RawRow;
-    newMode?: boolean;
+export interface CreateAppDto {
+    folder: string;
+    name: string;
 }
 
 export interface Link {

@@ -1,4 +1,3 @@
-import { RequestBody } from '../../types';
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
@@ -85,7 +84,7 @@ export class FrontHostApp {
         return `${data.page}.${data.form}.${data.ds}.${data.action}`;
     }
 
-    static async doHttpRequest2(method: RequestMethod, body: RequestBody) {
+    static async doHttpRequest2(method: RequestMethod, body: any) {
         console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
         console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);

@@ -1,7 +1,7 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
-import { RawRow, ChangesByKey, Key, Row, RequestBody } from '../../../../../types';
+import { RawRow, ChangesByKey, Key, Row, UpdateActionDto } from '../../../../../types';
 import { BkModel } from '../../BkModel';
 import { Context } from '../../../../Context';
 import { DataSourceScheme } from '../../../../common/Scheme/DataSourceScheme';
@@ -19,8 +19,8 @@ export abstract class BkPersistentDataSource<
     }
 
     getChanges(context: Context): Record<Key, any> {
-        const body = context.getBody() as RequestBody;
-        return this.decodeChanges(body.changes!);
+        const body = context.getBody() as UpdateActionDto;
+        return this.decodeChanges(body.changes);
     }
 
     decodeChanges(changes: ChangesByKey): Record<Key, any> {

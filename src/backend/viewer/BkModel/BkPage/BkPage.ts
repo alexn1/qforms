@@ -10,7 +10,7 @@ import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { Optional, RequestBody } from '../../../../types';
+import { Optional, PageActionDto } from '../../../../types';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -46,7 +46,7 @@ export class BkPage<
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        const body = context.getBody() as RequestBody;
+        const body = context.getBody() as PageActionDto;
         response.newMode = !!body.newMode;
         return response;
     }
