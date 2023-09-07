@@ -19,7 +19,7 @@ export type ReadResult = [RawRow[], Nullable<number>];
 
 export class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[] = [];
-    rows: Row[] = [];
+    rows: RawRow[] = [];
 
     /* constructor(data, parent) {
         super(data, parent);
@@ -247,11 +247,9 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
         }
     }
 
-    async fill(
-        context: Context,
-    ): Promise<{ rows: RawRow[]; count: number | null; limit?: number }> {
+    async fill(context: Context): Promise<DataSourceData> {
         // debug('DataSource.fill', this.getFullName());
-        const response = await super.fill(context);
+        const response: DataSourceData = (await super.fill(context)) as DataSourceData;
 
         // keyColumns
         response.keyColumns = this.keyColumns;
@@ -261,7 +259,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
         return response;
     }
 
-    async getRows(): Promise<Row[]> {
+    async getRows(): Promise<RawRow[]> {
         // debug('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
         const exists = await BkHelper.exists(jsonFilePath);

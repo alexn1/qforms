@@ -1,3 +1,4 @@
+import { DataSourceData } from './DataSourceData';
 import { FieldData } from './FieldData';
 import { ModelData } from './ModelData';
 
@@ -14,4 +15,5 @@ export interface FormData extends ModelData {
     deleteRowMode: string;
 
     fields: FieldData[];
+    dataSources: DataSourceData[];
 }

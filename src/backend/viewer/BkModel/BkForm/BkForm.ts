@@ -12,6 +12,7 @@ import { JSONString, PageActionDto, RawRow } from '../../../../types';
 import { debug } from '../../../../console';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
 import { FormData } from '../../../../common/ModelData/FormData';
+import { DataSourceData } from '../../../../common';
 
 export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[] = [];
@@ -43,22 +44,22 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
         response.ctrlClass = this.getAttr('ctrlClass');
     }
 
-    async fill(context: Context) {
+    async fill(context: Context): Promise<FormData> {
         // debug('Form.fill', this.constructor.name, this.getFullName());
         if (this.findDataSource('default')) {
-            return super.fill(context);
+            return (await super.fill(context)) as FormData;
         }
 
         // surrogate data source response
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context);
-        const response = await super.fill(context);
+        const response = (await super.fill(context)) as FormData;
         response.dataSources.push(dataSourceResponse);
 
         return response;
     }
 
-    _getSurrogateDataSourceResponse(context: Context) {
+    _getSurrogateDataSourceResponse(context: Context): DataSourceData {
         const row = {} as RawRow;
         row['id'] = '[1]' as JSONString;
 
@@ -70,7 +71,7 @@ export class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel
             name: 'default',
             keyColumns: ['id'],
             rows: [row],
-        };
+        } as DataSourceData;
     }
 
     dumpRowToParams(row: RawRow, context: Context) {

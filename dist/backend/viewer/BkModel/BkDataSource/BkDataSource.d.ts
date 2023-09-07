@@ -10,7 +10,7 @@ import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 export type ReadResult = [RawRow[], Nullable<number>];
 export declare class BkDataSource extends BkModel<DataSourceScheme> {
     keyColumns: string[];
-    rows: Row[];
+    rows: RawRow[];
     getDirPath(): string;
     getJsonFilePath(): string;
     init(context: Context): Promise<void>;
@@ -31,12 +31,8 @@ export declare class BkDataSource extends BkModel<DataSourceScheme> {
     calcNewKeyValues(originalKeyValues: KeyRecord, values: any): KeyRecord;
     calcNewKey(key: Key, values: any): Key;
     fillAttributes(response: DataSourceData): void;
-    fill(context: Context): Promise<{
-        rows: RawRow[];
-        count: number | null;
-        limit?: number;
-    }>;
-    getRows(): Promise<Row[]>;
+    fill(context: Context): Promise<DataSourceData>;
+    getRows(): Promise<RawRow[]>;
     isOnForm(): boolean;
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;

@@ -1,4 +1,4 @@
-import { RawRow } from '../../types';
+import { Nullable, RawRow } from '../../types';
 import { ModelData } from './ModelData';
 
 export interface DataSourceData extends ModelData {
@@ -8,4 +8,7 @@ export interface DataSourceData extends ModelData {
 
     keyColumns: string[];
     rows: RawRow[];
+
+    count: Nullable<number>;
+    limit?: number;
 }

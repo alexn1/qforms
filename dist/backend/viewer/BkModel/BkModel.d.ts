@@ -8,7 +8,7 @@ export declare class BkModel<TModelScheme extends ModelScheme = ModelScheme> ext
     init(context: Context): Promise<void>;
     deinit(): Promise<void>;
     checkDeinited(): void;
-    fill(context: Context): Promise<any>;
+    fill(context: Context): Promise<ModelData>;
     fillAttributes(response: ModelData): void;
     isBackOnly(): boolean;
     fillCollection(response: ModelData, colName: string, context: Context): Promise<void>;

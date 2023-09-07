@@ -8,6 +8,7 @@ import { Context } from '../../../Context';
 import { RawRow } from '../../../../types';
 import { FormScheme } from '../../../common/Scheme/FormScheme';
 import { FormData } from '../../../../common/ModelData/FormData';
+import { DataSourceData } from '../../../../common';
 export declare class BkForm<TFormScheme extends FormScheme = FormScheme> extends BkModel<TFormScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -16,13 +17,8 @@ export declare class BkForm<TFormScheme extends FormScheme = FormScheme> extends
     init(context: Context): Promise<void>;
     getDirPath(): string;
     fillAttributes(response: FormData): void;
-    fill(context: Context): Promise<any>;
-    _getSurrogateDataSourceResponse(context: Context): {
-        class: string;
-        name: string;
-        keyColumns: string[];
-        rows: RawRow[];
-    };
+    fill(context: Context): Promise<FormData>;
+    _getSurrogateDataSourceResponse(context: Context): DataSourceData;
     dumpRowToParams(row: RawRow, context: Context): void;
     replaceThis(context: Context, query: string): string;
     rpc(name: string, context: Context): Promise<any>;

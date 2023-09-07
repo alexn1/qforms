@@ -22,7 +22,7 @@ export class BkModel<
         }
     }
 
-    async fill(context: Context): Promise<any> {
+    async fill(context: Context): Promise<ModelData> {
         // debug('Model.fill', this.constructor.name, this.getName());
         const response: ModelData = { name: '' };
 

@@ -6297,7 +6297,7 @@ class BkDataSource extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        const response = await super.fill(context);
+        const response = (await super.fill(context));
         response.keyColumns = this.keyColumns;
         response.rows = await this.getRows();
         return response;
@@ -8357,11 +8357,11 @@ class BkForm extends BkModel_1.BkModel {
     }
     async fill(context) {
         if (this.findDataSource('default')) {
-            return super.fill(context);
+            return (await super.fill(context));
         }
         const dataSourceResponse = this._getSurrogateDataSourceResponse(context);
         this.dumpRowToParams(dataSourceResponse.rows[0], context);
-        const response = await super.fill(context);
+        const response = (await super.fill(context));
         response.dataSources.push(dataSourceResponse);
         return response;
     }
