@@ -7,11 +7,12 @@
         "rootDir": "src",
         "outDir": "dist",
         "moduleResolution": "node",
-        "module": "commonjs",
-        "resolveJsonModule": true,
-        "strictNullChecks": true,
         "noImplicitAny": false,
+        "strictNullChecks": true,
+        "removeComments": true,
         "experimentalDecorators": true,
-        "removeComments": true
+        "resolveJsonModule": true,
+
+        "module": "commonjs"
     }
 }
