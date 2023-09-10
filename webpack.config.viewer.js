@@ -1,7 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const tsConfigFront = require('./tsconfig.front.json');
+const tsConfigCustom = require('./tsconfig.custom.json');
 
 module.exports = {
     mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
@@ -28,7 +28,7 @@ module.exports = {
                     loader: 'ts-loader',
                     options: {
                         onlyCompileBundledFiles: true,
-                        ...tsConfigFront,
+                        ...tsConfigCustom,
                     },
                 },
             }, */
@@ -36,7 +36,7 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: 'esbuild-loader',
                 options: {
-                    tsconfig: './tsconfig.front.json',
+                    tsconfig: './tsconfig.custom.json',
                     keepNames: true,
                 },
             },
