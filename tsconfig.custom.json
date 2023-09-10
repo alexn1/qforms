@@ -10,9 +10,8 @@
         "module": "commonjs",
         "resolveJsonModule": true,
         "strictNullChecks": true,
-        "incremental": true,
-        "tsBuildInfoFile": "./dist/tsconfig.back.tsbuildinfo"
-        // "noImplicitAny": true
-    },
-    "include": ["src/**/*"]
+        "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "removeComments": true
+    }
 }

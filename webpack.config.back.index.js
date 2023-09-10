@@ -2,6 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const tsConfigCustom = require('./tsconfig.custom.json');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
@@ -27,21 +28,7 @@ module.exports = {
                     loader: 'ts-loader',
                     options: {
                         onlyCompileBundledFiles: false,
-                        compilerOptions: {
-                            target: 'ES2017',
-                            declaration: true,
-                            esModuleInterop: true,
-                            jsx: 'react-jsx',
-                            rootDir: 'src',
-                            outDir: 'dist',
-                            moduleResolution: 'node',
-                            module: 'commonjs',
-                            resolveJsonModule: true,
-                            strictNullChecks: true,
-                            noImplicitAny: false,
-                            experimentalDecorators: true,
-                            removeComments: true,
-                        },
+                        ...tsConfigCustom,
                     },
                 },
             },
