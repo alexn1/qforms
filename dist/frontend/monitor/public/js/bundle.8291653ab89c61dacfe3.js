@@ -2,238 +2,702 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/frontend/common/widget/Box/Box.less":
+/***/ "./src/console.ts":
+/*!************************!*\
+  !*** ./src/console.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LOG_LEVELS": () => (/* binding */ LOG_LEVELS),
+/* harmony export */   "debug": () => (/* binding */ debug),
+/* harmony export */   "error": () => (/* binding */ error),
+/* harmony export */   "getLogLevel": () => (/* binding */ getLogLevel),
+/* harmony export */   "getLogLevelName": () => (/* binding */ getLogLevelName),
+/* harmony export */   "log": () => (/* binding */ log),
+/* harmony export */   "warn": () => (/* binding */ warn)
+/* harmony export */ });
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+const LOG_LEVELS = ["debug", "log", "warn", "error"];
+function getLogLevel() {
+  return LOG_LEVELS.indexOf(getLogLevelName());
+}
+__name(getLogLevel, "getLogLevel");
+function getLogLevelName() {
+  if (typeof window === "object") {
+    return window.QFORMS_LOG_LEVEL || "debug";
+  } else if (typeof global === "object") {
+    return process.env.QFORMS_LOG_LEVEL || ( false ? 0 : "log");
+  }
+  return "debug";
+}
+__name(getLogLevelName, "getLogLevelName");
+function isJest() {
+  return typeof jest !== "undefined";
+}
+__name(isJest, "isJest");
+function debug(message, ...optionalParams) {
+  if (getLogLevel() <= LOG_LEVELS.indexOf("debug")) {
+    if (isJest()) {
+      process.stdout.write(`${[message, ...optionalParams].join(" ")}
+`);
+    } else {
+      console.debug(message, ...optionalParams);
+    }
+  }
+}
+__name(debug, "debug");
+function log(message, ...optionalParams) {
+  if (getLogLevel() <= LOG_LEVELS.indexOf("log")) {
+    if (isJest()) {
+      process.stdout.write(`${[message, ...optionalParams].join(" ")}
+`);
+    } else {
+      console.log(message, ...optionalParams);
+    }
+  }
+}
+__name(log, "log");
+function warn(message, ...optionalParams) {
+  if (getLogLevel() <= LOG_LEVELS.indexOf("log")) {
+    if (isJest()) {
+      process.stdout.write(`${[message, ...optionalParams].join(" ")}
+`);
+    } else {
+      console.warn(message, ...optionalParams);
+    }
+  }
+}
+__name(warn, "warn");
+function error(message, ...optionalParams) {
+  if (isJest()) {
+    process.stderr.write(`${[message, ...optionalParams].join(" ")}
+`);
+  } else {
+    console.error(message, ...optionalParams);
+  }
+}
+__name(error, "error");
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/Helper.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Helper.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Helper": () => (/* binding */ Helper)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _Helper = class _Helper {
+  /* static currentDate() {
+      const now = new Date();
+      let dd = now.getDate();if (dd < 10) dd = '0' + dd;
+      let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
+      const yyyy = now.getFullYear();
+      return [yyyy, mm, dd].join('-');
+  } */
+  /* static currentDateTime() {
+      return Helper.currentDate() + ' ' + Helper.currentTime();
+  } */
+  /* static currentTime() {
+      const now = new Date();
+      let hh = now.getHours();if (hh < 10) hh = '0' + hh;
+      let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
+      let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
+      return [hh, mm, ss].join(':');
+  } */
+  static formatDate(date, format) {
+    const YYYY = date.getFullYear();
+    const M = date.getMonth() + 1;
+    const D = date.getDate();
+    const h = date.getHours();
+    const m = date.getMinutes();
+    const s = date.getSeconds();
+    const MM = M < 10 ? `0${M}` : M;
+    const DD = D < 10 ? `0${D}` : D;
+    const hh = h < 10 ? `0${h}` : h;
+    const mm = m < 10 ? `0${m}` : m;
+    const ss = s < 10 ? `0${s}` : s;
+    const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+    return format.replace(
+      /\{([\w.]+)\}/g,
+      (text, name) => values[name] ? values[name] : text
+    );
+  }
+  static formatNumber(value) {
+    return new Intl.NumberFormat("ru-RU").format(value);
+  }
+  static today() {
+    const now = /* @__PURE__ */ new Date();
+    return _Helper.getStartOfDay(now);
+  }
+  static getStartOfDay(date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+  static encodeObject(obj) {
+    const eObj = {};
+    for (const name in obj) {
+      eObj[name] = _Helper.encodeValue(obj[name]);
+    }
+    return eObj;
+  }
+  static encodeValue(value) {
+    return JSON.stringify(value);
+  }
+  static decodeObject(eObj) {
+    if (!eObj)
+      throw new Error("Helper.decodeObject: no object");
+    const obj = {};
+    for (const name in eObj) {
+      obj[name] = _Helper.decodeValue(eObj[name]);
+    }
+    return obj;
+  }
+  static decodeValue(raw) {
+    return JSON.parse(raw, _Helper.dateTimeReviver);
+  }
+  static dateTimeReviver(key, value) {
+    if (typeof value === "string") {
+      const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
+        value
+      );
+      if (a)
+        return new Date(value);
+    }
+    return value;
+  }
+  static createReactComponent(rootElement, type, props = {}, children) {
+    let component = void 0;
+    const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+      react__WEBPACK_IMPORTED_MODULE_0__.createElement(
+        type,
+        __spreadProps(__spreadValues({}, props), {
+          onCreate: (c, name) => {
+            component = c;
+          }
+        }),
+        children
+      )
+    ]);
+    react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
+    return component;
+  }
+  static createReactComponent2(rootElement, type, props = {}, children) {
+    let component = void 0;
+    const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+      react__WEBPACK_IMPORTED_MODULE_0__.createElement(
+        type,
+        __spreadProps(__spreadValues({}, props), {
+          onCreate: (c, name) => {
+            component = c;
+          }
+        }),
+        children
+      )
+    ]);
+    react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
+    return component;
+  }
+  static destroyReactComponent(root) {
+    react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
+  }
+  static readFileAsDataURL(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
+  }
+  /* static readFileAsArrayBuffer(file) {
+      return new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsArrayBuffer(file);
+      });
+  } */
+  /* static convertBufferToBase64string(buffer) {
+      const array = new Uint8Array(buffer);
+      const binaryString = String.fromCharCode.apply(null, array);
+      return window.btoa(binaryString);
+  } */
+  /* static createObjectUrl(buffer) {
+      const blob = new Blob([new Uint8Array(buffer)]);
+      return window.URL.createObjectURL(blob);
+  } */
+  // append file as filed and all not file as json string
+  /* static createFormData(body) {
+      const formData = new FormData();
+      const fields = {};
+      for (const name in body) {
+          if (body[name] instanceof File) {
+              formData.append(name, body[name]);
+          } else {
+              fields[name] = body[name];
+          }
+      }
+      formData.append('__json', JSON.stringify(fields));
+      return formData;
+  } */
+  /* static base64ToArrayBuffer(base64) {
+      const binaryString = window.atob(base64);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+      }
+      return bytes.buffer;
+  } */
+  static templateToJsString(value, params) {
+    return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
+      if (params.hasOwnProperty(name)) {
+        return `Helper.decodeValue('${_Helper.encodeValue(params[name])}')`;
+      }
+      return "undefined";
+    });
+  }
+  static moveArrItem(arr, item, offset) {
+    const oldIndex = arr.indexOf(item);
+    if (oldIndex === -1)
+      throw new Error("cannot find element");
+    const newIndex = oldIndex + offset;
+    if (newIndex < 0)
+      throw new Error("cannot up top element");
+    if (newIndex > arr.length - 1)
+      throw new Error("cannot down bottom element");
+    arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+  }
+  static formatTime(_sec) {
+    let sec = _sec;
+    let sign = "";
+    if (_sec < 0) {
+      sec = -sec;
+      sign = "-";
+    }
+    let h = Math.floor(sec / 3600);
+    let m = Math.floor((sec - h * 3600) / 60);
+    let s = Math.floor(sec - h * 3600 - m * 60);
+    if (h < 10)
+      h = "0" + h;
+    if (m < 10)
+      m = "0" + m;
+    if (s < 10)
+      s = "0" + s;
+    if (Math.floor(sec / 3600) === 0) {
+      return `${sign}${m}:${s}`;
+    } else {
+      return `${sign}${h}:${m}:${s}`;
+    }
+  }
+  static formatTime2(_sec) {
+    let sec = _sec;
+    let sign = "";
+    if (_sec < 0) {
+      sec = -sec;
+      sign = "-";
+    }
+    let h = Math.floor(sec / 3600);
+    let m = Math.floor((sec - h * 3600) / 60);
+    let s = Math.floor(sec - h * 3600 - m * 60);
+    if (h < 10)
+      h = "0" + h;
+    if (m < 10)
+      m = "0" + m;
+    if (s < 10)
+      s = "0" + s;
+    if (Math.floor(sec / 3600) === 0) {
+      return `${sign}${m}m:${s}s`;
+    } else {
+      return `${sign}${h}h:${m}m:${s}s`;
+    }
+  }
+  static SECOND() {
+    return 1e3;
+  }
+  static MINUTE() {
+    return 60 * _Helper.SECOND();
+  }
+  static HOUR() {
+    return 60 * _Helper.MINUTE();
+  }
+  static DAY() {
+    return 24 * _Helper.HOUR();
+  }
+  static WEEK() {
+    return 7 * _Helper.DAY();
+  }
+  static fallbackCopyTextToClipboard(text) {
+    const activeElement = document.activeElement;
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    activeElement.focus();
+  }
+  static copyTextToClipboard(text) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)("Helper.copyTextToClipboard", text);
+      if (!navigator.clipboard) {
+        _Helper.fallbackCopyTextToClipboard(text);
+        return;
+      }
+      yield navigator.clipboard.writeText(text);
+    });
+  }
+  static addMinutes(date, minutes) {
+    date.setMinutes(date.getMinutes() + minutes);
+  }
+  static removeTimezoneOffset(date) {
+    _Helper.addMinutes(date, -date.getTimezoneOffset());
+  }
+  static addTimezoneOffset(date) {
+    _Helper.addMinutes(date, date.getTimezoneOffset());
+  }
+  static cloneDate(date) {
+    return new Date(date.getTime());
+  }
+  static fillArray(n) {
+    return Array.from(Array(n).keys());
+  }
+  // static inIframe(): boolean {
+  //     return false;
+  //     /* try {
+  //         return window.self !== window.top;
+  //     } catch (e) {
+  //         return false;
+  //     } */
+  // }
+  static setCookie(name, value, time) {
+    let expires = "";
+    if (time) {
+      const date = new Date(time);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (encodeURIComponent(value) || "") + expires + "; path=/";
+  }
+  static getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ")
+        c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0)
+        return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return void 0;
+  }
+  static eraseCookie(name) {
+    document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  }
+  static delay(ms = 1e3) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+  static registerGlobalClass(Class) {
+    if (typeof window === "object") {
+      if (window[Class.name])
+        throw new Error(`window.${Class.name} already used`);
+      window[Class.name] = Class;
+    } else {
+      if (global[Class.name])
+        throw new Error(`global.${Class.name} already used`);
+      global[Class.name] = Class;
+    }
+  }
+  static getGlobalClass(className) {
+    return typeof window === "object" ? window[className] : global[className];
+  }
+  static addClassToDocumentElement(className) {
+    if (typeof document === "object") {
+      document.documentElement.classList.add(className);
+    }
+  }
+};
+__name(_Helper, "Helper");
+let Helper = _Helper;
+Helper.registerGlobalClass(Helper);
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/ReactComponent.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/ReactComponent.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ReactComponent": () => (/* binding */ ReactComponent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const _ReactComponent = class _ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    if (props.onCreate) {
+      props.onCreate(this, this.props.name);
+    }
+    this.allowRerender = true;
+  }
+  getElement() {
+    return this.el.current;
+  }
+  getParent() {
+    return this.props.parent;
+  }
+  checkParent() {
+    if (!this.props.parent)
+      throw new Error(`${this.constructor.name}: no parent`);
+  }
+  getClassList() {
+    return [
+      this.getCssBlockName(),
+      ...this.props.classList || [],
+      ...this.state && this.state.classList ? this.state.classList : []
+    ];
+  }
+  addCssClass(className) {
+    if (this.state.classList.indexOf(className) === -1) {
+      this.state.classList.push(className);
+    }
+  }
+  removeCssClass(className) {
+    this.state.classList.splice(this.state.classList.indexOf(className), 1);
+  }
+  getCssBlockName() {
+    return this.constructor.name;
+  }
+  getCssClassNames() {
+    return this.getClassList().join(" ");
+  }
+  rerender(logTime = true) {
+    if (!this.canRerender())
+      return Promise.resolve();
+    return new Promise((resolve) => {
+      const start = Date.now();
+      this.forceUpdate(() => {
+        if (logTime) {
+          console.debug(`${this.constructor.name}.rerender time:`, Date.now() - start);
+        }
+        resolve();
+      });
+    });
+  }
+  canRerender() {
+    if (!this.allowRerender)
+      return false;
+    if (this.props.parent)
+      return this.props.parent.canRerender();
+    return true;
+  }
+  disableRerender() {
+    console.debug(`${this.constructor.name}.disableRerender`);
+    this.allowRerender = false;
+  }
+  enableRerender() {
+    console.debug(`${this.constructor.name}.enableRerender`);
+    this.allowRerender = true;
+  }
+  componentWillUnmount() {
+    if (this.props.onUnmount)
+      this.props.onUnmount(this, this.props.name);
+  }
+  /* componentDidMount() {
+      console.debug('ReactComponent.componentDidMount', this.constructor.name);
+  } */
+  isEnabled() {
+    return !this.isDisabled();
+  }
+  isDisabled() {
+    if (this.state && this.state.disabled !== void 0)
+      return this.state.disabled;
+    if (this.props.disabled !== void 0)
+      return this.props.disabled;
+    if (this.props.enabled !== void 0)
+      return !this.props.enabled;
+    return false;
+  }
+  disable() {
+    if (!this.state)
+      throw new Error("no state");
+    this.setState({ disabled: true });
+  }
+  enable() {
+    if (!this.state)
+      throw new Error("no state");
+    this.setState({ disabled: void 0 });
+  }
+};
+__name(_ReactComponent, "ReactComponent");
+let ReactComponent = _ReactComponent;
+if (typeof window === "object") {
+  window.ReactComponent = ReactComponent;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/monitor/MonitorView/MonitorView.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/monitor/MonitorView/MonitorView.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MonitorView": () => (/* binding */ MonitorView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _MonitorView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonitorView.less */ "./src/frontend/monitor/MonitorView/MonitorView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+const _MonitorView = class _MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  renderApplication(app) {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+        app.route,
+        " ",
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", { style: { color: "gray" }, children: [
+          "version: ",
+          app.version
+        ] })
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "pages:" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.pages.map((page) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", { children: page.name }, page.name)) })
+        ] }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "clients:" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.clients.map((client) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
+            client.uuid,
+            "\xA0",
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { style: { color: "blue" }, children: client.ip }),
+            "\xA0 v",
+            client.version,
+            "\xA0",
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              "span",
+              {
+                style: {
+                  color: "green"
+                },
+                children: `userId: ${client.userId}`
+              }
+            )
+          ] }, client.uuid)) })
+        ] })
+      ] })
+    ] }, app.route);
+  }
+  render() {
+    console.debug("MonitorView.render", this.props.data);
+    const data = this.props.data;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "MonitorView", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+        "nodeEnv: ",
+        data.nodeEnv
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+        "uptime: ",
+        _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.formatNumber(data.uptime),
+        " ms"
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "applications:" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })
+    ] });
+  }
+};
+__name(_MonitorView, "MonitorView");
+let MonitorView = _MonitorView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/monitor/MonitorView/MonitorView.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/monitor/MonitorView/MonitorView.less ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/monitor/style/monitor.less":
 /*!*************************************************!*\
-  !*** ./src/frontend/common/widget/Box/Box.less ***!
+  !*** ./src/frontend/monitor/style/monitor.less ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/CheckBox/CheckBox.less":
-/*!***********************************************************!*\
-  !*** ./src/frontend/common/widget/CheckBox/CheckBox.less ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DatePicker/DatePicker.less":
-/*!***************************************************************!*\
-  !*** ./src/frontend/common/widget/DatePicker/DatePicker.less ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.less":
-/*!***********************************************************************!*\
-  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less":
-/*!*******************************************************************************!*\
-  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Expand/Expand.less":
-/*!*******************************************************!*\
-  !*** ./src/frontend/common/widget/Expand/Expand.less ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Grid/Grid.less":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/widget/Grid/Grid.less ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/GridCell/GridCell.less":
-/*!***********************************************************!*\
-  !*** ./src/frontend/common/widget/GridCell/GridCell.less ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Image/Image.less":
-/*!*****************************************************!*\
-  !*** ./src/frontend/common/widget/Image/Image.less ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Menu/Menu.less":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/widget/Menu/Menu.less ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Modal/Modal.less":
-/*!*****************************************************!*\
-  !*** ./src/frontend/common/widget/Modal/Modal.less ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Password/Password.less":
-/*!***********************************************************!*\
-  !*** ./src/frontend/common/widget/Password/Password.less ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Select/Select.less":
-/*!*******************************************************!*\
-  !*** ./src/frontend/common/widget/Select/Select.less ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Slider/Slider.less":
-/*!*******************************************************!*\
-  !*** ./src/frontend/common/widget/Slider/Slider.less ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Statusbar/Statusbar.less":
-/*!*************************************************************!*\
-  !*** ./src/frontend/common/widget/Statusbar/Statusbar.less ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tab/Tab.less":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/widget/Tab/Tab.less ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tab2/Tab2.less":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/widget/Tab2/Tab2.less ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less":
-/*!*******************************************************************!*\
-  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tooltip/Tooltip.less":
-/*!*********************************************************!*\
-  !*** ./src/frontend/common/widget/Tooltip/Tooltip.less ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/index/IndexView/IndexView.less":
-/*!*****************************************************!*\
-  !*** ./src/frontend/index/IndexView/IndexView.less ***!
-  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -31397,3951 +31861,6 @@ if (false) {} else {
 }
 
 
-/***/ }),
-
-/***/ "./src/console.ts":
-/*!************************!*\
-  !*** ./src/console.ts ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LOG_LEVELS": () => (/* binding */ LOG_LEVELS),
-/* harmony export */   "debug": () => (/* binding */ debug),
-/* harmony export */   "error": () => (/* binding */ error),
-/* harmony export */   "getLogLevel": () => (/* binding */ getLogLevel),
-/* harmony export */   "getLogLevelName": () => (/* binding */ getLogLevelName),
-/* harmony export */   "log": () => (/* binding */ log),
-/* harmony export */   "warn": () => (/* binding */ warn)
-/* harmony export */ });
-const LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
-function getLogLevel() {
-    return LOG_LEVELS.indexOf(getLogLevelName());
-}
-function getLogLevelName() {
-    if (typeof window === 'object') {
-        return window.QFORMS_LOG_LEVEL || 'debug';
-    }
-    else if (typeof global === 'object') {
-        return process.env.QFORMS_LOG_LEVEL || ( false ? 0 : 'log');
-    }
-    return 'debug';
-}
-function isJest() {
-    return typeof jest !== 'undefined';
-}
-function debug(message, ...optionalParams) {
-    if (getLogLevel() <= LOG_LEVELS.indexOf('debug')) {
-        if (isJest()) {
-            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
-        }
-        else {
-            console.debug(message, ...optionalParams);
-        }
-    }
-}
-function log(message, ...optionalParams) {
-    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        if (isJest()) {
-            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
-        }
-        else {
-            console.log(message, ...optionalParams);
-        }
-    }
-}
-function warn(message, ...optionalParams) {
-    if (getLogLevel() <= LOG_LEVELS.indexOf('log')) {
-        if (isJest()) {
-            process.stdout.write(`${[message, ...optionalParams].join(' ')}\n`);
-        }
-        else {
-            console.warn(message, ...optionalParams);
-        }
-    }
-}
-function error(message, ...optionalParams) {
-    if (isJest()) {
-        process.stderr.write(`${[message, ...optionalParams].join(' ')}\n`);
-    }
-    else {
-        console.error(message, ...optionalParams);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/FrontHostApp.ts":
-/*!*********************************************!*\
-  !*** ./src/frontend/common/FrontHostApp.ts ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
-/* harmony export */ });
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-
-
-
-class FrontHostApp {
-    constructor(options) {
-        this.options = options;
-        this.alertCtrl = null;
-        this.documentTitle = '';
-    }
-    init() {
-        window.addEventListener('error', this.onWindowError.bind(this));
-        window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
-        window.addEventListener('popstate', this.onWindowPopState.bind(this));
-    }
-    async run() {
-        throw new Error('FrontHostApp.run not implemented');
-    }
-    async onWindowUnhandledrejection(e) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowUnhandledrejection');
-        try {
-            e.preventDefault();
-            const err = e instanceof Error ? e : e.reason || e.detail.reason;
-            this.logError(err);
-            await this.alert({ title: 'Unhandled Rejection', message: err.message });
-        }
-        catch (err) {
-            console.error(`onWindowUnhandledrejection error: ${err.message}`);
-        }
-    }
-    async onWindowError(e) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowError', e);
-        try {
-            e.preventDefault();
-            const err = e.error;
-            this.logError(err);
-        }
-        catch (err) {
-            console.error(`onWindowError error: ${err.message}`);
-        }
-    }
-    logError(err) {
-        console.error('FrontHostApp.logError', err);
-    }
-    static async doHttpRequest(data) {
-        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
-        console.warn(`body ${FrontHostApp.composeHandlerName(data)}:`, body);
-        return body;
-    }
-    static composeHandlerName(data) {
-        if (data.action === 'rpc') {
-            if (data.form)
-                return `${data.page}.${data.form}.${data.name}.${data.action}`;
-            if (data.page)
-                return `${data.page}.${data.name}.${data.action}`;
-            return `${data.name}.${data.action}`;
-        }
-        return `${data.page}.${data.form}.${data.ds}.${data.action}`;
-    }
-    static async doHttpRequest2(method, body) {
-        console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
-        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
-        console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);
-        return [headers, data];
-    }
-    static async fetchJson(method, url, data) {
-        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
-    }
-    static async fetch(method, url, body, contentType) {
-        try {
-            FrontHostApp.startWait();
-            const response = await fetch(url, Object.assign({ method,
-                body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
-            if (response.ok) {
-                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
-                    const [name, value] = header;
-                    acc[name] = value;
-                    return acc;
-                }, {});
-                const data = await response.json();
-                return [headers, data];
-            }
-            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
-        }
-        finally {
-            FrontHostApp.stopWait();
-        }
-    }
-    static startWait() {
-        document.querySelector('html').classList.add('wait');
-    }
-    static stopWait() {
-        document.querySelector('html').classList.remove('wait');
-    }
-    async onWindowPopState(e) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.onWindowPopState', e.state);
-    }
-    async alert(options) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.alert', options);
-        alert(options.message);
-    }
-    async confirm(options) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('FrontHostApp.confirm', options);
-        return confirm(options.message);
-    }
-    setDocumentTitle(title) {
-        if (typeof document === 'object') {
-            document.title = title;
-        }
-        else {
-            this.documentTitle = title;
-        }
-    }
-    getDocumentTitle() {
-        if (typeof document === 'object') {
-            return document.title;
-        }
-        return this.documentTitle;
-    }
-    isDebugMode() {
-        if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
-        }
-        else {
-            return this.getOptions().debug;
-        }
-    }
-    createLink(params = null) {
-        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
-        if (params) {
-            return [
-                path,
-                [
-                    ...(this.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
-        }
-        return path;
-    }
-    getOptions() {
-        if (!this.options) {
-            throw new Error('no options');
-        }
-        return this.options;
-    }
-    filterSearch(...names) {
-        if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.filter(...names);
-        }
-        const newObj = {};
-        const obj = this.getOptions().url.searchParams;
-        for (const name of names) {
-            if (obj.hasOwnProperty(name)) {
-                newObj[name] = obj.get(name);
-            }
-        }
-        return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.objToString(newObj);
-    }
-    getSearchParams() {
-        if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
-        }
-        return Object.fromEntries(this.getOptions().url.searchParams);
-    }
-    getCookie(name) {
-        if (typeof window === 'object') {
-            return _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.getCookie(name);
-        }
-        return this.getOptions().cookies[name];
-    }
-    getLocation() {
-        if (typeof window === 'object') {
-            return window.location;
-        }
-        return this.getOptions().url;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/Helper.ts":
-/*!***************************************!*\
-  !*** ./src/frontend/common/Helper.ts ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Helper": () => (/* binding */ Helper)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-
-
-
-class Helper {
-    static formatDate(date, format) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
-    }
-    static formatNumber(value) {
-        return new Intl.NumberFormat('ru-RU').format(value);
-    }
-    static today() {
-        const now = new Date();
-        return Helper.getStartOfDay(now);
-    }
-    static getStartOfDay(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
-    static encodeObject(obj) {
-        const eObj = {};
-        for (const name in obj) {
-            eObj[name] = Helper.encodeValue(obj[name]);
-        }
-        return eObj;
-    }
-    static encodeValue(value) {
-        return JSON.stringify(value);
-    }
-    static decodeObject(eObj) {
-        if (!eObj)
-            throw new Error('Helper.decodeObject: no object');
-        const obj = {};
-        for (const name in eObj) {
-            obj[name] = Helper.decodeValue(eObj[name]);
-        }
-        return obj;
-    }
-    static decodeValue(raw) {
-        return JSON.parse(raw, Helper.dateTimeReviver);
-    }
-    static dateTimeReviver(key, value) {
-        if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
-            if (a)
-                return new Date(value);
-        }
-        return value;
-    }
-    static createReactComponent(rootElement, type, props = {}, children) {
-        let component = undefined;
-        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
-                    component = c;
-                } }), children),
-        ]);
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
-        return component;
-    }
-    static createReactComponent2(rootElement, type, props = {}, children) {
-        let component = undefined;
-        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
-                    component = c;
-                } }), children),
-        ]);
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
-        return component;
-    }
-    static destroyReactComponent(root) {
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
-    }
-    static readFileAsDataURL(file) {
-        return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsDataURL(file);
-        });
-    }
-    static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
-            if (params.hasOwnProperty(name)) {
-                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
-            }
-            return 'undefined';
-        });
-    }
-    static moveArrItem(arr, item, offset) {
-        const oldIndex = arr.indexOf(item);
-        if (oldIndex === -1)
-            throw new Error('cannot find element');
-        const newIndex = oldIndex + offset;
-        if (newIndex < 0)
-            throw new Error('cannot up top element');
-        if (newIndex > arr.length - 1)
-            throw new Error('cannot down bottom element');
-        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-    }
-    static formatTime(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}:${s}`;
-        }
-        else {
-            return `${sign}${h}:${m}:${s}`;
-        }
-    }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
-    }
-    static SECOND() {
-        return 1000;
-    }
-    static MINUTE() {
-        return 60 * Helper.SECOND();
-    }
-    static HOUR() {
-        return 60 * Helper.MINUTE();
-    }
-    static DAY() {
-        return 24 * Helper.HOUR();
-    }
-    static WEEK() {
-        return 7 * Helper.DAY();
-    }
-    static fallbackCopyTextToClipboard(text) {
-        const activeElement = document.activeElement;
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.top = '0';
-        textArea.style.left = '0';
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        activeElement.focus();
-    }
-    static async copyTextToClipboard(text) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
-    }
-    static addMinutes(date, minutes) {
-        date.setMinutes(date.getMinutes() + minutes);
-    }
-    static removeTimezoneOffset(date) {
-        Helper.addMinutes(date, -date.getTimezoneOffset());
-    }
-    static addTimezoneOffset(date) {
-        Helper.addMinutes(date, date.getTimezoneOffset());
-    }
-    static cloneDate(date) {
-        return new Date(date.getTime());
-    }
-    static fillArray(n) {
-        return Array.from(Array(n).keys());
-    }
-    static setCookie(name, value, time) {
-        let expires = '';
-        if (time) {
-            const date = new Date(time);
-            expires = '; expires=' + date.toUTCString();
-        }
-        document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
-    }
-    static getCookie(name) {
-        const nameEQ = name + '=';
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ')
-                c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0)
-                return decodeURIComponent(c.substring(nameEQ.length, c.length));
-        }
-        return undefined;
-    }
-    static eraseCookie(name) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-    static delay(ms = 1000) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }
-    static registerGlobalClass(Class) {
-        if (typeof window === 'object') {
-            if (window[Class.name])
-                throw new Error(`window.${Class.name} already used`);
-            window[Class.name] = Class;
-        }
-        else {
-            if (global[Class.name])
-                throw new Error(`global.${Class.name} already used`);
-            global[Class.name] = Class;
-        }
-    }
-    static getGlobalClass(className) {
-        return typeof window === 'object' ? window[className] : global[className];
-    }
-    static addClassToDocumentElement(className) {
-        if (typeof document === 'object') {
-            document.documentElement.classList.add(className);
-        }
-    }
-}
-Helper.registerGlobalClass(Helper);
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/ReactComponent.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/ReactComponent.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ReactComponent": () => (/* binding */ ReactComponent)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-    constructor(props) {
-        super(props);
-        if (props.onCreate) {
-            props.onCreate(this, this.props.name);
-        }
-        this.allowRerender = true;
-    }
-    getElement() {
-        return this.el.current;
-    }
-    getParent() {
-        return this.props.parent;
-    }
-    checkParent() {
-        if (!this.props.parent)
-            throw new Error(`${this.constructor.name}: no parent`);
-    }
-    getClassList() {
-        return [
-            this.getCssBlockName(),
-            ...(this.props.classList || []),
-            ...(this.state && this.state.classList ? this.state.classList : []),
-        ];
-    }
-    addCssClass(className) {
-        if (this.state.classList.indexOf(className) === -1) {
-            this.state.classList.push(className);
-        }
-    }
-    removeCssClass(className) {
-        this.state.classList.splice(this.state.classList.indexOf(className), 1);
-    }
-    getCssBlockName() {
-        return this.constructor.name;
-    }
-    getCssClassNames() {
-        return this.getClassList().join(' ');
-    }
-    rerender(logTime = true) {
-        if (!this.canRerender())
-            return Promise.resolve();
-        return new Promise((resolve) => {
-            const start = Date.now();
-            this.forceUpdate(() => {
-                if (logTime) {
-                    console.debug(`${this.constructor.name}.rerender time:`, Date.now() - start);
-                }
-                resolve();
-            });
-        });
-    }
-    canRerender() {
-        if (!this.allowRerender)
-            return false;
-        if (this.props.parent)
-            return this.props.parent.canRerender();
-        return true;
-    }
-    disableRerender() {
-        console.debug(`${this.constructor.name}.disableRerender`);
-        this.allowRerender = false;
-    }
-    enableRerender() {
-        console.debug(`${this.constructor.name}.enableRerender`);
-        this.allowRerender = true;
-    }
-    componentWillUnmount() {
-        if (this.props.onUnmount)
-            this.props.onUnmount(this, this.props.name);
-    }
-    isEnabled() {
-        return !this.isDisabled();
-    }
-    isDisabled() {
-        if (this.state && this.state.disabled !== undefined)
-            return this.state.disabled;
-        if (this.props.disabled !== undefined)
-            return this.props.disabled;
-        if (this.props.enabled !== undefined)
-            return !this.props.enabled;
-        return false;
-    }
-    disable() {
-        if (!this.state)
-            throw new Error('no state');
-        this.setState({ disabled: true });
-    }
-    enable() {
-        if (!this.state)
-            throw new Error('no state');
-        this.setState({ disabled: undefined });
-    }
-}
-if (typeof window === 'object') {
-    window.ReactComponent = ReactComponent;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/Search.ts":
-/*!***************************************!*\
-  !*** ./src/frontend/common/Search.ts ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Search": () => (/* binding */ Search)
-/* harmony export */ });
-class Search {
-    static getObj() {
-        const params = new URLSearchParams(window.location.search);
-        const obj = {};
-        for (const [name, value] of params) {
-            obj[name] = value;
-        }
-        return obj;
-    }
-    static objToString(obj) {
-        const search = new URLSearchParams(obj).toString();
-        if (!search)
-            return '';
-        return `?${search}`;
-    }
-    static filter(...names) {
-        const obj = Search.getObj();
-        const newObj = {};
-        for (const name of names) {
-            if (obj.hasOwnProperty(name)) {
-                newObj[name] = obj[name];
-            }
-        }
-        return Search.objToString(newObj);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/ArrowIcon.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const ArrowIcon = (props) => {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
-};
-if (typeof window === 'object') {
-    window.ArrowIcon = ArrowIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/CancelIcon.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.CancelIcon = CancelIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/CloseIcon.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const CloseIcon = (props) => {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
-};
-if (typeof window === 'object') {
-    window.CloseIcon = CloseIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const CloseIcon2 = (props) => {
-    const size = props.size || 24;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
-};
-if (typeof window === 'object') {
-    window.CloseIcon2 = CloseIcon2;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/DateIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.DateIcon = DateIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/DeleteIcon.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/icon/DeleteIcon.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DeleteIcon": () => (/* binding */ DeleteIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.DeleteIcon = DeleteIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/DoneIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.DoneIcon = DoneIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/DownIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        const size = this.props.size || 24;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.DoneIcon = DoneIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/EditIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/EditIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditIcon": () => (/* binding */ EditIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.EditIcon = EditIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/LeftIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const LeftIcon = (props) => {
-    const size = props.size || 24;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
-};
-if (typeof window === 'object') {
-    window.LeftIcon = LeftIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/LocationIcon.tsx":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        const size = this.props.size || 24;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.LocationIcon = LocationIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.MoreVertIcon = MoreVertIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const OpenInNewIcon = () => {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] })));
-};
-if (typeof window === 'object') {
-    window.OpenInNewIcon = OpenInNewIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.PasswordIcon = PasswordIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        const size = this.props.size || 24;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.PhoneIcon = PhoneIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/RightIcon.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-const RightIcon = (props) => {
-    const size = props.size || 24;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
-};
-if (typeof window === 'object') {
-    window.RightIcon = RightIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
-/*!***************************************************!*\
-  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.SettingsIcon = SettingsIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/TimeIcon.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TimeIcon": () => (/* binding */ TimeIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", { fill: "none", height: "24", width: "24", x: "0" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12.5,7H11v6l5.2,3.2l0.8-1.3l-4.5-2.7V7z" }) }) })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.TimeIcon = TimeIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
-/*!*****************************************************!*\
-  !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.VisibilityIcon = VisibilityIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/VisibilityOffIcon.tsx":
-/*!********************************************************!*\
-  !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.VisibilityOffIcon = VisibilityOffIcon;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/icon/index.ts":
-/*!*******************************************!*\
-  !*** ./src/frontend/common/icon/index.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__.ArrowIcon),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _CloseIcon__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_18__.DateIcon),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_10__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_17__.DownIcon),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_15__.EditIcon),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _LeftIcon__WEBPACK_IMPORTED_MODULE_1__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__.PasswordIcon),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__.PhoneIcon),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _RightIcon__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__.SettingsIcon),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_19__.TimeIcon),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
-/* harmony export */ });
-/* harmony import */ var _CloseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _LeftIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _RightIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
-/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
-/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
-/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
-/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
-/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
-/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
-/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
-/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/index.ts":
-/*!**************************************!*\
-  !*** ./src/frontend/common/index.ts ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon),
-/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBoxList),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.ComboBox),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DatePicker),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Expand),
-/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridRow),
-/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Radio),
-/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
-/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tooltip),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon)
-/* harmony export */ });
-/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
-/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Box/Box.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/widget/Box/Box.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Box": () => (/* binding */ Box)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _Box_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Box.less */ "./src/frontend/common/widget/Box/Box.less");
-
-
-
-
-class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.update = () => {
-            console.debug('Box.update');
-            this.setState({
-                backgroundColor: 'green',
-            });
-        };
-        this.state = {
-            backgroundColor: 'purple',
-        };
-    }
-    componentDidMount() {
-        console.debug('Box.componentDidMount');
-    }
-    componentWillUnmount() {
-        console.debug('Box.componentWillUnmount');
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        console.debug('Box.shouldComponentUpdate', nextProps, nextState);
-        return true;
-    }
-    componentDidUpdate() {
-        console.debug('Box.componentDidUpdate');
-    }
-    render() {
-        console.debug('Box.render');
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Box = Box;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Button.tsx":
-/*!***********************************************!*\
-  !*** ./src/frontend/common/widget/Button.tsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Button": () => (/* binding */ Button)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-
-class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.state = { disabled: undefined };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-    }
-    isVisible() {
-        if (this.props.visible !== undefined)
-            return this.props.visible;
-        return true;
-    }
-    getStyle() {
-        return {
-            display: !this.isVisible() ? 'none' : undefined,
-            width: this.props.width,
-        };
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
-    }
-}
-if (typeof window === 'object') {
-    window.Button = Button;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/CheckBox/CheckBox.tsx":
-/*!**********************************************************!*\
-  !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _CheckBox_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckBox.less */ "./src/frontend/common/widget/CheckBox/CheckBox.less");
-
-
-
-class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = (e) => {
-            if (!this.props.readOnly) {
-                this.setState((prevState) => {
-                    if (this.props.onChange) {
-                        this.props.onChange(!prevState.checked, e);
-                    }
-                    return { checked: !prevState.checked };
-                });
-            }
-        };
-        this.onClick = (e) => {
-            if (!this.props.readOnly) {
-                if (this.props.onChange)
-                    this.props.onChange(true);
-                this.setState({ checked: true });
-            }
-        };
-        if (this.props.checked !== undefined &&
-            this.props.checked !== null &&
-            typeof this.props.checked !== 'boolean') {
-            throw new Error(`wrong checked prop: ${this.props.checked}`);
-        }
-        this.state = {
-            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
-        };
-    }
-    getValue() {
-        return this.state.checked;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
-        return true;
-    }
-    render() {
-        if (this.state.checked === null) {
-            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" })));
-        }
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange }));
-    }
-}
-if (typeof window === 'object') {
-    window.CheckBox = CheckBox;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
-/*!*****************************************************!*\
-  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCheckBoxChange = (e) => {
-            const checked = e.target.checked;
-            const itemValue = e.target.dataset.value;
-            this.setState((prevState) => {
-                const prevValue = prevState.value || [];
-                const value = [...prevValue];
-                if (checked) {
-                    if (value.indexOf(itemValue) > -1) {
-                        console.debug('value:', itemValue, checked, value);
-                        throw new Error('CheckBoxList value error');
-                    }
-                    value.push(itemValue);
-                }
-                else {
-                    if (value.indexOf(itemValue) === -1) {
-                        console.debug('value:', itemValue, checked, value);
-                        throw new Error('CheckBoxList value error');
-                    }
-                    value.splice(value.indexOf(itemValue), 1);
-                }
-                return { value };
-            }, () => {
-                if (this.props.onChange) {
-                    this.props.onChange(this.getValue());
-                }
-            });
-        };
-        if (!this.props.name)
-            throw new Error('no CheckBoxList name');
-        this.state = {
-            value: this.props.value || [],
-        };
-    }
-    getItems() {
-        return this.props.items || [];
-    }
-    getValue() {
-        return this.state.value || [];
-    }
-    isValueChecked(value) {
-        return this.getValue().indexOf(value) > -1;
-    }
-    composeItemId(value) {
-        return `${this.props.name}.${value}`;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map((item) => {
-                if (item.value === undefined)
-                    throw new Error('no item value');
-                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
-            }) })));
-    }
-}
-if (typeof window === 'object') {
-    window.CheckBoxList = CheckBoxList;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/ComboBox.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/widget/ComboBox.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = async (e) => {
-            this.setState({ value: e.target.value });
-            if (this.props.onChange) {
-                await this.props.onChange(e.target.value);
-            }
-        };
-        this.onMouseDown = async (e) => {
-            if (this.props.onMouseDown) {
-                await this.props.onMouseDown(e);
-            }
-        };
-        if (!props.items)
-            throw new Error('no ComboBox items');
-        this.state = { value: this.getInitialValue() };
-    }
-    getInitialValue() {
-        let value = null;
-        if (this.props.value !== undefined && this.props.value !== null) {
-            value = this.props.value;
-            const item = this.props.items.find((item) => item.value === this.props.value);
-            if (!item) {
-                if (this.props.nullable && value === '') {
-                }
-                else {
-                    console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
-                    console.debug('items:', this.props.items);
-                }
-            }
-        }
-        else {
-            if (this.props.items.length) {
-                value = this.props.items[0].value;
-            }
-            else {
-                value = '';
-            }
-        }
-        if (value === null)
-            throw new Error('null is wrong value for ComboBox');
-        return value;
-    }
-    getValue() {
-        return this.state.value;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
-                    this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.ComboBox = ComboBox;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
-/*!**************************************************************!*\
-  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
-
-
-
-
-
-
-class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onClick = (e) => {
-            console.debug('DatePicker.onClick', e.target);
-            if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
-                return this.onDateClick(e.target);
-            }
-        };
-        this.onMouseDown = (e) => {
-            if (this.props.onMouseDown) {
-                return this.props.onMouseDown(e);
-            }
-        };
-        this.onNextClick = (e) => {
-            this.setState((prevState) => {
-                const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
-                next.setMonth(next.getMonth() + 1);
-                return {
-                    selectedMonth: [next.getFullYear(), next.getMonth()],
-                };
-            });
-        };
-        this.onPrevClick = (e) => {
-            this.setState((prevState) => {
-                const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
-                prev.setMonth(prev.getMonth() - 1);
-                return {
-                    selectedMonth: [prev.getFullYear(), prev.getMonth()],
-                };
-            });
-        };
-        if (this.props.minDate && !(this.props.minDate instanceof Array))
-            throw new Error('minDate must be array');
-        this.state = { selectedMonth: this.calcSelectedMonth() };
-        this.MONTH = [
-            'Январь',
-            'Февраль',
-            'Март',
-            'Апрель',
-            'Май',
-            'Июнь',
-            'Июль',
-            'Август',
-            'Сентябрь',
-            'Октябрь',
-            'Ноябрь',
-            'Декабрь',
-        ];
-    }
-    static createDateFromArr(arr) {
-        return new Date(arr[0], arr[1], arr[2]);
-    }
-    isVisible() {
-        if (this.props.visible === false)
-            return false;
-        return true;
-    }
-    calcSelectedMonth() {
-        if (this.props.selectedDate) {
-            return [this.props.selectedDate[0], this.props.selectedDate[1]];
-        }
-        else if (this.props.highlightedDate) {
-            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
-        }
-        else {
-            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
-            if (this.props.minDate)
-                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
-            const date = new Date(Math.min(...dates));
-            return [date.getFullYear(), date.getMonth()];
-        }
-    }
-    static getTodayArr() {
-        return DatePicker.dateToArray(new Date());
-    }
-    static dateToArray(date) {
-        return [date.getFullYear(), date.getMonth(), date.getDate()];
-    }
-    static getDay(date) {
-        let day = date.getDay() - 1;
-        if (day === -1)
-            day = 6;
-        if (day === 0)
-            day = 7;
-        return day;
-    }
-    createSelectedDate() {
-        if (!this.isDateSelected())
-            throw new Error('date not selected');
-        return new Date(...this.props.selectedDate);
-    }
-    isDateSelected() {
-        return !!this.props.selectedDate;
-    }
-    getFirstDateOfTable() {
-        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1);
-        date.setDate(date.getDate() - DatePicker.getDay(date));
-        return date;
-    }
-    createMinDate() {
-        if (!this.props.minDate)
-            throw new Error('no min date');
-        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
-    }
-    isMinDate() {
-        return !!this.props.minDate;
-    }
-    isPrevAllowed() {
-        const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
-        prev.setMonth(prev.getMonth() - 1);
-        return this.isMonthAllowed(prev);
-    }
-    isMonthAllowed(month) {
-        if (this.isMinDate()) {
-            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
-            return month.getTime() >= minMonth.getTime();
-        }
-        return true;
-    }
-    onDateClick(target) {
-        if (this.props.onDateSelected) {
-            this.props.onDateSelected(JSON.parse(target.dataset.date));
-        }
-    }
-    render() {
-        const date = this.getFirstDateOfTable();
-        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
-        const minDate = this.isMinDate() ? this.createMinDate() : null;
-        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
-        const highlightedDate = this.props.highlightedDate
-            ?
-                new Date(...this.props.highlightedDate)
-            : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
-                            const classList = [];
-                            if (j === 5 || j === 6)
-                                classList.push('weekend');
-                            if (this.isSelectToday() && date.getTime() === today.getTime())
-                                classList.push('today');
-                            if (date.getMonth() !== this.state.selectedMonth[1])
-                                classList.push('out');
-                            if (!minDate)
-                                classList.push('selectable');
-                            else if (date.getTime() >= minDate.getTime())
-                                classList.push('selectable');
-                            if (selectedDate && date.getTime() === selectedDate.getTime())
-                                classList.push('selected');
-                            if (highlightedDate && highlightedDate.getTime() === date.getTime())
-                                classList.push('highlight');
-                            const text = date.getDate().toString();
-                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
-                            const style = this.props.getDateStyle
-                                ? this.props.getDateStyle(date)
-                                : null;
-                            date.setDate(date.getDate() + 1);
-                            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text));
-                        }) }, i))) })] })));
-    }
-    isSelectToday() {
-        if (this.props.selectToday === false)
-            return false;
-        return true;
-    }
-}
-if (typeof window === 'object') {
-    window.DatePicker = DatePicker;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
-/*!**********************************************************************!*\
-  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
-
-
-
-
-
-class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onButtonClick = (e) => {
-            this.setState((state) => ({ open: !state.open }));
-        };
-        this.onButtonBlur = (e) => {
-            if (this.state.open) {
-                this.setState({ open: false });
-            }
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape' && this.state.open) {
-                this.setState({ open: false });
-                e.stopPropagation();
-            }
-        };
-        this.onUlMouseDown = (e) => {
-            e.preventDefault();
-        };
-        this.onLiClick = async (e) => {
-            const li = e.currentTarget;
-            this.setState({ open: false }, () => {
-                if (this.props.onClick) {
-                    this.props.onClick(li);
-                }
-            });
-        };
-        this.state = {
-            open: false,
-            disabled: false,
-        };
-    }
-    isEnabled() {
-        if (this.props.enabled !== undefined)
-            return this.props.enabled;
-        return !this.state.disabled;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
-                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : undefined }, { children: action.title }), action.name))) }))] })));
-    }
-}
-_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DropdownButton);
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
-/*!******************************************************************************!*\
-  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
-
-
-
-
-
-
-
-
-class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onInputClick = (e) => {
-            if (this.props.readOnly)
-                return;
-            this.setState((prevState) => ({ open: !prevState.open }));
-        };
-        this.onInputKeyDown = (e) => {
-            if (e.key === 'Escape' && this.state.open) {
-                this.setState({ open: false });
-                e.stopPropagation();
-            }
-        };
-        this.onCloseDown = async (e) => {
-            this.setState({ value: null });
-            if (this.props.onChange) {
-                this.props.onChange(null);
-            }
-        };
-        this.onBlur = (e) => {
-            if (this.state.open) {
-                this.setState({ open: false });
-            }
-        };
-        this.onDatePickerMouseDown = (e) => {
-            e.preventDefault();
-        };
-        this.onDatePickerDateSelected = (date) => {
-            const value = new Date(date[0], date[1], date[2]);
-            this.setState({ open: false, value });
-            if (this.props.onChange) {
-                this.props.onChange(value);
-            }
-        };
-        this.state = {
-            open: false,
-            value: props.value || null,
-        };
-        if (props.value && !(props.value instanceof Date)) {
-            throw new Error(`need Date type, got ${typeof props.value}`);
-        }
-    }
-    getFormat() {
-        return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
-    }
-    getStringValue() {
-        const value = this.getValue();
-        if (value) {
-            let format = this.getFormat();
-            if (this.isDebugMode()) {
-                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
-                if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
-                    format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
-                }
-            }
-            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
-        }
-        return '';
-    }
-    getSelectedMonth() {
-        if (this.getValue()) {
-            return [this.getValue().getFullYear(), this.getValue().getMonth()];
-        }
-        return null;
-    }
-    getSelectedDate() {
-        if (this.getValue()) {
-            return [
-                this.getValue().getFullYear(),
-                this.getValue().getMonth(),
-                this.getValue().getDate(),
-            ];
-        }
-        return null;
-    }
-    getValue() {
-        return this.state.value;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    getClassList() {
-        return [...super.getClassList(), ...(this.props.readOnly ? ['read-only'] : [])];
-    }
-    renderInput() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
-    }
-    renderCloseIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
-    }
-    renderDateIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
-    }
-    renderDatePicker() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
-    }
-    isDebugMode() {
-        return this.props.debug === true;
-    }
-}
-if (typeof window === 'object') {
-    window.DropdownDatePicker = DropdownDatePicker;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
-/*!******************************************************!*\
-  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Expand": () => (/* binding */ Expand)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
-/* harmony import */ var _Expand_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Expand.less */ "./src/frontend/common/widget/Expand/Expand.less");
-
-
-
-
-class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onTitleClick = (e) => {
-            console.debug('Expand.onTitleClick');
-            this.setState((prevState) => {
-                return { opened: !prevState.opened };
-            });
-        };
-        this.state = {
-            opened: this.props.opened !== undefined ? this.props.opened : false,
-        };
-    }
-    isOpened() {
-        return this.state.opened;
-    }
-    isHighlighted() {
-        return !!this.props.highlighted;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.props.title }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__content` }, { children: this.props.children }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Expand = Expand;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Grid/Grid.tsx":
-/*!**************************************************!*\
-  !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Grid": () => (/* binding */ Grid)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _Grid_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Grid.less */ "./src/frontend/common/widget/Grid/Grid.less");
-
-
-
-
-
-
-
-class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCellMouseDown = async (e) => {
-            console.debug('Grid.onCellMouseDown', this.isLink());
-            e.preventDefault();
-            if (this.isDisabled())
-                return;
-            this.getElement().focus();
-            const button = e.button;
-            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-            const row = this.props.rows[i];
-            const key = e.currentTarget.dataset.row;
-            await this.selectCell(key, j);
-            if (button === 0 && this.props.onClick) {
-                this.props.onClick(row, key);
-            }
-        };
-        this.onRowMouseDown = async (e) => {
-            console.debug('Grid.onRowMouseDown', this.isLink());
-            const key = e.currentTarget.dataset.row;
-            await this.selectRow(key);
-        };
-        this.onCellDoubleClick = async (e) => {
-            const button = e.button;
-            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
-            const row = this.props.rows[i];
-            const key = e.currentTarget.dataset.row;
-            if (button === 0 && this.props.onDoubleClick) {
-                await this.props.onDoubleClick(row, key);
-            }
-        };
-        this.onRowDoubleClick = async (e) => {
-            const i = parseInt(e.currentTarget.dataset.r);
-            const row = this.props.rows[i];
-            const key = e.currentTarget.dataset.row;
-            if (this.props.onDoubleClick) {
-                await this.props.onDoubleClick(row, key);
-            }
-        };
-        this.onKeyDown = async (e) => {
-            if (this.isDisabled())
-                return;
-            switch (e.keyCode) {
-                case 37:
-                    e.preventDefault();
-                    await this.onLeft();
-                    break;
-                case 38:
-                    e.preventDefault();
-                    await this.onUp();
-                    break;
-                case 39:
-                    e.preventDefault();
-                    await this.onRight();
-                    break;
-                case 40:
-                    e.preventDefault();
-                    await this.onDown();
-                    break;
-                case 13:
-                    e.preventDefault();
-                    await this.onEnter();
-                    break;
-                case 46:
-                    e.preventDefault();
-                    await this.onDelete();
-                    break;
-                case 67:
-                    if (e.ctrlKey) {
-                        e.preventDefault();
-                        await this.onCopy();
-                    }
-                    break;
-            }
-        };
-        this.onResizeDoubleClick = async (e) => {
-            console.debug('Grid.onResizeDoubleClick', e.target);
-            const i = parseInt(e.target.dataset.i);
-            const column = this.props.columns[i];
-            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
-                return;
-            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
-            this.state.resized = Date.now();
-            await this.rerender();
-        };
-        this.onCellViewCreate = (c) => {
-            const columnName = c.props.column.name;
-            if (this.columns[columnName] === undefined)
-                this.columns[columnName] = [];
-            this.columns[columnName].push(c);
-        };
-        this.onCellViewUnmount = (c) => {
-            const columnName = c.props.column.name;
-            const i = this.columns[columnName].indexOf(c);
-            if (i === -1)
-                throw new Error('cannot find FieldView in Grid.columns');
-            this.columns[columnName].splice(i, 1);
-        };
-        this.onBodyScroll = async (e) => {
-            this.head.current.scrollLeft = e.target.scrollLeft;
-        };
-        this.onLinkClick = async (e) => {
-            console.debug('Grid.onLinkClick', e.ctrlKey);
-            if (e.ctrlKey)
-                return;
-            e.preventDefault();
-        };
-        this.state = {
-            key: this.props.selectedKey || null,
-            column: this.props.selectedKey && this.props.columns && this.props.columns.length
-                ? 0
-                : null,
-            columnWidth: {},
-            resized: Date.now(),
-        };
-        this.columns = {};
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-    }
-    getActiveColumn() {
-        return this.state.column;
-    }
-    setActiveColumn(column) {
-        this.state.column = column;
-    }
-    getActiveRowKey() {
-        return this.state.key;
-    }
-    setActiveRowKey(key) {
-        this.state.key = key;
-    }
-    isRowActive(i, key) {
-        return this.getActiveRowKey() === key;
-    }
-    async onCopy() {
-        console.debug('Grid.onCopy');
-        const row = this.findRow(this.getActiveRowKey());
-        const column = this.props.columns[this.getActiveColumn()].name;
-        const text = row[column];
-        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
-    }
-    findRow(key) {
-        return this.props.rows.find((row) => this.getRowKey(row) === key);
-    }
-    async onLeft() {
-        console.debug('Grid.onLeft');
-        const j = this.getActiveColumn();
-        if (j - 1 >= 0) {
-            this.setActiveColumn(j - 1);
-            await this.rerender();
-        }
-    }
-    async onUp() {
-        console.debug('Grid.onUp');
-        const key = this.getActiveRowKey();
-        const row = this.findRow(key);
-        const i = this.props.rows.indexOf(row);
-        if (i - 1 >= 0) {
-            const pRow = this.props.rows[i - 1];
-            const pKey = this.getRowKey(pRow);
-            this.setActiveRowKey(pKey);
-            await this.rerender();
-        }
-    }
-    async onRight() {
-        console.debug('Grid.onRight');
-        const j = this.getActiveColumn();
-        if (j + 1 <= this.props.columns.length - 1) {
-            this.setActiveColumn(j + 1);
-            await this.rerender();
-        }
-    }
-    async onDown() {
-        console.debug('Grid.onDown');
-        const key = this.getActiveRowKey();
-        const row = this.findRow(key);
-        const i = this.props.rows.indexOf(row);
-        if (i + 1 <= this.props.rows.length - 1) {
-            const nRow = this.props.rows[i + 1];
-            const nKey = this.getRowKey(nRow);
-            this.setActiveRowKey(nKey);
-            await this.rerender();
-        }
-    }
-    async onEnter() {
-        console.debug('Grid.onEnter');
-        const key = this.getActiveRowKey();
-        const row = this.findRow(key);
-        if (this.props.onDoubleClick) {
-            await this.props.onDoubleClick(row, key);
-        }
-    }
-    async onDelete() {
-        console.debug('Grid.onDelete');
-        const key = this.getActiveRowKey();
-        const row = this.findRow(key);
-        if (this.props.onDeleteKeyDown) {
-            await this.props.onDeleteKeyDown(row, key);
-        }
-    }
-    async selectCell(key, j) {
-        if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
-            return;
-        this.setActiveRowKey(key);
-        this.setActiveColumn(j);
-        if (this.props.onSelectionChange) {
-            await this.props.onSelectionChange(key);
-        }
-        else {
-            await this.rerender();
-        }
-    }
-    async selectRow(key) {
-        if (this.getActiveRowKey() === key)
-            return;
-        this.setActiveRowKey(key);
-        if (this.props.onSelectionChange) {
-            await this.props.onSelectionChange(key);
-        }
-        else {
-            await this.rerender();
-        }
-    }
-    getMaxColumnWidth(column) {
-        return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
-    }
-    getColumnWidth(i) {
-        const column = this.props.columns[i];
-        if (this.state.columnWidth[column.name] !== undefined) {
-            return this.state.columnWidth[column.name];
-        }
-        return column.width;
-    }
-    renderColumns() {
-        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
-    }
-    renderRows() {
-        return this.props.rows.map((row, i) => {
-            const key = this.getRowKey(row);
-            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
-        });
-    }
-    getRowKey(row) {
-        if (this.props.getRowKey) {
-            return this.props.getRowKey(row);
-        }
-        return this.props.rows.indexOf(row).toString();
-    }
-    renderCell(row, column) {
-        let view;
-        if (this.props.renderGridCellView) {
-            view = this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
-        }
-        if (view)
-            return view;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.updated) {
-            if (nextProps.updated - this.props.updated)
-                return true;
-            return false;
-        }
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
-    }
-    isLink() {
-        return !!this.props.createLinkCallback;
-    }
-}
-if (typeof window === 'object') {
-    window.Grid = Grid;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/GridCell/GridCell.tsx":
-/*!**********************************************************!*\
-  !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GridCell": () => (/* binding */ GridCell)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _GridCell_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GridCell.less */ "./src/frontend/common/widget/GridCell/GridCell.less");
-
-
-
-
-
-class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-    }
-    getSpanOffsetWidth() {
-        if (!this.span.current)
-            return 0;
-        return this.span.current.offsetWidth;
-    }
-    renderCellValue(rawValue) {
-        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
-        if (typeof value === 'boolean')
-            return value.toString();
-        return value;
-    }
-    render() {
-        const row = this.props.row;
-        const column = this.props.column;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
-    }
-}
-if (typeof window === 'object') {
-    window.GridCell = GridCell;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/GridRow/GridRow.tsx":
-/*!********************************************************!*\
-  !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GridRow": () => (/* binding */ GridRow)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    isCellActive(j) {
-        return this.props.active && this.props.activeColumn === j;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.updated) {
-            if (nextProps.updated - this.props.updated)
-                return true;
-            if (nextProps.resized - this.props.resized)
-                return true;
-            if (this.props.active !== nextProps.active)
-                return true;
-            if (this.props.active && this.props.activeColumn !== nextProps.activeColumn)
-                return true;
-            return false;
-        }
-        return true;
-    }
-    render() {
-        const grid = this.props.grid;
-        const row = this.props.row;
-        const i = this.props.i;
-        const key = this.props.rowKey;
-        const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name))), !!grid.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.GridRow = GridRow;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Image/Image.tsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/common/widget/Image/Image.tsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Image": () => (/* binding */ Image)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Image_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Image.less */ "./src/frontend/common/widget/Image/Image.less");
-
-
-
-
-class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onImgClick = async (e) => {
-            console.debug('Image.onImgClick');
-            if (this.props.onClick) {
-                return await this.props.onClick();
-            }
-            this.setState((prevState) => {
-                if (prevState.classList) {
-                    return { classList: null };
-                }
-                else {
-                    return { classList: ['Image_full'] };
-                }
-            });
-        };
-        this.img = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = { classList: null };
-    }
-    getNaturalSize() {
-        return [this.img.current.naturalWidth, this.img.current.naturalHeight];
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: this.getCssClassNames(), ref: this.img, src: this.props.src, onClick: this.onImgClick }));
-    }
-}
-if (typeof window === 'object') {
-    window.Image = Image;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
-/*!**************************************************!*\
-  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Menu": () => (/* binding */ Menu)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
-
-
-
-class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onMenuClick = async (e) => {
-            await this.toggleMenu(e.currentTarget.dataset.menu);
-        };
-        this.onBlur = async (e) => {
-            await this.closeMenu(e.currentTarget.dataset.menu);
-        };
-        this.onMouseDown = (e) => {
-            e.preventDefault();
-        };
-        this.onMenuItemClick = async (e) => {
-            e.persist();
-            const { menu, type, name } = e.target.dataset;
-            await this.closeMenu(menu);
-            if (this.props.onClick) {
-                this.props.onClick(menu, type, name);
-            }
-        };
-        this.state = {};
-    }
-    toggleMenu(menu) {
-        return new Promise((resolve) => {
-            this.setState((prevState) => ({
-                [menu]: !prevState[menu],
-            }), resolve);
-        });
-    }
-    closeMenu(menu) {
-        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
-    }
-}
-if (typeof window === 'object') {
-    window.Menu = Menu;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Modal/Modal.tsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Modal": () => (/* binding */ Modal)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Modal_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.less */ "./src/frontend/common/widget/Modal/Modal.less");
-
-
-
-class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
-    }
-}
-if (typeof window === 'object') {
-    window.Modal = Modal;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Password/Password.tsx":
-/*!**********************************************************!*\
-  !*** ./src/frontend/common/widget/Password/Password.tsx ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Password": () => (/* binding */ Password)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _Password_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Password.less */ "./src/frontend/common/widget/Password/Password.less");
-
-
-
-
-
-
-
-class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = (e) => {
-            this._setValue(e.target.value);
-        };
-        this.onCloseClick = (e) => {
-            this._setValue('');
-            this.getInputElement().focus();
-        };
-        this.onIconClick = (e) => {
-            this.setState((prevState) => {
-                return {
-                    type: prevState.type === 'password' ? 'text' : 'password',
-                };
-            });
-            this.getInputElement().focus();
-        };
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = {
-            value: this.props.value || '',
-            type: 'password',
-        };
-    }
-    getInputElement() {
-        return this.inputEl.current;
-    }
-    getValue() {
-        return this.state.value;
-    }
-    _setValue(value) {
-        this.state.value = value;
-        this.forceUpdate();
-        if (this.props.onChange) {
-            this.props.onChange(value);
-        }
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    isCloseVisible() {
-        return this.state.value !== '';
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Password = Password;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/PhoneBox.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-
-class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onKeyPress = (e) => {
-            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
-                e.preventDefault();
-            }
-            if (e.key === '+' &&
-                e.target.value.length &&
-                Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
-                e.preventDefault();
-            }
-        };
-        this.onChange = (e) => {
-            const start = e.target.selectionStart;
-            const end = e.target.selectionEnd;
-            const len = e.target.value.length;
-            if (start !== end || start !== len) {
-                return;
-            }
-            let value = PhoneBox.clearValue(e.target.value);
-            value = PhoneBox.ifNoCodeAddRussianCode(value);
-            this.state.value = PhoneBox.formatPhoneNumber(value);
-            this.setState({ value: this.state.value });
-            if (this.props.onChange) {
-                this.props.onChange(value);
-            }
-        };
-        this.onBlur = (e) => {
-            let value = PhoneBox.clearValue(e.target.value);
-            value = PhoneBox.ifNoCodeAddRussianCode(value);
-            if (this.props.onBlur) {
-                this.props.onBlur(value);
-            }
-        };
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = {
-            value: PhoneBox.formatPhoneNumber(this.props.value || ''),
-        };
-    }
-    getValue() {
-        return PhoneBox.clearValue(this.state.value);
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.value !== undefined) {
-            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
-        }
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
-    }
-    static clearValue(value) {
-        return value.replace(/[^\+0-9]/g, '');
-    }
-    static ifNoCodeAddRussianCode(value) {
-        if (value === '') {
-        }
-        else if (value.match(/^8/)) {
-            return value.replace(/^8/, '+7');
-        }
-        else if (value.match(/^7/)) {
-            return `+${value}`;
-        }
-        else if (value[0] !== '+') {
-            return `+7${value}`;
-        }
-        return value;
-    }
-    static formatPhoneNumber(_value) {
-        const value = PhoneBox.clearValue(_value);
-        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        if (arr) {
-            if (arr[5]) {
-                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
-            }
-            if (arr[4]) {
-                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
-            }
-            if (arr[3]) {
-                return `${arr[1]} ${arr[2]} ${arr[3]}`;
-            }
-            if (arr[2]) {
-                return `${arr[1]} ${arr[2]}`;
-            }
-            if (arr[1]) {
-                return `${arr[1]}`;
-            }
-        }
-        return value;
-    }
-}
-if (typeof window === 'object') {
-    window.PhoneBox = PhoneBox;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Radio.tsx":
-/*!**********************************************!*\
-  !*** ./src/frontend/common/widget/Radio.tsx ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Radio": () => (/* binding */ Radio)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = async (e) => {
-            this.setState({ value: e.target.value });
-            if (this.props.onChange) {
-                await this.props.onChange(e.target.value);
-            }
-        };
-        if (!props.name)
-            throw new Error('no name');
-        this.state = {
-            value: this.getInitialValue(),
-        };
-        console.debug('value:', JSON.stringify(this.getValue()));
-    }
-    getInitialValue() {
-        let value = null;
-        if (this.props.value !== undefined && this.props.value !== null) {
-            value = this.props.value;
-            const item = this.props.items.find((item) => item.value === this.props.value);
-            if (!item) {
-                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
-                console.debug('items:', this.props.items);
-            }
-        }
-        return value;
-    }
-    getValue() {
-        return this.state.value;
-    }
-    renderItem(item, i) {
-        return [
-            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'radio', name: this.props.name, id: `${this.props.name}${i}`, value: item.value, onChange: this.onChange, checked: item.value === this.getValue(), readOnly: this.isReadOnly(), disabled: this.isReadOnly() }),
-            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: `${this.props.name}${i}` }, { children: item.title || item.value })),
-        ];
-    }
-    isReadOnly() {
-        if (this.props.readOnly !== undefined)
-            return this.props.readOnly;
-        return false;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    render() {
-        const items = this.props.items || [];
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: items.map((item, i) => this.renderItem(item, i)) })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Select/Select.tsx":
-/*!******************************************************!*\
-  !*** ./src/frontend/common/widget/Select/Select.tsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Select": () => (/* binding */ Select)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-/* harmony import */ var _Select_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Select.less */ "./src/frontend/common/widget/Select/Select.less");
-
-
-
-
-
-
-class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onKeyDown = async (e) => {
-            if (this.isVisible()) {
-                this.setState({ visible: false });
-                e.stopPropagation();
-            }
-        };
-        this.onInputMouseDown = async (e) => {
-            console.debug('Select.onInputMouseDown');
-            if (this.props.readOnly)
-                return;
-            if (this.props.onMouseDown) {
-                await this.props.onMouseDown(e);
-            }
-            else {
-                if (!this.isVisible()) {
-                    const [selected] = this.el.current.querySelectorAll('li.selected');
-                    if (selected) {
-                        const scrollTop = selected.offsetTop -
-                            this.dropdown.current.getBoundingClientRect().height / 2 +
-                            selected.getBoundingClientRect().height / 2;
-                        console.debug('scrollTop:', scrollTop);
-                        this.dropdown.current.scrollTop = scrollTop;
-                        console.debug('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
-                    }
-                }
-                this.setState((prevState) => {
-                    return { visible: !prevState.visible };
-                });
-            }
-        };
-        this.onInputBlur = async (e) => {
-            console.debug('Select.onInputBlur', e.target);
-            this.setState({ visible: false });
-        };
-        this.onDropdownMouseDown = async (e) => {
-            e.preventDefault();
-        };
-        this.onDropdownClick = async (e) => {
-            console.debug('Select.onDropdownClick', e.target.offsetTop);
-            const value = JSON.parse(e.target.dataset.value);
-            this.setState({ value: value, visible: false }, async () => {
-                if (this.props.onChange) {
-                    await this.props.onChange(value.toString());
-                }
-            });
-        };
-        this.onCloseClick = async (e) => {
-            this.setState({ value: '' });
-            if (this.props.onChange) {
-                await this.props.onChange('');
-            }
-            this.getElement();
-        };
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = {
-            value: this.getInitialValue(),
-            visible: false,
-        };
-    }
-    isVisible() {
-        return this.state.visible;
-    }
-    getInitialValue() {
-        let value = null;
-        if (this.props.value !== undefined && this.props.value !== null) {
-            value = this.props.value;
-            const item = this.getItems().find((item) => item.value === this.props.value);
-            if (!item) {
-                if (this.isNullable() && value === '') {
-                }
-                else {
-                    console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
-                    console.debug('items:', this.getItems());
-                }
-            }
-        }
-        else {
-            if (this.isNullable()) {
-                value = '';
-            }
-            else {
-                if (this.props.items.length) {
-                    value = this.props.items[0].value;
-                }
-                else {
-                    value = '';
-                }
-            }
-        }
-        if (value === null)
-            throw new Error('null is wrong value for Select');
-        return value;
-    }
-    getValue() {
-        return this.state.value;
-    }
-    isNullable() {
-        return this.props.nullable !== undefined ? this.props.nullable : true;
-    }
-    getVisibility() {
-        return this.isVisible() ? 'visible' : 'hidden';
-    }
-    getDisplay() {
-        return this.isVisible() ? 'block' : 'none';
-    }
-    getItems() {
-        return this.props.items || [];
-    }
-    getValueTitle(value) {
-        if (value === '')
-            return '';
-        const item = this.getItems().find((item) => item.value === value);
-        if (!item)
-            throw new Error(`cannot find item by value: ${value}`);
-        return item.title || item.value;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    isCloseVisible() {
-        if (this.props.readOnly)
-            return false;
-        return this.state.value !== '';
-    }
-    renderInput() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown }));
-    }
-    renderClose() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
-    }
-    renderIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) })));
-    }
-    renderDropdown() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
-                display: this.getDisplay(),
-            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map((item) => {
-                    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value));
-                })] })));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Select = Select;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
-/*!******************************************************!*\
-  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Slider": () => (/* binding */ Slider)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _Slider_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Slider.less */ "./src/frontend/common/widget/Slider/Slider.less");
-
-
-
-
-
-
-class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onPrevClick = (e) => {
-            this.setState((prevState) => {
-                let image = prevState.image - 1;
-                if (image < 0) {
-                    image = this.props.images.length - 1;
-                }
-                return { image };
-            });
-        };
-        this.onNextClick = (e) => {
-            this.setState((prevState) => {
-                let image = prevState.image + 1;
-                if (image > this.props.images.length - 1) {
-                    image = 0;
-                }
-                return { image };
-            });
-        };
-        this.onImageClick = (e) => {
-            console.debug('Slider.onImageClick');
-            if (this.state.classList) {
-                this.setState({ classList: null });
-            }
-            else {
-                this.setState({ classList: ['full'] });
-            }
-        };
-        this.onCloseClick = (e) => {
-            this.setState({ classList: null });
-        };
-        if (!this.props.images)
-            throw new Error('Slider: no images');
-        this.state = { image: 0, classList: null };
-    }
-    render() {
-        const images = this.props.images || [];
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Slider = Slider;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
-/*!************************************************************!*\
-  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Statusbar_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Statusbar.less */ "./src/frontend/common/widget/Statusbar/Statusbar.less");
-
-
-
-class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-    setLastQueryTime(lastQueryTime) {
-        this.setState({ lastQueryTime });
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Last query time:", ' ', this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
-    }
-}
-if (typeof window === 'object') {
-    window.Statusbar = Statusbar;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tab/Tab.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Tab": () => (/* binding */ Tab)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Tab_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab.less */ "./src/frontend/common/widget/Tab/Tab.less");
-
-
-
-class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onLiMouseDown = (e) => {
-            if (e.target.classList.contains('close'))
-                return;
-            const i = parseInt(e.currentTarget.dataset.i);
-            if (this.props.getActive) {
-                if (this.props.onTabMouseDown)
-                    this.props.onTabMouseDown(i);
-            }
-            else {
-                if (i !== this.getActive()) {
-                    this.selectTab(i);
-                }
-            }
-        };
-        this.onLiClick = (e) => {
-            if (e.target.classList.contains('close')) {
-                const i = parseInt(e.currentTarget.dataset.i);
-                if (this.props.onTabClose)
-                    this.props.onTabClose(i);
-            }
-        };
-        this.state = {
-            active: 0,
-        };
-    }
-    getActive() {
-        if (this.props.getActive)
-            return this.props.getActive();
-        return this.state.active;
-    }
-    selectTab(i) {
-        if (i === this.getActive())
-            return;
-        const start = Date.now();
-        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
-    }
-    renderTitles() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : undefined, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
-    }
-    renderContents() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : undefined }, { children: tab.content }), tab.name)));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Tab = Tab;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
-/*!**************************************************!*\
-  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Tab2": () => (/* binding */ Tab2)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Tab2_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab2.less */ "./src/frontend/common/widget/Tab2/Tab2.less");
-
-
-
-class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onLiMouseDown = (e) => {
-            if (e.target.classList.contains('close'))
-                return;
-            const i = parseInt(e.currentTarget.dataset.i);
-            if (this.props.getActive) {
-                if (this.props.onTabMouseDown)
-                    this.props.onTabMouseDown(i);
-            }
-            else {
-                if (i !== this.getActive()) {
-                    this.selectTab(i);
-                }
-            }
-        };
-        this.onLiClick = (e) => {
-            if (e.target.classList.contains('close')) {
-                const i = parseInt(e.currentTarget.dataset.i);
-                if (this.props.onTabClose)
-                    this.props.onTabClose(i);
-            }
-        };
-        this.state = {
-            active: 0,
-        };
-    }
-    getActive() {
-        if (this.props.getActive)
-            return this.props.getActive();
-        return this.state.active;
-    }
-    selectTab(i) {
-        if (i === this.getActive())
-            return;
-        const start = Date.now();
-        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
-    }
-    renderTitles() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
-    }
-    renderContents() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page full ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name)));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Tab2 = Tab2;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/TextArea.tsx":
-/*!*************************************************!*\
-  !*** ./src/frontend/common/widget/TextArea.tsx ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TextArea": () => (/* binding */ TextArea)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = (e) => {
-            this.setState({ value: e.target.value });
-            if (this.props.onChange) {
-                this.props.onChange(e.target.value);
-            }
-        };
-        this.state = {
-            value: this.props.value || '',
-        };
-    }
-    getValue() {
-        return this.state.value;
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
-    }
-}
-if (typeof window === 'object') {
-    window.TextArea = TextArea;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/TextBox.tsx":
-/*!************************************************!*\
-  !*** ./src/frontend/common/widget/TextBox.tsx ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TextBox": () => (/* binding */ TextBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-
-class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = (e) => {
-            this._setValue(e.target.value);
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.state = {
-            value: this.props.value || '',
-        };
-    }
-    getValue() {
-        return this.state.value;
-    }
-    _setValue(value) {
-        this.state.value = value;
-        this.forceUpdate();
-        if (this.props.onChange) {
-            this.props.onChange(value);
-        }
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        this.state.value = nextProps.value;
-        return true;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
-    }
-}
-if (typeof window === 'object') {
-    window.TextBox = TextBox;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
-/*!********************************************************!*\
-  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-
-
-
-class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onKeyPress = (event) => {
-            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-                console.debug('cancel', event.key);
-                event.preventDefault();
-            }
-        };
-        this.onChange = (e) => {
-            const target = e.target;
-            const start = target.selectionStart;
-            const end = target.selectionEnd;
-            if (target.value.length > 5) {
-                return;
-            }
-            const inEnd = start === end && start === target.value.length;
-            const stringValue = this.formatValue(target.value);
-            this.setState({ value: stringValue }, () => {
-                if (!inEnd) {
-                    target.selectionStart = start;
-                    target.selectionEnd = end;
-                }
-                if (this.props.onChange) {
-                    let nValue;
-                    try {
-                        nValue = this.getValue();
-                    }
-                    catch (err) {
-                        console.debug(err.message);
-                        nValue = NaN;
-                    }
-                    this.props.onChange(nValue);
-                }
-            });
-        };
-        this.onBlur = (e) => {
-            if (this.props.onBlur) {
-                let nValue;
-                try {
-                    nValue = this.getValue();
-                }
-                catch (err) {
-                    console.debug(err.message);
-                    nValue = NaN;
-                }
-                this.props.onBlur(nValue);
-            }
-        };
-        if (props.value && typeof props.value !== 'number') {
-            throw new Error(`need number type, got ${typeof props.value}`);
-        }
-        this.state = {
-            value: TimeBox.getStringValue(props.value),
-        };
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-    }
-    formatValue(value) {
-        let min = '';
-        let sec = '';
-        const pure = value.replace(':', '');
-        switch (pure.length) {
-            case 0:
-                break;
-            case 1:
-                min = pure;
-                break;
-            case 2:
-                min = pure;
-                break;
-            case 3:
-                min = pure.substr(0, 2);
-                sec = pure.substr(2, 1);
-                break;
-            case 4:
-                min = pure.substr(0, 2);
-                sec = pure.substr(2, 2);
-                break;
-        }
-        return [min, ...(sec ? [sec] : [])].join(':');
-    }
-    getValue() {
-        return TimeBox.getIntegerValue(this.state.value);
-    }
-    setValue(value) {
-        this.setState({ value: TimeBox.getStringValue(value) });
-    }
-    static getStringValue(value) {
-        if (value === null)
-            return '';
-        if (value !== undefined) {
-            let h = Math.floor(value / 60);
-            let m = Math.floor(value - h * 60);
-            if (h < 10)
-                h = '0' + h;
-            if (m < 10)
-                m = '0' + m;
-            return `${h}:${m}`;
-        }
-        return '';
-    }
-    static getIntegerValue(stringValue) {
-        if (stringValue === '')
-            return null;
-        const arr = stringValue.split(':');
-        if (!arr[0])
-            throw new Error(`no hours: ${stringValue}`);
-        if (!arr[1])
-            throw new Error(`no minutes: ${stringValue}`);
-        if (arr[0].length !== 2)
-            throw new Error(`hours incomplete: ${stringValue}`);
-        if (arr[1].length !== 2)
-            throw new Error(`minutes incomplete: ${stringValue}`);
-        const hh = parseInt(arr[0]);
-        const mm = parseInt(arr[1]);
-        if (hh > 23)
-            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
-        if (mm > 59)
-            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
-        return hh * 60 + mm;
-    }
-    static splitTime(value) {
-        const hours = Math.floor(value / 60);
-        const minutes = value - hours * 60;
-        return [hours, minutes];
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.value !== nextProps.value) {
-            this.state.value = TimeBox.getStringValue(nextProps.value);
-            return true;
-        }
-        if (this.props.readOnly !== nextProps.readOnly)
-            return true;
-        if (this.props.placeholder !== nextProps.placeholder)
-            return true;
-        if (this.state.value !== nextState.value)
-            return true;
-        return false;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
-    }
-}
-if (typeof window === 'object') {
-    window.TimeBox = TimeBox;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx":
-/*!******************************************************************!*\
-  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TimeBox2": () => (/* binding */ TimeBox2)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _TimeBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
-/* harmony import */ var _TimeBox2_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TimeBox2.less */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less");
-
-
-
-
-
-
-class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
-    constructor(props) {
-        super(props);
-        this.onClear = (e) => {
-            this.setState({ value: '' }, () => {
-                if (this.props.onClear) {
-                    this.props.onClear();
-                }
-            });
-        };
-        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-    }
-    isCloseVisible() {
-        return !!this.state.value;
-    }
-    getInputElement() {
-        return this.inputEl.current;
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
-/*!********************************************************!*\
-  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Tooltip_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tooltip.less */ "./src/frontend/common/widget/Tooltip/Tooltip.less");
-
-
-
-class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
-    }
-}
-if (typeof window === 'object') {
-    window.Tooltip = Tooltip;
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/common/widget/index.ts":
-/*!*********************************************!*\
-  !*** ./src/frontend/common/widget/index.ts ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Box": () => (/* reexport safe */ _Box_Box__WEBPACK_IMPORTED_MODULE_0__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_3__.Button),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__.CheckBoxList),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__.DatePicker),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__.DropdownDatePicker),
-/* harmony export */   "Expand": () => (/* reexport safe */ _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__.Expand),
-/* harmony export */   "Grid": () => (/* reexport safe */ _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__.GridRow),
-/* harmony export */   "Image": () => (/* reexport safe */ _Image_Image__WEBPACK_IMPORTED_MODULE_23__.Image),
-/* harmony export */   "Menu": () => (/* reexport safe */ _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__.Modal),
-/* harmony export */   "Password": () => (/* reexport safe */ _Password_Password__WEBPACK_IMPORTED_MODULE_11__.Password),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _PhoneBox__WEBPACK_IMPORTED_MODULE_21__.PhoneBox),
-/* harmony export */   "Radio": () => (/* reexport safe */ _Radio__WEBPACK_IMPORTED_MODULE_27__.Radio),
-/* harmony export */   "Select": () => (/* reexport safe */ _Select_Select__WEBPACK_IMPORTED_MODULE_17__.Select),
-/* harmony export */   "Slider": () => (/* reexport safe */ _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _TextArea__WEBPACK_IMPORTED_MODULE_18__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _TextBox__WEBPACK_IMPORTED_MODULE_6__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__.TimeBox2),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__.Tooltip)
-/* harmony export */ });
-/* harmony import */ var _Box_Box__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-/* harmony import */ var _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-/* harmony import */ var _ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-/* harmony import */ var _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-/* harmony import */ var _TextBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-/* harmony import */ var _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-/* harmony import */ var _Password_Password__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-/* harmony import */ var _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-/* harmony import */ var _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-/* harmony import */ var _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-/* harmony import */ var _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _Select_Select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-/* harmony import */ var _TextArea__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-/* harmony import */ var _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-/* harmony import */ var _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _PhoneBox__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
-/* harmony import */ var _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
-/* harmony import */ var _Image_Image__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
-/* harmony import */ var _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
-/* harmony import */ var _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
-/* harmony import */ var _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
-/* harmony import */ var _Radio__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Radio */ "./src/frontend/common/widget/Radio.tsx");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/frontend/index/IndexFrontHostApp.ts":
-/*!*************************************************!*\
-  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
-/* harmony export */ });
-/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
-
-
-class IndexFrontHostApp {
-    constructor(data) {
-        this.data = data;
-        this.view = null;
-        this.currentAppFullName = undefined;
-        this.currentAppEnv = undefined;
-        this.modals = [];
-        this.folderNameTextBox = null;
-        this.folderName = null;
-        this.appName = null;
-        this.onAppChange = (fullName) => {
-            console.debug('IndexFrontHostApp.onAppChange', fullName);
-            this.currentAppFullName = fullName;
-            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
-            if (!appInfo)
-                throw new Error(`no appInfo ${fullName}`);
-            this.currentAppEnv = appInfo.envs[0];
-            this.view.rerender();
-        };
-        this.onEnvChange = (env) => {
-            console.debug('IndexFrontHostApp.onEnvChange', env);
-            this.currentAppEnv = env;
-        };
-        this.run = (e) => {
-            if (this.currentAppFullName) {
-                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.debug('href:', href);
-                window.location.href = href;
-            }
-        };
-        this.edit = (e) => {
-            if (this.currentAppFullName) {
-                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.debug('href:', href);
-                window.location.href = href;
-            }
-        };
-        this.btnCreate_Click = async (e) => {
-            this.modals.push({ id: 1 });
-            await this.view.rerender();
-            this.folderNameTextBox.getElement().focus();
-        };
-        this.closeModal = () => {
-            console.debug('IndexFrontHostApp.closeModal');
-            this.modals.pop();
-            this.view.rerender();
-        };
-        this.onFolderNameCreate = (textBox) => {
-            console.debug('IndexFrontHostApp.onFolderNameCreate');
-            this.folderNameTextBox = textBox;
-        };
-        this.onFolderNameChange = (folderName) => {
-            this.folderName = folderName;
-        };
-        this.onAppNameChange = (appName) => {
-            this.appName = appName;
-        };
-        this.onCreateClick = async (e) => {
-            console.debug('IndexFrontHostApp.onCreateClick');
-            console.debug(this.folderName, this.appName);
-            this.closeModal();
-            await this.createApp(this.folderName, this.appName);
-        };
-        console.debug('IndexFrontHostApp.constructor', data);
-    }
-    init() {
-        const appInfo = this.data.appInfos[0];
-        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
-        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
-        this.createView(document.querySelector('#root'));
-    }
-    createView(root) {
-        this.view = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
-            ctrl: this,
-        });
-    }
-    getAppItems() {
-        return this.data.appInfos.map((appInfo) => ({
-            value: appInfo.fullName,
-            title: appInfo.fullName,
-        }));
-    }
-    getEnvItems() {
-        if (this.currentAppFullName) {
-            const appInfo = this.getAppInfo(this.currentAppFullName);
-            if (appInfo) {
-                return appInfo.envs.map((env) => ({ value: env, title: env }));
-            }
-        }
-        return [];
-    }
-    getAppInfo(fullName) {
-        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
-    }
-    async createApp(folderName, appName) {
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            action: 'new',
-            folder: folderName,
-            name: appName,
-        });
-        console.debug('data:', data);
-        if (data.appInfos) {
-            this.data.appInfos = data.appInfos;
-            this.currentAppFullName = `${folderName}/${appName}`;
-            this.view.rerender();
-        }
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/index/IndexView/IndexView.tsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexView": () => (/* binding */ IndexView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _IndexView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IndexView.less */ "./src/frontend/index/IndexView/IndexView.less");
-
-
-
-class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    renderModals() {
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
-    }
-    render() {
-        console.debug('IndexView.render');
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
-    }
-}
-
-
 /***/ })
 
 /******/ 	});
@@ -35403,16 +31922,22 @@ class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************!*\
-  !*** ./src/frontend/index/main.ts ***!
-  \************************************/
+/*!**************************************!*\
+  !*** ./src/frontend/monitor/main.ts ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
+/* harmony import */ var _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MonitorView/MonitorView */ "./src/frontend/monitor/MonitorView/MonitorView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _style_monitor_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/monitor.less */ "./src/frontend/monitor/style/monitor.less");
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.debug('DOMContentLoaded');
-    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const data = JSON.parse(
+    document.querySelector('script[type="application/json"]').textContent
+  );
+  console.debug("data:", data);
+  _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(document.querySelector(".monitor__root"), _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__.MonitorView, { data });
 });
 
 })();

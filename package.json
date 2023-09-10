@@ -9,9 +9,9 @@
     "scripts": {
         "webpack-back-index": "NODE_ENV=dev webpack --config webpack.config.back.index.js",
         "webpack-back-start": "NODE_ENV=dev webpack --config webpack.config.back.start.js",
+        "webpack-front-editor": "NODE_ENV=dev webpack --config webpack.config.editor.js",
         "webpack-front-index": "NODE_ENV=dev webpack --config webpack.config.index.js",
         "webpack-front-monitor": "NODE_ENV=dev webpack --config webpack.config.monitor.js",
-        "webpack-front-editor": "NODE_ENV=dev webpack --config webpack.config.editor.js",
         "webpack-front-viewer": "NODE_ENV=dev webpack --config webpack.config.viewer.js",
         "build": "npx gulp build-dev",
         "build:prod": "npx gulp build-prod",
