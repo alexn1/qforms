@@ -1,6 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const tsConfigFront = require('./tsconfig.front.json');
 
 module.exports = {
     mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
@@ -23,19 +24,7 @@ module.exports = {
                     loader: 'ts-loader',
                     options: {
                         onlyCompileBundledFiles: true,
-                        compilerOptions: {
-                            target: 'ES2017',
-                            declaration: false,
-                            esModuleInterop: true,
-                            jsx: 'react-jsx',
-                            rootDir: 'src',
-                            outDir: 'dist',
-                            moduleResolution: 'node',
-                            noImplicitAny: false,
-                            strictNullChecks: true,
-                            removeComments: true,
-                            experimentalDecorators: true,
-                        },
+                        ...tsConfigFront,
                     },
                 },
             },
