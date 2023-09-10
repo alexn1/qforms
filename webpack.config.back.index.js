@@ -21,7 +21,7 @@ module.exports = {
     devtool: false,
     module: {
         rules: [
-            {
+            /* {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -30,6 +30,14 @@ module.exports = {
                         onlyCompileBundledFiles: false,
                         ...tsConfigCustom,
                     },
+                },
+            }, */
+            {
+                test: /\.tsx?$/,
+                loader: 'esbuild-loader',
+                options: {
+                    tsconfig: './tsconfig.custom.json',
+                    keepNames: true,
                 },
             },
             {

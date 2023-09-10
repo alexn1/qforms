@@ -16,7 +16,7 @@ module.exports = {
     devtool: false,
     module: {
         rules: [
-            {
+            /* {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -24,22 +24,15 @@ module.exports = {
                     options: {
                         onlyCompileBundledFiles: false,
                         ...tsConfigCustom,
-                        /* compilerOptions: {
-                            target: 'ES2017',
-                            declaration: true,
-                            esModuleInterop: true,
-                            jsx: 'react-jsx',
-                            rootDir: 'src',
-                            outDir: 'dist',
-                            moduleResolution: 'node',
-                            module: 'commonjs',
-                            resolveJsonModule: true,
-                            strictNullChecks: true,
-                            noImplicitAny: false,
-                            experimentalDecorators: true,
-                            removeComments: true,
-                        }, */
                     },
+                },
+            }, */
+            {
+                test: /\.tsx?$/,
+                loader: 'esbuild-loader',
+                options: {
+                    tsconfig: './tsconfig.custom.json',
+                    keepNames: true,
                 },
             },
             {
