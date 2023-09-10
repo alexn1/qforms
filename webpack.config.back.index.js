@@ -28,7 +28,10 @@ module.exports = {
                     loader: 'ts-loader',
                     options: {
                         onlyCompileBundledFiles: false,
-                        ...tsConfigCustom,
+                        compilerOptions: {
+                            ...tsConfigCustom.compilerOptions,
+                            declaration: true,
+                        },
                     },
                 },
             },
