@@ -59,8 +59,8 @@ export interface PageActionDto extends BaseDto {
 }
 
 export interface SelectActionDto extends BaseDto {
-    page: string;
-    form: string;
+    page: Nullable<string>;
+    form: Nullable<string>;
     ds: string;
     params: Record<string, any>;
 }

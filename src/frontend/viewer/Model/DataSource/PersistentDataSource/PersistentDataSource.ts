@@ -1,5 +1,12 @@
 import { DataSource } from '../DataSource';
-import { DeleteActionDto, InsertActionDto, Key, RawRow, SelectActionDto, UpdateActionDto } from '../../../../../types';
+import {
+    DeleteActionDto,
+    InsertActionDto,
+    Key,
+    RawRow,
+    SelectActionDto,
+    UpdateActionDto,
+} from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
 
@@ -232,7 +239,7 @@ export class PersistentDataSource extends DataSource {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request('POST', {
+        const body: SelectActionDto = {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,
@@ -241,7 +248,8 @@ export class PersistentDataSource extends DataSource {
                 ...this.getPageParams(),
                 ...params,
             },
-        } as SelectActionDto);
+        };
+        const data = await this.getApp().request('POST', body);
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
         return data;

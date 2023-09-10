@@ -12755,13 +12755,14 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       console.debug("PersistentDataSource.select", this.getFullName(), params);
       const page = this.getPage();
       const form = this.getForm();
-      const data = yield this.getApp().request("POST", {
+      const body = {
         action: "select",
         page: page ? page.getName() : null,
         form: form ? form.getName() : null,
         ds: this.getName(),
         params: __spreadValues(__spreadValues({}, this.getPageParams()), params)
-      });
+      };
+      const data = yield this.getApp().request("POST", body);
       if (!(data.rows instanceof Array))
         throw new Error("rows must be array");
       return data;

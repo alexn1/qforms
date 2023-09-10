@@ -19838,13 +19838,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request('POST', {
+        const body = {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,
             ds: this.getName(),
             params: Object.assign(Object.assign({}, this.getPageParams()), params),
-        });
+        };
+        const data = await this.getApp().request('POST', body);
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
         return data;
