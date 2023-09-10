@@ -21,7 +21,7 @@ module.exports = {
     devtool: false,
     module: {
         rules: [
-            /* {
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -31,15 +31,15 @@ module.exports = {
                         ...tsConfigCustom,
                     },
                 },
-            }, */
-            {
+            },
+            /* {
                 test: /\.tsx?$/,
                 loader: 'esbuild-loader',
                 options: {
                     tsconfig: './tsconfig.custom.json',
                     keepNames: true,
                 },
-            },
+            }, */
             {
                 test: /\.less$/i,
                 use: 'null-loader',
