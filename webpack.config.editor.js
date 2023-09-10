@@ -17,7 +17,7 @@ module.exports = {
     },
     module: {
         rules: [
-            {
+            /* {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -26,6 +26,14 @@ module.exports = {
                         onlyCompileBundledFiles: true,
                         ...tsConfigFront,
                     },
+                },
+            }, */
+            {
+                test: /\.tsx?$/,
+                loader: 'esbuild-loader',
+                options: {
+                    tsconfig: './tsconfig.front.json',
+                    keepNames: true,
                 },
             },
             {
