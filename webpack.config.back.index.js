@@ -54,7 +54,7 @@ module.exports = {
     },
     target: 'node',
     externals: [nodeExternals()],
-    externalsType: 'commonjs',
+    // externalsType: 'commonjs',
     optimization: {
         nodeEnv: false,
         minimizer: [
