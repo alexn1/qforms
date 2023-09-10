@@ -6,11 +6,15 @@
 /*!*************************!*\
   !*** ./src/pConsole.ts ***!
   \*************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.pConsole = exports.getLogLevelName = exports.LogLevels = exports.LogLevel = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LogLevel": () => (/* binding */ LogLevel),
+/* harmony export */   "LogLevels": () => (/* binding */ LogLevels),
+/* harmony export */   "getLogLevelName": () => (/* binding */ getLogLevelName),
+/* harmony export */   "pConsole": () => (/* binding */ pConsole)
+/* harmony export */ });
 const LOG_LEVEL_EV_NAME = 'QFORMS_LOG_LEVEL';
 var LogLevel;
 (function (LogLevel) {
@@ -18,8 +22,8 @@ var LogLevel;
     LogLevel["log"] = "log";
     LogLevel["warn"] = "warn";
     LogLevel["error"] = "error";
-})(LogLevel = exports.LogLevel || (exports.LogLevel = {}));
-exports.LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
+})(LogLevel || (LogLevel = {}));
+const LogLevels = [LogLevel.debug, LogLevel.log, LogLevel.warn, LogLevel.error];
 function getLogLevelName() {
     if (typeof window === 'object') {
         return window[LOG_LEVEL_EV_NAME] || 'debug';
@@ -29,16 +33,15 @@ function getLogLevelName() {
     }
     return 'debug';
 }
-exports.getLogLevelName = getLogLevelName;
 function isJest() {
     return typeof jest !== 'undefined';
 }
-exports.pConsole = new Proxy(console, {
+const pConsole = new Proxy(console, {
     get: function (target, prop, receiver) {
         if (typeof target[prop] === 'function') {
             return function (...args) {
-                const methodLevel = exports.LogLevels.indexOf(prop);
-                const logLevel = exports.LogLevels.indexOf(getLogLevelName());
+                const methodLevel = LogLevels.indexOf(prop);
+                const logLevel = LogLevels.indexOf(getLogLevelName());
                 if (methodLevel >= logLevel) {
                     if (!isJest()) {
                         return target[prop].apply(receiver, args);
@@ -96,17 +99,59 @@ module.exports = require("./index");
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-var exports = __webpack_exports__;
 /*!**********************!*\
   !*** ./src/start.ts ***!
   \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ "./index");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const index_1 = __webpack_require__(/*! ./index */ "./index");
-const pConsole_1 = __webpack_require__(/*! ./pConsole */ "./src/pConsole.ts");
+
 const MONITOR_CONFIG = {
     username: 'admin',
     password: '123qwe',
@@ -116,9 +161,9 @@ start(...process.argv).then((code) => {
         process.exit(code);
 });
 async function start(...argv) {
-    pConsole_1.pConsole.debug('start');
+    _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('start');
     try {
-        const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.argvAsKeyValue(argv)), { monitor: MONITOR_CONFIG }));
+        const backHostApp = new _index__WEBPACK_IMPORTED_MODULE_0__.BackHostApp(Object.assign(Object.assign({}, _index__WEBPACK_IMPORTED_MODULE_0__.BkHelper.argvAsKeyValue(argv)), { monitor: MONITOR_CONFIG }));
         await backHostApp.init();
         await backHostApp.run();
     }

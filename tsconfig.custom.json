@@ -11,8 +11,6 @@
         "strictNullChecks": true,
         "removeComments": true,
         "experimentalDecorators": true,
-        "resolveJsonModule": true,
-
-        "module": "commonjs"
+        "resolveJsonModule": true
     }
 }
