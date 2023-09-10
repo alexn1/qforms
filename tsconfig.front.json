@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ES2017",
+        "declaration": false,
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        "rootDir": "src",
+        "outDir": "dist",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "experimentalDecorators": true
+    }
+}
