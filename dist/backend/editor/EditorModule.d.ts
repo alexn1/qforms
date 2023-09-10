@@ -9,6 +9,6 @@ export declare class EditorModule {
     init(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];
-    handleEditorGet(req: any, res: any, context: Context): Promise<void>;
+    handleEditorGet(req: Request, res: Response, context: Context): Promise<void>;
     handleEditorPost(req: Request, res: Response, context: Context): Promise<void>;
 }

@@ -483,7 +483,7 @@ export class BackHostApp {
         pConsole.log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
-            res.end(html);
+            res.setHeader('Content-Type','text/html; charset=utf-8').end(html);
         } catch (err) {
             next(err);
         }
@@ -515,9 +515,9 @@ export class BackHostApp {
                 const html = this.monitorModule.render();
                 res.end(html);
             } else {
-                res.statusCode = 401;
-                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"');
-                res.end('Unauthorized');
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
+                    .status(401)
+                    .end('Unauthorized');
             }
         } catch (err) {
             next(err);

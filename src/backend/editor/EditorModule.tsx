@@ -90,7 +90,7 @@ export class EditorModule {
         ];
     }
 
-    async handleEditorGet(req, res, context: Context) {
+    async handleEditorGet(req: Request, res: Response, context: Context) {
         debug('EditorModule.handleEditorGet');
         const appInfo = await BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
 
@@ -117,7 +117,7 @@ export class EditorModule {
             links,
             scripts,
         );
-        res.end(html);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
 
     async handleEditorPost(req: Request, res: Response, context: Context) {

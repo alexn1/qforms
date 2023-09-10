@@ -1,9 +1,14 @@
+const { inspect } = require('util');
 const { BkHelper } = require('../../dist');
 const { SampleBackHostApp } = require('./SampleBackHostApp');
 
 require('./SampleBkApplication');
 require('./public/js/SampleApplicationController');
 require('./public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView');
+
+start(...process.argv).then((code) => {
+    if (code) process.exit(code);
+});
 
 async function start(...argv) {
     console.debug('start');
@@ -18,7 +23,3 @@ async function start(...argv) {
         return 1;
     }
 }
-
-start(...process.argv).then((code) => {
-    if (code) process.exit(code);
-});

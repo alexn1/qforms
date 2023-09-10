@@ -258,7 +258,7 @@ export class ViewerModule {
         try {
             await bkApplication.initContext(context);
             const html = await this.renderHtml(bkApplication, context);
-            res.end(html);
+            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
         } finally {
             await bkApplication.release(context);
         }
