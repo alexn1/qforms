@@ -77,13 +77,14 @@ export class PersistentDataSource extends DataSource {
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         // specific to PersistentDataSource
-        const result: Result = await this.getApp().request('POST', {
+        const body: UpdateActionDto = {
             action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
-        } as UpdateActionDto);
+        };
+        const result: Result = await this.getApp().request('POST', body);
 
         const [key] = Object.keys(result[database][table].updateEx!) as [Key];
         if (!key) throw new Error('no updated row');
@@ -111,13 +112,14 @@ export class PersistentDataSource extends DataSource {
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result: Result = await this.getApp().request('POST', {
+        const body: DeleteActionDto = {
             action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             params: { key },
-        } as DeleteActionDto);
+        };
+        const result: Result = await this.getApp().request('POST', body);
         await this.refill();
 
         // events

@@ -14598,12 +14598,13 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.getModel().request('POST', {
+        const body = {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
             params: options.params || {},
-        });
+        };
+        const { page: pageData } = await this.getModel().request('POST', body);
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -19035,12 +19036,13 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const response = await this.request('POST', {
+        const body = {
             action: 'rpc',
             name: name,
-            params: params,
             uuid: this.getAttr('uuid'),
-        });
+            params: params,
+        };
+        const response = await this.request('POST', body);
         if (response.errorMessage)
             throw new Error(response.errorMessage);
         return response;
@@ -19755,13 +19757,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         }
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
-        const result = await this.getApp().request('POST', {
+        const body = {
             action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
-        });
+        };
+        const result = await this.getApp().request('POST', body);
         const [key] = Object.keys(result[database][table].updateEx);
         if (!key)
             throw new Error('no updated row');
@@ -19785,13 +19788,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result = await this.getApp().request('POST', {
+        const body = {
             action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
-        });
+        };
+        const result = await this.getApp().request('POST', body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
@@ -20658,14 +20662,15 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request('POST', {
+        const body = {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
+            name: name,
             page: this.getPage().getName(),
             form: this.getName(),
-            name: name,
             params: params,
-        });
+        };
+        const result = await this.getApp().request('POST', body);
         if (result.errorMessage)
             throw new Error(result.errorMessage);
         return result;
@@ -21078,13 +21083,14 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     async rpc(name, params) {
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request('POST', {
+        const body = {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
-            page: this.getName(),
             name: name,
+            page: this.getName(),
             params: params,
-        });
+        };
+        const result = await this.getApp().request('POST', body);
         if (result.errorMessage)
             throw new Error(result.errorMessage);
         return result;

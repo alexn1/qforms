@@ -96,12 +96,13 @@ export class Application extends Model<ApplicationData> {
     async rpc(name: string, params: Record<string, any>) {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const response = await this.request('POST', {
+        const body: RpcActionDto = {
             action: 'rpc',
             name: name,
-            params: params,
             uuid: this.getAttr('uuid'),
-        } as RpcActionDto);
+            params: params,
+        };
+        const response = await this.request('POST', body);
         if (response.errorMessage) throw new Error(response.errorMessage);
         return response;
     }

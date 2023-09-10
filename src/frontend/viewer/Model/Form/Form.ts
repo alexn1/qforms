@@ -88,14 +88,15 @@ export class Form extends Model<FormData> {
     async rpc(name: string, params: Record<string, any>) {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result = await this.getApp().request('POST', {
+        const body: RpcActionDto = {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
+            name: name,
             page: this.getPage().getName(),
             form: this.getName(),
-            name: name,
             params: params,
-        } as RpcActionDto);
+        };
+        const result = await this.getApp().request('POST', body);
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }

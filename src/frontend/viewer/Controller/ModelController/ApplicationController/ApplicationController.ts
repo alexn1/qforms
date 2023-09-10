@@ -157,12 +157,13 @@ export class ApplicationController extends ModelController<Application> {
             return pageController;
         }
 
-        const { page: pageData } = await this.getModel().request('POST', {
+        const body: PageActionDto = {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
             params: options.params || {},
-        } as PageActionDto);
+        };
+        const { page: pageData } = await this.getModel().request('POST', body);
 
         // modal by default
         if (options.modal === undefined) {

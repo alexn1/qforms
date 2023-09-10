@@ -183,13 +183,14 @@ export class Page extends Model<PageData> {
     async rpc(name: string, params: Record<string, any>) {
         // debug('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result = await this.getApp().request('POST', {
+        const body: RpcActionDto = {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
-            page: this.getName(),
             name: name,
+            page: this.getName(),
             params: params,
-        } as RpcActionDto);
+        };
+        const result = await this.getApp().request('POST', body);
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }

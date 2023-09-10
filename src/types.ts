@@ -54,8 +54,8 @@ export interface LoginDto extends BaseDto {
 
 export interface PageActionDto extends BaseDto {
     page: string;
-    params: Record<string, any>;
     newMode: boolean;
+    params: Record<string, any>;
 }
 
 export interface SelectActionDto extends BaseDto {
@@ -87,10 +87,10 @@ export interface DeleteActionDto extends BaseDto {
 }
 
 export interface RpcActionDto extends BaseDto {
-    page: string;
-    form: string;
-    name: string;
     uuid: string;
+    name: string;
+    page?: string;
+    form?: string;
     params: Record<string, any>;
 }
 
@@ -114,5 +114,4 @@ export interface Access {
 export interface EditorPostDto {
     controller: string;
     action: string;
-    
 }

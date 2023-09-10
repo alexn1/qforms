@@ -6042,12 +6042,13 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
         this.onPageSelect(pageController);
         return pageController;
       }
-      const { page: pageData } = yield this.getModel().request("POST", {
+      const body = {
         action: "page",
         page: options.name,
         newMode: !!options.newMode,
         params: options.params || {}
-      });
+      };
+      const { page: pageData } = yield this.getModel().request("POST", body);
       if (options.modal === void 0) {
         options.modal = true;
       }
@@ -11816,12 +11817,13 @@ const _Application = class _Application extends _Model__WEBPACK_IMPORTED_MODULE_
       console.debug("Application.rpc", this.getFullName(), name, params);
       if (!name)
         throw new Error("no name");
-      const response = yield this.request("POST", {
+      const body = {
         action: "rpc",
         name,
-        params,
-        uuid: this.getAttr("uuid")
-      });
+        uuid: this.getAttr("uuid"),
+        params
+      };
+      const response = yield this.request("POST", body);
       if (response.errorMessage)
         throw new Error(response.errorMessage);
       return response;
@@ -12660,13 +12662,14 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       }
       if (!this.changes.size)
         throw new Error(`no changes: ${this.getFullName()}`);
-      const result = yield this.getApp().request("POST", {
+      const body = {
         action: "update",
         uuid: this.getApp().getAttr("uuid"),
         page: this.getForm().getPage().getName(),
         form: this.getForm().getName(),
         changes: this.getChangesByKey()
-      });
+      };
+      const result = yield this.getApp().request("POST", body);
       const [key] = Object.keys(result[database][table].updateEx);
       if (!key)
         throw new Error("no updated row");
@@ -12692,13 +12695,14 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       if (!table) {
         throw new Error(`no table in data source: ${this.getFullName()}`);
       }
-      const result = yield this.getApp().request("POST", {
+      const body = {
         action: "_delete",
         uuid: this.getApp().getAttr("uuid"),
         page: this.getForm().getPage().getName(),
         form: this.getForm().getName(),
         params: { key }
-      });
+      };
+      const result = yield this.getApp().request("POST", body);
       yield this.refill();
       const event = { source: this, deletes: result[database][table].delete };
       if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
@@ -13634,14 +13638,15 @@ const _Form = class _Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
       console.debug("Form.rpc", this.getFullName(), name, params);
       if (!name)
         throw new Error("no name");
-      const result = yield this.getApp().request("POST", {
+      const body = {
         action: "rpc",
         uuid: this.getApp().getAttr("uuid"),
+        name,
         page: this.getPage().getName(),
         form: this.getName(),
-        name,
         params
-      });
+      };
+      const result = yield this.getApp().request("POST", body);
       if (result.errorMessage)
         throw new Error(result.errorMessage);
       return result;
@@ -14110,13 +14115,14 @@ const _Page = class _Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     return __async(this, null, function* () {
       if (!name)
         throw new Error("no name");
-      const result = yield this.getApp().request("POST", {
+      const body = {
         action: "rpc",
         uuid: this.getApp().getAttr("uuid"),
-        page: this.getName(),
         name,
+        page: this.getName(),
         params
-      });
+      };
+      const result = yield this.getApp().request("POST", body);
       if (result.errorMessage)
         throw new Error(result.errorMessage);
       return result;

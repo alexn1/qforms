@@ -40,8 +40,8 @@ export interface LoginDto extends BaseDto {
 }
 export interface PageActionDto extends BaseDto {
     page: string;
-    params: Record<string, any>;
     newMode: boolean;
+    params: Record<string, any>;
 }
 export interface SelectActionDto extends BaseDto {
     page: Nullable<string>;
@@ -68,10 +68,10 @@ export interface DeleteActionDto extends BaseDto {
     params: Record<string, any>;
 }
 export interface RpcActionDto extends BaseDto {
-    page: string;
-    form: string;
-    name: string;
     uuid: string;
+    name: string;
+    page?: string;
+    form?: string;
     params: Record<string, any>;
 }
 export interface CreateAppDto {
