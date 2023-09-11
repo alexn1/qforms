@@ -25,6 +25,7 @@ import {
     InsertActionDto,
     LoginDto,
     PageActionDto,
+    PageActionQuery,
     RpcActionDto,
     SelectActionDto,
     UpdateActionDto,
@@ -109,9 +110,13 @@ export class ViewerModule {
 
             // handle actions
             const { action } = context.getQuery();
-            pConsole.debug('get action:', action);
-
-            await this.index(context, bkApplication);
+            if (action === 'page') {
+                const query = context.getQuery() as PageActionQuery;
+                console.log('query', query);
+                await this.page(context, bkApplication);
+            } else {
+                await this.index(context, bkApplication);
+            }
         }
     }
 
@@ -271,10 +276,12 @@ export class ViewerModule {
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
         const body = context.getBody() as PageActionDto;
+        const query = context.getQuery() as PageActionQuery;
+        const pageLinkName = body.page || query.page;
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, body.page);
+            const page = await application.getPage(context, pageLinkName);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
             context.getRes().json({ page: response });

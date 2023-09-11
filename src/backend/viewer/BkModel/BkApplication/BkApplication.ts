@@ -30,6 +30,7 @@ import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
+import { pConsole } from '../../../../pConsole';
 
 const pkg = require('../../../../../package.json');
 
@@ -277,7 +278,7 @@ export class BkApplication<
     }
 
     async getPage(context: Context, pageLinkName: string): Promise<BkPage> {
-        // debug('Application.getPage', pageLinkName);
+        pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');

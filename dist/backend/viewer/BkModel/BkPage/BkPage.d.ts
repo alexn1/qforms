@@ -15,6 +15,7 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     getDirPath(): string;
     fillAttributes(response: PageData): void;
     fill(context: Context): Promise<PageData>;
+    static getNewModeFromContext(context: Context): boolean;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): TBkApplication;
     findForm(name: string): Optional<BkForm>;

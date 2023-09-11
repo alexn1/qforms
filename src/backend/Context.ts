@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Nullable, Optional } from '../types';
+import { JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 
@@ -40,6 +40,9 @@ export class Context {
         // params
         this.params = {
             ...(req && req.body.params ? req.body.params : {}),
+            ...(req && req.query.action === 'page' && req.query.params
+                ? JSON.parse(req.query.params as JSONString)
+                : {}),
         };
 
         // files

@@ -1,3 +1,4 @@
+import { ParsedQs } from 'qs';
 export type Scalar = string | number | boolean;
 export type JSONString = string & {
     type: 'JSONString';
@@ -33,6 +34,9 @@ export type Optional<T> = T | undefined;
 export interface BaseDto {
     action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
 }
+export interface BaseQuery {
+    action: 'page';
+}
 export interface LoginDto extends BaseDto {
     tzOffset: JSONString;
     username: string;
@@ -42,6 +46,12 @@ export interface PageActionDto extends BaseDto {
     page: string;
     newMode: boolean;
     params: Record<string, any>;
+}
+export interface PageActionQuery extends ParsedQs {
+    action: 'page';
+    page: string;
+    newMode: JSONString;
+    params: JSONString;
 }
 export interface SelectActionDto extends BaseDto {
     page: Nullable<string>;

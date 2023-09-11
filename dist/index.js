@@ -2069,7 +2069,9 @@ class Context {
         this.options = options;
         this.connections = {};
         const req = this.getReq();
-        this.params = Object.assign({}, (req && req.body.params ? req.body.params : {}));
+        this.params = Object.assign(Object.assign({}, (req && req.body.params ? req.body.params : {})), (req && req.query.action === 'page' && req.query.params
+            ? JSON.parse(req.query.params)
+            : {}));
     }
     getRoute() {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -5872,6 +5874,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
 /* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
+
 
 
 
@@ -6051,6 +6055,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_12__.pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -8619,8 +8624,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkPage/BkPage */ "./src/backend/viewer/BkModel/BkPage/BkPage.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+
 
 
 
@@ -8704,10 +8711,10 @@ class BkForm extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         });
     }
     async rpc(name, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('BkForm.rpc', name, context.getBody());
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('BkForm.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({
+        throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -8723,8 +8730,7 @@ class BkForm extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
     isNewMode(context) {
-        const body = context.getBody();
-        return !!body.newMode;
+        return _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_2__.BkPage.getNewModeFromContext(context);
     }
     findField(name) {
         return this.fields.find((field) => field.getName() === name);
@@ -8960,9 +8966,19 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        const body = context.getBody();
-        response.newMode = !!body.newMode;
+        response.newMode = BkPage.getNewModeFromContext(context);
         return response;
+    }
+    static getNewModeFromContext(context) {
+        const query = context.getQuery();
+        if (query.action === 'page') {
+            if (['true', 'false'].includes(query.newMode)) {
+                return JSON.parse(query.newMode);
+            }
+            throw new Error('getNewModeFromContext: newMode required');
+        }
+        const body = context.getBody();
+        return !!body.newMode;
     }
     async rpc(name, context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('BkPage.rpc', name, context.getBody());
@@ -9199,8 +9215,14 @@ class ViewerModule {
         else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
             const { action } = context.getQuery();
-            _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('get action:', action);
-            await this.index(context, bkApplication);
+            if (action === 'page') {
+                const query = context.getQuery();
+                console.log('query', query);
+                await this.page(context, bkApplication);
+            }
+            else {
+                await this.index(context, bkApplication);
+            }
         }
     }
     async handlePost(context, application) {
@@ -9320,10 +9342,12 @@ class ViewerModule {
     async page(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.page', context.getReq().body.page);
         const body = context.getBody();
+        const query = context.getQuery();
+        const pageLinkName = body.page || query.page;
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, body.page);
+            const page = await application.getPage(context, pageLinkName);
             const response = await page.fill(context);
             if (response === undefined)
                 throw new Error('page action: response is undefined');

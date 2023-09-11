@@ -10,7 +10,7 @@ import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { Optional, PageActionDto } from '../../../../types';
+import { Optional, PageActionDto, PageActionQuery } from '../../../../types';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -46,9 +46,20 @@ export class BkPage<
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
-        const body = context.getBody() as PageActionDto;
-        response.newMode = !!body.newMode;
+        response.newMode = BkPage.getNewModeFromContext(context);
         return response;
+    }
+
+    static getNewModeFromContext(context: Context): boolean {
+        const query = context.getQuery() as PageActionQuery;
+        if (query.action === 'page') {
+            if (['true', 'false'].includes(query.newMode)) {
+                return JSON.parse(query.newMode);
+            }
+            throw new Error('getNewModeFromContext: newMode required');
+        }
+        const body = context.getBody() as PageActionDto;
+        return !!body.newMode;
     }
 
     async rpc(name: string, context: Context): Promise<any> {
