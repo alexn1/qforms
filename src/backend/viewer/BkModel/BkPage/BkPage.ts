@@ -52,7 +52,7 @@ export class BkPage<
 
     static getNewModeFromContext(context: Context): boolean {
         const query = context.getQuery() as PageActionQuery;
-        if (query.action === 'page') {
+        if (query.action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
                 return JSON.parse(query.newMode);
             }

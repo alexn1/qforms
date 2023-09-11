@@ -61,14 +61,14 @@ export interface LoginDto extends BaseDto {
 export interface PageActionDto extends BaseDto {
     page: string;
     newMode: boolean;
-    params: Record<string, any>;
+    params?: Record<string, any>;
 }
 
 export interface PageActionQuery extends ParsedQs {
     action: 'page';
     page: string;
-    newMode: JSONString; // 'true' | 'false';
-    params: JSONString;
+    newMode?: JSONString; // 'true' | 'false';
+    params?: JSONString;
 }
 
 export interface SelectActionDto extends BaseDto {

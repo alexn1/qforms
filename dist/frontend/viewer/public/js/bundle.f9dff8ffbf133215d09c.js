@@ -6046,7 +6046,7 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
         action: "page",
         page: options.name,
         newMode: !!options.newMode,
-        params: options.params || {}
+        params: options.params
       };
       const { page: pageData } = yield this.getModel().request("POST", body);
       if (options.modal === void 0) {

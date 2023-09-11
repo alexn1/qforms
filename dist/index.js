@@ -8971,7 +8971,7 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
     }
     static getNewModeFromContext(context) {
         const query = context.getQuery();
-        if (query.action === 'page') {
+        if (query.action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
                 return JSON.parse(query.newMode);
             }
@@ -14627,7 +14627,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
-            params: options.params || {},
+            params: options.params,
         };
         const { page: pageData } = await this.getModel().request('POST', body);
         if (options.modal === undefined) {

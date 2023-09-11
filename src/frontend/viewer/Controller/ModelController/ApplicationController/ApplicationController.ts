@@ -161,7 +161,7 @@ export class ApplicationController extends ModelController<Application> {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
-            params: options.params || {},
+            params: options.params,
         };
         const { page: pageData } = await this.getModel().request('POST', body);
 
