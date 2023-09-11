@@ -9191,7 +9191,6 @@ class ViewerModule {
     }
     async handleGet(context, bkApplication) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
-        const req = context.getReq();
         const session = context.getSession();
         if (bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])) {
@@ -9199,6 +9198,8 @@ class ViewerModule {
         }
         else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+            const { action } = context.getQuery();
+            _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('get action:', action);
             await this.index(context, bkApplication);
         }
     }

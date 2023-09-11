@@ -97,8 +97,6 @@ export class ViewerModule {
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
 
-        const req = context.getReq()!;
-
         const session = context.getSession();
 
         if (
@@ -108,6 +106,11 @@ export class ViewerModule {
             await this.loginGet(context, bkApplication);
         } else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+
+            // handle actions
+            const { action } = context.getQuery();
+            pConsole.debug('get action:', action);
+
             await this.index(context, bkApplication);
         }
     }
