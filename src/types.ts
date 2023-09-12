@@ -2,7 +2,7 @@ import { ParsedQs } from 'qs';
 
 export type Scalar = string | number | boolean;
 
-export type JSONString = string & { type: 'JSONString' };
+export type JSONString<T = any> = string & { type: 'JSONString' };
 
 export type Key = JSONString & { type2: 'Key' };
 
@@ -53,7 +53,7 @@ export interface BaseQuery {
 }
 
 export interface LoginDto extends BaseDto {
-    tzOffset: JSONString;
+    tzOffset: JSONString<number>;
     username: string;
     password: string;
 }
@@ -67,7 +67,7 @@ export interface PageActionDto extends BaseDto {
 export interface PageActionQuery extends ParsedQs {
     action: 'page';
     page: string;
-    newMode?: JSONString; // 'true' | 'false';
+    newMode?: JSONString<boolean>;
     params?: JSONString;
 }
 
