@@ -128,3 +128,7 @@ export interface EditorPostDto {
     controller: string;
     action: string;
 }
+
+export function parseJson(json: JSONString): any {
+    return JSON.parse(json);
+}
