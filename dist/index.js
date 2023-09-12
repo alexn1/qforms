@@ -21754,7 +21754,8 @@ const pConsole = new Proxy(console, {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "keyToKeyTuple": () => (/* binding */ keyToKeyTuple),
-/* harmony export */   "keyTupleToKey": () => (/* binding */ keyTupleToKey)
+/* harmony export */   "keyTupleToKey": () => (/* binding */ keyTupleToKey),
+/* harmony export */   "parseJson": () => (/* binding */ parseJson)
 /* harmony export */ });
 const keyTupleToKey = (keyArray) => {
     return JSON.stringify(keyArray);
@@ -21762,6 +21763,9 @@ const keyTupleToKey = (keyArray) => {
 const keyToKeyTuple = (key) => {
     return JSON.parse(key);
 };
+function parseJson(json) {
+    return JSON.parse(json);
+}
 
 
 /***/ }),
@@ -22344,7 +22348,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
 /* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
 /* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
-/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey)
+/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
+/* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson)
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/types.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Result */ "./src/Result.ts");

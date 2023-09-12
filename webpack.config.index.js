@@ -2,10 +2,11 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
+const { mode } = require('./webpack.helper');
 
 module.exports = {
-    mode: process.env.NODE_ENV === 'dev' ? 'development' : 'production',
     devtool: false,
+    mode: mode(),
     entry: './src/frontend/index/main.ts',
     output: {
         clean: true,

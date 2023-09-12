@@ -102,3 +102,4 @@ export interface EditorPostDto {
     controller: string;
     action: string;
 }
+export declare function parseJson(json: JSONString): any;
