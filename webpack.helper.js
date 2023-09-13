@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 function mode() {
     return process.env.NODE_ENV === 'dev' ? 'development' : 'production';
@@ -53,6 +54,24 @@ function lessCssLoaderRule() {
     };
 }
 
+function minimizer() {
+    return [
+        new TerserPlugin({
+            terserOptions: {
+                keep_classnames: true,
+            },
+        }),
+    ];
+}
+
+function frontPlugins() {
+    return [
+        new MiniCssExtractPlugin({
+            filename: 'css/bundle.[contenthash].css',
+        }),
+    ];
+}
+
 module.exports = {
     mode,
     resolve,
@@ -60,4 +79,6 @@ module.exports = {
     esbuildLoaderRule,
     lessNullLoaderRule,
     lessCssLoaderRule,
+    minimizer,
+    frontPlugins,
 };

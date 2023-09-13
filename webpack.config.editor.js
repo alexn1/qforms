@@ -1,12 +1,20 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { mode, resolve, esbuildLoaderRule, lessCssLoaderRule } = require('./webpack.helper');
+const {
+    mode,
+    resolve,
+    esbuildLoaderRule,
+    lessCssLoaderRule,
+    minimizer,
+    frontPlugins,
+} = require('./webpack.helper');
 
 module.exports = {
     devtool: false,
     mode: mode(),
     resolve: resolve(),
+    node: {
+        global: false,
+    },
     entry: './src/frontend/editor/main.ts',
     output: {
         clean: true,
@@ -17,20 +25,7 @@ module.exports = {
         rules: [esbuildLoaderRule(), lessCssLoaderRule()],
     },
     optimization: {
-        minimizer: [
-            new TerserPlugin({
-                terserOptions: {
-                    keep_classnames: true,
-                },
-            }),
-        ],
+        minimizer: minimizer(),
     },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: 'css/bundle.[contenthash].css',
-        }),
-    ],
-    node: {
-        global: false,
-    },
+    plugins: frontPlugins(),
 };
