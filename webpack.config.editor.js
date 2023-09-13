@@ -1,7 +1,6 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const tsConfigCustom = require('./tsconfig.custom.json');
 const { mode, resolve, esbuildLoaderRule } = require('./webpack.helper');
 
 module.exports = {
@@ -16,17 +15,6 @@ module.exports = {
     },
     module: {
         rules: [
-            /* {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'ts-loader',
-                    options: {
-                        onlyCompileBundledFiles: true,
-                        ...tsConfigCustom,
-                    },
-                },
-            }, */
             esbuildLoaderRule(),
             {
                 test: /\.less$/i,

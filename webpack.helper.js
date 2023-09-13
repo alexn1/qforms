@@ -1,3 +1,5 @@
+const tsConfigCustom = require('./tsconfig.custom.json');
+
 function mode() {
     return process.env.NODE_ENV === 'dev' ? 'development' : 'production';
 }
@@ -5,6 +7,23 @@ function mode() {
 function resolve() {
     return {
         extensions: ['.tsx', '.ts', '.js'],
+    };
+}
+
+function tsLoaderRule() {
+    return {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'ts-loader',
+            options: {
+                onlyCompileBundledFiles: false,
+                compilerOptions: {
+                    ...tsConfigCustom.compilerOptions,
+                    declaration: true,
+                },
+            },
+        },
     };
 }
 
@@ -19,4 +38,4 @@ function esbuildLoaderRule() {
     };
 }
 
-module.exports = { mode, resolve, esbuildLoaderRule };
+module.exports = { mode, resolve, tsLoaderRule, esbuildLoaderRule };
