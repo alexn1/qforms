@@ -188,19 +188,19 @@ const _FrontHostApp = class _FrontHostApp {
   static doHttpRequest(data) {
     return __async(this, null, function* () {
       console.warn("FrontHostApp.doHttpRequest", "POST", window.location.href, data);
-      const [headers, body] = yield _FrontHostApp.fetchJson("POST", window.location.href, data);
+      const [, body] = yield _FrontHostApp.fetchJson("POST", window.location.href, data);
       console.warn(`body ${_FrontHostApp.composeHandlerName(data)}:`, body);
       return body;
     });
   }
-  static doHttpRequest2(method, body) {
+  static doHttpRequest2(method, query, body) {
     return __async(this, null, function* () {
-      console.warn("FrontHostApp.doHttpRequest2", method, window.location.pathname, body);
-      const [headers, data] = yield _FrontHostApp.fetchJson(
-        method,
-        window.location.pathname,
-        body
-      );
+      let url = window.location.pathname;
+      if (query) {
+        url += `?${new URLSearchParams(query).toString()}`;
+      }
+      console.warn("FrontHostApp.doHttpRequest2", method, url, body);
+      const [headers, data] = yield _FrontHostApp.fetchJson(method, url, body);
       if (body) {
         console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
       } else {

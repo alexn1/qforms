@@ -28,7 +28,7 @@ export declare class FrontHostApp {
     onWindowError(e: any): Promise<void>;
     logError(err: any): void;
     static doHttpRequest(data: any): Promise<any>;
-    static doHttpRequest2(method: RequestMethod, body?: any): Promise<any[]>;
+    static doHttpRequest2(method: RequestMethod, query?: Record<string, string>, body?: any): Promise<any[]>;
     static composeHandlerName(data: any): string;
     static fetchJson(method: RequestMethod, url: string, data?: any): Promise<[headers: Record<string, string>, data: any]>;
     static fetch(method: RequestMethod, url: string, body?: any, contentType?: string): Promise<[headers: Record<string, string>, data: any]>;

@@ -165,13 +165,18 @@ export class ApplicationController extends ModelController<Application> {
         };
         const { page: pageData } = await this.getModel().request('POST', body); */
 
-        const query = {
+        const query: PageActionQuery = {
             action: 'page',
             page: options.name,
             newMode: JSON.stringify(!!options.newMode) as JSONString<boolean>,
-            params: JSON.stringify(options.params) as JSONString,
+            params: options.params
+                ? (JSON.stringify(options.params) as JSONString<Record<string, Scalar>>)
+                : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', query);
+        const { page: pageData } = await this.getModel().request2(
+            'GET',
+            query as Record<string, string>,
+        );
 
         // modal by default
         if (options.modal === undefined) {

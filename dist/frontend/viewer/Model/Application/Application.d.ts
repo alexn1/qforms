@@ -14,6 +14,7 @@ export declare class Application extends Model<ApplicationData> {
     addDatabase(database: Database): void;
     logout(): Promise<void>;
     request(method: RequestMethod, body: any): Promise<any>;
+    request2(method: RequestMethod, query?: Record<string, string>, body?: any): Promise<any>;
     findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     getText(): any;

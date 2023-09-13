@@ -10079,13 +10079,17 @@ class FrontHostApp {
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
+        const [, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
         console.warn(`body ${FrontHostApp.composeHandlerName(data)}:`, body);
         return body;
     }
-    static async doHttpRequest2(method, body) {
-        console.warn('FrontHostApp.doHttpRequest2', method, window.location.pathname, body);
-        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.pathname, body);
+    static async doHttpRequest2(method, query, body) {
+        let url = window.location.pathname;
+        if (query) {
+            url += `?${new URLSearchParams(query).toString()}`;
+        }
+        console.warn('FrontHostApp.doHttpRequest2', method, url, body);
+        const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
         if (body) {
             console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);
         }
@@ -14631,13 +14635,15 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.onPageSelect(pageController);
             return pageController;
         }
-        const body = {
+        const query = {
             action: 'page',
             page: options.name,
-            newMode: !!options.newMode,
-            params: options.params,
+            newMode: JSON.stringify(!!options.newMode),
+            params: options.params
+                ? JSON.stringify(options.params)
+                : undefined,
         };
-        const { page: pageData } = await this.getModel().request('POST', body);
+        const { page: pageData } = await this.getModel().request2('GET', query);
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -19034,7 +19040,19 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     async request(method, body) {
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, undefined, body);
+        if (!headers['qforms-platform-version'])
+            throw new Error('no qforms-platform-version header');
+        this.emit('request', {
+            time: Date.now() - start,
+            remotePlatformVersion: headers['qforms-platform-version'],
+            remoteAppVersion: headers['qforms-app-version'] || null,
+        });
+        return data;
+    }
+    async request2(method, query, body) {
+        const start = Date.now();
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, query, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         this.emit('request', {

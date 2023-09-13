@@ -68,7 +68,7 @@ export interface PageActionQuery extends ParsedQs {
     action: 'page';
     page: string;
     newMode?: JSONString<boolean>;
-    params?: JSONString;
+    params?: JSONString<Record<string, Scalar>>;
 }
 
 export interface SelectActionDto extends BaseDto {
