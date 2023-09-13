@@ -1,15 +1,20 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
-const { mode, resolve, tsLoaderRule, lessNullLoaderRule, minimizer } = require('./webpack.helper');
+const {
+    mode,
+    resolve,
+    tsLoaderRule,
+    lessNullLoaderRule,
+    minimizer,
+    base,
+} = require('./webpack.helper');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 module.exports = {
+    ...base(),
     target: 'node',
-    devtool: false,
-    mode: mode(),
-    resolve: resolve(),
     entry: './src/index.ts',
     output: {
         // clean: true,

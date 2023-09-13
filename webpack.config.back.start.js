@@ -6,15 +6,14 @@ const {
     esbuildLoaderRule,
     lessNullLoaderRule,
     minimizer,
+    base,
 } = require('./webpack.helper');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 module.exports = {
+    ...base(),
     target: 'node',
-    devtool: false,
-    mode: mode(),
-    resolve: resolve(),
     entry: './src/start.ts',
     output: {
         // clean: true,

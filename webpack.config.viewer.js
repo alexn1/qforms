@@ -6,12 +6,11 @@ const {
     lessCssLoaderRule,
     minimizer,
     frontPlugins,
+    base,
 } = require('./webpack.helper');
 
 module.exports = {
-    devtool: false,
-    mode: mode(),
-    resolve: resolve(),
+    ...base(),
     node: {
         global: false,
     },

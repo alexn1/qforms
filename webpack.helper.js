@@ -72,6 +72,14 @@ function frontPlugins() {
     ];
 }
 
+function base() {
+    return {
+        devtool: false,
+        mode: mode(),
+        resolve: resolve(),
+    };
+}
+
 module.exports = {
     mode,
     resolve,
@@ -81,4 +89,5 @@ module.exports = {
     lessCssLoaderRule,
     minimizer,
     frontPlugins,
+    base,
 };
