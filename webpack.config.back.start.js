@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TerserPlugin = require('terser-webpack-plugin');
-const { mode, resolve, esbuildLoaderRule } = require('./webpack.helper');
+const { mode, resolve, esbuildLoaderRule, lessNullLoaderRule } = require('./webpack.helper');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
@@ -16,13 +16,7 @@ module.exports = {
         filename: 'start.js',
     },
     module: {
-        rules: [
-            esbuildLoaderRule(),
-            {
-                test: /\.less$/i,
-                use: 'null-loader',
-            },
-        ],
+        rules: [esbuildLoaderRule(), lessNullLoaderRule()],
     },
     target: 'node',
     externals: [nodeExternals(), './index'],

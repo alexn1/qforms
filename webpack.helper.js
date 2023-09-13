@@ -1,5 +1,3 @@
-const tsConfigCustom = require('./tsconfig.custom.json');
-
 function mode() {
     return process.env.NODE_ENV === 'dev' ? 'development' : 'production';
 }
@@ -11,6 +9,7 @@ function resolve() {
 }
 
 function tsLoaderRule() {
+    const tsConfigCustom = require('./tsconfig.custom.json');
     return {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -38,4 +37,11 @@ function esbuildLoaderRule() {
     };
 }
 
-module.exports = { mode, resolve, tsLoaderRule, esbuildLoaderRule };
+function lessNullLoaderRule() {
+    return {
+        test: /\.less$/i,
+        use: 'null-loader',
+    };
+}
+
+module.exports = { mode, resolve, tsLoaderRule, esbuildLoaderRule, lessNullLoaderRule };
