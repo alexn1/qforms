@@ -1,19 +1,8 @@
 const path = require('path');
-const {
-    mode,
-    resolve,
-    esbuildLoaderRule,
-    lessCssLoaderRule,
-    minimizer,
-    frontPlugins,
-    base,
-} = require('./webpack.helper');
+const { esbuildLoaderRule, lessCssLoaderRule, frontBase } = require('./webpack.helper');
 
 module.exports = {
-    ...base(),
-    node: {
-        global: false,
-    },
+    ...frontBase(),
     entry: './src/frontend/editor/main.ts',
     output: {
         clean: true,
@@ -23,8 +12,4 @@ module.exports = {
     module: {
         rules: [esbuildLoaderRule(), lessCssLoaderRule()],
     },
-    optimization: {
-        minimizer: minimizer(),
-    },
-    plugins: frontPlugins(),
 };

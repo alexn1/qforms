@@ -1,19 +1,9 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const {
-    mode,
-    resolve,
-    esbuildLoaderRule,
-    lessNullLoaderRule,
-    minimizer,
-    base,
-} = require('./webpack.helper');
-
-// console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+const { esbuildLoaderRule, lessNullLoaderRule, backBase } = require('./webpack.helper');
 
 module.exports = {
-    ...base(),
-    target: 'node',
+    ...backBase(),
     entry: './src/start.ts',
     output: {
         // clean: true,
@@ -25,8 +15,4 @@ module.exports = {
     },
     externals: [nodeExternals(), './index'],
     externalsType: 'commonjs',
-    optimization: {
-        nodeEnv: false,
-        minimizer: minimizer(),
-    },
 };

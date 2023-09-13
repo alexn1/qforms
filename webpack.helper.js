@@ -80,6 +80,38 @@ function base() {
     };
 }
 
+function backOptimization() {
+    return {
+        nodeEnv: false,
+        minimizer: minimizer(),
+    };
+}
+
+function frontOptimization() {
+    return {
+        minimizer: minimizer(),
+    };
+}
+
+function backBase() {
+    return {
+        ...base(),
+        target: 'node',
+        optimization: backOptimization(),
+    };
+}
+
+function frontBase() {
+    return {
+        ...base(),
+        node: {
+            global: false,
+        },
+        optimization: frontOptimization(),
+        plugins: frontPlugins(),
+    };
+}
+
 module.exports = {
     mode,
     resolve,
@@ -90,4 +122,8 @@ module.exports = {
     minimizer,
     frontPlugins,
     base,
+    backOptimization,
+    frontOptimization,
+    backBase,
+    frontBase,
 };

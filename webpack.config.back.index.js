@@ -1,20 +1,10 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
-const {
-    mode,
-    resolve,
-    tsLoaderRule,
-    lessNullLoaderRule,
-    minimizer,
-    base,
-} = require('./webpack.helper');
-
-// console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+const { tsLoaderRule, lessNullLoaderRule, backBase } = require('./webpack.helper');
 
 module.exports = {
-    ...base(),
-    target: 'node',
+    ...backBase(),
     entry: './src/index.ts',
     output: {
         // clean: true,
@@ -29,10 +19,6 @@ module.exports = {
         rules: [tsLoaderRule(), lessNullLoaderRule()],
     },
     externals: [nodeExternals()],
-    optimization: {
-        nodeEnv: false,
-        minimizer: minimizer(),
-    },
     plugins: [
         new CopyPlugin({
             patterns: [
