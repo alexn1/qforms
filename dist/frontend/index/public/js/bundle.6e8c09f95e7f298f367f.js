@@ -193,6 +193,22 @@ const _FrontHostApp = class _FrontHostApp {
       return body;
     });
   }
+  static doHttpRequest2(method, body) {
+    return __async(this, null, function* () {
+      console.warn("FrontHostApp.doHttpRequest2", method, window.location.pathname, body);
+      const [headers, data] = yield _FrontHostApp.fetchJson(
+        method,
+        window.location.pathname,
+        body
+      );
+      if (body) {
+        console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
+      } else {
+        console.warn(data);
+      }
+      return [headers, data];
+    });
+  }
   static composeHandlerName(data) {
     if (data.action === "rpc") {
       if (data.form)
@@ -202,14 +218,6 @@ const _FrontHostApp = class _FrontHostApp {
       return `${data.name}.${data.action}`;
     }
     return `${data.page}.${data.form}.${data.ds}.${data.action}`;
-  }
-  static doHttpRequest2(method, body) {
-    return __async(this, null, function* () {
-      console.warn("FrontHostApp.doHttpRequest2", method, window.location.href, body);
-      const [headers, data] = yield _FrontHostApp.fetchJson(method, window.location.href, body);
-      console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
-      return [headers, data];
-    });
   }
   static fetchJson(method, url, data) {
     return __async(this, null, function* () {
@@ -230,14 +238,7 @@ const _FrontHostApp = class _FrontHostApp {
           body
         }, contentType ? { headers: { "Content-Type": contentType } } : {}));
         if (response.ok) {
-          const headers = Array.from(response.headers.entries()).reduce(
-            (acc, header) => {
-              const [name, value] = header;
-              acc[name] = value;
-              return acc;
-            },
-            {}
-          );
+          const headers = _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
           const data = yield response.json();
           return [headers, data];
         }
@@ -733,6 +734,16 @@ const _Helper = class _Helper {
     if (typeof document === "object") {
       document.documentElement.classList.add(className);
     }
+  }
+  static headersToRecord(headers) {
+    return Array.from(headers.entries()).reduce(
+      (acc, header) => {
+        const [name, value] = header;
+        acc[name] = value;
+        return acc;
+      },
+      {}
+    );
   }
 };
 __name(_Helper, "Helper");

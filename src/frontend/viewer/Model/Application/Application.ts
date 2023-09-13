@@ -54,7 +54,22 @@ export class Application extends Model<ApplicationData> {
     async request(method: RequestMethod, body: any) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, data] = await FrontHostApp.doHttpRequest2(method, body);
+        const [headers, data] = await FrontHostApp.doHttpRequest2(method, undefined, body);
+        if (!headers['qforms-platform-version'])
+            throw new Error('no qforms-platform-version header');
+        // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
+        this.emit('request', {
+            time: Date.now() - start,
+            remotePlatformVersion: headers['qforms-platform-version'],
+            remoteAppVersion: headers['qforms-app-version'] || null,
+        });
+        return data;
+    }
+
+    async request2(method: RequestMethod, query?: Record<string, string>, body?: any) {
+        // console.warn('Application.request', data);
+        const start = Date.now();
+        const [headers, data] = await FrontHostApp.doHttpRequest2(method, query, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');

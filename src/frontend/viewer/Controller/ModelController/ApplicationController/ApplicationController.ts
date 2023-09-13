@@ -1,4 +1,4 @@
-import { Key, PageActionDto } from '../../../../../types';
+import { JSONString, Key, PageActionDto, PageActionQuery } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -157,13 +157,21 @@ export class ApplicationController extends ModelController<Application> {
             return pageController;
         }
 
-        const body: PageActionDto = {
+        /* const body: PageActionDto = {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
             params: options.params,
         };
-        const { page: pageData } = await this.getModel().request('POST', body);
+        const { page: pageData } = await this.getModel().request('POST', body); */
+
+        const query = {
+            action: 'page',
+            page: options.name,
+            newMode: JSON.stringify(!!options.newMode) as JSONString<boolean>,
+            params: JSON.stringify(options.params) as JSONString,
+        };
+        const { page: pageData } = await this.getModel().request2('GET', query);
 
         // modal by default
         if (options.modal === undefined) {

@@ -37,4 +37,5 @@ export declare class Helper {
     static registerGlobalClass(Class: any): void;
     static getGlobalClass(className: string): any;
     static addClassToDocumentElement(className: string): void;
+    static headersToRecord(headers: Headers): Record<string, string>;
 }

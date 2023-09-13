@@ -471,6 +471,16 @@ const _Helper = class _Helper {
       document.documentElement.classList.add(className);
     }
   }
+  static headersToRecord(headers) {
+    return Array.from(headers.entries()).reduce(
+      (acc, header) => {
+        const [name, value] = header;
+        acc[name] = value;
+        return acc;
+      },
+      {}
+    );
+  }
 };
 __name(_Helper, "Helper");
 let Helper = _Helper;

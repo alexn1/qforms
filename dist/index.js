@@ -10083,6 +10083,17 @@ class FrontHostApp {
         console.warn(`body ${FrontHostApp.composeHandlerName(data)}:`, body);
         return body;
     }
+    static async doHttpRequest2(method, body) {
+        console.warn('FrontHostApp.doHttpRequest2', method, window.location.pathname, body);
+        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.pathname, body);
+        if (body) {
+            console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);
+        }
+        else {
+            console.warn(data);
+        }
+        return [headers, data];
+    }
     static composeHandlerName(data) {
         if (data.action === 'rpc') {
             if (data.form)
@@ -10093,12 +10104,6 @@ class FrontHostApp {
         }
         return `${data.page}.${data.form}.${data.ds}.${data.action}`;
     }
-    static async doHttpRequest2(method, body) {
-        console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
-        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
-        console.warn(`body ${FrontHostApp.composeHandlerName(body)}:`, data);
-        return [headers, data];
-    }
     static async fetchJson(method, url, data) {
         return await FrontHostApp.fetch(method, url, data ? JSON.stringify(data) : undefined, 'application/json');
     }
@@ -10108,11 +10113,7 @@ class FrontHostApp {
             const response = await fetch(url, Object.assign({ method,
                 body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
             if (response.ok) {
-                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
-                    const [name, value] = header;
-                    acc[name] = value;
-                    return acc;
-                }, {});
+                const headers = _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -10485,6 +10486,13 @@ class Helper {
         if (typeof document === 'object') {
             document.documentElement.classList.add(className);
         }
+    }
+    static headersToRecord(headers) {
+        return Array.from(headers.entries()).reduce((acc, header) => {
+            const [name, value] = header;
+            acc[name] = value;
+            return acc;
+        }, {});
     }
 }
 Helper.registerGlobalClass(Helper);

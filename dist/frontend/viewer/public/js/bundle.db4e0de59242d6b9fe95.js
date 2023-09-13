@@ -188,9 +188,25 @@ const _FrontHostApp = class _FrontHostApp {
   static doHttpRequest(data) {
     return __async(this, null, function* () {
       console.warn("FrontHostApp.doHttpRequest", "POST", window.location.href, data);
-      const [headers, body] = yield _FrontHostApp.fetchJson("POST", window.location.href, data);
+      const [, body] = yield _FrontHostApp.fetchJson("POST", window.location.href, data);
       console.warn(`body ${_FrontHostApp.composeHandlerName(data)}:`, body);
       return body;
+    });
+  }
+  static doHttpRequest2(method, query, body) {
+    return __async(this, null, function* () {
+      let url = window.location.pathname;
+      if (query) {
+        url += `?${new URLSearchParams(query).toString()}`;
+      }
+      console.warn("FrontHostApp.doHttpRequest2", method, url, body);
+      const [headers, data] = yield _FrontHostApp.fetchJson(method, url, body);
+      if (body) {
+        console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
+      } else {
+        console.warn(data);
+      }
+      return [headers, data];
     });
   }
   static composeHandlerName(data) {
@@ -202,14 +218,6 @@ const _FrontHostApp = class _FrontHostApp {
       return `${data.name}.${data.action}`;
     }
     return `${data.page}.${data.form}.${data.ds}.${data.action}`;
-  }
-  static doHttpRequest2(method, body) {
-    return __async(this, null, function* () {
-      console.warn("FrontHostApp.doHttpRequest2", method, window.location.href, body);
-      const [headers, data] = yield _FrontHostApp.fetchJson(method, window.location.href, body);
-      console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
-      return [headers, data];
-    });
   }
   static fetchJson(method, url, data) {
     return __async(this, null, function* () {
@@ -6053,13 +6061,13 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
         this.onPageSelect(pageController);
         return pageController;
       }
-      const body = {
+      const query = {
         action: "page",
         page: options.name,
-        newMode: !!options.newMode,
-        params: options.params
+        newMode: JSON.stringify(!!options.newMode),
+        params: JSON.stringify(options.params)
       };
-      const { page: pageData } = yield this.getModel().request("POST", body);
+      const { page: pageData } = yield this.getModel().request2("GET", query);
       if (options.modal === void 0) {
         options.modal = true;
       }
@@ -11791,7 +11799,21 @@ const _Application = class _Application extends _Model__WEBPACK_IMPORTED_MODULE_
   request(method, body) {
     return __async(this, null, function* () {
       const start = Date.now();
-      const [headers, data] = yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, body);
+      const [headers, data] = yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, void 0, body);
+      if (!headers["qforms-platform-version"])
+        throw new Error("no qforms-platform-version header");
+      this.emit("request", {
+        time: Date.now() - start,
+        remotePlatformVersion: headers["qforms-platform-version"],
+        remoteAppVersion: headers["qforms-app-version"] || null
+      });
+      return data;
+    });
+  }
+  request2(method, query, body) {
+    return __async(this, null, function* () {
+      const start = Date.now();
+      const [headers, data] = yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, query, body);
       if (!headers["qforms-platform-version"])
         throw new Error("no qforms-platform-version header");
       this.emit("request", {
