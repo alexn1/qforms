@@ -1,3 +1,5 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 function mode() {
     return process.env.NODE_ENV === 'dev' ? 'development' : 'production';
 }
@@ -44,4 +46,18 @@ function lessNullLoaderRule() {
     };
 }
 
-module.exports = { mode, resolve, tsLoaderRule, esbuildLoaderRule, lessNullLoaderRule };
+function lessCssLoaderRule() {
+    return {
+        test: /\.less$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+    };
+}
+
+module.exports = {
+    mode,
+    resolve,
+    tsLoaderRule,
+    esbuildLoaderRule,
+    lessNullLoaderRule,
+    lessCssLoaderRule,
+};

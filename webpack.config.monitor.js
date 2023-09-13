@@ -1,7 +1,7 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { mode, resolve, esbuildLoaderRule } = require('./webpack.helper');
+const { mode, resolve, esbuildLoaderRule, lessCssLoaderRule } = require('./webpack.helper');
 
 module.exports = {
     devtool: false,
@@ -14,13 +14,7 @@ module.exports = {
         filename: 'js/bundle.[contenthash].js',
     },
     module: {
-        rules: [
-            esbuildLoaderRule(),
-            {
-                test: /\.less$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-            },
-        ],
+        rules: [esbuildLoaderRule(), lessCssLoaderRule()],
     },
     optimization: {
         minimizer: [
