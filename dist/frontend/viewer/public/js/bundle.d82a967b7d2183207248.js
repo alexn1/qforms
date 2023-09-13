@@ -197,7 +197,7 @@ const _FrontHostApp = class _FrontHostApp {
     return __async(this, null, function* () {
       let url = window.location.pathname;
       if (query) {
-        url += `?${new URLSearchParams(query).toString()}`;
+        url += `?${_common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)}`;
       }
       console.warn("FrontHostApp.doHttpRequest2", method, url, body);
       const [headers, data] = yield _FrontHostApp.fetchJson(method, url, body);
@@ -744,6 +744,20 @@ const _Helper = class _Helper {
       },
       {}
     );
+  }
+  static queryToString(query) {
+    return Object.keys(query).filter((name) => query[name] !== void 0).map((name) => {
+      const value = query[name];
+      if (typeof value === "string") {
+        return `${name}=${encodeURIComponent(value)}`;
+      }
+      return _Helper.queryParamsToString(name, value);
+    }).join("&");
+  }
+  static queryParamsToString(name, params) {
+    return Object.keys(params).filter((field) => params[field] !== void 0).map((field) => {
+      return `${name}[${field}]=${encodeURIComponent(params[field])}`;
+    }).join("&");
   }
 };
 __name(_Helper, "Helper");
@@ -6064,8 +6078,8 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
       const query = {
         action: "page",
         page: options.name,
-        newMode: JSON.stringify(!!options.newMode),
-        params: options.params ? JSON.stringify(options.params) : void 0
+        newMode: options.newMode !== void 0 ? JSON.stringify(options.newMode) : void 0,
+        params: options.params ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params) : void 0
       };
       const { page: pageData } = yield this.getModel().request2(
         "GET",

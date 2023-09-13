@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { JSONString, Scalar } from '../../types';
+import { JSONString, Scalar, Query, QueryRecord } from '../../types';
 import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
+import { pConsole } from '../../pConsole';
 
 export class Helper {
     /* static currentDate() {
@@ -411,6 +412,30 @@ export class Helper {
             },
             {} as Record<string, string>,
         );
+    }
+
+    static queryToString(query: Query) {
+        // pConsole.debug('Helper.queryToString', query);
+        return Object.keys(query)
+            .filter((name: keyof Query) => query[name] !== undefined)
+            .map((name: keyof Query) => {
+                const value = query[name];
+                if (typeof value === 'string') {
+                    return `${name}=${encodeURIComponent(value)}`;
+                }
+                return Helper.queryRecordToString(name, value);
+            })
+            .join('&');
+    }
+
+    static queryRecordToString(name: string, record: QueryRecord) {
+        // pConsole.debug('Helper.queryRecordToString', name, record);
+        return Object.keys(record)
+            .filter((field: keyof QueryRecord) => record[field] !== undefined)
+            .map((field: keyof QueryRecord) => {
+                return `${name}[${field}]=${encodeURIComponent(record[field])}`;
+            })
+            .join('&');
     }
 }
 

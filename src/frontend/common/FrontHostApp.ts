@@ -1,6 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
+import { Query } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -75,10 +76,10 @@ export class FrontHostApp {
         return body;
     }
 
-    static async doHttpRequest2(method: RequestMethod, query?: Record<string, string>, body?: any) {
+    static async doHttpRequest2(method: RequestMethod, query?: Query, body?: any) {
         let url = window.location.pathname;
         if (query) {
-            url += `?${new URLSearchParams(query).toString()}`;
+            url += `?${Helper.queryToString(query)}`;
         }
         console.warn('FrontHostApp.doHttpRequest2', method, url, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
