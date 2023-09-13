@@ -37,14 +37,6 @@ module.exports = {
                     },
                 },
             },
-            /* {
-                test: /\.tsx?$/,
-                loader: 'esbuild-loader',
-                options: {
-                    tsconfig: './tsconfig.custom.json',
-                    keepNames: true,
-                },
-            }, */
             {
                 test: /\.less$/i,
                 use: 'null-loader',
@@ -53,7 +45,6 @@ module.exports = {
     },
     target: 'node',
     externals: [nodeExternals()],
-    // externalsType: 'commonjs',
     optimization: {
         nodeEnv: false,
         minimizer: [

@@ -8,4 +8,15 @@ function resolve() {
     };
 }
 
-module.exports = { mode, resolve };
+function esbuildLoaderRule() {
+    return {
+        test: /\.tsx?$/,
+        loader: 'esbuild-loader',
+        options: {
+            tsconfig: './tsconfig.custom.json',
+            keepNames: true,
+        },
+    };
+}
+
+module.exports = { mode, resolve, esbuildLoaderRule };

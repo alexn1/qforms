@@ -2,7 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TerserPlugin = require('terser-webpack-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
-const { mode, resolve } = require('./webpack.helper');
+const { mode, resolve, esbuildLoaderRule } = require('./webpack.helper');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
@@ -29,14 +29,7 @@ module.exports = {
                     },
                 },
             }, */
-            {
-                test: /\.tsx?$/,
-                loader: 'esbuild-loader',
-                options: {
-                    tsconfig: './tsconfig.custom.json',
-                    keepNames: true,
-                },
-            },
+            esbuildLoaderRule(),
             {
                 test: /\.less$/i,
                 use: 'null-loader',

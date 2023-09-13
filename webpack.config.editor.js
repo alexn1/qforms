@@ -2,7 +2,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
-const { mode, resolve } = require('./webpack.helper');
+const { mode, resolve, esbuildLoaderRule } = require('./webpack.helper');
 
 module.exports = {
     devtool: false,
@@ -27,14 +27,7 @@ module.exports = {
                     },
                 },
             }, */
-            {
-                test: /\.tsx?$/,
-                loader: 'esbuild-loader',
-                options: {
-                    tsconfig: './tsconfig.custom.json',
-                    keepNames: true,
-                },
-            },
+            esbuildLoaderRule(),
             {
                 test: /\.less$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
