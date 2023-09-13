@@ -168,7 +168,10 @@ export class ApplicationController extends ModelController<Application> {
         const query: PageActionQuery = {
             action: 'page',
             page: options.name,
-            newMode: JSON.stringify(!!options.newMode) as JSONString<boolean>,
+            newMode:
+                options.newMode !== undefined
+                    ? (JSON.stringify(options.newMode) as JSONString<boolean>)
+                    : undefined,
             params: options.params
                 ? (JSON.stringify(options.params) as JSONString<Record<string, Scalar>>)
                 : undefined,
