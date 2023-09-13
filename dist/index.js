@@ -9218,8 +9218,6 @@ class ViewerModule {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
             const { action } = context.getQuery();
             if (action === 'page') {
-                const query = context.getQuery();
-                console.log('query', query);
                 await this.page(context, bkApplication);
             }
             else {
@@ -14661,9 +14659,11 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             action: 'page',
             page: options.name,
             newMode: options.newMode !== undefined
-                ? JSON.stringify(options.newMode)
+                ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
                 : undefined,
-            params: options.params ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params) : undefined,
+            params: options.params
+                ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
+                : undefined,
         };
         const { page: pageData } = await this.getModel().request2('GET', query);
         if (options.modal === undefined) {

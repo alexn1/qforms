@@ -111,8 +111,6 @@ export class ViewerModule {
             // handle actions
             const { action } = context.getQuery();
             if (action === 'page') {
-                const query = context.getQuery() as PageActionQuery;
-                console.log('query', query);
                 await this.page(context, bkApplication);
             } else {
                 await this.index(context, bkApplication);

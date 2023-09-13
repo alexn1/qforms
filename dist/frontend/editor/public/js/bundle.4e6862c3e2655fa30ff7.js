@@ -84,6 +84,270 @@ __name(error, "error");
 
 /***/ }),
 
+/***/ "./src/frontend/common/FrontHostApp.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/FrontHostApp.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _FrontHostApp = class _FrontHostApp {
+  // for run on back
+  constructor(options) {
+    this.options = options;
+    this.alertCtrl = null;
+    this.documentTitle = "";
+  }
+  init() {
+    window.addEventListener("error", this.onWindowError.bind(this));
+    window.addEventListener("unhandledrejection", this.onWindowUnhandledrejection.bind(this));
+    window.addEventListener("popstate", this.onWindowPopState.bind(this));
+  }
+  run() {
+    return __async(this, null, function* () {
+      throw new Error("FrontHostApp.run not implemented");
+    });
+  }
+  onWindowUnhandledrejection(e) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)(
+        "FrontHostApp.onWindowUnhandledrejection"
+        /* , e */
+      );
+      try {
+        e.preventDefault();
+        const err = e instanceof Error ? e : e.reason || e.detail.reason;
+        this.logError(err);
+        yield this.alert({ title: "Unhandled Rejection", message: err.message });
+      } catch (err) {
+        console.error(`onWindowUnhandledrejection error: ${err.message}`);
+      }
+    });
+  }
+  onWindowError(e) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)("FrontHostApp.onWindowError", e);
+      try {
+        e.preventDefault();
+        const err = e.error;
+        this.logError(err);
+      } catch (err) {
+        console.error(`onWindowError error: ${err.message}`);
+      }
+    });
+  }
+  logError(err) {
+    console.error("FrontHostApp.logError", err);
+  }
+  static doHttpRequest(data) {
+    return __async(this, null, function* () {
+      console.warn("FrontHostApp.doHttpRequest", "POST", window.location.href, data);
+      const [, body] = yield _FrontHostApp.fetchJson("POST", window.location.href, data);
+      console.warn(`body ${_FrontHostApp.composeHandlerName(data)}:`, body);
+      return body;
+    });
+  }
+  static doHttpRequest2(method, query, body) {
+    return __async(this, null, function* () {
+      let url = window.location.pathname;
+      if (query) {
+        url += `?${_common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)}`;
+      }
+      console.warn("FrontHostApp.doHttpRequest2", method, url, body);
+      const [headers, data] = yield _FrontHostApp.fetchJson(method, url, body);
+      if (body) {
+        console.warn(`body ${_FrontHostApp.composeHandlerName(body)}:`, data);
+      } else {
+        console.warn(data);
+      }
+      return [headers, data];
+    });
+  }
+  static composeHandlerName(data) {
+    if (data.action === "rpc") {
+      if (data.form)
+        return `${data.page}.${data.form}.${data.name}.${data.action}`;
+      if (data.page)
+        return `${data.page}.${data.name}.${data.action}`;
+      return `${data.name}.${data.action}`;
+    }
+    return `${data.page}.${data.form}.${data.ds}.${data.action}`;
+  }
+  static fetchJson(method, url, data) {
+    return __async(this, null, function* () {
+      return yield _FrontHostApp.fetch(
+        method,
+        url,
+        data ? JSON.stringify(data) : void 0,
+        "application/json"
+      );
+    });
+  }
+  static fetch(method, url, body, contentType) {
+    return __async(this, null, function* () {
+      try {
+        _FrontHostApp.startWait();
+        const response = yield fetch(url, __spreadValues({
+          method,
+          body
+        }, contentType ? { headers: { "Content-Type": contentType } } : {}));
+        if (response.ok) {
+          const headers = _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
+          const data = yield response.json();
+          return [headers, data];
+        }
+        throw new Error(`${response.status} ${response.statusText}: ${yield response.text()}`);
+      } finally {
+        _FrontHostApp.stopWait();
+      }
+    });
+  }
+  static startWait() {
+    document.querySelector("html").classList.add("wait");
+  }
+  static stopWait() {
+    document.querySelector("html").classList.remove("wait");
+  }
+  onWindowPopState(e) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)("FrontHostApp.onWindowPopState", e.state);
+    });
+  }
+  alert(options) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)("FrontHostApp.alert", options);
+      alert(options.message);
+    });
+  }
+  confirm(options) {
+    return __async(this, null, function* () {
+      (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)("FrontHostApp.confirm", options);
+      return confirm(options.message);
+    });
+  }
+  setDocumentTitle(title) {
+    if (typeof document === "object") {
+      document.title = title;
+    } else {
+      this.documentTitle = title;
+    }
+  }
+  getDocumentTitle() {
+    if (typeof document === "object") {
+      return document.title;
+    }
+    return this.documentTitle;
+  }
+  isDebugMode() {
+    if (typeof window === "object") {
+      return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()["debug"] === "1";
+    } else {
+      return this.getOptions().debug;
+    }
+  }
+  createLink(params = null) {
+    const path = typeof window === "object" ? window.location.pathname : this.getOptions().url.pathname;
+    if (params) {
+      return [
+        path,
+        [
+          ...this.isDebugMode() ? ["debug=1"] : [],
+          ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`)
+        ].join("&")
+      ].join("?");
+    }
+    return path;
+  }
+  getOptions() {
+    if (!this.options) {
+      throw new Error("no options");
+    }
+    return this.options;
+  }
+  filterSearch(...names) {
+    if (typeof window === "object") {
+      return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.filter(...names);
+    }
+    const newObj = {};
+    const obj = this.getOptions().url.searchParams;
+    for (const name of names) {
+      if (obj.hasOwnProperty(name)) {
+        newObj[name] = obj.get(name);
+      }
+    }
+    return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.objToString(newObj);
+  }
+  getSearchParams() {
+    if (typeof window === "object") {
+      return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
+    }
+    return Object.fromEntries(this.getOptions().url.searchParams);
+  }
+  getCookie(name) {
+    if (typeof window === "object") {
+      return _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.getCookie(name);
+    }
+    return this.getOptions().cookies[name];
+  }
+  getLocation() {
+    if (typeof window === "object") {
+      return window.location;
+    }
+    return this.getOptions().url;
+  }
+};
+__name(_FrontHostApp, "FrontHostApp");
+let FrontHostApp = _FrontHostApp;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/Helper.ts":
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
@@ -481,6 +745,20 @@ const _Helper = class _Helper {
       {}
     );
   }
+  static queryToString(query) {
+    return Object.keys(query).filter((name) => query[name] !== void 0).map((name) => {
+      const value = query[name];
+      if (typeof value === "string") {
+        return `${name}=${encodeURIComponent(value)}`;
+      }
+      return _Helper.queryRecordToString(name, value);
+    }).join("&");
+  }
+  static queryRecordToString(name, record) {
+    return Object.keys(record).filter((field) => record[field] !== void 0).map((field) => {
+      return `${name}[${field}]=${encodeURIComponent(record[field])}`;
+    }).join("&");
+  }
 };
 __name(_Helper, "Helper");
 let Helper = _Helper;
@@ -609,92 +887,12129 @@ if (typeof window === "object") {
 
 /***/ }),
 
-/***/ "./src/frontend/monitor/MonitorView/MonitorView.tsx":
-/*!**********************************************************!*\
-  !*** ./src/frontend/monitor/MonitorView/MonitorView.tsx ***!
-  \**********************************************************/
+/***/ "./src/frontend/common/Search.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Search.ts ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MonitorView": () => (/* binding */ MonitorView)
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+const _Search = class _Search {
+  static getObj() {
+    const params = new URLSearchParams(window.location.search);
+    const obj = {};
+    for (const [name, value] of params) {
+      obj[name] = value;
+    }
+    return obj;
+  }
+  static objToString(obj) {
+    const search = new URLSearchParams(obj).toString();
+    if (!search)
+      return "";
+    return `?${search}`;
+  }
+  static filter(...names) {
+    const obj = _Search.getObj();
+    const newObj = {};
+    for (const name of names) {
+      if (obj.hasOwnProperty(name)) {
+        newObj[name] = obj[name];
+      }
+    }
+    return _Search.objToString(newObj);
+  }
+};
+__name(_Search, "Search");
+let Search = _Search;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/ArrowIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _MonitorView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonitorView.less */ "./src/frontend/monitor/MonitorView/MonitorView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const ArrowIcon = /* @__PURE__ */ __name((props) => {
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", { width: "10px", height: "6px", viewBox: "0 0 10 6", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) });
+}, "ArrowIcon");
+if (typeof window === "object") {
+  window.ArrowIcon = ArrowIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CancelIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _CancelIcon = class _CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })
+        ]
+      }
+    );
+  }
+};
+__name(_CancelIcon, "CancelIcon");
+let CancelIcon = _CancelIcon;
+if (typeof window === "object") {
+  window.CancelIcon = CancelIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const CloseIcon = /* @__PURE__ */ __name((props) => {
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", { width: "10px", height: "10px", viewBox: "0 0 10 10", children: [
+    /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }),
+    /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })
+  ] });
+}, "CloseIcon");
+if (typeof window === "object") {
+  window.CloseIcon = CloseIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const CloseIcon2 = /* @__PURE__ */ __name((props) => {
+  const size = props.size || 24;
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24", children: [
+    /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+    /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })
+  ] });
+}, "CloseIcon2");
+if (typeof window === "object") {
+  window.CloseIcon2 = CloseIcon2;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DateIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _DateIcon = class _DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "18px",
+        viewBox: "0 0 24 24",
+        width: "18px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })
+        ]
+      }
+    );
+  }
+};
+__name(_DateIcon, "DateIcon");
+let DateIcon = _DateIcon;
+if (typeof window === "object") {
+  window.DateIcon = DateIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DeleteIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/DeleteIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteIcon": () => (/* binding */ DeleteIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _DeleteIcon = class _DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" })
+        ]
+      }
+    );
+  }
+};
+__name(_DeleteIcon, "DeleteIcon");
+let DeleteIcon = _DeleteIcon;
+if (typeof window === "object") {
+  window.DeleteIcon = DeleteIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DoneIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _DoneIcon = class _DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })
+        ]
+      }
+    );
+  }
+};
+__name(_DoneIcon, "DoneIcon");
+let DoneIcon = _DoneIcon;
+if (typeof window === "object") {
+  window.DoneIcon = DoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DownIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _DownIcon = class _DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    const size = this.props.size || 24;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", { xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })
+    ] });
+  }
+};
+__name(_DownIcon, "DownIcon");
+let DownIcon = _DownIcon;
+if (typeof window === "object") {
+  window.DoneIcon = DoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/EditIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/EditIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditIcon": () => (/* binding */ EditIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _EditIcon = class _EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" })
+        ]
+      }
+    );
+  }
+};
+__name(_EditIcon, "EditIcon");
+let EditIcon = _EditIcon;
+if (typeof window === "object") {
+  window.EditIcon = EditIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LeftIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const LeftIcon = /* @__PURE__ */ __name((props) => {
+  const size = props.size || 24;
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: size,
+      width: size,
+      viewBox: "0 0 24 24",
+      fill: "#000000",
+      children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })
+      ]
+    }
+  );
+}, "LeftIcon");
+if (typeof window === "object") {
+  window.LeftIcon = LeftIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LocationIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _LocationIcon = class _LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    const size = this.props.size || 24;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })
+    ] });
+  }
+};
+__name(_LocationIcon, "LocationIcon");
+let LocationIcon = _LocationIcon;
+if (typeof window === "object") {
+  window.LocationIcon = LocationIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _MoreVertIcon = class _MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })
+        ]
+      }
+    );
+  }
+};
+__name(_MoreVertIcon, "MoreVertIcon");
+let MoreVertIcon = _MoreVertIcon;
+if (typeof window === "object") {
+  window.MoreVertIcon = MoreVertIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const OpenInNewIcon = /* @__PURE__ */ __name(() => {
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: "24px",
+      viewBox: "0 0 24 24",
+      width: "24px",
+      fill: "#000000",
+      children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })
+      ]
+    }
+  );
+}, "OpenInNewIcon");
+if (typeof window === "object") {
+  window.OpenInNewIcon = OpenInNewIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _PasswordIcon = class _PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        enableBackground: "new 0 0 24 24",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })
+        ]
+      }
+    );
+  }
+};
+__name(_PasswordIcon, "PasswordIcon");
+let PasswordIcon = _PasswordIcon;
+if (typeof window === "object") {
+  window.PasswordIcon = PasswordIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _PhoneIcon = class _PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    const size = this.props.size || 24;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", { xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })
+    ] });
+  }
+};
+__name(_PhoneIcon, "PhoneIcon");
+let PhoneIcon = _PhoneIcon;
+if (typeof window === "object") {
+  window.PhoneIcon = PhoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/RightIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const RightIcon = /* @__PURE__ */ __name((props) => {
+  const size = props.size || 24;
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      height: size,
+      width: size,
+      viewBox: "0 0 24 24",
+      fill: "#000000",
+      children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })
+      ]
+    }
+  );
+}, "RightIcon");
+if (typeof window === "object") {
+  window.RightIcon = RightIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _SettingsIcon = class _SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })
+        ]
+      }
+    );
+  }
+};
+__name(_SettingsIcon, "SettingsIcon");
+let SettingsIcon = _SettingsIcon;
+if (typeof window === "object") {
+  window.SettingsIcon = SettingsIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/TimeIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeIcon": () => (/* binding */ TimeIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _TimeIcon = class _TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        enableBackground: "new 0 0 24 24",
+        height: "18px",
+        viewBox: "0 0 24 24",
+        width: "18px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", { fill: "none", height: "24", width: "24", x: "0" }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12.5,7H11v6l5.2,3.2l0.8-1.3l-4.5-2.7V7z" }) }) })
+        ]
+      }
+    );
+  }
+};
+__name(_TimeIcon, "TimeIcon");
+let TimeIcon = _TimeIcon;
+if (typeof window === "object") {
+  window.TimeIcon = TimeIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _VisibilityIcon = class _VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })
+        ]
+      }
+    );
+  }
+};
+__name(_VisibilityIcon, "VisibilityIcon");
+let VisibilityIcon = _VisibilityIcon;
+if (typeof window === "object") {
+  window.VisibilityIcon = VisibilityIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityOffIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _VisibilityOffIcon = class _VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        height: "24px",
+        viewBox: "0 0 24 24",
+        width: "24px",
+        fill: "#000000",
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "path",
+            {
+              d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z",
+              fill: "none"
+            }
+          ),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })
+        ]
+      }
+    );
+  }
+};
+__name(_VisibilityOffIcon, "VisibilityOffIcon");
+let VisibilityOffIcon = _VisibilityOffIcon;
+if (typeof window === "object") {
+  window.VisibilityOffIcon = VisibilityOffIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/index.ts":
+/*!*******************************************!*\
+  !*** ./src/frontend/common/icon/index.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__.ArrowIcon),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _CloseIcon__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_18__.DateIcon),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_10__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_17__.DownIcon),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_15__.EditIcon),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _LeftIcon__WEBPACK_IMPORTED_MODULE_1__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__.PasswordIcon),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__.PhoneIcon),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _RightIcon__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__.SettingsIcon),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_19__.TimeIcon),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _CloseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _LeftIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _RightIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/index.ts":
+/*!**************************************!*\
+  !*** ./src/frontend/common/index.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBoxList),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.ComboBox),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Expand),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Radio),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
+/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
+/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Box/Box.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _Box_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Box.less */ "./src/frontend/common/widget/Box/Box.less");
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 
 
 
-const _MonitorView = class _MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-  renderApplication(app) {
-    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
-        app.route,
-        " ",
-        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", { style: { color: "gray" }, children: [
-          "version: ",
-          app.version
-        ] })
-      ] }),
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [
-        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
-          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "pages:" }),
-          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.pages.map((page) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", { children: page.name }, page.name)) })
-        ] }),
-        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
-          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "clients:" }),
-          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.clients.map((client) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
-            client.uuid,
-            "\xA0",
-            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { style: { color: "blue" }, children: client.ip }),
-            "\xA0 v",
-            client.version,
-            "\xA0",
-            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
-              "span",
-              {
-                style: {
-                  color: "green"
-                },
-                children: `userId: ${client.userId}`
-              }
-            )
-          ] }, client.uuid)) })
-        ] })
-      ] })
-    ] }, app.route);
+const _Box = class _Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.update = /* @__PURE__ */ __name(() => {
+      console.debug("Box.update");
+      this.setState({
+        backgroundColor: "green"
+      });
+    }, "update");
+    this.state = {
+      backgroundColor: "purple"
+    };
+  }
+  // componentWillMount() {
+  //     console.debug('Box.componentWillMount');
+  // }
+  componentDidMount() {
+    console.debug("Box.componentDidMount");
+  }
+  componentWillUnmount() {
+    console.debug("Box.componentWillUnmount");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.debug("Box.shouldComponentUpdate", nextProps, nextState);
+    return true;
+  }
+  componentDidUpdate() {
+    console.debug("Box.componentDidUpdate");
   }
   render() {
-    console.debug("MonitorView.render", this.props.data);
-    const data = this.props.data;
-    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "MonitorView", children: [
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
-        "nodeEnv: ",
-        data.nodeEnv
-      ] }),
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
-        "uptime: ",
-        _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.formatNumber(data.uptime),
-        " ms"
-      ] }),
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "applications:" }),
-      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })
+    console.debug("Box.render");
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "Box", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })
     ] });
   }
 };
-__name(_MonitorView, "MonitorView");
-let MonitorView = _MonitorView;
+__name(_Box, "Box");
+let Box = _Box;
+if (typeof window === "object") {
+  window.Box = Box;
+}
 
 
 /***/ }),
 
-/***/ "./src/frontend/monitor/MonitorView/MonitorView.less":
+/***/ "./src/frontend/common/widget/Button.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/widget/Button.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Button": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Button = class _Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = { disabled: void 0 };
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+  }
+  /*isDisabled() {
+      if (this.props.disabled !== undefined) return this.props.disabled;
+      if (this.props.enabled !== undefined) return !this.props.enabled;
+      return this.state.disabled;
+  }*/
+  /*isEnabled() {
+      return !this.isDisabled();
+  }*/
+  /*disable() {
+      this.setState({disabled: true});
+  }*/
+  /*enable() {
+      this.setState({disabled: false});
+  }*/
+  isVisible() {
+    if (this.props.visible !== void 0)
+      return this.props.visible;
+    return true;
+  }
+  getStyle() {
+    return {
+      display: !this.isVisible() ? "none" : void 0,
+      width: this.props.width
+    };
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "button",
+      {
+        className: this.getCssClassNames(),
+        ref: this.el,
+        id: this.props.id,
+        type: this.props.type,
+        name: this.props.name,
+        disabled: this.isDisabled(),
+        onClick: this.props.onClick,
+        onFocus: this.props.onFocus,
+        onBlur: this.props.onBlur,
+        onKeyDown: this.props.onKeyDown,
+        style: this.getStyle(),
+        children: this.props.title || this.props.children
+      }
+    );
+  }
+};
+__name(_Button, "Button");
+let Button = _Button;
+if (typeof window === "object") {
+  window.Button = Button;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _CheckBox_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckBox.less */ "./src/frontend/common/widget/CheckBox/CheckBox.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _CheckBox = class _CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      if (!this.props.readOnly) {
+        this.setState((prevState) => {
+          if (this.props.onChange) {
+            this.props.onChange(!prevState.checked, e);
+          }
+          return { checked: !prevState.checked };
+        });
+      }
+    }, "onChange");
+    this.onClick = /* @__PURE__ */ __name((e) => {
+      if (!this.props.readOnly) {
+        if (this.props.onChange)
+          this.props.onChange(true);
+        this.setState({ checked: true });
+      }
+    }, "onClick");
+    if (this.props.checked !== void 0 && this.props.checked !== null && typeof this.props.checked !== "boolean") {
+      throw new Error(`wrong checked prop: ${this.props.checked}`);
+    }
+    this.state = {
+      checked: typeof this.props.checked === "boolean" ? this.props.checked : null
+    };
+  }
+  getValue() {
+    return this.state.checked;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.checked = typeof nextProps.checked === "boolean" ? nextProps.checked : null;
+    return true;
+  }
+  render() {
+    if (this.state.checked === null) {
+      return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "div",
+        {
+          className: `${this.getCssClassNames()} ${this.isDisabled() ? "disabled" : ""}`,
+          onClick: this.onClick,
+          children: "?"
+        }
+      );
+    }
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        className: this.getCssClassNames(),
+        type: "checkbox",
+        id: this.props.id,
+        checked: this.state.checked,
+        readOnly: this.props.readOnly,
+        disabled: this.props.disabled,
+        "data-tag": this.props.tag,
+        onChange: this.onChange
+      }
+    );
+  }
+};
+__name(_CheckBox, "CheckBox");
+let CheckBox = _CheckBox;
+if (typeof window === "object") {
+  window.CheckBox = CheckBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _CheckBoxList = class _CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCheckBoxChange = /* @__PURE__ */ __name((e) => {
+      const checked = e.target.checked;
+      const itemValue = e.target.dataset.value;
+      this.setState(
+        (prevState) => {
+          const prevValue = prevState.value || [];
+          const value = [...prevValue];
+          if (checked) {
+            if (value.indexOf(itemValue) > -1) {
+              console.debug("value:", itemValue, checked, value);
+              throw new Error("CheckBoxList value error");
+            }
+            value.push(itemValue);
+          } else {
+            if (value.indexOf(itemValue) === -1) {
+              console.debug("value:", itemValue, checked, value);
+              throw new Error("CheckBoxList value error");
+            }
+            value.splice(value.indexOf(itemValue), 1);
+          }
+          return { value };
+        },
+        () => {
+          if (this.props.onChange) {
+            this.props.onChange(this.getValue());
+          }
+        }
+      );
+    }, "onCheckBoxChange");
+    if (!this.props.name)
+      throw new Error("no CheckBoxList name");
+    this.state = {
+      value: this.props.value || []
+    };
+  }
+  getItems() {
+    return this.props.items || [];
+  }
+  getValue() {
+    return this.state.value || [];
+  }
+  isValueChecked(value) {
+    return this.getValue().indexOf(value) > -1;
+  }
+  composeItemId(value) {
+    return `${this.props.name}.${value}`;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { className: this.getCssClassNames(), children: this.getItems().map((item) => {
+      if (item.value === void 0)
+        throw new Error("no item value");
+      return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "input",
+          {
+            type: "checkbox",
+            id: this.composeItemId(item.value),
+            checked: this.isValueChecked(item.value),
+            onChange: this.onCheckBoxChange,
+            "data-value": item.value,
+            readOnly: this.props.readOnly
+          }
+        ),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: this.composeItemId(item.value), children: item.title || item.value })
+      ] }, item.value);
+    }) });
+  }
+};
+__name(_CheckBoxList, "CheckBoxList");
+let CheckBoxList = _CheckBoxList;
+if (typeof window === "object") {
+  window.CheckBoxList = CheckBoxList;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/ComboBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/ComboBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _ComboBox = class _ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      this.setState({ value: e.target.value });
+      if (this.props.onChange) {
+        yield this.props.onChange(e.target.value);
+      }
+    }), "onChange");
+    this.onMouseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      if (this.props.onMouseDown) {
+        yield this.props.onMouseDown(e);
+      }
+    }), "onMouseDown");
+    if (!props.items)
+      throw new Error("no ComboBox items");
+    this.state = { value: this.getInitialValue() };
+  }
+  getInitialValue() {
+    let value = null;
+    if (this.props.value !== void 0 && this.props.value !== null) {
+      value = this.props.value;
+      const item = this.props.items.find((item2) => item2.value === this.props.value);
+      if (!item) {
+        if (this.props.nullable && value === "") {
+        } else {
+          console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
+          console.debug("items:", this.props.items);
+        }
+      }
+    } else {
+      if (this.props.items.length) {
+        value = this.props.items[0].value;
+      } else {
+        value = "";
+      }
+    }
+    if (value === null)
+      throw new Error("null is wrong value for ComboBox");
+    return value;
+  }
+  getValue() {
+    return this.state.value;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "select",
+      {
+        className: this.getCssClassNames(),
+        onChange: this.onChange,
+        value: this.state.value,
+        disabled: this.props.readOnly,
+        size: this.props.size,
+        style: this.props.style,
+        id: this.props.id,
+        onDoubleClick: this.props.onDoubleClick,
+        onMouseDown: this.onMouseDown,
+        children: [
+          this.props.nullable && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", { value: "", children: this.props.placeholder }),
+          this.props.items && this.props.items.map((item) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", { value: item.value, children: item.title || item.value }, item.value))
+        ]
+      }
+    );
+  }
+};
+__name(_ComboBox, "ComboBox");
+let ComboBox = _ComboBox;
+if (typeof window === "object") {
+  window.ComboBox = ComboBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+
+const _DatePicker = class _DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onClick = /* @__PURE__ */ __name((e) => {
+      console.debug("DatePicker.onClick", e.target);
+      if (e.target.nodeName === "TD" && e.target.classList.contains("selectable")) {
+        return this.onDateClick(e.target);
+      }
+    }, "onClick");
+    this.onMouseDown = /* @__PURE__ */ __name((e) => {
+      if (this.props.onMouseDown) {
+        return this.props.onMouseDown(e);
+      }
+    }, "onMouseDown");
+    this.onNextClick = /* @__PURE__ */ __name((e) => {
+      this.setState((prevState) => {
+        const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+        next.setMonth(next.getMonth() + 1);
+        return {
+          selectedMonth: [next.getFullYear(), next.getMonth()]
+        };
+      });
+    }, "onNextClick");
+    this.onPrevClick = /* @__PURE__ */ __name((e) => {
+      this.setState((prevState) => {
+        const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return {
+          selectedMonth: [prev.getFullYear(), prev.getMonth()]
+        };
+      });
+    }, "onPrevClick");
+    if (this.props.minDate && !(this.props.minDate instanceof Array))
+      throw new Error("minDate must be array");
+    this.state = { selectedMonth: this.calcSelectedMonth() };
+    this.MONTH = [
+      "\u042F\u043D\u0432\u0430\u0440\u044C",
+      "\u0424\u0435\u0432\u0440\u0430\u043B\u044C",
+      "\u041C\u0430\u0440\u0442",
+      "\u0410\u043F\u0440\u0435\u043B\u044C",
+      "\u041C\u0430\u0439",
+      "\u0418\u044E\u043D\u044C",
+      "\u0418\u044E\u043B\u044C",
+      "\u0410\u0432\u0433\u0443\u0441\u0442",
+      "\u0421\u0435\u043D\u0442\u044F\u0431\u0440\u044C",
+      "\u041E\u043A\u0442\u044F\u0431\u0440\u044C",
+      "\u041D\u043E\u044F\u0431\u0440\u044C",
+      "\u0414\u0435\u043A\u0430\u0431\u0440\u044C"
+    ];
+  }
+  static createDateFromArr(arr) {
+    return new Date(arr[0], arr[1], arr[2]);
+  }
+  isVisible() {
+    if (this.props.visible === false)
+      return false;
+    return true;
+  }
+  calcSelectedMonth() {
+    if (this.props.selectedDate) {
+      return [this.props.selectedDate[0], this.props.selectedDate[1]];
+    } else if (this.props.highlightedDate) {
+      return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
+    } else {
+      const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+      if (this.props.minDate)
+        dates.push(_DatePicker.createDateFromArr(this.props.minDate).getTime());
+      const date = new Date(Math.min(...dates));
+      return [date.getFullYear(), date.getMonth()];
+    }
+  }
+  static getTodayArr() {
+    return _DatePicker.dateToArray(/* @__PURE__ */ new Date());
+  }
+  static dateToArray(date) {
+    return [date.getFullYear(), date.getMonth(), date.getDate()];
+  }
+  static getDay(date) {
+    let day = date.getDay() - 1;
+    if (day === -1)
+      day = 6;
+    if (day === 0)
+      day = 7;
+    return day;
+  }
+  createSelectedDate() {
+    if (!this.isDateSelected())
+      throw new Error("date not selected");
+    return new Date(...this.props.selectedDate);
+  }
+  isDateSelected() {
+    return !!this.props.selectedDate;
+  }
+  getFirstDateOfTable() {
+    const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1);
+    date.setDate(date.getDate() - _DatePicker.getDay(date));
+    return date;
+  }
+  createMinDate() {
+    if (!this.props.minDate)
+      throw new Error("no min date");
+    return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
+  }
+  isMinDate() {
+    return !!this.props.minDate;
+  }
+  isPrevAllowed() {
+    const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
+    prev.setMonth(prev.getMonth() - 1);
+    return this.isMonthAllowed(prev);
+  }
+  isMonthAllowed(month) {
+    if (this.isMinDate()) {
+      const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
+      return month.getTime() >= minMonth.getTime();
+    }
+    return true;
+  }
+  onDateClick(target) {
+    if (this.props.onDateSelected) {
+      this.props.onDateSelected(JSON.parse(target.dataset.date));
+    }
+  }
+  render() {
+    const date = this.getFirstDateOfTable();
+    const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+    const minDate = this.isMinDate() ? this.createMinDate() : null;
+    const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+    const highlightedDate = this.props.highlightedDate ? (
+      // @ts-ignore
+      new Date(...this.props.highlightedDate)
+    ) : null;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "table",
+      {
+        className: `${this.getCssClassNames()} ${this.isVisible() ? "visible" : ""}`,
+        onClick: this.onClick,
+        onMouseDown: this.onMouseDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", { className: `${this.getCssBlockName()}__caption`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `${this.getCssBlockName()}__caption-content`, children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              "div",
+              {
+                className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? "enabled" : ""}`,
+                onClick: this.onPrevClick,
+                children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 })
+              }
+            ),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__caption-title`, children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              "div",
+              {
+                className: `${this.getCssBlockName()}__caption-link enabled`,
+                onClick: this.onNextClick,
+                children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 })
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th`, children: "\u041F\u043D" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th`, children: "\u0412\u0442" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th`, children: "\u0421\u0440" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th`, children: "\u0427\u0442" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th`, children: "\u041F\u0442" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th weekend`, children: "\u0421\u0431" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", { className: `${this.getCssBlockName()}__th weekend`, children: "\u0412\u0441" })
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
+            const classList = [];
+            if (j === 5 || j === 6)
+              classList.push("weekend");
+            if (this.isSelectToday() && date.getTime() === today.getTime())
+              classList.push("today");
+            if (date.getMonth() !== this.state.selectedMonth[1])
+              classList.push("out");
+            if (!minDate)
+              classList.push("selectable");
+            else if (date.getTime() >= minDate.getTime())
+              classList.push("selectable");
+            if (selectedDate && date.getTime() === selectedDate.getTime())
+              classList.push("selected");
+            if (highlightedDate && highlightedDate.getTime() === date.getTime())
+              classList.push("highlight");
+            const text = date.getDate().toString();
+            const dataDate = JSON.stringify(_DatePicker.dateToArray(date));
+            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
+            date.setDate(date.getDate() + 1);
+            return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              "td",
+              {
+                className: `${this.getCssBlockName()}__td  ${classList.join(
+                  " "
+                )}`,
+                style,
+                "data-date": dataDate,
+                children: text
+              },
+              text
+            );
+          }) }, i)) })
+        ]
+      }
+    );
+  }
+  isSelectToday() {
+    if (this.props.selectToday === false)
+      return false;
+    return true;
+  }
+};
+__name(_DatePicker, "DatePicker");
+let DatePicker = _DatePicker;
+if (typeof window === "object") {
+  window.DatePicker = DatePicker;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _DropdownButton = class _DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onButtonClick = /* @__PURE__ */ __name((e) => {
+      this.setState((state) => ({ open: !state.open }));
+    }, "onButtonClick");
+    this.onButtonBlur = /* @__PURE__ */ __name((e) => {
+      if (this.state.open) {
+        this.setState({ open: false });
+      }
+    }, "onButtonBlur");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape" && this.state.open) {
+        this.setState({ open: false });
+        e.stopPropagation();
+      }
+    }, "onKeyDown");
+    this.onUlMouseDown = /* @__PURE__ */ __name((e) => {
+      e.preventDefault();
+    }, "onUlMouseDown");
+    this.onLiClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const li = e.currentTarget;
+      this.setState({ open: false }, () => {
+        if (this.props.onClick) {
+          this.props.onClick(li);
+        }
+      });
+    }), "onLiClick");
+    this.state = {
+      open: false,
+      disabled: false
+    };
+  }
+  isEnabled() {
+    if (this.props.enabled !== void 0)
+      return this.props.enabled;
+    return !this.state.disabled;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `${this.getCssClassNames()} ${this.state.open && "show"}`, children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _Button__WEBPACK_IMPORTED_MODULE_3__.Button,
+        {
+          classList: [`${this.getCssBlockName()}__button`],
+          onClick: this.onButtonClick,
+          onBlur: this.onButtonBlur,
+          enabled: this.isEnabled(),
+          onKeyDown: this.onKeyDown,
+          children: this.props.title || this.props.children
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "ul",
+        {
+          className: `${this.getCssBlockName()}__dropdown`,
+          onMouseDown: this.onUlMouseDown,
+          children: this.props.actions && this.props.actions.map((action) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "li",
+            {
+              className: `${this.getCssBlockName()}__item ${action.enabled === false ? "disabled" : ""}`,
+              "data-action": action.name,
+              onClick: action.enabled !== false ? this.onLiClick : void 0,
+              children: action.title
+            },
+            action.name
+          ))
+        }
+      )
+    ] });
+  }
+};
+__name(_DropdownButton, "DropdownButton");
+let DropdownButton = _DropdownButton;
+_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DropdownButton);
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+
+const _DropdownDatePicker = class _DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onInputClick = /* @__PURE__ */ __name((e) => {
+      if (this.props.readOnly)
+        return;
+      this.setState((prevState) => ({ open: !prevState.open }));
+    }, "onInputClick");
+    this.onInputKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape" && this.state.open) {
+        this.setState({ open: false });
+        e.stopPropagation();
+      }
+    }, "onInputKeyDown");
+    this.onCloseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      this.setState({ value: null });
+      if (this.props.onChange) {
+        this.props.onChange(null);
+      }
+    }), "onCloseDown");
+    this.onBlur = /* @__PURE__ */ __name((e) => {
+      if (this.state.open) {
+        this.setState({ open: false });
+      }
+    }, "onBlur");
+    this.onDatePickerMouseDown = /* @__PURE__ */ __name((e) => {
+      e.preventDefault();
+    }, "onDatePickerMouseDown");
+    this.onDatePickerDateSelected = /* @__PURE__ */ __name((date) => {
+      const value = new Date(date[0], date[1], date[2]);
+      this.setState({ open: false, value });
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
+    }, "onDatePickerDateSelected");
+    this.state = {
+      open: false,
+      value: props.value || null
+    };
+    if (props.value && !(props.value instanceof Date)) {
+      throw new Error(`need Date type, got ${typeof props.value}`);
+    }
+  }
+  getFormat() {
+    return this.props.format || "{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}";
+  }
+  getStringValue() {
+    const value = this.getValue();
+    if (value) {
+      let format = this.getFormat();
+      if (this.isDebugMode()) {
+        const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, "{hh}:{mm}:{ss}");
+        if (format === "{DD}.{MM}.{YYYY}" && time !== "00:00:00") {
+          format = "{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}";
+        }
+      }
+      return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+    }
+    return "";
+  }
+  /*getMinDate() {
+      if (this.props.getMinDate) {
+          return this.props.getMinDate();
+      } else if (this.props.oldDates === false) {
+          return DatePicker.getTodayArr();
+      }
+      return null;
+  }*/
+  getSelectedMonth() {
+    if (this.getValue()) {
+      return [this.getValue().getFullYear(), this.getValue().getMonth()];
+    }
+    return null;
+  }
+  getSelectedDate() {
+    if (this.getValue()) {
+      return [
+        this.getValue().getFullYear(),
+        this.getValue().getMonth(),
+        this.getValue().getDate()
+      ];
+    }
+    return null;
+  }
+  getValue() {
+    return this.state.value;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  getClassList() {
+    return [...super.getClassList(), ...this.props.readOnly ? ["read-only"] : []];
+  }
+  renderInput() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        className: `${this.getCssBlockName()}__input`,
+        type: "text",
+        readOnly: true,
+        onClick: this.onInputClick,
+        onBlur: this.onBlur,
+        value: this.getStringValue(),
+        placeholder: this.props.placeholder,
+        onKeyDown: this.onInputKeyDown
+      }
+    );
+  }
+  renderCloseIcon() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "div",
+      {
+        className: `${this.getCssBlockName()}__close ${this.getStringValue() !== "" && !this.props.readOnly ? "visible" : ""}`,
+        onMouseDown: this.onCloseDown,
+        children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {})
+      }
+    );
+  }
+  renderDateIcon() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__icon`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) });
+  }
+  renderDatePicker() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `${this.getCssBlockName()}__date-picker-container`, children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__date-picker-close`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker,
+        {
+          minDate: this.props.minDate,
+          selectedMonth: this.getSelectedMonth(),
+          selectedDate: this.getSelectedDate(),
+          onMouseDown: this.onDatePickerMouseDown,
+          onDateSelected: this.onDatePickerDateSelected,
+          selectToday: this.props.selectToday,
+          highlightedDate: this.props.highlightedDate
+        }
+      )
+    ] });
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: this.getCssClassNames(), children: [
+      this.renderInput(),
+      this.renderCloseIcon(),
+      this.renderDateIcon(),
+      this.state.open && this.renderDatePicker()
+    ] });
+  }
+  isDebugMode() {
+    return this.props.debug === true;
+  }
+};
+__name(_DropdownDatePicker, "DropdownDatePicker");
+let DropdownDatePicker = _DropdownDatePicker;
+if (typeof window === "object") {
+  window.DropdownDatePicker = DropdownDatePicker;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Expand": () => (/* binding */ Expand)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _Expand_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Expand.less */ "./src/frontend/common/widget/Expand/Expand.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+const _Expand = class _Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onTitleClick = /* @__PURE__ */ __name((e) => {
+      console.debug("Expand.onTitleClick");
+      this.setState((prevState) => {
+        return { opened: !prevState.opened };
+      });
+    }, "onTitleClick");
+    this.state = {
+      opened: this.props.opened !== void 0 ? this.props.opened : false
+    };
+  }
+  isOpened() {
+    return this.state.opened;
+  }
+  isHighlighted() {
+    return !!this.props.highlighted;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} ${this.isOpened() ? "opened" : ""} ${this.isHighlighted() ? "highlighted" : ""}`,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick, children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__icon`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__title`, children: this.props.title })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__content`, children: this.props.children })
+        ]
+      }
+    );
+  }
+};
+__name(_Expand, "Expand");
+let Expand = _Expand;
+if (typeof window === "object") {
+  window.Expand = Expand;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _Grid_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Grid.less */ "./src/frontend/common/widget/Grid/Grid.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+const _Grid = class _Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCellMouseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Grid.onCellMouseDown", this.isLink());
+      e.preventDefault();
+      if (this.isDisabled())
+        return;
+      this.getElement().focus();
+      const button = e.button;
+      const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+      const row = this.props.rows[i];
+      const key = e.currentTarget.dataset.row;
+      yield this.selectCell(key, j);
+      if (button === 0 && this.props.onClick) {
+        this.props.onClick(row, key);
+      }
+    }), "onCellMouseDown");
+    this.onRowMouseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Grid.onRowMouseDown", this.isLink());
+      const key = e.currentTarget.dataset.row;
+      yield this.selectRow(key);
+    }), "onRowMouseDown");
+    this.onCellDoubleClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const button = e.button;
+      const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+      const row = this.props.rows[i];
+      const key = e.currentTarget.dataset.row;
+      if (button === 0 && this.props.onDoubleClick) {
+        yield this.props.onDoubleClick(row, key);
+      }
+    }), "onCellDoubleClick");
+    this.onRowDoubleClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const i = parseInt(e.currentTarget.dataset.r);
+      const row = this.props.rows[i];
+      const key = e.currentTarget.dataset.row;
+      if (this.props.onDoubleClick) {
+        yield this.props.onDoubleClick(row, key);
+      }
+    }), "onRowDoubleClick");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      if (this.isDisabled())
+        return;
+      switch (e.keyCode) {
+        case 37:
+          e.preventDefault();
+          yield this.onLeft();
+          break;
+        case 38:
+          e.preventDefault();
+          yield this.onUp();
+          break;
+        case 39:
+          e.preventDefault();
+          yield this.onRight();
+          break;
+        case 40:
+          e.preventDefault();
+          yield this.onDown();
+          break;
+        case 13:
+          e.preventDefault();
+          yield this.onEnter();
+          break;
+        case 46:
+          e.preventDefault();
+          yield this.onDelete();
+          break;
+        case 67:
+          if (e.ctrlKey) {
+            e.preventDefault();
+            yield this.onCopy();
+          }
+          break;
+      }
+    }), "onKeyDown");
+    this.onResizeDoubleClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Grid.onResizeDoubleClick", e.target);
+      const i = parseInt(e.target.dataset.i);
+      const column = this.props.columns[i];
+      if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+        return;
+      this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+      this.state.resized = Date.now();
+      yield this.rerender();
+    }), "onResizeDoubleClick");
+    this.onCellViewCreate = /* @__PURE__ */ __name((c) => {
+      const columnName = c.props.column.name;
+      if (this.columns[columnName] === void 0)
+        this.columns[columnName] = [];
+      this.columns[columnName].push(c);
+    }, "onCellViewCreate");
+    this.onCellViewUnmount = /* @__PURE__ */ __name((c) => {
+      const columnName = c.props.column.name;
+      const i = this.columns[columnName].indexOf(c);
+      if (i === -1)
+        throw new Error("cannot find FieldView in Grid.columns");
+      this.columns[columnName].splice(i, 1);
+    }, "onCellViewUnmount");
+    this.onBodyScroll = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      this.head.current.scrollLeft = e.target.scrollLeft;
+    }), "onBodyScroll");
+    this.onLinkClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Grid.onLinkClick", e.ctrlKey);
+      if (e.ctrlKey)
+        return;
+      e.preventDefault();
+    }), "onLinkClick");
+    this.state = {
+      key: this.props.selectedKey || null,
+      column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+      columnWidth: {},
+      resized: Date.now()
+    };
+    this.columns = {};
+    this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+  }
+  getActiveColumn() {
+    return this.state.column;
+  }
+  setActiveColumn(column) {
+    this.state.column = column;
+  }
+  getActiveRowKey() {
+    return this.state.key;
+  }
+  setActiveRowKey(key) {
+    this.state.key = key;
+  }
+  isRowActive(i, key) {
+    return this.getActiveRowKey() === key;
+  }
+  onCopy() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onCopy");
+      const row = this.findRow(this.getActiveRowKey());
+      const column = this.props.columns[this.getActiveColumn()].name;
+      const text = row[column];
+      yield _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
+    });
+  }
+  findRow(key) {
+    return this.props.rows.find((row) => this.getRowKey(row) === key);
+  }
+  onLeft() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onLeft");
+      const j = this.getActiveColumn();
+      if (j - 1 >= 0) {
+        this.setActiveColumn(j - 1);
+        yield this.rerender();
+      }
+    });
+  }
+  onUp() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onUp");
+      const key = this.getActiveRowKey();
+      const row = this.findRow(key);
+      const i = this.props.rows.indexOf(row);
+      if (i - 1 >= 0) {
+        const pRow = this.props.rows[i - 1];
+        const pKey = this.getRowKey(pRow);
+        this.setActiveRowKey(pKey);
+        yield this.rerender();
+      }
+    });
+  }
+  onRight() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onRight");
+      const j = this.getActiveColumn();
+      if (j + 1 <= this.props.columns.length - 1) {
+        this.setActiveColumn(j + 1);
+        yield this.rerender();
+      }
+    });
+  }
+  onDown() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onDown");
+      const key = this.getActiveRowKey();
+      const row = this.findRow(key);
+      const i = this.props.rows.indexOf(row);
+      if (i + 1 <= this.props.rows.length - 1) {
+        const nRow = this.props.rows[i + 1];
+        const nKey = this.getRowKey(nRow);
+        this.setActiveRowKey(nKey);
+        yield this.rerender();
+      }
+    });
+  }
+  onEnter() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onEnter");
+      const key = this.getActiveRowKey();
+      const row = this.findRow(key);
+      if (this.props.onDoubleClick) {
+        yield this.props.onDoubleClick(row, key);
+      }
+    });
+  }
+  onDelete() {
+    return __async(this, null, function* () {
+      console.debug("Grid.onDelete");
+      const key = this.getActiveRowKey();
+      const row = this.findRow(key);
+      if (this.props.onDeleteKeyDown) {
+        yield this.props.onDeleteKeyDown(row, key);
+      }
+    });
+  }
+  selectCell(key, j) {
+    return __async(this, null, function* () {
+      if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
+        return;
+      this.setActiveRowKey(key);
+      this.setActiveColumn(j);
+      if (this.props.onSelectionChange) {
+        yield this.props.onSelectionChange(key);
+      } else {
+        yield this.rerender();
+      }
+    });
+  }
+  selectRow(key) {
+    return __async(this, null, function* () {
+      if (this.getActiveRowKey() === key)
+        return;
+      this.setActiveRowKey(key);
+      if (this.props.onSelectionChange) {
+        yield this.props.onSelectionChange(key);
+      } else {
+        yield this.rerender();
+      }
+    });
+  }
+  getMaxColumnWidth(column) {
+    return Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2;
+  }
+  getColumnWidth(i) {
+    const column = this.props.columns[i];
+    if (this.state.columnWidth[column.name] !== void 0) {
+      return this.state.columnWidth[column.name];
+    }
+    return column.width;
+  }
+  renderColumns() {
+    return this.props.columns.map((column, i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssBlockName()}__th`,
+        style: { width: this.getColumnWidth(i) },
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "ellipsis", style: { textAlign: column.align }, children: column.title || column.name }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "span",
+            {
+              className: "Grid__resize",
+              "data-i": i,
+              onDoubleClick: this.onResizeDoubleClick
+            }
+          )
+        ]
+      },
+      column.name
+    ));
+  }
+  renderRows() {
+    return this.props.rows.map((row, i) => {
+      const key = this.getRowKey(row);
+      return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow,
+        {
+          rowKey: key,
+          grid: this,
+          row,
+          i,
+          active: this.isRowActive(i, key),
+          activeColumn: this.getActiveColumn(),
+          updated: this.props.updated,
+          resized: this.state.resized
+        },
+        key
+      );
+    });
+  }
+  getRowKey(row) {
+    if (this.props.getRowKey) {
+      return this.props.getRowKey(row);
+    }
+    return this.props.rows.indexOf(row).toString();
+  }
+  renderCell(row, column) {
+    let view;
+    if (this.props.renderGridCellView) {
+      view = this.props.renderGridCellView(
+        row,
+        column,
+        this.onCellViewCreate,
+        this.onCellViewUnmount
+      );
+    }
+    if (view)
+      return view;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell,
+      {
+        grid: this,
+        row,
+        column,
+        onCreate: this.onCellViewCreate,
+        onUnmount: this.onCellViewUnmount
+      }
+    );
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.updated) {
+      if (nextProps.updated - this.props.updated)
+        return true;
+      return false;
+    }
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} ${this.isDisabled() ? "disabled" : ""}`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__head`, ref: this.head, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__table`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `${this.getCssBlockName()}__tr`, children: [
+            this.props.columns && this.renderColumns(),
+            !!this.props.extraColumn && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` })
+          ] }) }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__table`, children: this.props.rows && this.renderRows() }) })
+        ]
+      }
+    );
+  }
+  isLink() {
+    return !!this.props.createLinkCallback;
+  }
+};
+__name(_Grid, "Grid");
+let Grid = _Grid;
+if (typeof window === "object") {
+  window.Grid = Grid;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridCell_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GridCell.less */ "./src/frontend/common/widget/GridCell/GridCell.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+const _GridCell = class _GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+  }
+  getSpanOffsetWidth() {
+    if (!this.span.current)
+      return 0;
+    return this.span.current.offsetWidth;
+  }
+  renderCellValue(rawValue) {
+    const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
+    if (typeof value === "boolean")
+      return value.toString();
+    return value;
+  }
+  render() {
+    const row = this.props.row;
+    const column = this.props.column;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssClassNames()} ellipsis`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { ref: this.span, children: this.renderCellValue(row[column.name]) }) });
+  }
+};
+__name(_GridCell, "GridCell");
+let GridCell = _GridCell;
+if (typeof window === "object") {
+  window.GridCell = GridCell;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridRow/GridRow.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _GridRow = class _GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  isCellActive(j) {
+    return this.props.active && this.props.activeColumn === j;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.updated) {
+      if (nextProps.updated - this.props.updated)
+        return true;
+      if (nextProps.resized - this.props.resized)
+        return true;
+      if (this.props.active !== nextProps.active)
+        return true;
+      if (this.props.active && this.props.activeColumn !== nextProps.activeColumn)
+        return true;
+      return false;
+    }
+    return true;
+  }
+  render() {
+    const grid = this.props.grid;
+    const row = this.props.row;
+    const i = this.props.i;
+    const key = this.props.rowKey;
+    const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "a",
+      {
+        className: `${grid.getCssBlockName()}__tr ${this.props.active ? "active" : ""}`,
+        "data-key": key,
+        href: link,
+        onClick: grid.onLinkClick,
+        children: [
+          grid.props.columns.map((column, j) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "div",
+            {
+              className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? "active" : ""}`,
+              style: { width: grid.getColumnWidth(j) },
+              "data-rc": `[${i},${j}]`,
+              "data-row": key,
+              onMouseDown: grid.onCellMouseDown,
+              onDoubleClick: grid.onCellDoubleClick,
+              children: grid.renderCell(row, column)
+            },
+            column.name
+          )),
+          !!grid.props.extraColumn && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "div",
+            {
+              className: `${grid.getCssBlockName()}__td`,
+              "data-r": i,
+              "data-row": key,
+              onMouseDown: grid.onRowMouseDown,
+              onDoubleClick: grid.onRowDoubleClick
+            }
+          )
+        ]
+      }
+    );
+  }
+};
+__name(_GridRow, "GridRow");
+let GridRow = _GridRow;
+if (typeof window === "object") {
+  window.GridRow = GridRow;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Image/Image.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Image": () => (/* binding */ Image)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Image_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Image.less */ "./src/frontend/common/widget/Image/Image.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _Image = class _Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onImgClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Image.onImgClick");
+      if (this.props.onClick) {
+        return yield this.props.onClick();
+      }
+      this.setState((prevState) => {
+        if (prevState.classList) {
+          return { classList: null };
+        } else {
+          return { classList: ["Image_full"] };
+        }
+      });
+    }), "onImgClick");
+    this.img = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = { classList: null };
+  }
+  getNaturalSize() {
+    return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "img",
+      {
+        className: this.getCssClassNames(),
+        ref: this.img,
+        src: this.props.src,
+        onClick: this.onImgClick
+      }
+    );
+  }
+  /*componentDidMount() {
+      console.debug('Image.componentDidMount', this.getNaturalSize());
+  }*/
+};
+__name(_Image, "Image");
+let Image = _Image;
+if (typeof window === "object") {
+  window.Image = Image;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Menu": () => (/* binding */ Menu)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _Menu = class _Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onMenuClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.toggleMenu(e.currentTarget.dataset.menu);
+    }), "onMenuClick");
+    this.onBlur = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.closeMenu(e.currentTarget.dataset.menu);
+    }), "onBlur");
+    this.onMouseDown = /* @__PURE__ */ __name((e) => {
+      e.preventDefault();
+    }, "onMouseDown");
+    this.onMenuItemClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      e.persist();
+      const { menu, type, name } = e.target.dataset;
+      yield this.closeMenu(menu);
+      if (this.props.onClick) {
+        this.props.onClick(menu, type, name);
+      }
+    }), "onMenuItemClick");
+    this.state = {};
+  }
+  toggleMenu(menu) {
+    return new Promise((resolve) => {
+      this.setState(
+        (prevState) => ({
+          [menu]: !prevState[menu]
+        }),
+        resolve
+      );
+    });
+  }
+  closeMenu(menu) {
+    return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "Menu", children: this.props.items && this.props.items.map((menu) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: this.state[menu.name] ? "active" : void 0,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              "data-menu": menu.name,
+              onClick: this.onMenuClick,
+              onBlur: this.onBlur,
+              children: menu.title
+            }
+          ),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick, children: menu.items.map((item) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "a",
+            {
+              "data-menu": menu.name,
+              "data-type": item.type,
+              "data-name": item.name,
+              children: item.title
+            },
+            item.name
+          )) })
+        ]
+      },
+      menu.name
+    )) });
+  }
+};
+__name(_Menu, "Menu");
+let Menu = _Menu;
+if (typeof window === "object") {
+  window.Menu = Menu;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Modal_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.less */ "./src/frontend/common/widget/Modal/Modal.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Modal = class _Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: this.getCssClassNames(), children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__container`, children: this.props.children }) });
+  }
+};
+__name(_Modal, "Modal");
+let Modal = _Modal;
+if (typeof window === "object") {
+  window.Modal = Modal;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Password": () => (/* binding */ Password)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _Password_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Password.less */ "./src/frontend/common/widget/Password/Password.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+
+
+const _Password = class _Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      this._setValue(e.target.value);
+    }, "onChange");
+    this.onCloseClick = /* @__PURE__ */ __name((e) => {
+      this._setValue("");
+      this.getInputElement().focus();
+    }, "onCloseClick");
+    this.onIconClick = /* @__PURE__ */ __name((e) => {
+      this.setState((prevState) => {
+        return {
+          type: prevState.type === "password" ? "text" : "password"
+        };
+      });
+      this.getInputElement().focus();
+    }, "onIconClick");
+    this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = {
+      value: this.props.value || "",
+      type: "password"
+    };
+  }
+  getInputElement() {
+    return this.inputEl.current;
+  }
+  getValue() {
+    return this.state.value;
+  }
+  _setValue(value) {
+    this.state.value = value;
+    this.forceUpdate();
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  isCloseVisible() {
+    return this.state.value !== "";
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { ref: this.el, className: this.getCssClassNames(), children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "input",
+        {
+          ref: this.inputEl,
+          className: `${this.getCssBlockName()}__input`,
+          type: this.state.type,
+          id: this.props.id,
+          name: this.props.name,
+          readOnly: this.props.readOnly,
+          disabled: this.props.disabled,
+          placeholder: this.props.placeholder,
+          autoFocus: this.props.autoFocus,
+          spellCheck: this.props.spellCheck,
+          autoComplete: this.props.autocomplete,
+          value: this.state.value,
+          onFocus: this.props.onFocus,
+          onBlur: this.props.onBlur,
+          onChange: this.onChange
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "div",
+        {
+          className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? "visible" : ""}`,
+          onClick: this.onCloseClick,
+          children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {})
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick, children: this.state.type === "password" ? /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) })
+    ] });
+  }
+};
+__name(_Password, "Password");
+let Password = _Password;
+if (typeof window === "object") {
+  window.Password = Password;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _PhoneBox = class _PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onKeyPress = /* @__PURE__ */ __name((e) => {
+      if (!["+", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(e.key)) {
+        e.preventDefault();
+      }
+      if (e.key === "+" && e.target.value.length && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+        e.preventDefault();
+      }
+    }, "onKeyPress");
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+      const len = e.target.value.length;
+      if (start !== end || start !== len) {
+        return;
+      }
+      let value = _PhoneBox.clearValue(e.target.value);
+      value = _PhoneBox.ifNoCodeAddRussianCode(value);
+      this.state.value = _PhoneBox.formatPhoneNumber(value);
+      this.setState({ value: this.state.value });
+      if (this.props.onChange) {
+        this.props.onChange(value);
+      }
+    }, "onChange");
+    this.onBlur = /* @__PURE__ */ __name((e) => {
+      let value = _PhoneBox.clearValue(e.target.value);
+      value = _PhoneBox.ifNoCodeAddRussianCode(value);
+      if (this.props.onBlur) {
+        this.props.onBlur(value);
+      }
+    }, "onBlur");
+    this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = {
+      value: _PhoneBox.formatPhoneNumber(this.props.value || "")
+    };
+  }
+  getValue() {
+    return _PhoneBox.clearValue(this.state.value);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.value !== void 0) {
+      this.state.value = _PhoneBox.formatPhoneNumber(nextProps.value);
+    }
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        ref: this.el,
+        className: this.getCssClassNames(),
+        type: "text",
+        id: this.props.id,
+        name: this.props.name,
+        readOnly: this.props.readOnly,
+        disabled: this.props.disabled,
+        placeholder: this.props.placeholder,
+        autoFocus: this.props.autoFocus,
+        spellCheck: this.props.spellCheck,
+        autoComplete: this.props.autocomplete,
+        value: this.state.value,
+        onFocus: this.props.onFocus,
+        onChange: this.onChange,
+        onBlur: this.onBlur,
+        onKeyPress: this.onKeyPress
+      }
+    );
+  }
+  static clearValue(value) {
+    return value.replace(/[^\+0-9]/g, "");
+  }
+  static ifNoCodeAddRussianCode(value) {
+    if (value === "") {
+    } else if (value.match(/^8/)) {
+      return value.replace(/^8/, "+7");
+    } else if (value.match(/^7/)) {
+      return `+${value}`;
+    } else if (value[0] !== "+") {
+      return `+7${value}`;
+    }
+    return value;
+  }
+  static formatPhoneNumber(_value) {
+    const value = _PhoneBox.clearValue(_value);
+    const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+    if (arr) {
+      if (arr[5]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+      }
+      if (arr[4]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+      }
+      if (arr[3]) {
+        return `${arr[1]} ${arr[2]} ${arr[3]}`;
+      }
+      if (arr[2]) {
+        return `${arr[1]} ${arr[2]}`;
+      }
+      if (arr[1]) {
+        return `${arr[1]}`;
+      }
+    }
+    return value;
+  }
+};
+__name(_PhoneBox, "PhoneBox");
+let PhoneBox = _PhoneBox;
+if (typeof window === "object") {
+  window.PhoneBox = PhoneBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Radio.tsx":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/widget/Radio.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Radio": () => (/* binding */ Radio)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _Radio = class _Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      this.setState({ value: e.target.value });
+      if (this.props.onChange) {
+        yield this.props.onChange(e.target.value);
+      }
+    }), "onChange");
+    if (!props.name)
+      throw new Error("no name");
+    this.state = {
+      value: this.getInitialValue()
+    };
+    console.debug("value:", JSON.stringify(this.getValue()));
+  }
+  getInitialValue() {
+    let value = null;
+    if (this.props.value !== void 0 && this.props.value !== null) {
+      value = this.props.value;
+      const item = this.props.items.find((item2) => item2.value === this.props.value);
+      if (!item) {
+        console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
+        console.debug("items:", this.props.items);
+      }
+    }
+    return value;
+  }
+  getValue() {
+    return this.state.value;
+  }
+  renderItem(item, i) {
+    return [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "input",
+        {
+          type: "radio",
+          name: this.props.name,
+          id: `${this.props.name}${i}`,
+          value: item.value,
+          onChange: this.onChange,
+          checked: item.value === this.getValue(),
+          readOnly: this.isReadOnly(),
+          disabled: this.isReadOnly()
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: `${this.props.name}${i}`, children: item.title || item.value })
+    ];
+  }
+  isReadOnly() {
+    if (this.props.readOnly !== void 0)
+      return this.props.readOnly;
+    return false;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  render() {
+    const items = this.props.items || [];
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: this.getCssClassNames(), children: items.map((item, i) => this.renderItem(item, i)) });
+  }
+};
+__name(_Radio, "Radio");
+let Radio = _Radio;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _Select_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Select.less */ "./src/frontend/common/widget/Select/Select.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+const _Select = class _Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onKeyDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      if (this.isVisible()) {
+        this.setState({ visible: false });
+        e.stopPropagation();
+      }
+    }), "onKeyDown");
+    this.onInputMouseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Select.onInputMouseDown");
+      if (this.props.readOnly)
+        return;
+      if (this.props.onMouseDown) {
+        yield this.props.onMouseDown(e);
+      } else {
+        if (!this.isVisible()) {
+          const [selected] = this.el.current.querySelectorAll("li.selected");
+          if (selected) {
+            const scrollTop = selected.offsetTop - this.dropdown.current.getBoundingClientRect().height / 2 + selected.getBoundingClientRect().height / 2;
+            console.debug("scrollTop:", scrollTop);
+            this.dropdown.current.scrollTop = scrollTop;
+            console.debug(
+              "this.dropdown.current.scrollTop",
+              this.dropdown.current.scrollTop
+            );
+          }
+        }
+        this.setState((prevState) => {
+          return { visible: !prevState.visible };
+        });
+      }
+    }), "onInputMouseDown");
+    this.onInputBlur = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Select.onInputBlur", e.target);
+      this.setState({ visible: false });
+    }), "onInputBlur");
+    this.onDropdownMouseDown = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      e.preventDefault();
+    }), "onDropdownMouseDown");
+    this.onDropdownClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("Select.onDropdownClick", e.target.offsetTop);
+      const value = JSON.parse(e.target.dataset.value);
+      this.setState({ value, visible: false }, () => __async(this, null, function* () {
+        if (this.props.onChange) {
+          yield this.props.onChange(value.toString());
+        }
+      }));
+    }), "onDropdownClick");
+    this.onCloseClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      this.setState({ value: "" });
+      if (this.props.onChange) {
+        yield this.props.onChange("");
+      }
+      this.getElement();
+    }), "onCloseClick");
+    this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = {
+      value: this.getInitialValue(),
+      visible: false
+    };
+  }
+  isVisible() {
+    return this.state.visible;
+  }
+  getInitialValue() {
+    let value = null;
+    if (this.props.value !== void 0 && this.props.value !== null) {
+      value = this.props.value;
+      const item = this.getItems().find((item2) => item2.value === this.props.value);
+      if (!item) {
+        if (this.isNullable() && value === "") {
+        } else {
+          console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
+          console.debug("items:", this.getItems());
+        }
+      }
+    } else {
+      if (this.isNullable()) {
+        value = "";
+      } else {
+        if (this.props.items.length) {
+          value = this.props.items[0].value;
+        } else {
+          value = "";
+        }
+      }
+    }
+    if (value === null)
+      throw new Error("null is wrong value for Select");
+    return value;
+  }
+  getValue() {
+    return this.state.value;
+  }
+  isNullable() {
+    return this.props.nullable !== void 0 ? this.props.nullable : true;
+  }
+  getVisibility() {
+    return this.isVisible() ? "visible" : "hidden";
+  }
+  getDisplay() {
+    return this.isVisible() ? "block" : "none";
+  }
+  getItems() {
+    return this.props.items || [];
+  }
+  getValueTitle(value) {
+    if (value === "")
+      return "";
+    const item = this.getItems().find((item2) => item2.value === value);
+    if (!item)
+      throw new Error(`cannot find item by value: ${value}`);
+    return item.title || item.value;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  isCloseVisible() {
+    if (this.props.readOnly)
+      return false;
+    return this.state.value !== "";
+  }
+  renderInput() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        className: `${this.getCssBlockName()}__input`,
+        readOnly: true,
+        disabled: this.props.readOnly,
+        placeholder: this.props.placeholder,
+        onBlur: this.onInputBlur,
+        value: this.getValueTitle(this.getValue()),
+        onMouseDown: this.onInputMouseDown,
+        onKeyDown: this.onKeyDown
+      }
+    );
+  }
+  renderClose() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "div",
+      {
+        className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? "visible" : ""}`,
+        onClick: this.onCloseClick,
+        children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {})
+      }
+    );
+  }
+  renderIcon() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__icon ${this.isVisible() ? "up" : ""}`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) });
+  }
+  renderDropdown() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "ul",
+      {
+        ref: this.dropdown,
+        className: `${this.getCssBlockName()}__dropdown`,
+        style: {
+          display: this.getDisplay()
+        },
+        onMouseDown: this.onDropdownMouseDown,
+        onClick: this.onDropdownClick,
+        children: [
+          this.isNullable() && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", { className: `${this.getCssBlockName()}__item`, "data-value": '""', children: "\xA0" }),
+          this.getItems().map((item) => {
+            return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              "li",
+              {
+                className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? "selected" : ""}`,
+                "data-value": JSON.stringify(item.value),
+                children: item.title || item.value
+              },
+              item.value
+            );
+          })
+        ]
+      }
+    );
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { ref: this.el, className: this.getCssClassNames(), children: [
+      this.renderInput(),
+      this.isNullable() && this.renderClose(),
+      this.renderIcon(),
+      this.renderDropdown()
+    ] });
+  }
+};
+__name(_Select, "Select");
+let Select = _Select;
+if (typeof window === "object") {
+  window.Select = Select;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Slider": () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _Slider_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Slider.less */ "./src/frontend/common/widget/Slider/Slider.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+
+const _Slider = class _Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onPrevClick = /* @__PURE__ */ __name((e) => {
+      this.setState((prevState) => {
+        let image = prevState.image - 1;
+        if (image < 0) {
+          image = this.props.images.length - 1;
+        }
+        return { image };
+      });
+    }, "onPrevClick");
+    this.onNextClick = /* @__PURE__ */ __name((e) => {
+      this.setState((prevState) => {
+        let image = prevState.image + 1;
+        if (image > this.props.images.length - 1) {
+          image = 0;
+        }
+        return { image };
+      });
+    }, "onNextClick");
+    this.onImageClick = /* @__PURE__ */ __name((e) => {
+      console.debug("Slider.onImageClick");
+      if (this.state.classList) {
+        this.setState({ classList: null });
+      } else {
+        this.setState({ classList: ["full"] });
+      }
+    }, "onImageClick");
+    this.onCloseClick = /* @__PURE__ */ __name((e) => {
+      this.setState({ classList: null });
+    }, "onCloseClick");
+    if (!this.props.images)
+      throw new Error("Slider: no images");
+    this.state = { image: 0, classList: null };
+  }
+  render() {
+    const images = this.props.images || [];
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: this.getCssClassNames(), children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "img",
+        {
+          className: "Slider_image",
+          src: images[this.state.image],
+          onClick: this.onImageClick
+        }
+      ),
+      images.length > 1 && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "Slider__label", children: [
+        images.length > 0 ? this.state.image + 1 : 0,
+        " / ",
+        images.length
+      ] }),
+      images.length > 1 && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "Slider__arrow left", onClick: this.onPrevClick, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }),
+      images.length > 1 && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "Slider__arrow right", onClick: this.onNextClick, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "Slider__close", onClick: this.onCloseClick, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) })
+    ] });
+  }
+};
+__name(_Slider, "Slider");
+let Slider = _Slider;
+if (typeof window === "object") {
+  window.Slider = Slider;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
+/*!************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Statusbar_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Statusbar.less */ "./src/frontend/common/widget/Statusbar/Statusbar.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Statusbar = class _Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  setLastQueryTime(lastQueryTime) {
+    this.setState({ lastQueryTime });
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "Statusbar", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+      "Last query time:",
+      " ",
+      this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : "-"
+    ] }) });
+  }
+};
+__name(_Statusbar, "Statusbar");
+let Statusbar = _Statusbar;
+if (typeof window === "object") {
+  window.Statusbar = Statusbar;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tab_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab.less */ "./src/frontend/common/widget/Tab/Tab.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Tab = class _Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onLiMouseDown = /* @__PURE__ */ __name((e) => {
+      if (e.target.classList.contains("close"))
+        return;
+      const i = parseInt(e.currentTarget.dataset.i);
+      if (this.props.getActive) {
+        if (this.props.onTabMouseDown)
+          this.props.onTabMouseDown(i);
+      } else {
+        if (i !== this.getActive()) {
+          this.selectTab(i);
+        }
+      }
+    }, "onLiMouseDown");
+    this.onLiClick = /* @__PURE__ */ __name((e) => {
+      if (e.target.classList.contains("close")) {
+        const i = parseInt(e.currentTarget.dataset.i);
+        if (this.props.onTabClose)
+          this.props.onTabClose(i);
+      }
+    }, "onLiClick");
+    this.state = {
+      active: 0
+    };
+  }
+  getActive() {
+    if (this.props.getActive)
+      return this.props.getActive();
+    return this.state.active;
+  }
+  selectTab(i) {
+    if (i === this.getActive())
+      return;
+    const start = Date.now();
+    this.setState({ active: i }, () => console.debug("selectTab time:", Date.now() - start));
+  }
+  renderTitles() {
+    return this.props.tabs.map((tab, i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "li",
+      {
+        className: i === this.getActive() ? "active" : void 0,
+        onMouseDown: this.onLiMouseDown,
+        onClick: this.onLiClick,
+        "data-i": i,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }),
+          this.props.canClose && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: "close", children: "\xD7" })
+        ]
+      },
+      tab.name
+    ));
+  }
+  renderContents() {
+    return this.props.tabs.map((tab, i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: i === this.getActive() ? "active" : void 0, children: tab.content }, tab.name));
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: this.getCssClassNames(), children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })
+    ] });
+  }
+};
+__name(_Tab, "Tab");
+let Tab = _Tab;
+if (typeof window === "object") {
+  window.Tab = Tab;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab2": () => (/* binding */ Tab2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tab2_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab2.less */ "./src/frontend/common/widget/Tab2/Tab2.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Tab2 = class _Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onLiMouseDown = /* @__PURE__ */ __name((e) => {
+      if (e.target.classList.contains("close"))
+        return;
+      const i = parseInt(e.currentTarget.dataset.i);
+      if (this.props.getActive) {
+        if (this.props.onTabMouseDown)
+          this.props.onTabMouseDown(i);
+      } else {
+        if (i !== this.getActive()) {
+          this.selectTab(i);
+        }
+      }
+    }, "onLiMouseDown");
+    this.onLiClick = /* @__PURE__ */ __name((e) => {
+      if (e.target.classList.contains("close")) {
+        const i = parseInt(e.currentTarget.dataset.i);
+        if (this.props.onTabClose)
+          this.props.onTabClose(i);
+      }
+    }, "onLiClick");
+    this.state = {
+      active: 0
+    };
+  }
+  getActive() {
+    if (this.props.getActive)
+      return this.props.getActive();
+    return this.state.active;
+  }
+  selectTab(i) {
+    if (i === this.getActive())
+      return;
+    const start = Date.now();
+    this.setState({ active: i }, () => console.debug("selectTab time:", Date.now() - start));
+  }
+  renderTitles() {
+    return this.props.tabs.map((tab, i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "li",
+      {
+        className: `${this.getCssBlockName()}__button ${i === this.getActive() ? "active" : ""}`,
+        onMouseDown: this.onLiMouseDown,
+        onClick: this.onLiClick,
+        "data-i": i,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }),
+          this.props.canClose && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: "close", children: "\xD7" })
+        ]
+      },
+      tab.name
+    ));
+  }
+  renderContents() {
+    return this.props.tabs.map((tab, i) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "div",
+      {
+        className: `${this.getCssBlockName()}__page full ${i === this.getActive() ? "active" : ""}`,
+        children: tab.content
+      },
+      tab.name
+    ));
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: this.getCssClassNames(), children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { className: `${this.getCssBlockName()}__buttons`, children: this.props.tabs && this.renderTitles() }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__pages`, children: this.props.tabs && this.renderContents() })
+    ] });
+  }
+};
+__name(_Tab2, "Tab2");
+let Tab2 = _Tab2;
+if (typeof window === "object") {
+  window.Tab2 = Tab2;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextArea.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/TextArea.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextArea": () => (/* binding */ TextArea)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _TextArea = class _TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      this.setState({ value: e.target.value });
+      if (this.props.onChange) {
+        this.props.onChange(e.target.value);
+      }
+    }, "onChange");
+    this.state = {
+      value: this.props.value || ""
+    };
+  }
+  getValue() {
+    return this.state.value;
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "textarea",
+      {
+        className: this.getCssClassNames(),
+        readOnly: this.props.readOnly,
+        disabled: this.props.disabled,
+        placeholder: this.props.placeholder,
+        rows: this.props.rows,
+        cols: this.props.cols,
+        value: this.state.value,
+        onChange: this.onChange,
+        onFocus: this.props.onFocus,
+        onBlur: this.props.onBlur
+      }
+    );
+  }
+};
+__name(_TextArea, "TextArea");
+let TextArea = _TextArea;
+if (typeof window === "object") {
+  window.TextArea = TextArea;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextBox.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/TextBox.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBox": () => (/* binding */ TextBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _TextBox = class _TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      this._setValue(e.target.value);
+    }, "onChange");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.state = {
+      value: this.props.value || ""
+    };
+  }
+  getValue() {
+    return this.state.value;
+  }
+  _setValue(value) {
+    this.state.value = value;
+    this.forceUpdate();
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    this.state.value = nextProps.value;
+    return true;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        ref: this.el,
+        className: this.getCssClassNames(),
+        type: this.props.type || "text",
+        id: this.props.id,
+        name: this.props.name,
+        readOnly: this.props.readOnly,
+        disabled: this.isDisabled(),
+        placeholder: this.props.placeholder,
+        autoFocus: this.props.autoFocus,
+        spellCheck: this.props.spellCheck,
+        autoComplete: this.props.autocomplete,
+        required: this.props.required,
+        value: this.state.value,
+        onFocus: this.props.onFocus,
+        onBlur: this.props.onBlur,
+        onChange: this.onChange
+      }
+    );
+  }
+};
+__name(_TextBox, "TextBox");
+let TextBox = _TextBox;
+if (typeof window === "object") {
+  window.TextBox = TextBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _TimeBox = class _TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onKeyPress = /* @__PURE__ */ __name((event) => {
+      if (!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(event.key)) {
+        console.debug("cancel", event.key);
+        event.preventDefault();
+      }
+    }, "onKeyPress");
+    this.onChange = /* @__PURE__ */ __name((e) => {
+      const target = e.target;
+      const start = target.selectionStart;
+      const end = target.selectionEnd;
+      if (target.value.length > 5) {
+        return;
+      }
+      const inEnd = start === end && start === target.value.length;
+      const stringValue = this.formatValue(target.value);
+      this.setState({ value: stringValue }, () => {
+        if (!inEnd) {
+          target.selectionStart = start;
+          target.selectionEnd = end;
+        }
+        if (this.props.onChange) {
+          let nValue;
+          try {
+            nValue = this.getValue();
+          } catch (err) {
+            console.debug(err.message);
+            nValue = NaN;
+          }
+          this.props.onChange(nValue);
+        }
+      });
+    }, "onChange");
+    this.onBlur = /* @__PURE__ */ __name((e) => {
+      if (this.props.onBlur) {
+        let nValue;
+        try {
+          nValue = this.getValue();
+        } catch (err) {
+          console.debug(err.message);
+          nValue = NaN;
+        }
+        this.props.onBlur(nValue);
+      }
+    }, "onBlur");
+    if (props.value && typeof props.value !== "number") {
+      throw new Error(`need number type, got ${typeof props.value}`);
+    }
+    this.state = {
+      value: _TimeBox.getStringValue(props.value)
+    };
+    this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+  }
+  formatValue(value) {
+    let min = "";
+    let sec = "";
+    const pure = value.replace(":", "");
+    switch (pure.length) {
+      case 0:
+        break;
+      case 1:
+        min = pure;
+        break;
+      case 2:
+        min = pure;
+        break;
+      case 3:
+        min = pure.substr(0, 2);
+        sec = pure.substr(2, 1);
+        break;
+      case 4:
+        min = pure.substr(0, 2);
+        sec = pure.substr(2, 2);
+        break;
+    }
+    return [min, ...sec ? [sec] : []].join(":");
+  }
+  getValue() {
+    return _TimeBox.getIntegerValue(this.state.value);
+  }
+  setValue(value) {
+    this.setState({ value: _TimeBox.getStringValue(value) });
+  }
+  /*onKeyDown = event => {
+          console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+          const mask = '00:00';
+          if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+          if (event.which < 96 || event.which > 105) {
+              console.debug('cancel');
+              event.stopPropagation();
+              event.preventDefault();
+          }
+  
+          if (event.target.value.length + 1 > mask.length) {
+              event.stopPropagation();
+              event.preventDefault();
+          }
+      }*/
+  /*onKeyUp = event => {
+      console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+      event.stopPropagation();
+      event.preventDefault();
+  }*/
+  static getStringValue(value) {
+    if (value === null)
+      return "";
+    if (value !== void 0) {
+      let h = Math.floor(value / 60);
+      let m = Math.floor(value - h * 60);
+      if (h < 10)
+        h = "0" + h;
+      if (m < 10)
+        m = "0" + m;
+      return `${h}:${m}`;
+    }
+    return "";
+  }
+  static getIntegerValue(stringValue) {
+    if (stringValue === "")
+      return null;
+    const arr = stringValue.split(":");
+    if (!arr[0])
+      throw new Error(`no hours: ${stringValue}`);
+    if (!arr[1])
+      throw new Error(`no minutes: ${stringValue}`);
+    if (arr[0].length !== 2)
+      throw new Error(`hours incomplete: ${stringValue}`);
+    if (arr[1].length !== 2)
+      throw new Error(`minutes incomplete: ${stringValue}`);
+    const hh = parseInt(arr[0]);
+    const mm = parseInt(arr[1]);
+    if (hh > 23)
+      throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+    if (mm > 59)
+      throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+    return hh * 60 + mm;
+  }
+  static splitTime(value) {
+    const hours = Math.floor(value / 60);
+    const minutes = value - hours * 60;
+    return [hours, minutes];
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.value !== nextProps.value) {
+      this.state.value = _TimeBox.getStringValue(nextProps.value);
+      return true;
+    }
+    if (this.props.readOnly !== nextProps.readOnly)
+      return true;
+    if (this.props.placeholder !== nextProps.placeholder)
+      return true;
+    if (this.state.value !== nextState.value)
+      return true;
+    return false;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      "input",
+      {
+        ref: this.el,
+        className: this.getCssClassNames(),
+        type: "text",
+        id: this.props.id,
+        readOnly: this.props.readOnly,
+        placeholder: this.props.placeholder,
+        value: this.state.value,
+        onChange: this.onChange,
+        onKeyPress: this.onKeyPress,
+        onBlur: this.onBlur
+      }
+    );
+  }
+};
+__name(_TimeBox, "TimeBox");
+let TimeBox = _TimeBox;
+if (typeof window === "object") {
+  window.TimeBox = TimeBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx":
+/*!******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox2": () => (/* binding */ TimeBox2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _TimeBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _TimeBox2_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TimeBox2.less */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+
+const _TimeBox2 = class _TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
+  constructor(props) {
+    super(props);
+    this.onClear = /* @__PURE__ */ __name((e) => {
+      this.setState({ value: "" }, () => {
+        if (this.props.onClear) {
+          this.props.onClear();
+        }
+      });
+    }, "onClear");
+    this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+  }
+  isCloseVisible() {
+    return !!this.state.value;
+  }
+  getInputElement() {
+    return this.inputEl.current;
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { ref: this.el, className: this.getCssClassNames(), children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "input",
+        {
+          ref: this.inputEl,
+          className: `${this.getCssBlockName()}__input`,
+          type: "text",
+          readOnly: this.props.readOnly,
+          placeholder: this.props.placeholder,
+          value: this.state.value,
+          onChange: this.onChange,
+          onKeyPress: this.onKeyPress,
+          onBlur: this.onBlur
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        "div",
+        {
+          className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? "visible" : ""}`,
+          onMouseDown: this.onClear,
+          children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {})
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__time-icon`, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) })
+    ] });
+  }
+};
+__name(_TimeBox2, "TimeBox2");
+let TimeBox2 = _TimeBox2;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tooltip_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tooltip.less */ "./src/frontend/common/widget/Tooltip/Tooltip.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _Tooltip = class _Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  // constructor(props) {
+  //     console.debug('Tooltip.constructor', props);
+  //     super(props);
+  // }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `Tooltip ${this.props.type} ${this.props.hidden ? "hidden" : ""}`, children: [
+      this.props.type !== "alert" && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: this.props.position, children: this.props.tip || "tip" })
+    ] });
+  }
+};
+__name(_Tooltip, "Tooltip");
+let Tooltip = _Tooltip;
+if (typeof window === "object") {
+  window.Tooltip = Tooltip;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/index.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/widget/index.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* reexport safe */ _Box_Box__WEBPACK_IMPORTED_MODULE_0__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_3__.Button),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__.CheckBoxList),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__.DatePicker),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__.DropdownDatePicker),
+/* harmony export */   "Expand": () => (/* reexport safe */ _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__.Expand),
+/* harmony export */   "Grid": () => (/* reexport safe */ _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__.GridRow),
+/* harmony export */   "Image": () => (/* reexport safe */ _Image_Image__WEBPACK_IMPORTED_MODULE_23__.Image),
+/* harmony export */   "Menu": () => (/* reexport safe */ _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__.Modal),
+/* harmony export */   "Password": () => (/* reexport safe */ _Password_Password__WEBPACK_IMPORTED_MODULE_11__.Password),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _PhoneBox__WEBPACK_IMPORTED_MODULE_21__.PhoneBox),
+/* harmony export */   "Radio": () => (/* reexport safe */ _Radio__WEBPACK_IMPORTED_MODULE_27__.Radio),
+/* harmony export */   "Select": () => (/* reexport safe */ _Select_Select__WEBPACK_IMPORTED_MODULE_17__.Select),
+/* harmony export */   "Slider": () => (/* reexport safe */ _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _TextArea__WEBPACK_IMPORTED_MODULE_18__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _TextBox__WEBPACK_IMPORTED_MODULE_6__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__.TimeBox2),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__.Tooltip)
+/* harmony export */ });
+/* harmony import */ var _Box_Box__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _TextBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _Password_Password__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _Select_Select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _TextArea__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _PhoneBox__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _Image_Image__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _Radio__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Radio */ "./src/frontend/common/widget/Radio.tsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ActionList/ActionList.tsx":
+/*!*******************************************************!*\
+  !*** ./src/frontend/editor/ActionList/ActionList.tsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionList": () => (/* binding */ ActionList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _ActionList = class _ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onClick = /* @__PURE__ */ __name((li) => __async(this, null, function* () {
+      console.debug("ActionList.onClick", li);
+      yield this.props.onClick(li.dataset.action);
+    }), "onClick");
+    this.state = {
+      item: null
+    };
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton,
+      {
+        title: "Actions",
+        onClick: this.onClick,
+        actions: this.state.item ? this.state.item.getActions().map((action) => {
+          return { name: action.action, title: action.caption };
+        }) : []
+      }
+    );
+  }
+};
+__name(_ActionList, "ActionList");
+let ActionList = _ActionList;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassController": () => (/* binding */ ChangeClassController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _ChangeClassController = class _ChangeClassController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__.ChangeClassView;
+  }
+};
+__name(_ChangeClassController, "ChangeClassController");
+let ChangeClassController = _ChangeClassController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassView": () => (/* binding */ ChangeClassView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _ChangeClassView = class _ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        class: this.class.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.class = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "Change Field Class" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__body", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "class", children: "Class" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+              {
+                id: "class",
+                items: [
+                  { value: "TextBoxField" },
+                  { value: "ComboBoxField" },
+                  { value: "TextAreaField" },
+                  { value: "LinkField" },
+                  { value: "ImageField" },
+                  { value: "LabelField" },
+                  { value: "DateField" },
+                  { value: "TimeField" },
+                  { value: "DateTimeField" },
+                  { value: "CheckBoxField" },
+                  { value: "CheckBoxListField" },
+                  { value: "FileField" },
+                  { value: "PhoneField" },
+                  { value: "PasswordField" },
+                  { value: "RadioField" }
+                ],
+                value: ctrl.options.fieldCtrl.model.getClassName(),
+                onCreate: (c) => this.class = c
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "change", type: "button", onClick: this.onCreate, children: "Change" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_ChangeClassView, "ChangeClassView");
+let ChangeClassView = _ChangeClassView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdModalController.ts":
+/*!********************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalController.ts ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdModalController": () => (/* binding */ EdModalController)
+/* harmony export */ });
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+const _EdModalController = class _EdModalController {
+  constructor(options) {
+    this.onClose = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("ModalController.onClose");
+      yield this.close();
+    }), "onClose");
+    this.onCreate = /* @__PURE__ */ __name((values) => __async(this, null, function* () {
+      console.debug("ModalController.onCreate", values);
+      yield this.close();
+      if (this.options.onCreate) {
+        yield this.options.onCreate(values);
+      }
+    }), "onCreate");
+    this.options = options;
+  }
+  close() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp.editorApp.onModalClose();
+    });
+  }
+  getViewClass() {
+    throw new Error("ModalController.getViewClass not implemented");
+  }
+};
+__name(_EdModalController, "EdModalController");
+let EdModalController = _EdModalController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdModalView.tsx":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalView.tsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdModalView": () => (/* binding */ EdModalView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdModalView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdModalView.less */ "./src/frontend/editor/EdModalController/EdModalView.less");
+/* harmony import */ var _NewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NewModelView.less */ "./src/frontend/editor/EdModalController/NewModelView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+const _EdModalView = class _EdModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), {
+      ctrl,
+      onCreate: (c) => ctrl.view = c
+    }) });
+  }
+};
+__name(_EdModalView, "EdModalView");
+let EdModalView = _EdModalView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionController": () => (/* binding */ NewActionController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewActionView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewActionController = class _NewActionController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewActionView__WEBPACK_IMPORTED_MODULE_1__.NewActionView;
+  }
+};
+__name(_NewActionController, "NewActionController");
+let NewActionController = _NewActionController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionView": () => (/* binding */ NewActionView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewActionView = class _NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        caption: this.caption.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+    this.caption = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Action" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "caption", children: "Caption" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "caption",
+                  onCreate: (c) => this.caption = c,
+                  autocomplete: "off"
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewActionView, "NewActionView");
+let NewActionView = _NewActionView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnController": () => (/* binding */ NewColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewColumnController = class _NewColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewColumnView__WEBPACK_IMPORTED_MODULE_1__.NewColumnView;
+  }
+};
+__name(_NewColumnController, "NewColumnController");
+let NewColumnController = _NewColumnController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnView": () => (/* binding */ NewColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewColumnView = class _NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Column" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__body", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "columnName", children: "Name" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "columnName", onCreate: (c) => this.name = c })
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewColumnView, "NewColumnView");
+let NewColumnView = _NewColumnView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceController": () => (/* binding */ NewDataSourceController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewDataSourceController = class _NewDataSourceController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__.NewDataSourceView;
+  }
+};
+__name(_NewDataSourceController, "NewDataSourceController");
+let NewDataSourceController = _NewDataSourceController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx":
+/*!*********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceView": () => (/* binding */ NewDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewDataSourceView = class _NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        class: this.class.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+    this.class = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Data Source" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "class", children: "Class" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "class",
+                  items: [
+                    { value: "DataSource", title: "DataSource" },
+                    { value: "SqlDataSource", title: "SqlDataSource" },
+                    { value: "NoSqlDataSource", title: "NoSqlDataSource" }
+                  ],
+                  onCreate: (c) => this.class = c,
+                  value: "SqlDataSource"
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, { onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "create", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewDataSourceView, "NewDataSourceView");
+let NewDataSourceView = _NewDataSourceView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseController": () => (/* binding */ NewDatabaseController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewDatabaseController = class _NewDatabaseController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__.NewDatabaseView;
+  }
+};
+__name(_NewDatabaseController, "NewDatabaseController");
+let NewDatabaseController = _NewDatabaseController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewDatabaseView = class _NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        class: this.class.getValue(),
+        name: this.name.getValue(),
+        host: this.host.getValue(),
+        database: this.database.getValue(),
+        user: this.user.getValue(),
+        password: this.password.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.class = null;
+    this.name = null;
+    this.host = null;
+    this.database = null;
+    this.user = null;
+    this.password = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `NewModelView__header`, children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `NewModelView__title`, children: "New Database" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `NewModelView__body`, children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "class", children: "Class" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "class",
+                  items: [
+                    { value: "MySqlDatabase", title: "MySqlDatabase" },
+                    { value: "PostgreSqlDatabase", title: "PostgreSqlDatabase" },
+                    { value: "MongoDbDatabase", title: "MongoDbDatabase" }
+                  ],
+                  onCreate: (c) => this.class = c,
+                  value: "PostgreSqlDatabase"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  value: "default",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "host", children: "Host" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "host",
+                  value: "localhost",
+                  onCreate: (c) => this.host = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "database", children: "Database" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "database",
+                  value: "test",
+                  onCreate: (c) => this.database = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "user", children: "User" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "user",
+                  value: "test",
+                  onCreate: (c) => this.user = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "user", children: "Password" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "password",
+                  value: "123qwe",
+                  onCreate: (c) => this.password = c,
+                  autocomplete: "off"
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: `NewModelView__footer`, children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, { onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "create", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewDatabaseView, "NewDatabaseView");
+let NewDatabaseView = _NewDatabaseView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldController": () => (/* binding */ NewFieldController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewFieldController = class _NewFieldController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewFieldView__WEBPACK_IMPORTED_MODULE_1__.NewFieldView;
+  }
+};
+__name(_NewFieldController, "NewFieldController");
+let NewFieldController = _NewFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldView": () => (/* binding */ NewFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewFieldView = class _NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        class: this.class.getValue(),
+        name: this.name.getValue(),
+        caption: this.caption.getValue() || this.name.getValue(),
+        type: this.type.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.class = null;
+    this.name = null;
+    this.caption = null;
+    this.type = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Field" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "class", children: "Class" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "class",
+                  items: [
+                    { value: "TextBoxField" },
+                    { value: "ComboBoxField" },
+                    { value: "TextAreaField" },
+                    { value: "LinkField" },
+                    { value: "ImageField" },
+                    { value: "LabelField" },
+                    { value: "DateField" },
+                    { value: "TimeField" },
+                    { value: "DateTimeField" },
+                    { value: "CheckBoxField" },
+                    { value: "CheckBoxListField" },
+                    { value: "FileField" },
+                    { value: "PhoneField" },
+                    { value: "PasswordField" },
+                    { value: "RadioField" }
+                  ],
+                  onCreate: (c) => this.class = c
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "caption", children: "Caption" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "caption",
+                  onCreate: (c) => this.caption = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "type", children: "Type" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "type",
+                  value: "",
+                  items: [
+                    { value: "", title: "" },
+                    { value: "string", title: "string" },
+                    { value: "number", title: "number" },
+                    { value: "boolean", title: "boolean" },
+                    { value: "object", title: "object" },
+                    { value: "date", title: "date" }
+                  ],
+                  onCreate: (c) => this.type = c
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewFieldView, "NewFieldView");
+let NewFieldView = _NewFieldView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewFormController = class _NewFormController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewFormView__WEBPACK_IMPORTED_MODULE_1__.NewFormView;
+  }
+};
+__name(_NewFormController, "NewFormController");
+let NewFormController = _NewFormController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx":
+/*!*********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormView": () => (/* binding */ NewFormView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewFormView = class _NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        caption: this.caption.getValue(),
+        class: this.class.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+    this.caption = null;
+    this.class = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Form" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "caption", children: "Caption" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "caption",
+                  onCreate: (c) => this.caption = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "formClass", children: "Class" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "formClass",
+                  value: "TableForm",
+                  items: [
+                    { value: "RowForm", title: "RowForm" },
+                    { value: "TableForm", title: "TableForm" },
+                    { value: "Form", title: "Form" }
+                  ],
+                  onCreate: (c) => this.class = c
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewFormView, "NewFormView");
+let NewFormView = _NewFormView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts":
+/*!********************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableController": () => (/* binding */ NewFormFromTableController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewFormFromTableController = class _NewFormFromTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__.NewFormFromTableView;
+  }
+};
+__name(_NewFormFromTableController, "NewFormFromTableController");
+let NewFormFromTableController = _NewFormFromTableController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx":
+/*!***************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableView": () => (/* binding */ NewFormFromTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewFormFromTableView = class _NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        page: this.page.getValue(),
+        class: this.class.getValue(),
+        name: this.name.getValue(),
+        caption: this.caption.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.page = null;
+    this.class = null;
+    this.name = null;
+    this.caption = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    const tableController = ctrl.options.tableController;
+    const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
+      value: pageLink.getName(),
+      title: pageLink.getName()
+    }));
+    console.debug("pages:", pages);
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Form" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "table", children: "Table" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "table",
+                  disabled: true,
+                  value: tableController.model.getName()
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "page", children: "Page" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "page",
+                  items: pages,
+                  value: pages[pages.length - 1].value,
+                  onCreate: (c) => this.page = c
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "class", children: "Form Class" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "class",
+                  value: "TableForm",
+                  items: [
+                    { value: "RowForm", title: "RowForm" },
+                    { value: "TableForm", title: "TableForm" }
+                  ],
+                  onCreate: (c) => this.class = c
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  value: ctrl.options.tableController.model.getName(),
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "caption", children: "Caption" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "caption",
+                  onCreate: (c) => this.caption = c,
+                  autocomplete: "off"
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewFormFromTableView, "NewFormFromTableView");
+let NewFormFromTableView = _NewFormFromTableView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts":
+/*!************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnController": () => (/* binding */ NewKeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewKeyColumnController = class _NewKeyColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__.NewKeyColumnView;
+  }
+};
+__name(_NewKeyColumnController, "NewKeyColumnController");
+let NewKeyColumnController = _NewKeyColumnController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnView": () => (/* binding */ NewKeyColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewKeyColumnView = class _NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Key Column" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__body", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+              {
+                id: "name",
+                onCreate: (c) => this.name = c,
+                autocomplete: "off",
+                autoFocus: true
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewKeyColumnView, "NewKeyColumnView");
+let NewKeyColumnView = _NewKeyColumnView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageController": () => (/* binding */ NewPageController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewPageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewPageController = class _NewPageController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewPageView__WEBPACK_IMPORTED_MODULE_1__.NewPageView;
+  }
+};
+__name(_NewPageController, "NewPageController");
+let NewPageController = _NewPageController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx":
+/*!*********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageView": () => (/* binding */ NewPageView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewPageView = class _NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue(),
+        caption: this.caption.getValue(),
+        startup: this.startup.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+    this.caption = null;
+    this.startup = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Page" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__body", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "name",
+                  onCreate: (c) => this.name = c,
+                  autocomplete: "off",
+                  autoFocus: true
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "caption", children: "Caption" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+                {
+                  id: "caption",
+                  onCreate: (c) => this.caption = c,
+                  autocomplete: "off"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "startup", children: "Startup" }),
+              /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox,
+                {
+                  id: "startup",
+                  items: [
+                    { value: "false", title: "false" },
+                    { value: "true", title: "true" }
+                  ],
+                  onCreate: (c) => this.startup = c
+                }
+              )
+            ] })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewPageView, "NewPageView");
+let NewPageView = _NewPageView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamController": () => (/* binding */ NewParamController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewParamView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewParamController = class _NewParamController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewParamView__WEBPACK_IMPORTED_MODULE_1__.NewParamView;
+  }
+};
+__name(_NewParamController, "NewParamController");
+let NewParamController = _NewParamController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamView": () => (/* binding */ NewParamView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewParamView = class _NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Param" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__body", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "name", children: "Name" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+              _common__WEBPACK_IMPORTED_MODULE_2__.TextBox,
+              {
+                id: "name",
+                onCreate: (c) => this.name = c,
+                autocomplete: "off",
+                autoFocus: true
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewParamView, "NewParamView");
+let NewParamView = _NewParamView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableController": () => (/* binding */ NewTableController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _NewTableController = class _NewTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
+  getViewClass() {
+    return _NewTableView__WEBPACK_IMPORTED_MODULE_1__.NewTableView;
+  }
+};
+__name(_NewTableController, "NewTableController");
+let NewTableController = _NewTableController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableView": () => (/* binding */ NewTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _NewTableView = class _NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onCreate = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      yield this.props.ctrl.onCreate({
+        name: this.name.getValue()
+      });
+    }), "onCreate");
+    this.onKeyDown = /* @__PURE__ */ __name((e) => {
+      if (e.key === "Escape") {
+        this.props.ctrl.onClose();
+      } else if (e.key === "Enter") {
+        this.onCreate();
+      }
+    }, "onKeyDown");
+    this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    this.name = null;
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+      "div",
+      {
+        className: `${this.getCssClassNames()} NewModelView`,
+        ref: this.el,
+        tabIndex: 0,
+        onKeyDown: this.onKeyDown,
+        children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__header", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__title", children: "New Table" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", className: "close", onClick: ctrl.onClose, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\xD7" }) })
+          ] }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "NewModelView__body", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: "tableName", children: "Name" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "tableName", onCreate: (c) => this.name = c })
+          ] }) }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "NewModelView__footer", children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: "button", onClick: ctrl.onClose, children: "Close" }),
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { name: "create", type: "button", onClick: this.onCreate, children: "Create" })
+          ] })
+        ]
+      }
+    );
+  }
+};
+__name(_NewTableView, "NewTableView");
+let NewTableView = _NewTableView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdActionController": () => (/* binding */ EdActionController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _EdActionController = class _EdActionController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  getActions() {
+    return [
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("actions", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("actions", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+      }
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeAction(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+};
+__name(_EdActionController, "EdActionController");
+let EdActionController = _EdActionController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdColumnController": () => (/* binding */ EdColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _EdColumnController = class _EdColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  getActions() {
+    return [{ action: "delete", caption: "Delete" }];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "delete":
+          yield this.delete();
+          break;
+      }
+    });
+  }
+  static getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Column",
+        action: "getView",
+        params: {
+          view
+        }
+      });
+    });
+  }
+  getPropList() {
+    const propList = super.getPropList();
+    propList.options["key"] = ["true", "false"];
+    propList.options["auto"] = ["true", "false"];
+    propList.options["nullable"] = ["true", "false"];
+    propList.options["type"] = ["", "string", "number", "boolean", "object", "date"];
+    return propList;
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeColumn(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+};
+__name(_EdColumnController, "EdColumnController");
+let EdColumnController = _EdColumnController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts":
+/*!*********************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdDataSourceController": () => (/* binding */ EdDataSourceController)
+/* harmony export */ });
+/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
+/* harmony import */ var _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdKeyColumnController/EdKeyColumnController */ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EdModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts");
+/* harmony import */ var _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx");
+/* harmony import */ var _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EdNoSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+const _EdDataSourceController = class _EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.onCreateModelBack = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const data = yield this.model.createModelBackJs();
+    }), "onCreateModelBack");
+    this.keyColumns = [];
+    this.items = [
+      {
+        getTitle: () => "Key Columns",
+        items: this.keyColumns
+      }
+    ];
+  }
+  getTitle() {
+    return `${this.model.getClassName()}: ${this.model.getName()}`;
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+      color: "brown"
+    };
+  }
+  init() {
+    this.model.keyColumns.forEach((keyColumn) => this.createKeyColumn(keyColumn));
+  }
+  createKeyColumn(model) {
+    const keyColumn = new _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__.EdKeyColumnController(model, this);
+    keyColumn.init();
+    this.keyColumns.push(keyColumn);
+    return keyColumn;
+  }
+  removeKeyColumn(keyColumnController) {
+    console.debug("DataSourceController.removeKeyColumn", keyColumnController.getTitle());
+    const i = this.keyColumns.indexOf(keyColumnController);
+    if (i === -1)
+      throw new Error("no such keyColumnController");
+    this.keyColumns.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newItem", caption: "New Key Column" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "newItem":
+          yield this.actionNewKeyColumn();
+          break;
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("dataSources", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("dataSources", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+      }
+    });
+  }
+  actionNewKeyColumn() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__.NewKeyColumnController({
+          onCreate: (values) => __async(this, null, function* () {
+            const keyColumn = yield this.model.newKeyColumn(values.name);
+            const keyColumnController = this.createKeyColumn(keyColumn);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
+            keyColumnController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  getPropList() {
+    const propList = {
+      list: {},
+      options: {}
+    };
+    for (const name in this.model.data["@attributes"]) {
+      if (!["countQuery", "singleQuery", "multipleQuery", "selectQuery"].includes(name)) {
+        propList.list[name] = this.model.data["@attributes"][name];
+      }
+    }
+    return propList;
+  }
+  getDocumentViewClass() {
+    if (this.model.getClassName() === "SqlDataSource")
+      return _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.EdSqlDataSourceView;
+    if (this.model.getClassName() === "NoSqlDataSource")
+      return _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__.EdNoSqlDataSourceView;
+    return super.getDocumentViewClass();
+  }
+  onSaveClick(name, value) {
+    return __async(this, null, function* () {
+      yield this.model.setValue(name, value);
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeDataSource(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+};
+__name(_EdDataSourceController, "EdDataSourceController");
+let EdDataSourceController = _EdDataSourceController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx":
+/*!*********************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdNoSqlDataSourceView": () => (/* binding */ EdNoSqlDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdNoSqlDataSourceView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdNoSqlDataSourceView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _EdNoSqlDataSourceView = class _EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((i, o) => __async(this, null, function* () {
+      yield this.rerender();
+    }), "onChange");
+    this.onSaveClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("NoSqlDataSourceView.onSaveClick");
+      const ctrl = this.props.ctrl;
+      yield ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
+      yield this.rerender();
+    }), "onSaveClick");
+    this.selectRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = {
+      selected: "selectQuery"
+    };
+    this.selectQuery = null;
+    this.countQuery = null;
+  }
+  componentDidMount() {
+    const { ctrl } = this.props;
+    this.selectQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(
+      this.selectRef.current,
+      ctrl.model.getAttr("selectQuery")
+    );
+    this.countQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(
+      this.countRef.current,
+      ctrl.model.getAttr("countQuery")
+    );
+    this.selectQuery.on("change", this.onChange);
+    this.countQuery.on("change", this.onChange);
+  }
+  componentWillUnmount() {
+    this.selectQuery.off("change", this.onChange);
+    this.countQuery.off("change", this.onChange);
+  }
+  isChanged() {
+    const { ctrl } = this.props;
+    const cm = this[this.state.selected];
+    if (!cm)
+      return false;
+    return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
+  }
+  getButtonClass(name) {
+    return this.state.selected === name ? "btn-primary" : "btn-default";
+  }
+  getVisibility(name) {
+    return this.state.selected === name ? "visible" : "hidden";
+  }
+  isSelected(name) {
+    return this.state.selected === name;
+  }
+  render() {
+    const { ctrl } = this.props;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "EdNoSqlDataSourceView full flex-column", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "toolbar", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: this.onSaveClick, enabled: this.isChanged(), children: "Save" }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateModelBack, children: "Model.back.ts" }),
+        "\xA0",
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "btn-group", role: "group", children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              className: `${this.getButtonClass("selectQuery")}`,
+              style: {
+                fontWeight: this.isSelected("selectQuery") ? "bold" : void 0
+              },
+              onClick: (e) => this.setState({ selected: "selectQuery" }),
+              children: "selectQuery"
+            }
+          ),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              className: `${this.getButtonClass("countQuery")}`,
+              style: {
+                fontWeight: this.isSelected("countQuery") ? "bold" : void 0
+              },
+              onClick: (e) => this.setState({ selected: "countQuery" }),
+              children: "countQuery"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "edit flex-max full", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "div",
+          {
+            className: "cm-container full",
+            style: { visibility: this.getVisibility("selectQuery") },
+            children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef })
+          }
+        ),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "div",
+          {
+            className: "cm-container full",
+            style: { visibility: this.getVisibility("countQuery") },
+            children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef })
+          }
+        )
+      ] })
+    ] });
+  }
+};
+__name(_EdNoSqlDataSourceView, "EdNoSqlDataSourceView");
+let EdNoSqlDataSourceView = _EdNoSqlDataSourceView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx":
+/*!*******************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx ***!
+  \*******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdSqlDataSourceView": () => (/* binding */ EdSqlDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdSqlDataSourceView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdSqlDataSourceView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _EdSqlDataSourceView = class _EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((i, o) => __async(this, null, function* () {
+      yield this.rerender();
+    }), "onChange");
+    this.onSaveClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("SqlDataSourceView.onSaveClick");
+      const ctrl = this.props.ctrl;
+      yield ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
+      yield this.rerender();
+    }), "onSaveClick");
+    this.singleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.multipleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.state = {
+      selected: "singleQuery"
+    };
+    this.singleQuery = null;
+    this.multipleQuery = null;
+    this.countQuery = null;
+  }
+  componentDidMount() {
+    const { ctrl } = this.props;
+    this.singleQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(
+      this.singleRef.current,
+      ctrl.model.getAttr("singleQuery")
+    );
+    this.multipleQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(
+      this.multipleRef.current,
+      ctrl.model.getAttr("multipleQuery")
+    );
+    this.countQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(
+      this.countRef.current,
+      ctrl.model.getAttr("countQuery")
+    );
+    this.singleQuery.on("change", this.onChange);
+    this.multipleQuery.on("change", this.onChange);
+    this.countQuery.on("change", this.onChange);
+  }
+  componentWillUnmount() {
+    this.singleQuery.off("change", this.onChange);
+    this.multipleQuery.off("change", this.onChange);
+    this.countQuery.off("change", this.onChange);
+  }
+  isChanged() {
+    const { ctrl } = this.props;
+    const cm = this[this.state.selected];
+    if (!cm)
+      return false;
+    return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
+  }
+  getButtonClass(name) {
+    return this.state.selected === name ? "btn-primary" : "btn-default";
+  }
+  getVisibility(name) {
+    return this.state.selected === name ? "visible" : "hidden";
+  }
+  isSelected(name) {
+    return this.state.selected === name;
+  }
+  render() {
+    const { ctrl } = this.props;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "EdSqlDataSourceView full flex-column", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "toolbar", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: this.onSaveClick, enabled: this.isChanged(), children: "Save" }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateModelBack, children: "Model.back.ts" }),
+        "\xA0",
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "btn-group", role: "group", children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              className: `${this.getButtonClass("singleQuery")}`,
+              style: {
+                fontWeight: this.isSelected("singleQuery") ? "bold" : void 0
+              },
+              onClick: (e) => this.setState({ selected: "singleQuery" }),
+              children: "singleQuery"
+            }
+          ),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              className: `${this.getButtonClass("multipleQuery")}`,
+              style: {
+                fontWeight: this.isSelected("multipleQuery") ? "bold" : void 0
+              },
+              onClick: (e) => this.setState({ selected: "multipleQuery" }),
+              children: "multipleQuery"
+            }
+          ),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            "button",
+            {
+              className: `${this.getButtonClass("countQuery")}`,
+              style: {
+                fontWeight: this.isSelected("countQuery") ? "bold" : void 0
+              },
+              onClick: (e) => this.setState({ selected: "countQuery" }),
+              children: "countQuery"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "edit flex-max full", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "div",
+          {
+            className: "cm-container full",
+            style: { visibility: this.getVisibility("singleQuery") },
+            children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef })
+          }
+        ),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "div",
+          {
+            className: "cm-container full",
+            style: { visibility: this.getVisibility("multipleQuery") },
+            children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef })
+          }
+        ),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          "div",
+          {
+            className: "cm-container full",
+            style: { visibility: this.getVisibility("countQuery") },
+            children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef })
+          }
+        )
+      ] })
+    ] });
+  }
+};
+__name(_EdSqlDataSourceView, "EdSqlDataSourceView");
+let EdSqlDataSourceView = _EdSqlDataSourceView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts":
+/*!*****************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdDatabaseController": () => (/* binding */ EdDatabaseController)
+/* harmony export */ });
+/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
+/* harmony import */ var _EdParamController_EdParamController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdParamController/EdParamController */ "./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts");
+/* harmony import */ var _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdTableController/EdTableController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts");
+/* harmony import */ var _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdDatabaseView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewParamController/NewParamController */ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts");
+/* harmony import */ var _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EdModalController/NewTableController/NewTableController */ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts");
+var __defProp = Object.defineProperty;
+var __getProtoOf = Object.getPrototypeOf;
+var __reflectGet = Reflect.get;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __superGet = (cls, obj, key) => __reflectGet(__getProtoOf(cls), key, obj);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+const _EdDatabaseController = class _EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.onTableSelect2 = /* @__PURE__ */ __name((item) => __async(this, null, function* () {
+      console.debug("DatabaseController.onTableSelect2", item.getTitle());
+      const tableName = item.getTitle();
+      this.tableName = tableName;
+      const data = yield this.model.getTableInfo(tableName);
+      this.tableInfo = data.tableInfo;
+      this.document.view.rerender();
+    }), "onTableSelect2");
+    this.onCreateTableClick = /* @__PURE__ */ __name((e) => {
+      console.debug("DatabaseController.onCreateTableClick");
+      this.newTableAction(this.tableName, this.tableInfo);
+    }, "onCreateTableClick");
+    this.tableName = null;
+    this.tableInfo = null;
+    this.params = [];
+    this.tables = [];
+    this.items = [
+      {
+        getTitle: () => "Params",
+        items: this.params
+      },
+      {
+        getTitle: () => "Tables",
+        items: this.tables
+      }
+    ];
+  }
+  getTitle() {
+    return `${this.model.getClassName()}: ${this.model.getName()}`;
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+      color: "purple"
+    };
+  }
+  init() {
+    this.model.params.forEach((param) => this.createParam(param));
+    this.model.tables.forEach((table) => this.createTable2(table));
+  }
+  createParam(model) {
+    const param = new _EdParamController_EdParamController__WEBPACK_IMPORTED_MODULE_1__.EdParamController(model, this);
+    param.init();
+    this.params.push(param);
+    return param;
+  }
+  createTable2(model) {
+    const table = new _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__.EdTableController(model, this);
+    table.init();
+    this.tables.push(table);
+    return table;
+  }
+  removeParam(paramController) {
+    console.debug("DatabaseController.removeParam", paramController.getTitle());
+    const i = this.params.indexOf(paramController);
+    if (i === -1)
+      throw new Error("no such paramController");
+    this.params.splice(i, 1);
+  }
+  removeTable2(tableController) {
+    console.debug("DatabaseController.removeTable2", tableController.getTitle());
+    const i = this.tables.indexOf(tableController);
+    if (i === -1)
+      throw new Error("no such tableController");
+    this.tables.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newParam", caption: "New Param" },
+      { action: "newTable", caption: "New Table" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "newParam":
+          yield this.actionNewParam();
+          break;
+        case "newTable":
+          yield this.actionNewTable();
+          break;
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("databases", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("databases", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        default:
+          throw new Error(`unknown action: ${name}`);
+      }
+    });
+  }
+  actionNewParam() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__.NewParamController({
+          onCreate: (values) => __async(this, null, function* () {
+            const param = yield this.model.newParam(values.name);
+            const paramController = this.createParam(param);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
+            paramController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  actionNewTable() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__.NewTableController({
+          onCreate: (values) => __async(this, null, function* () {
+            const table = yield this.model.newTable({ name: values.name });
+            const tableController = this.createTable2(table);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
+            tableController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  createDocument() {
+    return __async(this, null, function* () {
+      const document = yield __superGet(_EdDatabaseController.prototype, this, "createDocument").call(this);
+      const result = yield this.model.getView("DatabaseView/DatabaseView.html");
+      document.treeWidgetItems = result.data.tables.sort().map((tableName) => ({ getTitle: () => tableName }));
+      return document;
+    });
+  }
+  newTableAction(tableName, tableInfo) {
+    return __async(this, null, function* () {
+      console.debug("DatabaseController.newTableAction", tableName, tableInfo);
+      const table = yield this.model.newTable({
+        class: "Table",
+        name: tableName,
+        columns: tableInfo.map((column) => ({
+          class: "Column",
+          name: column.name,
+          caption: column.name,
+          type: column.type,
+          dbType: column.dbType,
+          key: column.key.toString(),
+          auto: column.auto.toString(),
+          nullable: column.nullable.toString()
+        }))
+      });
+      const tableController = this.createTable2(table);
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
+      tableController.view.parent.open();
+      this.view.rerender();
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      console.debug("DatabaseController.delete", this.getTitle());
+      yield this.model.delete();
+      this.parent.removeDatabase(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+  getDocumentViewClass() {
+    return _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__.EdDatabaseView;
+  }
+};
+__name(_EdDatabaseController, "EdDatabaseController");
+let EdDatabaseController = _EdDatabaseController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx":
+/*!************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdDatabaseView": () => (/* binding */ EdDatabaseView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
+/* harmony import */ var _EdDatabaseView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdDatabaseView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+const _EdDatabaseView = class _EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  renderGrid() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _common__WEBPACK_IMPORTED_MODULE_1__.Grid,
+      {
+        classList: ["flex-max"],
+        columns: [
+          { name: "name", title: "name", width: 100 },
+          { name: "type", title: "type", width: 60 },
+          { name: "key", title: "key", width: 60 },
+          { name: "auto", title: "auto", width: 60 },
+          { name: "nullable", title: "nullable", width: 60 },
+          { name: "dbType", title: "dbType", width: 200 },
+          { name: "comment", title: "comment", width: 100 }
+        ],
+        rows: ctrl.tableInfo,
+        getRowKey: (row) => row.name
+      }
+    );
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    const document = this.props.document;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "EdDatabaseView frame", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "client frame", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "frame__container", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "divTableInfo full flex-column", children: [
+        ctrl.tableInfo && this.renderGrid(),
+        ctrl.tableInfo && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, { onClick: ctrl.onCreateTableClick, children: "Create Table" })
+      ] }) }) }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__.TreeWidget,
+        {
+          classList: ["sidebar"],
+          items: document.treeWidgetItems,
+          onItemSelect: ctrl.onTableSelect2
+        }
+      )
+    ] });
+  }
+};
+__name(_EdDatabaseView, "EdDatabaseView");
+let EdDatabaseView = _EdDatabaseView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdDocumentController": () => (/* binding */ EdDocumentController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+const _EdDocumentController = class _EdDocumentController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.document = null;
+  }
+  createDocument() {
+    return __async(this, null, function* () {
+      const document = {
+        controller: this,
+        view: null
+      };
+      return this.document = document;
+    });
+  }
+  onDocumentClose() {
+    console.debug("DocumentController.onDocumentClose", this.getTitle());
+    this.document = null;
+  }
+};
+__name(_EdDocumentController, "EdDocumentController");
+let EdDocumentController = _EdDocumentController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx":
+/*!***************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdDocumentView": () => (/* binding */ EdDocumentView)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const _EdDocumentView = class _EdDocumentView extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
+  static createCM(textarea, value) {
+    const cm = CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      styleActiveLine: true,
+      matchBrackets: true
+    });
+    cm.setOption("theme", "cobalt");
+    cm.setValue(value);
+    return cm;
+  }
+};
+__name(_EdDocumentView, "EdDocumentView");
+let EdDocumentView = _EdDocumentView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts":
+/*!***********************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdTableController": () => (/* binding */ EdTableController)
+/* harmony export */ });
+/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
+/* harmony import */ var _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdColumnController/EdColumnController */ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts");
+/* harmony import */ var _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts");
+/* harmony import */ var _EditorHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EditorHelper */ "./src/frontend/editor/EditorHelper.ts");
+/* harmony import */ var _EdTableView__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EdTableView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+
+const _EdTableController = class _EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.onCreateFormButtonClick = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("TableController.onCreateFormButtonClick");
+      yield this.createFormAction();
+    }), "onCreateFormButtonClick");
+    this.columns = [];
+    this.items = [
+      {
+        getTitle: () => "Columns",
+        items: this.columns
+      }
+    ];
+  }
+  init() {
+    this.model.columns.forEach((column) => this.createColumn(column));
+  }
+  createColumn(model) {
+    const column = new _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__.EdColumnController(model, this);
+    column.init();
+    this.columns.push(column);
+    return column;
+  }
+  removeColumn(columnController) {
+    console.debug("TableController.removeColumn", columnController.getTitle());
+    const i = this.columns.indexOf(columnController);
+    if (i === -1)
+      throw new Error("no such columnController");
+    this.columns.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newColumn", caption: "New Column" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "delete":
+          yield this.delete();
+          break;
+        case "newColumn":
+          yield this.actionNewColumn();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("tables", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("tables", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        default:
+          throw new Error(`unknown action: ${name}`);
+      }
+    });
+  }
+  actionNewColumn() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__.NewColumnController({
+          onCreate: (values) => __async(this, null, function* () {
+            const column = yield this.model.newColumn(values.name);
+            const columnController = this.createColumn(column);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
+            columnController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  /*static async getView(view) {
+      console.debug('TableController.getView', view);
+      return FrontHostApp.doHttpRequest({
+          controller: 'Table',
+          action    : 'getView',
+          params    : {view : view}
+      });
+  }*/
+  static getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Table",
+        action: "getView",
+        params: {
+          view
+        }
+      });
+    });
+  }
+  createFormAction() {
+    return __async(this, null, function* () {
+      console.debug("TableController.createFormAction");
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
+          tableController: this,
+          onCreate: (values) => __async(this, null, function* () {
+            const formWizard = _EditorHelper__WEBPACK_IMPORTED_MODULE_6__.EditorHelper.create({
+              model: this.model,
+              pageName: values.page,
+              className: values.class,
+              formName: values.name,
+              formCaption: values.caption || values.name
+            });
+            const params = formWizard.getFormParams();
+            const databaseController = this.parent;
+            const applicationController = databaseController.parent;
+            const pageLinkController = applicationController.findPageLink(values.page);
+            if (!pageLinkController.pageController) {
+              yield pageLinkController.loadPage();
+            }
+            const pageController = pageLinkController.pageController;
+            const form = yield pageController.model.newForm(params);
+            const formController = pageController.createForm(form);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+            formController.view.parent.open();
+            pageLinkController.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      console.debug("TableController.delete", this.getTitle());
+      yield this.model.delete();
+      this.parent.removeTable2(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+  getDocumentViewClass() {
+    return _EdTableView__WEBPACK_IMPORTED_MODULE_7__.EdTableView;
+  }
+};
+__name(_EdTableController, "EdTableController");
+let EdTableController = _EdTableController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx":
+/*!******************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdTableView": () => (/* binding */ EdTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdTableView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EdTableView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _EdTableView = class _EdTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  renderRows() {
+    const ctrl = this.props.ctrl;
+    return ctrl.columns.map((column) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("name") }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("caption") }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("type") }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("key") }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("auto") }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr("nullable") })
+    ] }, column.model.getName()));
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: this.getCssClassNames(), children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "client frame", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "frame__container flex-column", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _common__WEBPACK_IMPORTED_MODULE_1__.Grid,
+        {
+          classList: ["flex-max"],
+          columns: [
+            { name: "name", title: "name", width: 100 },
+            { name: "caption", title: "caption", width: 100 },
+            { name: "type", title: "type", width: 60 },
+            { name: "key", title: "key", width: 60 },
+            { name: "auto", title: "auto", width: 60 },
+            { name: "nullable", title: "nullable", width: 60 }
+          ],
+          rows: ctrl.columns.map((column) => column.model.getAttributes()),
+          getRowKey: (row) => row.name
+        }
+      ),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, { onClick: ctrl.onCreateFormButtonClick, children: "Create Form" })
+    ] }) }) });
+  }
+};
+__name(_EdTableView, "EdTableView");
+let EdTableView = _EdTableView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts":
+/*!******************************************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts ***!
+  \******************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdApplicationController": () => (/* binding */ EdApplicationController)
+/* harmony export */ });
+/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
+/* harmony import */ var _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdDatabaseController/EdDatabaseController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts");
+/* harmony import */ var _EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EdPageLinkController/EdPageLinkController */ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../EdModalController/NewPageController/NewPageController */ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts");
+/* harmony import */ var _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../EdPageController/EdPageController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts");
+/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+
+
+const _EdApplicationController = class _EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
+  constructor(model, editorApp) {
+    super(model);
+    this.editorApp = editorApp;
+    this.databases = [];
+    this.dataSources = [];
+    this.actions = [];
+    this.pageLinks = [];
+    this.opened = true;
+    this.items = [
+      { getTitle: () => "Databases", items: this.databases },
+      { getTitle: () => "Data Sources", items: this.dataSources },
+      { getTitle: () => "Actions", items: this.actions },
+      { getTitle: () => "Pages", items: this.pageLinks, opened: true }
+    ];
+  }
+  init() {
+    this.model.databases.forEach((database) => this.createDatabase(database));
+    this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+    this.model.actions.forEach((action) => this.createAction(action));
+    this.model.pageLinks.forEach((pageLink) => this.createPageLink(pageLink));
+  }
+  createDatabase(model) {
+    const database = new _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__.EdDatabaseController(model, this);
+    database.init();
+    this.databases.push(database);
+    return database;
+  }
+  createPageLink(model) {
+    const pageLink = new _EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_2__.EdPageLinkController(model, this);
+    pageLink.init();
+    this.pageLinks.push(pageLink);
+    return pageLink;
+  }
+  removeDatabase(databaseController) {
+    console.debug("ApplicationController.removeDatabase", databaseController.getTitle());
+    const i = this.databases.indexOf(databaseController);
+    if (i === -1)
+      throw new Error("no such databaseController");
+    this.databases.splice(i, 1);
+  }
+  removePageLink(pageLinkController) {
+    const i = this.pageLinks.indexOf(pageLinkController);
+    if (i === -1)
+      throw new Error("no such pageLinkController");
+    this.pageLinks.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newDatabase", caption: "New Database" },
+      { action: "newDataSource", caption: "New Data Source" },
+      { action: "newAction", caption: "New Action" },
+      { action: "newPage", caption: "New Page" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "newDatabase":
+          yield this.newDatabaseAction();
+          break;
+        case "newDataSource":
+          yield this.newDataSourceAction();
+          break;
+        case "newPage":
+          yield this.newPageAction();
+          break;
+        case "newAction":
+          yield this.actionNewAction();
+          break;
+        default:
+          console.debug(name);
+      }
+    });
+  }
+  newDatabaseAction() {
+    return __async(this, null, function* () {
+      console.debug("ApplicationController.newDatabaseAction");
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
+          onCreate: (values) => __async(this, null, function* () {
+            const database = yield this.model.newDatabase({
+              class: values.class,
+              name: values.name,
+              params: [
+                { class: "Param", name: "host", value: values.host },
+                { class: "Param", name: "database", value: values.database },
+                { class: "Param", name: "user", value: values.user },
+                { class: "Param", name: "password", value: values.password }
+              ]
+            });
+            const databaseController = this.createDatabase(database);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
+            databaseController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  newDataSourceAction() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__.NewDataSourceController({
+          onCreate: (values) => __async(this, null, function* () {
+            const dataSource = yield this.model.newDataSource({
+              name: values.name,
+              class: values.class
+            });
+            const dataSourceController = this.createDataSource(dataSource);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+            dataSourceController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  newPageAction() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__.NewPageController({
+          onCreate: (values) => __async(this, null, function* () {
+            const page = yield this.model.newPage({
+              name: values.name,
+              caption: values.caption || values.name,
+              startup: values.startup
+            });
+            const pageLinkController = this.createPageLink(page.pageLink);
+            const pageController = new _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__.EdPageController(page, pageLinkController);
+            pageController.init();
+            pageLinkController.setPageController(pageController);
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  getPropList() {
+    const propList = super.getPropList();
+    propList.options["authentication"] = ["true", "false"];
+    propList.options["lang"] = ["en", "ru"];
+    return propList;
+  }
+  findPageLink(name) {
+    return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
+  }
+  getDocumentViewClass() {
+    return _EdVisualView__WEBPACK_IMPORTED_MODULE_8__.EdVisualView;
+  }
+};
+__name(_EdApplicationController, "EdApplicationController");
+let EdApplicationController = _EdApplicationController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts":
+/*!******************************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts ***!
+  \******************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdFieldController": () => (/* binding */ EdFieldController)
+/* harmony export */ });
+/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EdModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts");
+/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _EdFieldController = class _EdFieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  getTitle() {
+    return `${this.model.getClassName()}: ${this.model.getName()}`;
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+      color: "blue"
+    };
+  }
+  getActions() {
+    return [
+      { action: "changeClass", caption: "Change Class" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "changeClass":
+          yield this.actionChangeClass();
+          break;
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("fields", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("fields", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+      }
+    });
+  }
+  actionChangeClass() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__.ChangeClassController({
+          fieldCtrl: this,
+          onCreate: (values) => __async(this, null, function* () {
+            const data = yield this.model.changeClass({ class: values.class });
+            console.debug(data);
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
+            this.view.rerender();
+          })
+        })
+      );
+    });
+  }
+  getPropList() {
+    const list = this.model.data["@attributes"];
+    const options = {};
+    options["visible"] = ["true", "false"];
+    options["readOnly"] = ["true", "false"];
+    options["notNull"] = ["true", "false"];
+    options["param"] = ["true", "false"];
+    options["validateOnChange"] = ["true", "false"];
+    options["validateOnBlur"] = ["true", "false"];
+    options["autoFocus"] = ["true", "false"];
+    options["timezone"] = ["true", "false"];
+    options["newRowMode"] = ["disabled", "editPage", "createPage"];
+    options["type"] = ["", "string", "number", "boolean", "object", "date"];
+    return { list, options };
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeField(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+  getDocumentViewClass() {
+    return _EdVisualView__WEBPACK_IMPORTED_MODULE_3__.EdVisualView;
+  }
+};
+__name(_EdFieldController, "EdFieldController");
+let EdFieldController = _EdFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts":
+/*!****************************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts ***!
+  \****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdFormController": () => (/* binding */ EdFormController)
+/* harmony export */ });
+/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
+/* harmony import */ var _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFieldController/EdFieldController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts");
+/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+const _EdFormController = class _EdFormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.dataSources = [];
+    this.actions = [];
+    this.fields = [];
+    this.items = [
+      { getTitle: () => "Data Sources", items: this.dataSources },
+      { getTitle: () => "Actions", items: this.actions },
+      { getTitle: () => "Fields", items: this.fields }
+    ];
+  }
+  getTitle() {
+    return `${this.model.getClassName()}: ${this.model.getName()}`;
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+      color: "green"
+    };
+  }
+  init() {
+    this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+    this.model.fields.forEach((field) => this.createField(field));
+    this.model.actions.forEach((action) => this.createAction(action));
+  }
+  createField(model) {
+    const field = new _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__.EdFieldController(model, this);
+    field.init();
+    this.fields.push(field);
+    return field;
+  }
+  removeField(fieldController) {
+    console.debug("FormController.removeField", fieldController.getTitle());
+    const i = this.fields.indexOf(fieldController);
+    if (i === -1)
+      throw new Error("no such fieldController");
+    this.fields.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newDataSource", caption: "New Data Source" },
+      { action: "newField", caption: "New Field" },
+      { action: "newAction", caption: "New Action" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "newDataSource":
+          yield this.actionNewDataSource();
+          break;
+        case "newField":
+          yield this.actionNewField();
+          break;
+        case "newAction":
+          yield this.actionNewAction();
+          break;
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.moveUp();
+          this.parent.moveColItem("forms", this, -1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.moveDown();
+          this.parent.moveColItem("forms", this, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+      }
+    });
+  }
+  actionNewDataSource() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+          onCreate: (values) => __async(this, null, function* () {
+            const dataSource = yield this.model.newDataSource({
+              name: values.name,
+              class: values.class
+            });
+            const dataSourceController = this.createDataSource(dataSource);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+            dataSourceController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  actionNewField() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__.NewFieldController({
+          onCreate: (values) => __async(this, null, function* () {
+            const field = yield this.model.newField({
+              class: values.class,
+              name: values.name,
+              caption: values.caption,
+              type: values.type
+            });
+            const fieldController = this.createField(field);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
+            fieldController.view.parent.open();
+            this.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  getPropList() {
+    return {
+      list: this.model.data["@attributes"],
+      options: {
+        editMethod: ["disabled", "table", "form"],
+        newRowMode: [
+          "disabled",
+          "oneclick",
+          "editform",
+          "createform",
+          "oneclick editform",
+          "oneclick createform"
+        ],
+        deleteRowMode: ["disabled", "enabled"],
+        refreshButton: ["true", "false"],
+        visible: ["true", "false"],
+        newMode: ["", "true", "false"],
+        backOnly: ["true", "false"]
+      }
+    };
+  }
+  setProperty(name, value) {
+    return __async(this, null, function* () {
+      yield this.model.setValue(name, value);
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeForm(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+  getDocumentViewClass() {
+    return _EdVisualView__WEBPACK_IMPORTED_MODULE_5__.EdVisualView;
+  }
+};
+__name(_EdFormController, "EdFormController");
+let EdFormController = _EdFormController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts":
+/*!****************************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts ***!
+  \****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdPageController": () => (/* binding */ EdPageController)
+/* harmony export */ });
+/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
+/* harmony import */ var _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFormController/EdFormController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewFormController/NewFormController */ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts");
+/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+
+const _EdPageController = class _EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
+  constructor(model, pageLinkController = null, options = {}) {
+    super(model);
+    this.options = options;
+    this.pageLinkController = pageLinkController;
+    this.dataSources = [];
+    this.actions = [];
+    this.forms = [];
+    this.items = [
+      { getTitle: () => "Data Sources", items: this.dataSources },
+      { getTitle: () => "Actions", items: this.actions },
+      { getTitle: () => "Forms", items: this.forms }
+    ];
+  }
+  init() {
+    this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+    this.model.actions.forEach((action) => this.createAction(action));
+    this.model.forms.forEach((form) => this.createForm(form));
+  }
+  createForm(model) {
+    const form = new _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__.EdFormController(model, this);
+    form.init();
+    this.forms.push(form);
+    return form;
+  }
+  removeForm(formController) {
+    console.debug("PageController.removeForm", formController.getTitle());
+    const i = this.forms.indexOf(formController);
+    if (i === -1)
+      throw new Error("no such formController");
+    this.forms.splice(i, 1);
+  }
+  getActions() {
+    return [
+      { action: "newDataSource", caption: "New Data Source" },
+      { action: "newAction", caption: "New Action" },
+      { action: "newForm", caption: "New Form" },
+      { action: "moveUp", caption: "Move Up" },
+      { action: "moveDown", caption: "Move Down" },
+      { action: "delete", caption: "Delete" }
+    ];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "newForm":
+          yield this.actionNewForm();
+          break;
+        case "newDataSource":
+          yield this.newDataSourceAction();
+          break;
+        case "newAction":
+          yield this.actionNewAction();
+          break;
+        case "delete":
+          yield this.delete();
+          break;
+        case "moveUp":
+          yield this.model.pageLink.moveUp();
+          this.pageLinkController.parent.moveColItem(
+            "pageLinks",
+            this.pageLinkController,
+            -1
+          );
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        case "moveDown":
+          yield this.model.pageLink.moveDown();
+          this.pageLinkController.parent.moveColItem("pageLinks", this.pageLinkController, 1);
+          _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+          break;
+        default:
+          console.debug(name);
+      }
+    });
+  }
+  newDataSourceAction() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+          onCreate: (values) => __async(this, null, function* () {
+            const dataSourceData = yield _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__.DataSourceEditor.create(this.model, {
+              name: values.name,
+              class: values.class
+            });
+            const dataSource = this.model.createDataSource(dataSourceData);
+            const dataSourceController = this.createDataSource(dataSource);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+            dataSourceController.view.parent.open();
+            this.pageLinkController.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  actionNewForm() {
+    return __async(this, null, function* () {
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__.NewFormController({
+          onCreate: (values) => __async(this, null, function* () {
+            const form = yield this.model.newForm({
+              name: values.name,
+              caption: values.caption || values.name,
+              class: values.class
+            });
+            const formController = this.createForm(form);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+            formController.view.parent.open();
+            this.pageLinkController.view.rerender();
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+  getPropList() {
+    const propList = super.getPropList();
+    propList.list["menu"] = this.getPageLink().getAttr("menu");
+    propList.list["startup"] = this.getPageLink().getAttr("startup");
+    propList.options["startup"] = ["true", "false"];
+    propList.options["formInTab"] = ["true", "false"];
+    return propList;
+  }
+  setProperty(name, value) {
+    return __async(this, null, function* () {
+      if (name === "startup" || name === "menu") {
+        this.getPageLink().setValue(name, value);
+      } else {
+        _EdModelController__WEBPACK_IMPORTED_MODULE_7__.EdModelController.prototype.setProperty.call(this, name, value);
+      }
+    });
+  }
+  getPageLink() {
+    return this.model.pageLink;
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.pageLinkController.parent.removePageLink(this.pageLinkController);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+  getDocumentViewClass() {
+    return _EdVisualView__WEBPACK_IMPORTED_MODULE_6__.EdVisualView;
+  }
+};
+__name(_EdPageController, "EdPageController");
+let EdPageController = _EdPageController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts":
+/*!*************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdVisualController": () => (/* binding */ EdVisualController)
+/* harmony export */ });
+/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
+/* harmony import */ var _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdDataSourceController/EdDataSourceController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts");
+/* harmony import */ var _EdActionController_EdActionController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EdActionController/EdActionController */ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewActionController/NewActionController */ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts");
+var __defProp = Object.defineProperty;
+var __getProtoOf = Object.getPrototypeOf;
+var __reflectGet = Reflect.get;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __superGet = (cls, obj, key) => __reflectGet(__getProtoOf(cls), key, obj);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _EdVisualController = class _EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+  constructor(model, parent = null) {
+    super(model, parent);
+    this.onCreateCustomController = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("ApplicationController.onCreateCustomController");
+      const data = yield this.model.createController();
+      this.data.js = data.js;
+      this.document.view.rerender();
+    }), "onCreateCustomController");
+    this.onCreateCustomView = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("VisualController.onCreateCustomView");
+      const data = yield this.model.createView();
+      this.data.jsx = data.jsx;
+      this.document.view.rerender();
+    }), "onCreateCustomView");
+    this.onCreateCustomStyle = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      console.debug("VisualController.onCreateCustomStyle");
+      const data = yield this.model.createStyle();
+      this.data.less = data.less;
+      this.document.view.rerender();
+    }), "onCreateCustomStyle");
+    this.onCreateModelBack = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const data = yield this.model.createModelBackJs();
+    }), "onCreateModelBack");
+    this.data = null;
+  }
+  createDocument() {
+    return __async(this, null, function* () {
+      console.debug("VisualController.createDocument");
+      const document = yield __superGet(_EdVisualController.prototype, this, "createDocument").call(this);
+      const result = yield this.model.getView("VisualView.html");
+      this.data = result.data;
+      return document;
+    });
+  }
+  onControllerSave(value) {
+    return __async(this, null, function* () {
+      console.debug(
+        "ApplicationController.onControllerSave"
+        /*, value*/
+      );
+      const result = yield this.model.saveController(value);
+      this.data.js = result.js;
+      this.document.view.rerender();
+    });
+  }
+  createDataSource(model) {
+    console.debug("VisualController.createDataSource", model);
+    const dataSource = new _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__.EdDataSourceController(model, this);
+    dataSource.init();
+    this.dataSources.push(dataSource);
+    return dataSource;
+  }
+  removeDataSource(dataSourceController) {
+    const i = this.dataSources.indexOf(dataSourceController);
+    if (i === -1)
+      throw new Error("no such dataSourceController");
+    this.dataSources.splice(i, 1);
+  }
+  createAction(model) {
+    const action = new _EdActionController_EdActionController__WEBPACK_IMPORTED_MODULE_2__.EdActionController(model, this);
+    action.init();
+    this.actions.push(action);
+    return action;
+  }
+  removeAction(actionController) {
+    const i = this.actions.indexOf(actionController);
+    if (i === -1)
+      throw new Error("no such actionController");
+    this.actions.splice(i, 1);
+  }
+  actionNewAction() {
+    return __async(this, null, function* () {
+      console.debug("VisualController.actionNewAction");
+      yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(
+        new _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
+          onCreate: (values) => __async(this, null, function* () {
+            const action = yield this.model.newAction({
+              name: values.name,
+              caption: values.caption
+            });
+            const actionController = this.createAction(action);
+            yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
+            actionController.view.parent.open();
+            if (this.pageLinkController) {
+              this.pageLinkController.view.rerender();
+            } else {
+              this.view.rerender();
+            }
+            _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+          })
+        })
+      );
+    });
+  }
+};
+__name(_EdVisualController, "EdVisualController");
+let EdVisualController = _EdVisualController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx":
+/*!********************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdVisualView": () => (/* binding */ EdVisualView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdVisualView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdVisualView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _EdVisualView = class _EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+  constructor(props) {
+    super(props);
+    this.onControllerSave = /* @__PURE__ */ __name((e) => __async(this, null, function* () {
+      const ctrl = this.props.ctrl;
+      yield ctrl.onControllerSave(this.cm.getValue());
+    }), "onControllerSave");
+    this.onChange = /* @__PURE__ */ __name((instance, changeObj) => __async(this, null, function* () {
+      yield this.rerender();
+    }), "onChange");
+    this.textarea = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    this.cm = null;
+  }
+  getTextarea() {
+    if (this.textarea)
+      return this.textarea.current;
+    return null;
+  }
+  componentDidMount() {
+    const ctrl = this.props.ctrl;
+    if (ctrl.data.js) {
+      this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
+      this.cm.on("change", this.onChange);
+    }
+  }
+  componentDidUpdate() {
+    const ctrl = this.props.ctrl;
+    const textarea = this.getTextarea();
+    if (textarea && ctrl.data.js && !this.cm) {
+      this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
+    }
+  }
+  componentWillUnmount() {
+    if (this.cm) {
+      this.cm.off("change", this.onChange);
+    }
+  }
+  isChanged() {
+    if (!this.cm) {
+      return false;
+    }
+    return this.props.ctrl.data.js !== this.cm.getValue();
+  }
+  render() {
+    const ctrl = this.props.ctrl;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "EdVisualView full", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "full flex-column", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "toolbar", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateModelBack, children: "Model.back.ts" }),
+        !ctrl.data.js && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateCustomController, children: "Controller.front.js" }),
+        !ctrl.data.jsx && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateCustomView, children: "View.jsx" }),
+        !ctrl.data.less && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: ctrl.onCreateCustomStyle, children: "View.less" }),
+        ctrl.data.js && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { onClick: this.onControllerSave, enabled: this.isChanged(), children: "Save" })
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "edit flex-max full", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "cm-container full", children: ctrl.data.js && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.textarea }) }) })
+    ] }) });
+  }
+};
+__name(_EdVisualView, "EdVisualView");
+let EdVisualView = _EdVisualView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdKeyColumnController": () => (/* binding */ EdKeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _EdKeyColumnController = class _EdKeyColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  getActions() {
+    return [{ action: "delete", caption: "Delete" }];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "delete":
+          yield this.delete();
+          break;
+      }
+    });
+  }
+  static getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "KeyColumn",
+        action: "getView",
+        params: {
+          view
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeKeyColumn(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+};
+__name(_EdKeyColumnController, "EdKeyColumnController");
+let EdKeyColumnController = _EdKeyColumnController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdModelController.ts":
+/*!********************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdModelController.ts ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdModelController": () => (/* binding */ EdModelController)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+const _EdModelController = class _EdModelController {
+  constructor(model, parent = null) {
+    this.model = model;
+    this.parent = parent;
+    this.view = null;
+  }
+  init() {
+  }
+  getTitle() {
+    return this.model.getName();
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+    };
+  }
+  getPropList() {
+    return {
+      list: this.model.data["@attributes"],
+      options: {}
+    };
+  }
+  setProperty(name, value) {
+    return __async(this, null, function* () {
+      yield this.model.setValue(name, value);
+    });
+  }
+  /*getObject(col, name) {
+      return this[col].find(obj => obj.model.getName() === name);
+  }*/
+  doAction(name) {
+    return __async(this, null, function* () {
+      throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
+    });
+  }
+  getDocumentViewClass() {
+    console.debug(`${this.constructor.name}.getDocumentViewClass`);
+    return null;
+  }
+  moveColItem(colName, item, offset) {
+    _common__WEBPACK_IMPORTED_MODULE_0__.Helper.moveArrItem(this[colName], item, offset);
+  }
+};
+__name(_EdModelController, "EdModelController");
+let EdModelController = _EdModelController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdPageLinkController": () => (/* binding */ EdPageLinkController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Editor/PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EdDocumentController/EdVisualController/EdPageController/EdPageController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _EdPageLinkController = class _EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.node = true;
+    this.pageController = null;
+    this.items = null;
+  }
+  getTitle() {
+    if (this.pageController)
+      return this.pageController.getTitle();
+    return super.getTitle();
+  }
+  getStyle() {
+    return {
+      // fontWeight: 'bold',
+      color: "red"
+    };
+  }
+  hasPage() {
+    return this.pageController != null;
+  }
+  loadPage() {
+    return __async(this, null, function* () {
+      console.debug("PageLinkController.loadPage", this.getTitle());
+      if (this.pageController)
+        throw new Error("page already loaded");
+      const pageLink = this.model;
+      const pageData = yield _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.fetchPageData(pageLink.getFileName());
+      const page = new _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor(pageData, pageLink);
+      page.init();
+      const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.EdPageController(page, this);
+      pageController.init();
+      this.setPageController(pageController);
+      this.view.rerender();
+    });
+  }
+  getActions() {
+    return this.pageController.getActions();
+  }
+  getPropList() {
+    return this.pageController.getPropList();
+  }
+  setProperty(name, value) {
+    return __async(this, null, function* () {
+      this.pageController.setProperty(name, value);
+    });
+  }
+  setPageController(pageController) {
+    if (this.pageController)
+      throw new Error("pageLinkController already has pageController");
+    this.pageController = pageController;
+    this.items = pageController.items;
+  }
+  remove() {
+    console.debug("PageLinkController.remove", this.getTitle());
+    this.parent.removePageLink(this);
+  }
+};
+__name(_EdPageLinkController, "EdPageLinkController");
+let EdPageLinkController = _EdPageLinkController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EdParamController": () => (/* binding */ EdParamController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _EdParamController = class _EdParamController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  getActions() {
+    return [{ action: "delete", caption: "Delete" }];
+  }
+  doAction(name) {
+    return __async(this, null, function* () {
+      switch (name) {
+        case "delete":
+          yield this.delete();
+          break;
+      }
+    });
+  }
+  static getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Param",
+        action: "getView",
+        params: {
+          view
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.model.delete();
+      this.parent.removeParam(this);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+      _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    });
+  }
+};
+__name(_EdParamController, "EdParamController");
+let EdParamController = _EdParamController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionEditor": () => (/* binding */ ActionEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _ActionEditor = class _ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  /* constructor(data, parent) {
+      super(data, parent);
+  } */
+  /* async getView(view) {
+      return await FrontHostApp.doHttpRequest({
+          controller: 'Action',
+          action    : 'getView',
+          params    : {
+              view : view,
+              page : this.data !== undefined ? this.form.page.getName() : null,
+              form : this.data !== undefined ? this.form.getName()      : null,
+          }
+      });
+  } */
+  getParams() {
+    if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__.FormEditor) {
+      return {
+        pageFileName: this.parent.page.pageLink.getAttr("fileName"),
+        form: this.parent.getAttr("name"),
+        action: this.getAttr("name")
+      };
+    } else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor) {
+      return {
+        pageFileName: this.parent.pageLink.getAttr("fileName"),
+        action: this.getAttr("name")
+      };
+    }
+    return {
+      action: this.getAttr("name")
+    };
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Action",
+        action: "save",
+        params: __spreadProps(__spreadValues({}, this.getParams()), {
+          attr: name,
+          value
+        })
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Action",
+        action: "delete",
+        params: __spreadValues({}, this.getParams())
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      console.debug("ActionEditor.delete", this.getName());
+      yield this.deleteData();
+      this.parent.removeAction(this);
+    });
+  }
+  moveUp() {
+    return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+      controller: "Action",
+      action: "moveUp",
+      params: __spreadValues({}, this.getParams())
+    });
+  }
+  moveDown() {
+    return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+      controller: "Action",
+      action: "moveDown",
+      params: __spreadValues({}, this.getParams())
+    });
+  }
+};
+__name(_ActionEditor, "ActionEditor");
+let ActionEditor = _ActionEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationEditor": () => (/* binding */ ApplicationEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+const _ApplicationEditor = class _ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data) {
+    super(data);
+    this.databases = [];
+    this.dataSources = [];
+    this.actions = [];
+    this.pageLinks = [];
+  }
+  init() {
+    console.debug("ApplicationEditor.init", this.data);
+    for (const data of this.data.databases) {
+      this.createDatabase(data);
+    }
+    for (const data of this.data.dataSources) {
+      this.createDataSource(data);
+    }
+    for (const data of this.data.actions) {
+      this.createAction(data);
+    }
+    for (const data of this.data.pageLinks) {
+      this.createPageLink(data);
+    }
+  }
+  createAction(data) {
+    const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__.ActionEditor(data, this);
+    action.init();
+    this.actions.push(action);
+    return action;
+  }
+  createDatabase(data) {
+    const database = new _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__.DatabaseEditor(data, this);
+    database.init();
+    this.databases.push(database);
+    return database;
+  }
+  createPageLink(data) {
+    const pageLink = new _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__.PageLinkEditor(data, this);
+    pageLink.init();
+    this.pageLinks.push(pageLink);
+    return pageLink;
+  }
+  removeDatabase(database) {
+    console.debug("ApplicationEditor.removeDatabase", database.getName());
+    const i = this.databases.indexOf(database);
+    if (i === -1)
+      throw new Error("no such database");
+    this.databases.splice(i, 1);
+  }
+  removePageLink(pageLink) {
+    console.debug("ApplicationEditor.removePageLink", pageLink.getName());
+    const i = this.pageLinks.indexOf(pageLink);
+    if (i === -1)
+      throw new Error("no such pageLink");
+    this.pageLinks.splice(i, 1);
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "save",
+        params: {
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  newPageAndPageLinkData(params) {
+    return __async(this, null, function* () {
+      params["menu"] = params["startup"] === "true" ? "Pages" : "";
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "_new",
+        params
+      });
+    });
+  }
+  newPage(params) {
+    return __async(this, null, function* () {
+      const { page: pageData, pageLink: pageLinkData } = yield this.newPageAndPageLinkData(
+        params
+      );
+      const pageLink = this.createPageLink(pageLinkData);
+      return new _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__.PageEditor(pageData, pageLink);
+    });
+  }
+  newDatabase(params) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Database",
+        action: "_new",
+        params
+      });
+      return this.createDatabase(data);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "getView",
+        params: {
+          app: this.getName(),
+          view
+        }
+      });
+    });
+  }
+  saveView(text, view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "saveView",
+        params: {
+          app: this.getName(),
+          view,
+          text
+        }
+      });
+    });
+  }
+  saveController(text) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "saveController",
+        params: {
+          app: this.getName(),
+          text
+        }
+      });
+    });
+  }
+  createView() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "createView",
+        params: {
+          app: this.getName()
+        }
+      });
+    });
+  }
+  createController() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "createController",
+        params: {
+          app: this.getName()
+        }
+      });
+    });
+  }
+  createModelBackJs() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Application",
+        action: "createModelBackJs",
+        params: {
+          app: this.getName()
+        }
+      });
+    });
+  }
+  newDataSource(params) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "DataSource",
+        action: "_new",
+        params
+      });
+      return this.createDataSource(data);
+    });
+  }
+  newAction(params) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Action",
+        action: "_new",
+        params
+      });
+      return this.createAction(data);
+    });
+  }
+  createDataSource(data) {
+    const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor(data, this);
+    dataSource.init();
+    this.dataSources.push(dataSource);
+    return dataSource;
+  }
+};
+__name(_ApplicationEditor, "ApplicationEditor");
+let ApplicationEditor = _ApplicationEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ColumnEditor": () => (/* binding */ ColumnEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _ColumnEditor = class _ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, table) {
+    super(data, table);
+    this.table = table;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Column",
+        action: "save",
+        params: {
+          database: this.table.database.getName(),
+          table: this.table.getName(),
+          column: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Column",
+        action: "delete",
+        params: {
+          database: this.table.database.getName(),
+          table: this.table.getName(),
+          column: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeColumn(this);
+    });
+  }
+};
+__name(_ColumnEditor, "ColumnEditor");
+let ColumnEditor = _ColumnEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts":
+/*!*************************************************************************!*\
+  !*** ./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSourceEditor": () => (/* binding */ DataSourceEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+const _DataSourceEditor = class _DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, parent) {
+    super(data, parent);
+    this.keyColumns = [];
+  }
+  init() {
+    for (const data of this.data.keyColumns) {
+      this.createKeyColumn(data);
+    }
+  }
+  createKeyColumn(data) {
+    const keyColumn = new _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__.KeyColumnEditor(data, this);
+    keyColumn.init();
+    this.keyColumns.push(keyColumn);
+    return keyColumn;
+  }
+  removeKeyColumn(keyColumn) {
+    console.debug("DatabaseEditor.removeParam", keyColumn.getName());
+    const i = this.keyColumns.indexOf(keyColumn);
+    if (i === -1)
+      throw new Error("no such keyColumn");
+    this.keyColumns.splice(i, 1);
+  }
+  static create(parent, params) {
+    return __async(this, null, function* () {
+      if (parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        const form = parent;
+        params["page"] = form.page.pageLink.getFileName();
+        params["form"] = form.getName();
+      }
+      if (parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        const page = parent;
+        params["page"] = page.pageLink.getFileName();
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "DataSource",
+        action: "_new",
+        params
+      });
+    });
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "save",
+        params: {
+          dataSource: this.getName(),
+          attr: name,
+          value
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.pageFileName = this.parent.pageLink.getFileName();
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.form = this.parent.getName();
+        args.params.pageFileName = this.parent.page.pageLink.getFileName();
+      }
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "delete",
+        params: {
+          dataSource: this.getName()
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.page = this.parent.pageLink.getFileName();
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.form = this.parent.getName();
+        args.params.page = this.parent.page.pageLink.getFileName();
+      }
+      yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  createModelBackJs() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "DataSource",
+        action: "createModelBackJs",
+        params: __spreadProps(__spreadValues(__spreadValues({}, this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor ? {
+          page: this.parent.getName(),
+          pageFileName: this.parent.pageLink.getFileName()
+        } : {}), this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor ? {
+          form: this.parent.getName(),
+          page: this.parent.page.getName(),
+          pageFileName: this.parent.page.pageLink.getFileName()
+        } : {}), {
+          dataSource: this.getName()
+        })
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeDataSource(this);
+    });
+  }
+  moveUp() {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "moveUp",
+        params: {
+          dataSource: this.getName()
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.page = this.parent.pageLink.getFileName();
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.form = this.parent.getName();
+        args.params.page = this.parent.page.pageLink.getFileName();
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  moveDown() {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "moveDown",
+        params: {
+          dataSource: this.getName()
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.page = this.parent.pageLink.getFileName();
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.form = this.parent.getName();
+        args.params.page = this.parent.page.pageLink.getFileName();
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  newKeyColumnData(name) {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "KeyColumn",
+        action: "_new",
+        params: {
+          dataSource: this.getName(),
+          class: "KeyColumn",
+          name
+        }
+      };
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.page = this.parent.page.pageLink.getFileName();
+        args.params.form = this.parent.getName();
+      }
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.page = this.parent.pageLink.getFileName();
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  newKeyColumn(name) {
+    return __async(this, null, function* () {
+      const data = yield this.newKeyColumnData(name);
+      return this.createKeyColumn(data);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "getView",
+        params: {
+          dataSource: this instanceof _DataSourceEditor ? this.getName() : void 0,
+          view
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.pageFileName = this instanceof _DataSourceEditor ? this.parent.pageLink.getFileName() : void 0;
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.pageFileName = this instanceof _DataSourceEditor ? this.parent.page.pageLink.getFileName() : void 0;
+        args.params.form = this instanceof _DataSourceEditor ? this.parent.getName() : void 0;
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  saveController(text) {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "saveController",
+        params: {
+          dataSource: this.getName(),
+          text
+        }
+      };
+      if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+        args.params.pageFileName = this.parent.pageLink.getFileName();
+      }
+      if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+        args.params.pageFileName = this.parent.page.pageLink.getFileName();
+        args.params.form = this.parent.getName();
+      }
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  createController() {
+    return __async(this, null, function* () {
+      const args = {
+        controller: "DataSource",
+        action: "createController",
+        params: {
+          page: this.parent.page.getName(),
+          pageFileName: this.parent.page.pageLink.getFileName(),
+          form: this.parent.getName(),
+          dataSource: this.getName()
+        }
+      };
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+    });
+  }
+  getFullName() {
+    if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
+      return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join(".");
+    } else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
+      return [this.parent.getName(), this.getName()].join(".");
+    } else if (this.parent instanceof _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__.ApplicationEditor) {
+      return this.getName();
+    }
+  }
+};
+__name(_DataSourceEditor, "DataSourceEditor");
+let DataSourceEditor = _DataSourceEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts":
+/*!*********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseEditor": () => (/* binding */ DatabaseEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts");
+/* harmony import */ var _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _DatabaseEditor = class _DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, parent) {
+    super(data, parent);
+    this.params = [];
+    this.tables = [];
+  }
+  init() {
+    for (const data of this.data.params) {
+      this.createParam(data);
+    }
+    for (const data of this.data.tables) {
+      this.createTable(data);
+    }
+  }
+  createParam(data) {
+    const param = new _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__.ParamEditor(data, this);
+    param.init();
+    this.params.push(param);
+    return param;
+  }
+  createTable(data) {
+    const table = new _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__.TableEditor(data, this);
+    table.init();
+    this.tables.push(table);
+    return table;
+  }
+  removeParam(param) {
+    console.debug("DatabaseEditor.removeParam", param.getName());
+    const i = this.params.indexOf(param);
+    if (i === -1)
+      throw new Error("no such param");
+    this.params.splice(i, 1);
+  }
+  removeTable(table) {
+    console.debug("DatabaseEditor.removeTable", table.getName());
+    const i = this.tables.indexOf(table);
+    if (i === -1)
+      throw new Error("no such table");
+    this.tables.splice(i, 1);
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Database",
+        action: "save",
+        params: {
+          database: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Database",
+        action: "delete",
+        params: {
+          database: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeDatabase(this);
+    });
+  }
+  newParam(name) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Param",
+        action: "_new",
+        params: {
+          database: this.getName(),
+          class: "Param",
+          name
+        }
+      });
+      return this.createParam(data);
+    });
+  }
+  newTable(params) {
+    return __async(this, null, function* () {
+      if (!params.name)
+        throw new Error("newTable: no name");
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Table",
+        action: "_new",
+        params: {
+          database: this.getName(),
+          class: "Table",
+          name: params.name,
+          columns: params.columns
+        }
+      });
+      return this.createTable(data);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      console.debug("DatabaseEditor.getView", view);
+      return yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Database",
+        action: "getView",
+        params: {
+          view,
+          database: this.data !== void 0 ? this.getName() : null
+        }
+      });
+    });
+  }
+  getTableInfo(table) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+        controller: "Database",
+        action: "getTableInfo",
+        params: {
+          database: this.data !== void 0 ? this.getName() : null,
+          table
+        }
+      });
+    });
+  }
+  moveUp() {
+    return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+      controller: "Database",
+      action: "moveUp",
+      params: {
+        database: this.getName()
+      }
+    });
+  }
+  moveDown() {
+    return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
+      controller: "Database",
+      action: "moveDown",
+      params: {
+        database: this.getName()
+      }
+    });
+  }
+};
+__name(_DatabaseEditor, "DatabaseEditor");
+let DatabaseEditor = _DatabaseEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/Editor.ts":
+/*!**********************************************!*\
+  !*** ./src/frontend/editor/Editor/Editor.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Editor": () => (/* binding */ Editor)
+/* harmony export */ });
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+const _Editor = class _Editor {
+  constructor(data, parent = null) {
+    if (!data)
+      throw new Error("no data");
+    this.data = data;
+    this.parent = parent;
+  }
+  init() {
+  }
+  getClassName() {
+    return this.data["@class"];
+  }
+  getName() {
+    return this.getAttr("name");
+  }
+  getFullName(splitter = ".") {
+    let name;
+    if (this.form) {
+      name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
+    } else if (this.page) {
+      name = `${this.page.getName()}${splitter}${this.getName()}`;
+    } else {
+      name = this.getName();
+    }
+    return name;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      throw new Error(`${this.constructor.name}.setValue not implemented`);
+    });
+  }
+  getAttr(name) {
+    return this.data["@attributes"][name];
+  }
+  getAttributes() {
+    return this.data["@attributes"];
+  }
+  setAttr(name, value) {
+    this.data["@attributes"][name] = value;
+  }
+  /*getObject(col, name) {
+      return this[col].find(obj => obj.getName() === name);
+  }*/
+  /*createDataSource(data) {
+      const dataSource = new DataSourceEditor(data, this);
+      dataSource.init();
+      this.dataSources.push(dataSource);
+      return dataSource;
+  }*/
+  removeDataSource(dataSource) {
+    const i = this.dataSources.indexOf(dataSource);
+    if (i === -1)
+      throw new Error("no such dataSource");
+    this.dataSources.splice(i, 1);
+  }
+  /*createAction(data) {
+      const action = new ActionEditor(data, this);
+      action.init();
+      this.actions.push(action);
+      return action;
+  }*/
+  removeAction(action) {
+    const i = this.actions.indexOf(action);
+    if (i === -1)
+      throw new Error("no such action");
+    this.actions.splice(i, 1);
+  }
+};
+__name(_Editor, "Editor");
+let Editor = _Editor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldEditor": () => (/* binding */ FieldEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _FieldEditor = class _FieldEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, form) {
+    super(data, form);
+    this.form = form;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "save",
+        params: {
+          pageFileName: this.form.page.pageLink.getFileName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "delete",
+        params: {
+          pageFileName: this.form.page.pageLink.getFileName(),
+          form: this.form.getName(),
+          field: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeField(this);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "getView",
+        params: {
+          view,
+          page: this.data !== void 0 ? this.form.page.getName() : null,
+          form: this.data !== void 0 ? this.form.getName() : null,
+          field: this.data !== void 0 ? this.getName() : null
+        }
+      });
+    });
+  }
+  saveView(text, view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "saveView",
+        params: {
+          page: this.form.page.getName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          view,
+          text
+        }
+      });
+    });
+  }
+  saveController(text) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "saveController",
+        params: {
+          page: this.form.page.getName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          text
+        }
+      });
+    });
+  }
+  createView() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "createView",
+        params: {
+          page: this.form.page.getName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+  createStyle() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "createStyle",
+        params: {
+          page: this.form.page.getName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+  createController() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "createController",
+        params: {
+          page: this.form.page.getName(),
+          form: this.form.getName(),
+          field: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+  changeClass(params) {
+    return __async(this, null, function* () {
+      params["page"] = this.form.page.getName();
+      params["form"] = this.form.getName();
+      params["field"] = this.getName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "changeClass",
+        params
+      });
+      return this.data = data;
+    });
+  }
+  moveUp() {
+    return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+      controller: "Field",
+      action: "moveUp",
+      params: {
+        pageFileName: this.form.page.pageLink.getFileName(),
+        form: this.form.getName(),
+        field: this.getName()
+      }
+    });
+  }
+  moveDown() {
+    return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+      controller: "Field",
+      action: "moveDown",
+      params: {
+        pageFileName: this.form.page.pageLink.getFileName(),
+        form: this.form.getName(),
+        field: this.getName()
+      }
+    });
+  }
+};
+__name(_FieldEditor, "FieldEditor");
+let FieldEditor = _FieldEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts":
+/*!*************************************************************!*\
+  !*** ./src/frontend/editor/Editor/FormEditor/FormEditor.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormEditor": () => (/* binding */ FormEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+/* harmony import */ var _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FieldEditor/FieldEditor */ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _FormEditor = class _FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, page) {
+    super(data, page);
+    this.page = page;
+    this.dataSources = [];
+    this.fields = [];
+    this.actions = [];
+  }
+  init() {
+    for (const data of this.data.dataSources) {
+      this.createDataSource(data);
+    }
+    for (const data of this.data.actions) {
+      this.createAction(data);
+    }
+    for (const data of this.data.fields) {
+      this.createField(data);
+    }
+  }
+  createDataSource(data) {
+    const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
+    dataSource.init();
+    this.dataSources.push(dataSource);
+    return dataSource;
+  }
+  createAction(data) {
+    const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
+    action.init();
+    this.actions.push(action);
+    return action;
+  }
+  createField(data) {
+    const field = new _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__.FieldEditor(data, this);
+    field.init();
+    this.fields.push(field);
+    return field;
+  }
+  removeField(field) {
+    console.debug("FormEditor.removeField", field.getName());
+    const i = this.fields.indexOf(field);
+    if (i === -1)
+      throw new Error("no such field");
+    this.fields.splice(i, 1);
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "save",
+        params: {
+          pageFileName: this.page.pageLink.getFileName(),
+          form: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "delete",
+        params: {
+          pageFileName: this.page.pageLink.getFileName(),
+          form: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeForm(this);
+    });
+  }
+  moveUp() {
+    const args = {
+      controller: "Form",
+      action: "moveUp",
+      params: {
+        pageFileName: this.page.pageLink.getFileName(),
+        form: this.getName()
+      }
+    };
+    return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+  }
+  moveDown() {
+    const args = {
+      controller: "Form",
+      action: "moveDown",
+      params: {
+        pageFileName: this.page.pageLink.getFileName(),
+        form: this.getName()
+      }
+    };
+    return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
+  }
+  newField(params) {
+    return __async(this, null, function* () {
+      params["pageFileName"] = this.page.pageLink.getFileName();
+      params["form"] = this.getName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Field",
+        action: "_new",
+        params
+      });
+      return this.createField(data);
+    });
+  }
+  newAction(params) {
+    return __async(this, null, function* () {
+      params["pageFileName"] = this.page.pageLink.getFileName();
+      params["form"] = this.getName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Action",
+        action: "_new",
+        params
+      });
+      return this.createAction(data);
+    });
+  }
+  newDataSource(params) {
+    return __async(this, null, function* () {
+      params["page"] = this.page.pageLink.getFileName();
+      params["form"] = this.getName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "DataSource",
+        action: "_new",
+        params
+      });
+      return this.createDataSource(data);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "getView",
+        params: {
+          view,
+          page: this.data !== void 0 ? this.page.getName() : null,
+          form: this.data !== void 0 ? this.getName() : null
+        }
+      });
+    });
+  }
+  saveView(text, view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "saveView",
+        params: {
+          page: this.page.getName(),
+          form: this.getName(),
+          view,
+          text
+        }
+      });
+    });
+  }
+  saveController(text) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "saveController",
+        params: {
+          page: this.page.getName(),
+          form: this.getName(),
+          text
+        }
+      });
+    });
+  }
+  createModelBackJs() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "createModelBackJs",
+        params: {
+          page: this.page.getName(),
+          form: this.getName()
+        }
+      });
+    });
+  }
+  createView() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "createView",
+        params: {
+          page: this.page.getName(),
+          form: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+  createController() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "createController",
+        params: {
+          page: this.page.getName(),
+          form: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+  createStyle() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "createStyle",
+        params: {
+          page: this.page.getName(),
+          form: this.getName(),
+          class: this.getClassName()
+        }
+      });
+    });
+  }
+};
+__name(_FormEditor, "FormEditor");
+let FormEditor = _FormEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KeyColumnEditor": () => (/* binding */ KeyColumnEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _KeyColumnEditor = class _KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, dataSource) {
+    super(data, dataSource);
+    this.dataSource = dataSource;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "KeyColumn",
+        action: "save",
+        params: {
+          form: this.dataSource.parent.getName(),
+          pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
+          dataSource: this.dataSource.getName(),
+          keyColumn: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "KeyColumn",
+        action: "delete",
+        params: __spreadProps(__spreadValues(__spreadValues({}, this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {}), this.getForm() ? { form: this.getForm().getName() } : {}), {
+          dataSource: this.dataSource.getName(),
+          keyColumn: this.getName()
+        })
+      });
+    });
+  }
+  getPage() {
+    if (this.dataSource.parent.constructor.name === "FormEditor") {
+      return this.dataSource.parent.page;
+    }
+    if (this.dataSource.parent.constructor.name === "PageEditor") {
+      return this.dataSource.parent;
+    }
+    return null;
+  }
+  getForm() {
+    if (this.dataSource.parent.constructor.name === "FormEditor") {
+      return this.dataSource.parent;
+    }
+    return null;
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeKeyColumn(this);
+    });
+  }
+};
+__name(_KeyColumnEditor, "KeyColumnEditor");
+let KeyColumnEditor = _KeyColumnEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts":
+/*!*************************************************************!*\
+  !*** ./src/frontend/editor/Editor/PageEditor/PageEditor.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageEditor": () => (/* binding */ PageEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+const _PageEditor = class _PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, pageLink) {
+    super(data);
+    this.pageLink = pageLink;
+    this.dataSources = [];
+    this.actions = [];
+    this.forms = [];
+  }
+  init() {
+    for (const data of this.data.dataSources) {
+      this.createDataSource(data);
+    }
+    for (const data of this.data.actions) {
+      this.createAction(data);
+    }
+    for (const data of this.data.forms) {
+      this.createForm(data);
+    }
+  }
+  createDataSource(data) {
+    const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
+    dataSource.init();
+    this.dataSources.push(dataSource);
+    return dataSource;
+  }
+  createAction(data) {
+    const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
+    action.init();
+    this.actions.push(action);
+    return action;
+  }
+  createForm(data) {
+    const form = new _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__.FormEditor(data, this);
+    form.init();
+    this.forms.push(form);
+    return form;
+  }
+  removeForm(form) {
+    console.debug("Page.removeForm", form.getName());
+    const i = this.forms.indexOf(form);
+    if (i === -1)
+      throw new Error("no such form");
+    this.forms.splice(i, 1);
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "save",
+        params: {
+          fileName: this.pageLink.getFileName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "delete",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      console.debug("PageEditor.delete", this.getName());
+      yield this.deleteData();
+      this.pageLink.remove();
+    });
+  }
+  newForm(params) {
+    return __async(this, null, function* () {
+      params["pageFileName"] = this.pageLink.getFileName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Form",
+        action: "_new",
+        params
+      });
+      return this.createForm(data);
+    });
+  }
+  getView(view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "getView",
+        params: {
+          view,
+          page: this.data !== void 0 ? this.getName() : null
+        }
+      });
+    });
+  }
+  saveView(text, view) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "saveView",
+        params: {
+          page: this.getName(),
+          view,
+          text
+        }
+      });
+    });
+  }
+  saveController(text) {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "saveController",
+        params: {
+          page: this.getName(),
+          text
+        }
+      });
+    });
+  }
+  createView() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "createView",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  createController() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "createController",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  createStyle() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "createStyle",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  createModelBackJs() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "createModelBackJs",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  newAction(params) {
+    return __async(this, null, function* () {
+      params["pageFileName"] = this.pageLink.getFileName();
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
+        controller: "Action",
+        action: "_new",
+        params
+      });
+      return this.createAction(data);
+    });
+  }
+};
+__name(_PageEditor, "PageEditor");
+let PageEditor = _PageEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts":
+/*!*********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageLinkEditor": () => (/* binding */ PageLinkEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _PageLinkEditor = class _PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, parent) {
+    super(data, parent);
+    this.application = parent;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "PageLink",
+        action: "save",
+        params: {
+          pageLink: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  moveUp() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "PageLink",
+        action: "moveUp",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  moveDown() {
+    return __async(this, null, function* () {
+      return yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "PageLink",
+        action: "moveDown",
+        params: {
+          page: this.getName()
+        }
+      });
+    });
+  }
+  getFileName() {
+    return this.data["@attributes"].fileName;
+  }
+  remove() {
+    console.debug("PageLinkEditor.remove", this.getName());
+    this.parent.removePageLink(this);
+  }
+};
+__name(_PageLinkEditor, "PageLinkEditor");
+let PageLinkEditor = _PageLinkEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ParamEditor": () => (/* binding */ ParamEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+const _ParamEditor = class _ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, database) {
+    super(data, database);
+    this.database = database;
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Param",
+        action: "save",
+        params: {
+          database: this.database.getName(),
+          param: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+        controller: "Param",
+        action: "delete",
+        params: {
+          database: this.database.getName(),
+          param: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeParam(this);
+    });
+  }
+};
+__name(_ParamEditor, "ParamEditor");
+let ParamEditor = _ParamEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/TableEditor/TableEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableEditor": () => (/* binding */ TableEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+const _TableEditor = class _TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
+  constructor(data, database) {
+    super(data, database);
+    this.database = database;
+    this.columns = [];
+  }
+  init() {
+    for (const data of this.data.columns) {
+      this.createColumn(data);
+    }
+  }
+  createColumn(data) {
+    const column = new _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__.ColumnEditor(data, this);
+    column.init();
+    this.columns.push(column);
+    return column;
+  }
+  removeColumn(column) {
+    console.debug("TableEditor.removeColumn", column.getName());
+    const i = this.columns.indexOf(column);
+    if (i === -1)
+      throw new Error("no such column");
+    this.columns.splice(i, 1);
+  }
+  newColumn(name) {
+    return __async(this, null, function* () {
+      if (!name)
+        throw new Error(`newColumn: no name`);
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+        controller: "Column",
+        action: "_new",
+        params: {
+          database: this.database.getName(),
+          table: this.getName(),
+          name
+        }
+      });
+      return this.createColumn(data);
+    });
+  }
+  deleteData() {
+    return __async(this, null, function* () {
+      yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+        controller: "Table",
+        action: "delete",
+        params: {
+          database: this.database.getName(),
+          table: this.getName()
+        }
+      });
+    });
+  }
+  delete() {
+    return __async(this, null, function* () {
+      yield this.deleteData();
+      this.parent.removeTable(this);
+    });
+  }
+  moveUp() {
+    return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+      controller: "Table",
+      action: "moveUp",
+      params: {
+        database: this.database.getName(),
+        table: this.getName()
+      }
+    });
+  }
+  moveDown() {
+    return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+      controller: "Table",
+      action: "moveDown",
+      params: {
+        database: this.database.getName(),
+        table: this.getName()
+      }
+    });
+  }
+  setValue(name, value) {
+    return __async(this, null, function* () {
+      const data = yield _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+        controller: "Table",
+        action: "save",
+        params: {
+          database: this.database.getName(),
+          table: this.getName(),
+          attr: name,
+          value
+        }
+      });
+      this.setAttr(name, value);
+      return data;
+    });
+  }
+};
+__name(_TableEditor, "TableEditor");
+let TableEditor = _TableEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorFrontHostApp": () => (/* binding */ EditorFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+/* harmony import */ var _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts");
+/* harmony import */ var _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
+/* harmony import */ var _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../EdModelController/EdPageLinkController/EdPageLinkController */ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts");
+/* harmony import */ var _EdModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../EdModelController/EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
+/* harmony import */ var _EdModelController_EdDocumentController_EdDocumentController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdModelController/EdDocumentController/EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+
+
+
+
+const _EditorFrontHostApp = class _EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp {
+  constructor(data, runAppLink) {
+    super();
+    this.onItemOpen2 = /* @__PURE__ */ __name((item) => __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.onItemOpen2", item.getTitle());
+      if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
+        yield item.loadPage();
+      }
+    }), "onItemOpen2");
+    this.onItemSelect2 = /* @__PURE__ */ __name((item) => __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.onItemSelect2", item ? item.getTitle() : null);
+      if (item instanceof _EdModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
+        if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
+          yield item.loadPage();
+        }
+        this.fillActions(item);
+        this.fillPropertyGrid(item);
+      } else {
+        this.clearActions();
+        this.endEdit();
+      }
+    }), "onItemSelect2");
+    this.onPropertyGrid2Change = /* @__PURE__ */ __name((name, value) => {
+      console.debug("EditorFrontHostApp.onPropertyGrid2Change", name, value);
+      const controller = this.treeWidget2.getSelectedItem();
+      controller.setProperty(name, value);
+    }, "onPropertyGrid2Change");
+    this.onItemDoubleClick2 = /* @__PURE__ */ __name((item) => __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.onItemDoubleClick2", item.getTitle());
+      const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
+      if (!controller || !(controller instanceof _EdModelController_EdDocumentController_EdDocumentController__WEBPACK_IMPORTED_MODULE_6__.EdDocumentController))
+        return;
+      yield this.openDocument(controller);
+    }), "onItemDoubleClick2");
+    this.onDocumentClose = /* @__PURE__ */ __name((i) => {
+      console.debug("EditorFrontHostApp.onDocumentClose", i, this.tabWidget.state.active);
+      const document2 = this.documents[i];
+      const activeDocument = this.documents[this.tabWidget.state.active];
+      this.documents.splice(i, 1);
+      document2.controller.onDocumentClose();
+      if (document2 === activeDocument) {
+        if (this.documents.length) {
+          if (this.tabWidget.state.active >= this.documents.length) {
+            this.tabWidget.state.active = this.documents.length - 1;
+          }
+        } else {
+          this.tabWidget.state.active = null;
+        }
+      } else {
+        this.tabWidget.state.active = this.documents.indexOf(activeDocument);
+      }
+      this.view.rerender();
+    }, "onDocumentClose");
+    this.onActionClick = /* @__PURE__ */ __name((actionName) => __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.onActionClick", actionName);
+      const item = this.treeWidget2.getSelectedItem();
+      const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
+      yield controller.doAction(actionName);
+    }), "onActionClick");
+    console.debug("EditorFrontHostApp.constructor", data);
+    if (!data)
+      throw new Error("no data");
+    this.data = data;
+    _EditorFrontHostApp.editorApp = this;
+    this.runAppLink = runAppLink;
+    this.view = null;
+    this.actionList = null;
+    this.treeWidget2 = null;
+    this.pg = null;
+    this.items = null;
+    this.tabWidget = null;
+    this.documents = [];
+    this.modal = null;
+  }
+  run() {
+    return __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.run");
+      const app = new _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__.ApplicationEditor(this.data.app);
+      app.init();
+      const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.EdApplicationController(app, this);
+      applicationController.init();
+      this.items = [applicationController];
+      this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(
+        document.querySelector(".editor__root"),
+        _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView,
+        { ctrl: this, key: "editor" }
+      );
+    });
+  }
+  deinit() {
+  }
+  fillPropertyGrid(ctrl) {
+    const propList = ctrl.getPropList();
+    this.beginEdit(propList["list"], propList["options"]);
+  }
+  beginEdit(obj, options) {
+    console.debug("EditorFrontHostApp.beginEdit", obj, options);
+    this.pg.setState({ object: { obj, options } });
+  }
+  endEdit() {
+    console.debug("EditorFrontHostApp.endEdit");
+    this.pg.setState({ object: null });
+  }
+  static fetchPageData(fileName) {
+    return __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.fetchPageData", fileName);
+      return yield _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp.doHttpRequest({
+        controller: "Page",
+        action: "get",
+        params: { fileName }
+      });
+    });
+  }
+  fillActions(item) {
+    this.actionList.setState({ item });
+  }
+  clearActions() {
+    this.actionList.setState({ item: null });
+  }
+  openDocument(controller) {
+    return __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.openDocument", controller.getTitle());
+      let document2 = this.findDocument(controller);
+      if (!document2) {
+        document2 = yield controller.createDocument();
+        this.documents.push(document2);
+      }
+      this.tabWidget.state.active = this.documents.indexOf(document2);
+      yield this.view.rerender();
+    });
+  }
+  findDocument(controller) {
+    return this.documents.find((document2) => document2.controller === controller) || null;
+  }
+  openModal(modalController) {
+    return __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.openModal");
+      this.modal = modalController;
+      yield this.view.rerender();
+    });
+  }
+  onModalClose() {
+    return __async(this, null, function* () {
+      console.debug("EditorFrontHostApp.onModalClose");
+      this.modal = null;
+      yield this.view.rerender();
+    });
+  }
+};
+__name(_EditorFrontHostApp, "EditorFrontHostApp");
+let EditorFrontHostApp = _EditorFrontHostApp;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorFrontHostAppView": () => (/* binding */ EditorFrontHostAppView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.tsx");
+/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
+/* harmony import */ var _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx");
+/* harmony import */ var _EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdModalController/EdModalView */ "./src/frontend/editor/EdModalController/EdModalView.tsx");
+/* harmony import */ var _EditorFrontHostAppView_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditorFrontHostAppView.less */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+
+
+
+
+
+const _EditorFrontHostAppView = class _EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  renderDocumentView(document) {
+    if (!document.controller.getDocumentViewClass()) {
+      return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [
+        "no document view for ",
+        document.controller.constructor.name
+      ] });
+    }
+    return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
+      // @ts-ignore
+      onCreate: (c) => document.view = c,
+      document,
+      ctrl: document.controller
+    });
+  }
+  getTabs() {
+    console.debug("EditorFrontHostAppView.getTabs", this.props.ctrl.documents);
+    return this.props.ctrl.documents.map((document) => ({
+      name: document.controller.model.getFullName(),
+      title: document.controller.model.getFullName(),
+      content: this.renderDocumentView(document)
+    }));
+  }
+  render() {
+    const { ctrl } = this.props;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "EditorFrontHostAppView", children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "EditorFrontHostAppView__sidebar", children: [
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { className: "tree-bar", children: [
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", { href: ctrl.runAppLink, target: "_blank", children: "Run Application" }),
+          /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+            _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList,
+            {
+              onCreate: (c) => ctrl.actionList = c,
+              onClick: ctrl.onActionClick
+            }
+          ) })
+        ] }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "frame full", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "frame__container", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget,
+          {
+            classList: ["full"],
+            onCreate: (c) => ctrl.treeWidget2 = c,
+            items: ctrl.items,
+            onItemSelect: ctrl.onItemSelect2,
+            onItemDoubleClick: ctrl.onItemDoubleClick2,
+            onItemOpen: ctrl.onItemOpen2
+          }
+        ) }) }),
+        /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+          _common__WEBPACK_IMPORTED_MODULE_2__.Tab,
+          {
+            classList: ["Tab-blue", "full"],
+            tabs: [
+              {
+                name: "properties",
+                title: "Properties",
+                content: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+                  _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid,
+                  {
+                    onCreate: (c) => ctrl.pg = c,
+                    onChange: ctrl.onPropertyGrid2Change
+                  }
+                )
+              }
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "EditorFrontHostAppView__client", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _common__WEBPACK_IMPORTED_MODULE_2__.Tab,
+        {
+          classList: ["full"],
+          canClose: true,
+          onTabClose: ctrl.onDocumentClose,
+          onCreate: (c) => ctrl.tabWidget = c,
+          tabs: this.getTabs()
+        }
+      ) }),
+      ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__.EdModalView, { ctrl: ctrl.modal })
+    ] });
+  }
+};
+__name(_EditorFrontHostAppView, "EditorFrontHostAppView");
+let EditorFrontHostAppView = _EditorFrontHostAppView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EditorHelper.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/editor/EditorHelper.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorHelper": () => (/* binding */ EditorHelper)
+/* harmony export */ });
+/* harmony import */ var _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormWizard/MySqlFormWizard/MySqlFormWizard */ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts");
+/* harmony import */ var _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard */ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+const _EditorHelper = class _EditorHelper {
+  static create(params) {
+    console.debug("FormWizard.create", params);
+    switch (params.model.database.getClassName()) {
+      case "MySqlDatabase":
+        return new _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__.MySqlFormWizard(params);
+      case "PostgreSqlDatabase":
+        return new _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__.PostgreSqlFormWizard(params);
+      default:
+        throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
+    }
+  }
+};
+__name(_EditorHelper, "EditorHelper");
+let EditorHelper = _EditorHelper;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/FormWizard/FormWizard.ts":
+/*!******************************************************!*\
+  !*** ./src/frontend/editor/FormWizard/FormWizard.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormWizard": () => (/* binding */ FormWizard)
+/* harmony export */ });
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+const _FormWizard = class _FormWizard {
+  constructor(params) {
+    console.debug("FormWizard.constructor", params);
+    this.params = params;
+    this.model = params.model;
+    this.databaseName = params.model.database.getName();
+    this.tableName = params.model.getName();
+    this.tableColumns = Object.keys(params.model.data.columns).map(
+      (name) => params.model.data.columns[name]["@attributes"]
+    );
+  }
+  getDataSources() {
+    return [
+      {
+        class: "SqlDataSource",
+        name: "default",
+        database: this.databaseName,
+        table: this.tableName,
+        limit: this.params.className === "TableForm" ? "100" : "",
+        countQuery: this.getCountQuery(),
+        singleQuery: this.getSingleQuery(),
+        multipleQuery: this.getMultipleQuery()
+      }
+    ];
+  }
+  getFieldClass(column) {
+    if (column.type === "date")
+      return "DateField";
+    if (column.type === "boolean")
+      return "CheckBoxField";
+    if (this.params.className === "RowForm") {
+      if (column.dbType === "text") {
+        return "TextAreaField";
+      }
+      if (column.dbType === "json") {
+        return "TextAreaField";
+      }
+    }
+    return "TextBoxField";
+  }
+  getField(column) {
+    let field = {
+      class: this.getFieldClass(column),
+      name: column.name,
+      caption: column.caption || column.name
+    };
+    if (column.key === "true") {
+      if (column.auto === "false") {
+        field.notNull = "true";
+      }
+    } else {
+      if (column.nullable === "false") {
+        field.notNull = "true";
+        field.readOnly = "false";
+      }
+    }
+    if (column.auto === "true") {
+      field.readOnly = "true";
+    }
+    if (column.type === "date" && column.dbType === "timestamp without time zone") {
+      field.timezone = "false";
+    }
+    return field;
+  }
+  getFields() {
+    return this.getColumns().map((column) => this.getField(column));
+  }
+  getColumns() {
+    return this.tableColumns.filter((column) => {
+      if (this.params.className === "TableForm") {
+        if (column.dbType === "text")
+          return false;
+        if (column.dbType === "bytea")
+          return false;
+      }
+      return true;
+    });
+  }
+  getFormParams() {
+    return {
+      name: this.params.formName,
+      caption: this.params.formCaption,
+      class: this.params.className,
+      dataSources: this.getDataSources(),
+      fields: this.getFields()
+    };
+  }
+};
+__name(_FormWizard, "FormWizard");
+let FormWizard = _FormWizard;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MySqlFormWizard": () => (/* binding */ MySqlFormWizard)
+/* harmony export */ });
+/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const _MySqlFormWizard = class _MySqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
+  getSingleQuery() {
+    const columns = this.tableColumns.map((column) => column.name);
+    return "select\n{columns}\nfrom `{table}`\nwhere id = {key}".replace("{table}", this.tableName).replace(
+      "{columns}",
+      columns.map((column) => {
+        return "    `" + column + "`";
+      }).join(",\n")
+    );
+  }
+  getMultipleQuery() {
+    const columns = this.tableColumns.map((column) => column.name);
+    return "select\n{columns}\nfrom `{table}`\nlimit {offset}, {limit}".replace("{table}", this.tableName).replace(
+      "{columns}",
+      columns.map((column) => {
+        return "    `" + column + "`";
+      }).join(",\n")
+    );
+  }
+  getCountQuery() {
+    console.debug("MySqlFormWizard.getCountQuery");
+    return "select count(*) from `{table}`".replace("{table}", this.tableName);
+  }
+};
+__name(_MySqlFormWizard, "MySqlFormWizard");
+let MySqlFormWizard = _MySqlFormWizard;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PostgreSqlFormWizard": () => (/* binding */ PostgreSqlFormWizard)
+/* harmony export */ });
+/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+const _PostgreSqlFormWizard = class _PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
+  getSingleQuery() {
+    console.debug("PostgreSqlFormWizard.getSingleQuery");
+    const columns = this.getColumns().map((column) => column.name);
+    return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'.replace("{table}", this.tableName).replace("{columns}", columns.map((column) => `    "${column}"`).join(",\n"));
+  }
+  getMultipleQuery() {
+    console.debug("PostgreSqlFormWizard.getMultipleQuery");
+    const columns = this.getColumns().map((column) => column.name);
+    const _columns = columns.map((column) => `    "${column}"`).join(",\n");
+    return `select
+${_columns}
+from "${this.tableName}"
+order by "id"
+limit {limit}
+offset {offset}`;
+  }
+  getCountQuery() {
+    console.debug("PostgreSqlFormWizard.getCountQuery");
+    return `select count(*) from "${this.tableName}"`;
+  }
+};
+__name(_PostgreSqlFormWizard, "PostgreSqlFormWizard");
+let PostgreSqlFormWizard = _PostgreSqlFormWizard;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx":
 /*!***********************************************************!*\
-  !*** ./src/frontend/monitor/MonitorView/MonitorView.less ***!
+  !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.tsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PropertyGrid": () => (/* binding */ PropertyGrid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PropertyGrid_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PropertyGrid.less */ "./src/frontend/editor/PropertyGrid/PropertyGrid.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _PropertyGrid = class _PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onChange = /* @__PURE__ */ __name((name, value) => {
+      if (this.props.onChange) {
+        this.props.onChange(name, value);
+      }
+    }, "onChange");
+    this.state = {};
+  }
+  getObj() {
+    if (this.state.object) {
+      return this.state.object.obj;
+    }
+    return null;
+  }
+  getOptions() {
+    if (this.state.object) {
+      return this.state.object.options;
+    }
+    return null;
+  }
+  renderInput(name) {
+    const obj = this.getObj();
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _common__WEBPACK_IMPORTED_MODULE_1__.TextBox,
+      {
+        name,
+        value: obj[name],
+        spellCheck: "false",
+        onBlur: (event) => {
+          if (obj[name] !== event.currentTarget.value) {
+            this.onChange(name, event.currentTarget.value);
+          }
+        },
+        autocomplete: "off"
+      }
+    );
+  }
+  renderSelect(name) {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _common__WEBPACK_IMPORTED_MODULE_1__.ComboBox,
+      {
+        name,
+        value: obj[name],
+        items: options[name].map((value) => ({
+          value,
+          title: value
+        })),
+        onChange: (value) => this.onChange(name, value)
+      }
+    );
+  }
+  renderRows() {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return Object.keys(obj).map((name) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: name }),
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: options[name] !== void 0 ? this.renderSelect(name) : this.renderInput(name) })
+    ] }, name));
+  }
+  render() {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "PropertyGrid full frame", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: "frame__container", children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", { className: "PropertyGrid__table", cellPadding: 0, cellSpacing: 0, children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: this.getObj() && this.renderRows() }) }) }) });
+  }
+};
+__name(_PropertyGrid, "PropertyGrid");
+let PropertyGrid = _PropertyGrid;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/TreeWidget/TreeItem.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/editor/TreeWidget/TreeItem.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeItem": () => (/* binding */ TreeItem)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+
+
+const _TreeItem = class _TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.onDivMouseDown = /* @__PURE__ */ __name((e) => {
+      const item = this.props.item;
+      const tree = this.props.tree;
+      tree.select(item);
+    }, "onDivMouseDown");
+    this.onDivDoubleClick = /* @__PURE__ */ __name((e) => {
+      const item = this.props.item;
+      const tree = this.props.tree;
+      tree.onDoubleClick(item);
+    }, "onDivDoubleClick");
+    this.onNodeMouseDown = /* @__PURE__ */ __name((e) => {
+      const item = this.props.item;
+      const tree = this.props.tree;
+      const opened = this.state.opened;
+      e.stopPropagation();
+      this.setState((prevState) => {
+        return { opened: !prevState.opened };
+      });
+      if (!opened) {
+        tree.onOpen(item);
+      }
+    }, "onNodeMouseDown");
+    this.state = {
+      opened: props.item.opened !== void 0 ? props.item.opened : false
+    };
+    this.li = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+  }
+  isSelected() {
+    return this.props.tree.getSelectedItem() === this.props.item;
+  }
+  isOpened() {
+    return this.state.opened;
+  }
+  getElement() {
+    return this.li.current;
+  }
+  open() {
+    console.debug("TreeItem.open", this.props.item.getTitle());
+    this.state.opened = true;
+    if (this.parent) {
+      this.parent.open();
+    } else {
+      console.debug("this.parent", this.parent);
+    }
+  }
+  render() {
+    const tree = this.props.tree;
+    const item = this.props.item;
+    const items = item.items;
+    const hasItems = !!(items && items.length);
+    const isNode = item.node || hasItems;
+    const style = item.getStyle ? item.getStyle() : null;
+    const title = item.getTitle();
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { ref: this.li, className: this.isOpened() ? "opened" : void 0, children: [
+      /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(
+        "div",
+        {
+          className: this.isSelected() ? "active" : void 0,
+          style: { paddingLeft: this.props.paddingLeft },
+          onMouseDown: this.onDivMouseDown,
+          onDoubleClick: this.onDivDoubleClick,
+          children: [
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? "node" : "leaf", onMouseDown: this.onNodeMouseDown }),
+            "\xA0",
+            /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { style, children: title })
+          ]
+        }
+      ),
+      hasItems && /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item2) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+        _TreeItem,
+        {
+          tree,
+          item: item2,
+          paddingLeft: this.props.paddingLeft + 15,
+          onCreate: (c) => {
+            c.parent = this;
+            item2.view = c;
+          }
+        },
+        item2.getTitle()
+      )) })
+    ] }, title);
+  }
+};
+__name(_TreeItem, "TreeItem");
+let TreeItem = _TreeItem;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/TreeWidget/TreeWidget.tsx":
+/*!*******************************************************!*\
+  !*** ./src/frontend/editor/TreeWidget/TreeWidget.tsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeWidget": () => (/* binding */ TreeWidget)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TreeItem */ "./src/frontend/editor/TreeWidget/TreeItem.tsx");
+/* harmony import */ var _TreeWidget_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TreeWidget.less */ "./src/frontend/editor/TreeWidget/TreeWidget.less");
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
+
+
+
+
+const _TreeWidget = class _TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: null
+    };
+  }
+  select(item) {
+    return __async(this, null, function* () {
+      console.debug("TreeWidget.select", item ? item.getTitle() : null);
+      if (this.isSelected(item))
+        return;
+      return new Promise((resolve) => {
+        this.setState({ selectedItem: item }, () => {
+          if (this.props.onItemSelect)
+            this.props.onItemSelect(item);
+          resolve();
+        });
+      });
+    });
+  }
+  onDoubleClick(item) {
+    if (this.props.onItemDoubleClick)
+      this.props.onItemDoubleClick(item);
+  }
+  onOpen(item) {
+    if (this.props.onItemOpen)
+      this.props.onItemOpen(item);
+  }
+  isSelected(item) {
+    return this.state.selectedItem === item;
+  }
+  getSelectedItem() {
+    return this.state.selectedItem;
+  }
+  scrollToSelected() {
+    console.debug("TreeWidget.scrollToSelected", this.getSelectedItem().getTitle());
+    this.getSelectedItem().view.getElement().scrollIntoView();
+  }
+  render() {
+    console.debug(
+      "TreeWidget.render"
+      /*, this.props.items*/
+    );
+    const items = this.props.items;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: this.getCssClassNames(), children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(
+      _TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem,
+      {
+        tree: this,
+        item,
+        paddingLeft: 5,
+        onCreate: (c) => item.view = c
+      },
+      item.getTitle()
+    )) }) });
+  }
+};
+__name(_TreeWidget, "TreeWidget");
+let TreeWidget = _TreeWidget;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/ellipsis.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/style/ellipsis.less ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/flex-column.less":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/style/flex-column.less ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/flex-max.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/style/flex-max.less ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/flex.less":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/style/flex.less ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/frame.less":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/style/frame.less ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/full.less":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/style/full.less ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/global.less":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/style/global.less ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/grid-gap-10.less":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/style/grid-gap-10.less ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/grid-gap-5.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/style/grid-gap-5.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/style/wait.less":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/style/wait.less ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Box/Box.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.less ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.less ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -704,9 +13019,369 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/monitor/style/monitor.less":
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.less":
+/*!***************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.less ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.less":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.less ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Image/Image.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.less ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.less":
+/*!*************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.less ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.less":
 /*!*************************************************!*\
-  !*** ./src/frontend/monitor/style/monitor.less ***!
+  !*** ./src/frontend/common/widget/Tab/Tab.less ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less":
+/*!*******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.less":
+/*!*********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.less ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdModalView.less":
+/*!****************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalView.less ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewModelView.less":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewModelView.less ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less":
+/*!**********************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less":
+/*!********************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less ***!
+  \********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less":
+/*!*************************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less":
+/*!*******************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less":
+/*!*********************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less":
+/*!****************************************************************************!*\
+  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/PropertyGrid/PropertyGrid.less":
+/*!************************************************************!*\
+  !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.less ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/TreeWidget/TreeWidget.less":
+/*!********************************************************!*\
+  !*** ./src/frontend/editor/TreeWidget/TreeWidget.less ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/style/editor.less":
+/*!***********************************************!*\
+  !*** ./src/frontend/editor/style/editor.less ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/style/error.less":
+/*!**********************************************!*\
+  !*** ./src/frontend/editor/style/error.less ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/style/global.less":
+/*!***********************************************!*\
+  !*** ./src/frontend/editor/style/global.less ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/style/tree-bar.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/editor/style/tree-bar.less ***!
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31932,23 +44607,69 @@ if (false) {} else {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!**************************************!*\
-  !*** ./src/frontend/monitor/main.ts ***!
-  \**************************************/
+/*!*************************************!*\
+  !*** ./src/frontend/editor/main.ts ***!
+  \*************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MonitorView/MonitorView */ "./src/frontend/monitor/MonitorView/MonitorView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _style_monitor_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/monitor.less */ "./src/frontend/monitor/style/monitor.less");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _style_editor_less__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/editor.less */ "./src/frontend/editor/style/editor.less");
+/* harmony import */ var _style_error_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/error.less */ "./src/frontend/editor/style/error.less");
+/* harmony import */ var _style_global_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style/global.less */ "./src/frontend/editor/style/global.less");
+/* harmony import */ var _style_tree_bar_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style/tree-bar.less */ "./src/frontend/editor/style/tree-bar.less");
+/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
+/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
+/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
+/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/style/flex-max.less */ "./src/frontend/common/style/flex-max.less");
+/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/style/frame.less */ "./src/frontend/common/style/frame.less");
+/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../common/style/full.less */ "./src/frontend/common/style/full.less");
+/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../common/style/global.less */ "./src/frontend/common/style/global.less");
+/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../common/style/grid-gap-5.less */ "./src/frontend/common/style/grid-gap-5.less");
+/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
+/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => __async(undefined, null, function* () {
+  console.debug("editor.ejs DOMContentLoaded");
   const data = JSON.parse(
     document.querySelector('script[type="application/json"]').textContent
   );
-  console.debug("data:", data);
-  _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(document.querySelector(".monitor__root"), _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__.MonitorView, { data });
-});
+  const editorFrontHostApp = new _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp(data, data.runAppLink);
+  editorFrontHostApp.init();
+  yield editorFrontHostApp.run();
+}));
 
 })();
 

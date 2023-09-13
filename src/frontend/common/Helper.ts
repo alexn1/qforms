@@ -58,19 +58,21 @@ export class Helper {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
-    static encodeObject(obj: Record<string, any>): Record<string, JSONString> {
-        const eObj = {} as Record<string, JSONString>;
+    static encodeObject<T extends JSONString = JSONString>(
+        obj: Record<string, any>,
+    ): Record<string, T> {
+        const eObj = {} as Record<string, T>;
         for (const name in obj) {
-            eObj[name] = Helper.encodeValue(obj[name]);
+            eObj[name] = Helper.encodeValue<T>(obj[name]);
         }
         return eObj;
     }
 
-    static encodeValue(value: any): JSONString {
-        return JSON.stringify(value) as JSONString;
+    static encodeValue<T extends JSONString = JSONString>(value: any): T {
+        return JSON.stringify(value) as T;
     }
 
-    static decodeObject(eObj: Record<string, JSONString>): any {
+    static decodeObject(eObj: Record<string, JSONString>): Record<string, any> {
         if (!eObj) throw new Error('Helper.decodeObject: no object');
         const obj = {} as Record<string, any>;
         for (const name in eObj) {
@@ -79,7 +81,7 @@ export class Helper {
         return obj;
     }
 
-    static decodeValue(raw: JSONString) {
+    static decodeValue(raw: JSONString): any {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {

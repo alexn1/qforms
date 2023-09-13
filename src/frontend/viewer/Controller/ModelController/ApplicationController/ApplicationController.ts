@@ -170,9 +170,11 @@ export class ApplicationController extends ModelController<Application> {
             page: options.name,
             newMode:
                 options.newMode !== undefined
-                    ? (JSON.stringify(options.newMode) as JSONString<boolean>)
+                    ? Helper.encodeValue<JSONString<boolean>>(options.newMode)
                     : undefined,
-            params: options.params ? Helper.encodeObject(options.params) : undefined,
+            params: options.params
+                ? Helper.encodeObject<JSONString<Scalar>>(options.params)
+                : undefined,
         };
         const { page: pageData } = await this.getModel().request2(
             'GET',
