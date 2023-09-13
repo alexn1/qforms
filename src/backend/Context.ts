@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
+import { BkHelper } from './BkHelper';
 
 export type RequestEx = Request & {
     session: Session;
@@ -41,7 +42,7 @@ export class Context {
         this.params = {
             ...(req && req.body.params ? req.body.params : {}),
             ...(req && req.query.action === 'page' && req.query.params
-                ? JSON.parse(req.query.params as JSONString)
+                ? BkHelper.decodeObject(req.query.params)
                 : {}),
         };
 

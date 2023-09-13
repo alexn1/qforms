@@ -45,13 +45,13 @@ export interface LoginDto extends BaseDto {
 export interface PageActionDto extends BaseDto {
     page: string;
     newMode: boolean;
-    params?: Record<string, any>;
+    params?: Record<string, Scalar>;
 }
 export interface PageActionQuery extends ParsedQs {
     action: 'page';
     page: string;
     newMode?: JSONString<boolean>;
-    params?: JSONString<Record<string, Scalar>>;
+    params?: Record<string, JSONString<Scalar>>;
 }
 export interface SelectActionDto extends BaseDto {
     page: Nullable<string>;
@@ -103,3 +103,5 @@ export interface EditorPostDto {
     action: string;
 }
 export declare function parseJson(json: JSONString): any;
+export type QueryRecord = Record<string, string>;
+export type Query = Record<string, string | QueryRecord>;

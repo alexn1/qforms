@@ -2064,13 +2064,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Context": () => (/* binding */ Context)
 /* harmony export */ });
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
+
 class Context {
     constructor(options = {}) {
         this.options = options;
         this.connections = {};
         const req = this.getReq();
         this.params = Object.assign(Object.assign({}, (req && req.body.params ? req.body.params : {})), (req && req.query.action === 'page' && req.query.params
-            ? JSON.parse(req.query.params)
+            ? _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.decodeObject(req.query.params)
             : {}));
     }
     getRoute() {
@@ -10086,7 +10088,7 @@ class FrontHostApp {
     static async doHttpRequest2(method, query, body) {
         let url = window.location.pathname;
         if (query) {
-            url += `?${new URLSearchParams(query).toString()}`;
+            url += `?${_common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)}`;
         }
         console.warn('FrontHostApp.doHttpRequest2', method, url, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
@@ -10497,6 +10499,26 @@ class Helper {
             acc[name] = value;
             return acc;
         }, {});
+    }
+    static queryToString(query) {
+        return Object.keys(query)
+            .filter((name) => query[name] !== undefined)
+            .map((name) => {
+            const value = query[name];
+            if (typeof value === 'string') {
+                return `${name}=${encodeURIComponent(value)}`;
+            }
+            return Helper.queryRecordToString(name, value);
+        })
+            .join('&');
+    }
+    static queryRecordToString(name, record) {
+        return Object.keys(record)
+            .filter((field) => record[field] !== undefined)
+            .map((field) => {
+            return `${name}[${field}]=${encodeURIComponent(record[field])}`;
+        })
+            .join('&');
     }
 }
 Helper.registerGlobalClass(Helper);
@@ -14638,10 +14660,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         const query = {
             action: 'page',
             page: options.name,
-            newMode: JSON.stringify(!!options.newMode),
-            params: options.params
-                ? JSON.stringify(options.params)
+            newMode: options.newMode !== undefined
+                ? JSON.stringify(options.newMode)
                 : undefined,
+            params: options.params ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params) : undefined,
         };
         const { page: pageData } = await this.getModel().request2('GET', query);
         if (options.modal === undefined) {

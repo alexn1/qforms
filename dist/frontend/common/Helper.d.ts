@@ -1,4 +1,4 @@
-import { JSONString, Scalar } from '../../types';
+import { JSONString, Scalar, Query, QueryRecord } from '../../types';
 import { ReactComponent } from './ReactComponent';
 export declare class Helper {
     static formatDate(date: Date, format: string): string;
@@ -38,4 +38,6 @@ export declare class Helper {
     static getGlobalClass(className: string): any;
     static addClassToDocumentElement(className: string): void;
     static headersToRecord(headers: Headers): Record<string, string>;
+    static queryToString(query: Query): string;
+    static queryRecordToString(name: string, record: QueryRecord): string;
 }

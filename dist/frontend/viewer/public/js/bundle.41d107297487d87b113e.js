@@ -751,12 +751,12 @@ const _Helper = class _Helper {
       if (typeof value === "string") {
         return `${name}=${encodeURIComponent(value)}`;
       }
-      return _Helper.queryParamsToString(name, value);
+      return _Helper.queryRecordToString(name, value);
     }).join("&");
   }
-  static queryParamsToString(name, params) {
-    return Object.keys(params).filter((field) => params[field] !== void 0).map((field) => {
-      return `${name}[${field}]=${encodeURIComponent(params[field])}`;
+  static queryRecordToString(name, record) {
+    return Object.keys(record).filter((field) => record[field] !== void 0).map((field) => {
+      return `${name}[${field}]=${encodeURIComponent(record[field])}`;
     }).join("&");
   }
 };

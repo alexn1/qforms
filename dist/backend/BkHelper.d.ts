@@ -30,7 +30,7 @@ export declare class BkHelper {
     static dateTimeReviver(key: any, value: string | number | Date): string | number | Date;
     static decodeValue(rawValue: JSONString): any;
     static encodeValue(value: any): JSONString;
-    static decodeObject(obj: any): any;
+    static decodeObject(obj: any): Record<string, any>;
     static SECOND(): number;
     static MINUTE(): number;
     static HOUR(): number;
