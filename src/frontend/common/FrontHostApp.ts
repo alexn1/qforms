@@ -91,11 +91,25 @@ export class FrontHostApp {
         return [headers, data];
     }
 
-    static async fetchJson(method: RequestMethod, url: string, data: any) {
-        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
+    static async fetchJson(
+        method: RequestMethod,
+        url: string,
+        data?: any,
+    ): Promise<[headers: Record<string, string>, data: any]> {
+        return await FrontHostApp.fetch(
+            method,
+            url,
+            data ? JSON.stringify(data) : undefined,
+            'application/json',
+        );
     }
 
-    static async fetch(method: RequestMethod, url: string, body: any, contentType: string) {
+    static async fetch(
+        method: RequestMethod,
+        url: string,
+        body?: any,
+        contentType?: string,
+    ): Promise<[headers: Record<string, string>, data: any]> {
         try {
             FrontHostApp.startWait();
             const response = await fetch(url, {
@@ -104,12 +118,14 @@ export class FrontHostApp {
                 ...(contentType ? { headers: { 'Content-Type': contentType } } : {}),
             });
             if (response.ok) {
-                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
-                    const [name, value] = header;
-                    acc[name] = value;
-                    return acc;
-                }, {} as Record<string, string>);
-                // debug('headers:', headers);
+                const headers = Array.from(response.headers.entries()).reduce(
+                    (acc: Record<string, string>, header: [string, string]) => {
+                        const [name, value] = header;
+                        acc[name] = value;
+                        return acc;
+                    },
+                    {} as Record<string, string>,
+                );
                 const data = await response.json();
                 return [headers, data];
             }

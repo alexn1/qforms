@@ -7,7 +7,6 @@ module.exports = {
     ...backBase(),
     entry: './src/index.ts',
     output: {
-        // clean: true,
         path: path.resolve(__dirname, './dist'),
         filename: 'index.js',
 

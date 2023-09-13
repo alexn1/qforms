@@ -30,8 +30,8 @@ export declare class FrontHostApp {
     static doHttpRequest(data: any): Promise<any>;
     static composeHandlerName(data: any): string;
     static doHttpRequest2(method: RequestMethod, body: any): Promise<any[]>;
-    static fetchJson(method: RequestMethod, url: string, data: any): Promise<any[]>;
-    static fetch(method: RequestMethod, url: string, body: any, contentType: string): Promise<any[]>;
+    static fetchJson(method: RequestMethod, url: string, data?: any): Promise<[headers: Record<string, string>, data: any]>;
+    static fetch(method: RequestMethod, url: string, body?: any, contentType?: string): Promise<[headers: Record<string, string>, data: any]>;
     static startWait(): void;
     static stopWait(): void;
     onWindowPopState(e: any): Promise<void>;

@@ -1,6 +1,33 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+function backBase() {
+    return {
+        ...base(),
+        target: 'node',
+        optimization: backOptimization(),
+    };
+}
+
+function frontBase() {
+    return {
+        ...base(),
+        node: {
+            global: false,
+        },
+        optimization: frontOptimization(),
+        plugins: frontPlugins(),
+    };
+}
+
+function base() {
+    return {
+        devtool: false,
+        mode: mode(),
+        resolve: resolve(),
+    };
+}
+
 function mode() {
     return process.env.NODE_ENV === 'dev' ? 'development' : 'production';
 }
@@ -72,14 +99,6 @@ function frontPlugins() {
     ];
 }
 
-function base() {
-    return {
-        devtool: false,
-        mode: mode(),
-        resolve: resolve(),
-    };
-}
-
 function backOptimization() {
     return {
         nodeEnv: false,
@@ -90,25 +109,6 @@ function backOptimization() {
 function frontOptimization() {
     return {
         minimizer: minimizer(),
-    };
-}
-
-function backBase() {
-    return {
-        ...base(),
-        target: 'node',
-        optimization: backOptimization(),
-    };
-}
-
-function frontBase() {
-    return {
-        ...base(),
-        node: {
-            global: false,
-        },
-        optimization: frontOptimization(),
-        plugins: frontPlugins(),
     };
 }
 

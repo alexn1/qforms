@@ -10100,7 +10100,7 @@ class FrontHostApp {
         return [headers, data];
     }
     static async fetchJson(method, url, data) {
-        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
+        return await FrontHostApp.fetch(method, url, data ? JSON.stringify(data) : undefined, 'application/json');
     }
     static async fetch(method, url, body, contentType) {
         try {

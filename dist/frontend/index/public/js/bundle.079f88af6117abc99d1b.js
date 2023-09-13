@@ -213,7 +213,12 @@ const _FrontHostApp = class _FrontHostApp {
   }
   static fetchJson(method, url, data) {
     return __async(this, null, function* () {
-      return yield _FrontHostApp.fetch(method, url, JSON.stringify(data), "application/json");
+      return yield _FrontHostApp.fetch(
+        method,
+        url,
+        data ? JSON.stringify(data) : void 0,
+        "application/json"
+      );
     });
   }
   static fetch(method, url, body, contentType) {
@@ -225,11 +230,14 @@ const _FrontHostApp = class _FrontHostApp {
           body
         }, contentType ? { headers: { "Content-Type": contentType } } : {}));
         if (response.ok) {
-          const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
-            const [name, value] = header;
-            acc[name] = value;
-            return acc;
-          }, {});
+          const headers = Array.from(response.headers.entries()).reduce(
+            (acc, header) => {
+              const [name, value] = header;
+              acc[name] = value;
+              return acc;
+            },
+            {}
+          );
           const data = yield response.json();
           return [headers, data];
         }
