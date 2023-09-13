@@ -230,14 +230,7 @@ const _FrontHostApp = class _FrontHostApp {
           body
         }, contentType ? { headers: { "Content-Type": contentType } } : {}));
         if (response.ok) {
-          const headers = Array.from(response.headers.entries()).reduce(
-            (acc, header) => {
-              const [name, value] = header;
-              acc[name] = value;
-              return acc;
-            },
-            {}
-          );
+          const headers = _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
           const data = yield response.json();
           return [headers, data];
         }
@@ -733,6 +726,16 @@ const _Helper = class _Helper {
     if (typeof document === "object") {
       document.documentElement.classList.add(className);
     }
+  }
+  static headersToRecord(headers) {
+    return Array.from(headers.entries()).reduce(
+      (acc, header) => {
+        const [name, value] = header;
+        acc[name] = value;
+        return acc;
+      },
+      {}
+    );
   }
 };
 __name(_Helper, "Helper");

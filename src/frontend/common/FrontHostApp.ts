@@ -118,14 +118,7 @@ export class FrontHostApp {
                 ...(contentType ? { headers: { 'Content-Type': contentType } } : {}),
             });
             if (response.ok) {
-                const headers = Array.from(response.headers.entries()).reduce(
-                    (acc: Record<string, string>, header: [string, string]) => {
-                        const [name, value] = header;
-                        acc[name] = value;
-                        return acc;
-                    },
-                    {} as Record<string, string>,
-                );
+                const headers = Helper.headersToRecord(response.headers);
                 const data = await response.json();
                 return [headers, data];
             }

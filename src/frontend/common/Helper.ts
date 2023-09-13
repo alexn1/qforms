@@ -401,6 +401,17 @@ export class Helper {
             document.documentElement.classList.add(className);
         }
     }
+
+    static headersToRecord(headers: Headers): Record<string, string> {
+        return Array.from(headers.entries()).reduce(
+            (acc: Record<string, string>, header: [string, string]) => {
+                const [name, value] = header;
+                acc[name] = value;
+                return acc;
+            },
+            {} as Record<string, string>,
+        );
+    }
 }
 
 Helper.registerGlobalClass(Helper);
