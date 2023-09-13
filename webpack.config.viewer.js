@@ -2,11 +2,12 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
-const { mode } = require('./webpack.helper');
+const { mode, resolve } = require('./webpack.helper');
 
 module.exports = {
     devtool: false,
     mode: mode(),
+    resolve: resolve(),
     entry: './src/frontend/index.ts',
     output: {
         clean: true,
@@ -16,9 +17,6 @@ module.exports = {
             name: 'qforms',
             type: 'window',
         },
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [

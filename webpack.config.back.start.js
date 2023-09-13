@@ -2,13 +2,14 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TerserPlugin = require('terser-webpack-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
-const { mode } = require('./webpack.helper');
+const { mode, resolve } = require('./webpack.helper');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 module.exports = {
     devtool: false,
     mode: mode(),
+    resolve: resolve(),
     entry: './src/start.ts',
     output: {
         // clean: true,
@@ -41,9 +42,6 @@ module.exports = {
                 use: 'null-loader',
             },
         ],
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
     },
     target: 'node',
     externals: [nodeExternals(), './index'],

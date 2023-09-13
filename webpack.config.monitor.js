@@ -2,19 +2,17 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsConfigCustom = require('./tsconfig.custom.json');
-const { mode } = require('./webpack.helper');
+const { mode, resolve } = require('./webpack.helper');
 
 module.exports = {
     devtool: false,
     mode: mode(),
+    resolve: resolve(),
     entry: './src/frontend/monitor/main.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/frontend/monitor/public'),
         filename: 'js/bundle.[contenthash].js',
-    },
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
