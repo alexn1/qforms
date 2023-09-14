@@ -958,7 +958,7 @@ class BackHostApp {
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/:action', this.modulePatch.bind(this));
-        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
+        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/:action', this.moduleDelete.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
@@ -9326,7 +9326,7 @@ class ViewerModule {
         }
         await this.handleAction(context, application);
     }
-    async handleAction(context, application) {
+    getAction(context) {
         var _a;
         let { action } = context.getBody();
         if (!action) {
@@ -9334,6 +9334,10 @@ class ViewerModule {
         }
         if (!action)
             throw new Error('no action');
+        return action;
+    }
+    async handleAction(context, application) {
+        const action = this.getAction(context);
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
@@ -19955,13 +19959,12 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body = {
-            action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
         };
-        const result = await this.getApp().request('DELETE', body);
+        const result = await this.getApp().request2('DELETE', `${window.location.pathname}_delete`, body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {

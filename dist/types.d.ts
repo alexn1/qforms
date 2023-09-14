@@ -79,7 +79,7 @@ export interface UpdateActionDto {
     uuid: string;
     changes: ChangesByKey;
 }
-export interface DeleteActionDto extends BaseDto {
+export interface DeleteActionDto {
     page: string;
     form: string;
     uuid: string;

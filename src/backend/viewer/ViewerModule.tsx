@@ -159,13 +159,17 @@ export class ViewerModule {
         await this.handleAction(context, application);
     }
 
-    async handleAction(context: Context, application: BkApplication) {
+    getAction(context: Context): Action {
         let { action } = context.getBody() as BaseDto;
         if (!action) {
             action = context.getReq()?.params.action as Action;
         }
         if (!action) throw new Error('no action');
+        return action;
+    }
 
+    async handleAction(context: Context, application: BkApplication) {
+        const action = this.getAction(context);
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }

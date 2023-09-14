@@ -294,7 +294,7 @@ export class BackHostApp {
             this.modulePatch.bind(this),
         );
         this.express.delete(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
+            '/:module/:appDirName/:appFileName/:env/:domain/:action',
             this.moduleDelete.bind(this),
         );
         this.express.get(

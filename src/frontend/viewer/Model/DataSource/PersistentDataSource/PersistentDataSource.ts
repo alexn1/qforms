@@ -119,13 +119,16 @@ export class PersistentDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body: DeleteActionDto = {
-            action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             params: { key },
         };
-        const result: Result = await this.getApp().request('DELETE', body);
+        const result: Result = await this.getApp().request2(
+            'DELETE',
+            `${window.location.pathname}_delete`,
+            body,
+        );
         await this.refill();
 
         // events
