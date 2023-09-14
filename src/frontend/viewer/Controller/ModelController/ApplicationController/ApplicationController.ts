@@ -1,4 +1,4 @@
-import { JSONString, Key, PageActionDto, PageActionQuery } from '../../../../../types';
+import { JSONString, Key, PageActionDto, PageActionQuery, Nullable } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -14,7 +14,7 @@ export interface OpenPageOptions {
     name: string;
     newMode?: boolean;
     selectMode?: boolean;
-    params?: Record<string, Scalar>;
+    params?: Record<string, Nullable<Scalar>>;
     modal?: boolean;
     selectedKey?: Key;
     onCreate?: (page: Page) => void | Promise<void>;
@@ -173,7 +173,7 @@ export class ApplicationController extends ModelController<Application> {
                     ? Helper.encodeValue<JSONString<boolean>>(options.newMode)
                     : undefined,
             params: options.params
-                ? Helper.encodeObject<JSONString<Scalar>>(options.params)
+                ? Helper.encodeObject<JSONString<Nullable<Scalar>>>(options.params)
                 : undefined,
         };
         const { page: pageData } = await this.getModel().request2(

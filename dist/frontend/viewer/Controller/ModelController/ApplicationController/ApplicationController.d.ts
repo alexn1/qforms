@@ -1,4 +1,4 @@
-import { Key } from '../../../../../types';
+import { Key, Nullable } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { FrontHostApp } from '../../../../common';
@@ -11,7 +11,7 @@ export interface OpenPageOptions {
     name: string;
     newMode?: boolean;
     selectMode?: boolean;
-    params?: Record<string, Scalar>;
+    params?: Record<string, Nullable<Scalar>>;
     modal?: boolean;
     selectedKey?: Key;
     onCreate?: (page: Page) => void | Promise<void>;
