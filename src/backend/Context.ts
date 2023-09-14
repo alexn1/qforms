@@ -36,14 +36,10 @@ export class Context {
     constructor(public options: ContextOptions = {}) {
         // debug('Context', options);
 
-        const req = this.getReq();
-
         // params
         this.params = {
-            ...(req && req.body.params ? req.body.params : {}),
-            ...(req && req.query.action === 'page' && req.query.params
-                ? BkHelper.decodeObject(req.query.params)
-                : {}),
+            ...this.getQueryParams(),
+            ...this.getBodyParams(),
         };
 
         // files
@@ -52,6 +48,22 @@ export class Context {
                 this.files[name] = req.files[name].buffer;
             }
         } */
+    }
+
+    getQueryParams(): Record<string, any> {
+        const req = this.getReq();
+        if (req && ['page', 'select'].includes(req.query.action as string) && req.query.params) {
+            return BkHelper.decodeObject(req.query.params);
+        }
+        return {};
+    }
+
+    getBodyParams(): Record<string, any> {
+        const req = this.getReq();
+        if (req && req.body.params) {
+            return req.body.params;
+        }
+        return {};
     }
 
     getRoute(): string {

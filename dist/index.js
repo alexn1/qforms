@@ -2070,10 +2070,21 @@ class Context {
     constructor(options = {}) {
         this.options = options;
         this.connections = {};
+        this.params = Object.assign(Object.assign({}, this.getQueryParams()), this.getBodyParams());
+    }
+    getQueryParams() {
         const req = this.getReq();
-        this.params = Object.assign(Object.assign({}, (req && req.body.params ? req.body.params : {})), (req && req.query.action === 'page' && req.query.params
-            ? _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.decodeObject(req.query.params)
-            : {}));
+        if (req && ['page', 'select'].includes(req.query.action) && req.query.params) {
+            return _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.decodeObject(req.query.params);
+        }
+        return {};
+    }
+    getBodyParams() {
+        const req = this.getReq();
+        if (req && req.body.params) {
+            return req.body.params;
+        }
+        return {};
     }
     getRoute() {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -9364,21 +9375,11 @@ class ViewerModule {
             await application.release(context);
         }
     }
-    async getDataSource(context, application, body) {
-        if (body.page) {
-            const page = await application.getPage(context, body.page);
-            if (body.form) {
-                return page.getForm(body.form).getDataSource(body.ds);
-            }
-            return page.getDataSource(body.ds);
-        }
-        return application.getDataSource(body.ds);
-    }
     async select(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.select', context.getBody().page);
-        const body = context.getBody();
+        const { page, form, ds } = context.getQuery();
         const start = Date.now();
-        const dataSource = await this.getDataSource(context, application, body);
+        const dataSource = await this.getDataSource(context, application, { page, form, ds });
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
@@ -9386,6 +9387,16 @@ class ViewerModule {
             (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('select time:', time);
             context.getRes().json({ rows, count, time });
         });
+    }
+    async getDataSource(context, application, { page, form, ds }) {
+        if (page) {
+            const bkPage = await application.getPage(context, page);
+            if (form) {
+                return bkPage.getForm(form).getDataSource(ds);
+            }
+            return bkPage.getDataSource(ds);
+        }
+        return application.getDataSource(ds);
     }
     async insert(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.insert', context.getReq().body.page);
@@ -19924,14 +19935,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const body = {
+        const query = {
             action: 'select',
-            page: page ? page.getName() : null,
-            form: form ? form.getName() : null,
+            page: page ? page.getName() : undefined,
+            form: form ? form.getName() : undefined,
             ds: this.getName(),
             params: Object.assign(Object.assign({}, this.getPageParams()), params),
         };
-        const data = await this.getApp().request('POST', body);
+        const data = await this.getApp().request2('GET', query);
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
         return data;

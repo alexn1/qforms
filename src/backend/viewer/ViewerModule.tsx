@@ -24,10 +24,12 @@ import {
     DeleteActionDto,
     InsertActionDto,
     LoginDto,
+    Nullable,
     PageActionDto,
     PageActionQuery,
     RpcActionDto,
     SelectActionDto,
+    SelectActionQuery,
     UpdateActionDto,
 } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
@@ -291,27 +293,13 @@ export class ViewerModule {
         }
     }
 
-    async getDataSource(
-        context: Context,
-        application: BkApplication,
-        body: SelectActionDto,
-    ): Promise<BkDataSource> {
-        if (body.page) {
-            const page = await application.getPage(context, body.page);
-            if (body.form) {
-                return page.getForm(body.form).getDataSource(body.ds);
-            }
-            return page.getDataSource(body.ds);
-        }
-        return application.getDataSource(body.ds);
-    }
-
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.select', context.getBody().page);
-        const body = context.getBody() as SelectActionDto;
+        // const { page, form, ds } = context.getBody() as SelectActionDto;
+        const { page, form, ds } = context.getQuery() as SelectActionQuery;
         const start = Date.now();
-        const dataSource = await this.getDataSource(context, application, body);
+        const dataSource = await this.getDataSource(context, application, { page, form, ds });
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
@@ -319,6 +307,21 @@ export class ViewerModule {
             debug('select time:', time);
             context.getRes().json({ rows, count, time });
         });
+    }
+
+    async getDataSource(
+        context: Context,
+        application: BkApplication,
+        { page, form, ds }: { page?: string; form?: string; ds: string },
+    ): Promise<BkDataSource> {
+        if (page) {
+            const bkPage = await application.getPage(context, page);
+            if (form) {
+                return bkPage.getForm(form).getDataSource(ds);
+            }
+            return bkPage.getDataSource(ds);
+        }
+        return application.getDataSource(ds);
     }
 
     // action

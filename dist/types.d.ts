@@ -59,6 +59,13 @@ export interface SelectActionDto extends BaseDto {
     ds: string;
     params: Record<string, any>;
 }
+export interface SelectActionQuery extends ParsedQs {
+    action: 'select';
+    page?: string;
+    form?: string;
+    ds: string;
+    params?: Record<string, JSONString<any>>;
+}
 export interface InsertActionDto extends BaseDto {
     page: string;
     form: string;

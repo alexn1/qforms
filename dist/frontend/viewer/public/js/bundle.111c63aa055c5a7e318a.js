@@ -6082,10 +6082,7 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
         newMode: options.newMode !== void 0 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode) : void 0,
         params: options.params ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params) : void 0
       };
-      const { page: pageData } = yield this.getModel().request2(
-        "GET",
-        query
-      );
+      const { page: pageData } = yield this.getModel().request2("GET", query);
       if (options.modal === void 0) {
         options.modal = true;
       }
@@ -12810,14 +12807,14 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       console.debug("PersistentDataSource.select", this.getFullName(), params);
       const page = this.getPage();
       const form = this.getForm();
-      const body = {
+      const query = {
         action: "select",
-        page: page ? page.getName() : null,
-        form: form ? form.getName() : null,
+        page: page ? page.getName() : void 0,
+        form: form ? form.getName() : void 0,
         ds: this.getName(),
         params: __spreadValues(__spreadValues({}, this.getPageParams()), params)
       };
-      const data = yield this.getApp().request("POST", body);
+      const data = yield this.getApp().request2("GET", query);
       if (!(data.rows instanceof Array))
         throw new Error("rows must be array");
       return data;

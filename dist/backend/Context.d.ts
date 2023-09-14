@@ -23,6 +23,8 @@ export declare class Context {
         [name: string]: any;
     };
     constructor(options?: ContextOptions);
+    getQueryParams(): Record<string, any>;
+    getBodyParams(): Record<string, any>;
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): Nullable<ServerUser>;

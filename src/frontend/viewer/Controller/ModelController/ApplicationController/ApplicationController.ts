@@ -1,4 +1,11 @@
-import { JSONString, Key, PageActionDto, PageActionQuery, Nullable } from '../../../../../types';
+import {
+    JSONString,
+    Key,
+    PageActionDto,
+    PageActionQuery,
+    Nullable,
+    Query,
+} from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -176,10 +183,7 @@ export class ApplicationController extends ModelController<Application> {
                 ? Helper.encodeObject<JSONString<Nullable<Scalar>>>(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2(
-            'GET',
-            query as Record<string, string>,
-        );
+        const { page: pageData } = await this.getModel().request2('GET', query as Query);
 
         // modal by default
         if (options.modal === undefined) {
