@@ -2,7 +2,9 @@ import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { BkModel } from './BkModel/BkModel';
+import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
 import { NextFunction } from 'connect';
+import { SelectActionDto } from '../../types';
 export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, RowForm, } from '../../frontend/viewer';
 export declare class ViewerModule {
     private hostApp;
@@ -20,6 +22,7 @@ export declare class ViewerModule {
     loginPost(context: Context, application: BkApplication): Promise<void>;
     index(context: Context, bkApplication: BkApplication): Promise<void>;
     page(context: Context, application: BkApplication): Promise<void>;
+    getDataSource(context: Context, application: BkApplication, body: SelectActionDto): Promise<BkDataSource>;
     select(context: Context, application: BkApplication): Promise<void>;
     insert(context: Context, application: BkApplication): Promise<void>;
     update(context: Context, application: BkApplication): Promise<void>;

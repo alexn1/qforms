@@ -9224,6 +9224,9 @@ class ViewerModule {
             if (action === 'page') {
                 await this.page(context, bkApplication);
             }
+            else if (action === 'select') {
+                await this.select(context, bkApplication);
+            }
             else {
                 await this.index(context, bkApplication);
             }
@@ -9361,23 +9364,21 @@ class ViewerModule {
             await application.release(context);
         }
     }
-    async select(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.select', context.getReq().body.page);
-        const body = context.getBody();
-        const start = Date.now();
-        let dataSource;
+    async getDataSource(context, application, body) {
         if (body.page) {
             const page = await application.getPage(context, body.page);
             if (body.form) {
-                dataSource = page.getForm(body.form).getDataSource(body.ds);
+                return page.getForm(body.form).getDataSource(body.ds);
             }
-            else {
-                dataSource = page.getDataSource(body.ds);
-            }
+            return page.getDataSource(body.ds);
         }
-        else {
-            dataSource = application.getDataSource(body.ds);
-        }
+        return application.getDataSource(body.ds);
+    }
+    async select(context, application) {
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.select', context.getBody().page);
+        const body = context.getBody();
+        const start = Date.now();
+        const dataSource = await this.getDataSource(context, application, body);
         await dataSource.getDatabase().use(context, async (database) => {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
