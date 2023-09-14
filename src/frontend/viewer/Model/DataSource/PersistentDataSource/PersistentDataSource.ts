@@ -121,7 +121,7 @@ export class PersistentDataSource extends DataSource {
             form: this.getForm()!.getName(),
             params: { key },
         };
-        const result: Result = await this.getApp().request('POST', body);
+        const result: Result = await this.getApp().request('DELETE', body);
         await this.refill();
 
         // events

@@ -106,6 +106,7 @@ export declare class BackHostApp {
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePatch(req: Request, res: Response, next: NextFunction): Promise<void>;
+    moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;

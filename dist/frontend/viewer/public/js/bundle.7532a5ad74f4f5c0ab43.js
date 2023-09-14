@@ -12750,7 +12750,7 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
         form: this.getForm().getName(),
         params: { key }
       };
-      const result = yield this.getApp().request("POST", body);
+      const result = yield this.getApp().request("DELETE", body);
       yield this.refill();
       const event = { source: this, deletes: result[database][table].delete };
       if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {

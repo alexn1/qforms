@@ -958,6 +958,7 @@ class BackHostApp {
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
+        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
@@ -1236,6 +1237,33 @@ class BackHostApp {
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePatch(context, application);
+            }
+            else {
+                next();
+            }
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+    async moduleDelete(req, res, next) {
+        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('DELETE'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        let context = null;
+        try {
+            if (req.params.module === 'viewer') {
+                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(context);
+                await this.viewerModule.handleDelete(context, application);
             }
             else {
                 next();
@@ -9285,7 +9313,13 @@ class ViewerModule {
         }
     }
     async handlePatch(context, application) {
-        const { action } = context.getBody();
+        const user = context.getUser();
+        if (application.isAuthentication() && !user) {
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_5__.HttpError({ message: 'Unauthorized', status: 401, context });
+        }
+        await this.handleAction(context, application);
+    }
+    async handleDelete(context, application) {
         const user = context.getUser();
         if (application.isAuthentication() && !user) {
             throw new _HttpError__WEBPACK_IMPORTED_MODULE_5__.HttpError({ message: 'Unauthorized', status: 401, context });
@@ -19924,7 +19958,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             form: this.getForm().getName(),
             params: { key },
         };
-        const result = await this.getApp().request('POST', body);
+        const result = await this.getApp().request('DELETE', body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
