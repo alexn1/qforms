@@ -11,6 +11,7 @@ import {
 } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
+import { Helper } from '../../../../common';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {
@@ -80,13 +81,16 @@ export class PersistentDataSource extends DataSource {
 
         // specific to PersistentDataSource
         const body: UpdateActionDto = {
-            action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
         };
-        const result: Result = await this.getApp().request('PATCH', body);
+        const result: Result = await this.getApp().request2(
+            'PATCH',
+            `${window.location.pathname}update`,
+            body,
+        );
 
         const [key] = Object.keys(result[database][table].updateEx!) as [Key];
         if (!key) throw new Error('no updated row');
@@ -267,7 +271,10 @@ export class PersistentDataSource extends DataSource {
             },
         };
 
-        const data = await this.getApp().request2('GET', query as Query);
+        const data = await this.getApp().request2(
+            'GET',
+            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
+        );
 
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);

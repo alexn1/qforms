@@ -290,7 +290,7 @@ export class BackHostApp {
             this.modulePost.bind(this),
         );
         this.express.patch(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
+            '/:module/:appDirName/:appFileName/:env/:domain/:action',
             this.modulePatch.bind(this),
         );
         this.express.delete(

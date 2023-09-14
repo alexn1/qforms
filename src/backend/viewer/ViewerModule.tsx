@@ -20,6 +20,7 @@ import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
 import {
+    Action,
     BaseDto,
     DeleteActionDto,
     InsertActionDto,
@@ -159,7 +160,12 @@ export class ViewerModule {
     }
 
     async handleAction(context: Context, application: BkApplication) {
-        const { action } = context.getBody() as BaseDto;
+        let { action } = context.getBody() as BaseDto;
+        if (!action) {
+            action = context.getReq()?.params.action as Action;
+        }
+        if (!action) throw new Error('no action');
+
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }

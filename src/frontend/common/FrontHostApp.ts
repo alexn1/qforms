@@ -76,11 +76,8 @@ export class FrontHostApp {
         return body;
     }
 
-    static async doHttpRequest2(method: RequestMethod, query?: Query, body?: any) {
-        let url = window.location.pathname;
-        if (query) {
-            url += `?${Helper.queryToString(query)}`;
-        }
+    static async doHttpRequest2(method: RequestMethod, url: string, body?: any) {
+        
         console.warn('FrontHostApp.doHttpRequest2', method, url, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
         if (body) {

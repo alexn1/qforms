@@ -183,7 +183,11 @@ export class ApplicationController extends ModelController<Application> {
                 ? Helper.encodeObject<JSONString<Nullable<Scalar>>>(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', query as Query);
+
+        const { page: pageData } = await this.getModel().request2(
+            'GET',
+            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
+        );
 
         // modal by default
         if (options.modal === undefined) {

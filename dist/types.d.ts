@@ -31,8 +31,9 @@ export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
 export declare const keyToKeyTuple: (key: Key) => KeyTuple;
 export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
+export type Action = 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
 export interface BaseDto {
-    action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
+    action: Action;
 }
 export interface BaseQuery {
     action: 'page';
@@ -72,7 +73,7 @@ export interface InsertActionDto extends BaseDto {
     row: RawRow;
     uuid: string;
 }
-export interface UpdateActionDto extends BaseDto {
+export interface UpdateActionDto {
     page: string;
     form: string;
     uuid: string;

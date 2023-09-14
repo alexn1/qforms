@@ -54,7 +54,11 @@ export class Application extends Model<ApplicationData> {
     async request(method: RequestMethod, body: any) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, data] = await FrontHostApp.doHttpRequest2(method, undefined, body);
+        const [headers, data] = await FrontHostApp.doHttpRequest2(
+            method,
+            window.location.pathname,
+            body,
+        );
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -66,10 +70,10 @@ export class Application extends Model<ApplicationData> {
         return data;
     }
 
-    async request2(method: RequestMethod, query?: Query, body?: any) {
+    async request2(method: RequestMethod, url: string, body?: any) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, data] = await FrontHostApp.doHttpRequest2(method, query, body);
+        const [headers, data] = await FrontHostApp.doHttpRequest2(method, url, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');

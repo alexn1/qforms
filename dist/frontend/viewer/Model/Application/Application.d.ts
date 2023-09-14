@@ -1,4 +1,3 @@
-import { Query } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { RequestMethod } from '../../../common';
@@ -15,7 +14,7 @@ export declare class Application extends Model<ApplicationData> {
     addDatabase(database: Database): void;
     logout(): Promise<void>;
     request(method: RequestMethod, body: any): Promise<any>;
-    request2(method: RequestMethod, query?: Query, body?: any): Promise<any>;
+    request2(method: RequestMethod, url: string, body?: any): Promise<any>;
     findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     getText(): any;

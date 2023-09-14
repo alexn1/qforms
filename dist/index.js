@@ -957,7 +957,7 @@ class BackHostApp {
         this.express.get('/monitor', this.monitorGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
-        this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
+        this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/:action', this.modulePatch.bind(this));
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
@@ -9327,7 +9327,13 @@ class ViewerModule {
         await this.handleAction(context, application);
     }
     async handleAction(context, application) {
-        const { action } = context.getBody();
+        var _a;
+        let { action } = context.getBody();
+        if (!action) {
+            action = (_a = context.getReq()) === null || _a === void 0 ? void 0 : _a.params.action;
+        }
+        if (!action)
+            throw new Error('no action');
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
@@ -10169,11 +10175,7 @@ class FrontHostApp {
         console.warn(`body ${FrontHostApp.composeHandlerName(data)}:`, body);
         return body;
     }
-    static async doHttpRequest2(method, query, body) {
-        let url = window.location.pathname;
-        if (query) {
-            url += `?${_common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)}`;
-        }
+    static async doHttpRequest2(method, url, body) {
         console.warn('FrontHostApp.doHttpRequest2', method, url, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
         if (body) {
@@ -14755,7 +14757,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', query);
+        const { page: pageData } = await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`);
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -19152,7 +19154,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     async request(method, body) {
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, undefined, body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, window.location.pathname, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         this.emit('request', {
@@ -19162,9 +19164,9 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         });
         return data;
     }
-    async request2(method, query, body) {
+    async request2(method, url, body) {
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, query, body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, url, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         this.emit('request', {
@@ -19819,6 +19821,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
 
 
 class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
@@ -19921,13 +19925,12 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const body = {
-            action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         };
-        const result = await this.getApp().request('PATCH', body);
+        const result = await this.getApp().request2('PATCH', `${window.location.pathname}update`, body);
         const [key] = Object.keys(result[database][table].updateEx);
         if (!key)
             throw new Error('no updated row');
@@ -20012,7 +20015,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             ds: this.getName(),
             params: Object.assign(Object.assign({}, this.getPageParams()), params),
         };
-        const data = await this.getApp().request2('GET', query);
+        const data = await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`);
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
         return data;

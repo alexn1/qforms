@@ -44,8 +44,18 @@ export type Nullable<T> = T | null;
 
 export type Optional<T> = T | undefined;
 
+export type Action =
+    | 'page'
+    | 'insert'
+    | 'select'
+    | 'update'
+    | '_delete'
+    | 'rpc'
+    | 'login'
+    | 'logout';
+
 export interface BaseDto {
-    action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'login' | 'logout';
+    action: Action;
 }
 
 export interface BaseQuery {
@@ -93,7 +103,7 @@ export interface InsertActionDto extends BaseDto {
     uuid: string;
 }
 
-export interface UpdateActionDto extends BaseDto {
+export interface UpdateActionDto {
     page: string;
     form: string;
     uuid: string;
