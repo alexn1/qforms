@@ -23,9 +23,7 @@ describe('BackHostApp', () => {
     });
 
     test('/viewer/test/test/local/localhost/', async () => {
-        const { status: status2 } = await supertest(httpServer).get(
-            '/viewer/test/test/local/localhost/',
-        );
-        expect(status2).toBe(200);
+        const { status } = await supertest(httpServer).get('/viewer/test/test/local/localhost/');
+        expect(status).toBe(200);
     });
 });
