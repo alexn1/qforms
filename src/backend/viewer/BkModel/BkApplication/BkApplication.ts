@@ -304,7 +304,7 @@ export class BkApplication<
     }
 
     async fillPages(context: Context): Promise<PageData[]> {
-        // debug('Application.fillPages', context.query.page);
+        // debug('Application.fillPages');
         const pages: PageData[] = [];
         const pageLinksNames = this.getPageLinksToFill(context);
         for (const pageLinkName of pageLinksNames) {

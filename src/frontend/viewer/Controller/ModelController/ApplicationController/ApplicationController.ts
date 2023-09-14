@@ -173,7 +173,7 @@ export class ApplicationController extends ModelController<Application> {
         const { page: pageData } = await this.getModel().request('POST', body); */
 
         const query: PageActionQuery = {
-            page: options.name,
+            name: options.name,
             newMode:
                 options.newMode !== undefined
                     ? Helper.encodeValue<JSONString<boolean>>(options.newMode)

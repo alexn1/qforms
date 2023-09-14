@@ -9442,9 +9442,8 @@ class ViewerModule {
     }
     async page(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.page', context.getReq().body.page);
-        const body = context.getBody();
         const query = context.getQuery();
-        const pageLinkName = body.page || query.page;
+        const pageLinkName = query.name;
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -14755,7 +14754,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             return pageController;
         }
         const query = {
-            page: options.name,
+            name: options.name,
             newMode: options.newMode !== undefined
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
                 : undefined,

@@ -1,5 +1,10 @@
 const path = require('path');
-const { esbuildLoaderRule, lessCssLoaderRule, frontBase } = require('./webpack.helper');
+const {
+    esbuildLoaderRule,
+    lessCssLoaderRule,
+    frontBase,
+    tsLoaderRule,
+} = require('./webpack.helper');
 
 module.exports = {
     ...frontBase(),
@@ -10,6 +15,10 @@ module.exports = {
         filename: 'js/bundle.[contenthash].js',
     },
     module: {
-        rules: [esbuildLoaderRule(), lessCssLoaderRule()],
+        rules: [
+            // esbuildLoaderRule(),
+            tsLoaderRule(),
+            lessCssLoaderRule(),
+        ],
     },
 };

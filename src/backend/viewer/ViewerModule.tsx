@@ -300,9 +300,9 @@ export class ViewerModule {
     // action (fill page)
     async page(context: Context, application: BkApplication): Promise<void> {
         debug('ViewerModule.page', context.getReq()!.body.page);
-        const body = context.getBody() as PageActionDto;
+        // const body = context.getBody() as PageActionDto;
         const query = context.getQuery() as PageActionQuery;
-        const pageLinkName = body.page || query.page;
+        const pageLinkName = /* body.page || */ query.name;
         await application.connect(context);
         try {
             await application.initContext(context);

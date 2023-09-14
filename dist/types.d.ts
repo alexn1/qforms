@@ -46,7 +46,7 @@ export interface PageActionDto extends BaseDto {
     params?: Record<string, Scalar>;
 }
 export interface PageActionQuery extends ParsedQs {
-    page: string;
+    name: string;
     newMode?: JSONString<boolean>;
     params?: Record<string, JSONString<Nullable<Scalar>>>;
 }

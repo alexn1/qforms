@@ -1,6 +1,11 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const { esbuildLoaderRule, lessNullLoaderRule, backBase } = require('./webpack.helper');
+const {
+    esbuildLoaderRule,
+    lessNullLoaderRule,
+    backBase,
+    tsLoaderRule,
+} = require('./webpack.helper');
 
 module.exports = {
     ...backBase(),
@@ -10,7 +15,11 @@ module.exports = {
         filename: 'start.js',
     },
     module: {
-        rules: [esbuildLoaderRule(), lessNullLoaderRule()],
+        rules: [
+            // esbuildLoaderRule(),
+            tsLoaderRule(),
+            lessNullLoaderRule(),
+        ],
     },
     externals: [nodeExternals(), './index'],
     externalsType: 'commonjs',
