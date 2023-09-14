@@ -138,6 +138,17 @@ export class ViewerModule {
         }
     }
 
+    async handlePatch(context: Context, application: BkApplication): Promise<void> {
+        // debug('ViewerModule.handlePatch');
+        const { action } = context.getBody() as BaseDto;
+        const user = context.getUser();
+        if (application.isAuthentication() && !user) {
+            throw new HttpError({ message: 'Unauthorized', status: 401, context });
+        }
+
+        await this.handleAction(context, application);
+    }
+
     async handleAction(context: Context, application: BkApplication) {
         const { action } = context.getBody() as BaseDto;
         if (ACTIONS.indexOf(action) === -1) {

@@ -12717,7 +12717,7 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
         form: this.getForm().getName(),
         changes: this.getChangesByKey()
       };
-      const result = yield this.getApp().request("POST", body);
+      const result = yield this.getApp().request("PATCH", body);
       const [key] = Object.keys(result[database][table].updateEx);
       if (!key)
         throw new Error("no updated row");

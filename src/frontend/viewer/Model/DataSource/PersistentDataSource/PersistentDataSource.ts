@@ -86,7 +86,7 @@ export class PersistentDataSource extends DataSource {
             form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
         };
-        const result: Result = await this.getApp().request('POST', body);
+        const result: Result = await this.getApp().request('PATCH', body);
 
         const [key] = Object.keys(result[database][table].updateEx!) as [Key];
         if (!key) throw new Error('no updated row');

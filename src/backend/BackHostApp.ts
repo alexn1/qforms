@@ -289,6 +289,10 @@ export class BackHostApp {
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.modulePost.bind(this),
         );
+        this.express.patch(
+            '/:module/:appDirName/:appFileName/:env/:domain/',
+            this.modulePatch.bind(this),
+        );
         this.express.get(
             '/:module/:appDirName/:appFileName/:env/:domain/*',
             this.moduleGetFile.bind(this),
@@ -483,7 +487,7 @@ export class BackHostApp {
         pConsole.log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
-            res.setHeader('Content-Type','text/html; charset=utf-8').end(html);
+            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
         } catch (err) {
             next(err);
         }
@@ -603,6 +607,53 @@ export class BackHostApp {
                 } else {
                     next();
                 }
+            } else {
+                next();
+            }
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+
+    async modulePatch(req: Request, res: Response, next: NextFunction): Promise<void> {
+        // @ts-ignore
+        debug(colors.magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
+
+        // log request
+        pConsole.log(
+            // @ts-ignore
+            colors.magenta.underline('PATCH'),
+            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
+            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
+        );
+
+        let context: Nullable<Context> = null;
+        try {
+            if (req.params.module === 'viewer') {
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(context);
+                await this.viewerModule.handlePatch(context, application);
+                // await this.logRequest(req, context, time);
+                // } else if (req.params.module === 'editor') {
+                //     if (this.isDevelopment()) {
+                //         context = new Context({
+                //             req,
+                //             res,
+                //             domain: this.getDomainFromRequest(req),
+                //         });
+                //         const time = await this.editorModule.handleEditorPatch(req, res, context);
+                //         // await this.logRequest(req, context, time);
+                //     } else {
+                //         next();
+                //     }
             } else {
                 next();
             }

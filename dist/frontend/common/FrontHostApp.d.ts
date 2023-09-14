@@ -17,7 +17,7 @@ export interface Location {
     search: string;
     hash: string;
 }
-export type RequestMethod = 'GET' | 'POST' | 'PATCH';
+export type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 export declare class FrontHostApp {
     protected options?: FrontHostAppOptions | undefined;
     alertCtrl: any;

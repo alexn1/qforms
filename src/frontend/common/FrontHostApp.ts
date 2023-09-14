@@ -21,7 +21,7 @@ export interface Location {
     hash: string;
 }
 
-export type RequestMethod = 'GET' | 'POST' | 'PATCH';
+export type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export class FrontHostApp {
     alertCtrl: any = null;
