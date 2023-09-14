@@ -226,7 +226,7 @@ export class ViewerModule {
                 if (session.user === undefined) session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = JSON.parse(tzOffset);
+                session.tzOffset = BkHelper.decodeValue(tzOffset);
 
                 res.redirect(req.url);
                 this.getHostApp().logEvent(

@@ -9308,7 +9308,7 @@ class ViewerModule {
                     session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = JSON.parse(tzOffset);
+                session.tzOffset = _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.decodeValue(tzOffset);
                 res.redirect(req.url);
                 this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
