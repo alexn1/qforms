@@ -11,6 +11,7 @@ require('../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldVi
 describe('SampleBackHostApp', () => {
     let app;
     let httpServer;
+    const PATHNAME = '/viewer/sample/sample/local/localhost/';
 
     beforeAll(async () => {
         app = new SampleBackHostApp();
@@ -20,21 +21,23 @@ describe('SampleBackHostApp', () => {
         // await app.run();
     });
 
-    afterAll(() => {});
-
-    test('sample page action', async () => {
-        const { status, body } = await supertest(httpServer).get(
-            '/viewer/sample/sample/local/localhost/?action=page&page=Person&params[key]=2',
-        );
-        expect(status).toBe(200);
-        console.debug(body);
+    afterAll(async () => {
+        await app.shutdown();
     });
 
-    test('sample select action', async () => {
+    test('page action', async () => {
         const { status, body } = await supertest(httpServer).get(
-            '/viewer/sample/sample/local/localhost/?action=select&page=Person&form=Person&ds=default&params[key]=2',
+            `${PATHNAME}?action=page&page=Person&params[key]=2`,
         );
         expect(status).toBe(200);
-        console.debug(body);
+        // console.debug(body);
+    });
+
+    test('select action', async () => {
+        const { status, body } = await supertest(httpServer).get(
+            `${PATHNAME}?action=select&page=Person&form=Person&ds=default&params[key]=2`,
+        );
+        expect(status).toBe(200);
+        // console.debug(body);
     });
 });
