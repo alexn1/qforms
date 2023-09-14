@@ -1,5 +1,5 @@
 const path = require('path');
-const { esbuildLoaderRule, lessCssLoaderRule, frontBase, tsLoaderRule } = require('./webpack.helper');
+const { frontBase } = require('./webpack.helper');
 
 module.exports = {
     ...frontBase(),
@@ -12,11 +12,5 @@ module.exports = {
             name: 'qforms',
             type: 'window',
         },
-    },
-    module: {
-        rules: [
-            // esbuildLoaderRule(),
-            tsLoaderRule(),
-            lessCssLoaderRule()],
     },
 };

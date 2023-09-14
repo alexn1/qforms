@@ -17,6 +17,7 @@ function frontBase() {
         },
         optimization: frontOptimization(),
         plugins: frontPlugins(),
+        module: frontModule(),
     };
 }
 
@@ -112,6 +113,16 @@ function frontOptimization() {
     };
 }
 
+function frontModule() {
+    return {
+        rules: [
+            // esbuildLoaderRule(),
+            tsLoaderRule(),
+            lessCssLoaderRule(),
+        ],
+    };
+}
+
 module.exports = {
     mode,
     resolve,
@@ -126,4 +137,5 @@ module.exports = {
     frontOptimization,
     backBase,
     frontBase,
+    frontModule,
 };

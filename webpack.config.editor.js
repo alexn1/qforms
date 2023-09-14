@@ -1,10 +1,5 @@
 const path = require('path');
-const {
-    esbuildLoaderRule,
-    lessCssLoaderRule,
-    frontBase,
-    tsLoaderRule,
-} = require('./webpack.helper');
+const { frontBase } = require('./webpack.helper');
 
 module.exports = {
     ...frontBase(),
@@ -13,12 +8,5 @@ module.exports = {
         clean: true,
         path: path.resolve(__dirname, './dist/frontend/editor/public'),
         filename: 'js/bundle.[contenthash].js',
-    },
-    module: {
-        rules: [
-            // esbuildLoaderRule(),
-            tsLoaderRule(),
-            lessCssLoaderRule(),
-        ],
     },
 };
