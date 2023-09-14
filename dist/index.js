@@ -10518,7 +10518,11 @@ class Helper {
         return Object.keys(record)
             .filter((field) => record[field] !== undefined)
             .map((field) => {
-            return `${name}[${field}]=${encodeURIComponent(record[field])}`;
+            const val = encodeURIComponent(record[field])
+                .replace(/^%22/, '"')
+                .replace(/%22$/, '"')
+                .replace(/%20/g, '+');
+            return `${name}[${field}]=${val}`;
         })
             .join('&');
     }

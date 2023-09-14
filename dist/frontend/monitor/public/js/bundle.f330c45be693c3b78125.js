@@ -492,7 +492,8 @@ const _Helper = class _Helper {
   }
   static queryRecordToString(name, record) {
     return Object.keys(record).filter((field) => record[field] !== void 0).map((field) => {
-      return `${name}[${field}]=${encodeURIComponent(record[field])}`;
+      const val = encodeURIComponent(record[field]).replace(/^%22/, '"').replace(/%22$/, '"').replace(/%20/g, "+");
+      return `${name}[${field}]=${val}`;
     }).join("&");
   }
 };
