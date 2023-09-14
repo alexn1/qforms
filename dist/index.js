@@ -20014,13 +20014,12 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const page = this.getPage();
         const form = this.getForm();
         const query = {
-            action: 'select',
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
             params: Object.assign(Object.assign({}, this.getPageParams()), params),
         };
-        const data = await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`);
+        const data = await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`);
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
         return data;

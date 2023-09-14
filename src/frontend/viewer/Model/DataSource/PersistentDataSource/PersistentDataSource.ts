@@ -264,7 +264,6 @@ export class PersistentDataSource extends DataSource {
         const data = await this.getApp().request('POST', body); */
 
         const query: SelectActionQuery = {
-            action: 'select',
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
@@ -276,7 +275,7 @@ export class PersistentDataSource extends DataSource {
 
         const data = await this.getApp().request2(
             'GET',
-            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
+            `${window.location.pathname}select?${Helper.queryToString(query as Query)}`,
         );
 
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');

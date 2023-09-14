@@ -84,7 +84,6 @@ export interface SelectActionDto extends BaseDto {
 }
 
 export interface SelectActionQuery extends ParsedQs {
-    action: 'select';
     page?: string;
     form?: string;
     ds: string;

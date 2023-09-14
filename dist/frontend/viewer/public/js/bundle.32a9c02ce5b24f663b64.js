@@ -12818,7 +12818,6 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       const page = this.getPage();
       const form = this.getForm();
       const query = {
-        action: "select",
         page: page ? page.getName() : void 0,
         form: form ? form.getName() : void 0,
         ds: this.getName(),
@@ -12826,7 +12825,7 @@ const _PersistentDataSource = class _PersistentDataSource extends _DataSource__W
       };
       const data = yield this.getApp().request2(
         "GET",
-        `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`
+        `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`
       );
       if (!(data.rows instanceof Array))
         throw new Error("rows must be array");
