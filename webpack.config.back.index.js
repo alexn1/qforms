@@ -15,7 +15,7 @@ module.exports = {
         umdNamedDefine: true,
     },
     module: {
-        rules: [tsLoaderRule(), lessNullLoaderRule()],
+        rules: [tsLoaderRule(true), lessNullLoaderRule()],
     },
     externals: [nodeExternals()],
     plugins: [

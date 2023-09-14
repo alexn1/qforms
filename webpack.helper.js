@@ -38,7 +38,7 @@ function resolve() {
     };
 }
 
-function tsLoaderRule() {
+function tsLoaderRule(declaration = false) {
     const tsConfigCustom = require('./tsconfig.custom.json');
     return {
         test: /\.tsx?$/,
@@ -49,7 +49,7 @@ function tsLoaderRule() {
                 onlyCompileBundledFiles: false,
                 compilerOptions: {
                     ...tsConfigCustom.compilerOptions,
-                    declaration: true,
+                    declaration,
                 },
             },
         },
