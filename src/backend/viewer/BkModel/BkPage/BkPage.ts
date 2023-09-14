@@ -11,6 +11,7 @@ import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { Optional, PageActionDto, PageActionQuery } from '../../../../types';
+import { BkHelper } from '../../../BkHelper';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -54,7 +55,7 @@ export class BkPage<
         const query = context.getQuery() as PageActionQuery;
         if (query.action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
-                return JSON.parse(query.newMode);
+                return BkHelper.decodeValue(query.newMode);
             }
             throw new Error('getNewModeFromContext: newMode required');
         }

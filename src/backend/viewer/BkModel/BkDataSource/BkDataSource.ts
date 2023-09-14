@@ -10,7 +10,16 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
-import { Key, KeyRecord, Row, KeyTuple, RawRow, Access, Nullable } from '../../../../types';
+import {
+    Key,
+    KeyRecord,
+    Row,
+    KeyTuple,
+    RawRow,
+    Access,
+    Nullable,
+    keyToKeyTuple,
+} from '../../../../types';
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
@@ -165,7 +174,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
     }
 
     getKeyValuesFromKey(key: Key): KeyRecord {
-        const tuple: KeyTuple = JSON.parse(key);
+        const tuple: KeyTuple = keyToKeyTuple(key);
         if (tuple.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${tuple.length} of ${this.keyColumns.length}`);
         }
@@ -207,7 +216,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
     static keyToParams(key: Key, paramName = 'key'): KeyRecord {
         if (typeof key !== 'string') throw new Error('key not string');
         const params: KeyRecord = {};
-        const arr: KeyTuple = JSON.parse(key);
+        const arr: KeyTuple = keyToKeyTuple(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
         } else if (arr.length > 1) {

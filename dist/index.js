@@ -6351,7 +6351,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkForm_BkForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkForm/BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
 /* harmony import */ var _BkForm_BkRowForm_BkRowForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkForm/BkRowForm/BkRowForm */ "./src/backend/viewer/BkModel/BkForm/BkRowForm/BkRowForm.ts");
 /* harmony import */ var _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../BkForm/BkTableForm/BkTableForm */ "./src/backend/viewer/BkModel/BkForm/BkTableForm/BkTableForm.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+
 
 
 
@@ -6422,9 +6424,9 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
             .filter((column) => !!column);
         for (const rowColumn of rowColumns) {
             if (!formColumns.includes(rowColumn)) {
-                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('rowColumns:', rowColumns);
-                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('formColumns:', formColumns);
-                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('row:', row);
+                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('rowColumns:', rowColumns);
+                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('formColumns:', formColumns);
+                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('row:', row);
                 throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
             }
         }
@@ -6472,7 +6474,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.getParent().getApp();
     }
     getKeyValuesFromKey(key) {
-        const tuple = JSON.parse(key);
+        const tuple = (0,_types__WEBPACK_IMPORTED_MODULE_7__.keyToKeyTuple)(key);
         if (tuple.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${tuple.length} of ${this.keyColumns.length}`);
         }
@@ -6514,7 +6516,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         if (typeof key !== 'string')
             throw new Error('key not string');
         const params = {};
-        const arr = JSON.parse(key);
+        const arr = (0,_types__WEBPACK_IMPORTED_MODULE_7__.keyToKeyTuple)(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
         }
@@ -8934,6 +8936,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 /* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+
 
 
 
@@ -8975,7 +8979,7 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         const query = context.getQuery();
         if (query.action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
-                return JSON.parse(query.newMode);
+                return _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.decodeValue(query.newMode);
             }
             throw new Error('getNewModeFromContext: newMode required');
         }
