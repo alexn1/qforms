@@ -113,7 +113,7 @@ export class ViewerModule {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
 
             // handle actions
-            const { action } = context.getQuery();
+            const action = context.getAction();
             if (action === 'page') {
                 await this.page(context, bkApplication);
             } else if (action === 'select') {
@@ -159,17 +159,9 @@ export class ViewerModule {
         await this.handleAction(context, application);
     }
 
-    getAction(context: Context): Action {
-        let { action } = context.getBody() as BaseDto;
-        if (!action) {
-            action = context.getReq()?.params.action as Action;
-        }
-        if (!action) throw new Error('no action');
-        return action;
-    }
-
     async handleAction(context: Context, application: BkApplication) {
-        const action = this.getAction(context);
+        const action = context.getAction();
+        if (!action) throw new Error('no action');
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }

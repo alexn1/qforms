@@ -4,7 +4,6 @@ import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { BkModel } from './BkModel/BkModel';
 import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
 import { NextFunction } from 'connect';
-import { Action } from '../../types';
 export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, RowForm, } from '../../frontend/viewer';
 export declare class ViewerModule {
     private hostApp;
@@ -18,7 +17,6 @@ export declare class ViewerModule {
     handlePost(context: Context, application: BkApplication): Promise<void>;
     handlePatch(context: Context, application: BkApplication): Promise<void>;
     handleDelete(context: Context, application: BkApplication): Promise<void>;
-    getAction(context: Context): Action;
     handleAction(context: Context, application: BkApplication): Promise<void>;
     renderHtml(bkApplication: BkApplication, context: Context): Promise<string>;
     loginGet(context: Context, application: BkApplication): Promise<void>;

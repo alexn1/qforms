@@ -173,7 +173,6 @@ export class ApplicationController extends ModelController<Application> {
         const { page: pageData } = await this.getModel().request('POST', body); */
 
         const query: PageActionQuery = {
-            action: 'page',
             page: options.name,
             newMode:
                 options.newMode !== undefined
@@ -186,7 +185,7 @@ export class ApplicationController extends ModelController<Application> {
 
         const { page: pageData } = await this.getModel().request2(
             'GET',
-            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
+            `${window.location.pathname}page?${Helper.queryToString(query as Query)}`,
         );
 
         // modal by default

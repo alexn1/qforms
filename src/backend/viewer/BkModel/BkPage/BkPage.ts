@@ -52,8 +52,9 @@ export class BkPage<
     }
 
     static getNewModeFromContext(context: Context): boolean {
+        const action = context.getAction();
         const query = context.getQuery() as PageActionQuery;
-        if (query.action === 'page' && query.newMode !== undefined) {
+        if (action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
                 return BkHelper.decodeValue(query.newMode);
             }

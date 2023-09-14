@@ -58,10 +58,6 @@ export interface BaseDto {
     action: Action;
 }
 
-export interface BaseQuery {
-    action: 'page';
-}
-
 export interface LoginDto extends BaseDto {
     tzOffset: JSONString<number>;
     username: string;
@@ -75,7 +71,6 @@ export interface PageActionDto extends BaseDto {
 }
 
 export interface PageActionQuery extends ParsedQs {
-    action: 'page';
     page: string;
     newMode?: JSONString<boolean>;
     params?: Record<string, JSONString<Nullable<Scalar>>>;
@@ -110,7 +105,7 @@ export interface UpdateActionDto {
     changes: ChangesByKey;
 }
 
-export interface DeleteActionDto  {
+export interface DeleteActionDto {
     page: string;
     form: string;
     uuid: string;

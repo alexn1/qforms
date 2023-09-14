@@ -281,22 +281,36 @@ export class BackHostApp {
         this.express.get('/monitor', this.monitorGet.bind(this));
 
         // viewer/editor module
+
+        // GET
         this.express.get(
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.moduleGet.bind(this),
         );
+        this.express.get(
+            '/:module/:appDirName/:appFileName/:env/:domain/:action',
+            this.moduleGet.bind(this),
+        );
+
+        // POST
         this.express.post(
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.modulePost.bind(this),
         );
+
+        // PATCH
         this.express.patch(
             '/:module/:appDirName/:appFileName/:env/:domain/:action',
             this.modulePatch.bind(this),
         );
+
+        // DELETE
         this.express.delete(
             '/:module/:appDirName/:appFileName/:env/:domain/:action',
             this.moduleDelete.bind(this),
         );
+
+        // GET file
         this.express.get(
             '/:module/:appDirName/:appFileName/:env/:domain/*',
             this.moduleGetFile.bind(this),

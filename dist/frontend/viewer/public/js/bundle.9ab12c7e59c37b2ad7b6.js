@@ -6073,14 +6073,13 @@ const _ApplicationController = class _ApplicationController extends _ModelContro
         return pageController;
       }
       const query = {
-        action: "page",
         page: options.name,
         newMode: options.newMode !== void 0 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode) : void 0,
         params: options.params ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params) : void 0
       };
       const { page: pageData } = yield this.getModel().request2(
         "GET",
-        `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`
+        `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`
       );
       if (options.modal === void 0) {
         options.modal = true;

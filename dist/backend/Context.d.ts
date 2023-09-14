@@ -1,7 +1,7 @@
 /// <reference types="express-session" />
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Nullable, Optional } from '../types';
+import { Action, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 export type RequestEx = Request & {
@@ -53,6 +53,7 @@ export declare class Context {
     getAllParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;
+    getAction(): Nullable<Action>;
     static getIpFromReq(req: Request): string;
     destroy(): void;
 }

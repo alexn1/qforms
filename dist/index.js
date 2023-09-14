@@ -956,6 +956,7 @@ class BackHostApp {
         }
         this.express.get('/monitor', this.monitorGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/:action', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/:action', this.modulePatch.bind(this));
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/:action', this.moduleDelete.bind(this));
@@ -2130,7 +2131,8 @@ class Context {
     }
     getQueryParams() {
         const req = this.getReq();
-        if (req && ['page', 'select'].includes(req.query.action) && req.query.params) {
+        const action = this.getAction();
+        if (req && action && ['page', 'select'].includes(action) && req.query.params) {
             return _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.decodeObject(req.query.params);
         }
         return {};
@@ -2270,6 +2272,14 @@ class Context {
         const req = this.getReq();
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         return new URL(fullUrl);
+    }
+    getAction() {
+        var _a;
+        let { action } = this.getBody();
+        if (!action) {
+            action = (_a = this.getReq()) === null || _a === void 0 ? void 0 : _a.params.action;
+        }
+        return action || null;
     }
     static getIpFromReq(req) {
         return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -9043,8 +9053,9 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return response;
     }
     static getNewModeFromContext(context) {
+        const action = context.getAction();
         const query = context.getQuery();
-        if (query.action === 'page' && query.newMode !== undefined) {
+        if (action === 'page' && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
                 return _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.decodeValue(query.newMode);
             }
@@ -9287,7 +9298,7 @@ class ViewerModule {
         }
         else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-            const { action } = context.getQuery();
+            const action = context.getAction();
             if (action === 'page') {
                 await this.page(context, bkApplication);
             }
@@ -9326,18 +9337,10 @@ class ViewerModule {
         }
         await this.handleAction(context, application);
     }
-    getAction(context) {
-        var _a;
-        let { action } = context.getBody();
-        if (!action) {
-            action = (_a = context.getReq()) === null || _a === void 0 ? void 0 : _a.params.action;
-        }
+    async handleAction(context, application) {
+        const action = context.getAction();
         if (!action)
             throw new Error('no action');
-        return action;
-    }
-    async handleAction(context, application) {
-        const action = this.getAction(context);
         if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
         }
@@ -14752,7 +14755,6 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             return pageController;
         }
         const query = {
-            action: 'page',
             page: options.name,
             newMode: options.newMode !== undefined
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
@@ -14761,7 +14763,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`);
+        const { page: pageData } = await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`);
         if (options.modal === undefined) {
             options.modal = true;
         }

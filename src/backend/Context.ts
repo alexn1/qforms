@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { JSONString, Nullable, Optional } from '../types';
+import { Action, BaseDto, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { BkHelper } from './BkHelper';
@@ -52,7 +52,8 @@ export class Context {
 
     getQueryParams(): Record<string, any> {
         const req = this.getReq();
-        if (req && ['page', 'select'].includes(req.query.action as string) && req.query.params) {
+        const action = this.getAction();
+        if (req && action && ['page', 'select'].includes(action) && req.query.params) {
             return BkHelper.decodeObject(req.query.params);
         }
         return {};
@@ -227,6 +228,14 @@ export class Context {
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         // debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
+    }
+
+    getAction(): Nullable<Action> {
+        let { action } = this.getBody() as BaseDto;
+        if (!action) {
+            action = this.getReq()?.params.action as Action;
+        }
+        return action || null;
     }
 
     static getIpFromReq(req: Request): string {

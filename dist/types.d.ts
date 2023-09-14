@@ -35,9 +35,6 @@ export type Action = 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc'
 export interface BaseDto {
     action: Action;
 }
-export interface BaseQuery {
-    action: 'page';
-}
 export interface LoginDto extends BaseDto {
     tzOffset: JSONString<number>;
     username: string;
@@ -49,7 +46,6 @@ export interface PageActionDto extends BaseDto {
     params?: Record<string, Scalar>;
 }
 export interface PageActionQuery extends ParsedQs {
-    action: 'page';
     page: string;
     newMode?: JSONString<boolean>;
     params?: Record<string, JSONString<Nullable<Scalar>>>;
