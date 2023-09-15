@@ -1,6 +1,18 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
 import supertest from 'supertest';
-import { Helper, PageActionResponse, Result, keyToKeyTuple, SelectActionResponse } from '../dist';
+import {
+    Helper,
+    PageActionResponse,
+    Result,
+    keyToKeyTuple,
+    SelectActionResponse,
+    keyTupleToKey,
+    UpdateActionDto,
+    ChangesByKey,
+    Row,
+    RawRow,
+    InsertActionDto,
+} from '../dist';
 import { SampleBackHostApp } from '../apps/sample/SampleBackHostApp';
 import '../apps/sample/SampleBkApplication';
 import '../apps/sample/public/js/SampleApplicationController';
@@ -42,18 +54,18 @@ describe('SampleBackHostApp', () => {
             updated: new Date(),
             first_name: 'first',
             last_name: 'last',
-        };
+        } as unknown as Row;
 
         test('create', async () => {
-            const { status, body } = await supertest(httpServer)
-                .post(PATHNAME)
-                .send({
-                    action: 'insert',
-                    form: FORM,
-                    page: PAGE,
-                    uuid: UUID,
-                    row: Helper.encodeObject(row),
-                });
+            const rawRow = Helper.encodeObject(row) as RawRow;
+            const data: InsertActionDto = {
+                uuid: UUID,
+                action: 'insert',
+                form: FORM,
+                page: PAGE,
+                row: rawRow,
+            };
+            const { status, body } = await supertest(httpServer).post(PATHNAME).send(data);
             expect(status).toBe(201);
             const result: Result = body;
             const [key] = result.default.person.insert!;
@@ -67,6 +79,22 @@ describe('SampleBackHostApp', () => {
             expect(status).toBe(200);
             const response: SelectActionResponse = body;
             expect(Helper.decodeObject(response.rows[0])).toEqual({ id: personId, ...row });
+        });
+
+        test('update', async () => {
+            const key = keyTupleToKey([personId]);
+            const row = { first_name: 'changed field' } as unknown as Row;
+            const rawRow = Helper.encodeObject(row) as RawRow;
+            const data: UpdateActionDto = {
+                uuid: UUID,
+                page: PAGE,
+                form: FORM,
+                changes: { [key]: rawRow },
+            };
+            const { status, body } = await supertest(httpServer)
+                .patch(`${PATHNAME}update`)
+                .send(data);
+            expect(status).toBe(200);
         });
     });
 });
