@@ -362,7 +362,7 @@ export class ViewerModule {
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 return result;
             });
-            context.getRes().json(result);
+            context.getRes().status(201).json(result);
             this.hostApp.broadcastResult(application, context, result);
         });
     }
