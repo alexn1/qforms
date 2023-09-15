@@ -41322,13 +41322,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const table = this.getAttr('table');
         if (table === '')
             throw new Error('no data source table to insert');
-        const result = await this.getApp().request('POST', {
+        const body = {
             action: 'insert',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             row: this.getRowWithChanges(row),
-        });
+        };
+        const result = await this.getApp().request('POST', body);
         const [key] = Object.keys(result[database][table].insertEx);
         if (!key)
             throw new Error('no inserted row key');
@@ -41447,10 +41448,10 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             ds: this.getName(),
             params: _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
         };
-        const data = await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`);
-        if (!(data.rows instanceof Array))
+        const response = (await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
+        if (!(response.rows instanceof Array))
             throw new Error('rows must be array');
-        return data;
+        return response;
     }
     isPersistent() {
         return true;

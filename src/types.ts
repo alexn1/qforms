@@ -102,6 +102,12 @@ export interface InsertActionDto extends BaseDto {
     uuid: string;
 }
 
+export interface SelectActionResponse {
+    rows: RawRow[];
+    count: Nullable<number>;
+    time: number;
+}
+
 export interface UpdateActionDto {
     page: string;
     form: string;

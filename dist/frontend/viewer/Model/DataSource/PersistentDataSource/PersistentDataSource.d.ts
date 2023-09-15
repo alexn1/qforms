@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import { Key, RawRow } from '../../../../../types';
+import { Key, RawRow, SelectActionResponse } from '../../../../../types';
 import { Result } from '../../../../../Result';
 export declare class PersistentDataSource extends DataSource {
     insert(row: RawRow): Promise<Result>;
@@ -9,13 +9,11 @@ export declare class PersistentDataSource extends DataSource {
     onTableInsert: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;
     onTableRefresh: (e: any) => Promise<void>;
-    getPageParams(): {
-        [x: string]: any;
-    };
+    getPageParams(): Record<string, any>;
     refresh(): Promise<void>;
     refill(): Promise<void>;
-    fill(frame: any): Promise<void>;
+    fill(frame: number): Promise<void>;
     more(): Promise<void>;
-    select(params?: Record<string, any>): Promise<any>;
+    select(params?: Record<string, any>): Promise<SelectActionResponse>;
     isPersistent(): boolean;
 }

@@ -32,6 +32,7 @@ import {
     RpcActionDto,
     SelectActionDto,
     SelectActionQuery,
+    SelectActionResponse,
     UpdateActionDto,
 } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
@@ -329,7 +330,8 @@ export class ViewerModule {
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             debug('select time:', time);
-            context.getRes().json({ rows, count, time });
+            const response: SelectActionResponse = { rows, count, time };
+            context.getRes().json(response);
         });
     }
 

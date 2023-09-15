@@ -1,13 +1,10 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
-import { inspect } from 'util';
 import supertest from 'supertest';
-
+import { Helper, PageActionResponse, Result, keyToKeyTuple, SelectActionResponse } from '../dist';
 import { SampleBackHostApp } from '../apps/sample/SampleBackHostApp';
-
 import '../apps/sample/SampleBkApplication';
 import '../apps/sample/public/js/SampleApplicationController';
 import '../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView';
-import { Helper, PageActionResponse } from '../dist';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
@@ -30,35 +27,46 @@ describe('SampleBackHostApp', () => {
         const { status, body } = await supertest(httpServer).get(
             `${PATHNAME}page?name=Person&params[key]=2`,
         );
-        const response: PageActionResponse = body;
         expect(status).toBe(200);
+        // const response: PageActionResponse = body;
         // console.debug(response);
     });
 
-    test('select action', async () => {
-        const { status, body } = await supertest(httpServer).get(
-            `${PATHNAME}select?page=Person&form=Person&ds=default&params[key]=2`,
-        );
-        expect(status).toBe(200);
-        // console.debug(body);
-    });
+    describe('crud', () => {
+        const UUID = '561fe598-6d9f-4deb-aec3-80247187d35a';
+        const PAGE = 'Person';
+        const FORM = 'Person';
+        let personId: number;
+        let row = {
+            created: new Date(),
+            updated: new Date(),
+            first_name: 'first',
+            last_name: 'last',
+        };
 
-    test('insert action', async () => {
-        const { status, body } = await supertest(httpServer)
-            .post(PATHNAME)
-            .send({
-                uuid: '561fe598-6d9f-4deb-aec3-80247187d35a',
-                action: 'insert',
-                form: 'Person',
-                page: 'Person',
-                row: Helper.encodeObject({
-                    created: new Date(),
-                    updated: new Date(),
-                    first_name: 'first',
-                    last_name: 'last',
-                }),
-            });
-        expect(status).toBe(201);
-        console.debug(body);
+        test('create', async () => {
+            const { status, body } = await supertest(httpServer)
+                .post(PATHNAME)
+                .send({
+                    action: 'insert',
+                    form: FORM,
+                    page: PAGE,
+                    uuid: UUID,
+                    row: Helper.encodeObject(row),
+                });
+            expect(status).toBe(201);
+            const result: Result = body;
+            const [key] = result.default.person.insert!;
+            [personId] = keyToKeyTuple(key) as [number];
+        });
+
+        test('read', async () => {
+            const { status, body } = await supertest(httpServer).get(
+                `${PATHNAME}select?page=${PAGE}&form=${FORM}&ds=default&params[key]=${personId}`,
+            );
+            expect(status).toBe(200);
+            const response: SelectActionResponse = body;
+            expect(Helper.decodeObject(response.rows[0])).toEqual({ id: personId, ...row });
+        });
     });
 });
