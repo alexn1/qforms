@@ -1952,14 +1952,16 @@ class BkHelper {
     }
     static decodeValue(rawValue) {
         if (rawValue === undefined)
-            throw new Error('decodeValue undefined');
+            throw new Error('decodeValue: undefined');
         if (rawValue === null)
-            throw new Error('decodeValue null');
+            throw new Error('decodeValue: null');
+        if (rawValue === '')
+            throw new Error('decodeValue: empty string');
         try {
             return JSON.parse(rawValue, BkHelper.dateTimeReviver);
         }
         catch (err) {
-            throw new Error(`decodeValue failed: ${rawValue}`);
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
         }
     }
     static encodeValue(value) {
@@ -20016,7 +20018,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
-            params: Object.assign(Object.assign({}, this.getPageParams()), params),
+            params: _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
         };
         const data = await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`);
         if (!(data.rows instanceof Array))

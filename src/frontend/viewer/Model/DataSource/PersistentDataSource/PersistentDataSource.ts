@@ -2,6 +2,7 @@ import { DataSource } from '../DataSource';
 import {
     DeleteActionDto,
     InsertActionDto,
+    JSONString,
     Key,
     Query,
     RawRow,
@@ -267,10 +268,10 @@ export class PersistentDataSource extends DataSource {
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
-            params: {
+            params: Helper.encodeObject<JSONString<any>>({
                 ...this.getPageParams(),
                 ...params,
-            },
+            }),
         };
 
         const data = await this.getApp().request2(

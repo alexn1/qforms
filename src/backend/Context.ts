@@ -4,6 +4,7 @@ import { Action, BaseDto, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { BkHelper } from './BkHelper';
+import { pConsole } from '../pConsole';
 
 export type RequestEx = Request & {
     session: Session;
@@ -51,6 +52,7 @@ export class Context {
     }
 
     getQueryParams(): Record<string, any> {
+        // pConsole.debug('getQueryParams:', this.getReq()?.query?.params);
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && ['page', 'select'].includes(action) && req.query.params) {

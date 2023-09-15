@@ -375,12 +375,13 @@ export class BkHelper {
     }
 
     static decodeValue(rawValue: JSONString): any {
-        if (rawValue === undefined) throw new Error('decodeValue undefined');
-        if (rawValue === null) throw new Error('decodeValue null');
+        if (rawValue === undefined) throw new Error('decodeValue: undefined');
+        if (rawValue === null) throw new Error('decodeValue: null');
+        if (rawValue === '') throw new Error('decodeValue: empty string');
         try {
             return JSON.parse(rawValue, BkHelper.dateTimeReviver);
         } catch (err) {
-            throw new Error(`decodeValue failed: ${rawValue}`);
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
         }
     }
 
