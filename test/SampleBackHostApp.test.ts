@@ -1,16 +1,16 @@
-const { test, describe, expect, beforeAll, afterAll } = require('@jest/globals');
-const { inspect } = require('util');
-const supertest = require('supertest');
+import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
+import { inspect } from 'util';
+import supertest from 'supertest';
 
-const { SampleBackHostApp } = require('../apps/sample/SampleBackHostApp');
+import { SampleBackHostApp } from '../apps/sample/SampleBackHostApp';
 
-require('../apps/sample/SampleBkApplication');
-require('../apps/sample/public/js/SampleApplicationController');
-require('../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView');
+import '../apps/sample/SampleBkApplication';
+import '../apps/sample/public/js/SampleApplicationController';
+import '../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView';
 
 describe('SampleBackHostApp', () => {
-    let app;
-    let httpServer;
+    let app: SampleBackHostApp;
+    let httpServer: any;
     const PATHNAME = '/viewer/sample/sample/local/localhost/';
 
     beforeAll(async () => {
@@ -27,7 +27,7 @@ describe('SampleBackHostApp', () => {
 
     test('page action', async () => {
         const { status, body } = await supertest(httpServer).get(
-            `${PATHNAME}?action=page&page=Person&params[key]=2`,
+            `${PATHNAME}page?name=Person&params[key]=2`,
         );
         expect(status).toBe(200);
         // console.debug(body);
@@ -35,7 +35,7 @@ describe('SampleBackHostApp', () => {
 
     test('select action', async () => {
         const { status, body } = await supertest(httpServer).get(
-            `${PATHNAME}?action=select&page=Person&form=Person&ds=default&params[key]=2`,
+            `${PATHNAME}select?page=Person&form=Person&ds=default&params[key]=2`,
         );
         expect(status).toBe(200);
         // console.debug(body);
