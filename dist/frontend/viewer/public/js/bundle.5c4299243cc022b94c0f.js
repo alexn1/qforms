@@ -36309,7 +36309,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`);
+        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
         if (options.modal === undefined) {
             options.modal = true;
         }

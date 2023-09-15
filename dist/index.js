@@ -9450,10 +9450,11 @@ class ViewerModule {
         try {
             await application.initContext(context);
             const page = await application.getPage(context, pageLinkName);
-            const response = await page.fill(context);
-            if (response === undefined)
-                throw new Error('page action: response is undefined');
-            context.getRes().json({ page: response });
+            const pageData = await page.fill(context);
+            if (pageData === undefined)
+                throw new Error('page action: pageData is undefined');
+            const response = { page: pageData };
+            context.getRes().json(response);
         }
         finally {
             await application.release(context);
@@ -14764,7 +14765,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`);
+        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
         if (options.modal === undefined) {
             options.modal = true;
         }

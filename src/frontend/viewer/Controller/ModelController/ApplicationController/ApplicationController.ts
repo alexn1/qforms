@@ -5,6 +5,7 @@ import {
     PageActionQuery,
     Nullable,
     Query,
+    PageActionResponse,
 } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
@@ -183,10 +184,10 @@ export class ApplicationController extends ModelController<Application> {
                 : undefined,
         };
 
-        const { page: pageData } = await this.getModel().request2(
+        const { page: pageData } = (await this.getModel().request2(
             'GET',
             `${window.location.pathname}page?${Helper.queryToString(query as Query)}`,
-        );
+        )) as PageActionResponse;
 
         // modal by default
         if (options.modal === undefined) {

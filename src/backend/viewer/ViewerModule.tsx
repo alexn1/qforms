@@ -28,6 +28,7 @@ import {
     Nullable,
     PageActionDto,
     PageActionQuery,
+    PageActionResponse,
     RpcActionDto,
     SelectActionDto,
     SelectActionQuery,
@@ -307,9 +308,10 @@ export class ViewerModule {
         try {
             await application.initContext(context);
             const page = await application.getPage(context, pageLinkName);
-            const response = await page.fill(context);
-            if (response === undefined) throw new Error('page action: response is undefined');
-            context.getRes().json({ page: response });
+            const pageData = await page.fill(context);
+            if (pageData === undefined) throw new Error('page action: pageData is undefined');
+            const response: PageActionResponse = { page: pageData };
+            context.getRes().json(response);
         } finally {
             await application.release(context);
         }

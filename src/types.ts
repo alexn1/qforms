@@ -1,4 +1,5 @@
 import { ParsedQs } from 'qs';
+import { PageData } from './common';
 
 export type Scalar = string | number | boolean;
 
@@ -81,6 +82,10 @@ export interface SelectActionDto extends BaseDto {
     form: Nullable<string>;
     ds: string;
     params: Record<string, any>;
+}
+
+export interface PageActionResponse {
+    page: PageData;
 }
 
 export interface SelectActionQuery extends ParsedQs {
