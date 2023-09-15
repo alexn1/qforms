@@ -40,8 +40,20 @@ describe('SampleBackHostApp', () => {
             `${PATHNAME}page?name=${PAGE}&params[key]=1`,
         );
         expect(status).toBe(200);
-        // const response: PageActionResponse = body;
-        // console.debug(response.page);
+        const response: PageActionResponse = body;
+        delete response.page.actions;
+        delete response.page.dataSources;
+        // @ts-ignore
+        delete response.page.forms;
+        expect(response.page).toEqual({
+            name: 'Person',
+            caption: 'Person',
+            cssBlock: '',
+            viewClass: '',
+            ctrlClass: '',
+            formInTab: 'false',
+            newMode: false,
+        });
     });
 
     describe('crud', () => {
