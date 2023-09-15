@@ -1,11 +1,11 @@
-const { test, describe, expect, beforeAll, afterAll } = require('@jest/globals');
-const { inspect } = require('util');
-const supertest = require('supertest');
-const { BackHostApp } = require('../dist');
+import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
+import { inspect } from 'util';
+import supertest from 'supertest';
+import { BackHostApp } from '../dist';
 
 describe('BackHostApp', () => {
-    let app;
-    let httpServer;
+    let app: BackHostApp;
+    let httpServer: any;
 
     beforeAll(async () => {
         app = new BackHostApp({ port: 7002 });
