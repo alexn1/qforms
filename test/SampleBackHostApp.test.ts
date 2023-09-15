@@ -1,17 +1,17 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
 import supertest from 'supertest';
 import {
+    Key,
     Helper,
     PageActionResponse,
     Result,
     keyToKeyTuple,
     SelectActionResponse,
-    keyTupleToKey,
     UpdateActionDto,
-    ChangesByKey,
     Row,
     RawRow,
     InsertActionDto,
+    DeleteActionDto,
 } from '../dist';
 import { SampleBackHostApp } from '../apps/sample/SampleBackHostApp';
 import '../apps/sample/SampleBkApplication';
@@ -22,13 +22,13 @@ describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
     let httpServer: any;
     const PATHNAME = '/viewer/sample/sample/local/localhost/';
+    const PAGE = 'Person';
+    const FORM = 'Person';
 
     beforeAll(async () => {
         app = new SampleBackHostApp();
         await app.init();
         httpServer = app.getHttpServer();
-        // console.debug(`httpServer`, inspect(httpServer, false, 1));
-        // await app.run();
     });
 
     afterAll(async () => {
@@ -37,24 +37,23 @@ describe('SampleBackHostApp', () => {
 
     test('page action', async () => {
         const { status, body } = await supertest(httpServer).get(
-            `${PATHNAME}page?name=Person&params[key]=2`,
+            `${PATHNAME}page?name=${PAGE}&params[key]=1`,
         );
         expect(status).toBe(200);
         // const response: PageActionResponse = body;
-        // console.debug(response);
+        // console.debug(response.page);
     });
 
     describe('crud', () => {
         const UUID = '561fe598-6d9f-4deb-aec3-80247187d35a';
-        const PAGE = 'Person';
-        const FORM = 'Person';
-        let personId: number;
         let row = {
             created: new Date(),
             updated: new Date(),
             first_name: 'first',
             last_name: 'last',
         } as unknown as Row;
+        let personId: number;
+        let key: Key;
 
         test('create', async () => {
             const rawRow = Helper.encodeObject(row) as RawRow;
@@ -68,7 +67,7 @@ describe('SampleBackHostApp', () => {
             const { status, body } = await supertest(httpServer).post(PATHNAME).send(data);
             expect(status).toBe(201);
             const result: Result = body;
-            const [key] = result.default.person.insert!;
+            [key] = result.default.person.insert!;
             [personId] = keyToKeyTuple(key) as [number];
         });
 
@@ -82,9 +81,7 @@ describe('SampleBackHostApp', () => {
         });
 
         test('update', async () => {
-            const key = keyTupleToKey([personId]);
-            const row = { first_name: 'changed field' } as unknown as Row;
-            const rawRow = Helper.encodeObject(row) as RawRow;
+            const rawRow = Helper.encodeObject({ first_name: 'changed field' }) as RawRow;
             const data: UpdateActionDto = {
                 uuid: UUID,
                 page: PAGE,
@@ -95,6 +92,25 @@ describe('SampleBackHostApp', () => {
                 .patch(`${PATHNAME}update`)
                 .send(data);
             expect(status).toBe(200);
+            const result: Result = body;
+            expect(result.default.person.updateEx![key].first_name).toBe(
+                Helper.encodeValue('changed field'),
+            );
+        });
+
+        test('delete', async () => {
+            const data: DeleteActionDto = {
+                uuid: UUID,
+                page: PAGE,
+                form: FORM,
+                params: { key },
+            };
+            const { status, body } = await supertest(httpServer)
+                .delete(`${PATHNAME}_delete`)
+                .send(data);
+            expect(status).toBe(200);
+            const result: Result = body;
+            expect(result.default.person.delete).toEqual([key]);
         });
     });
 });
