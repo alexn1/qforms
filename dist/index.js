@@ -2290,10 +2290,9 @@ class Context {
         return new URL(fullUrl);
     }
     getAction() {
-        var _a;
         let { action } = this.getBody();
         if (!action) {
-            action = (_a = this.getReq()) === null || _a === void 0 ? void 0 : _a.params.action;
+            action = this.getQuery().action;
         }
         return action || null;
     }

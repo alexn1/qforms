@@ -235,7 +235,7 @@ export class Context {
     getAction(): Nullable<Action> {
         let { action } = this.getBody() as BaseDto;
         if (!action) {
-            action = this.getReq()?.params.action as Action;
+            action = this.getQuery().action as Action;
         }
         return action || null;
     }
