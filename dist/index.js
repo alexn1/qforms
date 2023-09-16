@@ -1690,7 +1690,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+
 
 
 
@@ -1788,7 +1791,7 @@ class BkHelper {
         });
     }
     static async getFileContent(filePath) {
-        if (await BkHelper.exists(filePath)) {
+        if (await BkHelper.exists2(filePath)) {
             return BkHelper.readTextFile(filePath);
         }
         return null;
@@ -1800,7 +1803,7 @@ class BkHelper {
         return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.readBinaryFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(filePath, (err, data) => {
                 if (err) {
@@ -1827,14 +1830,14 @@ class BkHelper {
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
-            const exists = await BkHelper.exists(dirPath);
+            const exists = await BkHelper.exists2(dirPath);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
             }
         }
     }
     static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.createDirIfNotExists'), dirPath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
                 if (exists) {
@@ -1885,15 +1888,22 @@ class BkHelper {
             rd.pipe(wr);
         });
     }
-    static exists(path) {
-        return new Promise((resolve) => {
-            fs__WEBPACK_IMPORTED_MODULE_0___default().exists(path, (exists) => {
-                resolve(exists);
-            });
-        });
+    static async exists2(path) {
+        try {
+            await (0,node_fs_promises__WEBPACK_IMPORTED_MODULE_6__.access)(path);
+            return true;
+        }
+        catch (err) {
+            if (err.code === 'ENOENT') {
+                return false;
+            }
+            else {
+                throw err;
+            }
+        }
     }
     static writeFile(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -1906,7 +1916,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFileSync'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFileSync'), filePath);
         return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -2542,7 +2552,7 @@ class JsonFile {
         this.content = null;
     }
     async create() {
-        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.exists(this.filePath);
+        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.exists2(this.filePath);
         if (exists)
             throw new Error(`File ${this.filePath} already exists`);
         if (this.data) {
@@ -3271,7 +3281,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         return this.editorPath;
     }
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists(newFilePath);
+        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(newFilePath);
         if (exists) {
             throw new Error(`File ${path__WEBPACK_IMPORTED_MODULE_0___default().basename(newFilePath)} already exists.`);
         }
@@ -3282,13 +3292,13 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
     }
     async getFile(filePath) {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Editor.getFile', filePath);
-        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists(filePath);
+        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(filePath);
         if (exists) {
             return await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(filePath);
         }
     }
     async saveFile(filePath, content) {
-        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists(filePath);
+        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
@@ -6361,7 +6371,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     async handleGetFile(context, next) {
         const filePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), context.getUri());
-        if (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.exists(filePath)) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_12__.pConsole.debug(`filePath: ${filePath}`);
+        if (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.exists2(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {
@@ -6460,7 +6471,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         await super.init(context);
         this.keyColumns = this.getKeyColumns();
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists(jsonFilePath);
+        const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(jsonFilePath);
         if (exists) {
             const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
@@ -22153,6 +22164,17 @@ module.exports = require("http");
 
 /***/ }),
 
+/***/ "node:fs/promises":
+/*!***********************************!*\
+  !*** external "node:fs/promises" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:fs/promises");
+
+/***/ }),
+
 /***/ "path":
 /*!***********************!*\
   !*** external "path" ***!
@@ -22182,7 +22204,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.38.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev node apps/sample/start.js port=7001","start:sample:nodemon":"NODE_ENV=dev nodemon --watch apps/sample apps/sample/start.js port=7001","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.38.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev node apps/sample/start.js port=7001","start:sample:bun":"NODE_ENV=dev bun apps/sample/start.js port=7001","start:sample:nodemon":"NODE_ENV=dev nodemon --watch apps/sample apps/sample/start.js port=7001","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 

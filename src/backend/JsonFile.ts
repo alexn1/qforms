@@ -9,7 +9,7 @@ export class JsonFile {
     constructor(public filePath: string, public data: any = null) {}
 
     async create(): Promise<void> {
-        const exists = await BkHelper.exists(this.filePath);
+        const exists = await BkHelper.exists2(this.filePath);
         if (exists) throw new Error(`File ${this.filePath} already exists`);
         if (this.data) {
         } else if (this.content) {

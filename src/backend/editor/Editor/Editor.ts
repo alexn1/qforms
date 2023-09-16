@@ -22,7 +22,7 @@ export class Editor<
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
-        const exists = await BkHelper.exists(newFilePath);
+        const exists = await BkHelper.exists2(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
@@ -36,7 +36,7 @@ export class Editor<
     } */
 
     async createFileByParams(newFilePath: string, templateFilePath: string, params) {
-        const exists = await BkHelper.exists(newFilePath);
+        const exists = await BkHelper.exists2(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
@@ -52,14 +52,14 @@ export class Editor<
 
     async getFile(filePath: string) {
         debug('Editor.getFile', filePath);
-        const exists = await BkHelper.exists(filePath);
+        const exists = await BkHelper.exists2(filePath);
         if (exists) {
             return await BkHelper.readTextFile(filePath);
         }
     }
 
     async saveFile(filePath: string, content: string): Promise<void> {
-        const exists = await BkHelper.exists(filePath);
+        const exists = await BkHelper.exists2(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }

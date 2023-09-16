@@ -541,7 +541,8 @@ export class BkApplication<
     async handleGetFile(context: Context, next: NextFunction) {
         // debug('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
-        if (await BkHelper.exists(filePath)) {
+        pConsole.debug(`filePath: ${filePath}`);
+        if (await BkHelper.exists2(filePath)) {
             // context.setVersionHeaders(pkg.version, this.getVersion());
             context.getRes().sendFile(filePath);
         } else {

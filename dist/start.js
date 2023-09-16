@@ -163,7 +163,8 @@ start(...process.argv).then((code) => {
 async function start(...argv) {
     _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('start');
     try {
-        const backHostApp = new _index__WEBPACK_IMPORTED_MODULE_0__.BackHostApp(Object.assign(Object.assign({}, _index__WEBPACK_IMPORTED_MODULE_0__.BkHelper.argvAsKeyValue(argv)), { monitor: MONITOR_CONFIG }));
+        const params = _index__WEBPACK_IMPORTED_MODULE_0__.BkHelper.argvAsKeyValue(argv);
+        const backHostApp = new _index__WEBPACK_IMPORTED_MODULE_0__.BackHostApp(Object.assign(Object.assign({}, params), { port: params.port ? parseInt(params.port) : undefined, monitor: MONITOR_CONFIG }));
         await backHostApp.init();
         await backHostApp.run();
     }

@@ -4,6 +4,7 @@ import path from 'path';
 import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
+import { access } from 'node:fs/promises';
 
 import { JSONString } from '../types';
 import { debug } from '../console';
@@ -153,7 +154,7 @@ export class BkHelper {
     }
 
     static async getFileContent(filePath: string) {
-        if (await BkHelper.exists(filePath)) {
+        if (await BkHelper.exists2(filePath)) {
             return BkHelper.readTextFile(filePath);
         }
         return null;
@@ -195,7 +196,7 @@ export class BkHelper {
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
-            const exists = await BkHelper.exists(dirPath);
+            const exists = await BkHelper.exists2(dirPath);
             // debug('dirPath', i, dirPath, exists);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
@@ -296,6 +297,8 @@ export class BkHelper {
         });
     }
 
+    /*
+    // fs.exists deprecated in node and not supported in bun
     static exists(path: fs.PathLike): Promise<boolean> {
         // debug(colors.blue('BkHelper.exists'), path);
         return new Promise((resolve) => {
@@ -303,6 +306,19 @@ export class BkHelper {
                 resolve(exists);
             });
         });
+    } */
+
+    static async exists2(path: fs.PathLike): Promise<boolean> {
+        try {
+            await access(path);
+            return true;
+        } catch (err) {
+            if (err.code === 'ENOENT') {
+                return false;
+            } else {
+                throw err;
+            }
+        }
     }
 
     static writeFile(filePath: string, content: string): Promise<void> {

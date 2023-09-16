@@ -55,7 +55,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
 
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await BkHelper.exists(jsonFilePath);
+        const exists = await BkHelper.exists2(jsonFilePath);
         if (exists) {
             const content = await BkHelper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
