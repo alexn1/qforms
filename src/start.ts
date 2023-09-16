@@ -13,8 +13,10 @@ start(...process.argv).then((code) => {
 async function start(...argv: string[]): Promise<Optional<number>> {
     pConsole.debug('start');
     try {
+        const params = BkHelper.argvAsKeyValue(argv);
         const backHostApp = new BackHostApp({
-            ...BkHelper.argvAsKeyValue(argv),
+            ...params,
+            port: params.port ? parseInt(params.port) : undefined,
             monitor: MONITOR_CONFIG,
         });
         await backHostApp.init();

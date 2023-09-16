@@ -8,8 +8,10 @@ start(...process.argv).then((code) => {
 async function start(...argv) {
     console.debug('start');
     try {
+        const params = BkHelper.argvAsKeyValue(argv);
         const backHostApp = new SampleBackHostApp({
-            ...BkHelper.argvAsKeyValue(argv),
+            ...params,
+            port: params.port ? parseInt(params.port) : undefined,
         });
         await backHostApp.init();
         await backHostApp.run();

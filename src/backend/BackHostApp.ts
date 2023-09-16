@@ -117,7 +117,10 @@ export class BackHostApp {
     }
 
     getPort(): number {
-        return this.params.port || LISTEN_PORT;
+        const { port } = this.params;
+        if (port && typeof port !== 'number')
+            throw new Error(`getPort: type port error: ${typeof port}`);
+        return port || LISTEN_PORT;
     }
 
     createHttpServer(): void {

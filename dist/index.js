@@ -839,7 +839,10 @@ class BackHostApp {
         return this.params.host || LISTEN_HOST;
     }
     getPort() {
-        return this.params.port || LISTEN_PORT;
+        const { port } = this.params;
+        if (port && typeof port !== 'number')
+            throw new Error(`getPort: type port error: ${typeof port}`);
+        return port || LISTEN_PORT;
     }
     createHttpServer() {
         this.httpServer = http__WEBPACK_IMPORTED_MODULE_0___default().createServer(this.express);
