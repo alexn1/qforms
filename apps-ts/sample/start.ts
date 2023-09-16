@@ -1,11 +1,10 @@
+import { join } from 'path';
 import { inspect } from 'util';
 import { BkHelper, Optional } from '../../dist';
 import { SampleBackHostApp } from './index';
-import { join } from 'path';
 
-start(...process.argv).then((code) => {
-    if (code) process.exit(code);
-});
+const code = await start(...process.argv);
+if (code) process.exit(code);
 
 async function start(...argv: string[]): Promise<Optional<number>> {
     console.debug('start');
