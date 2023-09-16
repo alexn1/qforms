@@ -14,10 +14,7 @@ import {
     InsertActionDto,
     DeleteActionDto,
 } from '../dist';
-import { SampleBackHostApp } from '../apps/sample/SampleBackHostApp';
-import '../apps/sample/SampleBkApplication';
-import '../apps/sample/public/js/SampleApplicationController';
-import '../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldView';
+import { SampleBackHostApp } from '../apps/sample';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
