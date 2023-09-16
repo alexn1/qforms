@@ -304,7 +304,7 @@ export class ViewerModule {
         debug('ViewerModule.page', context.getReq()!.body.page);
         // const body = context.getBody() as PageActionDto;
         const query = context.getQuery() as PageActionQuery;
-        const pageLinkName = /* body.page || */ query.name;
+        const pageLinkName = /* body.page || */ query.page;
         await application.connect(context);
         try {
             await application.initContext(context);

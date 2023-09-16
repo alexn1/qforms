@@ -174,7 +174,8 @@ export class ApplicationController extends ModelController<Application> {
         const { page: pageData } = await this.getModel().request('POST', body); */
 
         const query: PageActionQuery = {
-            name: options.name,
+            action: 'page',
+            page: options.name,
             newMode:
                 options.newMode !== undefined
                     ? Helper.encodeValue<JSONString<boolean>>(options.newMode)
@@ -186,7 +187,7 @@ export class ApplicationController extends ModelController<Application> {
 
         const { page: pageData } = (await this.getModel().request2(
             'GET',
-            `${window.location.pathname}page?${Helper.queryToString(query as Query)}`,
+            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
         )) as PageActionResponse;
 
         // modal by default

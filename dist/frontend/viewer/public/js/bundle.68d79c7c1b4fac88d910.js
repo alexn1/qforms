@@ -36301,7 +36301,8 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             return pageController;
         }
         const query = {
-            name: options.name,
+            action: 'page',
+            page: options.name,
             newMode: options.newMode !== undefined
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
                 : undefined,
@@ -36309,7 +36310,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
+        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -41360,12 +41361,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const body = {
+            action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         };
-        const result = await this.getApp().request2('PATCH', `${window.location.pathname}update`, body);
+        const result = await this.getApp().request2('PATCH', window.location.pathname, body);
         const [key] = Object.keys(result[database][table].updateEx);
         if (!key)
             throw new Error('no updated row');
@@ -41390,12 +41392,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body = {
+            action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
         };
-        const result = await this.getApp().request2('DELETE', `${window.location.pathname}_delete`, body);
+        const result = await this.getApp().request2('DELETE', window.location.pathname, body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
@@ -41443,12 +41446,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const page = this.getPage();
         const form = this.getForm();
         const query = {
+            action: 'select',
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
             params: _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
         };
-        const response = (await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
+        const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');
         return response;

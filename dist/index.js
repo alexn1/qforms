@@ -959,10 +959,9 @@ class BackHostApp {
         }
         this.express.get('/monitor', this.monitorGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
-        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/:action', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
-        this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/:action', this.modulePatch.bind(this));
-        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/:action', this.moduleDelete.bind(this));
+        this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
+        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
@@ -1456,7 +1455,7 @@ class BackHostApp {
         return this.frontendDirPath;
     }
     initCustomRoutes() { }
-    alias(method, path, [module, appDirName, appFileName, env, domain, action], cb, query) {
+    alias(method, path, [module, appDirName, appFileName, env, domain], cb, query) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
             req.params.appDirName = appDirName;
@@ -1466,9 +1465,6 @@ class BackHostApp {
             }
             if (domain) {
                 req.params.domain = domain;
-            }
-            if (action) {
-                req.params.action = action;
             }
             if (query) {
                 Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
@@ -9464,7 +9460,7 @@ class ViewerModule {
     async page(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.page', context.getReq().body.page);
         const query = context.getQuery();
-        const pageLinkName = query.name;
+        const pageLinkName = query.page;
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -14777,7 +14773,8 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             return pageController;
         }
         const query = {
-            name: options.name,
+            action: 'page',
+            page: options.name,
             newMode: options.newMode !== undefined
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
                 : undefined,
@@ -14785,7 +14782,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}page?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
+        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -19954,12 +19951,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const body = {
+            action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         };
-        const result = await this.getApp().request2('PATCH', `${window.location.pathname}update`, body);
+        const result = await this.getApp().request2('PATCH', window.location.pathname, body);
         const [key] = Object.keys(result[database][table].updateEx);
         if (!key)
             throw new Error('no updated row');
@@ -19984,12 +19982,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body = {
+            action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
         };
-        const result = await this.getApp().request2('DELETE', `${window.location.pathname}_delete`, body);
+        const result = await this.getApp().request2('DELETE', window.location.pathname, body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
@@ -20037,12 +20036,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const page = this.getPage();
         const form = this.getForm();
         const query = {
+            action: 'select',
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
             params: _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
         };
-        const response = (await this.getApp().request2('GET', `${window.location.pathname}select?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
+        const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');
         return response;

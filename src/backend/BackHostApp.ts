@@ -43,7 +43,6 @@ export type Route = [
     appFileName: string,
     env: string,
     domain?: string,
-    action?: string,
 ];
 
 export interface BackHostAppParams {
@@ -291,10 +290,6 @@ export class BackHostApp {
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.moduleGet.bind(this),
         );
-        this.express.get(
-            '/:module/:appDirName/:appFileName/:env/:domain/:action',
-            this.moduleGet.bind(this),
-        );
 
         // POST
         this.express.post(
@@ -304,13 +299,13 @@ export class BackHostApp {
 
         // PATCH
         this.express.patch(
-            '/:module/:appDirName/:appFileName/:env/:domain/:action',
+            '/:module/:appDirName/:appFileName/:env/:domain/',
             this.modulePatch.bind(this),
         );
 
         // DELETE
         this.express.delete(
-            '/:module/:appDirName/:appFileName/:env/:domain/:action',
+            '/:module/:appDirName/:appFileName/:env/:domain/',
             this.moduleDelete.bind(this),
         );
 
@@ -955,9 +950,9 @@ export class BackHostApp {
     alias(
         method: 'get' | 'post' | 'patch' | 'delete',
         path: string | RegExp,
-        [module, appDirName, appFileName, env, domain, action]: Route,
+        [module, appDirName, appFileName, env, domain]: Route,
         cb: string,
-        query?: Record<string, Scalar | null>,
+        query?: Record<string, Nullable<Scalar>>,
     ) {
         this.express[method](path, async (req: Request, res: Response, next: NextFunction) => {
             req.params.module = module;
@@ -968,9 +963,6 @@ export class BackHostApp {
             }
             if (domain) {
                 req.params.domain = domain;
-            }
-            if (action) {
-                req.params.action = action;
             }
             if (query) {
                 Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));

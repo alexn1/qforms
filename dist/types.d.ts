@@ -47,7 +47,8 @@ export interface PageActionDto extends BaseDto {
     params?: Record<string, Scalar>;
 }
 export interface PageActionQuery extends ParsedQs {
-    name: string;
+    action: string;
+    page: string;
     newMode?: JSONString<boolean>;
     params?: Record<string, JSONString<Nullable<Scalar>>>;
 }
@@ -61,6 +62,7 @@ export interface PageActionResponse {
     page: PageData;
 }
 export interface SelectActionQuery extends ParsedQs {
+    action: string;
     page?: string;
     form?: string;
     ds: string;
@@ -78,12 +80,14 @@ export interface SelectActionResponse {
     time: number;
 }
 export interface UpdateActionDto {
+    action: 'update';
     page: string;
     form: string;
     uuid: string;
     changes: ChangesByKey;
 }
 export interface DeleteActionDto {
+    action: '_delete';
     page: string;
     form: string;
     uuid: string;

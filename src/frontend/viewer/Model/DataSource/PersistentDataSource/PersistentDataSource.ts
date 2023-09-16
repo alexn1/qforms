@@ -84,6 +84,7 @@ export class PersistentDataSource extends DataSource {
 
         // specific to PersistentDataSource
         const body: UpdateActionDto = {
+            action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -91,7 +92,7 @@ export class PersistentDataSource extends DataSource {
         };
         const result: Result = await this.getApp().request2(
             'PATCH',
-            `${window.location.pathname}update`,
+            window.location.pathname,
             body,
         );
 
@@ -122,6 +123,7 @@ export class PersistentDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body: DeleteActionDto = {
+            action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -129,7 +131,7 @@ export class PersistentDataSource extends DataSource {
         };
         const result: Result = await this.getApp().request2(
             'DELETE',
-            `${window.location.pathname}_delete`,
+            window.location.pathname,
             body,
         );
         await this.refill();
@@ -267,6 +269,7 @@ export class PersistentDataSource extends DataSource {
         const data = await this.getApp().request('POST', body); */
 
         const query: SelectActionQuery = {
+            action: 'select',
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
@@ -277,7 +280,7 @@ export class PersistentDataSource extends DataSource {
         };
         const response = (await this.getApp().request2(
             'GET',
-            `${window.location.pathname}select?${Helper.queryToString(query as Query)}`,
+            `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
         )) as SelectActionResponse;
 
         if (!(response.rows instanceof Array)) throw new Error('rows must be array');
