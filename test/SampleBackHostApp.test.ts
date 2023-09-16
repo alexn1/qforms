@@ -106,7 +106,9 @@ describe('SampleBackHostApp', () => {
                 .send(data);
             expect(status).toBe(200);
             const result: Result = body;
-            const first_name = Helper.decodeValue(result.default.person.updateEx![key].first_name);
+            const first_name = Helper.decodeValue(
+                result.default.person.updateEx![key].first_name,
+            ) as string;
             expect(first_name).toBe('changed field');
         });
 
