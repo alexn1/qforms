@@ -43,6 +43,7 @@ export type Route = [
     appFileName: string,
     env: string,
     domain?: string,
+    action?: string,
 ];
 
 export interface BackHostAppParams {
@@ -952,9 +953,9 @@ export class BackHostApp {
     initCustomRoutes(): void {}
 
     alias(
-        method: 'get' | 'post',
+        method: 'get' | 'post' | 'patch' | 'delete',
         path: string | RegExp,
-        [module, appDirName, appFileName, env, domain]: Route,
+        [module, appDirName, appFileName, env, domain, action]: Route,
         cb: string,
         query?: Record<string, Scalar | null>,
     ) {
@@ -967,6 +968,9 @@ export class BackHostApp {
             }
             if (domain) {
                 req.params.domain = domain;
+            }
+            if (action) {
+                req.params.action = action;
             }
             if (query) {
                 Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
@@ -995,6 +999,8 @@ export class BackHostApp {
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void {
         this.alias('get', path, route, 'moduleGet', query);
         this.alias('post', path, route, 'modulePost', query);
+        this.alias('patch', path, route, 'modulePatch', query);
+        this.alias('delete', path, route, 'moduleDelete', query);
     }
 
     getNodeEnv(): Nullable<string> {

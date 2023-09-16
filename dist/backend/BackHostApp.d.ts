@@ -19,7 +19,8 @@ export type Route = [
     appDirName: string,
     appFileName: string,
     env: string,
-    domain?: string
+    domain?: string,
+    action?: string
 ];
 export interface BackHostAppParams {
     [name: string]: any;
@@ -123,7 +124,7 @@ export declare class BackHostApp {
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
-    alias(method: 'get' | 'post', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
+    alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain, action]: Route, cb: string, query?: Record<string, Scalar | null>): void;
     static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;
     getNodeEnv(): Nullable<string>;
