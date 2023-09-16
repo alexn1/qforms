@@ -1,6 +1,6 @@
-const { inspect } = require('util');
-const { BkHelper } = require('../../dist');
-const { SampleBackHostApp } = require('./index');
+import { inspect } from 'util';
+import { BkHelper } from '../../dist';
+import { SampleBackHostApp } from './index';
 
 start(...process.argv).then((code) => {
     if (code) process.exit(code);

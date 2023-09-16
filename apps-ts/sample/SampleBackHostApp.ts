@@ -1,6 +1,6 @@
-const { BackHostApp } = require('../../dist');
+import { BackHostApp } from '../../dist';
 
-class SampleBackHostApp extends BackHostApp {
+export class SampleBackHostApp extends BackHostApp {
     initCustomRoutes() {
         this.getPostAlias(
             /^\/page\/Page1\/(\d+)-([a-z0-9\-]+)$/,
@@ -13,5 +13,3 @@ class SampleBackHostApp extends BackHostApp {
         );
     }
 }
-
-module.exports = { SampleBackHostApp };
