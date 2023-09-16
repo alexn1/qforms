@@ -965,7 +965,12 @@ export class BackHostApp {
                 req.params.domain = domain;
             }
             if (query) {
-                Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
+                const params = BackHostApp.getQueryFromParams(req, query);
+                for (const name in params) {
+                    if (!req.query[name]) {
+                        req.query[name] = params[name];
+                    }
+                }
             }
             // @ts-ignore
             await this[cb](req, res, next);

@@ -244,5 +244,12 @@ export class Context {
         return (req.headers['x-forwarded-for'] as string) || req.connection.remoteAddress!;
     }
 
+    getPage(): Nullable<string> {
+        if (this.getQuery().page) {
+            return this.getQuery().page as string;
+        }
+        return null;
+    }
+
     destroy(): void {}
 }

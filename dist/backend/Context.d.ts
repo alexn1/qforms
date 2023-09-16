@@ -55,5 +55,6 @@ export declare class Context {
     getUrl(): URL;
     getAction(): Nullable<Action>;
     static getIpFromReq(req: Request): string;
+    getPage(): Nullable<string>;
     destroy(): void;
 }

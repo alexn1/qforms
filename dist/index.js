@@ -1467,7 +1467,12 @@ class BackHostApp {
                 req.params.domain = domain;
             }
             if (query) {
-                Object.assign(req.query, BackHostApp.getQueryFromParams(req, query));
+                const params = BackHostApp.getQueryFromParams(req, query);
+                for (const name in params) {
+                    if (!req.query[name]) {
+                        req.query[name] = params[name];
+                    }
+                }
             }
             await this[cb](req, res, next);
         });
@@ -2298,6 +2303,12 @@ class Context {
     }
     static getIpFromReq(req) {
         return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    }
+    getPage() {
+        if (this.getQuery().page) {
+            return this.getQuery().page;
+        }
+        return null;
     }
     destroy() { }
 }
@@ -6165,7 +6176,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
             .map((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getName(data));
     }
     getPageLinksToFill(context) {
-        const pageLinkName = context.getAllParams().page;
+        const pageLinkName = context.getPage();
         if (pageLinkName) {
             return [pageLinkName];
         }

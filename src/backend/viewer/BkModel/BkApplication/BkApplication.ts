@@ -296,7 +296,7 @@ export class BkApplication<
     }
 
     getPageLinksToFill(context: Context): string[] {
-        const pageLinkName = context.getAllParams().page as string;
+        const pageLinkName = context.getPage();
         if (pageLinkName) {
             return [pageLinkName];
         }
