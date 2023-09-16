@@ -14,7 +14,7 @@ import {
     InsertActionDto,
     DeleteActionDto,
 } from '../dist';
-import { SampleBackHostApp } from '../apps/sample';
+import { SampleBackHostApp } from '../apps-ts/sample';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
@@ -24,7 +24,9 @@ describe('SampleBackHostApp', () => {
     const FORM = 'Person';
 
     beforeAll(async () => {
-        app = new SampleBackHostApp();
+        app = new SampleBackHostApp({
+            appsDirPath: './apps-ts',
+        });
         await app.init();
         httpServer = app.getHttpServer();
     });
