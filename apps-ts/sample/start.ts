@@ -1,19 +1,20 @@
 import { inspect } from 'util';
-import { BkHelper } from '../../dist';
+import { BkHelper, Optional } from '../../dist';
 import { SampleBackHostApp } from './index';
+import { join } from 'path';
 
 start(...process.argv).then((code) => {
     if (code) process.exit(code);
 });
 
-async function start(...argv) {
+async function start(...argv: string[]): Promise<Optional<number>> {
     console.debug('start');
     // console.debug('global:', inspect(global));
     try {
-        const params = BkHelper.argvAsKeyValue(argv);
         const backHostApp = new SampleBackHostApp({
-            ...params,
-            port: params.port ? parseInt(params.port) : undefined,
+            ...BkHelper.argvAsKeyValue(argv),
+            appsDirPath: join(__dirname, '../'),
+            port: 7001,
         });
         await backHostApp.init();
         await backHostApp.run();
