@@ -1,4 +1,5 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
+import { Server } from 'http';
 import supertest from 'supertest';
 import {
     Key,
@@ -20,7 +21,7 @@ import '../apps/sample/public/js/PersonsPersonsFirstNameTableFormTextBoxFieldVie
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
-    let httpServer: any;
+    let httpServer: Server;
     const PATHNAME = '/viewer/sample/sample/local/localhost/';
     const PAGE = 'Person';
     const FORM = 'Person';
@@ -64,7 +65,6 @@ describe('SampleBackHostApp', () => {
             first_name: 'first',
             last_name: 'last',
         } as unknown as Row;
-        let personId: number;
         let key: Key;
 
         test('create', async () => {
@@ -80,16 +80,17 @@ describe('SampleBackHostApp', () => {
             expect(status).toBe(201);
             const result: Result = body;
             [key] = result.default.person.insert!;
-            [personId] = keyToKeyTuple(key) as [number];
         });
 
         test('read', async () => {
+            const [id] = keyToKeyTuple(key) as [number];
             const { status, body } = await supertest(httpServer).get(
-                `${PATHNAME}select?page=${PAGE}&form=${FORM}&ds=default&params[key]=${personId}`,
+                `${PATHNAME}select?page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
             );
             expect(status).toBe(200);
             const response: SelectActionResponse = body;
-            expect(Helper.decodeObject(response.rows[0])).toEqual({ id: personId, ...row });
+            const selctedRow = Helper.decodeObject(response.rows[0]) as Row;
+            expect(selctedRow).toEqual({ id, ...row });
         });
 
         test('update', async () => {
@@ -105,9 +106,8 @@ describe('SampleBackHostApp', () => {
                 .send(data);
             expect(status).toBe(200);
             const result: Result = body;
-            expect(result.default.person.updateEx![key].first_name).toBe(
-                Helper.encodeValue('changed field'),
-            );
+            const first_name = Helper.decodeValue(result.default.person.updateEx![key].first_name);
+            expect(first_name).toBe('changed field');
         });
 
         test('delete', async () => {
