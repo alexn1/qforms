@@ -1,3 +1,4 @@
+const { inspect } = require('util');
 const { BkHelper } = require('../../dist');
 const { SampleBackHostApp } = require('./index');
 
@@ -7,6 +8,7 @@ start(...process.argv).then((code) => {
 
 async function start(...argv) {
     console.debug('start');
+    // console.debug('global:', inspect(global));
     try {
         const params = BkHelper.argvAsKeyValue(argv);
         const backHostApp = new SampleBackHostApp({
