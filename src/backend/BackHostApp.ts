@@ -29,6 +29,7 @@ import { Nullable } from '../types';
 import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
+import { checkNodeVersion } from '../system';
 
 const pkg = require('../../package.json');
 
@@ -36,6 +37,7 @@ const BACKEND_DIR_PATH = path.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
+const MIN_NODE_VERSION = 14;
 
 export type Route = [
     module: 'viewer' | 'editor',
@@ -92,7 +94,7 @@ export class BackHostApp {
     @log(LogLevel.debug)
     @time
     async init(): Promise<void> {
-        this.checkNodeVersion();
+        checkNodeVersion(MIN_NODE_VERSION);
         this.initDirPaths();
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
@@ -125,17 +127,6 @@ export class BackHostApp {
 
     createHttpServer(): void {
         this.httpServer = http.createServer(this.express);
-    }
-
-    checkNodeVersion(): void {
-        const [majorNodeVersion] = process.versions.node.split('.');
-        // debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
-        const MIN_NODE_VERSION = 14;
-        if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
-            throw new Error(
-                `min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`,
-            );
-        }
     }
 
     checkApplicationFolder(): void {
