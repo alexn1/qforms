@@ -562,7 +562,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 if (application.isAvailable()) {
@@ -574,7 +574,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 await this.editorModule.handleEditorGet(req, res, context);
             } else {
@@ -607,7 +607,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePost(context, application);
@@ -617,7 +617,7 @@ export class BackHostApp {
                     context = new Context({
                         req,
                         res,
-                        domain: this.getDomainFromRequest(req),
+                        domain: this.getDomain(req),
                     });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
@@ -654,7 +654,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePatch(context, application);
@@ -664,7 +664,7 @@ export class BackHostApp {
                 //         context = new Context({
                 //             req,
                 //             res,
-                //             domain: this.getDomainFromRequest(req),
+                //             domain: this.getDomain(req),
                 //         });
                 //         const time = await this.editorModule.handleEditorPatch(req, res, context);
                 //         // await this.logRequest(req, context, time);
@@ -701,7 +701,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handleDelete(context, application);
@@ -711,7 +711,7 @@ export class BackHostApp {
                 //         context = new Context({
                 //             req,
                 //             res,
-                //             domain: this.getDomainFromRequest(req),
+                //             domain: this.getDomain(req),
                 //         });
                 //         const time = await this.editorModule.handleEditorDelete(req, res, context);
                 //         // await this.logRequest(req, context, time);
@@ -743,7 +743,7 @@ export class BackHostApp {
                 context = new Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handleGetFile(context, application, next);
@@ -901,7 +901,7 @@ export class BackHostApp {
         } */
     }
 
-    getDomainFromRequest(req: Request): Nullable<string> {
+    static getDomainFromRequest(req: Request): Nullable<string> {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
@@ -909,6 +909,10 @@ export class BackHostApp {
         const [domain] = host.split('.');
         if (!domain) throw new Error('trouble getting a domain');
         return domain;
+    }
+
+    getDomain(req: Request): Nullable<string> {
+        return 'domain';
     }
 
     async postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void> {
@@ -921,7 +925,7 @@ export class BackHostApp {
             const data = JSON.stringify(
                 {
                     headers: req.headers,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 },
                 null,
                 4,

@@ -1156,7 +1156,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 if (application.isAvailable()) {
@@ -1170,7 +1170,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 await this.editorModule.handleEditorGet(req, res, context);
             }
@@ -1196,7 +1196,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePost(context, application);
@@ -1206,7 +1206,7 @@ class BackHostApp {
                     context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                         req,
                         res,
-                        domain: this.getDomainFromRequest(req),
+                        domain: this.getDomain(req),
                     });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                 }
@@ -1236,7 +1236,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePatch(context, application);
@@ -1263,7 +1263,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handleDelete(context, application);
@@ -1290,7 +1290,7 @@ class BackHostApp {
                 context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
                     req,
                     res,
-                    domain: this.getDomainFromRequest(req),
+                    domain: this.getDomain(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handleGetFile(context, application, next);
@@ -1415,7 +1415,7 @@ class BackHostApp {
     onHttpServerError(err) {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onHttpServerError'), err.code, err.message);
     }
-    getDomainFromRequest(req) {
+    static getDomainFromRequest(req) {
         if (!req)
             throw new Error('need req param');
         const hostPort = req.headers.host;
@@ -1427,6 +1427,9 @@ class BackHostApp {
             throw new Error('trouble getting a domain');
         return domain;
     }
+    getDomain(req) {
+        return 'domain';
+    }
     async postError(req, res, next) {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BackHostApp.postError'), req.body.message);
         const body = req.body;
@@ -1434,7 +1437,7 @@ class BackHostApp {
         try {
             const data = JSON.stringify({
                 headers: req.headers,
-                domain: this.getDomainFromRequest(req),
+                domain: this.getDomain(req),
             }, null, 4);
             await this.eventLog.log({
                 type: body.type,
