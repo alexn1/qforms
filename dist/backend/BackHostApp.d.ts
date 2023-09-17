@@ -65,7 +65,6 @@ export declare class BackHostApp {
     getHost(): string;
     getPort(): number;
     createHttpServer(): void;
-    checkNodeVersion(): void;
     checkApplicationFolder(): void;
     createTempDirsIfNotExistSync(): void;
     private createEventLog;
@@ -74,7 +73,6 @@ export declare class BackHostApp {
     initDirPaths(): void;
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;
-    getSecretSync(): string;
     initExpressServer(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     beginCreateApplication(context: Context): Promise<BkApplication>;

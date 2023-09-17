@@ -30,6 +30,7 @@ import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion } from '../system';
+import { getSecretSync } from './system-helper';
 
 const pkg = require('../../package.json');
 
@@ -210,18 +211,6 @@ export class BackHostApp {
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
-    getSecretSync(): string {
-        const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
-        let secret;
-        secret = BkHelper.getFileContentSync(secretFilePath);
-        if (secret) {
-            return secret;
-        }
-        secret = BkHelper.getRandomString(20);
-        BkHelper.writeFileSync(secretFilePath, secret);
-        return secret;
-    }
-
     initExpressServer(): void {
         // create
         this.express = express();
@@ -242,7 +231,7 @@ export class BackHostApp {
         this.express.use(
             session({
                 store: new FileSessionStore(this.sessionDirPath),
-                secret: this.getSecretSync(),
+                secret: getSecretSync(path.join(this.runtimeDirPath, 'secret.txt')),
                 // @ts-ignore
                 key: 'sid',
                 resave: false,

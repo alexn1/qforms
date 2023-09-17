@@ -773,6 +773,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
+/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../system */ "./src/system.ts");
+/* harmony import */ var _system_helper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./system-helper */ "./src/backend/system-helper.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,11 +807,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const BACKEND_DIR_PATH = path__WEBPACK_IMPORTED_MODULE_4___default().join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
+const MIN_NODE_VERSION = 14;
 class BackHostApp {
     constructor(params = {}) {
         this.params = params;
@@ -819,7 +824,7 @@ class BackHostApp {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.constructor', params);
     }
     async init() {
-        this.checkNodeVersion();
+        (0,_system__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
         this.initDirPaths();
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
@@ -846,13 +851,6 @@ class BackHostApp {
     }
     createHttpServer() {
         this.httpServer = http__WEBPACK_IMPORTED_MODULE_0___default().createServer(this.express);
-    }
-    checkNodeVersion() {
-        const [majorNodeVersion] = process.versions.node.split('.');
-        const MIN_NODE_VERSION = 14;
-        if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
-            throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
-        }
     }
     checkApplicationFolder() {
         if (!fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(this.appsDirPath)) {
@@ -917,17 +915,6 @@ class BackHostApp {
         process.on('uncaughtException', this.onUncaughtException.bind(this));
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
-    getSecretSync() {
-        const secretFilePath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt');
-        let secret;
-        secret = _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.getFileContentSync(secretFilePath);
-        if (secret) {
-            return secret;
-        }
-        secret = _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.getRandomString(20);
-        _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.writeFileSync(secretFilePath, secret);
-        return secret;
-    }
     initExpressServer() {
         var _a;
         this.express = express__WEBPACK_IMPORTED_MODULE_1___default()();
@@ -941,7 +928,7 @@ class BackHostApp {
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
         this.express.use(express_session__WEBPACK_IMPORTED_MODULE_7___default()({
             store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_17__.FileSessionStore(this.sessionDirPath),
-            secret: this.getSecretSync(),
+            secret: (0,_system_helper__WEBPACK_IMPORTED_MODULE_27__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -5929,6 +5916,33 @@ class MonitorModule {
 </body>
 </html>`;
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/backend/system-helper.ts":
+/*!**************************************!*\
+  !*** ./src/backend/system-helper.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
+/* harmony export */ });
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
+
+function getSecretSync(secretFilePath) {
+    let secret;
+    secret = _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.getFileContentSync(secretFilePath);
+    if (secret) {
+        return secret;
+    }
+    secret = _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.getRandomString(20);
+    _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.writeFileSync(secretFilePath, secret);
+    return secret;
 }
 
 
@@ -21921,6 +21935,27 @@ const pConsole = new Proxy(console, {
         return target[prop];
     },
 });
+
+
+/***/ }),
+
+/***/ "./src/system.ts":
+/*!***********************!*\
+  !*** ./src/system.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion)
+/* harmony export */ });
+function checkNodeVersion(minNodeVersion) {
+    const [majorNodeVersion] = process.versions.node.split('.');
+    if (parseInt(majorNodeVersion) < minNodeVersion) {
+        throw new Error(`min node version required ${minNodeVersion}, current ${majorNodeVersion}`);
+    }
+}
 
 
 /***/ }),
