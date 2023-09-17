@@ -29,8 +29,7 @@ import { Nullable } from '../types';
 import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
-import { checkNodeVersion } from '../system';
-import { getSecretSync } from './system-helper';
+import { checkNodeVersion, getSecretSync } from './system-helper';
 
 const pkg = require('../../package.json');
 

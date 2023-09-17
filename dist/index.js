@@ -773,15 +773,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
-/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../system */ "./src/system.ts");
-/* harmony import */ var _system_helper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./system-helper */ "./src/backend/system-helper.ts");
+/* harmony import */ var _system_helper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./system-helper */ "./src/backend/system-helper.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -824,7 +822,7 @@ class BackHostApp {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.constructor', params);
     }
     async init() {
-        (0,_system__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
+        (0,_system_helper__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
         this.initDirPaths();
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
@@ -928,7 +926,7 @@ class BackHostApp {
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
         this.express.use(express_session__WEBPACK_IMPORTED_MODULE_7___default()({
             store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_17__.FileSessionStore(this.sessionDirPath),
-            secret: (0,_system_helper__WEBPACK_IMPORTED_MODULE_27__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
+            secret: (0,_system_helper__WEBPACK_IMPORTED_MODULE_26__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -5930,10 +5928,17 @@ class MonitorModule {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion),
 /* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
 /* harmony export */ });
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 
+function checkNodeVersion(minNodeVersion) {
+    const [majorNodeVersion] = process.versions.node.split('.');
+    if (parseInt(majorNodeVersion) < minNodeVersion) {
+        throw new Error(`min node version required ${minNodeVersion}, current ${majorNodeVersion}`);
+    }
+}
 function getSecretSync(secretFilePath) {
     let secret;
     secret = _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.getFileContentSync(secretFilePath);
@@ -21935,27 +21940,6 @@ const pConsole = new Proxy(console, {
         return target[prop];
     },
 });
-
-
-/***/ }),
-
-/***/ "./src/system.ts":
-/*!***********************!*\
-  !*** ./src/system.ts ***!
-  \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion)
-/* harmony export */ });
-function checkNodeVersion(minNodeVersion) {
-    const [majorNodeVersion] = process.versions.node.split('.');
-    if (parseInt(majorNodeVersion) < minNodeVersion) {
-        throw new Error(`min node version required ${minNodeVersion}, current ${majorNodeVersion}`);
-    }
-}
 
 
 /***/ }),
