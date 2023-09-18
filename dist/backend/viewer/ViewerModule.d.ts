@@ -12,16 +12,17 @@ export declare class ViewerModule {
     private dataSourceController;
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
-    initControllers(): void;
     initCss(): Promise<void>;
     initJs(): Promise<void>;
-    getLinks(): string[];
-    getScripts(): string[];
+    initControllers(): void;
     handleGet(context: Context, bkApplication: BkApplication): Promise<void>;
     handlePost(context: Context, application: BkApplication): Promise<void>;
     handlePatch(context: Context, application: BkApplication): Promise<void>;
     handleDelete(context: Context, application: BkApplication): Promise<void>;
     handleAction(context: Context, application: BkApplication): Promise<void>;
+    checkAuthorization(context: Context, application: BkApplication): void;
     handleGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
     getHostApp(): BackHostApp;
+    getLinks(): string[];
+    getScripts(): string[];
 }

@@ -9638,11 +9638,6 @@ class ViewerModule {
         await this.initJs();
         this.initControllers();
     }
-    initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__.BkPageController();
-        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__.BkDataSourceController(this);
-    }
     async initCss() {
         this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.css:', this.css);
@@ -9653,11 +9648,10 @@ class ViewerModule {
             throw new Error('no qforms js');
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.js:', this.js);
     }
-    getLinks() {
-        return this.css;
-    }
-    getScripts() {
-        return this.js;
+    initControllers() {
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__.BkPageController();
+        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__.BkDataSourceController(this);
     }
     async handleGet(context, bkApplication) {
         _pConsole__WEBPACK_IMPORTED_MODULE_4__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
@@ -9686,28 +9680,17 @@ class ViewerModule {
             await this.applicationController.loginPost(context, application);
         }
         else {
-            const user = context.getUser();
-            if (application.isAuthentication() && !user) {
-                throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
-            }
             await this.handleAction(context, application);
         }
     }
     async handlePatch(context, application) {
-        const user = context.getUser();
-        if (application.isAuthentication() && !user) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
-        }
         await this.handleAction(context, application);
     }
     async handleDelete(context, application) {
-        const user = context.getUser();
-        if (application.isAuthentication() && !user) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
-        }
         await this.handleAction(context, application);
     }
     async handleAction(context, application) {
+        this.checkAuthorization(context, application);
         const action = context.getAction();
         if (!action)
             throw new Error('no action');
@@ -9737,11 +9720,23 @@ class ViewerModule {
             throw new Error(`unknown action: ${action}`);
         }
     }
+    checkAuthorization(context, application) {
+        const user = context.getUser();
+        if (application.isAuthentication() && !user) {
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
+        }
+    }
     async handleGetFile(context, application, next) {
         await application.handleGetFile(context, next);
     }
     getHostApp() {
         return this.hostApp;
+    }
+    getLinks() {
+        return this.css;
+    }
+    getScripts() {
+        return this.js;
     }
 }
 

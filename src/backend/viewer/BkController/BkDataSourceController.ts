@@ -1,6 +1,9 @@
 import { Context } from '../../Context';
 import { pConsole } from '../../../pConsole';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
+import { ViewerModule } from '../ViewerModule';
+import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
+import { Result } from '../../../Result';
 import {
     SelectActionQuery,
     SelectActionResponse,
@@ -8,9 +11,6 @@ import {
     UpdateActionDto,
     DeleteActionDto,
 } from '../../../types';
-import { ViewerModule } from '../ViewerModule';
-import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
-import { Result } from '../../../Result';
 
 export class BkDataSourceController {
     constructor(private viewerModule: ViewerModule) {}

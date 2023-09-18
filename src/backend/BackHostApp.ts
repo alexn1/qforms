@@ -238,10 +238,6 @@ export class BackHostApp {
             }),
         );
 
-        // test
-        // this.express.get( '/test', this._getTest.bind(this));
-        // this.express.post('/test', this._postTest.bind(this));
-
         // error logger
         this.express.options('/error', (req: Request, res: Response, next: NextFunction) => {
             pConsole.log('options /error');
@@ -776,17 +772,6 @@ export class BackHostApp {
         }
         await this.logError(error, req);
     }
-
-    /* _getTest(req, res, next) {
-        debug('getTest');
-        res.setHeader('Content-Type', 'text/plain;charset=utf-8');
-        res.end('getTest');
-    } */
-
-    /* _postTest(req, res, next) {
-        debug('postTest', req.body);
-        res.json({foo: 'bar'});
-    } */
 
     static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void> {
         return new Promise((resolve, reject) => {
