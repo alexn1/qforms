@@ -1,4 +1,4 @@
-import http from 'http';
+import { Server, createServer } from 'http';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import colors from 'colors/safe';
 import fs from 'fs';
@@ -59,7 +59,7 @@ export interface BackHostAppParams {
 export class BackHostApp {
     applications: { [route: string]: BkApplication } = {};
     private express: Express;
-    httpServer: http.Server;
+    httpServer: Server;
     wsServer: WebSocketServer;
 
     // dir path
@@ -122,7 +122,7 @@ export class BackHostApp {
     }
 
     createHttpServer(): void {
-        this.httpServer = http.createServer(this.express);
+        this.httpServer = createServer(this.express);
     }
 
     checkApplicationFolder(): void {
@@ -473,7 +473,7 @@ export class BackHostApp {
         await this.logError(error, req);
     }
 
-    static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void> {
+    static runHttpServer(httpServer: Server, host: string, port: number): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
                 const tempErrorHandler = (err: any) => {
@@ -665,7 +665,7 @@ export class BackHostApp {
         return this.params.frontLogUrl;
     }
 
-    getHttpServer(): http.Server {
+    getHttpServer(): Server {
         return this.httpServer;
     }
 

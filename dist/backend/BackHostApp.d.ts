@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import http from 'http';
+import { Server } from 'http';
 import { Express, NextFunction, Request, Response } from 'express';
 import { WebSocketServer } from './WebSocketServer';
 import { Context } from './Context';
@@ -35,7 +35,7 @@ export declare class BackHostApp {
         [route: string]: BkApplication;
     };
     private express;
-    httpServer: http.Server;
+    httpServer: Server;
     wsServer: WebSocketServer;
     appsDirPath: string;
     distDirPath: string;
@@ -85,7 +85,7 @@ export declare class BackHostApp {
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
     createAppInfos(req: Request): Promise<AppInfo[]>;
     composeContextData(err: Error, req: Request): {
-        headers: http.IncomingHttpHeaders;
+        headers: import("http").IncomingHttpHeaders;
         method: string;
         host: string | undefined;
         originalUrl: string;
@@ -101,7 +101,7 @@ export declare class BackHostApp {
     logEvent(context: Context, message: string, data?: object): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;
-    static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void>;
+    static runHttpServer(httpServer: Server, host: string, port: number): Promise<void>;
     onProcessMessage(message: string): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): Promise<void>;
@@ -119,7 +119,7 @@ export declare class BackHostApp {
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
-    getHttpServer(): http.Server;
+    getHttpServer(): Server;
     getFrontendDirPath(): string;
     getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;

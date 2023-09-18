@@ -851,7 +851,7 @@ class BackHostApp {
         return port || LISTEN_PORT;
     }
     createHttpServer() {
-        this.httpServer = http__WEBPACK_IMPORTED_MODULE_0___default().createServer(this.express);
+        this.httpServer = (0,http__WEBPACK_IMPORTED_MODULE_0__.createServer)(this.express);
     }
     checkApplicationFolder() {
         if (!fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(this.appsDirPath)) {
