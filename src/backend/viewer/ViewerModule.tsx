@@ -64,6 +64,7 @@ const ACTIONS = [
 export class ViewerModule {
     private css: string[];
     private js: string[];
+    // private applicationController = new
 
     constructor(private hostApp: BackHostApp) {}
 

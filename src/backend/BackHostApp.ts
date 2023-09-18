@@ -270,6 +270,12 @@ export class BackHostApp {
             this.moduleGet.bind(this),
         );
 
+        // GET file
+        this.express.get(
+            '/:module/:appDirName/:appFileName/:env/:domain/*',
+            this.moduleGetFile.bind(this),
+        );
+
         // POST
         this.express.post(
             '/:module/:appDirName/:appFileName/:env/:domain/',
@@ -286,12 +292,6 @@ export class BackHostApp {
         this.express.delete(
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.moduleDelete.bind(this),
-        );
-
-        // GET file
-        this.express.get(
-            '/:module/:appDirName/:appFileName/:env/:domain/*',
-            this.moduleGetFile.bind(this),
         );
 
         // handle static for index and monitor
