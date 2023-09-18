@@ -99,7 +99,7 @@ export class BackHostApp {
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
-        this.initExpressServer();
+        this.createExpressServer();
         await this.initModules();
         this.createHttpServer();
     }
@@ -210,32 +210,19 @@ export class BackHostApp {
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
-    initExpressServer(): void {
+    createExpressServer(): void {
         this.express = express();
-        this.express.set('handleException', this.params.handleException ?? true);
-        this.express.enable('strict routing');
-
+        this.initExpressServer();
         this.useMiddlewares();
         this.initSystemRoutes();
-
-        // handle static for index and monitor
-        this.express.use(
-            express.static(this.frontendDirPath, {
-                setHeaders: (res, fullPath, stat) => {
-                    pConsole.log(
-                        `static: /${path.relative(this.frontendDirPath, fullPath)} ${
-                            res.statusCode
-                        }`,
-                    );
-                },
-            }),
-        );
-
+        this.useStatic();
         this.initCustomRoutes();
+        this.useErrors();
+    }
 
-        // 404 and 500 error handlers
-        this.express.use(this._e404.bind(this));
-        this.express.use(this._e500.bind(this));
+    initExpressServer() {
+        this.express.set('handleException', this.params.handleException ?? true);
+        this.express.enable('strict routing');
     }
 
     useMiddlewares(): void {
@@ -309,6 +296,27 @@ export class BackHostApp {
     }
 
     initCustomRoutes(): void {}
+
+    // handle static for index and monitor
+    useStatic(): void {
+        this.express.use(
+            express.static(this.frontendDirPath, {
+                setHeaders: (res, fullPath, stat) => {
+                    pConsole.log(
+                        `static: /${path.relative(this.frontendDirPath, fullPath)} ${
+                            res.statusCode
+                        }`,
+                    );
+                },
+            }),
+        );
+    }
+
+    // 404 and 500 error handlers
+    useErrors() {
+        this.express.use(this._e404.bind(this));
+        this.express.use(this._e500.bind(this));
+    }
 
     // создание приложения длительный процесс, если во время создания приложения
     // будет вызвара createApplicationIfNotExists, то ей будет возвращён пустой промис

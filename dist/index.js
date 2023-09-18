@@ -827,7 +827,7 @@ class BackHostApp {
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
-        this.initExpressServer();
+        this.createExpressServer();
         await this.initModules();
         this.createHttpServer();
     }
@@ -913,21 +913,19 @@ class BackHostApp {
         process.on('uncaughtException', this.onUncaughtException.bind(this));
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
-    initExpressServer() {
-        var _a;
+    createExpressServer() {
         this.express = express__WEBPACK_IMPORTED_MODULE_1___default()();
-        this.express.set('handleException', (_a = this.params.handleException) !== null && _a !== void 0 ? _a : true);
-        this.express.enable('strict routing');
+        this.initExpressServer();
         this.useMiddlewares();
         this.initSystemRoutes();
-        this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
-            setHeaders: (res, fullPath, stat) => {
-                _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
-            },
-        }));
+        this.useStatic();
         this.initCustomRoutes();
-        this.express.use(this._e404.bind(this));
-        this.express.use(this._e500.bind(this));
+        this.useErrors();
+    }
+    initExpressServer() {
+        var _a;
+        this.express.set('handleException', (_a = this.params.handleException) !== null && _a !== void 0 ? _a : true);
+        this.express.enable('strict routing');
     }
     useMiddlewares() {
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().json({
@@ -959,6 +957,17 @@ class BackHostApp {
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
     }
     initCustomRoutes() { }
+    useStatic() {
+        this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
+            setHeaders: (res, fullPath, stat) => {
+                _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+            },
+        }));
+    }
+    useErrors() {
+        this.express.use(this._e404.bind(this));
+        this.express.use(this._e500.bind(this));
+    }
     async createApplicationIfNotExists(context) {
         const route = context.getRoute();
         const application = this.applications[route];

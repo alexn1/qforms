@@ -73,10 +73,13 @@ export declare class BackHostApp {
     initDirPaths(): void;
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;
+    createExpressServer(): void;
     initExpressServer(): void;
     useMiddlewares(): void;
     initSystemRoutes(): void;
     initCustomRoutes(): void;
+    useStatic(): void;
+    useErrors(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     beginCreateApplication(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
