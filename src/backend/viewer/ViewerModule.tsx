@@ -110,7 +110,15 @@ export class ViewerModule {
 
     async handlePatch(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePatch');
-        await this.handleAction(context, application);
+        const action = context.getAction();
+        if (!action) throw new Error('no action');
+        if (action === 'update') {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.dataSourceController.update(context, application);
+        } else {
+            throw new Error(`unknown action: ${action}`);
+        }
     }
 
     async handleDelete(context: Context, application: BkApplication): Promise<void> {
@@ -131,8 +139,6 @@ export class ViewerModule {
             await this.applicationController.rpc(context, application);
         } else if (action === 'insert') {
             await this.dataSourceController.insert(context, application);
-        } else if (action === 'update') {
-            await this.dataSourceController.update(context, application);
         } else if (action === '_delete') {
             await this.dataSourceController._delete(context, application);
         } else {

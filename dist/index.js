@@ -9677,7 +9677,17 @@ class ViewerModule {
         }
     }
     async handlePatch(context, application) {
-        await this.handleAction(context, application);
+        const action = context.getAction();
+        if (!action)
+            throw new Error('no action');
+        if (action === 'update') {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.dataSourceController.update(context, application);
+        }
+        else {
+            throw new Error(`unknown action: ${action}`);
+        }
     }
     async handleDelete(context, application) {
         await this.handleAction(context, application);
@@ -9699,9 +9709,6 @@ class ViewerModule {
         }
         else if (action === 'insert') {
             await this.dataSourceController.insert(context, application);
-        }
-        else if (action === 'update') {
-            await this.dataSourceController.update(context, application);
         }
         else if (action === '_delete') {
             await this.dataSourceController._delete(context, application);
