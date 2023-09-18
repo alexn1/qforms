@@ -11,6 +11,7 @@ export declare class ViewerModule {
     private js;
     private applicationController;
     private pageController;
+    private dataSourceController;
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     initControllers(): void;
@@ -23,7 +24,6 @@ export declare class ViewerModule {
     handlePatch(context: Context, application: BkApplication): Promise<void>;
     handleDelete(context: Context, application: BkApplication): Promise<void>;
     handleAction(context: Context, application: BkApplication): Promise<void>;
-    select(context: Context, application: BkApplication): Promise<void>;
     getDataSource(context: Context, application: BkApplication, { page, form, ds }: {
         page?: string;
         form?: string;

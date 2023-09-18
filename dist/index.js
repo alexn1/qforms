@@ -6106,6 +6106,56 @@ class BkApplicationController {
 
 /***/ }),
 
+/***/ "./src/backend/viewer/BkController/BkDataSourceController.ts":
+/*!*******************************************************************!*\
+  !*** ./src/backend/viewer/BkController/BkDataSourceController.ts ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BkDataSourceController": () => (/* binding */ BkDataSourceController)
+/* harmony export */ });
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
+
+class BkDataSourceController {
+    constructor(viewerModule) {
+        this.viewerModule = viewerModule;
+    }
+    async select(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkDataSourceController.select', context.getBody().page);
+        const { page, form, ds } = context.getQuery();
+        const start = Date.now();
+        const dataSource = await BkDataSourceController.getDataSource(context, application, {
+            page,
+            form,
+            ds,
+        });
+        await dataSource.getDatabase().use(context, async (database) => {
+            await application.initContext(context);
+            const [rows, count] = await dataSource.read(context);
+            const time = Date.now() - start;
+            _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('select time:', time);
+            const response = { rows, count, time };
+            context.getRes().json(response);
+        });
+    }
+    static async getDataSource(context, application, { page, form, ds }) {
+        if (page) {
+            const bkPage = await application.getPage(context, page);
+            if (form) {
+                return bkPage.getForm(form).getDataSource(ds);
+            }
+            return bkPage.getDataSource(ds);
+        }
+        return application.getDataSource(ds);
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/backend/viewer/BkController/BkPageController.ts":
 /*!*************************************************************!*\
   !*** ./src/backend/viewer/BkController/BkPageController.ts ***!
@@ -9453,11 +9503,11 @@ class BkTable extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.NoSqlDataSource),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.RowForm),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableForm),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableFormTextBoxFieldController),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TextBoxField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSource),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.RowForm),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableForm),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableFormTextBoxFieldController),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TextBoxField),
 /* harmony export */   "ViewerModule": () => (/* binding */ ViewerModule)
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
@@ -9469,7 +9519,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
 /* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
+/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
+
 
 
 
@@ -9502,6 +9554,7 @@ class ViewerModule {
     initControllers() {
         this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__.BkApplicationController(this);
         this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__.BkPageController();
+        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__.BkDataSourceController(this);
     }
     async initCss() {
         this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
@@ -9533,7 +9586,7 @@ class ViewerModule {
                 await this.pageController.page(context, bkApplication);
             }
             else if (action === 'select') {
-                await this.select(context, bkApplication);
+                await this.dataSourceController.select(context, bkApplication);
             }
             else {
                 await this.applicationController.index(context, bkApplication);
@@ -9581,23 +9634,12 @@ class ViewerModule {
         else if (action === 'logout') {
             await this.applicationController.logout(context, application);
         }
+        else if (action === 'select') {
+            await this.dataSourceController.select(context, application);
+        }
         else {
             await this[action](context, application);
         }
-    }
-    async select(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.select', context.getBody().page);
-        const { page, form, ds } = context.getQuery();
-        const start = Date.now();
-        const dataSource = await this.getDataSource(context, application, { page, form, ds });
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const [rows, count] = await dataSource.read(context);
-            const time = Date.now() - start;
-            (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('select time:', time);
-            const response = { rows, count, time };
-            context.getRes().json(response);
-        });
     }
     async getDataSource(context, application, { page, form, ds }) {
         if (page) {

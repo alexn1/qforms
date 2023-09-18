@@ -39,6 +39,7 @@ import { Session_deleteUser, Session_save } from '../Session';
 import { application } from 'express';
 import { BkApplicationController } from './BkController/BkApplicationController';
 import { BkPageController } from './BkController/BkPageController';
+import { BkDataSourceController } from './BkController/BkDataSourceController';
 
 const pkg = require('../../../package.json');
 
@@ -68,6 +69,7 @@ export class ViewerModule {
     private js: string[];
     private applicationController: BkApplicationController;
     private pageController: BkPageController;
+    private dataSourceController: BkDataSourceController;
 
     constructor(private hostApp: BackHostApp) {}
 
@@ -81,6 +83,7 @@ export class ViewerModule {
     initControllers() {
         this.applicationController = new BkApplicationController(this);
         this.pageController = new BkPageController();
+        this.dataSourceController = new BkDataSourceController(this);
     }
 
     async initCss(): Promise<void> {
@@ -137,7 +140,7 @@ export class ViewerModule {
             if (action === 'page') {
                 await this.pageController.page(context, bkApplication);
             } else if (action === 'select') {
-                await this.select(context, bkApplication);
+                await this.dataSourceController.select(context, bkApplication);
             } else {
                 // await this.index(context, bkApplication);
                 await this.applicationController.index(context, bkApplication);
@@ -191,26 +194,11 @@ export class ViewerModule {
             await this.pageController.page(context, application);
         } else if (action === 'logout') {
             await this.applicationController.logout(context, application);
+        } else if (action === 'select') {
+            await this.dataSourceController.select(context, application);
         } else {
             await (this as any)[action](context, application);
         }
-    }
-
-    // action
-    async select(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.select', context.getBody().page);
-        // const { page, form, ds } = context.getBody() as SelectActionDto;
-        const { page, form, ds } = context.getQuery() as SelectActionQuery;
-        const start = Date.now();
-        const dataSource = await this.getDataSource(context, application, { page, form, ds });
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const [rows, count] = await dataSource.read(context);
-            const time = Date.now() - start;
-            debug('select time:', time);
-            const response: SelectActionResponse = { rows, count, time };
-            context.getRes().json(response);
-        });
     }
 
     async getDataSource(
