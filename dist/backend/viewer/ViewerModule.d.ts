@@ -9,8 +9,13 @@ export declare class ViewerModule {
     private hostApp;
     private css;
     private js;
+    private applicationController;
+    private pageController;
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
+    initControllers(): void;
+    initCss(): Promise<void>;
+    initJs(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];
     handleGet(context: Context, bkApplication: BkApplication): Promise<void>;
@@ -22,7 +27,6 @@ export declare class ViewerModule {
     loginGet(context: Context, application: BkApplication): Promise<void>;
     loginPost(context: Context, application: BkApplication): Promise<void>;
     index(context: Context, bkApplication: BkApplication): Promise<void>;
-    page(context: Context, application: BkApplication): Promise<void>;
     select(context: Context, application: BkApplication): Promise<void>;
     getDataSource(context: Context, application: BkApplication, { page, form, ds }: {
         page?: string;

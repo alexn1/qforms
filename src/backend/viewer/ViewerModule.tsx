@@ -37,6 +37,8 @@ import {
 } from '../../types';
 import { Session_deleteUser, Session_save } from '../Session';
 import { application } from 'express';
+import { BkApplicationController } from './BkController/BkApplicationController';
+import { BkPageController } from './BkController/BkPageController';
 
 const pkg = require('../../../package.json');
 
@@ -64,27 +66,42 @@ const ACTIONS = [
 export class ViewerModule {
     private css: string[];
     private js: string[];
-    // private applicationController = new
+    private applicationController: BkApplicationController;
+    private pageController: BkPageController;
 
     constructor(private hostApp: BackHostApp) {}
 
     async init() {
         // debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
+        this.initControllers();
+        await this.initCss();
+        await this.initJs();
+    }
+
+    initControllers() {
+        this.applicationController = new BkApplicationController();
+        this.pageController = new BkPageController();
+    }
+
+    async initCss(): Promise<void> {
         this.css = (
             await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'css',
             )
         ).map((path) => `/viewer/public/${path}`);
+        debug('ViewerModule.css:', this.css);
+    }
+
+    async initJs() {
         this.js = (
             await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'js',
             )
         ).map((path) => `/viewer/public/${path}`);
-        debug('ViewerModule.css:', this.css);
-        debug('ViewerModule.js:', this.js);
         if (!this.js.length) throw new Error('no qforms js');
+        debug('ViewerModule.js:', this.js);
     }
 
     getLinks(): string[] {
@@ -118,7 +135,7 @@ export class ViewerModule {
             // handle actions
             const action = context.getAction();
             if (action === 'page') {
-                await this.page(context, bkApplication);
+                await this.pageController.page(context, bkApplication);
             } else if (action === 'select') {
                 await this.select(context, bkApplication);
             } else {
@@ -169,7 +186,11 @@ export class ViewerModule {
             throw new Error(`unknown action: ${action}`);
         }
         context.setVersionHeaders(pkg.version, application.getVersion());
-        await (this as any)[action](context, application);
+        if (action === 'page') {
+            await this.pageController.page(context, application);
+        } else {
+            await (this as any)[action](context, application);
+        }
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
@@ -297,25 +318,6 @@ export class ViewerModule {
             res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
         } finally {
             await bkApplication.release(context);
-        }
-    }
-
-    // action (fill page)
-    async page(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.page', context.getReq()!.body.page);
-        // const body = context.getBody() as PageActionDto;
-        const query = context.getQuery() as PageActionQuery;
-        const pageLinkName = /* body.page || */ query.page;
-        await application.connect(context);
-        try {
-            await application.initContext(context);
-            const page = await application.getPage(context, pageLinkName);
-            const pageData = await page.fill(context);
-            if (pageData === undefined) throw new Error('page action: pageData is undefined');
-            const response: PageActionResponse = { page: pageData };
-            context.getRes().json(response);
-        } finally {
-            await application.release(context);
         }
     }
 

@@ -944,10 +944,10 @@ class BackHostApp {
         }
         this.express.get('/monitor', this.monitorGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
-        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
                 _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
@@ -5953,6 +5953,59 @@ function getSecretSync(secretFilePath) {
 
 /***/ }),
 
+/***/ "./src/backend/viewer/BkController/BkApplicationController.ts":
+/*!********************************************************************!*\
+  !*** ./src/backend/viewer/BkController/BkApplicationController.ts ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BkApplicationController": () => (/* binding */ BkApplicationController)
+/* harmony export */ });
+class BkApplicationController {
+}
+
+
+/***/ }),
+
+/***/ "./src/backend/viewer/BkController/BkPageController.ts":
+/*!*************************************************************!*\
+  !*** ./src/backend/viewer/BkController/BkPageController.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BkPageController": () => (/* binding */ BkPageController)
+/* harmony export */ });
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
+
+class BkPageController {
+    async page(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkPageController.page', context.getPage());
+        const { page: pageLinkName } = context.getQuery();
+        await application.connect(context);
+        try {
+            await application.initContext(context);
+            const page = await application.getPage(context, pageLinkName);
+            const pageData = await page.fill(context);
+            if (pageData === undefined)
+                throw new Error('page action: pageData is undefined');
+            const response = { page: pageData };
+            context.getRes().json(response);
+        }
+        finally {
+            await application.release(context);
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/backend/viewer/BkModel/BkAction/BkAction.ts":
 /*!*********************************************************!*\
   !*** ./src/backend/viewer/BkModel/BkAction/BkAction.ts ***!
@@ -9264,11 +9317,11 @@ class BkTable extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__.NoSqlDataSource),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__.RowForm),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__.TableForm),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__.TableFormTextBoxFieldController),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__.TextBoxField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__.NoSqlDataSource),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__.RowForm),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__.TableForm),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__.TableFormTextBoxFieldController),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__.TextBoxField),
 /* harmony export */   "ViewerModule": () => (/* binding */ ViewerModule)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
@@ -9291,7 +9344,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.ts");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
+
+
 
 
 
@@ -9325,12 +9382,23 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
+        this.initControllers();
+        await this.initCss();
+        await this.initJs();
+    }
+    initControllers() {
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_16__.BkApplicationController();
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_17__.BkPageController();
+    }
+    async initCss() {
         this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.css:', this.css);
-        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.js:', this.js);
+    }
+    async initJs() {
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         if (!this.js.length)
             throw new Error('no qforms js');
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.js:', this.js);
     }
     getLinks() {
         return this.css;
@@ -9349,7 +9417,7 @@ class ViewerModule {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
             const action = context.getAction();
             if (action === 'page') {
-                await this.page(context, bkApplication);
+                await this.pageController.page(context, bkApplication);
             }
             else if (action === 'select') {
                 await this.select(context, bkApplication);
@@ -9394,7 +9462,12 @@ class ViewerModule {
             throw new Error(`unknown action: ${action}`);
         }
         context.setVersionHeaders(pkg.version, application.getVersion());
-        await this[action](context, application);
+        if (action === 'page') {
+            await this.pageController.page(context, application);
+        }
+        else {
+            await this[action](context, application);
+        }
     }
     async renderHtml(bkApplication, context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.renderHtml');
@@ -9487,24 +9560,6 @@ class ViewerModule {
         }
         finally {
             await bkApplication.release(context);
-        }
-    }
-    async page(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('ViewerModule.page', context.getReq().body.page);
-        const query = context.getQuery();
-        const pageLinkName = query.page;
-        await application.connect(context);
-        try {
-            await application.initContext(context);
-            const page = await application.getPage(context, pageLinkName);
-            const pageData = await page.fill(context);
-            if (pageData === undefined)
-                throw new Error('page action: pageData is undefined');
-            const response = { page: pageData };
-            context.getRes().json(response);
-        }
-        finally {
-            await application.release(context);
         }
     }
     async select(context, application) {
