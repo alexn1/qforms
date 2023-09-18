@@ -23,7 +23,6 @@ export declare class ViewerModule {
     handlePatch(context: Context, application: BkApplication): Promise<void>;
     handleDelete(context: Context, application: BkApplication): Promise<void>;
     handleAction(context: Context, application: BkApplication): Promise<void>;
-    loginPost(context: Context, application: BkApplication): Promise<void>;
     select(context: Context, application: BkApplication): Promise<void>;
     getDataSource(context: Context, application: BkApplication, { page, form, ds }: {
         page?: string;

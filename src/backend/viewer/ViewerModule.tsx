@@ -149,7 +149,7 @@ export class ViewerModule {
         // debug('ViewerModule.handlePost');
         const { action } = context.getBody() as BaseDto;
         if (action === 'login') {
-            await this.loginPost(context, application);
+            await this.applicationController.loginPost(context, application);
         } else {
             const user = context.getUser();
             if (application.isAuthentication() && !user) {
@@ -191,56 +191,6 @@ export class ViewerModule {
             await this.pageController.page(context, application);
         } else {
             await (this as any)[action](context, application);
-        }
-    }
-
-    async loginPost(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.loginPost');
-        const { tzOffset, username, password } = context.getBody() as LoginDto;
-        if (tzOffset === undefined) throw new Error('no tzOffset');
-        if (username === undefined) throw new Error('no username');
-        if (password === undefined) throw new Error('no password');
-
-        const req = context.getReq()!;
-        const res = context.getRes();
-
-        await application.connect(context);
-        try {
-            const user = await application.authenticate(context, username, password);
-            if (user) {
-                if (!user.id) throw new Error('no user id');
-                if (!user.name) throw new Error('no user name');
-                const session = context.getSession();
-                if (session.user === undefined) session.user = {};
-                session.user[context.getRoute()] = user;
-                session.ip = context.getIp();
-                session.tzOffset = BkHelper.decodeValue(tzOffset);
-
-                res.redirect(req.url);
-                this.getHostApp().logEvent(
-                    context,
-                    `login ${application.getName()}/${context.getDomain()} ${user.name}`,
-                );
-            } else {
-                // const users = await application.getUsers(context);
-                const links = ReactDOMServer.renderToStaticMarkup(
-                    <Links links={[...this.getLinks(), ...application.links]} />,
-                );
-                const scripts = ReactDOMServer.renderToStaticMarkup(
-                    <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
-                );
-                const html = login(pkg.version, context, application, links, scripts, {
-                    name: application.getName(),
-                    text: application.getText(),
-                    title: application.getTitle(context),
-                    errMsg: application.getText().login.WrongUsernameOrPassword,
-                    username: username,
-                    password: password,
-                });
-                res.status(401).end(html);
-            }
-        } finally {
-            await application.release(context);
         }
     }
 

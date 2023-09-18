@@ -9,6 +9,8 @@ import { ViewerModule } from '../ViewerModule';
 import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
+import { LoginDto } from '../../../types';
+import { BkHelper } from '../../BkHelper';
 
 const { version } = require('../../../../package.json');
 
@@ -91,5 +93,59 @@ export class BkApplicationController {
             username: context.getQuery().username,
         });
         context.getRes().end(html);
+    }
+
+    async loginPost(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('ViewerModule.loginPost');
+        const { tzOffset, username, password } = context.getBody() as LoginDto;
+        if (tzOffset === undefined) throw new Error('no tzOffset');
+        if (username === undefined) throw new Error('no username');
+        if (password === undefined) throw new Error('no password');
+
+        const req = context.getReq()!;
+        const res = context.getRes();
+
+        await application.connect(context);
+        try {
+            const user = await application.authenticate(context, username, password);
+            if (user) {
+                if (!user.id) throw new Error('no user id');
+                if (!user.name) throw new Error('no user name');
+                const session = context.getSession();
+                if (session.user === undefined) session.user = {};
+                session.user[context.getRoute()] = user;
+                session.ip = context.getIp();
+                session.tzOffset = BkHelper.decodeValue(tzOffset);
+
+                res.redirect(req.url);
+                this.viewerModule
+                    .getHostApp()
+                    .logEvent(
+                        context,
+                        `login ${application.getName()}/${context.getDomain()} ${user.name}`,
+                    );
+            } else {
+                // const users = await application.getUsers(context);
+                const links = ReactDOMServer.renderToStaticMarkup(
+                    <Links links={[...this.viewerModule.getLinks(), ...application.links]} />,
+                );
+                const scripts = ReactDOMServer.renderToStaticMarkup(
+                    <Scripts
+                        scripts={[...this.viewerModule.getScripts(), ...application.scripts]}
+                    />,
+                );
+                const html = login(version, context, application, links, scripts, {
+                    name: application.getName(),
+                    text: application.getText(),
+                    title: application.getTitle(context),
+                    errMsg: application.getText().login.WrongUsernameOrPassword,
+                    username: username,
+                    password: password,
+                });
+                res.status(401).end(html);
+            }
+        } finally {
+            await application.release(context);
+        }
     }
 }

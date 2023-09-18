@@ -5976,6 +5976,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
 /* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
+
 
 
 
@@ -6036,6 +6038,54 @@ class BkApplicationController {
             username: context.getQuery().username,
         });
         context.getRes().end(html);
+    }
+    async loginPost(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.loginPost');
+        const { tzOffset, username, password } = context.getBody();
+        if (tzOffset === undefined)
+            throw new Error('no tzOffset');
+        if (username === undefined)
+            throw new Error('no username');
+        if (password === undefined)
+            throw new Error('no password');
+        const req = context.getReq();
+        const res = context.getRes();
+        await application.connect(context);
+        try {
+            const user = await application.authenticate(context, username, password);
+            if (user) {
+                if (!user.id)
+                    throw new Error('no user id');
+                if (!user.name)
+                    throw new Error('no user name');
+                const session = context.getSession();
+                if (session.user === undefined)
+                    session.user = {};
+                session.user[context.getRoute()] = user;
+                session.ip = context.getIp();
+                session.tzOffset = _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.decodeValue(tzOffset);
+                res.redirect(req.url);
+                this.viewerModule
+                    .getHostApp()
+                    .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
+            }
+            else {
+                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...application.links] }));
+                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...application.scripts] }));
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(version, context, application, links, scripts, {
+                    name: application.getName(),
+                    text: application.getText(),
+                    title: application.getTitle(context),
+                    errMsg: application.getText().login.WrongUsernameOrPassword,
+                    username: username,
+                    password: password,
+                });
+                res.status(401).end(html);
+            }
+        }
+        finally {
+            await application.release(context);
+        }
     }
 }
 
@@ -9389,36 +9439,24 @@ class BkTable extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__.NoSqlDataSource),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__.RowForm),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__.TableForm),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__.TableFormTextBoxFieldController),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__.TextBoxField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSource),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.RowForm),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableForm),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableFormTextBoxFieldController),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TextBoxField),
 /* harmony export */   "ViewerModule": () => (/* binding */ ViewerModule)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./login */ "./src/backend/viewer/login.tsx");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
-/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
-
-
-
-
-
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
 
 
 
@@ -9450,18 +9488,18 @@ class ViewerModule {
         await this.initJs();
     }
     initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_12__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_13__.BkPageController();
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__.BkPageController();
     }
     async initCss() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.css:', this.css);
+        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.css:', this.css);
     }
     async initJs() {
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         if (!this.js.length)
             throw new Error('no qforms js');
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.js:', this.js);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.js:', this.js);
     }
     getLinks() {
         return this.css;
@@ -9470,7 +9508,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_10__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
+        _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const session = context.getSession();
         if (bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])) {
@@ -9493,12 +9531,12 @@ class ViewerModule {
     async handlePost(context, application) {
         const { action } = context.getBody();
         if (action === 'login') {
-            await this.loginPost(context, application);
+            await this.applicationController.loginPost(context, application);
         }
         else {
             const user = context.getUser();
             if (application.isAuthentication() && !user) {
-                throw new _HttpError__WEBPACK_IMPORTED_MODULE_4__.HttpError({ message: 'Unauthorized', status: 401, context });
+                throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
             }
             await this.handleAction(context, application);
         }
@@ -9506,14 +9544,14 @@ class ViewerModule {
     async handlePatch(context, application) {
         const user = context.getUser();
         if (application.isAuthentication() && !user) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_4__.HttpError({ message: 'Unauthorized', status: 401, context });
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
         }
         await this.handleAction(context, application);
     }
     async handleDelete(context, application) {
         const user = context.getUser();
         if (application.isAuthentication() && !user) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_4__.HttpError({ message: 'Unauthorized', status: 401, context });
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
         }
         await this.handleAction(context, application);
     }
@@ -9532,54 +9570,8 @@ class ViewerModule {
             await this[action](context, application);
         }
     }
-    async loginPost(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.loginPost');
-        const { tzOffset, username, password } = context.getBody();
-        if (tzOffset === undefined)
-            throw new Error('no tzOffset');
-        if (username === undefined)
-            throw new Error('no username');
-        if (password === undefined)
-            throw new Error('no password');
-        const req = context.getReq();
-        const res = context.getRes();
-        await application.connect(context);
-        try {
-            const user = await application.authenticate(context, username, password);
-            if (user) {
-                if (!user.id)
-                    throw new Error('no user id');
-                if (!user.name)
-                    throw new Error('no user name');
-                const session = context.getSession();
-                if (session.user === undefined)
-                    session.user = {};
-                session.user[context.getRoute()] = user;
-                session.ip = context.getIp();
-                session.tzOffset = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.decodeValue(tzOffset);
-                res.redirect(req.url);
-                this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
-            }
-            else {
-                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: [...this.getLinks(), ...application.links] }));
-                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(pkg.version, context, application, links, scripts, {
-                    name: application.getName(),
-                    text: application.getText(),
-                    title: application.getTitle(context),
-                    errMsg: application.getText().login.WrongUsernameOrPassword,
-                    username: username,
-                    password: password,
-                });
-                res.status(401).end(html);
-            }
-        }
-        finally {
-            await application.release(context);
-        }
-    }
     async select(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.select', context.getBody().page);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.select', context.getBody().page);
         const { page, form, ds } = context.getQuery();
         const start = Date.now();
         const dataSource = await this.getDataSource(context, application, { page, form, ds });
@@ -9587,7 +9579,7 @@ class ViewerModule {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
-            (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('select time:', time);
+            (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('select time:', time);
             const response = { rows, count, time };
             context.getRes().json(response);
         });
@@ -9603,7 +9595,7 @@ class ViewerModule {
         return application.getDataSource(ds);
     }
     async insert(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.insert', context.getReq().body.page);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.insert', context.getReq().body.page);
         const body = context.getBody();
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
@@ -9621,7 +9613,7 @@ class ViewerModule {
         });
     }
     async update(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.update', context.getReq().body.page);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.update', context.getReq().body.page);
         const body = context.getBody();
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
@@ -9639,7 +9631,7 @@ class ViewerModule {
         });
     }
     async _delete(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule._delete', context.getReq().body.page);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule._delete', context.getReq().body.page);
         const body = context.getBody();
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
@@ -9668,7 +9660,7 @@ class ViewerModule {
         return application;
     }
     async rpc(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.rpc', context.getReq().body);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.rpc', context.getReq().body);
         const dto = context.getBody();
         const res = context.getRes();
         const model = await ViewerModule.getModel(context, application);
@@ -9679,14 +9671,14 @@ class ViewerModule {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_5__.Result)) {
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_3__.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.hostApp.broadcastResult(application, context, _result);
             }
             else {
                 res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_5__.Result) {
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_3__.Result) {
                     this.hostApp.broadcastResult(application, context, result);
                 }
             }
@@ -9700,19 +9692,19 @@ class ViewerModule {
         }
     }
     async logout(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.logout');
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
             throw new Error(`no user for route ${route}`);
         }
         const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_11__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_11__.Session_save)(session);
+        (0,_Session__WEBPACK_IMPORTED_MODULE_6__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_6__.Session_save)(session);
         context.getRes().json(null);
     }
     async test(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.test', context.getReq().body);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.test', context.getReq().body);
         context.getRes().json(null);
     }
     async handleGetFile(context, application, next) {
