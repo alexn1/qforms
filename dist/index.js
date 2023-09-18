@@ -5978,6 +5978,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
 /* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
+
 
 
 
@@ -5995,7 +5997,7 @@ class BkApplicationController {
         this.viewerModule = viewerModule;
     }
     async index(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.index');
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -6008,7 +6010,7 @@ class BkApplicationController {
         }
     }
     async renderHtml(bkApplication, context) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.renderHtml');
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.renderHtml');
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...bkApplication.links] }));
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...bkApplication.scripts] }));
         const data = await bkApplication.fill(context);
@@ -6029,7 +6031,7 @@ class BkApplicationController {
         return html;
     }
     async loginGet(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.loginGet');
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.loginGet');
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...application.links] }));
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...application.scripts] }));
         const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(version, context, application, links, scripts, {
@@ -6042,7 +6044,7 @@ class BkApplicationController {
         context.getRes().end(html);
     }
     async loginPost(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.loginPost');
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.loginPost');
         const { tzOffset, username, password } = context.getBody();
         if (tzOffset === undefined)
             throw new Error('no tzOffset');
@@ -6090,7 +6092,7 @@ class BkApplicationController {
         }
     }
     async logout(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.logout');
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
@@ -6100,6 +6102,49 @@ class BkApplicationController {
         (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_deleteUser)(session, route);
         await (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_save)(session);
         context.getRes().json(null);
+    }
+    async rpc(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
+        const dto = context.getBody();
+        const res = context.getRes();
+        const model = await BkApplicationController.getModel(context, application);
+        try {
+            const result = await model.rpc(dto.name, context);
+            if (result === undefined)
+                throw new Error('rpc action: result is undefined');
+            if (Array.isArray(result)) {
+                const [response, _result] = result;
+                res.json(response);
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_11__.Result)) {
+                    throw new Error('_result is not Result');
+                }
+                this.viewerModule.getHostApp().broadcastResult(application, context, _result);
+            }
+            else {
+                res.json(result);
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_11__.Result) {
+                    this.viewerModule.getHostApp().broadcastResult(application, context, result);
+                }
+            }
+        }
+        catch (err) {
+            const errorMessage = err.message;
+            err.message = `rpc error ${dto.name}: ${err.message}`;
+            err.context = context;
+            await this.viewerModule.getHostApp().logError(err, context.getReq());
+            res.json({ errorMessage });
+        }
+    }
+    static async getModel(context, application) {
+        const body = context.getBody();
+        if (body.page) {
+            const page = await application.getPage(context, body.page);
+            if (body.form) {
+                return page.getForm(body.form);
+            }
+            return page;
+        }
+        return application;
     }
 }
 
@@ -9557,25 +9602,23 @@ class BkTable extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSource),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.RowForm),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableForm),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableFormTextBoxFieldController),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TextBoxField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.NoSqlDataSource),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.RowForm),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableForm),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableFormTextBoxFieldController),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TextBoxField),
 /* harmony export */   "ViewerModule": () => (/* binding */ ViewerModule)
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
 /* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
-/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
-/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
-
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
 
 
 
@@ -9586,39 +9629,29 @@ __webpack_require__.r(__webpack_exports__);
 
 const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 
-const ACTIONS = [
-    'insert',
-    'select',
-    'update',
-    '_delete',
-    'page',
-    'rpc',
-    'logout',
-    'test',
-];
 class ViewerModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.initControllers();
         await this.initCss();
         await this.initJs();
+        this.initControllers();
     }
     initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__.BkPageController();
-        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__.BkDataSourceController(this);
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__.BkPageController();
+        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__.BkDataSourceController(this);
     }
     async initCss() {
         this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.css:', this.css);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.css:', this.css);
     }
     async initJs() {
         this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         if (!this.js.length)
             throw new Error('no qforms js');
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.js:', this.js);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.js:', this.js);
     }
     getLinks() {
         return this.css;
@@ -9627,7 +9660,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
+        _pConsole__WEBPACK_IMPORTED_MODULE_4__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const session = context.getSession();
         if (bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])) {
@@ -9678,9 +9711,6 @@ class ViewerModule {
         const action = context.getAction();
         if (!action)
             throw new Error('no action');
-        if (ACTIONS.indexOf(action) === -1) {
-            throw new Error(`unknown action: ${action}`);
-        }
         context.setVersionHeaders(pkg.version, application.getVersion());
         if (action === 'page') {
             await this.pageController.page(context, application);
@@ -9690,6 +9720,9 @@ class ViewerModule {
         }
         else if (action === 'select') {
             await this.dataSourceController.select(context, application);
+        }
+        else if (action === 'rpc') {
+            await this.applicationController.rpc(context, application);
         }
         else if (action === 'insert') {
             await this.dataSourceController.insert(context, application);
@@ -9701,65 +9734,8 @@ class ViewerModule {
             await this.dataSourceController._delete(context, application);
         }
         else {
-            await this[action](context, application);
+            throw new Error(`unknown action: ${action}`);
         }
-    }
-    async getDataSource(context, application, { page, form, ds }) {
-        if (page) {
-            const bkPage = await application.getPage(context, page);
-            if (form) {
-                return bkPage.getForm(form).getDataSource(ds);
-            }
-            return bkPage.getDataSource(ds);
-        }
-        return application.getDataSource(ds);
-    }
-    static async getModel(context, application) {
-        const body = context.getBody();
-        if (body.page) {
-            const page = await application.getPage(context, body.page);
-            if (body.form) {
-                return page.getForm(body.form);
-            }
-            return page;
-        }
-        return application;
-    }
-    async rpc(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.rpc', context.getReq().body);
-        const dto = context.getBody();
-        const res = context.getRes();
-        const model = await ViewerModule.getModel(context, application);
-        try {
-            const result = await model.rpc(dto.name, context);
-            if (result === undefined)
-                throw new Error('rpc action: result is undefined');
-            if (Array.isArray(result)) {
-                const [response, _result] = result;
-                res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_3__.Result)) {
-                    throw new Error('_result is not Result');
-                }
-                this.hostApp.broadcastResult(application, context, _result);
-            }
-            else {
-                res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_3__.Result) {
-                    this.hostApp.broadcastResult(application, context, result);
-                }
-            }
-        }
-        catch (err) {
-            const errorMessage = err.message;
-            err.message = `rpc error ${dto.name}: ${err.message}`;
-            err.context = context;
-            await this.hostApp.logError(err, context.getReq());
-            res.json({ errorMessage });
-        }
-    }
-    async test(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.test', context.getReq().body);
-        context.getRes().json(null);
     }
     async handleGetFile(context, application, next) {
         await application.handleGetFile(context, next);

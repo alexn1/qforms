@@ -53,7 +53,7 @@ export {
 } from '../../frontend/viewer';
 
 // post actions
-const ACTIONS = [
+/* const ACTIONS = [
     'insert', // insert     create
     'select', // select     read
     'update', // update     update
@@ -62,7 +62,7 @@ const ACTIONS = [
     'rpc',
     'logout',
     'test',
-];
+]; */
 
 export class ViewerModule {
     private css: string[];
@@ -75,9 +75,9 @@ export class ViewerModule {
 
     async init() {
         // debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
-        this.initControllers();
         await this.initCss();
         await this.initJs();
+        this.initControllers();
     }
 
     initControllers() {
@@ -142,7 +142,6 @@ export class ViewerModule {
             } else if (action === 'select') {
                 await this.dataSourceController.select(context, bkApplication);
             } else {
-                // await this.index(context, bkApplication);
                 await this.applicationController.index(context, bkApplication);
             }
         }
@@ -186,9 +185,9 @@ export class ViewerModule {
     async handleAction(context: Context, application: BkApplication) {
         const action = context.getAction();
         if (!action) throw new Error('no action');
-        if (ACTIONS.indexOf(action) === -1) {
+        /* if (ACTIONS.indexOf(action) === -1) {
             throw new Error(`unknown action: ${action}`);
-        }
+        } */
         context.setVersionHeaders(pkg.version, application.getVersion());
         if (action === 'page') {
             await this.pageController.page(context, application);
@@ -196,6 +195,8 @@ export class ViewerModule {
             await this.applicationController.logout(context, application);
         } else if (action === 'select') {
             await this.dataSourceController.select(context, application);
+        } else if (action === 'rpc') {
+            await this.applicationController.rpc(context, application);
         } else if (action === 'insert') {
             await this.dataSourceController.insert(context, application);
         } else if (action === 'update') {
@@ -203,75 +204,18 @@ export class ViewerModule {
         } else if (action === '_delete') {
             await this.dataSourceController._delete(context, application);
         } else {
-            await (this as any)[action](context, application);
-        }
-    }
-
-    async getDataSource(
-        context: Context,
-        application: BkApplication,
-        { page, form, ds }: { page?: string; form?: string; ds: string },
-    ): Promise<BkDataSource> {
-        if (page) {
-            const bkPage = await application.getPage(context, page);
-            if (form) {
-                return bkPage.getForm(form).getDataSource(ds);
-            }
-            return bkPage.getDataSource(ds);
-        }
-        return application.getDataSource(ds);
-    }
-
-    static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
-        const body = context.getBody() as RpcActionDto;
-        if (body.page) {
-            const page = await application.getPage(context, body.page);
-            if (body.form) {
-                return page.getForm(body.form);
-            }
-            return page;
-        }
-        return application;
-    }
-
-    // action
-    async rpc(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.rpc', context.getReq()!.body);
-        const dto = context.getBody() as RpcActionDto;
-        const res = context.getRes();
-        const model = await ViewerModule.getModel(context, application);
-        try {
-            const result = await model.rpc(dto.name, context);
-            if (result === undefined) throw new Error('rpc action: result is undefined');
-            if (Array.isArray(result)) {
-                const [response, _result] = result;
-                res.json(response);
-                if (!(_result instanceof Result)) {
-                    throw new Error('_result is not Result');
-                }
-                this.hostApp.broadcastResult(application, context, _result);
-            } else {
-                res.json(result);
-                if (result instanceof Result) {
-                    this.hostApp.broadcastResult(application, context, result);
-                }
-            }
-        } catch (err: any) {
-            const errorMessage = err.message;
-            err.message = `rpc error ${dto.name}: ${err.message}`;
-            err.context = context;
-            await this.hostApp.logError(err, context.getReq());
-            res.json({ errorMessage });
+            throw new Error(`unknown action: ${action}`);
+            // await (this as any)[action](context, application);
         }
     }
 
     // action
-    async test(context: Context, application: BkApplication) {
+    /* async test(context: Context, application: BkApplication) {
         debug('ViewerModule.test', context.getReq()!.body);
         // const result = await Test[req.body.name](context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         context.getRes().json(null);
-    }
+    } */
 
     async handleGetFile(context: Context, application: BkApplication, next: NextFunction) {
         await application.handleGetFile(context, next);

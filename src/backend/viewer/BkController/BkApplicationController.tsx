@@ -9,9 +9,11 @@ import { ViewerModule } from '../ViewerModule';
 import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
-import { LoginDto } from '../../../types';
+import { LoginDto, RpcActionDto } from '../../../types';
 import { BkHelper } from '../../BkHelper';
 import { Session_deleteUser, Session_save } from '../../Session';
+import { Result } from '../../../Result';
+import { BkModel } from '../BkModel/BkModel';
 
 const { version } = require('../../../../package.json');
 
@@ -20,7 +22,7 @@ export class BkApplicationController {
 
     // action (index page, action by default for GET request)
     async index(context: Context, bkApplication: BkApplication): Promise<void> {
-        pConsole.debug('ViewerModule.index');
+        pConsole.debug('BkApplicationController.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -33,7 +35,7 @@ export class BkApplicationController {
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
-        pConsole.debug('ViewerModule.renderHtml');
+        pConsole.debug('BkApplicationController.renderHtml');
 
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.viewerModule.getLinks(), ...bkApplication.links]} />,
@@ -79,7 +81,7 @@ export class BkApplicationController {
     }
 
     async loginGet(context: Context, application: BkApplication) {
-        pConsole.debug('ViewerModule.loginGet');
+        pConsole.debug('BkApplicationController.loginGet');
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.viewerModule.getLinks(), ...application.links]} />,
         );
@@ -97,7 +99,7 @@ export class BkApplicationController {
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
-        pConsole.debug('ViewerModule.loginPost');
+        pConsole.debug('BkApplicationController.loginPost');
         const { tzOffset, username, password } = context.getBody() as LoginDto;
         if (tzOffset === undefined) throw new Error('no tzOffset');
         if (username === undefined) throw new Error('no username');
@@ -152,7 +154,7 @@ export class BkApplicationController {
 
     // action
     async logout(context: Context, application: BkApplication): Promise<void> {
-        pConsole.debug('ViewerModule.logout');
+        pConsole.debug('BkApplicationController.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
@@ -162,5 +164,48 @@ export class BkApplicationController {
         Session_deleteUser(session, route);
         await Session_save(session);
         context.getRes().json(null);
+    }
+
+    // action
+    async rpc(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('BkApplicationController.rpc', context.getReq()!.body);
+        const dto = context.getBody() as RpcActionDto;
+        const res = context.getRes();
+        const model = await BkApplicationController.getModel(context, application);
+        try {
+            const result = await model.rpc(dto.name, context);
+            if (result === undefined) throw new Error('rpc action: result is undefined');
+            if (Array.isArray(result)) {
+                const [response, _result] = result;
+                res.json(response);
+                if (!(_result instanceof Result)) {
+                    throw new Error('_result is not Result');
+                }
+                this.viewerModule.getHostApp().broadcastResult(application, context, _result);
+            } else {
+                res.json(result);
+                if (result instanceof Result) {
+                    this.viewerModule.getHostApp().broadcastResult(application, context, result);
+                }
+            }
+        } catch (err: any) {
+            const errorMessage = err.message;
+            err.message = `rpc error ${dto.name}: ${err.message}`;
+            err.context = context;
+            await this.viewerModule.getHostApp().logError(err, context.getReq());
+            res.json({ errorMessage });
+        }
+    }
+
+    static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
+        const body = context.getBody() as RpcActionDto;
+        if (body.page) {
+            const page = await application.getPage(context, body.page);
+            if (body.form) {
+                return page.getForm(body.form);
+            }
+            return page;
+        }
+        return application;
     }
 }
