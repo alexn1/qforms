@@ -1935,7 +1935,7 @@ class Context {
     getQueryParams() {
         const req = this.getReq();
         const action = this.getAction();
-        if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.select].includes(action) && req.query.params) {
+        if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
             return _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.decodeObject(req.query.params);
         }
         return {};
@@ -9736,7 +9736,7 @@ class ViewerModule {
             if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.page) {
                 await this.pageController.page(context, bkApplication);
             }
-            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.select) {
+            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.read) {
                 await this.dataSourceController.select(context, bkApplication);
             }
             else {
@@ -9778,7 +9778,7 @@ class ViewerModule {
             else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.rpc) {
                 await this.applicationController.rpc(context, application);
             }
-            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.insert) {
+            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.create) {
                 await this.dataSourceController.insert(context, application);
             }
             else {
@@ -20172,7 +20172,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (table === '')
             throw new Error('no data source table to insert');
         const body = {
-            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.insert,
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.create,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
@@ -20294,7 +20294,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const page = this.getPage();
         const form = this.getForm();
         const query = {
-            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.select,
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.read,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
@@ -22197,8 +22197,8 @@ const keyToKeyTuple = (key) => {
 var Action;
 (function (Action) {
     Action["page"] = "page";
-    Action["insert"] = "insert";
-    Action["select"] = "select";
+    Action["create"] = "create";
+    Action["read"] = "read";
     Action["update"] = "update";
     Action["delete"] = "delete";
     Action["rpc"] = "rpc";

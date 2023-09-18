@@ -133,7 +133,7 @@ export class ViewerModule {
             const action = context.getAction();
             if (action === Action.page) {
                 await this.pageController.page(context, bkApplication);
-            } else if (action === Action.select) {
+            } else if (action === Action.read) {
                 await this.dataSourceController.select(context, bkApplication);
             } else {
                 await this.applicationController.index(context, bkApplication);
@@ -172,7 +172,7 @@ export class ViewerModule {
                 await this.applicationController.logout(context, application);
             } else if (action === Action.rpc) {
                 await this.applicationController.rpc(context, application);
-            } else if (action === Action.insert) {
+            } else if (action === Action.create) {
                 await this.dataSourceController.insert(context, application);
             } else {
                 throw new Error(`unknown action: ${action}`);

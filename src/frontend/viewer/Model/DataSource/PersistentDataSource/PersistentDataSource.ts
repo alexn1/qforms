@@ -36,7 +36,7 @@ export class PersistentDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const body: InsertActionDto = {
-            action: Action.insert,
+            action: Action.create,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -258,7 +258,7 @@ export class PersistentDataSource extends DataSource {
         const form = this.getForm();
 
         const query: SelectActionQuery = {
-            action: Action.select,
+            action: Action.read,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),

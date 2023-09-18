@@ -34,8 +34,8 @@ export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
 export declare enum Action {
     page = "page",
-    insert = "insert",
-    select = "select",
+    create = "create",
+    read = "read",
     update = "update",
     delete = "delete",
     rpc = "rpc",

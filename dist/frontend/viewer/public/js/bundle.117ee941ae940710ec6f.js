@@ -31990,6 +31990,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
+
 
 
 
@@ -32051,7 +32053,7 @@ class FrontHostApp {
         return [headers, data];
     }
     static composeHandlerName(data) {
-        if (data.action === 'rpc') {
+        if (data.action === _types__WEBPACK_IMPORTED_MODULE_3__.Action.rpc) {
             if (data.form)
                 return `${data.page}.${data.form}.${data.name}.${data.action}`;
             if (data.page)
@@ -40551,15 +40553,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Application": () => (/* binding */ Application)
 /* harmony export */ });
-/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
-/* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
 
-class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+
+class Application extends _Model__WEBPACK_IMPORTED_MODULE_1__.Model {
     constructor(data) {
         super(data);
         this.databases = [];
@@ -40573,7 +40577,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     createDatabases() {
         for (const data of this.getData().databases) {
-            const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_1__.Database(data, this);
+            const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_2__.Database(data, this);
             database.init();
             this.addDatabase(database);
         }
@@ -40593,7 +40597,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     async request(method, body) {
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, window.location.pathname, body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest2(method, window.location.pathname, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         this.emit('request', {
@@ -40605,7 +40609,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     async request2(method, url, body) {
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, url, body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest2(method, url, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         this.emit('request', {
@@ -40641,7 +40645,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!name)
             throw new Error('no name');
         const body = {
-            action: 'rpc',
+            action: _types__WEBPACK_IMPORTED_MODULE_0__.Action.rpc,
             name: name,
             uuid: this.getAttr('uuid'),
             params: params,
@@ -40669,7 +40673,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.getAttr('route');
     }
 }
-_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(Application);
+_common_Helper__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(Application);
 
 
 /***/ }),
@@ -41255,8 +41259,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PersistentDataSource": () => (/* binding */ PersistentDataSource)
 /* harmony export */ });
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
-/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
+/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
 
 
 
@@ -41273,7 +41279,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             if (!Object.keys(e.updates).length)
                 throw new Error(`${this.getFullName()}: no updates`);
             await this.refill();
-            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
                 this.getForm().onDataSourceUpdate(e);
             }
             this.emit('update', e);
@@ -41286,7 +41292,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
                 return;
             }
             await this.refill();
-            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
                 this.getForm().onDataSourceInsert(e);
             }
             this.emit('insert', e);
@@ -41299,7 +41305,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
                 return;
             }
             await this.refill();
-            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
                 this.getForm().onDataSourceDelete(e);
             }
             this.emit('delete', e);
@@ -41311,7 +41317,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             if (e.source)
                 throw new Error('refresh is foreign result so source must be null');
             await this.refill();
-            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
                 this.getForm().onDataSourceRefresh(e);
             }
             this.emit('refresh', e);
@@ -41324,7 +41330,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (table === '')
             throw new Error('no data source table to insert');
         const body = {
-            action: 'insert',
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.create,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
@@ -41342,7 +41348,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         this.changes.clear();
         this.addRow(row);
         const event = { source: this, inserts: result[database][table].insert };
-        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
             this.getForm().onDataSourceInsert(event);
         }
         this.emit('insert', event);
@@ -41361,7 +41367,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const body = {
-            action: 'update',
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.update,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
@@ -41375,7 +41381,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         this.changes.clear();
         this.updateRow(key, newValues);
         const event = { source: this, updates: result[database][table].update };
-        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
             this.getForm().onDataSourceUpdate(event);
         }
         this.emit('update', event);
@@ -41392,7 +41398,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body = {
-            action: '_delete',
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action["delete"],
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
@@ -41401,7 +41407,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const result = await this.getApp().request2('DELETE', window.location.pathname, body);
         await this.refill();
         const event = { source: this, deletes: result[database][table].delete };
-        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
             this.getForm().onDataSourceDelete(event);
         }
         this.emit('delete', event);
@@ -41415,7 +41421,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
     async refresh() {
         console.debug('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
-        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form) {
             this.getForm().onDataSourceRefresh({ source: this });
         }
     }
@@ -41446,13 +41452,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const page = this.getPage();
         const form = this.getForm();
         const query = {
-            action: 'select',
+            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.read,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
-            params: _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
+            params: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
         };
-        const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_2__.Helper.queryToString(query)}`));
+        const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_3__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');
         return response;
@@ -42187,6 +42193,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+
 
 
 class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
@@ -42250,7 +42258,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!name)
             throw new Error('no name');
         const body = {
-            action: 'rpc',
+            action: _types__WEBPACK_IMPORTED_MODULE_2__.Action.rpc,
             uuid: this.getApp().getAttr('uuid'),
             name: name,
             page: this.getPage().getName(),
@@ -42527,7 +42535,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+
 
 
 
@@ -42547,8 +42557,8 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     init() {
         this.createDataSources();
         this.createForms();
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('page options:', this.options);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('page params:', this.getParams());
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)('page options:', this.options);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)('page params:', this.getParams());
     }
     deinit() {
         if (this.deinited)
@@ -42582,7 +42592,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.update', this.getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -42590,7 +42600,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     discard() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.discard', this.getFullName());
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm) {
                 form.discard();
@@ -42655,7 +42665,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return !!this.options.modal;
     }
     onFormInsert(e) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Page.onFormInsert', e);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__.DataSource.keyToParams(key);
             for (const name in keyParams) {
@@ -42667,7 +42677,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!name)
             throw new Error('no name');
         const body = {
-            action: 'rpc',
+            action: _types__WEBPACK_IMPORTED_MODULE_4__.Action.rpc,
             uuid: this.getApp().getAttr('uuid'),
             name: name,
             page: this.getName(),
@@ -43225,6 +43235,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Action": () => (/* binding */ Action),
 /* harmony export */   "keyToKeyTuple": () => (/* binding */ keyToKeyTuple),
 /* harmony export */   "keyTupleToKey": () => (/* binding */ keyTupleToKey),
 /* harmony export */   "parseJson": () => (/* binding */ parseJson)
@@ -43235,6 +43246,17 @@ const keyTupleToKey = (keyArray) => {
 const keyToKeyTuple = (key) => {
     return JSON.parse(key);
 };
+var Action;
+(function (Action) {
+    Action["page"] = "page";
+    Action["create"] = "create";
+    Action["read"] = "read";
+    Action["update"] = "update";
+    Action["delete"] = "delete";
+    Action["rpc"] = "rpc";
+    Action["login"] = "login";
+    Action["logout"] = "logout";
+})(Action || (Action = {}));
 function parseJson(json) {
     return JSON.parse(json);
 }

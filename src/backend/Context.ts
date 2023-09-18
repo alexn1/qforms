@@ -56,7 +56,7 @@ export class Context {
         // pConsole.debug('getQueryParams:', this.getReq()?.query?.params);
         const req = this.getReq();
         const action = this.getAction();
-        if (req && action && [Action.page, Action.select].includes(action) && req.query.params) {
+        if (req && action && [Action.page, Action.read].includes(action) && req.query.params) {
             return BkHelper.decodeObject(req.query.params);
         }
         return {};
