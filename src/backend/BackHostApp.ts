@@ -917,22 +917,17 @@ export class BackHostApp {
                 data: `${body.data}\n${data}`,
                 ip: body.ip || Context.getIpFromReq(req),
             });
-            res.header('Access-Control-Allow-Origin', '*');
-            res.end('ok');
+            res.header('Access-Control-Allow-Origin', '*').end('ok');
         } catch (err) {
             next(err);
         }
-    }
-
-    getFrontendDirPath(): string {
-        return this.frontendDirPath;
     }
 
     alias(
         method: 'get' | 'post' | 'patch' | 'delete',
         path: string | RegExp,
         [module, appDirName, appFileName, env, domain]: Route,
-        cb: string,
+        fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete',
         query?: Record<string, Nullable<Scalar>>,
     ) {
         this.express[method](path, async (req: Request, res: Response, next: NextFunction) => {
@@ -954,7 +949,7 @@ export class BackHostApp {
                 }
             }
             // @ts-ignore
-            await this[cb](req, res, next);
+            await this[fn](req, res, next);
         });
     }
 
@@ -981,6 +976,37 @@ export class BackHostApp {
         this.alias('delete', path, route, 'moduleDelete', query);
     }
 
+    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void {
+        debug('BackHostApp.broadcastResult');
+        for (const route in this.applications) {
+            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
+                sourceApplication.broadcastDomesticResultToClients(context, result);
+            } else {
+                const application = this.applications[route];
+                application.broadcastForeignResultToClients(context, result);
+            }
+        }
+    }
+
+    // @log(LogLevel.debug)
+    // static test(): void {}
+
+    getLogger(): EventLog {
+        return this.eventLog;
+    }
+
+    getFrontLogUrl(): Optional<string> {
+        return this.params.frontLogUrl;
+    }
+
+    getHttpServer(): http.Server {
+        return this.httpServer;
+    }
+
+    getFrontendDirPath(): string {
+        return this.frontendDirPath;
+    }
+
     getNodeEnv(): Nullable<string> {
         return process.env.NODE_ENV || null;
     }
@@ -995,32 +1021,5 @@ export class BackHostApp {
 
     getParams(): BackHostAppParams {
         return this.params;
-    }
-
-    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void {
-        debug('BackHostApp.broadcastResult');
-        for (const route in this.applications) {
-            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
-                sourceApplication.broadcastDomesticResultToClients(context, result);
-            } else {
-                const application = this.applications[route];
-                application.broadcastForeignResultToClients(context, result);
-            }
-        }
-    }
-
-    @log(LogLevel.debug)
-    static test(): void {}
-
-    getLogger(): EventLog {
-        return this.eventLog;
-    }
-
-    getFrontLogUrl(): Optional<string> {
-        return this.params.frontLogUrl;
-    }
-
-    getHttpServer(): http.Server {
-        return this.httpServer;
     }
 }

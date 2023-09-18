@@ -1449,17 +1449,13 @@ class BackHostApp {
                 data: `${body.data}\n${data}`,
                 ip: body.ip || _Context__WEBPACK_IMPORTED_MODULE_10__.Context.getIpFromReq(req),
             });
-            res.header('Access-Control-Allow-Origin', '*');
-            res.end('ok');
+            res.header('Access-Control-Allow-Origin', '*').end('ok');
         }
         catch (err) {
             next(err);
         }
     }
-    getFrontendDirPath() {
-        return this.frontendDirPath;
-    }
-    alias(method, path, [module, appDirName, appFileName, env, domain], cb, query) {
+    alias(method, path, [module, appDirName, appFileName, env, domain], fn, query) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
             req.params.appDirName = appDirName;
@@ -1478,7 +1474,7 @@ class BackHostApp {
                     }
                 }
             }
-            await this[cb](req, res, next);
+            await this[fn](req, res, next);
         });
     }
     static getQueryFromParams(req, query) {
@@ -1523,7 +1519,6 @@ class BackHostApp {
             }
         }
     }
-    static test() { }
     getLogger() {
         return this.eventLog;
     }
@@ -1532,6 +1527,9 @@ class BackHostApp {
     }
     getHttpServer() {
         return this.httpServer;
+    }
+    getFrontendDirPath() {
+        return this.frontendDirPath;
     }
 }
 __decorate([
@@ -1554,9 +1552,6 @@ __decorate([
 __decorate([
     (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
 ], BackHostApp.prototype, "shutdown", null);
-__decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
-], BackHostApp, "test", null);
 
 
 /***/ }),

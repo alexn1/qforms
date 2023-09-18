@@ -127,8 +127,7 @@ export declare class BackHostApp {
     getDomain(req: Request): Nullable<string>;
     optionsError(req: Request, res: Response, next: NextFunction): Promise<void>;
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
-    getFrontendDirPath(): string;
-    alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Nullable<Scalar>>): void;
+    alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete', query?: Record<string, Nullable<Scalar>>): void;
     static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;
     getNodeEnv(): Nullable<string>;
@@ -136,8 +135,8 @@ export declare class BackHostApp {
     isProduction(): boolean;
     getParams(): BackHostAppParams;
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
-    static test(): void;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
     getHttpServer(): http.Server;
+    getFrontendDirPath(): string;
 }
