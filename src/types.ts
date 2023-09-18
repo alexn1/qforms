@@ -97,17 +97,17 @@ export interface SelectActionQuery extends ParsedQs {
     params?: Record<string, JSONString<any>>;
 }
 
+export interface SelectActionResponse {
+    rows: RawRow[];
+    count: Nullable<number>;
+    time: number;
+}
+
 export interface InsertActionDto extends BaseDto {
     page: string;
     form: string;
     row: RawRow;
     uuid: string;
-}
-
-export interface SelectActionResponse {
-    rows: RawRow[];
-    count: Nullable<number>;
-    time: number;
 }
 
 export interface UpdateActionDto {
