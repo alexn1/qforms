@@ -41,7 +41,7 @@ export declare class BackHostApp {
     applications: {
         [route: string]: BkApplication;
     };
-    express: Express;
+    private express;
     httpServer: http.Server;
     wsServer: WebSocketServer;
     appsDirPath: string;
@@ -50,6 +50,7 @@ export declare class BackHostApp {
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
+    private router;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -68,6 +69,7 @@ export declare class BackHostApp {
     checkApplicationFolder(): void;
     createTempDirsIfNotExistSync(): void;
     private createEventLog;
+    initRouter(): void;
     initModules(): Promise<void>;
     createWebSocketServer(): void;
     initDirPaths(): void;
@@ -104,8 +106,6 @@ export declare class BackHostApp {
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
-    indexGet(req: Request, res: Response, next: NextFunction): Promise<void>;
-    indexPost(req: Request, res: Response, next: NextFunction): Promise<void>;
     monitorGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
@@ -130,13 +130,14 @@ export declare class BackHostApp {
     alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete', query?: Record<string, Nullable<Scalar>>): void;
     static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;
-    getNodeEnv(): Nullable<string>;
-    isDevelopment(): boolean;
-    isProduction(): boolean;
-    getParams(): BackHostAppParams;
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
     getHttpServer(): http.Server;
     getFrontendDirPath(): string;
+    getNodeEnv(): Nullable<string>;
+    isDevelopment(): boolean;
+    isProduction(): boolean;
+    getParams(): BackHostAppParams;
+    getExpress(): Express;
 }

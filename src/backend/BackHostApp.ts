@@ -30,6 +30,7 @@ import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './system-helper';
+import { Router } from './Router';
 
 const pkg = require('../../package.json');
 
@@ -65,7 +66,7 @@ export interface BackHostAppParams {
 
 export class BackHostApp {
     applications: { [route: string]: BkApplication } = {};
-    express: Express;
+    private express: Express;
     httpServer: http.Server;
     wsServer: WebSocketServer;
 
@@ -76,6 +77,8 @@ export class BackHostApp {
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
+
+    private router: Router;
 
     // module
     indexModule: IndexModule;
@@ -99,8 +102,9 @@ export class BackHostApp {
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
-        this.createExpressServer();
+        this.initRouter();
         await this.initModules();
+        this.createExpressServer();
         this.createHttpServer();
     }
 
@@ -144,21 +148,18 @@ export class BackHostApp {
         this.eventLog = new EventLog(this.params.logger);
     }
 
+    initRouter() {
+        this.router = new Router(this);
+    }
+
     async initModules(): Promise<void> {
-        // indexModule
         this.indexModule = new IndexModule(this);
-        await this.indexModule.init();
-
-        // monitorModule
         this.monitorModule = new MonitorModule(this);
-        await this.monitorModule.init();
-
-        // viewerModule
         this.viewerModule = new ViewerModule(this);
-        await this.viewerModule.init();
-
-        // editorModule
         this.editorModule = new EditorModule(this);
+        await this.indexModule.init();
+        await this.monitorModule.init();
+        await this.viewerModule.init();
         await this.editorModule.init();
     }
 
@@ -247,17 +248,19 @@ export class BackHostApp {
     }
 
     initSystemRoutes(): void {
+        this.router.createRoutes();
+
         // error
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
 
         // index module
-        if (this.isDevelopment()) {
+        /* if (this.isDevelopment()) {
             // google chrome always redirect from /index to /index/ even with disabled cache
             // so we use /index2
             this.express.get('/index2', this.indexGet.bind(this));
             this.express.post('/index2', this.indexPost.bind(this));
-        }
+        } */
 
         // monitor module
         this.express.get('/monitor', this.monitorGet.bind(this));
@@ -483,7 +486,7 @@ export class BackHostApp {
         }
     }
 
-    async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
+    /* async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         pConsole.log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
@@ -491,9 +494,9 @@ export class BackHostApp {
         } catch (err) {
             next(err);
         }
-    }
+    } */
 
-    async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
+    /* async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
         pConsole.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createAppInfos(req);
@@ -506,7 +509,7 @@ export class BackHostApp {
         } catch (err) {
             next(err);
         }
-    }
+    } */
 
     async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         pConsole.log(colors.magenta('monitorGet') /* , req.headers */);
@@ -1021,5 +1024,9 @@ export class BackHostApp {
 
     getParams(): BackHostAppParams {
         return this.params;
+    }
+
+    getExpress(): Express {
+        return this.express;
     }
 }
