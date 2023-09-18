@@ -256,12 +256,6 @@ export class BackHostApp {
 
         // viewer/editor module
 
-        // GET
-        this.express.get(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
-            this.moduleGet.bind(this),
-        );
-
         // GET file
         this.express.get(
             '/:module/:appDirName/:appFileName/:env/:domain/*',
@@ -475,25 +469,6 @@ export class BackHostApp {
         }
     }
 
-    async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // @ts-ignore
-        // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('GET'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-        );
-        if (req.params.module === 'viewer') {
-            await this.viewerModule.get(req, res, next);
-        } else if (req.params.module === 'editor' && this.isDevelopment()) {
-            await this.editorModule.get(req, res, next);
-        } else {
-            next();
-        }
-    }
-
     async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
@@ -516,19 +491,13 @@ export class BackHostApp {
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 await this.viewerModule.handlePost(context, application);
-                // await this.logRequest(req, context, time);
-            } else if (req.params.module === 'editor') {
-                if (this.isDevelopment()) {
-                    context = new Context({
-                        req,
-                        res,
-                        domain: this.getDomain(req),
-                    });
-                    const time = await this.editorModule.handleEditorPost(req, res, context);
-                    // await this.logRequest(req, context, time);
-                } else {
-                    next();
-                }
+            } else if (req.params.module === 'editor' && this.isDevelopment()) {
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomain(req),
+                });
+                await this.editorModule.handleEditorPost(req, res, context);
             } else {
                 next();
             }

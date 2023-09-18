@@ -952,7 +952,6 @@ class BackHostApp {
         this.router.createRoutes();
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
-        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
@@ -1098,18 +1097,6 @@ class BackHostApp {
         }
         catch (err) {
             _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
-        }
-    }
-    async moduleGet(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
-        if (req.params.module === 'viewer') {
-            await this.viewerModule.get(req, res, next);
-        }
-        else if (req.params.module === 'editor' && this.isDevelopment()) {
-            await this.editorModule.get(req, res, next);
-        }
-        else {
-            next();
         }
     }
     async modulePost(req, res, next) {
@@ -2581,6 +2568,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Router": () => (/* binding */ Router)
 /* harmony export */ });
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+
+
 class Router {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -2591,6 +2583,21 @@ class Router {
             this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
         this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
+        this.hostApp
+            .getExpress()
+            .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+    }
+    async moduleGet(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.get(req, res, next);
+        }
+        else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+            await this.hostApp.editorModule.get(req, res, next);
+        }
+        else {
+            next();
+        }
     }
 }
 

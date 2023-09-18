@@ -16,5 +16,27 @@ export class Router {
 
         // monitor module
         this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
+
+        // GET
+        this.hostApp
+            .getExpress()
+            .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+    }
+
+    async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
+        // @ts-ignore
+        // debug(colors.magenta.underline('Router.moduleGet'), req.params);
+        pConsole.log(
+            // @ts-ignore
+            colors.magenta.underline('GET'),
+            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
+        );
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.get(req, res, next);
+        } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+            await this.hostApp.editorModule.get(req, res, next);
+        } else {
+            next();
+        }
     }
 }
