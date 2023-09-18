@@ -29,7 +29,6 @@ export declare class ViewerModule {
         form?: string;
         ds: string;
     }): Promise<BkDataSource>;
-    _delete(context: Context, application: BkApplication): Promise<void>;
     static getModel(context: Context, application: BkApplication): Promise<BkModel>;
     rpc(context: Context, application: BkApplication): Promise<void>;
     test(context: Context, application: BkApplication): Promise<void>;

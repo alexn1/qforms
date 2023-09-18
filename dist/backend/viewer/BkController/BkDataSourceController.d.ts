@@ -8,6 +8,7 @@ export declare class BkDataSourceController {
     select(context: Context, application: BkApplication): Promise<void>;
     insert(context: Context, application: BkApplication): Promise<void>;
     update(context: Context, application: BkApplication): Promise<void>;
+    _delete(context: Context, application: BkApplication): Promise<void>;
     static getDataSource(context: Context, application: BkApplication, { page, form, ds }: {
         page?: string;
         form?: string;

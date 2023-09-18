@@ -6,6 +6,7 @@ import {
     SelectActionResponse,
     InsertActionDto,
     UpdateActionDto,
+    DeleteActionDto,
 } from '../../../types';
 import { ViewerModule } from '../ViewerModule';
 import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
@@ -65,6 +66,25 @@ export class BkDataSourceController {
             const result = await database.transaction<Result>(context, async () => {
                 const result = await dataSource.update(context);
                 if (result === undefined) throw new Error('action update: result is undefined');
+                return result;
+            });
+            context.getRes().json(result);
+            this.viewerModule.getHostApp().broadcastResult(application, context, result);
+        });
+    }
+
+    // action
+    async _delete(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('BkDataSourceController._delete', context.getReq()!.body.page);
+        const body = context.getBody() as DeleteActionDto;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
+        const dataSource = form.getDataSource('default');
+        await dataSource.getDatabase().use(context, async (database) => {
+            await application.initContext(context);
+            const result = await database.transaction<Result>(context, async () => {
+                const result = await dataSource.delete(context);
+                if (result === undefined) throw new Error('delete result is undefined');
                 return result;
             });
             context.getRes().json(result);

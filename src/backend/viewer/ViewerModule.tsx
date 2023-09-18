@@ -200,6 +200,8 @@ export class ViewerModule {
             await this.dataSourceController.insert(context, application);
         } else if (action === 'update') {
             await this.dataSourceController.update(context, application);
+        } else if (action === '_delete') {
+            await this.dataSourceController._delete(context, application);
         } else {
             await (this as any)[action](context, application);
         }
@@ -218,25 +220,6 @@ export class ViewerModule {
             return bkPage.getDataSource(ds);
         }
         return application.getDataSource(ds);
-    }
-
-    // action
-    async _delete(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule._delete', context.getReq()!.body.page);
-        const body = context.getBody() as DeleteActionDto;
-        const page = await application.getPage(context, body.page);
-        const form = page.getForm(body.form);
-        const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const result = await database.transaction<Result>(context, async () => {
-                const result = await dataSource.delete(context);
-                if (result === undefined) throw new Error('delete result is undefined');
-                return result;
-            });
-            context.getRes().json(result);
-            this.hostApp.broadcastResult(application, context, result);
-        });
     }
 
     static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
