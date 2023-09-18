@@ -128,7 +128,7 @@ export class ViewerModule {
             bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])
         ) {
-            await this.loginGet(context, bkApplication);
+            await this.applicationController.loginGet(context, bkApplication);
         } else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
 
@@ -192,24 +192,6 @@ export class ViewerModule {
         } else {
             await (this as any)[action](context, application);
         }
-    }
-
-    async loginGet(context: Context, application: BkApplication) {
-        debug('ViewerModule.loginGet');
-        const links = ReactDOMServer.renderToStaticMarkup(
-            <Links links={[...this.getLinks(), ...application.links]} />,
-        );
-        const scripts = ReactDOMServer.renderToStaticMarkup(
-            <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
-        );
-        const html = login(pkg.version, context, application, links, scripts, {
-            name: application.getName(),
-            text: application.getText(),
-            title: application.getTitle(context),
-            errMsg: null,
-            username: context.getQuery().username,
-        });
-        context.getRes().end(html);
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {

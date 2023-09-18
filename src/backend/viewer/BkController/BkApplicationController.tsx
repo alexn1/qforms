@@ -8,6 +8,7 @@ import { Scripts } from '../../Scripts';
 import { ViewerModule } from '../ViewerModule';
 import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
+import { login } from '../login';
 
 const { version } = require('../../../../package.json');
 
@@ -72,5 +73,23 @@ export class BkApplicationController {
         );
 
         return html;
+    }
+
+    async loginGet(context: Context, application: BkApplication) {
+        pConsole.debug('ViewerModule.loginGet');
+        const links = ReactDOMServer.renderToStaticMarkup(
+            <Links links={[...this.viewerModule.getLinks(), ...application.links]} />,
+        );
+        const scripts = ReactDOMServer.renderToStaticMarkup(
+            <Scripts scripts={[...this.viewerModule.getScripts(), ...application.scripts]} />,
+        );
+        const html = login(version, context, application, links, scripts, {
+            name: application.getName(),
+            text: application.getText(),
+            title: application.getTitle(context),
+            errMsg: null,
+            username: context.getQuery().username,
+        });
+        context.getRes().end(html);
     }
 }

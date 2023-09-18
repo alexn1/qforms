@@ -5975,6 +5975,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Scripts */ "./src/backend/Scripts.tsx");
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
 /* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
+
 
 
 
@@ -6021,6 +6023,19 @@ class BkApplicationController {
         const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
         const html = bkApplication.renderIndexHtml(context, applicationController, version, links, scripts, data, appViewHtml);
         return html;
+    }
+    async loginGet(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.loginGet');
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...application.links] }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...application.scripts] }));
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(version, context, application, links, scripts, {
+            name: application.getName(),
+            text: application.getText(),
+            title: application.getTitle(context),
+            errMsg: null,
+            username: context.getQuery().username,
+        });
+        context.getRes().end(html);
     }
 }
 
@@ -9459,7 +9474,7 @@ class ViewerModule {
         const session = context.getSession();
         if (bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])) {
-            await this.loginGet(context, bkApplication);
+            await this.applicationController.loginGet(context, bkApplication);
         }
         else {
             context.setVersionHeaders(pkg.version, bkApplication.getVersion());
@@ -9516,19 +9531,6 @@ class ViewerModule {
         else {
             await this[action](context, application);
         }
-    }
-    async loginGet(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.loginGet');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: [...this.getLinks(), ...application.links] }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(pkg.version, context, application, links, scripts, {
-            name: application.getName(),
-            text: application.getText(),
-            title: application.getTitle(context),
-            errMsg: null,
-            username: context.getQuery().username,
-        });
-        context.getRes().end(html);
     }
     async loginPost(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('ViewerModule.loginPost');
