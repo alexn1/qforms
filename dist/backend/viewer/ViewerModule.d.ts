@@ -34,7 +34,6 @@ export declare class ViewerModule {
     _delete(context: Context, application: BkApplication): Promise<void>;
     static getModel(context: Context, application: BkApplication): Promise<BkModel>;
     rpc(context: Context, application: BkApplication): Promise<void>;
-    logout(context: Context, application: BkApplication): Promise<void>;
     test(context: Context, application: BkApplication): Promise<void>;
     handleGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
     getHostApp(): BackHostApp;

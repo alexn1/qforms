@@ -189,6 +189,8 @@ export class ViewerModule {
         context.setVersionHeaders(pkg.version, application.getVersion());
         if (action === 'page') {
             await this.pageController.page(context, application);
+        } else if (action === 'logout') {
+            await this.applicationController.logout(context, application);
         } else {
             await (this as any)[action](context, application);
         }
@@ -324,20 +326,6 @@ export class ViewerModule {
             await this.hostApp.logError(err, context.getReq());
             res.json({ errorMessage });
         }
-    }
-
-    // action
-    async logout(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.logout');
-        const user = context.getUser();
-        const route = context.getRoute();
-        if (!user) {
-            throw new Error(`no user for route ${route}`);
-        }
-        const session = context.getSession();
-        Session_deleteUser(session, route);
-        await Session_save(session);
-        context.getRes().json(null);
     }
 
     // action

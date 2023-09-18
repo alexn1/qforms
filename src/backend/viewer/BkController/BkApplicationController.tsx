@@ -11,6 +11,7 @@ import { Application } from '../../../frontend/viewer/Model/Application/Applicat
 import { login } from '../login';
 import { LoginDto } from '../../../types';
 import { BkHelper } from '../../BkHelper';
+import { Session_deleteUser, Session_save } from '../../Session';
 
 const { version } = require('../../../../package.json');
 
@@ -147,5 +148,19 @@ export class BkApplicationController {
         } finally {
             await application.release(context);
         }
+    }
+
+    // action
+    async logout(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('ViewerModule.logout');
+        const user = context.getUser();
+        const route = context.getRoute();
+        if (!user) {
+            throw new Error(`no user for route ${route}`);
+        }
+        const session = context.getSession();
+        Session_deleteUser(session, route);
+        await Session_save(session);
+        context.getRes().json(null);
     }
 }

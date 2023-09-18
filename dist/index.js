@@ -5977,6 +5977,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+
 
 
 
@@ -6086,6 +6088,18 @@ class BkApplicationController {
         finally {
             await application.release(context);
         }
+    }
+    async logout(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('ViewerModule.logout');
+        const user = context.getUser();
+        const route = context.getRoute();
+        if (!user) {
+            throw new Error(`no user for route ${route}`);
+        }
+        const session = context.getSession();
+        (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_save)(session);
+        context.getRes().json(null);
     }
 }
 
@@ -9439,11 +9453,11 @@ class BkTable extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSource),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.RowForm),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableForm),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TableFormTextBoxFieldController),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__.TextBoxField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.NoSqlDataSource),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.RowForm),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableForm),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TableFormTextBoxFieldController),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__.TextBoxField),
 /* harmony export */   "ViewerModule": () => (/* binding */ ViewerModule)
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
@@ -9453,11 +9467,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
-/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
-
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _frontend_viewer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../frontend/viewer */ "./src/frontend/viewer/index.ts");
 
 
 
@@ -9488,8 +9500,8 @@ class ViewerModule {
         await this.initJs();
     }
     initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__.BkPageController();
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__.BkPageController();
     }
     async initCss() {
         this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
@@ -9565,6 +9577,9 @@ class ViewerModule {
         context.setVersionHeaders(pkg.version, application.getVersion());
         if (action === 'page') {
             await this.pageController.page(context, application);
+        }
+        else if (action === 'logout') {
+            await this.applicationController.logout(context, application);
         }
         else {
             await this[action](context, application);
@@ -9690,18 +9705,6 @@ class ViewerModule {
             await this.hostApp.logError(err, context.getReq());
             res.json({ errorMessage });
         }
-    }
-    async logout(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.logout');
-        const user = context.getUser();
-        const route = context.getRoute();
-        if (!user) {
-            throw new Error(`no user for route ${route}`);
-        }
-        const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_6__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_6__.Session_save)(session);
-        context.getRes().json(null);
     }
     async test(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.test', context.getReq().body);
