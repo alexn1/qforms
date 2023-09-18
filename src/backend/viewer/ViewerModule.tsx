@@ -121,6 +121,25 @@ export class ViewerModule {
         }
     }
 
+    async post(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handlePost(context, application);
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
         const { action } = context.getBody() as BaseDto;

@@ -262,12 +262,6 @@ export class BackHostApp {
             this.moduleGetFile.bind(this),
         );
 
-        // POST
-        this.express.post(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
-            this.modulePost.bind(this),
-        );
-
         // PATCH
         this.express.patch(
             '/:module/:appDirName/:appFileName/:env/:domain/',
@@ -466,47 +460,6 @@ export class BackHostApp {
             });
         } catch (err) {
             pConsole.error(colors.red(err));
-        }
-    }
-
-    async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('POST'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
-        let context: Nullable<Context> = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handlePost(context, application);
-            } else if (req.params.module === 'editor' && this.isDevelopment()) {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                await this.editorModule.handleEditorPost(req, res, context);
-            } else {
-                next();
-            }
-        } catch (err) {
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
         }
     }
 

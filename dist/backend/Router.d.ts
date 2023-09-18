@@ -5,4 +5,5 @@ export declare class Router {
     constructor(hostApp: BackHostApp);
     createRoutes(): void;
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
+    modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
 }

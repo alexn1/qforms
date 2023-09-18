@@ -106,7 +106,6 @@ export declare class BackHostApp {
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
-    modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePatch(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;

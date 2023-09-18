@@ -21,6 +21,11 @@ export class Router {
         this.hostApp
             .getExpress()
             .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+
+        // POST
+        this.hostApp
+            .getExpress()
+            .post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
     }
 
     async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -35,6 +40,27 @@ export class Router {
             await this.hostApp.viewerModule.get(req, res, next);
         } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
+        } else {
+            next();
+        }
+    }
+
+    async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
+        // @ts-ignore
+        debug(colors.magenta.underline('Router.modulePost'), req.params, req.body);
+
+        // log request
+        pConsole.log(
+            // @ts-ignore
+            colors.magenta.underline('POST'),
+            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
+            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
+        );
+
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.post(req, res, next);
+        } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+            await this.hostApp.editorModule.post(req, res, next);
         } else {
             next();
         }

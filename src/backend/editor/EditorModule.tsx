@@ -138,6 +138,24 @@ export class EditorModule {
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
 
+    async post(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            await this.handleEditorPost(req, res, context);
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+
     async handleEditorPost(req: Request, res: Response, context: Context) {
         debug('EditorModule.handleEditorPost', req.body);
         const body = req.body as EditorPostDto;

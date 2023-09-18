@@ -953,7 +953,6 @@ class BackHostApp {
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
-        this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
     }
@@ -1097,46 +1096,6 @@ class BackHostApp {
         }
         catch (err) {
             _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
-        }
-    }
-    async modulePost(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
-        let context = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handlePost(context, application);
-            }
-            else if (req.params.module === 'editor') {
-                if (this.isDevelopment()) {
-                    context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                        req,
-                        res,
-                        domain: this.getDomain(req),
-                    });
-                    const time = await this.editorModule.handleEditorPost(req, res, context);
-                }
-                else {
-                    next();
-                }
-            }
-            else {
-                next();
-            }
-        }
-        catch (err) {
-            next(err);
-        }
-        finally {
-            if (context) {
-                context.destroy();
-            }
         }
     }
     async modulePatch(req, res, next) {
@@ -2586,6 +2545,9 @@ class Router {
         this.hostApp
             .getExpress()
             .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+        this.hostApp
+            .getExpress()
+            .post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
     }
     async moduleGet(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
@@ -2594,6 +2556,19 @@ class Router {
         }
         else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
+        }
+        else {
+            next();
+        }
+    }
+    async modulePost(req, res, next) {
+        debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.post(req, res, next);
+        }
+        else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+            await this.hostApp.editorModule.post(req, res, next);
         }
         else {
             next();
@@ -5384,6 +5359,25 @@ class EditorModule {
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: this.getScripts() }));
         const html = (0,_home__WEBPACK_IMPORTED_MODULE_9__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
+    }
+    async post(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_3__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            await this.handleEditorPost(req, res, context);
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
     }
     async handleEditorPost(req, res, context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('EditorModule.handleEditorPost', req.body);
@@ -9758,6 +9752,26 @@ class ViewerModule {
             }
             else {
                 await this.applicationController.index(context, bkApplication);
+            }
+        }
+    }
+    async post(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_1__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handlePost(context, application);
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
             }
         }
     }

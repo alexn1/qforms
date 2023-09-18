@@ -11,5 +11,6 @@ export declare class EditorModule {
     getScripts(): string[];
     get(req: Request, res: Response, next: NextFunction): Promise<void>;
     handleEditorGet(req: Request, res: Response, context: Context): Promise<void>;
+    post(req: Request, res: Response, next: NextFunction): Promise<void>;
     handleEditorPost(req: Request, res: Response, context: Context): Promise<void>;
 }
