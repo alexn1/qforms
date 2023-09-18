@@ -10,31 +10,29 @@ export class Router {
         if (this.hostApp.isDevelopment()) {
             // google chrome always redirect from /index to /index/ even with disabled cache
             // so we use /index2
-            this.hostApp.getExpress().get('/index2', this.indexGet.bind(this));
-            this.hostApp.getExpress().post('/index2', this.indexPost.bind(this));
+            this.hostApp.getExpress().get('/index2', this.hostApp.indexModule.get.bind(this));
+            this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
+
+        // monitor module
+        this.hostApp.getExpress().get('/monitor', this.monitorGet.bind(this));
     }
 
-    async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        pConsole.log(colors.magenta('indexGet'));
+    async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
+        pConsole.log(colors.magenta('monitorGet') /* , req.headers */);
         try {
-            const html = await this.hostApp.indexModule.render();
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
-        } catch (err) {
-            next(err);
-        }
-    }
-
-    async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        pConsole.log(colors.magenta('indexPost'), req.params);
-        try {
-            const appInfos = await this.hostApp.createAppInfos(req);
-            res.json({
-                appInfos: appInfos.map((appInfo) => ({
-                    fullName: appInfo.fullName,
-                    envs: appInfo.envs,
-                })),
-            });
+            if (!this.hostApp.getParams().monitor) {
+                res.end('Please set monitor username/password in app params');
+                return;
+            }
+            if (this.hostApp.monitorModule.authorize(req)) {
+                const html = this.hostApp.monitorModule.render();
+                res.end(html);
+            } else {
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
+                    .status(401)
+                    .end('Unauthorized');
+            }
         } catch (err) {
             next(err);
         }

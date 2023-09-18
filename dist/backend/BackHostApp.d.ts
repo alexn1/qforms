@@ -106,7 +106,6 @@ export declare class BackHostApp {
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
-    monitorGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePatch(req: Request, res: Response, next: NextFunction): Promise<void>;

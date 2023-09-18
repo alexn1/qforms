@@ -4,6 +4,5 @@ export declare class Router {
     private hostApp;
     constructor(hostApp: BackHostApp);
     createRoutes(): void;
-    indexGet(req: Request, res: Response, next: NextFunction): Promise<void>;
-    indexPost(req: Request, res: Response, next: NextFunction): Promise<void>;
+    monitorGet(req: Request, res: Response, next: NextFunction): Promise<void>;
 }

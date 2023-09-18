@@ -1,3 +1,5 @@
+import colors from 'colors/safe';
+import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import ReactDOMServer from 'react-dom/server';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
@@ -5,6 +7,7 @@ import { BkHelper } from '../BkHelper';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { BackHostApp } from '../BackHostApp';
+import { pConsole } from '../../pConsole';
 
 const pkg = require('../../../package.json');
 
@@ -29,6 +32,31 @@ export class IndexModule {
         ).map((path) => `/index/public/${path}`);
         // debug('app.css:', this.css);
         // debug('app.js:' , this.js);
+    }
+
+    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+        pConsole.log(colors.magenta('indexGet'));
+        try {
+            const html = await this.hostApp.indexModule.render();
+            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async post(req: Request, res: Response, next: NextFunction): Promise<void> {
+        pConsole.log(colors.magenta('indexPost'), req.params);
+        try {
+            const appInfos = await this.hostApp.createAppInfos(req);
+            res.json({
+                appInfos: appInfos.map((appInfo) => ({
+                    fullName: appInfo.fullName,
+                    envs: appInfo.envs,
+                })),
+            });
+        } catch (err) {
+            next(err);
+        }
     }
 
     async fill() {

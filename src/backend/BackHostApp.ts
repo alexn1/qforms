@@ -254,17 +254,6 @@ export class BackHostApp {
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
 
-        // index module
-        /* if (this.isDevelopment()) {
-            // google chrome always redirect from /index to /index/ even with disabled cache
-            // so we use /index2
-            this.express.get('/index2', this.indexGet.bind(this));
-            this.express.post('/index2', this.indexPost.bind(this));
-        } */
-
-        // monitor module
-        this.express.get('/monitor', this.monitorGet.bind(this));
-
         // viewer/editor module
 
         // GET
@@ -483,51 +472,6 @@ export class BackHostApp {
             });
         } catch (err) {
             pConsole.error(colors.red(err));
-        }
-    }
-
-    /* async indexGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        pConsole.log(colors.magenta('indexGet'));
-        try {
-            const html = await this.indexModule.render();
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
-        } catch (err) {
-            next(err);
-        }
-    } */
-
-    /* async indexPost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        pConsole.log(colors.magenta('indexPost'), req.params);
-        try {
-            const appInfos = await this.createAppInfos(req);
-            res.json({
-                appInfos: appInfos.map((appInfo) => ({
-                    fullName: appInfo.fullName,
-                    envs: appInfo.envs,
-                })),
-            });
-        } catch (err) {
-            next(err);
-        }
-    } */
-
-    async monitorGet(req: Request, res: Response, next: NextFunction): Promise<void> {
-        pConsole.log(colors.magenta('monitorGet') /* , req.headers */);
-        try {
-            if (!this.params.monitor) {
-                res.end('Please set monitor username/password in app params');
-                return;
-            }
-            if (this.monitorModule.authorize(req)) {
-                const html = this.monitorModule.render();
-                res.end(html);
-            } else {
-                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
-                    .status(401)
-                    .end('Unauthorized');
-            }
-        } catch (err) {
-            next(err);
         }
     }
 

@@ -952,7 +952,6 @@ class BackHostApp {
         this.router.createRoutes();
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
-        this.express.get('/monitor', this.monitorGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
@@ -1099,27 +1098,6 @@ class BackHostApp {
         }
         catch (err) {
             _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
-        }
-    }
-    async monitorGet(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('monitorGet'));
-        try {
-            if (!this.params.monitor) {
-                res.end('Please set monitor username/password in app params');
-                return;
-            }
-            if (this.monitorModule.authorize(req)) {
-                const html = this.monitorModule.render();
-                res.end(html);
-            }
-            else {
-                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
-                    .status(401)
-                    .end('Unauthorized');
-            }
-        }
-        catch (err) {
-            next(err);
         }
     }
     async moduleGet(req, res, next) {
@@ -2628,30 +2606,27 @@ class Router {
     }
     createRoutes() {
         if (this.hostApp.isDevelopment()) {
-            this.hostApp.getExpress().get('/index2', this.indexGet.bind(this));
-            this.hostApp.getExpress().post('/index2', this.indexPost.bind(this));
+            this.hostApp.getExpress().get('/index2', this.hostApp.indexModule.get.bind(this));
+            this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
+        this.hostApp.getExpress().get('/monitor', this.monitorGet.bind(this));
     }
-    async indexGet(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta('indexGet'));
+    async monitorGet(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta('monitorGet'));
         try {
-            const html = await this.hostApp.indexModule.render();
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
-        }
-        catch (err) {
-            next(err);
-        }
-    }
-    async indexPost(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta('indexPost'), req.params);
-        try {
-            const appInfos = await this.hostApp.createAppInfos(req);
-            res.json({
-                appInfos: appInfos.map((appInfo) => ({
-                    fullName: appInfo.fullName,
-                    envs: appInfo.envs,
-                })),
-            });
+            if (!this.hostApp.getParams().monitor) {
+                res.end('Please set monitor username/password in app params');
+                return;
+            }
+            if (this.hostApp.monitorModule.authorize(req)) {
+                const html = this.hostApp.monitorModule.render();
+                res.end(html);
+            }
+            else {
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
+                    .status(401)
+                    .end('Unauthorized');
+            }
         }
         catch (err) {
             next(err);
@@ -5782,14 +5757,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+
+
 
 
 
@@ -5803,11 +5783,36 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+    }
+    async get(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_8__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexGet'));
+        try {
+            const html = await this.hostApp.indexModule.render();
+            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
+        }
+        catch (err) {
+            next(err);
+        }
+    }
+    async post(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_8__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexPost'), req.params);
+        try {
+            const appInfos = await this.hostApp.createAppInfos(req);
+            res.json({
+                appInfos: appInfos.map((appInfo) => ({
+                    fullName: appInfo.fullName,
+                    envs: appInfo.envs,
+                })),
+            });
+        }
+        catch (err) {
+            next(err);
+        }
     }
     async fill() {
-        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_3__.BkApplication.getAppInfos(this.hostApp.appsDirPath);
+        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.getAppInfos(this.hostApp.appsDirPath);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -5823,8 +5828,8 @@ class IndexModule {
         return this.js;
     }
     async render() {
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: this.getScripts() }));
         const data = await this.fill();
         const data2 = JSON.stringify(data);
         return `<!DOCTYPE html>
