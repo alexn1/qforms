@@ -1,7 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
-import { Actions, Query } from '../../types';
+import { Action, Query } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -88,7 +88,7 @@ export class FrontHostApp {
     }
 
     static composeHandlerName(data: any) {
-        if (data.action === Actions.rpc) {
+        if (data.action === Action.rpc) {
             if (data.form) return `${data.page}.${data.form}.${data.name}.${data.action}`;
             if (data.page) return `${data.page}.${data.name}.${data.action}`;
             return `${data.name}.${data.action}`;

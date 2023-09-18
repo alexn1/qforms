@@ -10,7 +10,7 @@ import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { Actions, Optional, PageActionDto, PageActionQuery } from '../../../../types';
+import { Action, Optional, PageActionDto, PageActionQuery } from '../../../../types';
 import { BkHelper } from '../../../BkHelper';
 
 export class BkPage<
@@ -54,7 +54,7 @@ export class BkPage<
     static getNewModeFromContext(context: Context): boolean {
         const action = context.getAction();
         const query = context.getQuery() as PageActionQuery;
-        if (action === Actions.page && query.newMode !== undefined) {
+        if (action === Action.page && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
                 return BkHelper.decodeValue(query.newMode);
             }

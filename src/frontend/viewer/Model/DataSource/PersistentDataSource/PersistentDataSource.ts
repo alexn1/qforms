@@ -10,7 +10,7 @@ import {
     SelectActionQuery,
     SelectActionResponse,
     UpdateActionDto,
-    Actions,
+    Action,
 } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
@@ -36,7 +36,7 @@ export class PersistentDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const body: InsertActionDto = {
-            action: Actions.insert,
+            action: Action.insert,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -85,7 +85,7 @@ export class PersistentDataSource extends DataSource {
 
         // specific to PersistentDataSource
         const body: UpdateActionDto = {
-            action: Actions.update,
+            action: Action.update,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -124,7 +124,7 @@ export class PersistentDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body: DeleteActionDto = {
-            action: Actions.delete,
+            action: Action.delete,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -258,7 +258,7 @@ export class PersistentDataSource extends DataSource {
         const form = this.getForm();
 
         const query: SelectActionQuery = {
-            action: Actions.select,
+            action: Action.select,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),

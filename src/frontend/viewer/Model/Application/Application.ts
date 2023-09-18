@@ -1,4 +1,4 @@
-import { RpcActionDto, Actions } from '../../../../types';
+import { RpcActionDto, Action } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp, RequestMethod } from '../../../common';
@@ -116,7 +116,7 @@ export class Application extends Model<ApplicationData> {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const body: RpcActionDto = {
-            action: Actions.rpc,
+            action: Action.rpc,
             name: name,
             uuid: this.getAttr('uuid'),
             params: params,

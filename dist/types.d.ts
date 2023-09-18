@@ -32,7 +32,7 @@ export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
 export declare const keyToKeyTuple: (key: Key) => KeyTuple;
 export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
-export declare enum Actions {
+export declare enum Action {
     page = "page",
     insert = "insert",
     select = "select",
@@ -42,7 +42,6 @@ export declare enum Actions {
     login = "login",
     logout = "logout"
 }
-export type Action = Actions.page | Actions.insert | Actions.select | Actions.update | Actions.delete | Actions.rpc | Actions.login | Actions.logout;
 export interface BaseDto {
     action: Action;
 }
@@ -90,14 +89,14 @@ export interface InsertActionDto extends BaseDto {
     uuid: string;
 }
 export interface UpdateActionDto {
-    action: Actions.update;
+    action: Action.update;
     page: string;
     form: string;
     uuid: string;
     changes: ChangesByKey;
 }
 export interface DeleteActionDto {
-    action: Actions.delete;
+    action: Action.delete;
     page: string;
     form: string;
     uuid: string;
