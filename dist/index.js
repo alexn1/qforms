@@ -2455,10 +2455,11 @@ class Router {
     }
     async moduleGet(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
-        if (req.params.module === 'viewer') {
+        const { module } = req.params;
+        if (module === 'viewer') {
             await this.hostApp.viewerModule.get(req, res, next);
         }
-        else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+        else if (module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
         }
         else {
@@ -2477,11 +2478,12 @@ class Router {
     }
     async modulePost(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('Router.modulePost'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
-        if (req.params.module === 'viewer') {
+        Router.logRequestWithBody(req);
+        const { module } = req.params;
+        if (module === 'viewer') {
             await this.hostApp.viewerModule.post(req, res, next);
         }
-        else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+        else if (module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.post(req, res, next);
         }
         else {
@@ -2490,7 +2492,7 @@ class Router {
     }
     async modulePatch(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('PATCH'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        Router.logRequestWithBody(req);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.patch(req, res, next);
         }
@@ -2500,7 +2502,7 @@ class Router {
     }
     async moduleDelete(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('DELETE'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        Router.logRequestWithBody(req);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.delete(req, res, next);
         }
@@ -2530,6 +2532,9 @@ class Router {
             }
             await this[fn](req, res, next);
         });
+    }
+    static logRequestWithBody(req) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline(req.method), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
     }
 }
 

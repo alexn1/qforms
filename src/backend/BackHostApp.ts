@@ -21,7 +21,7 @@ import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { CreateAppDto, Optional, Scalar } from '../types';
+import { CreateAppDto, Optional, Scalar, Route } from '../types';
 import { EVEvent, EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, error } from '../console';
@@ -30,7 +30,7 @@ import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './system-helper';
-import { Route, Router } from './Router';
+import { Router } from './Router';
 
 const pkg = require('../../package.json');
 

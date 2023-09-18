@@ -121,3 +121,10 @@ export interface EditorPostDto {
 export declare function parseJson(json: JSONString): any;
 export type QueryRecord = Record<string, string>;
 export type Query = Record<string, string | QueryRecord>;
+export type Route = [
+    module: 'viewer' | 'editor',
+    appDirName: string,
+    appFileName: string,
+    env: string,
+    domain?: string
+];

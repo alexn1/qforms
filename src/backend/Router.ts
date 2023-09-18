@@ -2,15 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { pConsole } from '../pConsole';
-import { Nullable, Scalar } from '../types';
-
-export type Route = [
-    module: 'viewer' | 'editor',
-    appDirName: string,
-    appFileName: string,
-    env: string,
-    domain?: string,
-];
+import { Nullable, Scalar, Route } from '../types';
 
 export type ExpressMethod = 'get' | 'post' | 'patch' | 'delete';
 
@@ -67,9 +59,10 @@ export class Router {
             colors.magenta.underline('GET'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
         );
-        if (req.params.module === 'viewer') {
+        const { module } = req.params;
+        if (module === 'viewer') {
             await this.hostApp.viewerModule.get(req, res, next);
-        } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+        } else if (module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
         } else {
             next();
@@ -93,18 +86,11 @@ export class Router {
     async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         pConsole.debug(colors.magenta.underline('Router.modulePost'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('POST'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
-        if (req.params.module === 'viewer') {
+        Router.logRequestWithBody(req);
+        const { module } = req.params;
+        if (module === 'viewer') {
             await this.hostApp.viewerModule.post(req, res, next);
-        } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
+        } else if (module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.post(req, res, next);
         } else {
             next();
@@ -114,15 +100,7 @@ export class Router {
     async modulePatch(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         pConsole.debug(colors.magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('PATCH'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
+        Router.logRequestWithBody(req);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.patch(req, res, next);
         } else {
@@ -133,15 +111,7 @@ export class Router {
     async moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
         pConsole.debug(colors.magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('DELETE'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
+        Router.logRequestWithBody(req);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.delete(req, res, next);
         } else {
@@ -179,5 +149,14 @@ export class Router {
                 // @ts-ignore
                 await this[fn](req, res, next);
             });
+    }
+
+    static logRequestWithBody(req: Request) {
+        pConsole.log(
+            // @ts-ignore
+            colors.magenta.underline(req.method),
+            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
+            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
+        );
     }
 }

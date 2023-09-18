@@ -10,11 +10,10 @@ import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
-import { Optional, Scalar } from '../types';
+import { Optional, Scalar, Route } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { Nullable } from '../types';
-import { Route } from './Router';
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
