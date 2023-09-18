@@ -15,13 +15,13 @@ import { BkDataSourceController } from './BkController/BkDataSourceController';
 const pkg = require('../../../package.json');
 
 // to compile without using
-export {
+/* export {
     TableForm,
     NoSqlDataSource,
     TextBoxField,
     TableFormTextBoxFieldController,
     RowForm,
-} from '../../frontend/viewer';
+} from '../../frontend/viewer'; */
 
 export class ViewerModule {
     private css: string[];
@@ -127,8 +127,6 @@ export class ViewerModule {
             await this.pageController.page(context, application);
         } else if (action === 'logout') {
             await this.applicationController.logout(context, application);
-        } else if (action === 'select') {
-            await this.dataSourceController.select(context, application);
         } else if (action === 'rpc') {
             await this.applicationController.rpc(context, application);
         } else if (action === 'insert') {
