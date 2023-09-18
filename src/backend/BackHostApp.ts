@@ -211,14 +211,34 @@ export class BackHostApp {
     }
 
     initExpressServer(): void {
-        // create
         this.express = express();
-
-        // init
         this.express.set('handleException', this.params.handleException ?? true);
         this.express.enable('strict routing');
 
-        // middlewares
+        this.useMiddlewares();
+        this.initSystemRoutes();
+
+        // handle static for index and monitor
+        this.express.use(
+            express.static(this.frontendDirPath, {
+                setHeaders: (res, fullPath, stat) => {
+                    pConsole.log(
+                        `static: /${path.relative(this.frontendDirPath, fullPath)} ${
+                            res.statusCode
+                        }`,
+                    );
+                },
+            }),
+        );
+
+        this.initCustomRoutes();
+
+        // 404 and 500 error handlers
+        this.express.use(this._e404.bind(this));
+        this.express.use(this._e500.bind(this));
+    }
+
+    useMiddlewares(): void {
         this.express.use(
             bodyParser.json({
                 limit: '20mb',
@@ -237,14 +257,11 @@ export class BackHostApp {
                 saveUninitialized: false,
             }),
         );
+    }
 
-        // error logger
-        this.express.options('/error', (req: Request, res: Response, next: NextFunction) => {
-            pConsole.log('options /error');
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
-            res.end();
-        });
+    initSystemRoutes(): void {
+        // error
+        this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
 
         // index module
@@ -289,26 +306,9 @@ export class BackHostApp {
             '/:module/:appDirName/:appFileName/:env/:domain/',
             this.moduleDelete.bind(this),
         );
-
-        // handle static for index and monitor
-        this.express.use(
-            express.static(this.frontendDirPath, {
-                setHeaders: (res, fullPath, stat) => {
-                    pConsole.log(
-                        `static: /${path.relative(this.frontendDirPath, fullPath)} ${
-                            res.statusCode
-                        }`,
-                    );
-                },
-            }),
-        );
-
-        this.initCustomRoutes();
-
-        // 404 and 500 error handlers
-        this.express.use(this._e404.bind(this));
-        this.express.use(this._e500.bind(this));
     }
+
+    initCustomRoutes(): void {}
 
     // создание приложения длительный процесс, если во время создания приложения
     // будет вызвара createApplicationIfNotExists, то ей будет возвращён пустой промис
@@ -879,6 +879,13 @@ export class BackHostApp {
         return 'domain';
     }
 
+    async optionsError(req: Request, res: Response, next: NextFunction): Promise<void> {
+        pConsole.log('options /error');
+        res.header('Access-Control-Allow-Origin', '*')
+            .header('Access-Control-Allow-Headers', 'Content-Type, Content-Length')
+            .end();
+    }
+
     async postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void> {
         debug(colors.blue('BackHostApp.postError'), req.body.message);
         const body = req.body as EVEvent;
@@ -912,8 +919,6 @@ export class BackHostApp {
     getFrontendDirPath(): string {
         return this.frontendDirPath;
     }
-
-    initCustomRoutes(): void {}
 
     alias(
         method: 'get' | 'post' | 'patch' | 'delete',

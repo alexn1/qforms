@@ -74,6 +74,9 @@ export declare class BackHostApp {
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;
     initExpressServer(): void;
+    useMiddlewares(): void;
+    initSystemRoutes(): void;
+    initCustomRoutes(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     beginCreateApplication(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
@@ -119,9 +122,9 @@ export declare class BackHostApp {
     onHttpServerError(err: any): void;
     static getDomainFromRequest(req: Request): Nullable<string>;
     getDomain(req: Request): Nullable<string>;
+    optionsError(req: Request, res: Response, next: NextFunction): Promise<void>;
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
-    initCustomRoutes(): void;
     alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Nullable<Scalar>>): void;
     static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
     getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void;

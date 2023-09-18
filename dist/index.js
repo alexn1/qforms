@@ -918,6 +918,18 @@ class BackHostApp {
         this.express = express__WEBPACK_IMPORTED_MODULE_1___default()();
         this.express.set('handleException', (_a = this.params.handleException) !== null && _a !== void 0 ? _a : true);
         this.express.enable('strict routing');
+        this.useMiddlewares();
+        this.initSystemRoutes();
+        this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
+            setHeaders: (res, fullPath, stat) => {
+                _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+            },
+        }));
+        this.initCustomRoutes();
+        this.express.use(this._e404.bind(this));
+        this.express.use(this._e500.bind(this));
+    }
+    useMiddlewares() {
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().json({
             limit: '20mb',
             reviver: _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.dateTimeReviver,
@@ -931,12 +943,9 @@ class BackHostApp {
             resave: false,
             saveUninitialized: false,
         }));
-        this.express.options('/error', (req, res, next) => {
-            _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('options /error');
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
-            res.end();
-        });
+    }
+    initSystemRoutes() {
+        this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
         if (this.isDevelopment()) {
             this.express.get('/index2', this.indexGet.bind(this));
@@ -948,15 +957,8 @@ class BackHostApp {
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
         this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
-        this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
-            setHeaders: (res, fullPath, stat) => {
-                _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
-            },
-        }));
-        this.initCustomRoutes();
-        this.express.use(this._e404.bind(this));
-        this.express.use(this._e500.bind(this));
     }
+    initCustomRoutes() { }
     async createApplicationIfNotExists(context) {
         const route = context.getRoute();
         const application = this.applications[route];
@@ -1415,6 +1417,12 @@ class BackHostApp {
     getDomain(req) {
         return 'domain';
     }
+    async optionsError(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('options /error');
+        res.header('Access-Control-Allow-Origin', '*')
+            .header('Access-Control-Allow-Headers', 'Content-Type, Content-Length')
+            .end();
+    }
     async postError(req, res, next) {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BackHostApp.postError'), req.body.message);
         const body = req.body;
@@ -1442,7 +1450,6 @@ class BackHostApp {
     getFrontendDirPath() {
         return this.frontendDirPath;
     }
-    initCustomRoutes() { }
     alias(method, path, [module, appDirName, appFileName, env, domain], cb, query) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
