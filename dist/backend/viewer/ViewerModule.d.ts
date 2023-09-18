@@ -29,7 +29,6 @@ export declare class ViewerModule {
         form?: string;
         ds: string;
     }): Promise<BkDataSource>;
-    insert(context: Context, application: BkApplication): Promise<void>;
     update(context: Context, application: BkApplication): Promise<void>;
     _delete(context: Context, application: BkApplication): Promise<void>;
     static getModel(context: Context, application: BkApplication): Promise<BkModel>;

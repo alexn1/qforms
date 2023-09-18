@@ -1,9 +1,10 @@
 import { Context } from '../../Context';
 import { pConsole } from '../../../pConsole';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
-import { SelectActionQuery, SelectActionResponse } from '../../../types';
+import { SelectActionQuery, SelectActionResponse, InsertActionDto } from '../../../types';
 import { ViewerModule } from '../ViewerModule';
 import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
+import { Result } from '../../../Result';
 
 export class BkDataSourceController {
     constructor(private viewerModule: ViewerModule) {}
@@ -25,6 +26,25 @@ export class BkDataSourceController {
             pConsole.debug('select time:', time);
             const response: SelectActionResponse = { rows, count, time };
             context.getRes().json(response);
+        });
+    }
+
+    // action
+    async insert(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('BkDataSourceController.insert', context.getReq()!.body.page);
+        const body = context.getBody() as InsertActionDto;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
+        const dataSource = form.getDataSource('default');
+        await dataSource.getDatabase().use(context, async (database) => {
+            await application.initContext(context);
+            const result = await database.transaction<Result>(context, async () => {
+                const result = await dataSource.create(context);
+                if (result === undefined) throw new Error('insert action: result is undefined');
+                return result;
+            });
+            context.getRes().status(201).json(result);
+            this.viewerModule.getHostApp().broadcastResult(application, context, result);
         });
     }
 

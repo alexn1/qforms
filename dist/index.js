@@ -6141,6 +6141,24 @@ class BkDataSourceController {
             context.getRes().json(response);
         });
     }
+    async insert(context, application) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkDataSourceController.insert', context.getReq().body.page);
+        const body = context.getBody();
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
+        const dataSource = form.getDataSource('default');
+        await dataSource.getDatabase().use(context, async (database) => {
+            await application.initContext(context);
+            const result = await database.transaction(context, async () => {
+                const result = await dataSource.create(context);
+                if (result === undefined)
+                    throw new Error('insert action: result is undefined');
+                return result;
+            });
+            context.getRes().status(201).json(result);
+            this.viewerModule.getHostApp().broadcastResult(application, context, result);
+        });
+    }
     static async getDataSource(context, application, { page, form, ds }) {
         if (page) {
             const bkPage = await application.getPage(context, page);
@@ -9637,6 +9655,9 @@ class ViewerModule {
         else if (action === 'select') {
             await this.dataSourceController.select(context, application);
         }
+        else if (action === 'insert') {
+            await this.dataSourceController.insert(context, application);
+        }
         else {
             await this[action](context, application);
         }
@@ -9650,24 +9671,6 @@ class ViewerModule {
             return bkPage.getDataSource(ds);
         }
         return application.getDataSource(ds);
-    }
-    async insert(context, application) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.insert', context.getReq().body.page);
-        const body = context.getBody();
-        const page = await application.getPage(context, body.page);
-        const form = page.getForm(body.form);
-        const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const result = await database.transaction(context, async () => {
-                const result = await dataSource.create(context);
-                if (result === undefined)
-                    throw new Error('insert action: result is undefined');
-                return result;
-            });
-            context.getRes().status(201).json(result);
-            this.hostApp.broadcastResult(application, context, result);
-        });
     }
     async update(context, application) {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.update', context.getReq().body.page);

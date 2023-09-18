@@ -196,6 +196,8 @@ export class ViewerModule {
             await this.applicationController.logout(context, application);
         } else if (action === 'select') {
             await this.dataSourceController.select(context, application);
+        } else if (action === 'insert') {
+            await this.dataSourceController.insert(context, application);
         } else {
             await (this as any)[action](context, application);
         }
@@ -214,25 +216,6 @@ export class ViewerModule {
             return bkPage.getDataSource(ds);
         }
         return application.getDataSource(ds);
-    }
-
-    // action
-    async insert(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.insert', context.getReq()!.body.page);
-        const body = context.getBody() as InsertActionDto;
-        const page = await application.getPage(context, body.page);
-        const form = page.getForm(body.form);
-        const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const result = await database.transaction<Result>(context, async () => {
-                const result = await dataSource.create(context);
-                if (result === undefined) throw new Error('insert action: result is undefined');
-                return result;
-            });
-            context.getRes().status(201).json(result);
-            this.hostApp.broadcastResult(application, context, result);
-        });
     }
 
     // action
