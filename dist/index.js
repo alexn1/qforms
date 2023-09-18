@@ -2706,9 +2706,9 @@ class WebSocketServer {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.error)('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', webSocket.upgradeReq.url);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent(webSocket.upgradeReq.url))));
-        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse(webSocket.upgradeReq.url, true);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', webSocket.url);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent(webSocket.url))));
+        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse(webSocket.url, true);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)

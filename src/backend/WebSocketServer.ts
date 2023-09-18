@@ -1,7 +1,6 @@
 import ws from 'ws';
 import url from 'url';
 import colors from 'colors/safe';
-
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
 import { debug, log, error } from '../console';
@@ -26,11 +25,11 @@ export class WebSocketServer {
     }
 
     async onConnection(webSocket) {
-        debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        debug('WebSocketServer.onConnection', webSocket.url);
 
-        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(webSocket.upgradeReq.url))));
+        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(webSocket.url))));
 
-        const parts = url.parse(webSocket.upgradeReq.url, true);
+        const parts = url.parse(webSocket.url, true);
         // debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
