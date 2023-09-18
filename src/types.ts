@@ -45,15 +45,26 @@ export type Nullable<T> = T | null;
 
 export type Optional<T> = T | undefined;
 
+export enum Actions {
+    page = 'page',
+    insert = 'insert',
+    select = 'select',
+    update = 'update',
+    delete = '_delete',
+    rpc = 'rpc',
+    login = 'login',
+    logout = 'logout',
+}
+
 export type Action =
-    | 'page'
-    | 'insert'
-    | 'select'
-    | 'update'
-    | '_delete'
-    | 'rpc'
-    | 'login'
-    | 'logout';
+    | Actions.page
+    | Actions.insert
+    | Actions.select
+    | Actions.update
+    | Actions.delete
+    | Actions.rpc
+    | Actions.login
+    | Actions.logout;
 
 export interface BaseDto {
     action: Action;
@@ -111,7 +122,7 @@ export interface InsertActionDto extends BaseDto {
 }
 
 export interface UpdateActionDto {
-    action: 'update';
+    action: Actions.update;
     page: string;
     form: string;
     uuid: string;
@@ -119,7 +130,7 @@ export interface UpdateActionDto {
 }
 
 export interface DeleteActionDto {
-    action: '_delete';
+    action: Actions.delete;
     page: string;
     form: string;
     uuid: string;

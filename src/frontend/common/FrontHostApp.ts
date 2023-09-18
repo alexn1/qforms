@@ -1,7 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
-import { Query } from '../../types';
+import { Actions, Query } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -77,7 +77,6 @@ export class FrontHostApp {
     }
 
     static async doHttpRequest2(method: RequestMethod, url: string, body?: any) {
-        
         console.warn('FrontHostApp.doHttpRequest2', method, url, body);
         const [headers, data] = await FrontHostApp.fetchJson(method, url, body);
         if (body) {
@@ -89,7 +88,7 @@ export class FrontHostApp {
     }
 
     static composeHandlerName(data: any) {
-        if (data.action === 'rpc') {
+        if (data.action === Actions.rpc) {
             if (data.form) return `${data.page}.${data.form}.${data.name}.${data.action}`;
             if (data.page) return `${data.page}.${data.name}.${data.action}`;
             return `${data.name}.${data.action}`;

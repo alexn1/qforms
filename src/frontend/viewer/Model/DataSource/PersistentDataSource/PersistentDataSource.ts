@@ -10,6 +10,7 @@ import {
     SelectActionQuery,
     SelectActionResponse,
     UpdateActionDto,
+    Actions,
 } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
@@ -35,7 +36,7 @@ export class PersistentDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const body: InsertActionDto = {
-            action: 'insert',
+            action: Actions.insert,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -84,7 +85,7 @@ export class PersistentDataSource extends DataSource {
 
         // specific to PersistentDataSource
         const body: UpdateActionDto = {
-            action: 'update',
+            action: Actions.update,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -123,7 +124,7 @@ export class PersistentDataSource extends DataSource {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const body: DeleteActionDto = {
-            action: '_delete',
+            action: Actions.delete,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
@@ -256,20 +257,8 @@ export class PersistentDataSource extends DataSource {
         const page = this.getPage();
         const form = this.getForm();
 
-        /* const body: SelectActionDto = {
-            action: 'select',
-            page: page ? page.getName() : null,
-            form: form ? form.getName() : null,
-            ds: this.getName(),
-            params: {
-                ...this.getPageParams(),
-                ...params,
-            },
-        };
-        const data = await this.getApp().request('POST', body); */
-
         const query: SelectActionQuery = {
-            action: 'select',
+            action: Actions.select,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),

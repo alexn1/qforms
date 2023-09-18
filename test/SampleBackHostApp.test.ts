@@ -15,6 +15,7 @@ import {
     DeleteActionDto,
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
+import { Actions } from '../dist';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
@@ -37,7 +38,7 @@ describe('SampleBackHostApp', () => {
 
     test('page action', async () => {
         const { status, body } = await supertest(httpServer).get(
-            `${PATHNAME}?action=page&page=${PAGE}&params[key]=1`,
+            `${PATHNAME}?action=${Actions.page}&page=${PAGE}&params[key]=1`,
         );
         expect(status).toBe(200);
         const response: PageActionResponse = body;
@@ -70,7 +71,7 @@ describe('SampleBackHostApp', () => {
             const rawRow = Helper.encodeObject(row) as RawRow;
             const data: InsertActionDto = {
                 uuid: UUID,
-                action: 'insert',
+                action: Actions.insert,
                 form: FORM,
                 page: PAGE,
                 row: rawRow,
@@ -84,7 +85,7 @@ describe('SampleBackHostApp', () => {
         test('read', async () => {
             const [id] = keyToKeyTuple(key) as [number];
             const { status, body } = await supertest(httpServer).get(
-                `${PATHNAME}?action=select&page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
+                `${PATHNAME}?action=${Actions.select}&page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
             );
             expect(status).toBe(200);
             const response: SelectActionResponse = body;
@@ -95,7 +96,7 @@ describe('SampleBackHostApp', () => {
         test('update', async () => {
             const rawRow = Helper.encodeObject({ first_name: 'changed field' }) as RawRow;
             const data: UpdateActionDto = {
-                action: 'update',
+                action: Actions.update,
                 uuid: UUID,
                 page: PAGE,
                 form: FORM,
@@ -112,7 +113,7 @@ describe('SampleBackHostApp', () => {
 
         test('delete', async () => {
             const data: DeleteActionDto = {
-                action: '_delete',
+                action: Actions.delete,
                 uuid: UUID,
                 page: PAGE,
                 form: FORM,

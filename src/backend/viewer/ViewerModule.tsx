@@ -7,7 +7,7 @@ import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { HttpError } from '../HttpError';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { BaseDto, Nullable } from '../../types';
+import { BaseDto, Nullable, Actions } from '../../types';
 import { BkApplicationController } from './BkController/BkApplicationController';
 import { BkPageController } from './BkController/BkPageController';
 import { BkDataSourceController } from './BkController/BkDataSourceController';
@@ -131,9 +131,9 @@ export class ViewerModule {
 
             // handle actions
             const action = context.getAction();
-            if (action === 'page') {
+            if (action === Actions.page) {
                 await this.pageController.page(context, bkApplication);
-            } else if (action === 'select') {
+            } else if (action === Actions.select) {
                 await this.dataSourceController.select(context, bkApplication);
             } else {
                 await this.applicationController.index(context, bkApplication);
@@ -163,16 +163,16 @@ export class ViewerModule {
     async handlePost(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePost');
         const { action } = context.getBody() as BaseDto;
-        if (action === 'login') {
+        if (action === Actions.login) {
             await this.applicationController.loginPost(context, application);
         } else {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
-            if (action === 'logout') {
+            if (action === Actions.logout) {
                 await this.applicationController.logout(context, application);
-            } else if (action === 'rpc') {
+            } else if (action === Actions.rpc) {
                 await this.applicationController.rpc(context, application);
-            } else if (action === 'insert') {
+            } else if (action === Actions.insert) {
                 await this.dataSourceController.insert(context, application);
             } else {
                 throw new Error(`unknown action: ${action}`);
@@ -202,7 +202,7 @@ export class ViewerModule {
         // debug('ViewerModule.handlePatch');
         const action = context.getAction();
         if (!action) throw new Error('no action');
-        if (action === 'update') {
+        if (action === Actions.update) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
             await this.dataSourceController.update(context, application);
@@ -234,10 +234,10 @@ export class ViewerModule {
         // debug('ViewerModule.handleDelete');
         const action = context.getAction();
         if (!action) throw new Error('no action');
-        if (action === '_delete') {
+        if (action === Actions.delete) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
-            await this.dataSourceController._delete(context, application);
+            await this.dataSourceController.delete(context, application);
         } else {
             throw new Error(`unknown action: ${action}`);
         }

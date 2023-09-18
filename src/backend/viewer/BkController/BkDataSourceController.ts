@@ -74,8 +74,8 @@ export class BkDataSourceController {
     }
 
     // action
-    async _delete(context: Context, application: BkApplication): Promise<void> {
-        pConsole.debug('BkDataSourceController._delete', context.getReq()!.body.page);
+    async delete(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('BkDataSourceController.delete', context.getReq()!.body.page);
         const body = context.getBody() as DeleteActionDto;
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);

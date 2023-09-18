@@ -6,6 +6,7 @@ import { Key, RawRow, Row, RpcActionDto, Scalar } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { FormData } from '../../../../common/ModelData/FormData';
+import { Actions } from '../../../../types';
 
 export class Form extends Model<FormData> {
     dataSources: DataSource[] = [];
@@ -89,7 +90,7 @@ export class Form extends Model<FormData> {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const body: RpcActionDto = {
-            action: 'rpc',
+            action: Actions.rpc,
             uuid: this.getApp().getAttr('uuid'),
             name: name,
             page: this.getPage().getName(),

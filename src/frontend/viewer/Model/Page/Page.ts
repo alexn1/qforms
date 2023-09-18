@@ -4,7 +4,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
-import { Key, RpcActionDto } from '../../../../types';
+import { Actions, Key, RpcActionDto } from '../../../../types';
 import { Application } from '../Application/Application';
 import { debug } from '../../../../console';
 
@@ -184,7 +184,7 @@ export class Page extends Model<PageData> {
         // debug('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const body: RpcActionDto = {
-            action: 'rpc',
+            action: Actions.rpc,
             uuid: this.getApp().getAttr('uuid'),
             name: name,
             page: this.getName(),
