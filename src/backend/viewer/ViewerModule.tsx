@@ -79,7 +79,7 @@ export class ViewerModule {
     }
 
     initControllers() {
-        this.applicationController = new BkApplicationController();
+        this.applicationController = new BkApplicationController(this);
         this.pageController = new BkPageController();
     }
 
@@ -139,7 +139,8 @@ export class ViewerModule {
             } else if (action === 'select') {
                 await this.select(context, bkApplication);
             } else {
-                await this.index(context, bkApplication);
+                // await this.index(context, bkApplication);
+                await this.applicationController.index(context, bkApplication);
             }
         }
     }
@@ -191,52 +192,6 @@ export class ViewerModule {
         } else {
             await (this as any)[action](context, application);
         }
-    }
-
-    async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
-        debug('ViewerModule.renderHtml');
-
-        const links = ReactDOMServer.renderToStaticMarkup(
-            <Links links={[...this.getLinks(), ...bkApplication.links]} />,
-        );
-        const scripts = ReactDOMServer.renderToStaticMarkup(
-            <Scripts scripts={[...this.getScripts(), ...bkApplication.scripts]} />,
-        );
-        const data = await bkApplication.fill(context);
-
-        // frontHostApp
-        const frontHostApp = new FrontHostApp({
-            debug: context.isDebugMode(),
-            url: context.getUrl(),
-            cookies: context.getCookies(),
-        });
-
-        // application
-        const application = new Application(data);
-        application.init();
-
-        // applicationController
-        const applicationController = ApplicationController.create(application, frontHostApp);
-        applicationController.init();
-
-        const element = React.createElement(applicationController.getViewClass(), {
-            ctrl: applicationController,
-        });
-
-        const appViewHtml = ReactDOMServer.renderToString(element);
-        // debug('appViewHtml:', appViewHtml);
-
-        const html = bkApplication.renderIndexHtml(
-            context,
-            applicationController,
-            pkg.version,
-            links,
-            scripts,
-            data,
-            appViewHtml,
-        );
-
-        return html;
     }
 
     async loginGet(context: Context, application: BkApplication) {
@@ -304,20 +259,6 @@ export class ViewerModule {
             }
         } finally {
             await application.release(context);
-        }
-    }
-
-    // action (index page, action by default for GET request)
-    async index(context: Context, bkApplication: BkApplication): Promise<void> {
-        debug('ViewerModule.index');
-        const res = context.getRes();
-        await bkApplication.connect(context);
-        try {
-            await bkApplication.initContext(context);
-            const html = await this.renderHtml(bkApplication, context);
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
-        } finally {
-            await bkApplication.release(context);
         }
     }
 
