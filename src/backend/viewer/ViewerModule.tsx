@@ -1,13 +1,13 @@
+import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import { Context } from '../Context';
 import { BkHelper } from '../BkHelper';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { HttpError } from '../HttpError';
-import { NextFunction } from 'connect';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
-import { BaseDto } from '../../types';
+import { BaseDto, Nullable } from '../../types';
 import { BkApplicationController } from './BkController/BkApplicationController';
 import { BkPageController } from './BkController/BkPageController';
 import { BkDataSourceController } from './BkController/BkDataSourceController';
@@ -64,6 +64,29 @@ export class ViewerModule {
         this.applicationController = new BkApplicationController(this);
         this.pageController = new BkPageController();
         this.dataSourceController = new BkDataSourceController(this);
+    }
+
+    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            if (application.isAvailable()) {
+                await this.handleGet(context, application);
+            } else {
+                next();
+            }
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
     }
 
     async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {

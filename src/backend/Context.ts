@@ -4,7 +4,8 @@ import { Action, BaseDto, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { BkHelper } from './BkHelper';
-import { pConsole } from '../pConsole';
+import { LogLevel, pConsole } from '../pConsole';
+import { log } from '../decorators';
 
 export type RequestEx = Request & {
     session: Session;
@@ -251,5 +252,6 @@ export class Context {
         return null;
     }
 
+    @log(LogLevel.debug)
     destroy(): void {}
 }

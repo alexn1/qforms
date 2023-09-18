@@ -1,5 +1,5 @@
+import { Request, Response, NextFunction } from 'express';
 import path from 'path';
-import { Request, Response } from 'express';
 import ReactDOMServer from 'react-dom/server';
 
 import { Context } from '../Context';
@@ -11,7 +11,7 @@ import { Scripts } from '../Scripts';
 import * as backend from '../index';
 import { home } from './home';
 import { debug } from '../../console';
-import { EditorPostDto } from '../../types';
+import { EditorPostDto, Nullable } from '../../types';
 
 const pkg = require('../../../package.json');
 
@@ -88,6 +88,24 @@ export class EditorModule {
             '/lib/codemirror-4.8/mode/javascript/javascript.js',
             ...this.js,
         ];
+    }
+
+    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            await this.handleEditorGet(req, res, context);
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
     }
 
     async handleEditorGet(req: Request, res: Response, context: Context) {

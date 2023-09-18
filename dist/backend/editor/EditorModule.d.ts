@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 export declare class EditorModule {
@@ -9,6 +9,7 @@ export declare class EditorModule {
     init(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];
+    get(req: Request, res: Response, next: NextFunction): Promise<void>;
     handleEditorGet(req: Request, res: Response, context: Context): Promise<void>;
     handleEditorPost(req: Request, res: Response, context: Context): Promise<void>;
 }

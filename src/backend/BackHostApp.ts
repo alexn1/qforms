@@ -485,37 +485,12 @@ export class BackHostApp {
             colors.magenta.underline('GET'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
         );
-
-        let context: Nullable<Context> = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                if (application.isAvailable()) {
-                    await this.viewerModule.handleGet(context, application);
-                } else {
-                    next();
-                }
-            } else if (req.params.module === 'editor' && this.isDevelopment()) {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                await this.editorModule.handleEditorGet(req, res, context);
-            } else {
-                next();
-            }
-        } catch (err) {
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
+        if (req.params.module === 'viewer') {
+            await this.viewerModule.get(req, res, next);
+        } else if (req.params.module === 'editor' && this.isDevelopment()) {
+            await this.editorModule.get(req, res, next);
+        } else {
+            next();
         }
     }
 

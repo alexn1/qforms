@@ -1102,41 +1102,14 @@ class BackHostApp {
     }
     async moduleGet(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
-        let context = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                if (application.isAvailable()) {
-                    await this.viewerModule.handleGet(context, application);
-                }
-                else {
-                    next();
-                }
-            }
-            else if (req.params.module === 'editor' && this.isDevelopment()) {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                await this.editorModule.handleEditorGet(req, res, context);
-            }
-            else {
-                next();
-            }
+        if (req.params.module === 'viewer') {
+            await this.viewerModule.get(req, res, next);
         }
-        catch (err) {
-            next(err);
+        else if (req.params.module === 'editor' && this.isDevelopment()) {
+            await this.editorModule.get(req, res, next);
         }
-        finally {
-            if (context) {
-                context.destroy();
-            }
+        else {
+            next();
         }
     }
     async modulePost(req, res, next) {
@@ -2101,6 +2074,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Context": () => (/* binding */ Context)
 /* harmony export */ });
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
 
 class Context {
     constructor(options = {}) {
@@ -2270,6 +2253,9 @@ class Context {
     }
     destroy() { }
 }
+__decorate([
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_2__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_1__.LogLevel.debug)
+], Context.prototype, "destroy", null);
 
 
 /***/ }),
@@ -5287,13 +5273,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../index */ "./src/backend/index.ts");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home */ "./src/backend/editor/home.tsx");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Context */ "./src/backend/Context.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../index */ "./src/backend/index.ts");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home */ "./src/backend/editor/home.tsx");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+
 
 
 
@@ -5341,8 +5329,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
+        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
     }
     getLinks() {
         return [
@@ -5358,21 +5346,40 @@ class EditorModule {
             ...this.js,
         ];
     }
+    async get(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_3__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            await this.handleEditorGet(req, res, context);
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
     async handleEditorGet(req, res, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('EditorModule.handleEditorGet');
-        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('EditorModule.handleEditorGet');
+        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.hostApp.getNodeEnv(),
             logErrorUrl: '/error',
         };
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: this.getScripts() }));
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_9__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
     async handleEditorPost(req, res, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('EditorModule.handleEditorPost', req.body);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('EditorModule.handleEditorPost', req.body);
         const body = req.body;
         if (EDITOR_CONTROLLERS.indexOf(body.controller) === -1) {
             throw new Error(`unknown controller: ${body.controller}`);
@@ -5381,10 +5388,10 @@ class EditorModule {
             throw new Error(`unknown action ${body.action}`);
         }
         const editorControllerClassName = `${body.controller}EditorController`;
-        const ControllerClass = _index__WEBPACK_IMPORTED_MODULE_7__[editorControllerClassName];
+        const ControllerClass = _index__WEBPACK_IMPORTED_MODULE_8__[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
+        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = body.action;
@@ -9659,13 +9666,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
-/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Context */ "./src/backend/Context.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+
 
 
 
@@ -9685,22 +9694,47 @@ class ViewerModule {
         this.initControllers();
     }
     async initCss() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.css:', this.css);
+        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.css:', this.css);
     }
     async initJs() {
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         if (!this.js.length)
             throw new Error('no qforms js');
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.js:', this.js);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.js:', this.js);
     }
     initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_5__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_6__.BkPageController();
-        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_7__.BkDataSourceController(this);
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__.BkPageController();
+        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__.BkDataSourceController(this);
+    }
+    async get(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_1__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            if (application.isAvailable()) {
+                await this.handleGet(context, application);
+            }
+            else {
+                next();
+            }
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
     }
     async handleGet(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_4__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
+        _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const session = context.getSession();
         if (bkApplication.isAuthentication() &&
             !(session.user && session.user[context.getRoute()])) {
@@ -9774,7 +9808,7 @@ class ViewerModule {
     checkAuthorization(context, application) {
         const user = context.getUser();
         if (application.isAuthentication() && !user) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({ message: 'Unauthorized', status: 401, context });
         }
     }
     getHostApp() {
