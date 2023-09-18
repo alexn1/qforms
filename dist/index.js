@@ -2595,11 +2595,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Router": () => (/* binding */ Router)
 /* harmony export */ });
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! colors/safe */ "colors/safe");
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-
-
 class Router {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -2609,28 +2604,7 @@ class Router {
             this.hostApp.getExpress().get('/index2', this.hostApp.indexModule.get.bind(this));
             this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
-        this.hostApp.getExpress().get('/monitor', this.monitorGet.bind(this));
-    }
-    async monitorGet(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta('monitorGet'));
-        try {
-            if (!this.hostApp.getParams().monitor) {
-                res.end('Please set monitor username/password in app params');
-                return;
-            }
-            if (this.hostApp.monitorModule.authorize(req)) {
-                const html = this.hostApp.monitorModule.render();
-                res.end(html);
-            }
-            else {
-                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
-                    .status(401)
-                    .end('Unauthorized');
-            }
-        }
-        catch (err) {
-            next(err);
-        }
+        this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
     }
 }
 
@@ -5876,11 +5850,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+
+
 
 
 
@@ -5893,8 +5872,29 @@ class MonitorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
+        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
+        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
+    }
+    async get(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('monitorGet'));
+        try {
+            if (!this.hostApp.getParams().monitor) {
+                res.end('Please set monitor username/password in app params');
+                return;
+            }
+            if (this.hostApp.monitorModule.authorize(req)) {
+                const html = this.hostApp.monitorModule.render();
+                res.end(html);
+            }
+            else {
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
+                    .status(401)
+                    .end('Unauthorized');
+            }
+        }
+        catch (err) {
+            next(err);
+        }
     }
     fill() {
         return {
@@ -5914,7 +5914,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getWebSocketIP(webSocket),
+                            ip: _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getWebSocketIP(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),
@@ -5947,8 +5947,8 @@ class MonitorModule {
             this.checkCredentials(req));
     }
     render() {
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: this.getScripts() }));
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_4___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_4___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
         const data = JSON.stringify(this.fill());
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">

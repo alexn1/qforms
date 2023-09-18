@@ -1,10 +1,12 @@
+import { Request, Response, NextFunction } from 'express';
 import path from 'path';
-
+import colors from 'colors/safe';
 import { BackHostApp } from '../BackHostApp';
 import { BkHelper } from '../BkHelper';
 import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
+import { pConsole } from '../../pConsole';
 
 const pkg = require('../../../package.json');
 
@@ -32,6 +34,26 @@ export class MonitorModule {
         ).map((path) => `/monitor/public/${path}`);
         // debug('monitor.css:', this.css);
         // debug('monitor.js:' , this.js);
+    }
+
+    async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+        pConsole.log(colors.magenta('monitorGet') /* , req.headers */);
+        try {
+            if (!this.hostApp.getParams().monitor) {
+                res.end('Please set monitor username/password in app params');
+                return;
+            }
+            if (this.hostApp.monitorModule.authorize(req)) {
+                const html = this.hostApp.monitorModule.render();
+                res.end(html);
+            } else {
+                res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"')
+                    .status(401)
+                    .end('Unauthorized');
+            }
+        } catch (err) {
+            next(err);
+        }
     }
 
     fill() {

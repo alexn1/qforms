@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from 'express';
 import { BackHostApp } from '../BackHostApp';
 export declare class MonitorModule {
     hostApp: BackHostApp;
@@ -5,6 +6,7 @@ export declare class MonitorModule {
     js: string[];
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
+    get(req: Request, res: Response, next: NextFunction): Promise<void>;
     fill(): {
         nodeEnv: import("../..").Nullable<string>;
         uptime: number;
