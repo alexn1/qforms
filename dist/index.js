@@ -22200,7 +22200,7 @@ var Action;
     Action["insert"] = "insert";
     Action["select"] = "select";
     Action["update"] = "update";
-    Action["delete"] = "_delete";
+    Action["delete"] = "delete";
     Action["rpc"] = "rpc";
     Action["login"] = "login";
     Action["logout"] = "logout";

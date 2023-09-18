@@ -37,7 +37,7 @@ export declare enum Action {
     insert = "insert",
     select = "select",
     update = "update",
-    delete = "_delete",
+    delete = "delete",
     rpc = "rpc",
     login = "login",
     logout = "logout"
