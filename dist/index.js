@@ -953,8 +953,6 @@ class BackHostApp {
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
-        this.express.patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
-        this.express.delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
     }
     initCustomRoutes() { }
     useStatic() {
@@ -1096,60 +1094,6 @@ class BackHostApp {
         }
         catch (err) {
             _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
-        }
-    }
-    async modulePatch(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('PATCH'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
-        let context = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handlePatch(context, application);
-            }
-            else {
-                next();
-            }
-        }
-        catch (err) {
-            next(err);
-        }
-        finally {
-            if (context) {
-                context.destroy();
-            }
-        }
-    }
-    async moduleDelete(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('DELETE'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
-        let context = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handleDelete(context, application);
-            }
-            else {
-                next();
-            }
-        }
-        catch (err) {
-            next(err);
-        }
-        finally {
-            if (context) {
-                context.destroy();
-            }
         }
     }
     async moduleGetFile(req, res, next) {
@@ -1330,28 +1274,6 @@ class BackHostApp {
             next(err);
         }
     }
-    alias(method, path, [module, appDirName, appFileName, env, domain], fn, query) {
-        this.express[method](path, async (req, res, next) => {
-            req.params.module = module;
-            req.params.appDirName = appDirName;
-            req.params.appFileName = appFileName;
-            if (env) {
-                req.params.env = env;
-            }
-            if (domain) {
-                req.params.domain = domain;
-            }
-            if (query) {
-                const params = BackHostApp.getQueryFromParams(req, query);
-                for (const name in params) {
-                    if (!req.query[name]) {
-                        req.query[name] = params[name];
-                    }
-                }
-            }
-            await this[fn](req, res, next);
-        });
-    }
     static getQueryFromParams(req, query) {
         return Object.keys(query).reduce((acc, name) => {
             const value = query[name];
@@ -1365,10 +1287,10 @@ class BackHostApp {
         }, {});
     }
     getPostAlias(path, route, query) {
-        this.alias('get', path, route, 'moduleGet', query);
-        this.alias('post', path, route, 'modulePost', query);
-        this.alias('patch', path, route, 'modulePatch', query);
-        this.alias('delete', path, route, 'moduleDelete', query);
+        this.router.alias('get', path, route, 'moduleGet', query);
+        this.router.alias('post', path, route, 'modulePost', query);
+        this.router.alias('patch', path, route, 'modulePatch', query);
+        this.router.alias('delete', path, route, 'moduleDelete', query);
     }
     broadcastResult(sourceApplication, context, result) {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.broadcastResult');
@@ -2529,7 +2451,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! colors/safe */ "colors/safe");
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _BackHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackHostApp */ "./src/backend/BackHostApp.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+
 
 
 class Router {
@@ -2548,9 +2472,15 @@ class Router {
         this.hostApp
             .getExpress()
             .post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
+        this.hostApp
+            .getExpress()
+            .patch('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePatch.bind(this));
+        this.hostApp
+            .getExpress()
+            .delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
     }
     async moduleGet(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.get(req, res, next);
         }
@@ -2562,8 +2492,8 @@ class Router {
         }
     }
     async modulePost(req, res, next) {
-        debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('Router.modulePost'), req.params, req.body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
         if (req.params.module === 'viewer') {
             await this.hostApp.viewerModule.post(req, res, next);
         }
@@ -2573,6 +2503,49 @@ class Router {
         else {
             next();
         }
+    }
+    async modulePatch(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('PATCH'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.patch(req, res, next);
+        }
+        else {
+            next();
+        }
+    }
+    async moduleDelete(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('DELETE'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.delete(req, res, next);
+        }
+        else {
+            next();
+        }
+    }
+    alias(method, path, [module, appDirName, appFileName, env, domain], fn, query) {
+        this.hostApp
+            .getExpress()[method](path, async (req, res, next) => {
+            req.params.module = module;
+            req.params.appDirName = appDirName;
+            req.params.appFileName = appFileName;
+            if (env) {
+                req.params.env = env;
+            }
+            if (domain) {
+                req.params.domain = domain;
+            }
+            if (query) {
+                const params = _BackHostApp__WEBPACK_IMPORTED_MODULE_1__.BackHostApp.getQueryFromParams(req, query);
+                for (const name in params) {
+                    if (!req.query[name]) {
+                        req.query[name] = params[name];
+                    }
+                }
+            }
+            await this[fn](req, res, next);
+        });
     }
 }
 
@@ -9797,6 +9770,26 @@ class ViewerModule {
             }
         }
     }
+    async patch(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_1__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handlePatch(context, application);
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
     async handlePatch(context, application) {
         const action = context.getAction();
         if (!action)
@@ -9808,6 +9801,26 @@ class ViewerModule {
         }
         else {
             throw new Error(`unknown action: ${action}`);
+        }
+    }
+    async delete(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_1__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handleDelete(context, application);
+        }
+        catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
         }
     }
     async handleDelete(context, application) {

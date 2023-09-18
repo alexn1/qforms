@@ -52,7 +52,7 @@ export class Router {
 
     async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
-        // debug(colors.magenta.underline('Router.moduleGet'), req.params);
+        // pConsole.debug(colors.magenta.underline('Router.moduleGet'), req.params);
         pConsole.log(
             // @ts-ignore
             colors.magenta.underline('GET'),
@@ -69,7 +69,7 @@ export class Router {
 
     async modulePost(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
-        debug(colors.magenta.underline('Router.modulePost'), req.params, req.body);
+        pConsole.debug(colors.magenta.underline('Router.modulePost'), req.params, req.body);
 
         // log request
         pConsole.log(
@@ -90,7 +90,7 @@ export class Router {
 
     async modulePatch(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
+        pConsole.debug(colors.magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
 
         // log request
         pConsole.log(
@@ -109,7 +109,7 @@ export class Router {
 
     async moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void> {
         // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
+        pConsole.debug(colors.magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
 
         // log request
         pConsole.log(
