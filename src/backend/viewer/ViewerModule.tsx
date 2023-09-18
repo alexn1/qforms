@@ -198,6 +198,8 @@ export class ViewerModule {
             await this.dataSourceController.select(context, application);
         } else if (action === 'insert') {
             await this.dataSourceController.insert(context, application);
+        } else if (action === 'update') {
+            await this.dataSourceController.update(context, application);
         } else {
             await (this as any)[action](context, application);
         }
@@ -216,25 +218,6 @@ export class ViewerModule {
             return bkPage.getDataSource(ds);
         }
         return application.getDataSource(ds);
-    }
-
-    // action
-    async update(context: Context, application: BkApplication): Promise<void> {
-        debug('ViewerModule.update', context.getReq()!.body.page);
-        const body = context.getBody() as UpdateActionDto;
-        const page = await application.getPage(context, body.page);
-        const form = page.getForm(body.form);
-        const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().use(context, async (database) => {
-            await application.initContext(context);
-            const result = await database.transaction<Result>(context, async () => {
-                const result = await dataSource.update(context);
-                if (result === undefined) throw new Error('action update: result is undefined');
-                return result;
-            });
-            context.getRes().json(result);
-            this.hostApp.broadcastResult(application, context, result);
-        });
     }
 
     // action

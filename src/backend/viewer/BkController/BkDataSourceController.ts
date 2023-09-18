@@ -1,7 +1,12 @@
 import { Context } from '../../Context';
 import { pConsole } from '../../../pConsole';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
-import { SelectActionQuery, SelectActionResponse, InsertActionDto } from '../../../types';
+import {
+    SelectActionQuery,
+    SelectActionResponse,
+    InsertActionDto,
+    UpdateActionDto,
+} from '../../../types';
 import { ViewerModule } from '../ViewerModule';
 import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
 import { Result } from '../../../Result';
@@ -44,6 +49,25 @@ export class BkDataSourceController {
                 return result;
             });
             context.getRes().status(201).json(result);
+            this.viewerModule.getHostApp().broadcastResult(application, context, result);
+        });
+    }
+
+    // action
+    async update(context: Context, application: BkApplication): Promise<void> {
+        pConsole.debug('BkDataSourceController.update', context.getReq()!.body.page);
+        const body = context.getBody() as UpdateActionDto;
+        const page = await application.getPage(context, body.page);
+        const form = page.getForm(body.form);
+        const dataSource = form.getDataSource('default');
+        await dataSource.getDatabase().use(context, async (database) => {
+            await application.initContext(context);
+            const result = await database.transaction<Result>(context, async () => {
+                const result = await dataSource.update(context);
+                if (result === undefined) throw new Error('action update: result is undefined');
+                return result;
+            });
+            context.getRes().json(result);
             this.viewerModule.getHostApp().broadcastResult(application, context, result);
         });
     }
