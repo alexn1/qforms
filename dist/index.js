@@ -952,7 +952,6 @@ class BackHostApp {
         this.router.createRoutes();
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
-        this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
     }
     initCustomRoutes() { }
     useStatic() {
@@ -1094,34 +1093,6 @@ class BackHostApp {
         }
         catch (err) {
             _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
-        }
-    }
-    async moduleGetFile(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
-        (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta.underline('GET'), req.originalUrl);
-        if (req.params.module === 'viewer') {
-            let context = null;
-            try {
-                context = new _Context__WEBPACK_IMPORTED_MODULE_10__.Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handleGetFile(context, application, next);
-            }
-            catch (err) {
-                err.message = `moduleGetFile error: ${err.message}`;
-                next(err);
-            }
-            finally {
-                if (context) {
-                    context.destroy();
-                }
-            }
-        }
-        else {
-            next();
         }
     }
     async _e404(req, res, next) {
@@ -2471,6 +2442,9 @@ class Router {
             .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.hostApp
             .getExpress()
+            .get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
+        this.hostApp
+            .getExpress()
             .post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.hostApp
             .getExpress()
@@ -2486,6 +2460,16 @@ class Router {
         }
         else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
+        }
+        else {
+            next();
+        }
+    }
+    async moduleGetFile(req, res, next) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('Router.moduleGetFile'), req.originalUrl);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), req.originalUrl);
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.getFile(req, res, next);
         }
         else {
             next();
@@ -9699,6 +9683,27 @@ class ViewerModule {
             }
         }
         catch (err) {
+            next(err);
+        }
+        finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+    async getFile(req, res, next) {
+        let context = null;
+        try {
+            context = new _Context__WEBPACK_IMPORTED_MODULE_1__.Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handleGetFile(context, application, next);
+        }
+        catch (err) {
+            err.message = `getFile error: ${err.message}`;
             next(err);
         }
         finally {

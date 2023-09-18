@@ -8,13 +8,15 @@ export type Route = [
     env: string,
     domain?: string
 ];
+export type ExpressMethod = 'get' | 'post' | 'patch' | 'delete';
 export declare class Router {
     private hostApp;
     constructor(hostApp: BackHostApp);
     createRoutes(): void;
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
+    moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePatch(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void>;
-    alias(method: 'get' | 'post' | 'patch' | 'delete', path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete', query?: Record<string, Nullable<Scalar>>): void;
+    alias(method: ExpressMethod, path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete', query?: Record<string, Nullable<Scalar>>): void;
 }

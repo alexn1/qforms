@@ -100,7 +100,6 @@ export declare class BackHostApp {
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
-    moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;
     static runHttpServer(httpServer: http.Server, host: string, port: number): Promise<void>;

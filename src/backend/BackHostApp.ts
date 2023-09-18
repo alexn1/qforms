@@ -245,14 +245,6 @@ export class BackHostApp {
         // error
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
-
-        // viewer/editor module
-
-        // GET file
-        this.express.get(
-            '/:module/:appDirName/:appFileName/:env/:domain/*',
-            this.moduleGetFile.bind(this),
-        );
     }
 
     initCustomRoutes(): void {}
@@ -440,36 +432,6 @@ export class BackHostApp {
             });
         } catch (err) {
             pConsole.error(colors.red(err));
-        }
-    }
-
-    async moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
-
-        // @ts-ignore
-        log(colors.magenta.underline('GET'), req.originalUrl);
-
-        if (req.params.module === 'viewer') {
-            let context: Nullable<Context> = null;
-            try {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handleGetFile(context, application, next);
-            } catch (err) {
-                err.message = `moduleGetFile error: ${err.message}`;
-                next(err);
-            } finally {
-                if (context) {
-                    context.destroy();
-                }
-            }
-        } else {
-            next();
         }
     }
 

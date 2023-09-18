@@ -89,6 +89,26 @@ export class ViewerModule {
         }
     }
 
+    async getFile(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handleGetFile(context, application, next);
+        } catch (err) {
+            err.message = `getFile error: ${err.message}`;
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
+
     async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {
         pConsole.debug(
             'ViewerModule.handleGet',

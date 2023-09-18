@@ -12,6 +12,8 @@ export type Route = [
     domain?: string,
 ];
 
+export type ExpressMethod = 'get' | 'post' | 'patch' | 'delete';
+
 export class Router {
     constructor(private hostApp: BackHostApp) {}
 
@@ -26,10 +28,17 @@ export class Router {
         // monitor module
         this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
 
+        // viewer/editor module
+
         // GET
         this.hostApp
             .getExpress()
             .get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
+
+        // GET file
+        this.hostApp
+            .getExpress()
+            .get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
 
         // POST
         this.hostApp
@@ -62,6 +71,20 @@ export class Router {
             await this.hostApp.viewerModule.get(req, res, next);
         } else if (req.params.module === 'editor' && this.hostApp.isDevelopment()) {
             await this.hostApp.editorModule.get(req, res, next);
+        } else {
+            next();
+        }
+    }
+
+    async moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void> {
+        // @ts-ignore
+        pConsole.debug(colors.magenta.underline('Router.moduleGetFile'), req.originalUrl);
+
+        // @ts-ignore
+        pConsole.log(colors.magenta.underline('GET'), req.originalUrl);
+
+        if (req.params.module === 'viewer') {
+            await this.hostApp.viewerModule.getFile(req, res, next);
         } else {
             next();
         }
@@ -127,7 +150,7 @@ export class Router {
     }
 
     alias(
-        method: 'get' | 'post' | 'patch' | 'delete',
+        method: ExpressMethod,
         path: string | RegExp,
         [module, appDirName, appFileName, env, domain]: Route,
         fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete',
