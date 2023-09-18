@@ -30,7 +30,7 @@ import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './system-helper';
-import { Router } from './Router';
+import { Route, Router } from './Router';
 
 const pkg = require('../../package.json');
 
@@ -39,14 +39,6 @@ const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 const MIN_NODE_VERSION = 14;
-
-export type Route = [
-    module: 'viewer' | 'editor',
-    appDirName: string,
-    appFileName: string,
-    env: string,
-    domain?: string,
-];
 
 export interface BackHostAppParams {
     [name: string]: any;
@@ -261,18 +253,6 @@ export class BackHostApp {
             '/:module/:appDirName/:appFileName/:env/:domain/*',
             this.moduleGetFile.bind(this),
         );
-
-        // PATCH
-        this.express.patch(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
-            this.modulePatch.bind(this),
-        );
-
-        // DELETE
-        this.express.delete(
-            '/:module/:appDirName/:appFileName/:env/:domain/',
-            this.moduleDelete.bind(this),
-        );
     }
 
     initCustomRoutes(): void {}
@@ -460,100 +440,6 @@ export class BackHostApp {
             });
         } catch (err) {
             pConsole.error(colors.red(err));
-        }
-    }
-
-    async modulePatch(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.modulePatch'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('PATCH'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
-        let context: Nullable<Context> = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handlePatch(context, application);
-                // await this.logRequest(req, context, time);
-                // } else if (req.params.module === 'editor') {
-                //     if (this.isDevelopment()) {
-                //         context = new Context({
-                //             req,
-                //             res,
-                //             domain: this.getDomain(req),
-                //         });
-                //         const time = await this.editorModule.handleEditorPatch(req, res, context);
-                //         // await this.logRequest(req, context, time);
-                //     } else {
-                //         next();
-                //     }
-            } else {
-                next();
-            }
-        } catch (err) {
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
-        }
-    }
-
-    async moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // @ts-ignore
-        debug(colors.magenta.underline('BackHostApp.moduleDelete'), req.params, req.body);
-
-        // log request
-        pConsole.log(
-            // @ts-ignore
-            colors.magenta.underline('DELETE'),
-            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
-            `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
-        );
-
-        let context: Nullable<Context> = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomain(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handleDelete(context, application);
-                // await this.logRequest(req, context, time);
-                // } else if (req.params.module === 'editor') {
-                //     if (this.isDevelopment()) {
-                //         context = new Context({
-                //             req,
-                //             res,
-                //             domain: this.getDomain(req),
-                //         });
-                //         const time = await this.editorModule.handleEditorDelete(req, res, context);
-                //         // await this.logRequest(req, context, time);
-                //     } else {
-                //         next();
-                //     }
-            } else {
-                next();
-            }
-        } catch (err) {
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
         }
     }
 
@@ -767,36 +653,6 @@ export class BackHostApp {
         }
     }
 
-    alias(
-        method: 'get' | 'post' | 'patch' | 'delete',
-        path: string | RegExp,
-        [module, appDirName, appFileName, env, domain]: Route,
-        fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete',
-        query?: Record<string, Nullable<Scalar>>,
-    ) {
-        this.express[method](path, async (req: Request, res: Response, next: NextFunction) => {
-            req.params.module = module;
-            req.params.appDirName = appDirName;
-            req.params.appFileName = appFileName;
-            if (env) {
-                req.params.env = env;
-            }
-            if (domain) {
-                req.params.domain = domain;
-            }
-            if (query) {
-                const params = BackHostApp.getQueryFromParams(req, query);
-                for (const name in params) {
-                    if (!req.query[name]) {
-                        req.query[name] = params[name];
-                    }
-                }
-            }
-            // @ts-ignore
-            await this[fn](req, res, next);
-        });
-    }
-
     static getQueryFromParams(
         req: Request,
         query: Record<string, Nullable<Scalar>>,
@@ -813,11 +669,15 @@ export class BackHostApp {
         }, {} as Record<string, any>);
     }
 
-    getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Scalar | null>): void {
-        this.alias('get', path, route, 'moduleGet', query);
-        this.alias('post', path, route, 'modulePost', query);
-        this.alias('patch', path, route, 'modulePatch', query);
-        this.alias('delete', path, route, 'moduleDelete', query);
+    getPostAlias(
+        path: string | RegExp,
+        route: Route,
+        query?: Record<string, Nullable<Scalar>>,
+    ): void {
+        this.router.alias('get', path, route, 'moduleGet', query);
+        this.router.alias('post', path, route, 'modulePost', query);
+        this.router.alias('patch', path, route, 'modulePatch', query);
+        this.router.alias('delete', path, route, 'moduleDelete', query);
     }
 
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void {

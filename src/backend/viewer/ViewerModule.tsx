@@ -159,6 +159,24 @@ export class ViewerModule {
             }
         }
     }
+    async patch(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handlePatch(context, application);
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
+        }
+    }
 
     async handlePatch(context: Context, application: BkApplication): Promise<void> {
         // debug('ViewerModule.handlePatch');
@@ -170,6 +188,25 @@ export class ViewerModule {
             await this.dataSourceController.update(context, application);
         } else {
             throw new Error(`unknown action: ${action}`);
+        }
+    }
+
+    async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
+        let context: Nullable<Context> = null;
+        try {
+            context = new Context({
+                req,
+                res,
+                domain: this.hostApp.getDomain(req),
+            });
+            const application = await this.hostApp.createApplicationIfNotExists(context);
+            await this.handleDelete(context, application);
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
         }
     }
 
