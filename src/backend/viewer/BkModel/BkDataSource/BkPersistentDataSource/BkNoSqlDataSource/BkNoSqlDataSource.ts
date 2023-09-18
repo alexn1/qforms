@@ -10,7 +10,7 @@ import {
     RawRow,
     JSONString,
     UpdateActionDto,
-    InsertActionDto,
+    CreateActionDto,
 } from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
 import { BkForm } from '../../../BkForm/BkForm';
@@ -130,7 +130,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const body = context.getBody() as InsertActionDto;
+        const body = context.getBody() as CreateActionDto;
         const values = _values ? _values : this.decodeRow(body.row);
         debug('values', values);
 

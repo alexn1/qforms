@@ -7,11 +7,11 @@ import {
     PageActionResponse,
     Result,
     keyToKeyTuple,
-    SelectActionResponse,
+    ReadActionResponse,
     UpdateActionDto,
     Row,
     RawRow,
-    InsertActionDto,
+    CreateActionDto,
     DeleteActionDto,
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
@@ -69,9 +69,9 @@ describe('SampleBackHostApp', () => {
 
         test('create', async () => {
             const rawRow = Helper.encodeObject(row) as RawRow;
-            const data: InsertActionDto = {
+            const data: CreateActionDto = {
                 uuid: UUID,
-                action: Action.insert,
+                action: Action.create,
                 form: FORM,
                 page: PAGE,
                 row: rawRow,
@@ -85,10 +85,10 @@ describe('SampleBackHostApp', () => {
         test('read', async () => {
             const [id] = keyToKeyTuple(key) as [number];
             const { status, body } = await supertest(httpServer).get(
-                `${PATHNAME}?action=${Action.select}&page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
+                `${PATHNAME}?action=${Action.read}&page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
             );
             expect(status).toBe(200);
-            const response: SelectActionResponse = body;
+            const response: ReadActionResponse = body;
             const selctedRow = Helper.decodeObject(response.rows[0]) as Row;
             expect(selctedRow).toEqual({ id, ...row });
         });

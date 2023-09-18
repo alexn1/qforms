@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import { Key, RawRow, SelectActionResponse } from '../../../../../types';
+import { Key, RawRow, ReadActionResponse } from '../../../../../types';
 import { Result } from '../../../../../Result';
 export declare class PersistentDataSource extends DataSource {
     insert(row: RawRow): Promise<Result>;
@@ -14,6 +14,6 @@ export declare class PersistentDataSource extends DataSource {
     refill(): Promise<void>;
     fill(frame: number): Promise<void>;
     more(): Promise<void>;
-    select(params?: Record<string, any>): Promise<SelectActionResponse>;
+    select(params?: Record<string, any>): Promise<ReadActionResponse>;
     isPersistent(): boolean;
 }

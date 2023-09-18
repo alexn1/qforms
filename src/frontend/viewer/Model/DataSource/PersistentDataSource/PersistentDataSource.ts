@@ -1,14 +1,13 @@
 import { DataSource } from '../DataSource';
 import {
     DeleteActionDto,
-    InsertActionDto,
+    CreateActionDto,
     JSONString,
     Key,
     Query,
     RawRow,
-    SelectActionDto,
-    SelectActionQuery,
-    SelectActionResponse,
+    ReadActionQuery,
+    ReadActionResponse,
     UpdateActionDto,
     Action,
 } from '../../../../../types';
@@ -35,7 +34,7 @@ export class PersistentDataSource extends DataSource {
         const table = this.getAttr('table') as string;
         if (table === '') throw new Error('no data source table to insert');
 
-        const body: InsertActionDto = {
+        const body: CreateActionDto = {
             action: Action.create,
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
@@ -252,12 +251,12 @@ export class PersistentDataSource extends DataSource {
         await this.fill(this.lastFrame);
     }
 
-    async select(params: Record<string, any> = {}): Promise<SelectActionResponse> {
+    async select(params: Record<string, any> = {}): Promise<ReadActionResponse> {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
 
-        const query: SelectActionQuery = {
+        const query: ReadActionQuery = {
             action: Action.read,
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
@@ -270,7 +269,7 @@ export class PersistentDataSource extends DataSource {
         const response = (await this.getApp().request2(
             'GET',
             `${window.location.pathname}?${Helper.queryToString(query as Query)}`,
-        )) as SelectActionResponse;
+        )) as ReadActionResponse;
 
         if (!(response.rows instanceof Array)) throw new Error('rows must be array');
         // if (response.time) console.debug(`select time of ${this.getFullName()}:`, response.time);

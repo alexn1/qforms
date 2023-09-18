@@ -5,9 +5,9 @@ import { ViewerModule } from '../ViewerModule';
 import { BkDataSource } from '../BkModel/BkDataSource/BkDataSource';
 import { Result } from '../../../Result';
 import {
-    SelectActionQuery,
-    SelectActionResponse,
-    InsertActionDto,
+    ReadActionQuery,
+    ReadActionResponse,
+    CreateActionDto,
     UpdateActionDto,
     DeleteActionDto,
 } from '../../../types';
@@ -18,7 +18,7 @@ export class BkDataSourceController {
     // action
     async select(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkDataSourceController.select', context.getBody().page);
-        const { page, form, ds } = context.getQuery() as SelectActionQuery;
+        const { page, form, ds } = context.getQuery() as ReadActionQuery;
         const start = Date.now();
         const dataSource = await BkDataSourceController.getDataSource(context, application, {
             page,
@@ -30,7 +30,7 @@ export class BkDataSourceController {
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             pConsole.debug('select time:', time);
-            const response: SelectActionResponse = { rows, count, time };
+            const response: ReadActionResponse = { rows, count, time };
             context.getRes().json(response);
         });
     }
@@ -38,7 +38,7 @@ export class BkDataSourceController {
     // action
     async insert(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkDataSourceController.insert', context.getReq()!.body.page);
-        const body = context.getBody() as InsertActionDto;
+        const body = context.getBody() as CreateActionDto;
         const page = await application.getPage(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');

@@ -79,18 +79,11 @@ export interface PageActionQuery extends ParsedQs {
     params?: Record<string, JSONString<Nullable<Scalar>>>;
 }
 
-export interface SelectActionDto extends BaseDto {
-    page: Nullable<string>;
-    form: Nullable<string>;
-    ds: string;
-    params: Record<string, any>;
-}
-
 export interface PageActionResponse {
     page: PageData;
 }
 
-export interface SelectActionQuery extends ParsedQs {
+export interface ReadActionQuery extends ParsedQs {
     action: string;
     page?: string;
     form?: string;
@@ -98,13 +91,13 @@ export interface SelectActionQuery extends ParsedQs {
     params?: Record<string, JSONString<any>>;
 }
 
-export interface SelectActionResponse {
+export interface ReadActionResponse {
     rows: RawRow[];
     count: Nullable<number>;
     time: number;
 }
 
-export interface InsertActionDto extends BaseDto {
+export interface CreateActionDto extends BaseDto {
     page: string;
     form: string;
     row: RawRow;
