@@ -9673,7 +9673,20 @@ class ViewerModule {
             await this.applicationController.loginPost(context, application);
         }
         else {
-            await this.handleAction(context, application);
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            if (action === 'logout') {
+                await this.applicationController.logout(context, application);
+            }
+            else if (action === 'rpc') {
+                await this.applicationController.rpc(context, application);
+            }
+            else if (action === 'insert') {
+                await this.dataSourceController.insert(context, application);
+            }
+            else {
+                throw new Error(`unknown action: ${action}`);
+            }
         }
     }
     async handlePatch(context, application) {
@@ -9690,41 +9703,26 @@ class ViewerModule {
         }
     }
     async handleDelete(context, application) {
-        await this.handleAction(context, application);
-    }
-    async handleAction(context, application) {
-        this.checkAuthorization(context, application);
         const action = context.getAction();
         if (!action)
             throw new Error('no action');
-        context.setVersionHeaders(pkg.version, application.getVersion());
-        if (action === 'page') {
-            await this.pageController.page(context, application);
-        }
-        else if (action === 'logout') {
-            await this.applicationController.logout(context, application);
-        }
-        else if (action === 'rpc') {
-            await this.applicationController.rpc(context, application);
-        }
-        else if (action === 'insert') {
-            await this.dataSourceController.insert(context, application);
-        }
-        else if (action === '_delete') {
+        if (action === '_delete') {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
             await this.dataSourceController._delete(context, application);
         }
         else {
             throw new Error(`unknown action: ${action}`);
         }
     }
+    async handleGetFile(context, application, next) {
+        await application.handleGetFile(context, next);
+    }
     checkAuthorization(context, application) {
         const user = context.getUser();
         if (application.isAuthentication() && !user) {
             throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({ message: 'Unauthorized', status: 401, context });
         }
-    }
-    async handleGetFile(context, application, next) {
-        await application.handleGetFile(context, next);
     }
     getHostApp() {
         return this.hostApp;

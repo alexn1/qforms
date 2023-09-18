@@ -18,9 +18,8 @@ export declare class ViewerModule {
     handlePost(context: Context, application: BkApplication): Promise<void>;
     handlePatch(context: Context, application: BkApplication): Promise<void>;
     handleDelete(context: Context, application: BkApplication): Promise<void>;
-    handleAction(context: Context, application: BkApplication): Promise<void>;
-    checkAuthorization(context: Context, application: BkApplication): void;
     handleGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
+    checkAuthorization(context: Context, application: BkApplication): void;
     getHostApp(): BackHostApp;
     getLinks(): string[];
     getScripts(): string[];
