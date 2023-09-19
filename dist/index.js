@@ -2616,6 +2616,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
+
 
 
 
@@ -2635,9 +2637,9 @@ class WebSocketServer {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.error)('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', webSocket.url);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent(webSocket.url))));
-        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse(webSocket.url, true);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', (0,_private_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket));
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent((0,_private_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket)))));
+        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse((0,_private_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket), true);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)
@@ -5954,7 +5956,8 @@ class MonitorModule {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion),
-/* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
+/* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync),
+/* harmony export */   "getWebsocketUrl": () => (/* binding */ getWebsocketUrl)
 /* harmony export */ });
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 
@@ -5973,6 +5976,13 @@ function getSecretSync(secretFilePath) {
     secret = _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.getRandomString(20);
     _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.writeFileSync(secretFilePath, secret);
     return secret;
+}
+function getWebsocketUrl(webSocket) {
+    var _a;
+    const url = webSocket.url || ((_a = webSocket.upgradeReq) === null || _a === void 0 ? void 0 : _a.url);
+    if (!url)
+        throw new Error('getWebsocketUrl: cannot get webSocket url');
+    return url;
 }
 
 

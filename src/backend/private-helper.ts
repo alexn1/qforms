@@ -17,3 +17,10 @@ export function getSecretSync(secretFilePath: string): string {
     BkHelper.writeFileSync(secretFilePath, secret);
     return secret;
 }
+
+//  for Node.js and Bun compatibility
+export function getWebsocketUrl(webSocket): string {
+    const url = webSocket.url || webSocket.upgradeReq?.url;
+    if (!url) throw new Error('getWebsocketUrl: cannot get webSocket url');
+    return url;
+}

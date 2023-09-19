@@ -4,6 +4,7 @@ import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
 import { debug, log, error } from '../console';
+import { getWebsocketUrl } from './private-helper';
 
 export class WebSocketServer {
     options: any;
@@ -25,11 +26,9 @@ export class WebSocketServer {
     }
 
     async onConnection(webSocket) {
-        debug('WebSocketServer.onConnection', webSocket.url);
-
-        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(webSocket.url))));
-
-        const parts = url.parse(webSocket.url, true);
+        debug('WebSocketServer.onConnection', getWebsocketUrl(webSocket));
+        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(getWebsocketUrl(webSocket)))));
+        const parts = url.parse(getWebsocketUrl(webSocket), true);
         // debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
