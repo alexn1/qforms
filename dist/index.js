@@ -773,7 +773,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
-/* harmony import */ var _system_helper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./system-helper */ "./src/backend/system-helper.ts");
+/* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -824,7 +824,7 @@ class BackHostApp {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.constructor', params);
     }
     async init() {
-        (0,_system_helper__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
+        (0,_private_helper__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
         this.initDirPaths();
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
@@ -942,7 +942,7 @@ class BackHostApp {
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
         this.express.use(express_session__WEBPACK_IMPORTED_MODULE_7___default()({
             store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_17__.FileSessionStore(this.sessionDirPath),
-            secret: (0,_system_helper__WEBPACK_IMPORTED_MODULE_26__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
+            secret: (0,_private_helper__WEBPACK_IMPORTED_MODULE_26__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -5944,10 +5944,10 @@ class MonitorModule {
 
 /***/ }),
 
-/***/ "./src/backend/system-helper.ts":
-/*!**************************************!*\
-  !*** ./src/backend/system-helper.ts ***!
-  \**************************************/
+/***/ "./src/backend/private-helper.ts":
+/*!***************************************!*\
+  !*** ./src/backend/private-helper.ts ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
