@@ -1257,7 +1257,7 @@ class BackHostApp {
             return acc;
         }, {});
     }
-    getPostAlias(path, route, query) {
+    createCustomRoute(path, route, query) {
         this.router.alias('get', path, route, 'moduleGet', query);
         this.router.alias('post', path, route, 'modulePost', query);
         this.router.alias('patch', path, route, 'modulePatch', query);

@@ -631,7 +631,7 @@ export class BackHostApp {
         }, {} as Record<string, any>);
     }
 
-    getPostAlias(
+    createCustomRoute(
         path: string | RegExp,
         route: Route,
         query?: Record<string, Nullable<Scalar>>,

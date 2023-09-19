@@ -2,7 +2,7 @@ import { BackHostApp } from '../../dist';
 
 export class SampleBackHostApp extends BackHostApp {
     initCustomRoutes() {
-        this.getPostAlias(
+        this.createCustomRoute(
             /^\/page\/Page1\/(\d+)-([a-z0-9\-]+)$/,
             ['viewer', 'sample', 'sample', 'local', 'localhost'],
             {

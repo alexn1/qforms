@@ -115,7 +115,7 @@ export declare class BackHostApp {
     optionsError(req: Request, res: Response, next: NextFunction): Promise<void>;
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     static getQueryFromParams(req: Request, query: Record<string, Nullable<Scalar>>): Record<string, any>;
-    getPostAlias(path: string | RegExp, route: Route, query?: Record<string, Nullable<Scalar>>): void;
+    createCustomRoute(path: string | RegExp, route: Route, query?: Record<string, Nullable<Scalar>>): void;
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     getLogger(): EventLog;
     getFrontLogUrl(): Optional<string>;
