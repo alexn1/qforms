@@ -318,7 +318,8 @@ export class ApplicationController extends ModelController<Application> {
     onLogout = async () => {
         console.debug('ApplicationController.onLogout');
         const result = await this.getModel().request('POST', { action: 'logout' });
-        location.href = this.getRootPath();
+        // location.href = this.getRootPath();
+        location.reload();
     };
 
     onMenuItemClick = async (menu, type, name) => {

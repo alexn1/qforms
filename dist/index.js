@@ -14935,7 +14935,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         this.onLogout = async () => {
             console.debug('ApplicationController.onLogout');
             const result = await this.getModel().request('POST', { action: 'logout' });
-            location.href = this.getRootPath();
+            location.reload();
         };
         this.onMenuItemClick = async (menu, type, name) => {
             console.debug('ApplicationController.onMenuItemClick', menu, type, name);
