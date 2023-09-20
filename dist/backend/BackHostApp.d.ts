@@ -15,7 +15,6 @@ import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { Nullable } from '../types';
 export interface BackHostAppParams {
-    [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;

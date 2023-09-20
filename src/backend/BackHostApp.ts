@@ -41,7 +41,7 @@ const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT
 const MIN_NODE_VERSION = 14;
 
 export interface BackHostAppParams {
-    [name: string]: any;
+    // [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
