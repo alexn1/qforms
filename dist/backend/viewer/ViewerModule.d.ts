@@ -25,7 +25,7 @@ export declare class ViewerModule {
     handleDelete(context: Context, application: BkApplication): Promise<void>;
     handleGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
     checkAuthorization(context: Context, application: BkApplication): void;
-    getHostApp(): BackHostApp;
+    getHostApp(): BackHostApp<import("../BackHostApp").BackHostAppParams>;
     getLinks(): string[];
     getScripts(): string[];
 }

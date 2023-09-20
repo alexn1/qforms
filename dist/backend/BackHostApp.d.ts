@@ -28,7 +28,7 @@ export interface BackHostAppParams {
         password: string;
     };
 }
-export declare class BackHostApp {
+export declare class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> {
     private params;
     applications: {
         [route: string]: BkApplication;
@@ -52,7 +52,7 @@ export declare class BackHostApp {
         [route: string]: Nullable<Array<EmptyPromise<BkApplication>>>;
     };
     private eventLog;
-    constructor(params?: BackHostAppParams);
+    constructor(params?: TParams);
     init(): Promise<void>;
     run(): Promise<void>;
     getHost(): string;
@@ -123,6 +123,6 @@ export declare class BackHostApp {
     getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;
     isProduction(): boolean;
-    getParams(): BackHostAppParams;
+    getParams(): TParams;
     getExpress(): Express;
 }

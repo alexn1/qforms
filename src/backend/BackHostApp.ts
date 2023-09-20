@@ -56,7 +56,7 @@ export interface BackHostAppParams {
     };
 }
 
-export class BackHostApp {
+export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> {
     applications: { [route: string]: BkApplication } = {};
     private express: Express;
     httpServer: Server;
@@ -82,7 +82,7 @@ export class BackHostApp {
     createAppQueue: { [route: string]: Nullable<Array<EmptyPromise<BkApplication>>> } = {};
     private eventLog: EventLog;
 
-    constructor(private params: BackHostAppParams = {}) {
+    constructor(private params: TParams = {} as TParams) {
         debug('BackHostApp.constructor', params);
     }
 
@@ -686,7 +686,7 @@ export class BackHostApp {
         return !this.isDevelopment();
     }
 
-    getParams(): BackHostAppParams {
+    getParams(): TParams {
         return this.params;
     }
 
