@@ -399,7 +399,7 @@ export class BackHostApp {
                 ip: req && Context.getIpFromReq(req),
             });
         } catch (err) {
-            error(colors.red(err));
+            error('logError:', colors.red(err));
         }
     }
 
@@ -432,7 +432,7 @@ export class BackHostApp {
                 ip: context.getIp(),
             });
         } catch (err) {
-            pConsole.error(colors.red(err));
+            pConsole.error('logEvent:', colors.red(err));
         }
     }
 
@@ -449,7 +449,7 @@ export class BackHostApp {
     async _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void> {
         debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
-        pConsole.log(colors.red(err.message));
+        pConsole.log('_e500:', colors.red(err.message));
 
         const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
