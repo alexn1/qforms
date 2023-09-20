@@ -5,6 +5,7 @@ import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { access } from 'node:fs/promises';
+import { v4 as uuidv4 } from 'uuid';
 
 import { JSONString } from '../types';
 import { debug } from '../console';
@@ -577,6 +578,10 @@ export class BkHelper {
         });
         if (response.ok) return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    }
+
+    static newClientId() {
+        return uuidv4();
     }
 }
 

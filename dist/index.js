@@ -1468,7 +1468,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! uuid */ "uuid");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+
 
 
 
@@ -1579,7 +1582,7 @@ class BkHelper {
         return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.readBinaryFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(filePath, (err, data) => {
                 if (err) {
@@ -1613,7 +1616,7 @@ class BkHelper {
         }
     }
     static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.createDirIfNotExists'), dirPath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
                 if (exists) {
@@ -1679,7 +1682,7 @@ class BkHelper {
         }
     }
     static writeFile(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -1692,7 +1695,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFileSync'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFileSync'), filePath);
         return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -1894,6 +1897,9 @@ class BkHelper {
         if (response.ok)
             return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    }
+    static newClientId() {
+        return (0,uuid__WEBPACK_IMPORTED_MODULE_7__.v4)();
     }
 }
 BkHelper.registerGlobalClass(BkHelper);
@@ -6362,20 +6368,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uuid */ "uuid");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../BaseModel */ "./src/backend/BaseModel.ts");
-/* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
-/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
-
+/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../BaseModel */ "./src/backend/BaseModel.ts");
+/* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
+/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
 
 
 
@@ -6389,7 +6392,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const pkg = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
-class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
+class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     constructor(appInfo, hostApp, env = 'local') {
         super(appInfo.appFile.data);
         this.appInfo = appInfo;
@@ -6417,16 +6420,16 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('publicDirPath:', publicDirPath);
-        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('publicDirPath:', publicDirPath);
+        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)(`Application.deinit: ${this.getName()}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)(`Application.deinit: ${this.getName()}`);
         await super.deinit();
         for (const database of this.databases) {
             await database.deinit();
@@ -6441,7 +6444,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
-        return _text__WEBPACK_IMPORTED_MODULE_10__[lang];
+        return _text__WEBPACK_IMPORTED_MODULE_9__[lang];
     }
     getVersion() {
         return null;
@@ -6474,10 +6477,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         response.text = this.getText();
         response.menu = this.menu;
         response.nav = this.nav;
-        response.uuid = (0,uuid__WEBPACK_IMPORTED_MODULE_1__.v4)();
+        response.uuid = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.newClientId();
         response.actions = this.getCol('actions').map((action) => ({
-            name: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getName(action),
-            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getAttr(action, 'caption'),
+            name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
+            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),
         }));
         response.pages = await this.fillPages(context);
         response.user = this.isAuthentication()
@@ -6504,7 +6507,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = pageLink.getPageFilePath();
-                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_6__.JsonFile(pageFilePath);
+                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
@@ -6527,8 +6530,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         if (actions.length) {
             menu['Actions'] = actions.map((action) => ({
                 type: 'action',
-                action: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getName(action),
-                caption: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getAttr(action, 'caption'),
+                action: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
+                caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),
             }));
         }
         this.menu = menu;
@@ -6536,7 +6539,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_5__.BkPageLink(data, this);
+        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__.BkPageLink(data, this);
     }
     async createPage(context, pageLinkName) {
         if (!this.isData('pageLinks', pageLinkName)) {
@@ -6545,7 +6548,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getDirPath(), relFilePath);
-        const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.readTextFile(pageFilePath);
+        const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = (await this.createChildModel('pages', data));
         await page.init(context);
@@ -6555,7 +6558,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_12__.pConsole.debug('Application.getPage', pageLinkName);
+        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -6567,8 +6570,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
-            .filter((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getAttr(data, 'startup') === 'true')
-            .map((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getName(data));
+            .filter((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(data, 'startup') === 'true')
+            .map((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data));
     }
     getPageLinksToFill(context) {
         const pageLinkName = context.getPage();
@@ -6588,7 +6591,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         return pages;
     }
     async authenticate(ctx, username, password) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('Application.authenticate');
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -6604,10 +6607,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         return null;
     }
     async rpc(name, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('BkApplication.rpc', name, context.getBody());
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('BkApplication.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new _HttpError__WEBPACK_IMPORTED_MODULE_7__.HttpError({
+        throw new _HttpError__WEBPACK_IMPORTED_MODULE_6__.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -6646,8 +6649,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         const fileName = path__WEBPACK_IMPORTED_MODULE_0___default().basename(filePath, path__WEBPACK_IMPORTED_MODULE_0___default().extname(filePath));
         return {
             appFile,
-            name: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getName(data),
-            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel.getAttr(data, 'caption'),
+            name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data),
+            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(data, 'caption'),
             fullName: (0,path__WEBPACK_IMPORTED_MODULE_0__.join)(dirName, fileName),
             envs: BkApplication.getEnvList(data),
             dirName,
@@ -6659,14 +6662,14 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         };
     }
     static async loadAppInfo(appFilePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('Application.loadAppInfo', appFilePath);
-        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_6__.JsonFile(appFilePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.loadAppInfo', appFilePath);
+        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
     static async getAppInfos(appsDirPath) {
-        const appFilesPaths = await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper._glob(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper._glob(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -6719,7 +6722,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         this.clients.splice(i, 1);
     }
     broadcastDomesticResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6732,7 +6735,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         }
     }
     broadcastForeignResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_11__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6756,7 +6759,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
                     const table = database.findTable(tableName);
                     if (table) {
                         if (!fResult)
-                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_8__.Result();
+                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_7__.Result();
                         if (!fResult[databaseName])
                             fResult[databaseName] = {};
                         fResult[databaseName][tableName] = { refresh: true };
@@ -6777,8 +6780,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
     }
     async handleGetFile(context, next) {
         const filePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), context.getUri());
-        _pConsole__WEBPACK_IMPORTED_MODULE_12__.pConsole.debug(`filePath: ${filePath}`);
-        if (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.exists2(filePath)) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug(`filePath: ${filePath}`);
+        if (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.exists2(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {
@@ -6787,7 +6790,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_3__.BkModel {
         }
     }
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
-        return (0,_home__WEBPACK_IMPORTED_MODULE_9__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
+        return (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];

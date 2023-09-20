@@ -29,7 +29,7 @@ export interface ApplicationData extends ModelData {
     };
     nodeEnv: string | null;
     time: number;
-    uuid: string;
+    uuid: string; // clientId
     user: Nullable<ClientUser>;
 
     // any

@@ -1,5 +1,4 @@
 import path, { join } from 'path';
-import { v4 as uuidv4 } from 'uuid';
 import { WebSocket } from 'ws';
 // import axios from 'axios';
 // import colors from 'colors/safe';
@@ -172,7 +171,7 @@ export class BkApplication<
         response.nav = this.nav;
 
         // uuid
-        response.uuid = uuidv4();
+        response.uuid = BkHelper.newClientId();
 
         // actions
         response.actions = this.getCol('actions').map((action: ActionScheme) => ({
