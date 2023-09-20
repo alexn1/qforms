@@ -1,13 +1,19 @@
 import { Context } from './Context';
 
 export class HttpError extends Error {
-    context?: Context;
+    route?: string;
     status?: number;
     data?: object;
 
-    constructor(options: { message: string; context?: Context; status?: number; data?: object }) {
+    constructor(options: {
+        message: string;
+        context?: Context;
+        route?: string;
+        status?: number;
+        data?: object;
+    }) {
         super(options.message);
-        this.context = options.context;
+        this.route = options.route;
         this.status = options.status;
         this.data = options.data;
     }

@@ -1048,22 +1048,6 @@ class BackHostApp {
         const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__.BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;
     }
-    composeContextData(err, req) {
-        const route = err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError && err.context ? err.context.getRoute() : null;
-        return {
-            headers: req.headers,
-            method: req.method,
-            host: req.headers.host,
-            originalUrl: req.originalUrl,
-            uri: req.params['0'],
-            platformVersion: pkg.version,
-            appVersion: route ? this.applications[route].getVersion() : null,
-            route: route,
-            body: req.body,
-            status: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.status || null : null,
-            data: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.data || null : null,
-        };
-    }
     async logError(err, req) {
         _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('BackHostApp.logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
         try {
@@ -1079,6 +1063,22 @@ class BackHostApp {
         catch (err) {
             (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
         }
+    }
+    composeContextData(err, req) {
+        const route = err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.route : null;
+        return {
+            route: route,
+            headers: req.headers,
+            method: req.method,
+            host: req.headers.host,
+            originalUrl: req.originalUrl,
+            uri: req.params['0'],
+            platformVersion: pkg.version,
+            appVersion: route && this.applications[route] ? this.applications[route].getVersion() : null,
+            body: req.body,
+            status: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.status || null : null,
+            data: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.data || null : null,
+        };
     }
     async logEvent(context, message, data) {
         _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('BackHostApp.logEvent', message);
@@ -2326,7 +2326,7 @@ __webpack_require__.r(__webpack_exports__);
 class HttpError extends Error {
     constructor(options) {
         super(options.message);
-        this.context = options.context;
+        this.route = options.route;
         this.status = options.status;
         this.data = options.data;
     }
@@ -9877,7 +9877,11 @@ class ViewerModule {
     }
     checkAuthorization(context, application) {
         if (application.isAuthentication() && !context.getUser()) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({ message: 'Unauthorized', status: 401, context });
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({
+                message: 'Unauthorized',
+                status: 401,
+                route: context.getRoute(),
+            });
         }
     }
     getHostApp() {

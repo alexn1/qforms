@@ -387,23 +387,6 @@ export class BackHostApp {
         return appInfos;
     }
 
-    composeContextData(err: Error, req: Request) {
-        const route = err instanceof HttpError && err.context ? err.context.getRoute() : null;
-        return {
-            headers: req.headers,
-            method: req.method,
-            host: req.headers.host,
-            originalUrl: req.originalUrl,
-            uri: req.params['0'],
-            platformVersion: pkg.version,
-            appVersion: route ? this.applications[route].getVersion() : null,
-            route: route,
-            body: req.body,
-            status: err instanceof HttpError ? err.status || null : null,
-            data: err instanceof HttpError ? err.data || null : null,
-        };
-    }
-
     async logError(err: Error, req?: Request): Promise<void> {
         pConsole.log('BackHostApp.logError:', colors.red(err.message));
         try {
@@ -418,6 +401,24 @@ export class BackHostApp {
         } catch (err) {
             error(colors.red(err));
         }
+    }
+
+    composeContextData(err: Error, req: Request) {
+        const route = err instanceof HttpError ? err.route : null;
+        return {
+            route: route,
+            headers: req.headers,
+            method: req.method,
+            host: req.headers.host,
+            originalUrl: req.originalUrl,
+            uri: req.params['0'],
+            platformVersion: pkg.version,
+            appVersion:
+                route && this.applications[route] ? this.applications[route].getVersion() : null,
+            body: req.body,
+            status: err instanceof HttpError ? err.status || null : null,
+            data: err instanceof HttpError ? err.data || null : null,
+        };
     }
 
     async logEvent(context: Context, message: string, data?: object): Promise<void> {

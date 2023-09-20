@@ -84,7 +84,9 @@ export declare class BackHostApp {
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
     createAppInfos(req: Request): Promise<AppInfo[]>;
+    logError(err: Error, req?: Request): Promise<void>;
     composeContextData(err: Error, req: Request): {
+        route: string | null | undefined;
         headers: import("http").IncomingHttpHeaders;
         method: string;
         host: string | undefined;
@@ -92,12 +94,10 @@ export declare class BackHostApp {
         uri: string;
         platformVersion: any;
         appVersion: string | null;
-        route: string | null;
         body: any;
         status: number | null;
         data: object | null;
     };
-    logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void>;

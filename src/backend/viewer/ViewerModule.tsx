@@ -244,7 +244,11 @@ export class ViewerModule {
 
     checkAuthorization(context: Context, application: BkApplication): void {
         if (application.isAuthentication() && !context.getUser()) {
-            throw new HttpError({ message: 'Unauthorized', status: 401, context });
+            throw new HttpError({
+                message: 'Unauthorized',
+                status: 401,
+                route: context.getRoute(),
+            });
         }
     }
 
