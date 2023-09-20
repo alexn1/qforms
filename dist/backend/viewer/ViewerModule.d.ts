@@ -16,7 +16,7 @@ export declare class ViewerModule {
     initControllers(): void;
     get(req: Request, res: Response, next: NextFunction): Promise<void>;
     getFile(req: Request, res: Response, next: NextFunction): Promise<void>;
-    handleGet(context: Context, bkApplication: BkApplication): Promise<void>;
+    handleGet(context: Context, application: BkApplication): Promise<void>;
     post(req: Request, res: Response, next: NextFunction): Promise<void>;
     handlePost(context: Context, application: BkApplication): Promise<void>;
     patch(req: Request, res: Response, next: NextFunction): Promise<void>;

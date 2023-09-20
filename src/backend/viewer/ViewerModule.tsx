@@ -109,34 +109,29 @@ export class ViewerModule {
         }
     }
 
-    async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {
+    async handleGet(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug(
             'ViewerModule.handleGet',
             context.getDomain(),
             context.getReq()!.url,
             context.getReq()!.params,
             context.getQuery(),
-            // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
-
-        const session = context.getSession();
-
-        if (
-            bkApplication.isAuthentication() &&
-            !(session.user && session.user[context.getRoute()])
-        ) {
-            await this.applicationController.loginGet(context, bkApplication);
+        const action = context.getAction();
+        if (action === Action.page) {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.pageController.page(context, application);
+        } else if (action === Action.read) {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.dataSourceController.select(context, application);
         } else {
-            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-
-            // handle actions
-            const action = context.getAction();
-            if (action === Action.page) {
-                await this.pageController.page(context, bkApplication);
-            } else if (action === Action.read) {
-                await this.dataSourceController.select(context, bkApplication);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            if (application.isAuthentication() && !context.getUser()) {
+                await this.applicationController.loginGet(context, application);
             } else {
-                await this.applicationController.index(context, bkApplication);
+                await this.applicationController.index(context, application);
             }
         }
     }
@@ -247,9 +242,8 @@ export class ViewerModule {
         await application.handleGetFile(context, next);
     }
 
-    checkAuthorization(context: Context, application: BkApplication) {
-        const user = context.getUser();
-        if (application.isAuthentication() && !user) {
+    checkAuthorization(context: Context, application: BkApplication): void {
+        if (application.isAuthentication() && !context.getUser()) {
             throw new HttpError({ message: 'Unauthorized', status: 401, context });
         }
     }

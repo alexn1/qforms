@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Action, BaseDto, Nullable, Optional } from '../types';
+import { Action, BaseDto, BaseQuery, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { BkHelper } from './BkHelper';
@@ -79,10 +79,10 @@ export class Context {
     }
 
     getUser(): Nullable<ServerUser> {
-        const route = this.getRoute();
         const req = this.getReq();
         if (!req) return null;
         const session = this.getSession();
+        const route = this.getRoute();
         if (session.user && session.user[route]) {
             return session.user[route];
         }
@@ -234,10 +234,15 @@ export class Context {
     }
 
     getAction(): Nullable<Action> {
-        let { action } = this.getBody() as BaseDto;
-        if (!action) {
-            action = this.getQuery().action as Action;
+        const req = this.getReq();
+        if (!req) {
+            return null;
         }
+        if (req.method === 'GET') {
+            const { action } = this.getQuery() as BaseQuery;
+            return action || null;
+        }
+        const { action } = this.getBody() as BaseDto;
         return action || null;
     }
 

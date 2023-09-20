@@ -1960,11 +1960,11 @@ class Context {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
     }
     getUser() {
-        const route = this.getRoute();
         const req = this.getReq();
         if (!req)
             return null;
         const session = this.getSession();
+        const route = this.getRoute();
         if (session.user && session.user[route]) {
             return session.user[route];
         }
@@ -2083,10 +2083,15 @@ class Context {
         return new URL(fullUrl);
     }
     getAction() {
-        let { action } = this.getBody();
-        if (!action) {
-            action = this.getQuery().action;
+        const req = this.getReq();
+        if (!req) {
+            return null;
         }
+        if (req.method === 'GET') {
+            const { action } = this.getQuery();
+            return action || null;
+        }
+        const { action } = this.getBody();
         return action || null;
     }
     static getIpFromReq(req) {
@@ -9736,24 +9741,26 @@ class ViewerModule {
             }
         }
     }
-    async handleGet(context, bkApplication) {
+    async handleGet(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
-        const session = context.getSession();
-        if (bkApplication.isAuthentication() &&
-            !(session.user && session.user[context.getRoute()])) {
-            await this.applicationController.loginGet(context, bkApplication);
+        const action = context.getAction();
+        if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.page) {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.pageController.page(context, application);
+        }
+        else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.read) {
+            this.checkAuthorization(context, application);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            await this.dataSourceController.select(context, application);
         }
         else {
-            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-            const action = context.getAction();
-            if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.page) {
-                await this.pageController.page(context, bkApplication);
-            }
-            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.read) {
-                await this.dataSourceController.select(context, bkApplication);
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            if (application.isAuthentication() && !context.getUser()) {
+                await this.applicationController.loginGet(context, application);
             }
             else {
-                await this.applicationController.index(context, bkApplication);
+                await this.applicationController.index(context, application);
             }
         }
     }
@@ -9869,8 +9876,7 @@ class ViewerModule {
         await application.handleGetFile(context, next);
     }
     checkAuthorization(context, application) {
-        const user = context.getUser();
-        if (application.isAuthentication() && !user) {
+        if (application.isAuthentication() && !context.getUser()) {
             throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({ message: 'Unauthorized', status: 401, context });
         }
     }

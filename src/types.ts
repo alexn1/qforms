@@ -60,6 +60,10 @@ export interface BaseDto {
     action: Action;
 }
 
+export interface BaseQuery extends ParsedQs {
+    action: Action;
+}
+
 export interface LoginDto extends BaseDto {
     tzOffset: JSONString<number>;
     username: string;
