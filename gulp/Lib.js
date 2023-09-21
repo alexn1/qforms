@@ -67,7 +67,7 @@ class Lib {
             });
             if (!quiet) childProcess.stdout.on('data', (data) => process.stdout.write(data));
             childProcess.stderr.on('data', (data) => process.stderr.write(data));
-            childProcess.on('exit:', (code) => {
+            childProcess.on('exit', (code) => {
                 // console.debug('exit:', code, typeof code);
                 if (code) {
                     const err = new Error(`"${cmd}" process exited with code: ${code}`);
