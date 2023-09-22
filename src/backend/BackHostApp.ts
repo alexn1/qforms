@@ -682,9 +682,9 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
         return this.getNodeEnv() === 'dev';
     }
 
-    isProduction(): boolean {
+    /* isProduction(): boolean {
         return !this.isDevelopment();
-    }
+    } */
 
     getParams(): TParams {
         return this.params;

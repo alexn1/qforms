@@ -1293,9 +1293,6 @@ class BackHostApp {
     isDevelopment() {
         return this.getNodeEnv() === 'dev';
     }
-    isProduction() {
-        return !this.isDevelopment();
-    }
     getParams() {
         return this.params;
     }

@@ -122,7 +122,6 @@ export declare class BackHostApp<TParams extends BackHostAppParams = BackHostApp
     getFrontendDirPath(): string;
     getNodeEnv(): Nullable<string>;
     isDevelopment(): boolean;
-    isProduction(): boolean;
     getParams(): TParams;
     getExpress(): Express;
 }
