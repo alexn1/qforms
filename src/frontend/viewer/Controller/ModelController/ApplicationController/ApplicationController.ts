@@ -178,10 +178,13 @@ export class ApplicationController extends ModelController<Application> {
             page: options.name,
             newMode:
                 options.newMode !== undefined
-                    ? Helper.encodeValue<JSONString<boolean>>(options.newMode)
+                    ? (Helper.encodeValue(options.newMode) as JSONString<boolean>)
                     : undefined,
             params: options.params
-                ? Helper.encodeObject<JSONString<Nullable<Scalar>>>(options.params)
+                ? (Helper.encodeObject(options.params) as Record<
+                      string,
+                      JSONString<Nullable<Scalar>>
+                  >)
                 : undefined,
         };
 

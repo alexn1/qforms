@@ -261,7 +261,7 @@ export class PersistentDataSource extends DataSource {
             page: page ? page.getName() : undefined,
             form: form ? form.getName() : undefined,
             ds: this.getName(),
-            params: Helper.encodeObject<JSONString<any>>({
+            params: Helper.encodeObject({
                 ...this.getPageParams(),
                 ...params,
             }),

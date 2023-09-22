@@ -9,7 +9,7 @@ import { ViewerModule } from '../ViewerModule';
 import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
-import { LoginDto, RpcActionDto } from '../../../types';
+import { LoginActionDto, RpcActionDto } from '../../../types';
 import { BkHelper } from '../../BkHelper';
 import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
@@ -100,7 +100,7 @@ export class BkApplicationController {
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkApplicationController.loginPost');
-        const { tzOffset, username, password } = context.getBody() as LoginDto;
+        const { tzOffset, username, password } = context.getBody() as LoginActionDto;
         if (tzOffset === undefined) throw new Error('no tzOffset');
         if (username === undefined) throw new Error('no username');
         if (password === undefined) throw new Error('no password');

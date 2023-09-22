@@ -5,8 +5,8 @@ export declare class Helper {
     static formatNumber(value: number): string;
     static today(): Date;
     static getStartOfDay(date: Date): Date;
-    static encodeObject<T extends JSONString = JSONString>(obj: Record<string, any>): Record<string, T>;
-    static encodeValue<T extends JSONString = JSONString>(value: any): T;
+    static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
+    static encodeValue<T>(value: T): JSONString<T>;
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: string, value: any): any;

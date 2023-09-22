@@ -58,17 +58,17 @@ export class Helper {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
-    static encodeObject<T extends JSONString = JSONString>(
+    static encodeObject(
         obj: Record<string, any>,
-    ): Record<string, T> {
-        const eObj = {} as Record<string, T>;
+    ): Record<string, JSONString> {
+        const eObj = {} as Record<string, any>;
         for (const name in obj) {
-            eObj[name] = Helper.encodeValue<T>(obj[name]);
+            eObj[name] = Helper.encodeValue(obj[name]);
         }
         return eObj;
     }
 
-    static encodeValue<T>(value: T): JSONString<T> {
+    static  encodeValue<T>(value: T): JSONString<T> {
         return JSON.stringify(value) as JSONString<T>;
     }
 

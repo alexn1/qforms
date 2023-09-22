@@ -1155,7 +1155,7 @@ class BackHostApp {
     }
     async onProcessSIGINT() {
         (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('\nBackHostApp.onProcessSIGINT');
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('\nReceived INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);

@@ -64,7 +64,7 @@ export interface BaseQuery extends ParsedQs {
     action: Action;
 }
 
-export interface LoginDto extends BaseDto {
+export interface LoginActionDto extends BaseDto {
     tzOffset: JSONString<number>;
     username: string;
     password: string;
