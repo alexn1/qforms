@@ -16,7 +16,7 @@
         "build": "npx gulp build-dev",
         "build:prod": "npx gulp build-prod",
         "start": "NODE_ENV=dev node dist/start.js",
-        "start:sample": "NODE_ENV=dev bun --hot apps-ts/sample/start.ts",
+        "start:sample": "NODE_ENV=dev bun apps-ts/sample/start.ts",
         "start:apps": "NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js",
         "nodemon-start": "NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js",
         "test": "jest --runInBand",
