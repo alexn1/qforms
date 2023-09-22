@@ -374,7 +374,7 @@ export class Helper {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-    static delay(ms = 1000) {
+    static delay(ms: number = 1000) {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
@@ -442,24 +442,6 @@ export class Helper {
                 return `${name}[${field}]=${val}`;
             })
             .join('&');
-    }
-
-    static createReadQuery(
-        page: string,
-        form: string,
-        ds: string,
-        params?: Record<string, any>,
-    ): Query {
-        const query: ReadActionQuery = {
-            action: Action.read,
-            page,
-            form,
-            ds,
-        };
-        if (params) {
-            query.params = Helper.encodeObject(params);
-        }
-        return query as Query;
     }
 }
 
