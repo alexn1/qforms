@@ -507,7 +507,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
 
     async onProcessSIGINT(): Promise<void> {
         debug('\nBackHostApp.onProcessSIGINT');
-        pConsole.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        pConsole.log('\nReceived INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
