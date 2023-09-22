@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { JSONString, Scalar, Query, QueryRecord } from '../../types';
+import { JSONString, Scalar, Query, QueryRecord, Action, ReadActionQuery } from '../../types';
 import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
@@ -442,6 +442,24 @@ export class Helper {
                 return `${name}[${field}]=${val}`;
             })
             .join('&');
+    }
+
+    static createReadQuery(
+        page: string,
+        form: string,
+        ds: string,
+        params?: Record<string, any>,
+    ): Query {
+        const query: ReadActionQuery = {
+            action: Action.read,
+            page,
+            form,
+            ds,
+        };
+        if (params) {
+            query.params = Helper.encodeObject(params);
+        }
+        return query as Query;
     }
 }
 
