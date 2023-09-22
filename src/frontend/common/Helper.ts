@@ -68,8 +68,8 @@ export class Helper {
         return eObj;
     }
 
-    static encodeValue<T extends JSONString = JSONString>(value: any): T {
-        return JSON.stringify(value) as T;
+    static encodeValue<T>(value: T): JSONString<T> {
+        return JSON.stringify(value) as JSONString<T>;
     }
 
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any> {
