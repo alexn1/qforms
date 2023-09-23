@@ -11,7 +11,7 @@
         "error": "Error",
         "alert": "Alert",
         "confirm": "Confirm",
-        "versionNotification": "New version is available. Please refresh page."
+        "versionNotification": "New version is available. Please refresh the page."
     },
     "page": {
         "create": "Create",
