@@ -134,3 +134,8 @@ export type Route = [
     env: string,
     domain?: string
 ];
+export type CustomRoute = [
+    path: string | RegExp,
+    route: Route,
+    query?: Record<string, Nullable<Scalar>>
+];
