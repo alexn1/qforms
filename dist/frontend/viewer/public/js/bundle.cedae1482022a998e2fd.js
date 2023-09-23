@@ -32473,6 +32473,12 @@ class Helper {
         })
             .join('&');
     }
+    static keyTupleToKey(keyArray) {
+        return JSON.stringify(keyArray);
+    }
+    static keyToKeyTuple(key) {
+        return JSON.parse(key);
+    }
 }
 Helper.registerGlobalClass(Helper);
 

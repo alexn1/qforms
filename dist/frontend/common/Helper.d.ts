@@ -1,4 +1,4 @@
-import { JSONString, Scalar, Query, QueryRecord } from '../../types';
+import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
 import { ReactComponent } from './ReactComponent';
 export declare class Helper {
     static formatDate(date: Date, format: string): string;
@@ -40,4 +40,6 @@ export declare class Helper {
     static headersToRecord(headers: Headers): Record<string, string>;
     static queryToString(query: Query): string;
     static queryRecordToString(name: string, record: QueryRecord): string;
+    static keyTupleToKey(keyArray: KeyTuple): Key;
+    static keyToKeyTuple(key: Key): KeyTuple;
 }

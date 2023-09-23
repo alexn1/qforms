@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { JSONString, Scalar, Query, QueryRecord, Action, ReadActionQuery } from '../../types';
+import {
+    JSONString,
+    Scalar,
+    Query,
+    QueryRecord,
+    Action,
+    ReadActionQuery,
+    KeyTuple,
+    Key,
+} from '../../types';
 import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
 import { pConsole } from '../../pConsole';
@@ -58,9 +67,7 @@ export class Helper {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
-    static encodeObject(
-        obj: Record<string, any>,
-    ): Record<string, JSONString> {
+    static encodeObject(obj: Record<string, any>): Record<string, JSONString> {
         const eObj = {} as Record<string, any>;
         for (const name in obj) {
             eObj[name] = Helper.encodeValue(obj[name]);
@@ -68,7 +75,7 @@ export class Helper {
         return eObj;
     }
 
-    static  encodeValue<T>(value: T): JSONString<T> {
+    static encodeValue<T>(value: T): JSONString<T> {
         return JSON.stringify(value) as JSONString<T>;
     }
 
@@ -442,6 +449,14 @@ export class Helper {
                 return `${name}[${field}]=${val}`;
             })
             .join('&');
+    }
+
+    static keyTupleToKey(keyArray: KeyTuple): Key {
+        return JSON.stringify(keyArray) as Key;
+    }
+
+    static keyToKeyTuple(key: Key): KeyTuple {
+        return JSON.parse(key);
     }
 }
 
