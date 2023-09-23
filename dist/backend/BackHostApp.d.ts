@@ -65,7 +65,7 @@ export declare class BackHostApp<TParams extends BackHostAppParams = BackHostApp
     initModules(): Promise<void>;
     createWebSocketServer(): void;
     initDirPaths(): void;
-    composeStartMessage(host: string, port: string | number): string;
+    composeStartMessage(): string;
     listenProcessEvents(): void;
     createExpressServer(): void;
     initExpressServer(): void;

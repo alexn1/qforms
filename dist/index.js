@@ -839,7 +839,7 @@ class BackHostApp {
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.createWebSocketServer();
         this.listenProcessEvents();
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(this.composeStartMessage(this.getHost(), this.getPort()));
+        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(this.composeStartMessage());
     }
     getHost() {
         return this.params.host || LISTEN_HOST;
@@ -892,7 +892,9 @@ class BackHostApp {
         this.runtimeDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.params.runtimeDirPath || './runtime');
         this.sessionDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'session');
     }
-    composeStartMessage(host, port) {
+    composeStartMessage() {
+        const host = this.getHost();
+        const port = this.getPort();
         let message = '\n';
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
         message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;

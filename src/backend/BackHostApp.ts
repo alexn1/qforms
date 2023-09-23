@@ -107,7 +107,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.createWebSocketServer();
         this.listenProcessEvents();
-        pConsole.log(this.composeStartMessage(this.getHost(), this.getPort()));
+        pConsole.log(this.composeStartMessage());
     }
 
     getHost(): string {
@@ -171,7 +171,9 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
     }
 
-    composeStartMessage(host: string, port: string | number): string {
+    composeStartMessage(): string {
+        const host = this.getHost();
+        const port = this.getPort();
         let message = '\n';
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
         message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
