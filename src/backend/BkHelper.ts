@@ -1,43 +1,13 @@
 import fs from 'fs';
-import glob from 'glob';
 import path from 'path';
-import slash from 'slash';
+// import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { access } from 'node:fs/promises';
 import { v4 as uuidv4 } from 'uuid';
-
 import { JSONString } from '../types';
 import { debug } from '../console';
-
-function _getFilePathsSync(dirPath: string, ext: string) {
-    const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
-    glob.sync(path.join(dirPath, '*/')).forEach((subDirPath) => {
-        _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
-            filePaths.push(fileName);
-        });
-    });
-    return filePaths;
-}
-
-async function _getFilePaths2(dirPath: string, ext: string, filePaths: string[]) {
-    // debug('_getFilePaths2', dirPath);
-    // all files from directory
-    const files = await BkHelper._glob(path.join(dirPath, '*.' + ext));
-
-    // pushing files to output array
-    files.forEach((item) => {
-        filePaths.push(item);
-    });
-    // all directories from directory
-    const dirs = await BkHelper._glob(path.join(dirPath, '*/'));
-
-    // for each dir push files to output array
-    for (let i = 0; i < dirs.length; i++) {
-        const subDirPath = dirs[i];
-        await _getFilePaths2(subDirPath, ext, filePaths);
-    }
-}
+import { _getFilePathsSync, _getFilePaths2 } from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -54,30 +24,18 @@ export class BkHelper {
     }
 
     static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string) {
-        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map((filePath) => {
+        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext) /* .map((filePath) => {
             return slash(path.relative(publicDirPath, filePath));
-        });
-    }
-
-    static _glob(path: string): Promise<any[]> {
-        return new Promise((resolve, reject) => {
-            glob(path, (err, items) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(items);
-                }
-            });
-        });
+        }) */;
     }
 
     static async getFilePaths(dirPath: string, ext: string): Promise<string[]> {
         // debug('BkHelper.getFilePaths');
         const filePaths: string[] = [];
         await _getFilePaths2(dirPath, ext, filePaths);
-        const relativeFilePaths = filePaths.map((filePath) => {
+        const relativeFilePaths = filePaths; /* .map((filePath) => {
             return slash(path.relative(dirPath, filePath));
-        });
+        }) */
         return relativeFilePaths;
     }
 
@@ -90,36 +48,8 @@ export class BkHelper {
                 arrS[i] = '0' + arrS[i];
             }
         }
-
-        /*
-        let hh = now.getHours();
-        let mm = now.getMinutes();
-        let ss = now.getSeconds();
-
-        let _hh = hh.toString();
-        let _mm = mm.toString();
-        let _ss = ss.toString();
-
-        if (hh < 10) _hh = '0' + _hh;
-        if (mm < 10) _mm = '0' + mm;
-        if (ss < 10) _ss = '0' + ss;
-
-
-        return [_hh, _mm, _ss].join(':');*/
         return arrS.join(':');
     }
-
-    /* static currentDate() {
-        const now = new Date();
-        let dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
-        let mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-
-    /* static currentDateTime() {
-        return BkHelper.currentDate() + ' ' + BkHelper.currentTime();
-    } */
 
     static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
@@ -471,6 +401,7 @@ export class BkHelper {
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
         return format.replace(/\{([\w.]+)\}/g, (text, name: string) =>
+            // @ts-ignore
             values[name] ? values[name] : text,
         );
     }
@@ -557,7 +488,9 @@ export class BkHelper {
 
     static registerGlobalClass(Class: any): void {
         // debug('BkHelper.registerGlobalClass', Class.name);
+        // @ts-ignore
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
+        // @ts-ignore
         global[Class.name] = Class;
     }
 

@@ -1,40 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import {
-    JSONString,
-    Scalar,
-    Query,
-    QueryRecord,
-    Action,
-    ReadActionQuery,
-    KeyTuple,
-    Key,
-} from '../../types';
+import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
 import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
-import { pConsole } from '../../pConsole';
 
 export class Helper {
-    /* static currentDate() {
-        const now = new Date();
-        let dd = now.getDate();if (dd < 10) dd = '0' + dd;
-        let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
-        const yyyy = now.getFullYear();
-        return [yyyy, mm, dd].join('-');
-    } */
-
-    /* static currentDateTime() {
-        return Helper.currentDate() + ' ' + Helper.currentTime();
-    } */
-
-    /* static currentTime() {
-        const now = new Date();
-        let hh = now.getHours();if (hh < 10) hh = '0' + hh;
-        let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
-        let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
-        return [hh, mm, ss].join(':');
-    } */
-
     static formatDate(date: Date, format: string) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -49,6 +19,7 @@ export class Helper {
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
         return format.replace(/\{([\w.]+)\}/g, (text, name) =>
+            // @ts-ignore
             values[name] ? values[name] : text,
         );
     }
@@ -112,7 +83,7 @@ export class Helper {
         rootElement: Element,
         type: any,
         props = {},
-        children?,
+        children?: ReactNode[],
     ): ReactComponent | undefined {
         // debug('Helper.createReactComponent', rootElement, type);
         let component: ReactComponent | undefined = undefined;
@@ -134,9 +105,9 @@ export class Helper {
 
     static createReactComponent2(
         rootElement: Element,
-        type,
+        type: any,
         props = {},
-        children?,
+        children?: ReactNode[],
     ): ReactComponent | undefined {
         // debug('Helper.createReactComponent2', rootElement, type);
         let component: ReactComponent | undefined = undefined;
@@ -157,9 +128,9 @@ export class Helper {
         return component;
     }
 
-    static destroyReactComponent(root) {
+    /* static destroyReactComponent(root) {
         ReactDOM.unmountComponentAtNode(root);
-    }
+    } */
 
     static readFileAsDataURL(file: Blob) {
         return new Promise<string | ArrayBuffer | null>((resolve) => {
@@ -387,7 +358,7 @@ export class Helper {
         });
     }
 
-    static registerGlobalClass(Class) {
+    static registerGlobalClass(Class: any) {
         // debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name]) throw new Error(`window.${Class.name} already used`);

@@ -2,7 +2,6 @@ import path, { join } from 'path';
 import { WebSocket } from 'ws';
 // import axios from 'axios';
 // import colors from 'colors/safe';
-
 import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
@@ -24,12 +23,12 @@ import { ApplicationData, MenuItem } from '../../../../common/ModelData/Applicat
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';
-import { ActionData } from '../../../../common/ModelData/ActionData';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
+import { _glob } from '../../../FileHelper';
 
 const pkg = require('../../../../../package.json');
 
@@ -415,7 +414,7 @@ export class BkApplication<
 
     static async getAppInfos(appsDirPath: string /* , distDirPath?: string */): Promise<AppInfo[]> {
         // debug('BkApplication.getAppInfos', appsDirPath);
-        const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await _glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];

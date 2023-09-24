@@ -1455,21 +1455,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! glob */ "glob");
-/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(glob__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var slash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! slash */ "slash");
-/* harmony import */ var slash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(slash__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! colors/safe */ "colors/safe");
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! node-fetch */ "node-fetch");
-/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
-/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! uuid */ "uuid");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! node-fetch */ "node-fetch");
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "uuid");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -1478,27 +1475,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-function _getFilePathsSync(dirPath, ext) {
-    const filePaths = glob__WEBPACK_IMPORTED_MODULE_1___default().sync(path__WEBPACK_IMPORTED_MODULE_2___default().join(dirPath, '*.' + ext));
-    glob__WEBPACK_IMPORTED_MODULE_1___default().sync(path__WEBPACK_IMPORTED_MODULE_2___default().join(dirPath, '*/')).forEach((subDirPath) => {
-        _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
-            filePaths.push(fileName);
-        });
-    });
-    return filePaths;
-}
-async function _getFilePaths2(dirPath, ext, filePaths) {
-    const files = await BkHelper._glob(path__WEBPACK_IMPORTED_MODULE_2___default().join(dirPath, '*.' + ext));
-    files.forEach((item) => {
-        filePaths.push(item);
-    });
-    const dirs = await BkHelper._glob(path__WEBPACK_IMPORTED_MODULE_2___default().join(dirPath, '*/'));
-    for (let i = 0; i < dirs.length; i++) {
-        const subDirPath = dirs[i];
-        await _getFilePaths2(subDirPath, ext, filePaths);
-    }
-}
 class BkHelper {
     static getRandomString(length) {
         function getRandomInt(min, max) {
@@ -1513,28 +1489,12 @@ class BkHelper {
         return result;
     }
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return _getFilePathsSync(path__WEBPACK_IMPORTED_MODULE_2___default().join(publicDirPath, subDirPath), ext).map((filePath) => {
-            return slash__WEBPACK_IMPORTED_MODULE_3___default()(path__WEBPACK_IMPORTED_MODULE_2___default().relative(publicDirPath, filePath));
-        });
-    }
-    static _glob(path) {
-        return new Promise((resolve, reject) => {
-            glob__WEBPACK_IMPORTED_MODULE_1___default()(path, (err, items) => {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(items);
-                }
-            });
-        });
+        return (0,_FileHelper__WEBPACK_IMPORTED_MODULE_7__._getFilePathsSync)(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
     }
     static async getFilePaths(dirPath, ext) {
         const filePaths = [];
-        await _getFilePaths2(dirPath, ext, filePaths);
-        const relativeFilePaths = filePaths.map((filePath) => {
-            return slash__WEBPACK_IMPORTED_MODULE_3___default()(path__WEBPACK_IMPORTED_MODULE_2___default().relative(dirPath, filePath));
-        });
+        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_7__._getFilePaths2)(dirPath, ext, filePaths);
+        const relativeFilePaths = filePaths;
         return relativeFilePaths;
     }
     static currentTime() {
@@ -1581,7 +1541,7 @@ class BkHelper {
         return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.readBinaryFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(filePath, (err, data) => {
                 if (err) {
@@ -1615,7 +1575,7 @@ class BkHelper {
         }
     }
     static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.createDirIfNotExists'), dirPath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
                 if (exists) {
@@ -1668,7 +1628,7 @@ class BkHelper {
     }
     static async exists2(path) {
         try {
-            await (0,node_fs_promises__WEBPACK_IMPORTED_MODULE_6__.access)(path);
+            await (0,node_fs_promises__WEBPACK_IMPORTED_MODULE_4__.access)(path);
             return true;
         }
         catch (err) {
@@ -1681,7 +1641,7 @@ class BkHelper {
         }
     }
     static writeFile(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -1694,7 +1654,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_4___default().blue('BkHelper.writeFileSync'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFileSync'), filePath);
         return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -1888,7 +1848,7 @@ class BkHelper {
         return [contentType, buffer];
     }
     static async post(url, data) {
-        const response = await node_fetch__WEBPACK_IMPORTED_MODULE_5___default()(url, {
+        const response = await node_fetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -1898,7 +1858,7 @@ class BkHelper {
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
     }
     static newClientId() {
-        return (0,uuid__WEBPACK_IMPORTED_MODULE_7__.v4)();
+        return (0,uuid__WEBPACK_IMPORTED_MODULE_5__.v4)();
     }
 }
 BkHelper.registerGlobalClass(BkHelper);
@@ -2237,6 +2197,61 @@ class EventLog {
             return null;
         }
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/backend/FileHelper.ts":
+/*!***********************************!*\
+  !*** ./src/backend/FileHelper.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "_getFilePaths2": () => (/* binding */ _getFilePaths2),
+/* harmony export */   "_getFilePathsSync": () => (/* binding */ _getFilePathsSync),
+/* harmony export */   "_glob": () => (/* binding */ _glob)
+/* harmony export */ });
+/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! glob */ "glob");
+/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(glob__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function _getFilePathsSync(dirPath, ext) {
+    const filePaths = glob__WEBPACK_IMPORTED_MODULE_0___default().sync(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*.' + ext));
+    glob__WEBPACK_IMPORTED_MODULE_0___default().sync(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*/')).forEach((subDirPath) => {
+        _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
+            filePaths.push(fileName);
+        });
+    });
+    return filePaths;
+}
+async function _getFilePaths2(dirPath, ext, filePaths) {
+    const files = await _glob(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*.' + ext));
+    files.forEach((item) => {
+        filePaths.push(item);
+    });
+    const dirs = await _glob(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*/'));
+    for (let i = 0; i < dirs.length; i++) {
+        const subDirPath = dirs[i];
+        await _getFilePaths2(subDirPath, ext, filePaths);
+    }
+}
+function _glob(path) {
+    return new Promise((resolve, reject) => {
+        glob__WEBPACK_IMPORTED_MODULE_0___default()(path, (err, items) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(items);
+            }
+        });
+    });
 }
 
 
@@ -6383,6 +6398,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../FileHelper */ "./src/backend/FileHelper.ts");
+
 
 
 
@@ -6673,7 +6690,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return appInfo;
     }
     static async getAppInfos(appsDirPath) {
-        const appFilesPaths = await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper._glob(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_12__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -10704,9 +10721,6 @@ class Helper {
         ]);
         react_dom__WEBPACK_IMPORTED_MODULE_1___default().hydrate(reactRootElement, rootElement);
         return component;
-    }
-    static destroyReactComponent(root) {
-        react_dom__WEBPACK_IMPORTED_MODULE_1___default().unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
         return new Promise((resolve) => {
@@ -22416,17 +22430,6 @@ module.exports = require("react/jsx-runtime");
 
 /***/ }),
 
-/***/ "slash":
-/*!************************!*\
-  !*** external "slash" ***!
-  \************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("slash");
-
-/***/ }),
-
 /***/ "uuid":
 /*!***********************!*\
   !*** external "uuid" ***!
@@ -22522,7 +22525,7 @@ module.exports = JSON.parse('{"name":"qforms","version":"0.43.0-dev","descriptio
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"login":{"login":"Login","username":"Username","password":"Password","signIn":"Sign in","WrongUsernameOrPassword":"Wrong username or password"},"application":{"logout":"Logout","error":"Error","alert":"Alert","confirm":"Confirm","versionNotification":"New version is available. Please refresh page."},"page":{"create":"Create","cancel":"Cancel","saveAndClose":"Save and close","save":"Save","close":"Close","refresh":"Refresh","discard":"Discard","actions":"Actions","select":"Select","reset":"Reset"},"form":{"refresh":"Refresh","new":"New","delete":"Delete","areYouSure":"Are you sure?","count":"Count","previous":"Previous","next":"Next","edit":"Edit","save":"Save","cancel":"Cancel","discard":"Discard","actions":"Actions","required":"required","phoneNumberFormatError":"phone number format error"},"field":{"selectValue":"select value","fillValue":"fill in this field","timeNotValid":"time not valid","clear":"Clear"},"error":{"notNumber":"not a number","invalidDate":"invalid date"},"confirm":{"yes":"Yes","no":"No"}}');
+module.exports = JSON.parse('{"login":{"login":"Login","username":"Username","password":"Password","signIn":"Sign in","WrongUsernameOrPassword":"Wrong username or password"},"application":{"logout":"Logout","error":"Error","alert":"Alert","confirm":"Confirm","versionNotification":"New version is available. Please refresh the page."},"page":{"create":"Create","cancel":"Cancel","saveAndClose":"Save and close","save":"Save","close":"Close","refresh":"Refresh","discard":"Discard","actions":"Actions","select":"Select","reset":"Reset"},"form":{"refresh":"Refresh","new":"New","delete":"Delete","areYouSure":"Are you sure?","count":"Count","previous":"Previous","next":"Next","edit":"Edit","save":"Save","cancel":"Cancel","discard":"Discard","actions":"Actions","required":"required","phoneNumberFormatError":"phone number format error"},"field":{"selectValue":"select value","fillValue":"fill in this field","timeNotValid":"time not valid","clear":"Clear"},"error":{"notNumber":"not a number","invalidDate":"invalid date"},"confirm":{"yes":"Yes","no":"No"}}');
 
 /***/ }),
 
