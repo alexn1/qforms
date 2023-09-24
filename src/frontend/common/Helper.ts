@@ -455,6 +455,12 @@ export class Helper {
         }
         return arrS.join(':');
     }
+
+    static getFirstField(object: any) {
+        const [key] = Object.keys(object);
+        if (!key) throw new Error('getFirstField: no fields');
+        return object[key];
+    }
 }
 
 Helper.registerGlobalClass(Helper);

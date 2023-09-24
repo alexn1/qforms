@@ -1,7 +1,7 @@
-import { BkHelper } from '../src/backend/BkHelper';
+import { Helper } from '../src';
 
 describe('Helper', () => {
     test('Helper.formatNumber', async () => {
-        expect(BkHelper.formatNumber(10000)).toBe('10\u00A0000');
+        expect(Helper.formatNumber(10000)).toBe('10\u00A0000');
     });
 });

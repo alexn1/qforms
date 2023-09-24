@@ -43,4 +43,5 @@ export declare class Helper {
     static keyTupleToKey(keyArray: KeyTuple): Key;
     static keyToKeyTuple(key: Key): KeyTuple;
     static currentTime(): string;
+    static getFirstField(object: any): any;
 }

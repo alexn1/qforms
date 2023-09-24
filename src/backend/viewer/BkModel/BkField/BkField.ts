@@ -40,7 +40,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getAllParams();
-        const js = BkHelper.templateToJsString(defaultValue, params);
+        const js = Helper.templateToJsString(defaultValue, params);
         let value;
         try {
             value = eval(js);

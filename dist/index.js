@@ -1457,18 +1457,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
-
 
 class BkHelper {
-    static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
-            if (Object.prototype.hasOwnProperty.call(params, name)) {
-                return `Helper.decodeValue('${_frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(params[name])}')`;
-            }
-            return 'undefined';
-        });
-    }
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1)
@@ -1490,12 +1480,6 @@ class BkHelper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static getFirstField(object) {
-        const [key] = Object.keys(object);
-        if (!key)
-            throw new Error('getFirstField: no fields');
-        return object[key];
-    }
     static argvAsKeyValue(argv, slice = 2) {
         return argv
             .slice(slice)
@@ -1516,9 +1500,6 @@ class BkHelper {
             }
             throw new Error(`wrong type for array item: ${type}`);
         });
-    }
-    static formatNumber(value) {
-        return new Intl.NumberFormat('ru-RU').format(value);
     }
     static registerGlobalClass(Class) {
         if (global[Class.name])
@@ -8689,9 +8670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
-
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -8721,7 +8700,7 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
             return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getAllParams();
-        const js = _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.templateToJsString(defaultValue, params);
+        const js = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.templateToJsString(defaultValue, params);
         let value;
         try {
             value = eval(js);
@@ -8764,10 +8743,10 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
     valueToRaw(value) {
-        return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeValue(value);
+        return _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
     }
     rawToValue(raw) {
-        return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(raw);
+        return _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';
@@ -10072,6 +10051,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
 /* harmony export */ });
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+
 class DateTimeHelper {
     static today(timeOffset) {
         let ts = Date.now();
@@ -10136,6 +10117,7 @@ class DateTimeHelper {
         }
     }
 }
+_frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
 
 
 /***/ }),
@@ -10961,6 +10943,12 @@ class Helper {
             }
         }
         return arrS.join(':');
+    }
+    static getFirstField(object) {
+        const [key] = Object.keys(object);
+        if (!key)
+            throw new Error('getFirstField: no fields');
+        return object[key];
     }
 }
 Helper.registerGlobalClass(Helper);

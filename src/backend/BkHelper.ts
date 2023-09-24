@@ -1,15 +1,14 @@
 import fetch from 'node-fetch';
-import { Helper } from '../frontend';
 
 export class BkHelper {
-    static templateToJsString(value: string, params: Record<string, any>) {
+    /* static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
-    }
+    } */
 
     static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
@@ -87,12 +86,6 @@ export class BkHelper {
         );
     } */
 
-    static getFirstField(object: any) {
-        const [key] = Object.keys(object);
-        if (!key) throw new Error('getFirstField: no fields');
-        return object[key];
-    }
-
     static argvAsKeyValue(argv: string[], slice: number = 2): Record<string, string> {
         return argv
             .slice(slice)
@@ -116,9 +109,9 @@ export class BkHelper {
         });
     }
 
-    static formatNumber(value: number): string {
+    /* static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
-    }
+    } */
 
     static registerGlobalClass(Class: any): void {
         // debug('BkHelper.registerGlobalClass', Class.name);

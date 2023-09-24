@@ -7,7 +7,7 @@ import { Application } from '../Application/Application';
 import { FieldData } from '../../../../common/ModelData/FieldData';
 export declare class Field extends Model<FieldData> {
     init(): void;
-    replaceThis(value: any): any;
+    replaceThis(value: string): string;
     fillDefaultValue(row: RawRow): void;
     valueToPageParams(row: RawRow): void;
     isChanged(row: RawRow): boolean;

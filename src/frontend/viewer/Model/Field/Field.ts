@@ -11,8 +11,8 @@ import { FieldData } from '../../../../common/ModelData/FieldData';
 export class Field extends Model<FieldData> {
     init() {}
 
-    replaceThis(value) {
-        return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {
+    replaceThis(value: string) {
+        return value.replace(/\{([@\w\.]+)\}/g, (text: string, name: string) => {
             if (name.indexOf('.') === -1) return text;
             let arr = name.split('.');
             if (arr[0] === 'this') arr[0] = this.getPage().getName();
