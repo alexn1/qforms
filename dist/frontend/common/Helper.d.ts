@@ -13,10 +13,8 @@ export declare class Helper {
     static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null>;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;
-    static formatTime(_sec: number): string;
-    static formatTime2(_sec: number): string;
-    static fallbackCopyTextToClipboard(text: string): void;
     static copyTextToClipboard(text: string): Promise<void>;
+    static fallbackCopyTextToClipboard(text: string): void;
     static fillArray(n: number): number[];
     static setCookie(name: string, value: Scalar, time: number): void;
     static getCookie(name: string): string | undefined;

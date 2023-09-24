@@ -187,73 +187,14 @@ export class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
 
-    static formatTime(_sec: number) {
-        // debug('Helper.formatTime', sec);
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
+    static async copyTextToClipboard(text: string) {
+        debug('Helper.copyTextToClipboard', text);
+        if (!navigator.clipboard) {
+            Helper.fallbackCopyTextToClipboard(text);
+            return;
         }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
-        if (h < 10) h = '0' + h;
-        // @ts-ignore
-        if (m < 10) m = '0' + m;
-        // @ts-ignore
-        if (s < 10) s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}:${s}`;
-        } else {
-            return `${sign}${h}:${m}:${s}`;
-        }
+        await navigator.clipboard.writeText(text);
     }
-
-    static formatTime2(_sec: number) {
-        // debug('Helper.formatTime', sec);
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
-        if (h < 10) h = '0' + h;
-        // @ts-ignore
-        if (m < 10) m = '0' + m;
-        // @ts-ignore
-        if (s < 10) s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        } else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
-    }
-
-    /* static SECOND() {
-        return 1000;
-    } */
-
-    /* static MINUTE() {
-        return 60 * Helper.SECOND();
-    } */
-
-    /* static HOUR() {
-        return 60 * Helper.MINUTE();
-    } */
-
-    /* static DAY() {
-        return 24 * Helper.HOUR();
-    } */
-
-    /* static WEEK() {
-        return 7 * Helper.DAY();
-    } */
 
     static fallbackCopyTextToClipboard(text: string) {
         // debug('Helper.fallbackCopyTextToClipboard', text);
@@ -271,32 +212,6 @@ export class Helper {
         // @ts-ignore
         activeElement.focus();
     }
-
-    static async copyTextToClipboard(text: string) {
-        debug('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
-    }
-
-    /* static addMinutes(date: Date, minutes: number) {
-        // console.lodebugg('Helper.addMinutes', date, minutes);
-        date.setMinutes(date.getMinutes() + minutes);
-    } */
-
-    /* static removeTimezoneOffset(date: Date) {
-        Helper.addMinutes(date, -date.getTimezoneOffset());
-    } */
-
-    /* static addTimezoneOffset(date: Date) {
-        Helper.addMinutes(date, date.getTimezoneOffset());
-    } */
-
-    /* static cloneDate(date: Date) {
-        return new Date(date.getTime());
-    } */
 
     static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());

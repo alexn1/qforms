@@ -350,6 +350,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/frontend/index/IndexView/IndexView.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/AlertController/AlertView.less":
 /*!***********************************************************************!*\
   !*** ./src/frontend/viewer/Controller/AlertController/AlertView.less ***!
@@ -31962,29 +31974,6 @@ class DateTimeHelper {
     static cloneDate(date) {
         return new Date(date.getTime());
     }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
-    }
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -32010,6 +31999,52 @@ class DateTimeHelper {
             }
         }
         return arrS.join(':');
+    }
+    static formatTime(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}:${s}`;
+        }
+        else {
+            return `${sign}${h}:${m}:${s}`;
+        }
+    }
+    static formatTime2(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
     }
 }
 _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
@@ -32568,51 +32603,13 @@ class Helper {
             throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-    static formatTime(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
+    static async copyTextToClipboard(text) {
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
+        if (!navigator.clipboard) {
+            Helper.fallbackCopyTextToClipboard(text);
+            return;
         }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}:${s}`;
-        }
-        else {
-            return `${sign}${h}:${m}:${s}`;
-        }
-    }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
+        await navigator.clipboard.writeText(text);
     }
     static fallbackCopyTextToClipboard(text) {
         const activeElement = document.activeElement;
@@ -32627,14 +32624,6 @@ class Helper {
         document.execCommand('copy');
         document.body.removeChild(textArea);
         activeElement.focus();
-    }
-    static async copyTextToClipboard(text) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
     }
     static fillArray(n) {
         return Array.from(Array(n).keys());
@@ -36135,6 +36124,163 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewer */ "./src/frontend/viewer/index.ts");
 
 
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexFrontHostApp.ts":
+/*!*************************************************!*\
+  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+
+
+class IndexFrontHostApp {
+    constructor(data) {
+        this.data = data;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
+        this.onAppChange = (fullName) => {
+            console.debug('IndexFrontHostApp.onAppChange', fullName);
+            this.currentAppFullName = fullName;
+            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
+            if (!appInfo)
+                throw new Error(`no appInfo ${fullName}`);
+            this.currentAppEnv = appInfo.envs[0];
+            this.view.rerender();
+        };
+        this.onEnvChange = (env) => {
+            console.debug('IndexFrontHostApp.onEnvChange', env);
+            this.currentAppEnv = env;
+        };
+        this.run = (e) => {
+            if (this.currentAppFullName) {
+                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.debug('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.edit = (e) => {
+            if (this.currentAppFullName) {
+                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.debug('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.btnCreate_Click = async (e) => {
+            this.modals.push({ id: 1 });
+            await this.view.rerender();
+            this.folderNameTextBox.getElement().focus();
+        };
+        this.closeModal = () => {
+            console.debug('IndexFrontHostApp.closeModal');
+            this.modals.pop();
+            this.view.rerender();
+        };
+        this.onFolderNameCreate = (textBox) => {
+            console.debug('IndexFrontHostApp.onFolderNameCreate');
+            this.folderNameTextBox = textBox;
+        };
+        this.onFolderNameChange = (folderName) => {
+            this.folderName = folderName;
+        };
+        this.onAppNameChange = (appName) => {
+            this.appName = appName;
+        };
+        this.onCreateClick = async (e) => {
+            console.debug('IndexFrontHostApp.onCreateClick');
+            console.debug(this.folderName, this.appName);
+            this.closeModal();
+            await this.createApp(this.folderName, this.appName);
+        };
+        console.debug('IndexFrontHostApp.constructor', data);
+    }
+    init() {
+        const appInfo = this.data.appInfos[0];
+        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.createView(document.querySelector('#root'));
+    }
+    createView(root) {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
+            ctrl: this,
+        });
+    }
+    getAppItems() {
+        return this.data.appInfos.map((appInfo) => ({
+            value: appInfo.fullName,
+            title: appInfo.fullName,
+        }));
+    }
+    getEnvItems() {
+        if (this.currentAppFullName) {
+            const appInfo = this.getAppInfo(this.currentAppFullName);
+            if (appInfo) {
+                return appInfo.envs.map((env) => ({ value: env, title: env }));
+            }
+        }
+        return [];
+    }
+    getAppInfo(fullName) {
+        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
+    }
+    async createApp(folderName, appName) {
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+            action: 'new',
+            folder: folderName,
+            name: appName,
+        });
+        console.debug('data:', data);
+        if (data.appInfos) {
+            this.data.appInfos = data.appInfos;
+            this.currentAppFullName = `${folderName}/${appName}`;
+            this.view.rerender();
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexView/IndexView.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexView": () => (/* binding */ IndexView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _IndexView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IndexView.less */ "./src/frontend/index/IndexView/IndexView.less");
+
+
+
+class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    renderModals() {
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
+    }
+    render() {
+        console.debug('IndexView.render');
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
+    }
+}
 
 
 /***/ }),
@@ -43742,12 +43888,22 @@ function parseJson(json) {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/frontend/index.ts");
-/******/ 	window.qforms = __webpack_exports__;
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!************************************!*\
+  !*** ./src/frontend/index/main.ts ***!
+  \************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.debug('DOMContentLoaded');
+    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
+});
+
+})();
+
 /******/ })()
 ;

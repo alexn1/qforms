@@ -32130,29 +32130,6 @@ class DateTimeHelper {
     static cloneDate(date) {
         return new Date(date.getTime());
     }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
-    }
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -32178,6 +32155,52 @@ class DateTimeHelper {
             }
         }
         return arrS.join(':');
+    }
+    static formatTime(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}:${s}`;
+        }
+        else {
+            return `${sign}${h}:${m}:${s}`;
+        }
+    }
+    static formatTime2(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
     }
 }
 _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
@@ -32736,51 +32759,13 @@ class Helper {
             throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-    static formatTime(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
+    static async copyTextToClipboard(text) {
+        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
+        if (!navigator.clipboard) {
+            Helper.fallbackCopyTextToClipboard(text);
+            return;
         }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}:${s}`;
-        }
-        else {
-            return `${sign}${h}:${m}:${s}`;
-        }
-    }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
+        await navigator.clipboard.writeText(text);
     }
     static fallbackCopyTextToClipboard(text) {
         const activeElement = document.activeElement;
@@ -32795,14 +32780,6 @@ class Helper {
         document.execCommand('copy');
         document.body.removeChild(textArea);
         activeElement.focus();
-    }
-    static async copyTextToClipboard(text) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
     }
     static fillArray(n) {
         return Array.from(Array(n).keys());
