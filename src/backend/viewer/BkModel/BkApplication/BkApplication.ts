@@ -29,7 +29,6 @@ import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
 import { _glob, exists2, getFilePaths, readTextFile } from '../../../file-helper';
-import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');
 
@@ -171,7 +170,7 @@ export class BkApplication<
         response.nav = this.nav;
 
         // uuid
-        response.uuid = newClientId();
+        response.uuid = BkHelper.newClientId();
 
         // actions
         response.actions = this.getCol('actions').map((action: ActionScheme) => ({

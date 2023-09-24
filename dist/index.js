@@ -1457,6 +1457,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uuid */ "uuid");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_1__);
+
 
 class BkHelper {
     static argvAsKeyValue(argv, slice = 2) {
@@ -1489,6 +1492,9 @@ class BkHelper {
         if (response.ok)
             return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    }
+    static newClientId() {
+        return (0,uuid__WEBPACK_IMPORTED_MODULE_1__.v4)();
     }
 }
 BkHelper.registerGlobalClass(BkHelper);
@@ -2208,12 +2214,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getWebSocketIP": () => (/* binding */ getWebSocketIP),
 /* harmony export */   "getWebSocketPort": () => (/* binding */ getWebSocketPort),
-/* harmony export */   "getWebsocketUrl": () => (/* binding */ getWebsocketUrl),
-/* harmony export */   "newClientId": () => (/* binding */ newClientId)
+/* harmony export */   "getWebsocketUrl": () => (/* binding */ getWebsocketUrl)
 /* harmony export */ });
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid */ "uuid");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_0__);
-
 function getWebSocketIP(webSocket) {
     return webSocket.upgradeReq.headers['x-real-ip']
         ? webSocket.upgradeReq.headers['x-real-ip']
@@ -2223,9 +2225,6 @@ function getWebSocketPort(webSocket) {
     return webSocket.upgradeReq.headers['x-real-port']
         ? webSocket.upgradeReq.headers['x-real-port']
         : webSocket.upgradeReq.socket.remotePort;
-}
-function newClientId() {
-    return (0,uuid__WEBPACK_IMPORTED_MODULE_0__.v4)();
 }
 function getWebsocketUrl(webSocket) {
     var _a;
@@ -6257,16 +6256,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../BaseModel */ "./src/backend/BaseModel.ts");
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
-/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
-/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
+/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
 
 
 
@@ -6309,16 +6308,16 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_11__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('publicDirPath:', publicDirPath);
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_11__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('publicDirPath:', publicDirPath);
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)(`Application.deinit: ${this.getName()}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)(`Application.deinit: ${this.getName()}`);
         await super.deinit();
         for (const database of this.databases) {
             await database.deinit();
@@ -6333,7 +6332,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
-        return _text__WEBPACK_IMPORTED_MODULE_8__[lang];
+        return _text__WEBPACK_IMPORTED_MODULE_9__[lang];
     }
     getVersion() {
         return null;
@@ -6366,7 +6365,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         response.text = this.getText();
         response.menu = this.menu;
         response.nav = this.nav;
-        response.uuid = (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_12__.newClientId)();
+        response.uuid = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.newClientId();
         response.actions = this.getCol('actions').map((action) => ({
             name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
             caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),
@@ -6396,7 +6395,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = pageLink.getPageFilePath();
-                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_4__.JsonFile(pageFilePath);
+                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
@@ -6428,7 +6427,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_3__.BkPageLink(data, this);
+        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__.BkPageLink(data, this);
     }
     async createPage(context, pageLinkName) {
         if (!this.isData('pageLinks', pageLinkName)) {
@@ -6437,7 +6436,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getDirPath(), relFilePath);
-        const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_11__.readTextFile)(pageFilePath);
+        const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.readTextFile)(pageFilePath);
         const data = JSON.parse(content);
         const page = (await this.createChildModel('pages', data));
         await page.init(context);
@@ -6447,7 +6446,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_10__.pConsole.debug('Application.getPage', pageLinkName);
+        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -6480,7 +6479,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return pages;
     }
     async authenticate(ctx, username, password) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('Application.authenticate');
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -6496,10 +6495,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return null;
     }
     async rpc(name, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('BkApplication.rpc', name, context.getBody());
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('BkApplication.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new _HttpError__WEBPACK_IMPORTED_MODULE_5__.HttpError({
+        throw new _HttpError__WEBPACK_IMPORTED_MODULE_6__.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -6551,14 +6550,14 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         };
     }
     static async loadAppInfo(appFilePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('Application.loadAppInfo', appFilePath);
-        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_4__.JsonFile(appFilePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.loadAppInfo', appFilePath);
+        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
     static async getAppInfos(appsDirPath) {
-        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_11__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -6611,7 +6610,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         this.clients.splice(i, 1);
     }
     broadcastDomesticResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6624,7 +6623,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         }
     }
     broadcastForeignResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6648,7 +6647,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
                     const table = database.findTable(tableName);
                     if (table) {
                         if (!fResult)
-                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_6__.Result();
+                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_7__.Result();
                         if (!fResult[databaseName])
                             fResult[databaseName] = {};
                         fResult[databaseName][tableName] = { refresh: true };
@@ -6669,8 +6668,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     async handleGetFile(context, next) {
         const filePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), context.getUri());
-        _pConsole__WEBPACK_IMPORTED_MODULE_10__.pConsole.debug(`filePath: ${filePath}`);
-        if (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_11__.exists2)(filePath)) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug(`filePath: ${filePath}`);
+        if (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.exists2)(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {
@@ -6679,7 +6678,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         }
     }
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
-        return (0,_home__WEBPACK_IMPORTED_MODULE_7__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
+        return (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];

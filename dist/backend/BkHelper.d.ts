@@ -4,4 +4,5 @@ export declare class BkHelper {
     static registerGlobalClass(Class: any): void;
     static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer];
     static post(url: string, data: any): Promise<any>;
+    static newClientId(): string;
 }

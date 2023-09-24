@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { v4 as uuidv4 } from 'uuid';
 
 export class BkHelper {
     /* static templateToJsString(value: string, params: Record<string, any>) {
@@ -116,6 +117,10 @@ export class BkHelper {
         });
         if (response.ok) return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    }
+
+    static newClientId() {
+        return uuidv4();
     }
 }
 
