@@ -1,22 +1,14 @@
 import React from 'react';
 import { RowFormFieldView } from '../RowFormFieldView';
-import { Helper, Image, Button } from '../../../../../../common';
+import { Helper, Image, Button, BinaryHelper } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
 import { RowFormFileFieldController } from './RowFormFileFieldController';
-
 import './RowFormFileFieldView.less';
 
 export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldController> {
     image: React.RefObject<any> = React.createRef();
     div: React.RefObject<any> = React.createRef();
     input: React.RefObject<any> = React.createRef();
-
-    /* constructor(props) {
-        super(props);
-        // this.image = React.createRef();
-        // this.div = React.createRef();
-        // this.input = React.createRef();
-    } */
 
     getImage() {
         return this.image.current;
@@ -44,7 +36,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     onChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
-            const widgetValue = (await Helper.readFileAsDataURL(file)) as string;
+            const widgetValue = (await BinaryHelper.readFileAsDataURL(file)) as string;
             // console.debug('widgetValue:', widgetValue);
             this.getCtrl().onChange(widgetValue);
         }

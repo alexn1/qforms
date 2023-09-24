@@ -6,7 +6,6 @@ export declare class Helper {
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: string, value: any): any;
-    static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null>;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;
     static copyTextToClipboard(text: string): Promise<void>;
