@@ -1,16 +1,11 @@
 import path from 'path';
-
 import { VisualEditorController } from '../VisualEditorController';
-import { BkHelper } from '../../../BkHelper';
+import { readTextFile } from '../../../FileHelper';
 
 export class PageEditorController extends VisualEditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
-
     async get(params) {
         const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
-        const content = await BkHelper.readTextFile(pageFilePath);
+        const content = await readTextFile(pageFilePath);
         return JSON.parse(content);
     }
 

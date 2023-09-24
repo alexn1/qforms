@@ -6,7 +6,6 @@ export declare class BkHelper {
     static getRandomString(length: number): string;
     static currentTime(): string;
     static templateToJsString(value: string, params: Record<string, any>): string;
-    static readTextFile(path: string): Promise<string>;
     static getFileContent(filePath: string): Promise<string | null>;
     static getFileContentSync(filePath: string): string | null;
     static readBinaryFile(filePath: string): Promise<unknown>;

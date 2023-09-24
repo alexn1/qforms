@@ -6,6 +6,7 @@ import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
+import { readTextFile } from '../../FileHelper';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,
@@ -26,7 +27,7 @@ export class Editor<
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
-        const template = await BkHelper.readTextFile(templateFilePath);
+        const template = await readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
         if (text === '') {
             text = emptyTemplate;
@@ -40,7 +41,7 @@ export class Editor<
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
-        const template = await BkHelper.readTextFile(templateFilePath);
+        const template = await readTextFile(templateFilePath);
         const content = ejs.render(template, params);
         await BkHelper.writeFile2(newFilePath, content);
         return content;
@@ -54,7 +55,7 @@ export class Editor<
         debug('Editor.getFile', filePath);
         const exists = await BkHelper.exists2(filePath);
         if (exists) {
-            return await BkHelper.readTextFile(filePath);
+            return await readTextFile(filePath);
         }
     }
 

@@ -1,10 +1,10 @@
 import fs from 'fs';
-// import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { access } from 'node:fs/promises';
 import { JSONString } from '../types';
 import { debug } from '../console';
+import { readTextFile } from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -41,22 +41,9 @@ export class BkHelper {
         });
     }
 
-    static readTextFile(path: string): Promise<string> {
-        // debug(colors.blue('BkHelper.readTextFile'), path);
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, 'utf8', (err, content) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(content);
-                }
-            });
-        });
-    }
-
     static async getFileContent(filePath: string) {
         if (await BkHelper.exists2(filePath)) {
-            return BkHelper.readTextFile(filePath);
+            return readTextFile(filePath);
         }
         return null;
     }

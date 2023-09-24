@@ -28,7 +28,7 @@ import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
-import { _glob, getFilePaths } from '../../../FileHelper';
+import { _glob, getFilePaths, readTextFile } from '../../../FileHelper';
 import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');
@@ -265,7 +265,7 @@ export class BkApplication<
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await BkHelper.readTextFile(pageFilePath);
+        const content = await readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = (await this.createChildModel('pages', data)) as BkPage;
         await page.init(context);

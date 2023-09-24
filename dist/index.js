@@ -1462,6 +1462,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
+
 
 
 
@@ -1499,21 +1501,9 @@ class BkHelper {
             return 'undefined';
         });
     }
-    static readTextFile(path) {
-        return new Promise((resolve, reject) => {
-            fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(path, 'utf8', (err, content) => {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve(content);
-                }
-            });
-        });
-    }
     static async getFileContent(filePath) {
         if (await BkHelper.exists2(filePath)) {
-            return BkHelper.readTextFile(filePath);
+            return (0,_FileHelper__WEBPACK_IMPORTED_MODULE_5__.readTextFile)(filePath);
         }
         return null;
     }
@@ -2185,17 +2175,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "_getFilePathsSync": () => (/* binding */ _getFilePathsSync),
 /* harmony export */   "_glob": () => (/* binding */ _glob),
 /* harmony export */   "getFilePaths": () => (/* binding */ getFilePaths),
-/* harmony export */   "getFilePathsSync": () => (/* binding */ getFilePathsSync)
+/* harmony export */   "getFilePathsSync": () => (/* binding */ getFilePathsSync),
+/* harmony export */   "readTextFile": () => (/* binding */ readTextFile)
 /* harmony export */ });
-/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! glob */ "glob");
-/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(glob__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! glob */ "glob");
+/* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(glob__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 function _getFilePathsSync(dirPath, ext) {
-    const filePaths = glob__WEBPACK_IMPORTED_MODULE_0___default().sync(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*.' + ext));
-    glob__WEBPACK_IMPORTED_MODULE_0___default().sync(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*/')).forEach((subDirPath) => {
+    const filePaths = glob__WEBPACK_IMPORTED_MODULE_2___default().sync(path__WEBPACK_IMPORTED_MODULE_0___default().join(dirPath, '*.' + ext));
+    glob__WEBPACK_IMPORTED_MODULE_2___default().sync(path__WEBPACK_IMPORTED_MODULE_0___default().join(dirPath, '*/')).forEach((subDirPath) => {
         _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
             filePaths.push(fileName);
         });
@@ -2203,11 +2197,11 @@ function _getFilePathsSync(dirPath, ext) {
     return filePaths;
 }
 async function _getFilePaths2(dirPath, ext, filePaths) {
-    const files = await _glob(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*.' + ext));
+    const files = await _glob(path__WEBPACK_IMPORTED_MODULE_0___default().join(dirPath, '*.' + ext));
     files.forEach((item) => {
         filePaths.push(item);
     });
-    const dirs = await _glob(path__WEBPACK_IMPORTED_MODULE_1___default().join(dirPath, '*/'));
+    const dirs = await _glob(path__WEBPACK_IMPORTED_MODULE_0___default().join(dirPath, '*/'));
     for (let i = 0; i < dirs.length; i++) {
         const subDirPath = dirs[i];
         await _getFilePaths2(subDirPath, ext, filePaths);
@@ -2215,7 +2209,7 @@ async function _getFilePaths2(dirPath, ext, filePaths) {
 }
 function _glob(path) {
     return new Promise((resolve, reject) => {
-        glob__WEBPACK_IMPORTED_MODULE_0___default()(path, (err, items) => {
+        glob__WEBPACK_IMPORTED_MODULE_2___default()(path, (err, items) => {
             if (err) {
                 reject(err);
             }
@@ -2226,13 +2220,25 @@ function _glob(path) {
     });
 }
 function getFilePathsSync(publicDirPath, subDirPath, ext) {
-    return _getFilePathsSync(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
+    return _getFilePathsSync(path__WEBPACK_IMPORTED_MODULE_0___default().join(publicDirPath, subDirPath), ext);
 }
 async function getFilePaths(dirPath, ext) {
     const filePaths = [];
     await _getFilePaths2(dirPath, ext, filePaths);
     const relativeFilePaths = filePaths;
     return relativeFilePaths;
+}
+function readTextFile(path) {
+    return new Promise((resolve, reject) => {
+        fs__WEBPACK_IMPORTED_MODULE_1___default().readFile(path, 'utf8', (err, content) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(content);
+            }
+        });
+    });
 }
 
 
@@ -2344,6 +2350,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 /* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
+
 
 
 
@@ -2369,7 +2377,7 @@ class JsonFile {
         await _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.writeFile2(this.filePath, this.content);
     }
     async read() {
-        const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.readTextFile(this.filePath);
+        const content = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_3__.readTextFile)(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
     }
@@ -3233,8 +3241,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
 /* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../backend */ "./src/backend/index.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../FileHelper */ "./src/backend/FileHelper.ts");
 
 const ejs = __webpack_require__(/*! ejs */ "ejs");
+
 
 
 
@@ -3254,7 +3264,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         if (exists) {
             throw new Error(`File ${path__WEBPACK_IMPORTED_MODULE_0___default().basename(newFilePath)} already exists.`);
         }
-        const template = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(templateFilePath);
+        const template = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_5__.readTextFile)(templateFilePath);
         const content = ejs.render(template, params);
         await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.writeFile2(newFilePath, content);
         return content;
@@ -3263,7 +3273,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Editor.getFile', filePath);
         const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(filePath);
         if (exists) {
-            return await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(filePath);
+            return await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_5__.readTextFile)(filePath);
         }
     }
     async saveFile(filePath, content) {
@@ -5001,14 +5011,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _VisualEditorController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VisualEditorController */ "./src/backend/editor/EditorController/VisualEditorController.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
 class PageEditorController extends _VisualEditorController__WEBPACK_IMPORTED_MODULE_1__.VisualEditorController {
     async get(params) {
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.appInfo.dirPath, params.fileName);
-        const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(pageFilePath);
+        const content = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_2__.readTextFile)(pageFilePath);
         return JSON.parse(content);
     }
     async save(params) {
@@ -6587,7 +6597,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getDirPath(), relFilePath);
-        const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.readTextFile(pageFilePath);
+        const content = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_12__.readTextFile)(pageFilePath);
         const data = JSON.parse(content);
         const page = (await this.createChildModel('pages', data));
         await page.init(context);
@@ -6894,6 +6904,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../BkForm/BkTableForm/BkTableForm */ "./src/backend/viewer/BkModel/BkForm/BkTableForm/BkTableForm.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../FileHelper */ "./src/backend/FileHelper.ts");
+
 
 
 
@@ -6921,7 +6933,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         const jsonFilePath = this.getJsonFilePath();
         const exists = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.exists2(jsonFilePath);
         if (exists) {
-            const content = await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.readTextFile(jsonFilePath);
+            const content = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_9__.readTextFile)(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }

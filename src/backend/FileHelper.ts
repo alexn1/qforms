@@ -1,5 +1,7 @@
-import glob from 'glob';
 import path from 'path';
+import fs from 'fs';
+import glob from 'glob';
+// import slash from 'slash';
 
 export function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -56,4 +58,17 @@ export async function getFilePaths(dirPath: string, ext: string): Promise<string
         return slash(path.relative(dirPath, filePath));
     }) */
     return relativeFilePaths;
+}
+
+export function readTextFile(path: string): Promise<string> {
+    // debug(colors.blue('readTextFile'), path);
+    return new Promise((resolve, reject) => {
+        fs.readFile(path, 'utf8', (err, content) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(content);
+            }
+        });
+    });
 }

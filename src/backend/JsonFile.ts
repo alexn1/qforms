@@ -2,6 +2,7 @@ import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
 import { debug } from '../console';
 import { Nullable } from '../types';
+import { readTextFile } from './FileHelper';
 
 export class JsonFile {
     content: Nullable<string> = null;
@@ -22,7 +23,7 @@ export class JsonFile {
     }
 
     async read(): Promise<void> {
-        const content = await BkHelper.readTextFile(this.filePath);
+        const content = await readTextFile(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
     }
