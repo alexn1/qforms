@@ -32098,7 +32098,10 @@ class DateTimeHelper {
     }
     static today2() {
         const now = new Date();
-        return _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.getStartOfDay(now);
+        return DateTimeHelper.getStartOfDay(now);
+    }
+    static getStartOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
     static SECOND() {
         return 1000;
@@ -32164,6 +32167,17 @@ class DateTimeHelper {
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
         return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+    }
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
     }
 }
 _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
@@ -32632,9 +32646,6 @@ class Helper {
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
-    static getStartOfDay(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
     static encodeObject(obj) {
         const eObj = {};
         for (const name in obj) {
@@ -32771,21 +32782,6 @@ class Helper {
             return `${sign}${h}h:${m}m:${s}s`;
         }
     }
-    static SECOND() {
-        return 1000;
-    }
-    static MINUTE() {
-        return 60 * Helper.SECOND();
-    }
-    static HOUR() {
-        return 60 * Helper.MINUTE();
-    }
-    static DAY() {
-        return 24 * Helper.HOUR();
-    }
-    static WEEK() {
-        return 7 * Helper.DAY();
-    }
     static fallbackCopyTextToClipboard(text) {
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
@@ -32807,18 +32803,6 @@ class Helper {
             return;
         }
         await navigator.clipboard.writeText(text);
-    }
-    static addMinutes(date, minutes) {
-        date.setMinutes(date.getMinutes() + minutes);
-    }
-    static removeTimezoneOffset(date) {
-        Helper.addMinutes(date, -date.getTimezoneOffset());
-    }
-    static addTimezoneOffset(date) {
-        Helper.addMinutes(date, date.getTimezoneOffset());
-    }
-    static cloneDate(date) {
-        return new Date(date.getTime());
     }
     static fillArray(n) {
         return Array.from(Array(n).keys());
@@ -32907,17 +32891,6 @@ class Helper {
     }
     static keyToKeyTuple(key) {
         return JSON.parse(key);
-    }
-    static currentTime() {
-        const now = new Date();
-        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
-        const arrS = arrN.map((n) => n.toString());
-        for (let i = 0; i < arrN.length; i++) {
-            if (arrN[i] < 10) {
-                arrS[i] = '0' + arrS[i];
-            }
-        }
-        return arrS.join(':');
     }
     static getFirstField(object) {
         const [key] = Object.keys(object);
@@ -47518,6 +47491,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+
 
 
 class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -47527,15 +47502,15 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(raw) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -47561,6 +47536,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+
 
 
 class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -47570,15 +47547,15 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(rawValue) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {

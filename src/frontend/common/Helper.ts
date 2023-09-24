@@ -9,10 +9,6 @@ export class Helper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 
-    static getStartOfDay(date: Date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
-
     static encodeObject(obj: Record<string, any>): Record<string, JSONString> {
         const eObj = {} as Record<string, any>;
         for (const name in obj) {
@@ -239,25 +235,25 @@ export class Helper {
         }
     }
 
-    static SECOND() {
+    /* static SECOND() {
         return 1000;
-    }
+    } */
 
-    static MINUTE() {
+    /* static MINUTE() {
         return 60 * Helper.SECOND();
-    }
+    } */
 
-    static HOUR() {
+    /* static HOUR() {
         return 60 * Helper.MINUTE();
-    }
+    } */
 
-    static DAY() {
+    /* static DAY() {
         return 24 * Helper.HOUR();
-    }
+    } */
 
-    static WEEK() {
+    /* static WEEK() {
         return 7 * Helper.DAY();
-    }
+    } */
 
     static fallbackCopyTextToClipboard(text: string) {
         // debug('Helper.fallbackCopyTextToClipboard', text);
@@ -285,22 +281,22 @@ export class Helper {
         await navigator.clipboard.writeText(text);
     }
 
-    static addMinutes(date: Date, minutes: number) {
+    /* static addMinutes(date: Date, minutes: number) {
         // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
-    }
+    } */
 
-    static removeTimezoneOffset(date: Date) {
+    /* static removeTimezoneOffset(date: Date) {
         Helper.addMinutes(date, -date.getTimezoneOffset());
-    }
+    } */
 
-    static addTimezoneOffset(date: Date) {
+    /* static addTimezoneOffset(date: Date) {
         Helper.addMinutes(date, date.getTimezoneOffset());
-    }
+    } */
 
-    static cloneDate(date: Date) {
+    /* static cloneDate(date: Date) {
         return new Date(date.getTime());
-    }
+    } */
 
     static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());
@@ -417,18 +413,6 @@ export class Helper {
 
     static keyToKeyTuple(key: Key): KeyTuple {
         return JSON.parse(key);
-    }
-
-    static currentTime() {
-        const now = new Date();
-        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
-        const arrS = arrN.map((n) => n.toString());
-        for (let i = 0; i < arrN.length; i++) {
-            if (arrN[i] < 10) {
-                arrS[i] = '0' + arrS[i];
-            }
-        }
-        return arrS.join(':');
     }
 
     static getFirstField(object: any) {

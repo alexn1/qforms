@@ -21,7 +21,11 @@ export class DateTimeHelper {
     static today2() {
         const now = new Date();
         // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        return Helper.getStartOfDay(now);
+        return DateTimeHelper.getStartOfDay(now);
+    }
+
+    static getStartOfDay(date: Date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
     static SECOND(): number {
@@ -102,6 +106,18 @@ export class DateTimeHelper {
             // @ts-ignore
             values[name] ? values[name] : text,
         );
+    }
+
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
     }
 }
 

@@ -1,6 +1,7 @@
 export declare class DateTimeHelper {
     static today(timeOffset: number): Date;
     static today2(): Date;
+    static getStartOfDay(date: Date): Date;
     static SECOND(): number;
     static MINUTE(): number;
     static HOUR(): number;
@@ -12,4 +13,5 @@ export declare class DateTimeHelper {
     static cloneDate(date: Date): Date;
     static formatTime2(_sec: number): string;
     static formatDate(date: Date, format: string): string;
+    static currentTime(): string;
 }

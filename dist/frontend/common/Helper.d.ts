@@ -3,7 +3,6 @@ import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../typ
 import { ReactComponent } from './ReactComponent';
 export declare class Helper {
     static formatNumber(value: number): string;
-    static getStartOfDay(date: Date): Date;
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
     static encodeValue<T>(value: T): JSONString<T>;
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;
@@ -16,17 +15,8 @@ export declare class Helper {
     static moveArrItem(arr: any[], item: any, offset: number): void;
     static formatTime(_sec: number): string;
     static formatTime2(_sec: number): string;
-    static SECOND(): number;
-    static MINUTE(): number;
-    static HOUR(): number;
-    static DAY(): number;
-    static WEEK(): number;
     static fallbackCopyTextToClipboard(text: string): void;
     static copyTextToClipboard(text: string): Promise<void>;
-    static addMinutes(date: Date, minutes: number): void;
-    static removeTimezoneOffset(date: Date): void;
-    static addTimezoneOffset(date: Date): void;
-    static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
     static setCookie(name: string, value: Scalar, time: number): void;
     static getCookie(name: string): string | undefined;
@@ -40,7 +30,6 @@ export declare class Helper {
     static queryRecordToString(name: string, record: QueryRecord): string;
     static keyTupleToKey(keyArray: KeyTuple): Key;
     static keyToKeyTuple(key: Key): KeyTuple;
-    static currentTime(): string;
     static getFirstField(object: any): any;
     static mapObject(object: any, cb: any): any;
     static templateArray(arr: any[]): any[];
