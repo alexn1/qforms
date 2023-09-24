@@ -19,11 +19,13 @@ import {
     Access,
     Nullable,
     keyToKeyTuple,
+    KeyElement,
 } from '../../../../types';
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 import { exists2, readTextFile } from '../../../file-helper';
+import { Helper } from '../../../../frontend';
 
 export type ReadResult = [RawRow[], Nullable<number>];
 
@@ -164,7 +166,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
             }
         } else {
             for (const name in row) {
-                rawRow[name] = BkHelper.encodeValue(row[name]);
+                rawRow[name] = Helper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -230,17 +232,18 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
         return params;
     }
 
-    calcNewKeyValues(originalKeyValues: KeyRecord, values): KeyRecord {
+    calcNewKeyValues(originalKeyValues: KeyRecord, values: Record<string, KeyElement>): KeyRecord {
         const newKeyValues = this.keyColumns.reduce((acc, name) => {
             if (originalKeyValues[name] === undefined)
                 throw new Error(`no key column in values: ${name}`);
+            // @ts-ignore
             acc[name] = values[name] !== undefined ? values[name] : originalKeyValues[name];
             return acc;
         }, {});
         return newKeyValues;
     }
 
-    calcNewKey(key: Key, values) {
+    calcNewKey(key: Key, values: Record<string, KeyElement>) {
         const keyValues = this.getKeyValuesFromKey(key);
         const newKeyValues = this.calcNewKeyValues(keyValues, values);
         return this.getKeyFromValues(newKeyValues);

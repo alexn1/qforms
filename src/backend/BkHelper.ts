@@ -6,7 +6,7 @@ export class BkHelper {
     static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
-                return `Helper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
@@ -68,9 +68,9 @@ export class BkHelper {
         }
     } */
 
-    static encodeValue(value: any): JSONString {
+    /* static encodeValue(value: any): JSONString {
         return JSON.stringify(value) as JSONString;
-    }
+    } */
 
     static decodeObject(obj: any): Record<string, any> {
         const dObj: any = {};

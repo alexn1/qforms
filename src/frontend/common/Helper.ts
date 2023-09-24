@@ -68,14 +68,14 @@ export class Helper {
         // }
     } */
 
-    static decodeValue(rawValue: JSONString): any {
-        if (rawValue === undefined) throw new Error('decodeValue: undefined');
-        if (rawValue === null) throw new Error('decodeValue: null');
-        if (rawValue === '') throw new Error('decodeValue: empty string');
+    static decodeValue(raw: JSONString): any {
+        if (raw === undefined) throw new Error('decodeValue: undefined');
+        if (raw === null) throw new Error('decodeValue: null');
+        if (raw === '') throw new Error('decodeValue: empty string');
         try {
-            return JSON.parse(rawValue, Helper.dateTimeReviver);
+            return JSON.parse(raw, Helper.dateTimeReviver);
         } catch (err) {
-            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${raw}"`);
         }
     }
 

@@ -15,14 +15,14 @@ export class BkDateTimeField extends BkField {
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 
-    valueToRaw(value) {
+    valueToRaw(value: Date) {
         let raw;
         if (value && !this.isTimezone()) {
             const v = BkHelper.cloneDate(value);
             BkHelper.removeTimezoneOffset(v);
-            raw = BkHelper.encodeValue(v);
+            raw = Helper.encodeValue(v);
         } else {
-            raw = BkHelper.encodeValue(value);
+            raw = Helper.encodeValue(value);
         }
         // debug('DateTimeField.rawToValue', this.getFullName(), value, raw);
         return raw;

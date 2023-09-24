@@ -9,22 +9,20 @@ export class BkDateField extends BkField {
         response.readOnly = this.getAttr('readOnly');
         response.notNull = this.getAttr('notNull');
         response.format = this.getAttr('format');
-        // if (this.isAttr('timezone')) {
         response.timezone = this.getAttr('timezone');
-        // }
         response.placeholder = this.getAttr('placeholder');
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 
-    valueToRaw(value) {
+    valueToRaw(value: Date) {
         let raw;
         if (value && !this.isTimezone()) {
             const v = BkHelper.cloneDate(value);
             BkHelper.removeTimezoneOffset(v);
-            raw = BkHelper.encodeValue(v);
+            raw = Helper.encodeValue(v);
         } else {
-            raw = BkHelper.encodeValue(value);
+            raw = Helper.encodeValue(value);
         }
         // debug('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;

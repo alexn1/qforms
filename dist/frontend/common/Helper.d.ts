@@ -9,7 +9,7 @@ export declare class Helper {
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
     static encodeValue<T>(value: T): JSONString<T>;
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;
-    static decodeValue(rawValue: JSONString): any;
+    static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: string, value: any): any;
     static createReactComponent(rootElement: Element, type: any, props?: {}, children?: ReactNode[]): ReactComponent | undefined;
     static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: ReactNode[]): ReactComponent | undefined;

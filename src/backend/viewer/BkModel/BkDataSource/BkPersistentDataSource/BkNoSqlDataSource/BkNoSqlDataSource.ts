@@ -17,6 +17,7 @@ import { BkForm } from '../../../BkForm/BkForm';
 import { BkModel } from '../../../BkModel';
 import { debug } from '../../../../../../console';
 import { DataSourceScheme } from '../../../../../common/Scheme/DataSourceScheme';
+import { Helper } from '../../../../../../frontend';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
@@ -269,7 +270,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             }
         } else {
             for (const name in row) {
-                rawRow[name] = BkHelper.encodeValue(row[name]);
+                rawRow[name] = Helper.encodeValue(row[name]);
             }
         }
         return rawRow;

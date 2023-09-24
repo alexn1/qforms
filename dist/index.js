@@ -1464,7 +1464,7 @@ class BkHelper {
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
-                return `Helper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
+                return `Helper.decodeValue('${_frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
@@ -1498,9 +1498,6 @@ class BkHelper {
             ts -= BkHelper.MINUTE() * timeOffset;
         }
         return new Date(ts);
-    }
-    static encodeValue(value) {
-        return JSON.stringify(value);
     }
     static decodeObject(obj) {
         const dObj = {};
@@ -6857,14 +6854,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkPage/BkPage */ "./src/backend/viewer/BkModel/BkPage/BkPage.ts");
-/* harmony import */ var _BkForm_BkForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkForm/BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
-/* harmony import */ var _BkForm_BkRowForm_BkRowForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkForm/BkRowForm/BkRowForm */ "./src/backend/viewer/BkModel/BkForm/BkRowForm/BkRowForm.ts");
-/* harmony import */ var _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../BkForm/BkTableForm/BkTableForm */ "./src/backend/viewer/BkModel/BkForm/BkTableForm/BkTableForm.ts");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkPage/BkPage */ "./src/backend/viewer/BkModel/BkPage/BkPage.ts");
+/* harmony import */ var _BkForm_BkForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkForm/BkForm */ "./src/backend/viewer/BkModel/BkForm/BkForm.ts");
+/* harmony import */ var _BkForm_BkRowForm_BkRowForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkForm/BkRowForm/BkRowForm */ "./src/backend/viewer/BkModel/BkForm/BkRowForm/BkRowForm.ts");
+/* harmony import */ var _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkForm/BkTableForm/BkTableForm */ "./src/backend/viewer/BkModel/BkForm/BkTableForm/BkTableForm.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -6891,9 +6888,9 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         await super.init(context);
         this.keyColumns = this.getKeyColumns();
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_9__.exists2)(jsonFilePath);
+        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.exists2)(jsonFilePath);
         if (exists) {
-            const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_9__.readTextFile)(jsonFilePath);
+            const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.readTextFile)(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }
@@ -6937,9 +6934,9 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
             .filter((column) => !!column);
         for (const rowColumn of rowColumns) {
             if (!formColumns.includes(rowColumn)) {
-                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('rowColumns:', rowColumns);
-                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('formColumns:', formColumns);
-                (0,_console__WEBPACK_IMPORTED_MODULE_8__.debug)('row:', row);
+                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('rowColumns:', rowColumns);
+                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('formColumns:', formColumns);
+                (0,_console__WEBPACK_IMPORTED_MODULE_7__.debug)('row:', row);
                 throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
             }
         }
@@ -6978,7 +6975,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         }
         else {
             for (const name in row) {
-                rawRow[name] = _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.encodeValue(row[name]);
+                rawRow[name] = _frontend__WEBPACK_IMPORTED_MODULE_9__.Helper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -6987,7 +6984,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.getParent().getApp();
     }
     getKeyValuesFromKey(key) {
-        const tuple = (0,_types__WEBPACK_IMPORTED_MODULE_7__.keyToKeyTuple)(key);
+        const tuple = (0,_types__WEBPACK_IMPORTED_MODULE_6__.keyToKeyTuple)(key);
         if (tuple.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${tuple.length} of ${this.keyColumns.length}`);
         }
@@ -7018,7 +7015,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
                 this.getName(),
             ].join('.');
         }
-        else if (this.getParent() instanceof _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_3__.BkPage) {
+        else if (this.getParent() instanceof _BkPage_BkPage__WEBPACK_IMPORTED_MODULE_2__.BkPage) {
             return [this.getParent().getName(), this.getName()].join('.');
         }
         else {
@@ -7029,7 +7026,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         if (typeof key !== 'string')
             throw new Error('key not string');
         const params = {};
-        const arr = (0,_types__WEBPACK_IMPORTED_MODULE_7__.keyToKeyTuple)(key);
+        const arr = (0,_types__WEBPACK_IMPORTED_MODULE_6__.keyToKeyTuple)(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
         }
@@ -7077,16 +7074,16 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.rows;
     }
     isOnForm() {
-        return this.getParent() instanceof _BkForm_BkForm__WEBPACK_IMPORTED_MODULE_4__.BkForm;
+        return this.getParent() instanceof _BkForm_BkForm__WEBPACK_IMPORTED_MODULE_3__.BkForm;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();
     }
     isDefaultOnRowForm() {
-        return this.getName() === 'default' && this.getParent() instanceof _BkForm_BkRowForm_BkRowForm__WEBPACK_IMPORTED_MODULE_5__.BkRowForm;
+        return this.getName() === 'default' && this.getParent() instanceof _BkForm_BkRowForm_BkRowForm__WEBPACK_IMPORTED_MODULE_4__.BkRowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.getParent() instanceof _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_6__.BkTableForm;
+        return this.getName() === 'default' && this.getParent() instanceof _BkForm_BkTableForm_BkTableForm__WEBPACK_IMPORTED_MODULE_5__.BkTableForm;
     }
     async read(context) {
         throw new Error(`${this.constructor.name}.select not implemented`);
@@ -7141,8 +7138,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkPersistentDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkPersistentDataSource/BkPersistentDataSource.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
 /* harmony import */ var _BkDataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -7203,7 +7200,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         }
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(context), this.getSelectParams(context));
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('rows query time:', Date.now() - start);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('rows query time:', Date.now() - start);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
         let count = null;
@@ -7211,7 +7208,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
             try {
                 const start = Date.now();
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getSelectParams(context));
-                (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('count query time:', Date.now() - start);
+                (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('count query time:', Date.now() - start);
             }
             catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -7221,7 +7218,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         return [rawRows, count];
     }
     async create(context, _values = null) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('NoSqlDataSource.create');
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('NoSqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7232,14 +7229,14 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         const tableName = this.getAttr('table');
         const body = context.getBody();
         const values = _values ? _values : this.decodeRow(body.row);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('values', values);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('values', values);
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('insertResult:', insertResult);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('insertResult:', insertResult);
         const newRow = { _id: insertResult.insertedId };
         const key = this.getKeyFromValues(newRow);
         if (!key)
             throw new Error('create: cannot calc row key');
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('key:', key);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('key:', key);
         const keyParams = _BkDataSource__WEBPACK_IMPORTED_MODULE_2__.BkDataSource.keyToParams(key);
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), keyParams);
         if (!row)
@@ -7252,7 +7249,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         return result;
     }
     async update(context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('NoSqlDataSource.update');
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('NoSqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7263,16 +7260,16 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         const body = context.getBody();
         const changes = this.decodeChanges(body.changes);
         const key = Object.keys(changes)[0];
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('key:', key);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('key:', key);
         const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
             $set: values,
         });
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('updateResult', updateResult);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('updateResult', updateResult);
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = _BkDataSource__WEBPACK_IMPORTED_MODULE_2__.BkDataSource.keyToParams(newKey);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('newKey:', newKey);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('newKey:', newKey);
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
@@ -7290,7 +7287,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         const key = context.getParam('key');
         const filter = this.getKeyValuesFromKey(key);
         const deleteResult = await this.getDatabase().deleteOne(context, this.getAttr('table'), filter);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('updateResult', deleteResult);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('updateResult', deleteResult);
         const result = new _Result__WEBPACK_IMPORTED_MODULE_1__.Result();
         _Result__WEBPACK_IMPORTED_MODULE_1__.Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;
@@ -7334,7 +7331,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         }
         else {
             for (const name in row) {
-                rawRow[name] = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.encodeValue(row[name]);
+                rawRow[name] = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -8678,10 +8675,10 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
         if (value && !this.isTimezone()) {
             const v = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.cloneDate(value);
             _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.removeTimezoneOffset(v);
-            raw = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.encodeValue(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(v);
         }
         else {
-            raw = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
         }
         return raw;
     }
@@ -8730,10 +8727,10 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
         if (value && !this.isTimezone()) {
             const v = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.cloneDate(value);
             _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.removeTimezoneOffset(v);
-            raw = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.encodeValue(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(v);
         }
         else {
-            raw = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
         }
         return raw;
     }
@@ -8838,7 +8835,7 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
     valueToRaw(value) {
-        return _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.encodeValue(value);
+        return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeValue(value);
     }
     rawToValue(raw) {
         return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(raw);
@@ -10687,18 +10684,18 @@ class Helper {
         }
         return obj;
     }
-    static decodeValue(rawValue) {
-        if (rawValue === undefined)
+    static decodeValue(raw) {
+        if (raw === undefined)
             throw new Error('decodeValue: undefined');
-        if (rawValue === null)
+        if (raw === null)
             throw new Error('decodeValue: null');
-        if (rawValue === '')
+        if (raw === '')
             throw new Error('decodeValue: empty string');
         try {
-            return JSON.parse(rawValue, Helper.dateTimeReviver);
+            return JSON.parse(raw, Helper.dateTimeReviver);
         }
         catch (err) {
-            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${raw}"`);
         }
     }
     static dateTimeReviver(key, value) {

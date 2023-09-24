@@ -93,7 +93,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
     }
 
     valueToRaw(value: any): JSONString {
-        return BkHelper.encodeValue(value);
+        return Helper.encodeValue(value);
     }
 
     rawToValue(raw: JSONString): any {
@@ -125,7 +125,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
         return this.getDatabaseTableColumn().getAttr('dbType');
     }
 
-    valueToDbValue(value) {
+    valueToDbValue(value: any) {
         if (this.getDbType() === 'json') {
             return JSON.stringify(value);
         }

@@ -1,11 +1,9 @@
 /// <reference types="node" />
-import { JSONString } from '../types';
 export declare class BkHelper {
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;
     static mapObject(object: any, cb: any): any;
     static today(timeOffset: number): Date;
-    static encodeValue(value: any): JSONString;
     static decodeObject(obj: any): Record<string, any>;
     static SECOND(): number;
     static MINUTE(): number;
