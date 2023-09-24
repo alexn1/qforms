@@ -5,34 +5,11 @@ import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
 
 export class Helper {
-    static formatDate(date: Date, format: string) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) =>
-            // @ts-ignore
-            values[name] ? values[name] : text,
-        );
-    }
-
     static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 
-    static today() {
-        const now = new Date();
-        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        return Helper.getStartOfDay(now);
-    }
+
 
     static getStartOfDay(date: Date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());

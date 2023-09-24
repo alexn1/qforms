@@ -3,6 +3,7 @@ import { Helper } from '../../Helper';
 import { LeftIcon } from '../../icon/LeftIcon';
 import { RightIcon } from '../../icon/RightIcon';
 import './DatePicker.less';
+import { DateTimeHelper } from '../../../../common';
 
 // props
 //  visible boolean true
@@ -54,7 +55,7 @@ export class DatePicker extends ReactComponent {
         } else if (this.props.highlightedDate) {
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         } else {
-            const dates = [Helper.today().getTime()];
+            const dates = [DateTimeHelper.today2().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
@@ -165,7 +166,7 @@ export class DatePicker extends ReactComponent {
     render() {
         // console.debug('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
-        const today = Helper.today();
+        const today = DateTimeHelper.today2();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         // @ts-ignore

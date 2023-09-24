@@ -4,9 +4,8 @@ import { CloseIcon } from '../../icon/CloseIcon';
 import { DateIcon } from '../../icon/DateIcon';
 import { CloseIcon2 } from '../../icon/CloseIcon2';
 import { DatePicker } from '../DatePicker/DatePicker';
-import { FrontHostApp } from '../../FrontHostApp';
-
 import './DropdownDatePicker.less';
+import { DateTimeHelper } from '../../../../common';
 
 // oldDates boolean true
 export class DropdownDatePicker extends ReactComponent {
@@ -78,12 +77,12 @@ export class DropdownDatePicker extends ReactComponent {
         if (value) {
             let format = this.getFormat();
             if (this.isDebugMode()) {
-                const time = Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return Helper.formatDate(value, format);
+            return DateTimeHelper.formatDate(value, format);
         }
         return '';
     }
