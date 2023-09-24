@@ -8,6 +8,7 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { pConsole } from '../../pConsole';
 import { getWebSocketIP } from '../WebScoketHelper';
+import { getFilePaths } from '../FileHelper';
 
 const pkg = require('../../../package.json');
 
@@ -22,17 +23,14 @@ export class MonitorModule {
 
     async init() {
         this.css = (
-            await BkHelper.getFilePaths(
+            await getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
                 'css',
             )
-        ).map((path) => `/monitor/public/${path}`);
+        ).map((path: string) => `/monitor/public/${path}`);
         this.js = (
-            await BkHelper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
-                'js',
-            )
-        ).map((path) => `/monitor/public/${path}`);
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')
+        ).map((path: string) => `/monitor/public/${path}`);
         // debug('monitor.css:', this.css);
         // debug('monitor.js:' , this.js);
     }

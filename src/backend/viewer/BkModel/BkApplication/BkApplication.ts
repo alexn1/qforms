@@ -28,7 +28,7 @@ import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
-import { _glob } from '../../../FileHelper';
+import { _glob, getFilePaths } from '../../../FileHelper';
 import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');
@@ -81,7 +81,7 @@ export class BkApplication<
 
     async getLinks(context: Context): Promise<Array<Link | string>> {
         const virtualPath = context.getVirtualPath();
-        return (await BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map(
+        return (await getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
@@ -90,8 +90,8 @@ export class BkApplication<
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         debug('publicDirPath:', publicDirPath);
-        return (await BkHelper.getFilePaths(publicDirPath, 'js')).map(
-            (src) => `${virtualPath}/${src}`,
+        return (await getFilePaths(publicDirPath, 'js')).map(
+            (src: string) => `${virtualPath}/${src}`,
         );
     }
 

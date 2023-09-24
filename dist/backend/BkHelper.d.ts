@@ -4,8 +4,6 @@ import fs from 'fs';
 import { JSONString } from '../types';
 export declare class BkHelper {
     static getRandomString(length: number): string;
-    static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string): string[];
-    static getFilePaths(dirPath: string, ext: string): Promise<string[]>;
     static currentTime(): string;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static readTextFile(path: string): Promise<string>;

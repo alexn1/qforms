@@ -41,3 +41,19 @@ export function _glob(path: string): Promise<any[]> {
         });
     });
 }
+
+export function getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string) {
+    return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext) /* .map((filePath) => {
+        return slash(path.relative(publicDirPath, filePath));
+    }) */;
+}
+
+export async function getFilePaths(dirPath: string, ext: string): Promise<string[]> {
+    // debug('getFilePaths');
+    const filePaths: string[] = [];
+    await _getFilePaths2(dirPath, ext, filePaths);
+    const relativeFilePaths = filePaths; /* .map((filePath) => {
+        return slash(path.relative(dirPath, filePath));
+    }) */
+    return relativeFilePaths;
+}

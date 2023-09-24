@@ -8,6 +8,7 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { BackHostApp } from '../BackHostApp';
 import { pConsole } from '../../pConsole';
+import { getFilePaths } from '../FileHelper';
 
 const pkg = require('../../../package.json');
 
@@ -19,16 +20,10 @@ export class IndexModule {
 
     async init() {
         this.css = (
-            await BkHelper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
-                'css',
-            )
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')
         ).map((path) => `/index/public/${path}`);
         this.js = (
-            await BkHelper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
-                'js',
-            )
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')
         ).map((path) => `/index/public/${path}`);
         // debug('app.css:', this.css);
         // debug('app.js:' , this.js);

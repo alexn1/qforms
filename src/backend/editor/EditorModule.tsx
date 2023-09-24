@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import ReactDOMServer from 'react-dom/server';
-
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { BkHelper } from '../BkHelper';
@@ -12,6 +11,7 @@ import * as backend from '../index';
 import { home } from './home';
 import { debug } from '../../console';
 import { EditorPostDto, Nullable } from '../../types';
+import { getFilePaths } from '../FileHelper';
 
 const pkg = require('../../../package.json');
 
@@ -59,17 +59,18 @@ export class EditorModule {
 
     async init() {
         this.css = (
-            await BkHelper.getFilePaths(
+            await getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'css',
             )
-        ).map((path) => `/editor/public/${path}`);
+        ).map((path: string) => `/editor/public/${path}`);
+        
         this.js = (
-            await BkHelper.getFilePaths(
+            await getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'js',
             )
-        ).map((path) => `/editor/public/${path}`);
+        ).map((path: string) => `/editor/public/${path}`);
         // debug('editor.css:', this.css);
         // debug('editor.js:' , this.js);
     }

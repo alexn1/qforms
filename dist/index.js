@@ -1455,18 +1455,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! colors/safe */ "colors/safe");
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! node-fetch */ "node-fetch");
-/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
-/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../console */ "./src/console.ts");
-/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
-
-
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! node-fetch */ "node-fetch");
+/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
+/* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../console */ "./src/console.ts");
 
 
 
@@ -1484,15 +1479,6 @@ class BkHelper {
             result += chars.substr(index, 1);
         }
         return result;
-    }
-    static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return (0,_FileHelper__WEBPACK_IMPORTED_MODULE_6__._getFilePathsSync)(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
-    }
-    static async getFilePaths(dirPath, ext) {
-        const filePaths = [];
-        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_6__._getFilePaths2)(dirPath, ext, filePaths);
-        const relativeFilePaths = filePaths;
-        return relativeFilePaths;
     }
     static currentTime() {
         const now = new Date();
@@ -1538,7 +1524,7 @@ class BkHelper {
         return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.readBinaryFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(filePath, (err, data) => {
                 if (err) {
@@ -1572,7 +1558,7 @@ class BkHelper {
         }
     }
     static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.createDirIfNotExists'), dirPath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
                 if (exists) {
@@ -1625,7 +1611,7 @@ class BkHelper {
     }
     static async exists2(path) {
         try {
-            await (0,node_fs_promises__WEBPACK_IMPORTED_MODULE_4__.access)(path);
+            await (0,node_fs_promises__WEBPACK_IMPORTED_MODULE_3__.access)(path);
             return true;
         }
         catch (err) {
@@ -1638,7 +1624,7 @@ class BkHelper {
         }
     }
     static writeFile(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -1651,7 +1637,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFileSync'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().blue('BkHelper.writeFileSync'), filePath);
         return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -1835,7 +1821,7 @@ class BkHelper {
         return [contentType, buffer];
     }
     static async post(url, data) {
-        const response = await node_fetch__WEBPACK_IMPORTED_MODULE_3___default()(url, {
+        const response = await node_fetch__WEBPACK_IMPORTED_MODULE_2___default()(url, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -2197,7 +2183,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "_getFilePaths2": () => (/* binding */ _getFilePaths2),
 /* harmony export */   "_getFilePathsSync": () => (/* binding */ _getFilePathsSync),
-/* harmony export */   "_glob": () => (/* binding */ _glob)
+/* harmony export */   "_glob": () => (/* binding */ _glob),
+/* harmony export */   "getFilePaths": () => (/* binding */ getFilePaths),
+/* harmony export */   "getFilePathsSync": () => (/* binding */ getFilePathsSync)
 /* harmony export */ });
 /* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! glob */ "glob");
 /* harmony import */ var glob__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(glob__WEBPACK_IMPORTED_MODULE_0__);
@@ -2236,6 +2224,15 @@ function _glob(path) {
             }
         });
     });
+}
+function getFilePathsSync(publicDirPath, subDirPath, ext) {
+    return _getFilePathsSync(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
+}
+async function getFilePaths(dirPath, ext) {
+    const filePaths = [];
+    await _getFilePaths2(dirPath, ext, filePaths);
+    const relativeFilePaths = filePaths;
+    return relativeFilePaths;
 }
 
 
@@ -5264,13 +5261,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Context */ "./src/backend/Context.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../index */ "./src/backend/index.ts");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./home */ "./src/backend/editor/home.tsx");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../index */ "./src/backend/index.ts");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home */ "./src/backend/editor/home.tsx");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -5319,8 +5316,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_4__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
+        this.css = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_10__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
+        this.js = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_10__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
     }
     getLinks() {
         return [
@@ -5356,16 +5353,16 @@ class EditorModule {
         }
     }
     async handleEditorGet(req, res, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('EditorModule.handleEditorGet');
-        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
+        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('EditorModule.handleEditorGet');
+        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.hostApp.getNodeEnv(),
             logErrorUrl: '/error',
         };
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: this.getScripts() }));
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_9__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
     async post(req, res, next) {
@@ -5388,7 +5385,7 @@ class EditorModule {
         }
     }
     async handleEditorPost(req, res, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('EditorModule.handleEditorPost', req.body);
+        (0,_console__WEBPACK_IMPORTED_MODULE_9__.debug)('EditorModule.handleEditorPost', req.body);
         const body = req.body;
         if (EDITOR_CONTROLLERS.indexOf(body.controller) === -1) {
             throw new Error(`unknown controller: ${body.controller}`);
@@ -5397,10 +5394,10 @@ class EditorModule {
             throw new Error(`unknown action ${body.action}`);
         }
         const editorControllerClassName = `${body.controller}EditorController`;
-        const ControllerClass = _index__WEBPACK_IMPORTED_MODULE_8__[editorControllerClassName];
+        const ControllerClass = _index__WEBPACK_IMPORTED_MODULE_7__[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_5__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
+        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.loadAppInfo(this.hostApp.getSrcAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = body.action;
@@ -5754,10 +5751,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -5773,11 +5770,11 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+        this.css = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
     }
     async get(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_8__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexGet'));
+        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexGet'));
         try {
             const html = await this.hostApp.indexModule.render();
             res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
@@ -5787,7 +5784,7 @@ class IndexModule {
         }
     }
     async post(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_8__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexPost'), req.params);
+        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexPost'), req.params);
         try {
             const appInfos = await this.hostApp.createAppInfos(req);
             res.json({
@@ -5818,8 +5815,8 @@ class IndexModule {
         return this.js;
     }
     async render() {
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_6__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_7__.Scripts, { scripts: this.getScripts() }));
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
         const data = await this.fill();
         const data2 = JSON.stringify(data);
         return `<!DOCTYPE html>
@@ -5868,13 +5865,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! colors/safe */ "colors/safe");
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -5890,11 +5887,11 @@ class MonitorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
+        this.css = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
+        this.js = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
     }
     async get(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('monitorGet'));
+        _pConsole__WEBPACK_IMPORTED_MODULE_6__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('monitorGet'));
         try {
             if (!this.hostApp.getParams().monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -5932,7 +5929,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_8__.getWebSocketIP)(webSocket),
+                            ip: (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_7__.getWebSocketIP)(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),
@@ -5965,8 +5962,8 @@ class MonitorModule {
             this.checkCredentials(req));
     }
     render() {
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_4___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_4___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: this.getScripts() }));
         const data = JSON.stringify(this.fill());
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">
@@ -6462,13 +6459,13 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        return (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('publicDirPath:', publicDirPath);
-        return (await _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        return (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
         (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)(`Application.deinit: ${this.getName()}`);
@@ -9689,14 +9686,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Context */ "./src/backend/Context.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
-/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
-/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
+/* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -9718,19 +9715,19 @@ class ViewerModule {
         this.initControllers();
     }
     async initCss() {
-        this.css = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.css:', this.css);
+        this.css = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_9__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.css:', this.css);
     }
     async initJs() {
-        this.js = (await _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.getFilePaths(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
+        this.js = (await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_9__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_0___default().join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         if (!this.js.length)
             throw new Error('no qforms js');
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('ViewerModule.js:', this.js);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('ViewerModule.js:', this.js);
     }
     initControllers() {
-        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_7__.BkApplicationController(this);
-        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_8__.BkPageController();
-        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_9__.BkDataSourceController(this);
+        this.applicationController = new _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__.BkApplicationController(this);
+        this.pageController = new _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__.BkPageController();
+        this.dataSourceController = new _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__.BkDataSourceController(this);
     }
     async get(req, res, next) {
         let context = null;
@@ -9779,14 +9776,14 @@ class ViewerModule {
         }
     }
     async handleGet(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
+        _pConsole__WEBPACK_IMPORTED_MODULE_4__.pConsole.debug('ViewerModule.handleGet', context.getDomain(), context.getReq().url, context.getReq().params, context.getQuery());
         const action = context.getAction();
-        if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.page) {
+        if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.page) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
             await this.pageController.page(context, application);
         }
-        else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.read) {
+        else if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.read) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
             await this.dataSourceController.select(context, application);
@@ -9823,19 +9820,19 @@ class ViewerModule {
     }
     async handlePost(context, application) {
         const { action } = context.getBody();
-        if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.login) {
+        if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.login) {
             await this.applicationController.loginPost(context, application);
         }
         else {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
-            if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.logout) {
+            if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.logout) {
                 await this.applicationController.logout(context, application);
             }
-            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.rpc) {
+            else if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.rpc) {
                 await this.applicationController.rpc(context, application);
             }
-            else if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.create) {
+            else if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.create) {
                 await this.dataSourceController.insert(context, application);
             }
             else {
@@ -9867,7 +9864,7 @@ class ViewerModule {
         const action = context.getAction();
         if (!action)
             throw new Error('no action');
-        if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action.update) {
+        if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.update) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
             await this.dataSourceController.update(context, application);
@@ -9900,7 +9897,7 @@ class ViewerModule {
         const action = context.getAction();
         if (!action)
             throw new Error('no action');
-        if (action === _types__WEBPACK_IMPORTED_MODULE_6__.Action["delete"]) {
+        if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action["delete"]) {
             this.checkAuthorization(context, application);
             context.setVersionHeaders(pkg.version, application.getVersion());
             await this.dataSourceController.delete(context, application);
@@ -9914,7 +9911,7 @@ class ViewerModule {
     }
     checkAuthorization(context, application) {
         if (application.isAuthentication() && !context.getUser()) {
-            throw new _HttpError__WEBPACK_IMPORTED_MODULE_3__.HttpError({
+            throw new _HttpError__WEBPACK_IMPORTED_MODULE_2__.HttpError({
                 message: 'Unauthorized',
                 status: 401,
                 route: context.getRoute(),

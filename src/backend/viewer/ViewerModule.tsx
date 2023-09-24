@@ -11,6 +11,7 @@ import { BaseDto, Nullable, Action } from '../../types';
 import { BkApplicationController } from './BkController/BkApplicationController';
 import { BkPageController } from './BkController/BkPageController';
 import { BkDataSourceController } from './BkController/BkDataSourceController';
+import { getFilePaths } from '../FileHelper';
 
 const pkg = require('../../../package.json');
 
@@ -41,21 +42,15 @@ export class ViewerModule {
 
     async initCss(): Promise<void> {
         this.css = (
-            await BkHelper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
-                'css',
-            )
-        ).map((path) => `/viewer/public/${path}`);
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')
+        ).map((path: string) => `/viewer/public/${path}`);
         debug('ViewerModule.css:', this.css);
     }
 
     async initJs() {
         this.js = (
-            await BkHelper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
-                'js',
-            )
-        ).map((path) => `/viewer/public/${path}`);
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')
+        ).map((path: string) => `/viewer/public/${path}`);
         if (!this.js.length) throw new Error('no qforms js');
         debug('ViewerModule.js:', this.js);
     }

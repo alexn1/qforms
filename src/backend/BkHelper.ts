@@ -1,12 +1,10 @@
 import fs from 'fs';
-import path from 'path';
 // import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { access } from 'node:fs/promises';
 import { JSONString } from '../types';
 import { debug } from '../console';
-import { _getFilePathsSync, _getFilePaths2 } from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -20,22 +18,6 @@ export class BkHelper {
             result += chars.substr(index, 1);
         }
         return result;
-    }
-
-    static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string) {
-        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext) /* .map((filePath) => {
-            return slash(path.relative(publicDirPath, filePath));
-        }) */;
-    }
-
-    static async getFilePaths(dirPath: string, ext: string): Promise<string[]> {
-        // debug('BkHelper.getFilePaths');
-        const filePaths: string[] = [];
-        await _getFilePaths2(dirPath, ext, filePaths);
-        const relativeFilePaths = filePaths; /* .map((filePath) => {
-            return slash(path.relative(dirPath, filePath));
-        }) */
-        return relativeFilePaths;
     }
 
     static currentTime() {
