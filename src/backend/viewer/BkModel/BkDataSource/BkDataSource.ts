@@ -23,7 +23,7 @@ import {
 import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
-import { readTextFile } from '../../../FileHelper';
+import { exists2, readTextFile } from '../../../FileHelper';
 
 export type ReadResult = [RawRow[], Nullable<number>];
 
@@ -56,7 +56,7 @@ export class BkDataSource extends BkModel<DataSourceScheme> {
 
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await BkHelper.exists2(jsonFilePath);
+        const exists = await exists2(jsonFilePath);
         if (exists) {
             const content = await readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);

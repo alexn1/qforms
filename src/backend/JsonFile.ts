@@ -2,7 +2,7 @@ import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
 import { debug } from '../console';
 import { Nullable } from '../types';
-import { readTextFile } from './FileHelper';
+import { exists2, readTextFile } from './FileHelper';
 
 export class JsonFile {
     content: Nullable<string> = null;
@@ -10,7 +10,7 @@ export class JsonFile {
     constructor(public filePath: string, public data: any = null) {}
 
     async create(): Promise<void> {
-        const exists = await BkHelper.exists2(this.filePath);
+        const exists = await exists2(this.filePath);
         if (exists) throw new Error(`File ${this.filePath} already exists`);
         if (this.data) {
         } else if (this.content) {

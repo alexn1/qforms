@@ -4,6 +4,7 @@ import { Store, SessionData } from 'express-session';
 
 import { BkHelper } from './BkHelper';
 import { debug } from '../console';
+import { getFileContent } from './FileHelper';
 
 export class FileSessionStore extends Store {
     store: Record<string, SessionData> = {};
@@ -30,7 +31,7 @@ export class FileSessionStore extends Store {
             cb(null, session);
         } else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            BkHelper.getFileContent(sessionFilePath).then((content) => {
+            getFileContent(sessionFilePath).then((content) => {
                 if (content) {
                     try {
                         const session = (this.store[sid] = JSON.parse(content));

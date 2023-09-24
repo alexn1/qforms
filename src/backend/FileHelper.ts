@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import glob from 'glob';
+import { access } from 'node:fs/promises';
 // import slash from 'slash';
 
 export function _getFilePathsSync(dirPath: string, ext: string) {
@@ -71,4 +72,24 @@ export function readTextFile(path: string): Promise<string> {
             }
         });
     });
+}
+
+export async function exists2(path: fs.PathLike): Promise<boolean> {
+    try {
+        await access(path);
+        return true;
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            return false;
+        } else {
+            throw err;
+        }
+    }
+}
+
+export async function getFileContent(filePath: string) {
+    if (await exists2(filePath)) {
+        return readTextFile(filePath);
+    }
+    return null;
 }

@@ -6,7 +6,6 @@ export declare class BkHelper {
     static getRandomString(length: number): string;
     static currentTime(): string;
     static templateToJsString(value: string, params: Record<string, any>): string;
-    static getFileContent(filePath: string): Promise<string | null>;
     static getFileContentSync(filePath: string): string | null;
     static readBinaryFile(filePath: string): Promise<unknown>;
     static createPath(arr: string[]): string;
@@ -16,7 +15,6 @@ export declare class BkHelper {
     static createDirIfNotExistsSync(dirPath: string): void;
     static moveArrItem(arr: any[], item: any, offset: number): void;
     static copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void>;
-    static exists2(path: fs.PathLike): Promise<boolean>;
     static writeFile(filePath: string, content: string): Promise<void>;
     static writeFileSync(filePath: string, content: string): void;
     static writeFile2(filePath: string, content: string): Promise<void>;

@@ -28,7 +28,7 @@ import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
-import { _glob, getFilePaths, readTextFile } from '../../../FileHelper';
+import { _glob, exists2, getFilePaths, readTextFile } from '../../../FileHelper';
 import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');
@@ -541,7 +541,7 @@ export class BkApplication<
         // debug('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
         pConsole.debug(`filePath: ${filePath}`);
-        if (await BkHelper.exists2(filePath)) {
+        if (await exists2(filePath)) {
             // context.setVersionHeaders(pkg.version, this.getVersion());
             context.getRes().sendFile(filePath);
         } else {

@@ -1,10 +1,9 @@
 import fs from 'fs';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
-import { access } from 'node:fs/promises';
 import { JSONString } from '../types';
 import { debug } from '../console';
-import { readTextFile } from './FileHelper';
+import { exists2 } from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -41,12 +40,6 @@ export class BkHelper {
         });
     }
 
-    static async getFileContent(filePath: string) {
-        if (await BkHelper.exists2(filePath)) {
-            return readTextFile(filePath);
-        }
-        return null;
-    }
     static getFileContentSync(filePath: string) {
         // debug(colors.blue('BkHelper.getFileContentSync'), filePath);
         if (!fs.existsSync(filePath)) {
@@ -84,7 +77,7 @@ export class BkHelper {
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
-            const exists = await BkHelper.exists2(dirPath);
+            const exists = await exists2(dirPath);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
             }
@@ -141,19 +134,6 @@ export class BkHelper {
             });
             rd.pipe(wr);
         });
-    }
-
-    static async exists2(path: fs.PathLike): Promise<boolean> {
-        try {
-            await access(path);
-            return true;
-        } catch (err) {
-            if (err.code === 'ENOENT') {
-                return false;
-            } else {
-                throw err;
-            }
-        }
     }
 
     static writeFile(filePath: string, content: string): Promise<void> {

@@ -6,7 +6,7 @@ import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
-import { readTextFile } from '../../FileHelper';
+import { exists2, readTextFile } from '../../FileHelper';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,
@@ -23,7 +23,7 @@ export class Editor<
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
-        const exists = await BkHelper.exists2(newFilePath);
+        const exists = await exists2(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
@@ -37,7 +37,7 @@ export class Editor<
     } */
 
     async createFileByParams(newFilePath: string, templateFilePath: string, params) {
-        const exists = await BkHelper.exists2(newFilePath);
+        const exists = await exists2(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
@@ -53,14 +53,14 @@ export class Editor<
 
     async getFile(filePath: string) {
         debug('Editor.getFile', filePath);
-        const exists = await BkHelper.exists2(filePath);
+        const exists = await exists2(filePath);
         if (exists) {
             return await readTextFile(filePath);
         }
     }
 
     async saveFile(filePath: string, content: string): Promise<void> {
-        const exists = await BkHelper.exists2(filePath);
+        const exists = await exists2(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
