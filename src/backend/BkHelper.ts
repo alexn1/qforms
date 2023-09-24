@@ -28,23 +28,6 @@ export class BkHelper {
         }, {});
     }
 
-    /*
-     * timeOffset number in minutes
-     */
-    static today(timeOffset: number) {
-        // debug('BkHelper.today', timeOffset);
-        let ts = Date.now();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts += BkHelper.MINUTE() * timeOffset;
-        }
-        const date = new Date(ts);
-        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts -= BkHelper.MINUTE() * timeOffset;
-        }
-        return new Date(ts);
-    }
-
     /* static dateTimeReviver(key: any, value: string | number | Date) {
         if (typeof value === 'string') {
             const a =
@@ -80,43 +63,6 @@ export class BkHelper {
         }
         return dObj;
     } */
-
-    static SECOND(): number {
-        return 1000;
-    }
-
-    static MINUTE(): number {
-        return 60 * BkHelper.SECOND();
-    }
-
-    static HOUR(): number {
-        return 60 * BkHelper.MINUTE();
-    }
-
-    static DAY(): number {
-        return 24 * BkHelper.HOUR();
-    }
-
-    static WEEK(): number {
-        return 7 * BkHelper.DAY();
-    }
-
-    static addMinutes(date: Date, minutes: number): void {
-        // debug('BkHelper.addMinutes', date, minutes);
-        date.setMinutes(date.getMinutes() + minutes);
-    }
-
-    static removeTimezoneOffset(date: Date): void {
-        BkHelper.addMinutes(date, -date.getTimezoneOffset());
-    }
-
-    static addTimezoneOffset(date: Date): void {
-        BkHelper.addMinutes(date, date.getTimezoneOffset());
-    }
-
-    static cloneDate(date: Date): Date {
-        return new Date(date.getTime());
-    }
 
     static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());
@@ -172,30 +118,6 @@ export class BkHelper {
 
     static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
-    }
-
-    static formatTime2(_sec: number): string {
-        // debug('BkHelper.formatTime', sec);
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        // @ts-ignore
-        if (h < 10) h = '0' + h;
-        // @ts-ignore
-        if (m < 10) m = '0' + m;
-        // @ts-ignore
-        if (s < 10) s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        } else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
     }
 
     static registerGlobalClass(Class: any): void {

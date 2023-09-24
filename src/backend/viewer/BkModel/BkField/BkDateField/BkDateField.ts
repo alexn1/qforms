@@ -2,6 +2,7 @@ import { BkField } from '../BkField';
 import { BkHelper } from '../../../../BkHelper';
 import { Helper } from '../../../../../frontend';
 import { JSONString } from '../../../../../types';
+import { DateTimeHelper } from '../../../../../common';
 
 export class BkDateField extends BkField {
     fillAttributes(response: any): void {
@@ -18,8 +19,8 @@ export class BkDateField extends BkField {
     valueToRaw(value: Date) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = BkHelper.cloneDate(value);
-            BkHelper.removeTimezoneOffset(v);
+            const v = DateTimeHelper.cloneDate(value);
+            DateTimeHelper.removeTimezoneOffset(v);
             raw = Helper.encodeValue(v);
         } else {
             raw = Helper.encodeValue(value);
@@ -31,7 +32,7 @@ export class BkDateField extends BkField {
     rawToValue(raw: JSONString<Date>) {
         const value = Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            BkHelper.addTimezoneOffset(value);
+            DateTimeHelper.addTimezoneOffset(value);
         }
         // debug('DateField.rawToValue', this.getFullName(), raw, value);
         return value;

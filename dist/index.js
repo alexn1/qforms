@@ -1487,45 +1487,6 @@ class BkHelper {
             return obj;
         }, {});
     }
-    static today(timeOffset) {
-        let ts = Date.now();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts += BkHelper.MINUTE() * timeOffset;
-        }
-        const date = new Date(ts);
-        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts -= BkHelper.MINUTE() * timeOffset;
-        }
-        return new Date(ts);
-    }
-    static SECOND() {
-        return 1000;
-    }
-    static MINUTE() {
-        return 60 * BkHelper.SECOND();
-    }
-    static HOUR() {
-        return 60 * BkHelper.MINUTE();
-    }
-    static DAY() {
-        return 24 * BkHelper.HOUR();
-    }
-    static WEEK() {
-        return 7 * BkHelper.DAY();
-    }
-    static addMinutes(date, minutes) {
-        date.setMinutes(date.getMinutes() + minutes);
-    }
-    static removeTimezoneOffset(date) {
-        BkHelper.addMinutes(date, -date.getTimezoneOffset());
-    }
-    static addTimezoneOffset(date) {
-        BkHelper.addMinutes(date, date.getTimezoneOffset());
-    }
-    static cloneDate(date) {
-        return new Date(date.getTime());
-    }
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
@@ -1558,29 +1519,6 @@ class BkHelper {
     }
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
-    }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
     }
     static registerGlobalClass(Class) {
         if (global[Class.name])
@@ -8645,8 +8583,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BkDateField": () => (/* binding */ BkDateField)
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -8664,19 +8602,19 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.cloneDate(value);
-            _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.removeTimezoneOffset(v);
-            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
-            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
         return raw;
     }
     rawToValue(raw) {
-        const value = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -8697,8 +8635,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BkDateTimeField": () => (/* binding */ BkDateTimeField)
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -8716,19 +8654,19 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.cloneDate(value);
-            _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.removeTimezoneOffset(v);
-            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
-            raw = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
         return raw;
     }
     rawToValue(raw) {
-        const value = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -10123,6 +10061,85 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/common/DateTimeHelper.ts":
+/*!**************************************!*\
+  !*** ./src/common/DateTimeHelper.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
+/* harmony export */ });
+class DateTimeHelper {
+    static today(timeOffset) {
+        let ts = Date.now();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts += DateTimeHelper.MINUTE() * timeOffset;
+        }
+        const date = new Date(ts);
+        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts -= DateTimeHelper.MINUTE() * timeOffset;
+        }
+        return new Date(ts);
+    }
+    static SECOND() {
+        return 1000;
+    }
+    static MINUTE() {
+        return 60 * DateTimeHelper.SECOND();
+    }
+    static HOUR() {
+        return 60 * DateTimeHelper.MINUTE();
+    }
+    static DAY() {
+        return 24 * DateTimeHelper.HOUR();
+    }
+    static WEEK() {
+        return 7 * DateTimeHelper.DAY();
+    }
+    static addMinutes(date, minutes) {
+        date.setMinutes(date.getMinutes() + minutes);
+    }
+    static removeTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, -date.getTimezoneOffset());
+    }
+    static addTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, date.getTimezoneOffset());
+    }
+    static cloneDate(date) {
+        return new Date(date.getTime());
+    }
+    static formatTime2(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/common/ModelData/ActionData.ts":
 /*!********************************************!*\
   !*** ./src/common/ModelData/ActionData.ts ***!
@@ -10293,7 +10310,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper)
+/* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
+/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
+
 
 
 
@@ -22703,6 +22725,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DatePicker),
 /* harmony export */   "DateTimeField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeField),
 /* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateTimeFieldEditor),
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper),
 /* harmony export */   "DeleteIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
 /* harmony export */   "DoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
 /* harmony export */   "DownIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
