@@ -2,6 +2,46 @@ import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 export class BkHelper {
+    static argvAsKeyValue(argv: string[], slice: number = 2): Record<string, string> {
+        return argv
+            .slice(slice)
+            .map((arg) => arg.split('='))
+            .reduce((record: Record<string, string>, [key, value]: [string, string]) => {
+                record[key] = value;
+                return record;
+            }, {} as Record<string, string>);
+    }
+
+    static registerGlobalClass(Class: any): void {
+        // debug('BkHelper.registerGlobalClass', Class.name);
+        // @ts-ignore
+        if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
+        // @ts-ignore
+        global[Class.name] = Class;
+    }
+
+    static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer] {
+        const [type, data] = value.split(';');
+        const contentType = type.split(':')[1];
+        const base64string = data.split(',')[1];
+        const buffer = Buffer.from(base64string, 'base64');
+        return [contentType, buffer];
+    }
+
+    static async post(url: string, data: any): Promise<any> {
+        const response = await fetch(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) return await response.json();
+        throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    }
+
+    static newClientId() {
+        return uuidv4();
+    }
+
     /* static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
@@ -79,49 +119,9 @@ export class BkHelper {
         );
     } */
 
-    static argvAsKeyValue(argv: string[], slice: number = 2): Record<string, string> {
-        return argv
-            .slice(slice)
-            .map((arg) => arg.split('='))
-            .reduce((record: Record<string, string>, [key, value]: [string, string]) => {
-                record[key] = value;
-                return record;
-            }, {} as Record<string, string>);
-    }
-
     /* static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
     } */
-
-    static registerGlobalClass(Class: any): void {
-        // debug('BkHelper.registerGlobalClass', Class.name);
-        // @ts-ignore
-        if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
-        // @ts-ignore
-        global[Class.name] = Class;
-    }
-
-    static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer] {
-        const [type, data] = value.split(';');
-        const contentType = type.split(':')[1];
-        const base64string = data.split(',')[1];
-        const buffer = Buffer.from(base64string, 'base64');
-        return [contentType, buffer];
-    }
-
-    static async post(url: string, data: any): Promise<any> {
-        const response = await fetch(url, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        });
-        if (response.ok) return await response.json();
-        throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
-    }
-
-    static newClientId() {
-        return uuidv4();
-    }
 }
 
 BkHelper.registerGlobalClass(BkHelper);
