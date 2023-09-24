@@ -5257,9 +5257,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var slash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! slash */ "slash");
-/* harmony import */ var slash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(slash__WEBPACK_IMPORTED_MODULE_6__);
-
 
 
 
@@ -5300,14 +5297,14 @@ function _glob(path) {
 }
 function getFilePathsSync(publicDirPath, subDirPath, ext) {
     return _getFilePathsSync(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext).map((filePath) => {
-        return slash__WEBPACK_IMPORTED_MODULE_6___default()(path__WEBPACK_IMPORTED_MODULE_1___default().relative(publicDirPath, filePath));
+        return path__WEBPACK_IMPORTED_MODULE_1___default().relative(publicDirPath, filePath);
     });
 }
 async function getFilePaths(dirPath, ext) {
     const filePaths = [];
     await _getFilePaths2(dirPath, ext, filePaths);
     const relativeFilePaths = filePaths.map((filePath) => {
-        return slash__WEBPACK_IMPORTED_MODULE_6___default()(path__WEBPACK_IMPORTED_MODULE_1___default().relative(dirPath, filePath));
+        return path__WEBPACK_IMPORTED_MODULE_1___default().relative(dirPath, filePath);
     });
     return relativeFilePaths;
 }
@@ -22517,17 +22514,6 @@ module.exports = require("react-dom/server");
 
 "use strict";
 module.exports = require("react/jsx-runtime");
-
-/***/ }),
-
-/***/ "slash":
-/*!************************!*\
-  !*** external "slash" ***!
-  \************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("slash");
 
 /***/ }),
 

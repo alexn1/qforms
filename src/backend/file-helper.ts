@@ -4,7 +4,7 @@ import fs from 'fs';
 import glob from 'glob';
 import { access } from 'node:fs/promises';
 import { pConsole } from '../pConsole';
-import slash from 'slash';
+// import slash from 'slash';
 
 export function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -49,7 +49,7 @@ export function _glob(path: string): Promise<any[]> {
 
 export function getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string): string[] {
     return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map((filePath) => {
-        return slash(path.relative(publicDirPath, filePath));
+        return /* slash( */ path.relative(publicDirPath, filePath) /* ) */;
     });
 }
 
@@ -58,7 +58,7 @@ export async function getFilePaths(dirPath: string, ext: string): Promise<string
     const filePaths: string[] = [];
     await _getFilePaths2(dirPath, ext, filePaths);
     const relativeFilePaths = filePaths.map((filePath) => {
-        return slash(path.relative(dirPath, filePath));
+        return /* slash( */ path.relative(dirPath, filePath) /* ) */;
     });
     return relativeFilePaths;
 }
