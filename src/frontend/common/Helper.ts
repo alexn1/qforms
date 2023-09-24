@@ -1,5 +1,4 @@
 import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
-import { debug } from '../../console';
 
 export class Helper {
     static formatNumber(value: number): string {
@@ -61,15 +60,6 @@ export class Helper {
         return value;
     }
 
-    static templateToJsString(value: string, params: Record<string, any>) {
-        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
-            if (params.hasOwnProperty(name)) {
-                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
-            }
-            return 'undefined';
-        });
-    }
-
     static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
@@ -77,32 +67,6 @@ export class Helper {
         if (newIndex < 0) throw new Error('cannot up top element');
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-    }
-
-    static async copyTextToClipboard(text: string) {
-        debug('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
-    }
-
-    static fallbackCopyTextToClipboard(text: string) {
-        // debug('Helper.fallbackCopyTextToClipboard', text);
-        const activeElement = document.activeElement;
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.top = '0'; // Avoid scrolling to bottom
-        textArea.style.left = '0';
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        // @ts-ignore
-        activeElement.focus();
     }
 
     static fillArray(n: number): number[] {
@@ -118,7 +82,7 @@ export class Helper {
     //     } */
     // }
 
-    static delay(ms: number = 1000) {
+    static sleep(ms: number) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
@@ -218,6 +182,15 @@ export class Helper {
                 return `'${item}'`;
             }
             throw new Error(`wrong type for array item: ${type}`);
+        });
+    }
+
+    static templateToJsString(value: string, params: Record<string, any>) {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
+            if (params.hasOwnProperty(name)) {
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
+            }
+            return 'undefined';
         });
     }
 }

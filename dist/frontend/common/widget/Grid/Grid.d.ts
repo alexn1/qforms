@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 import './Grid.less';
 export declare class Grid extends ReactComponent {

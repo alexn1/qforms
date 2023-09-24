@@ -10463,6 +10463,47 @@ class BinaryHelper {
 
 /***/ }),
 
+/***/ "./src/frontend/common/ClipboardHelper.ts":
+/*!************************************************!*\
+  !*** ./src/frontend/common/ClipboardHelper.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ClipboardHelper": () => (/* binding */ ClipboardHelper)
+/* harmony export */ });
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+
+class ClipboardHelper {
+    static async copyTextToClipboard(text) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('Helper.copyTextToClipboard', text);
+        if (!navigator.clipboard) {
+            ClipboardHelper.fallbackCopyTextToClipboard(text);
+            return;
+        }
+        await navigator.clipboard.writeText(text);
+    }
+    static fallbackCopyTextToClipboard(text) {
+        const activeElement = document.activeElement;
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.position = 'fixed';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        activeElement.focus();
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/CookieHelper.ts":
 /*!*********************************************!*\
   !*** ./src/frontend/common/CookieHelper.ts ***!
@@ -10715,8 +10756,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Helper": () => (/* binding */ Helper)
 /* harmony export */ });
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
-
 class Helper {
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
@@ -10784,32 +10823,10 @@ class Helper {
             throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-    static async copyTextToClipboard(text) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_0__.debug)('Helper.copyTextToClipboard', text);
-        if (!navigator.clipboard) {
-            Helper.fallbackCopyTextToClipboard(text);
-            return;
-        }
-        await navigator.clipboard.writeText(text);
-    }
-    static fallbackCopyTextToClipboard(text) {
-        const activeElement = document.activeElement;
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.top = '0';
-        textArea.style.left = '0';
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        activeElement.focus();
-    }
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static delay(ms = 1000) {
+    static sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
     static registerGlobalClass(Class) {
@@ -11741,61 +11758,62 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.ArrowIcon),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.ArrowIcon),
 /* harmony export */   "BinaryHelper": () => (/* reexport safe */ _BinaryHelper__WEBPACK_IMPORTED_MODULE_6__.BinaryHelper),
-/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.CheckBoxList),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.ComboBox),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBoxList),
+/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__.ClipboardHelper),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.ComboBox),
 /* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_5__.CookieHelper),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DatePicker),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Expand),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.GridRow),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Radio),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "ReactHelper": () => (/* reexport safe */ _ReactHelper__WEBPACK_IMPORTED_MODULE_4__.ReactHelper),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.RightIcon),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tooltip),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityOffIcon)
 /* harmony export */ });
 /* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
@@ -11804,8 +11822,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReactHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ReactHelper */ "./src/frontend/common/ReactHelper.ts");
 /* harmony import */ var _CookieHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CookieHelper */ "./src/frontend/common/CookieHelper.ts");
 /* harmony import */ var _BinaryHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BinaryHelper */ "./src/frontend/common/BinaryHelper.ts");
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
-/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+/* harmony import */ var _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ClipboardHelper */ "./src/frontend/common/ClipboardHelper.ts");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
+/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+
 
 
 
@@ -12632,9 +12652,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _ClipboardHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ClipboardHelper */ "./src/frontend/common/ClipboardHelper.ts");
 /* harmony import */ var _Grid_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Grid.less */ "./src/frontend/common/widget/Grid/Grid.less");
 /* harmony import */ var _Grid_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Grid_less__WEBPACK_IMPORTED_MODULE_6__);
 
@@ -12761,8 +12781,8 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             resized: Date.now(),
         };
         this.columns = {};
-        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1___default().createRef();
+        this.head = react__WEBPACK_IMPORTED_MODULE_1___default().createRef();
     }
     getActiveColumn() {
         return this.state.column;
@@ -12784,7 +12804,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
-        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
+        await _ClipboardHelper__WEBPACK_IMPORTED_MODULE_5__.ClipboardHelper.copyTextToClipboard(text);
     }
     findRow(key) {
         return this.props.rows.find((row) => this.getRowKey(row) === key);
@@ -12884,7 +12904,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     renderRows() {
         return this.props.rows.map((row, i) => {
             const key = this.getRowKey(row);
-            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_3__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
         });
     }
     getRowKey(row) {
@@ -12900,7 +12920,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
         if (view)
             return view;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_4__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.updated) {
@@ -14366,6 +14386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CheckBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxField),
 /* harmony export */   "CheckBoxList": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CheckBoxList),
 /* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxListField),
+/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon2),
 /* harmony export */   "Column": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Column),
@@ -22703,6 +22724,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CheckBoxList": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxList),
 /* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxListField),
 /* harmony export */   "CheckBoxListFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.CheckBoxListFieldEditor),
+/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
 /* harmony export */   "Column": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Column),

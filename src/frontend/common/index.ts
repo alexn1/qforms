@@ -5,6 +5,7 @@ export * from './Search';
 export * from './ReactHelper';
 export * from './CookieHelper';
 export * from './BinaryHelper';
+export * from './ClipboardHelper';
 
 // icon
 export * from './icon';

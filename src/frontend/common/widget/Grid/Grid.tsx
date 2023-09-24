@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
-import { Helper } from '../../Helper';
 import { GridRow } from '../GridRow/GridRow';
 import { GridCell } from '../GridCell/GridCell';
+import { ClipboardHelper } from '../../ClipboardHelper';
 import './Grid.less';
 
 export class Grid extends ReactComponent {
@@ -137,7 +137,7 @@ export class Grid extends ReactComponent {
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
-        await Helper.copyTextToClipboard(text);
+        await ClipboardHelper.copyTextToClipboard(text);
     }
 
     findRow(key) {

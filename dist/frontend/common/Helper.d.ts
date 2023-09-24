@@ -8,10 +8,8 @@ export declare class Helper {
     static dateTimeReviver(key: string, value: any): any;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;
-    static copyTextToClipboard(text: string): Promise<void>;
-    static fallbackCopyTextToClipboard(text: string): void;
     static fillArray(n: number): number[];
-    static delay(ms?: number): Promise<unknown>;
+    static sleep(ms: number): Promise<unknown>;
     static registerGlobalClass(Class: any): void;
     static getGlobalClass(className: string): any;
     static addClassToDocumentElement(className: string): void;
