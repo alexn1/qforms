@@ -1,36 +1,12 @@
 import fetch from 'node-fetch';
 import { JSONString } from '../types';
+import { Helper } from '../frontend';
 
 export class BkHelper {
-    static getRandomString(length: number) {
-        function getRandomInt(min: number, max: number) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            const index = getRandomInt(0, chars.length - 1);
-            result += chars.substr(index, 1);
-        }
-        return result;
-    }
-
-    static currentTime() {
-        const now = new Date();
-        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
-        const arrS = arrN.map((n) => n.toString());
-        for (let i = 0; i < arrN.length; i++) {
-            if (arrN[i] < 10) {
-                arrS[i] = '0' + arrS[i];
-            }
-        }
-        return arrS.join(':');
-    }
-
     static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
-                return `BkHelper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
+                return `Helper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
@@ -70,7 +46,7 @@ export class BkHelper {
         return new Date(ts);
     }
 
-    static dateTimeReviver(key: any, value: string | number | Date) {
+    /* static dateTimeReviver(key: any, value: string | number | Date) {
         if (typeof value === 'string') {
             const a =
                 /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
@@ -79,18 +55,18 @@ export class BkHelper {
             if (a) return new Date(value);
         }
         return value;
-    }
+    } */
 
-    static decodeValue(rawValue: JSONString): any {
+    /* static decodeValue(rawValue: JSONString): any {
         if (rawValue === undefined) throw new Error('decodeValue: undefined');
         if (rawValue === null) throw new Error('decodeValue: null');
         if (rawValue === '') throw new Error('decodeValue: empty string');
         try {
-            return JSON.parse(rawValue, BkHelper.dateTimeReviver);
+            return JSON.parse(rawValue, Helper.dateTimeReviver);
         } catch (err) {
             throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
         }
-    }
+    } */
 
     static encodeValue(value: any): JSONString {
         return JSON.stringify(value) as JSONString;
@@ -101,7 +77,7 @@ export class BkHelper {
         for (const name in obj) {
             if (typeof obj[name] !== 'string')
                 throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = BkHelper.decodeValue(obj[name]);
+            dObj[name] = Helper.decodeValue(obj[name]);
         }
         return dObj;
     }
@@ -147,7 +123,7 @@ export class BkHelper {
         return Array.from(Array(n).keys());
     }
 
-    static formatDate(date: Date, format: string) {
+    /* static formatDate(date: Date, format: string) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
         const D = date.getDate();
@@ -164,7 +140,7 @@ export class BkHelper {
             // @ts-ignore
             values[name] ? values[name] : text,
         );
-    }
+    } */
 
     static getFirstField(object: any) {
         const [key] = Object.keys(object);

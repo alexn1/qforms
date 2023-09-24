@@ -59,13 +59,24 @@ export class Helper {
         return obj;
     }
 
-    static decodeValue(raw: JSONString): any {
+    /* static decodeValue(raw: JSONString): any {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
         //     // debug('raw:', raw);
         //     throw err;
         // }
+    } */
+
+    static decodeValue(rawValue: JSONString): any {
+        if (rawValue === undefined) throw new Error('decodeValue: undefined');
+        if (rawValue === null) throw new Error('decodeValue: null');
+        if (rawValue === '') throw new Error('decodeValue: empty string');
+        try {
+            return JSON.parse(rawValue, Helper.dateTimeReviver);
+        } catch (err) {
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
+        }
     }
 
     static dateTimeReviver(key: string, value: any) {
@@ -428,6 +439,18 @@ export class Helper {
 
     static keyToKeyTuple(key: Key): KeyTuple {
         return JSON.parse(key);
+    }
+
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
     }
 }
 

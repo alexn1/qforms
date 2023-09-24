@@ -1,5 +1,7 @@
 import { BkField } from '../BkField';
 import { BkHelper } from '../../../../BkHelper';
+import { Helper } from '../../../../../frontend';
+import { JSONString } from '../../../../../types';
 
 export class BkDateTimeField extends BkField {
     fillAttributes(response: any): void {
@@ -26,8 +28,8 @@ export class BkDateTimeField extends BkField {
         return raw;
     }
 
-    rawToValue(raw) {
-        const value = BkHelper.decodeValue(raw);
+    rawToValue(raw: JSONString<Date>) {
+        const value = Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
             BkHelper.addTimezoneOffset(value);
         }

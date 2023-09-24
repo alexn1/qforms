@@ -756,26 +756,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express_session__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! express-session */ "express-session");
 /* harmony import */ var express_session__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(express_session__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _WebSocketServer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./WebSocketServer */ "./src/backend/WebSocketServer.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
-/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
-/* harmony import */ var _monitor_MonitorModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./monitor/MonitorModule */ "./src/backend/monitor/MonitorModule.tsx");
-/* harmony import */ var _index_IndexModule__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./index/IndexModule */ "./src/backend/index/IndexModule.tsx");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _viewer_ViewerModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./viewer/ViewerModule */ "./src/backend/viewer/ViewerModule.tsx");
-/* harmony import */ var _editor_EditorModule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./editor/EditorModule */ "./src/backend/editor/EditorModule.tsx");
-/* harmony import */ var _FileSessionStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./FileSessionStore */ "./src/backend/FileSessionStore.ts");
-/* harmony import */ var _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./editor/Editor/ApplicationEditor/ApplicationEditor */ "./src/backend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
-/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
-/* harmony import */ var _EventLog__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./EventLog */ "./src/backend/EventLog.ts");
-/* harmony import */ var _EmptyPromise__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/EmptyPromise.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../console */ "./src/console.ts");
-/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
-/* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
-/* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
+/* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
+/* harmony import */ var _monitor_MonitorModule__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./monitor/MonitorModule */ "./src/backend/monitor/MonitorModule.tsx");
+/* harmony import */ var _index_IndexModule__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./index/IndexModule */ "./src/backend/index/IndexModule.tsx");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _viewer_ViewerModule__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./viewer/ViewerModule */ "./src/backend/viewer/ViewerModule.tsx");
+/* harmony import */ var _editor_EditorModule__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./editor/EditorModule */ "./src/backend/editor/EditorModule.tsx");
+/* harmony import */ var _FileSessionStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./FileSessionStore */ "./src/backend/FileSessionStore.ts");
+/* harmony import */ var _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./editor/Editor/ApplicationEditor/ApplicationEditor */ "./src/backend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
+/* harmony import */ var _EventLog__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./EventLog */ "./src/backend/EventLog.ts");
+/* harmony import */ var _EmptyPromise__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/EmptyPromise.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
+/* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
+/* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -823,10 +823,10 @@ class BackHostApp {
         this.applications = {};
         this.startTime = new Date();
         this.createAppQueue = {};
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.constructor', params);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.constructor', params);
     }
     async init() {
-        (0,_private_helper__WEBPACK_IMPORTED_MODULE_26__.checkNodeVersion)(MIN_NODE_VERSION);
+        (0,_private_helper__WEBPACK_IMPORTED_MODULE_25__.checkNodeVersion)(MIN_NODE_VERSION);
         this.initDirPaths();
         this.checkApplicationFolder();
         this.createTempDirsIfNotExistSync();
@@ -841,7 +841,7 @@ class BackHostApp {
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         this.createWebSocketServer();
         this.listenProcessEvents();
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(this.composeStartMessage());
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(this.composeStartMessage());
     }
     getHost() {
         return this.params.host || LISTEN_HOST;
@@ -861,20 +861,20 @@ class BackHostApp {
         }
     }
     createTempDirsIfNotExistSync() {
-        (0,_file_helper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExistsSync)(this.runtimeDirPath);
-        (0,_file_helper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExistsSync)(this.sessionDirPath);
+        (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__.createDirIfNotExistsSync)(this.runtimeDirPath);
+        (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__.createDirIfNotExistsSync)(this.sessionDirPath);
     }
     createEventLog() {
-        this.eventLog = new _EventLog__WEBPACK_IMPORTED_MODULE_20__.EventLog(this.params.logger);
+        this.eventLog = new _EventLog__WEBPACK_IMPORTED_MODULE_19__.EventLog(this.params.logger);
     }
     initRouter() {
-        this.router = new _Router__WEBPACK_IMPORTED_MODULE_27__.Router(this);
+        this.router = new _Router__WEBPACK_IMPORTED_MODULE_26__.Router(this);
     }
     async initModules() {
-        this.indexModule = new _index_IndexModule__WEBPACK_IMPORTED_MODULE_13__.IndexModule(this);
-        this.monitorModule = new _monitor_MonitorModule__WEBPACK_IMPORTED_MODULE_12__.MonitorModule(this);
-        this.viewerModule = new _viewer_ViewerModule__WEBPACK_IMPORTED_MODULE_15__.ViewerModule(this);
-        this.editorModule = new _editor_EditorModule__WEBPACK_IMPORTED_MODULE_16__.EditorModule(this);
+        this.indexModule = new _index_IndexModule__WEBPACK_IMPORTED_MODULE_12__.IndexModule(this);
+        this.monitorModule = new _monitor_MonitorModule__WEBPACK_IMPORTED_MODULE_11__.MonitorModule(this);
+        this.viewerModule = new _viewer_ViewerModule__WEBPACK_IMPORTED_MODULE_14__.ViewerModule(this);
+        this.editorModule = new _editor_EditorModule__WEBPACK_IMPORTED_MODULE_15__.EditorModule(this);
         await this.indexModule.init();
         await this.monitorModule.init();
         await this.viewerModule.init();
@@ -940,13 +940,13 @@ class BackHostApp {
     useMiddlewares() {
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().json({
             limit: '20mb',
-            reviver: _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.dateTimeReviver,
+            reviver: _frontend__WEBPACK_IMPORTED_MODULE_28__.Helper.dateTimeReviver,
         }));
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().urlencoded({ extended: false }));
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
         this.express.use(express_session__WEBPACK_IMPORTED_MODULE_7___default()({
-            store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_17__.FileSessionStore(this.sessionDirPath),
-            secret: (0,_private_helper__WEBPACK_IMPORTED_MODULE_26__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
+            store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_16__.FileSessionStore(this.sessionDirPath),
+            secret: (0,_private_helper__WEBPACK_IMPORTED_MODULE_25__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -961,7 +961,7 @@ class BackHostApp {
     useStatic() {
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
-                _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+                _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(`static: /${path__WEBPACK_IMPORTED_MODULE_4___default().relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
             },
         }));
     }
@@ -976,8 +976,8 @@ class BackHostApp {
             return application;
         }
         if (Array.isArray(this.createAppQueue[route])) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('application is creating:', route);
-            const promise = _EmptyPromise__WEBPACK_IMPORTED_MODULE_21__.EmptyPromise.create();
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('application is creating:', route);
+            const promise = _EmptyPromise__WEBPACK_IMPORTED_MODULE_20__.EmptyPromise.create();
             this.createAppQueue[route].push(promise);
             return promise;
         }
@@ -988,14 +988,14 @@ class BackHostApp {
         this.createAppQueue[route] = [];
         try {
             const app = (this.applications[route] = await this.createApplication(context));
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('application created, start resolve loop', route, this.createAppQueue[route].length);
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('application created, start resolve loop', route, this.createAppQueue[route].length);
             for (const p of this.createAppQueue[route]) {
                 p.resolve(app);
             }
             return app;
         }
         catch (err) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('application not created, start reject loop', route, this.createAppQueue[route].length);
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('application not created, start reject loop', route, this.createAppQueue[route].length);
             for (const p of this.createAppQueue[route]) {
                 p.reject(err);
             }
@@ -1021,23 +1021,23 @@ class BackHostApp {
         return path__WEBPACK_IMPORTED_MODULE_4___default().join(this.distDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     async createApplication(context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(`BackHostApp.createApplication: ${context.getRoute()}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)(`BackHostApp.createApplication: ${context.getRoute()}`);
         const appFilePath = this.getDistAppFilePath(context);
-        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__.BkApplication.loadAppInfo(appFilePath);
+        const appInfo = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication.loadAppInfo(appFilePath);
         const ApplicationClass = this.getApplicationClass(appInfo);
         const application = new ApplicationClass(appInfo, this, context.getEnv());
         await application.init(context);
         return application;
     }
     getApplicationClass(appInfo) {
-        const modelClass = _BaseModel__WEBPACK_IMPORTED_MODULE_19__.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
+        const modelClass = _BaseModel__WEBPACK_IMPORTED_MODULE_18__.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
             if (!CustomClass)
                 throw new Error(`no class ${modelClass}`);
             return CustomClass;
         }
-        return _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__.BkApplication;
+        return _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication;
     }
     async createAppInfos(req) {
         const { folder, name } = req.body;
@@ -1047,13 +1047,13 @@ class BackHostApp {
             throw new Error(`name required: ${name}`);
         const appDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.appsDirPath, folder);
         const appFilePath = path__WEBPACK_IMPORTED_MODULE_4___default().join(appDirPath, name + '.json');
-        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExists)(appDirPath);
-        await _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_18__.ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__.BkApplication.getAppInfos(this.appsDirPath);
+        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__.createDirIfNotExists)(appDirPath);
+        await _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_17__.ApplicationEditor.createAppFile(appFilePath, { name });
+        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;
     }
     async logError(err, req) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('BackHostApp.logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('BackHostApp.logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
         try {
             await this.eventLog.log({
                 type: 'error',
@@ -1061,15 +1061,15 @@ class BackHostApp {
                 message: err.message,
                 stack: err.stack,
                 data: req && JSON.stringify(this.composeContextData(err, req), null, 4),
-                ip: req && _Context__WEBPACK_IMPORTED_MODULE_10__.Context.getIpFromReq(req),
+                ip: req && _Context__WEBPACK_IMPORTED_MODULE_9__.Context.getIpFromReq(req),
             });
         }
         catch (err) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
         }
     }
     composeContextData(err, req) {
-        const route = err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.route : null;
+        const route = err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError ? err.route : null;
         return {
             route: route,
             headers: req.headers,
@@ -1080,12 +1080,12 @@ class BackHostApp {
             platformVersion: pkg.version,
             appVersion: route && this.applications[route] ? this.applications[route].getVersion() : null,
             body: req.body,
-            status: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.status || null : null,
-            data: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError ? err.data || null : null,
+            status: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError ? err.status || null : null,
+            data: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError ? err.data || null : null,
         };
     }
     async logEvent(context, message, data) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('BackHostApp.logEvent', message);
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('BackHostApp.logEvent', message);
         try {
             await this.eventLog.log({
                 type: 'log',
@@ -1096,20 +1096,20 @@ class BackHostApp {
             });
         }
         catch (err) {
-            _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.error('logEvent:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
+            _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.error('logEvent:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err));
         }
     }
     async _e404(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta(req.method), 'error/404', req.originalUrl);
-        next(new _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError({
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta(req.method), 'error/404', req.originalUrl);
+        next(new _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404,
         }));
     }
     async _e500(err, req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('module.exports.e500:'), req.method, req.originalUrl, err);
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('_e500:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
-        const error = typeof err === 'string' ? new _HttpError__WEBPACK_IMPORTED_MODULE_14__.HttpError({ message: err }) : err;
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('module.exports.e500:'), req.method, req.originalUrl, err);
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('_e500:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
+        const error = typeof err === 'string' ? new _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&
             req.headers['content-type'].indexOf('application/json') !== -1) {
@@ -1123,7 +1123,7 @@ class BackHostApp {
                 ? error.message
                 : 'Internal Software Error';
             const stack = this.isDevelopment() && error.status !== 404 ? error.stack : '';
-            res.end((0,_e500__WEBPACK_IMPORTED_MODULE_25__.e500)(status, message, stack));
+            res.end((0,_e500__WEBPACK_IMPORTED_MODULE_24__.e500)(status, message, stack));
         }
         await this.logError(error, req);
     }
@@ -1131,7 +1131,7 @@ class BackHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const tempErrorHandler = (err) => {
-                    (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('tempErrorHandler', err);
+                    (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
                     reject(err);
                 };
@@ -1152,45 +1152,45 @@ class BackHostApp {
                 await this.shutdown();
             }
             catch (err) {
-                (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('shutdown error:', err.message);
+                (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('shutdown error:', err.message);
             }
             process.exit(0);
         }
     }
     async onProcessSIGINT() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('\nBackHostApp.onProcessSIGINT');
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('\nReceived INT signal (Ctrl+C), shutting down gracefully...');
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('\nBackHostApp.onProcessSIGINT');
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('\nReceived INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
         }
         catch (err) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('shutdown error:', err.message);
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('shutdown error:', err.message);
             process.exit(1);
         }
     }
     async onProcessSIGTERM() {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
             process.exit(0);
         }
         catch (err) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)('shutdown error:', err.message);
+            (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)('shutdown error:', err.message);
             process.exit(1);
         }
     }
     onProcessExit(code) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.onProcessExit:', code);
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('exit:', code);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.onProcessExit:', code);
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('exit:', code);
     }
     async onUncaughtException(err, origin) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onUncaughtException'), err);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onUncaughtException'), err);
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
     async onUnhandledRejection(reason, promise) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onUnhandledRejection'), reason);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
@@ -1203,7 +1203,7 @@ class BackHostApp {
         }
     }
     onHttpServerError(err) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onHttpServerError'), err.code, err.message);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.error)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red('BackHostApp.onHttpServerError'), err.code, err.message);
     }
     static getDomainFromRequest(req) {
         if (!req)
@@ -1221,15 +1221,15 @@ class BackHostApp {
         return 'domain';
     }
     async optionsError(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('options /error');
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('options /error');
         res.header('Access-Control-Allow-Origin', '*')
             .header('Access-Control-Allow-Headers', 'Content-Type, Content-Length')
             .end();
     }
     async postError(req, res, next) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BackHostApp.postError'), req.body.message);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BackHostApp.postError'), req.body.message);
         const body = req.body;
-        _pConsole__WEBPACK_IMPORTED_MODULE_24__.pConsole.log('client error:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(body.message));
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('client error:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(body.message));
         try {
             const data = JSON.stringify({
                 headers: req.headers,
@@ -1241,7 +1241,7 @@ class BackHostApp {
                 message: body.message,
                 stack: body.stack,
                 data: `${body.data}\n${data}`,
-                ip: body.ip || _Context__WEBPACK_IMPORTED_MODULE_10__.Context.getIpFromReq(req),
+                ip: body.ip || _Context__WEBPACK_IMPORTED_MODULE_9__.Context.getIpFromReq(req),
             });
             res.header('Access-Control-Allow-Origin', '*').end('ok');
         }
@@ -1268,7 +1268,7 @@ class BackHostApp {
         this.router.alias('delete', path, route, 'moduleDelete', query);
     }
     broadcastResult(sourceApplication, context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_22__.debug)('BackHostApp.broadcastResult');
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
@@ -1305,24 +1305,24 @@ class BackHostApp {
     }
 }
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug),
-    _decorators__WEBPACK_IMPORTED_MODULE_23__.time
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug),
+    _decorators__WEBPACK_IMPORTED_MODULE_22__.time
 ], BackHostApp.prototype, "init", null);
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug),
-    _decorators__WEBPACK_IMPORTED_MODULE_23__.time
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug),
+    _decorators__WEBPACK_IMPORTED_MODULE_22__.time
 ], BackHostApp.prototype, "run", null);
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
 ], BackHostApp.prototype, "createAppInfos", null);
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessMessage", null);
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_23__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_24__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
 ], BackHostApp.prototype, "shutdown", null);
 
 
@@ -1457,35 +1457,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! node-fetch */ "node-fetch");
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+
 
 class BkHelper {
-    static getRandomString(length) {
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-            const index = getRandomInt(0, chars.length - 1);
-            result += chars.substr(index, 1);
-        }
-        return result;
-    }
-    static currentTime() {
-        const now = new Date();
-        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
-        const arrS = arrN.map((n) => n.toString());
-        for (let i = 0; i < arrN.length; i++) {
-            if (arrN[i] < 10) {
-                arrS[i] = '0' + arrS[i];
-            }
-        }
-        return arrS.join(':');
-    }
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
-                return `BkHelper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
+                return `Helper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
@@ -1520,28 +1499,6 @@ class BkHelper {
         }
         return new Date(ts);
     }
-    static dateTimeReviver(key, value) {
-        if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
-            if (a)
-                return new Date(value);
-        }
-        return value;
-    }
-    static decodeValue(rawValue) {
-        if (rawValue === undefined)
-            throw new Error('decodeValue: undefined');
-        if (rawValue === null)
-            throw new Error('decodeValue: null');
-        if (rawValue === '')
-            throw new Error('decodeValue: empty string');
-        try {
-            return JSON.parse(rawValue, BkHelper.dateTimeReviver);
-        }
-        catch (err) {
-            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
-        }
-    }
     static encodeValue(value) {
         return JSON.stringify(value);
     }
@@ -1550,7 +1507,7 @@ class BkHelper {
         for (const name in obj) {
             if (typeof obj[name] !== 'string')
                 throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = BkHelper.decodeValue(obj[name]);
+            dObj[name] = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(obj[name]);
         }
         return dObj;
     }
@@ -1583,21 +1540,6 @@ class BkHelper {
     }
     static fillArray(n) {
         return Array.from(Array(n).keys());
-    }
-    static formatDate(date, format) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
     static getFirstField(object) {
         const [key] = Object.keys(object);
@@ -6024,12 +5966,23 @@ class MonitorModule {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion),
+/* harmony export */   "getRandomString": () => (/* binding */ getRandomString),
 /* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
 /* harmony export */ });
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
 
-
+function getRandomString(length) {
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const index = getRandomInt(0, chars.length - 1);
+        result += chars.substr(index, 1);
+    }
+    return result;
+}
 function checkNodeVersion(minNodeVersion) {
     const [majorNodeVersion] = process.versions.node.split('.');
     if (parseInt(majorNodeVersion) < minNodeVersion) {
@@ -6038,12 +5991,12 @@ function checkNodeVersion(minNodeVersion) {
 }
 function getSecretSync(secretFilePath) {
     let secret;
-    secret = (0,_file_helper__WEBPACK_IMPORTED_MODULE_1__.getFileContentSync)(secretFilePath);
+    secret = (0,_file_helper__WEBPACK_IMPORTED_MODULE_0__.getFileContentSync)(secretFilePath);
     if (secret) {
         return secret;
     }
-    secret = _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper.getRandomString(20);
-    (0,_file_helper__WEBPACK_IMPORTED_MODULE_1__.writeFileSync)(secretFilePath, secret);
+    secret = getRandomString(20);
+    (0,_file_helper__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(secretFilePath, secret);
     return secret;
 }
 
@@ -6073,10 +6026,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
 /* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
-
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
 
 
 
@@ -6164,7 +6115,7 @@ class BkApplicationController {
                     session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.decodeValue(tzOffset);
+                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_6__.Helper.decodeValue(tzOffset);
                 res.redirect(req.url);
                 this.viewerModule
                     .getHostApp()
@@ -6196,8 +6147,8 @@ class BkApplicationController {
             throw new Error(`no user for route ${route}`);
         }
         const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_10__.Session_save)(session);
+        (0,_Session__WEBPACK_IMPORTED_MODULE_9__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_9__.Session_save)(session);
         context.getRes().json(null);
     }
     async rpc(context, application) {
@@ -6212,14 +6163,14 @@ class BkApplicationController {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_11__.Result)) {
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_10__.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.viewerModule.getHostApp().broadcastResult(application, context, _result);
             }
             else {
                 res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_11__.Result) {
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_10__.Result) {
                     this.viewerModule.getHostApp().broadcastResult(application, context, result);
                 }
             }
@@ -8707,6 +8658,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+
 
 
 class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
@@ -8733,7 +8686,7 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
         return raw;
     }
     rawToValue(raw) {
-        const value = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
             _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.addTimezoneOffset(value);
         }
@@ -8757,6 +8710,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+
 
 
 class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
@@ -8783,7 +8738,7 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
         return raw;
     }
     rawToValue(raw) {
-        const value = _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
             _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.addTimezoneOffset(value);
         }
@@ -8809,6 +8764,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
+
 
 
 
@@ -8884,7 +8841,7 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.encodeValue(value);
     }
     rawToValue(raw) {
-        return _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.decodeValue(raw);
+        return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(raw);
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';
@@ -9499,7 +9456,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -9544,7 +9501,7 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         const query = context.getQuery();
         if (action === _types__WEBPACK_IMPORTED_MODULE_4__.Action.page && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
-                return _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.decodeValue(query.newMode);
+                return _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.decodeValue(query.newMode);
             }
             throw new Error('getNewModeFromContext: newMode required');
         }
@@ -10730,8 +10687,19 @@ class Helper {
         }
         return obj;
     }
-    static decodeValue(raw) {
-        return JSON.parse(raw, Helper.dateTimeReviver);
+    static decodeValue(rawValue) {
+        if (rawValue === undefined)
+            throw new Error('decodeValue: undefined');
+        if (rawValue === null)
+            throw new Error('decodeValue: null');
+        if (rawValue === '')
+            throw new Error('decodeValue: empty string');
+        try {
+            return JSON.parse(rawValue, Helper.dateTimeReviver);
+        }
+        catch (err) {
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${rawValue}"`);
+        }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -10969,6 +10937,17 @@ class Helper {
     }
     static keyToKeyTuple(key) {
         return JSON.parse(key);
+    }
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
     }
 }
 Helper.registerGlobalClass(Helper);

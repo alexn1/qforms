@@ -32,6 +32,7 @@ import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './private-helper';
 import { Router } from './Router';
 import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
+import { Helper } from '../frontend';
 
 const pkg = require('../../package.json');
 
@@ -225,7 +226,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
         this.express.use(
             bodyParser.json({
                 limit: '20mb',
-                reviver: BkHelper.dateTimeReviver,
+                reviver: Helper.dateTimeReviver,
             }),
         );
         this.express.use(bodyParser.urlencoded({ extended: false }));

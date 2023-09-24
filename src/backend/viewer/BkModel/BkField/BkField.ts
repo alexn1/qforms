@@ -11,6 +11,7 @@ import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
 import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
 import { FieldData } from '../../../../common/ModelData/FieldData';
+import { Helper } from '../../../../frontend';
 
 export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
     fillAttributes(response: FieldData): void {
@@ -96,7 +97,7 @@ export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkM
     }
 
     rawToValue(raw: JSONString): any {
-        return BkHelper.decodeValue(raw);
+        return Helper.decodeValue(raw);
     }
 
     isTimezone(): boolean {

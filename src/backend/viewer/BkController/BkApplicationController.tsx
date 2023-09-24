@@ -6,7 +6,7 @@ import { pConsole } from '../../../pConsole';
 import { Links } from '../../Links';
 import { Scripts } from '../../Scripts';
 import { ViewerModule } from '../ViewerModule';
-import { FrontHostApp, ApplicationController } from '../../../frontend';
+import { FrontHostApp, ApplicationController, Helper } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
 import { LoginActionDto, RpcActionDto } from '../../../types';
@@ -118,7 +118,7 @@ export class BkApplicationController {
                 if (session.user === undefined) session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = BkHelper.decodeValue(tzOffset);
+                session.tzOffset = Helper.decodeValue(tzOffset);
 
                 res.redirect(req.url);
                 this.viewerModule
