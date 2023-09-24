@@ -3,5 +3,6 @@ export * from './Helper';
 export * from './ReactComponent';
 export * from './Search';
 export * from './ReactHelper';
+export * from './CookieHelper';
 export * from './icon';
 export * from './widget';

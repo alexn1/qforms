@@ -1,4 +1,4 @@
-import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
+import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
 import { debug } from '../../console';
 
 export class Helper {
@@ -170,36 +170,8 @@ export class Helper {
     //     } */
     // }
 
-    static setCookie(name: string, value: Scalar, time: number) {
-        let expires = '';
-        if (time) {
-            const date = new Date(time);
-            // date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = '; expires=' + date.toUTCString();
-        }
-        document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
-    }
-
-    static getCookie(name: string): string | undefined {
-        const nameEQ = name + '=';
-        const ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0)
-                return decodeURIComponent(c.substring(nameEQ.length, c.length));
-        }
-        return undefined;
-    }
-
-    static eraseCookie(name: string) {
-        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
-
     static delay(ms: number = 1000) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     static registerGlobalClass(Class: any) {

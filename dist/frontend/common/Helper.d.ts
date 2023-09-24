@@ -1,4 +1,4 @@
-import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
+import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
 export declare class Helper {
     static formatNumber(value: number): string;
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
@@ -12,9 +12,6 @@ export declare class Helper {
     static copyTextToClipboard(text: string): Promise<void>;
     static fallbackCopyTextToClipboard(text: string): void;
     static fillArray(n: number): number[];
-    static setCookie(name: string, value: Scalar, time: number): void;
-    static getCookie(name: string): string | undefined;
-    static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;
     static registerGlobalClass(Class: any): void;
     static getGlobalClass(className: string): any;

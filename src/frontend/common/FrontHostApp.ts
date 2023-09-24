@@ -2,6 +2,7 @@ import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
 import { Action, Query } from '../../types';
+import { CookieHelper } from './CookieHelper';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -229,7 +230,7 @@ export class FrontHostApp {
 
     getCookie(name: string): string | undefined {
         if (typeof window === 'object') {
-            return Helper.getCookie(name);
+            return CookieHelper.getCookie(name);
         }
         return this.getOptions().cookies[name];
     }
