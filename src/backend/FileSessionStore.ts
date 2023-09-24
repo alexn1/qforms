@@ -4,7 +4,7 @@ import { Store, SessionData } from 'express-session';
 
 import { BkHelper } from './BkHelper';
 import { debug } from '../console';
-import { getFileContent } from './FileHelper';
+import { getFileContent, writeFile } from './FileHelper';
 
 export class FileSessionStore extends Store {
     store: Record<string, SessionData> = {};
@@ -19,7 +19,7 @@ export class FileSessionStore extends Store {
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        BkHelper.writeFile(sessionFilePath, content)
+        writeFile(sessionFilePath, content)
             .then(() => cb(null))
             .catch((err) => cb(err));
     }

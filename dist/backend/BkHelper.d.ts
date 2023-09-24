@@ -1,18 +1,11 @@
 /// <reference types="node" />
-/// <reference types="node" />
-import fs from 'fs';
 import { JSONString } from '../types';
 export declare class BkHelper {
     static getRandomString(length: number): string;
     static currentTime(): string;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;
-    static copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void>;
-    static writeFile(filePath: string, content: string): Promise<void>;
-    static writeFileSync(filePath: string, content: string): void;
-    static writeFile2(filePath: string, content: string): Promise<void>;
     static mapObject(object: any, cb: any): any;
-    static fsUnlink(filePath: string): Promise<void>;
     static today(timeOffset: number): Date;
     static dateTimeReviver(key: any, value: string | number | Date): string | number | Date;
     static decodeValue(rawValue: JSONString): any;

@@ -159,10 +159,62 @@ export async function createDirIfNotExists2(originalDirPath: string) {
     }
 }
 
-
 export function createDirIfNotExistsSync(dirPath: string) {
     // debug(colors.blue('createDirIfNotExistsSync'), dirPath);
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath);
     }
+}
+
+export function copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void> {
+    return new Promise((resolve, reject) => {
+        const rd = fs.createReadStream(source);
+        rd.on('error', (err) => {
+            reject(err);
+        });
+        const wr = fs.createWriteStream(target);
+        wr.on('error', (err) => {
+            reject(err);
+        });
+        wr.on('close', () => {
+            resolve();
+        });
+        rd.pipe(wr);
+    });
+}
+
+export function writeFile(filePath: string, content: string): Promise<void> {
+    pConsole.debug(colors.blue('writeFile'), filePath);
+    return new Promise((resolve, reject) => {
+        fs.writeFile(filePath, content, 'utf8', (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
+export async function writeFile2(filePath: string, content: string) {
+    const dirPath = getDirPath(filePath);
+    await createDirIfNotExists2(dirPath);
+    return await writeFile(filePath, content);
+}
+
+export function writeFileSync(filePath: string, content: string) {
+    pConsole.debug(colors.blue('writeFileSync'), filePath /* , content */);
+    return fs.writeFileSync(filePath, content, 'utf8');
+}
+
+export function fsUnlink(filePath: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
 }

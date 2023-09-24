@@ -1,15 +1,5 @@
-import fs from 'fs';
-import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { JSONString } from '../types';
-import { debug } from '../console';
-import {
-    createDirIfNotExists,
-    createDirIfNotExists2,
-    createPath,
-    exists2,
-    getDirPath,
-} from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -55,65 +45,12 @@ export class BkHelper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
 
-    static copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const rd = fs.createReadStream(source);
-            rd.on('error', (err) => {
-                reject(err);
-            });
-            const wr = fs.createWriteStream(target);
-            wr.on('error', (err) => {
-                reject(err);
-            });
-            wr.on('close', () => {
-                resolve();
-            });
-            rd.pipe(wr);
-        });
-    }
-
-    static writeFile(filePath: string, content: string): Promise<void> {
-        debug(colors.blue('BkHelper.writeFile'), filePath);
-        return new Promise((resolve, reject) => {
-            fs.writeFile(filePath, content, 'utf8', (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-    }
-
-    static writeFileSync(filePath: string, content: string) {
-        debug(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
-        return fs.writeFileSync(filePath, content, 'utf8');
-    }
-
-    static async writeFile2(filePath: string, content: string) {
-        const dirPath = getDirPath(filePath);
-        await createDirIfNotExists2(dirPath);
-        return await BkHelper.writeFile(filePath, content);
-    }
-
     static mapObject(object: any, cb: any) {
         return Object.keys(object).reduce((obj: any, key) => {
             const [newKey, newVal] = cb(key, object[key]) as [string, any];
             obj[newKey] = newVal;
             return obj;
         }, {});
-    }
-
-    static fsUnlink(filePath: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            fs.unlink(filePath, (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
     }
 
     /*

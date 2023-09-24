@@ -15,3 +15,8 @@ export declare function getDirPath(filePath: string): string;
 export declare function createDirIfNotExists(dirPath: string): Promise<void>;
 export declare function createDirIfNotExists2(originalDirPath: string): Promise<void>;
 export declare function createDirIfNotExistsSync(dirPath: string): void;
+export declare function copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void>;
+export declare function writeFile(filePath: string, content: string): Promise<void>;
+export declare function writeFile2(filePath: string, content: string): Promise<void>;
+export declare function writeFileSync(filePath: string, content: string): void;
+export declare function fsUnlink(filePath: string): Promise<void>;

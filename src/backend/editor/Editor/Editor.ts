@@ -6,7 +6,7 @@ import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
-import { exists2, readTextFile } from '../../FileHelper';
+import { exists2, readTextFile, writeFile2 } from '../../FileHelper';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,
@@ -32,7 +32,7 @@ export class Editor<
         if (text === '') {
             text = emptyTemplate;
         }
-        await BkHelper.writeFile2(newFilePath, text);
+        await writeFile2(newFilePath, text);
         return text;
     } */
 
@@ -43,7 +43,7 @@ export class Editor<
         }
         const template = await readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await BkHelper.writeFile2(newFilePath, content);
+        await writeFile2(newFilePath, content);
         return content;
     }
 
@@ -64,7 +64,7 @@ export class Editor<
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        await BkHelper.writeFile2(filePath, content);
+        await writeFile2(filePath, content);
     }
 
     async getCustomFile(ext: string) {

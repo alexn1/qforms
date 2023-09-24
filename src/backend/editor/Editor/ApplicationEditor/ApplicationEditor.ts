@@ -12,6 +12,7 @@ import { ApplicationAttributes, ApplicationItems } from '../../../common/Scheme/
 import { PageLinkParams } from '../PageLinkEditor/PageLinkEditor';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
+import { fsUnlink } from '../../../FileHelper';
 
 export type ApplicationParams = Partial<ApplicationAttributes> &
     Partial<ApplicationItems> & {
@@ -92,7 +93,7 @@ export class ApplicationEditor extends Editor<ApplicationScheme> {
     async removePageFile(name: string) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
-        await BkHelper.fsUnlink(pageFilePath);
+        await fsUnlink(pageFilePath);
     }
 
     async createPageEditor(relFilePath: string): Promise<PageEditor> {

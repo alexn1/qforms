@@ -1,5 +1,5 @@
 import { BkHelper } from './BkHelper';
-import { getFileContentSync } from './FileHelper';
+import { getFileContentSync, writeFileSync } from './FileHelper';
 
 export function checkNodeVersion(minNodeVersion: number): void {
     const [majorNodeVersion] = process.versions.node.split('.');
@@ -15,6 +15,6 @@ export function getSecretSync(secretFilePath: string): string {
         return secret;
     }
     secret = BkHelper.getRandomString(20);
-    BkHelper.writeFileSync(secretFilePath, secret);
+    writeFileSync(secretFilePath, secret);
     return secret;
 }

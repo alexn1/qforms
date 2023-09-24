@@ -2,7 +2,7 @@ import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
 import { debug } from '../console';
 import { Nullable } from '../types';
-import { exists2, readTextFile } from './FileHelper';
+import { exists2, readTextFile, writeFile2 } from './FileHelper';
 
 export class JsonFile {
     content: Nullable<string> = null;
@@ -19,7 +19,7 @@ export class JsonFile {
             this.data = {};
         }
         this.content = JSON.stringify(this.data, null, 4);
-        await BkHelper.writeFile2(this.filePath, this.content);
+        await writeFile2(this.filePath, this.content);
     }
 
     async read(): Promise<void> {
@@ -31,7 +31,7 @@ export class JsonFile {
     async save(): Promise<void> {
         debug('JsonFile.save', this.filePath);
         this.content = JSON.stringify(this.data, null, 4);
-        await BkHelper.writeFile2(this.filePath, this.content);
+        await writeFile2(this.filePath, this.content);
     }
 
     getAttr(name: string): string {
