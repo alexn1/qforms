@@ -8,7 +8,7 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { BackHostApp } from '../BackHostApp';
 import { pConsole } from '../../pConsole';
-import { getFilePaths } from '../FileHelper';
+import { getFilePaths } from '../file-helper';
 
 const pkg = require('../../../package.json');
 

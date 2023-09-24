@@ -12,7 +12,7 @@ import { ApplicationAttributes, ApplicationItems } from '../../../common/Scheme/
 import { PageLinkParams } from '../PageLinkEditor/PageLinkEditor';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
-import { fsUnlink } from '../../../FileHelper';
+import { fsUnlink } from '../../../file-helper';
 
 export type ApplicationParams = Partial<ApplicationAttributes> &
     Partial<ApplicationItems> & {

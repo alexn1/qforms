@@ -11,7 +11,7 @@ import * as backend from '../index';
 import { home } from './home';
 import { debug } from '../../console';
 import { EditorPostDto, Nullable } from '../../types';
-import { getFilePaths } from '../FileHelper';
+import { getFilePaths } from '../file-helper';
 
 const pkg = require('../../../package.json');
 
@@ -59,17 +59,11 @@ export class EditorModule {
 
     async init() {
         this.css = (
-            await getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
-                'css',
-            )
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')
         ).map((path: string) => `/editor/public/${path}`);
-        
+
         this.js = (
-            await getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
-                'js',
-            )
+            await getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')
         ).map((path: string) => `/editor/public/${path}`);
         // debug('editor.css:', this.css);
         // debug('editor.js:' , this.js);

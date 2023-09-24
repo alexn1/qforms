@@ -11,7 +11,7 @@ import { BaseDto, Nullable, Action } from '../../types';
 import { BkApplicationController } from './BkController/BkApplicationController';
 import { BkPageController } from './BkController/BkPageController';
 import { BkDataSourceController } from './BkController/BkDataSourceController';
-import { getFilePaths } from '../FileHelper';
+import { getFilePaths } from '../file-helper';
 
 const pkg = require('../../../package.json');
 

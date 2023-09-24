@@ -1,5 +1,5 @@
 import { BkHelper } from './BkHelper';
-import { getFileContentSync, writeFileSync } from './FileHelper';
+import { getFileContentSync, writeFileSync } from './file-helper';
 
 export function checkNodeVersion(minNodeVersion: number): void {
     const [majorNodeVersion] = process.versions.node.split('.');

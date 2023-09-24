@@ -31,7 +31,7 @@ import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './private-helper';
 import { Router } from './Router';
-import { createDirIfNotExists, createDirIfNotExistsSync } from './FileHelper';
+import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
 
 const pkg = require('../../package.json');
 

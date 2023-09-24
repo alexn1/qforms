@@ -1,10 +1,7 @@
 import path from 'path';
 import { Store, SessionData } from 'express-session';
-// import colors from 'colors/safe';
-
-import { BkHelper } from './BkHelper';
 import { debug } from '../console';
-import { getFileContent, writeFile } from './FileHelper';
+import { getFileContent, writeFile } from './file-helper';
 
 export class FileSessionStore extends Store {
     store: Record<string, SessionData> = {};

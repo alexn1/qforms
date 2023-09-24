@@ -28,7 +28,7 @@ import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
 import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
-import { _glob, exists2, getFilePaths, readTextFile } from '../../../FileHelper';
+import { _glob, exists2, getFilePaths, readTextFile } from '../../../file-helper';
 import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');

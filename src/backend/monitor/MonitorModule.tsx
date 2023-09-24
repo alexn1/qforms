@@ -8,7 +8,7 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { pConsole } from '../../pConsole';
 import { getWebSocketIP } from '../WebScoketHelper';
-import { getFilePaths } from '../FileHelper';
+import { getFilePaths } from '../file-helper';
 
 const pkg = require('../../../package.json');
 

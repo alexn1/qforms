@@ -2,7 +2,7 @@ import { BkHelper } from './BkHelper';
 import { BaseModel } from './BaseModel';
 import { debug } from '../console';
 import { Nullable } from '../types';
-import { exists2, readTextFile, writeFile2 } from './FileHelper';
+import { exists2, readTextFile, writeFile2 } from './file-helper';
 
 export class JsonFile {
     content: Nullable<string> = null;

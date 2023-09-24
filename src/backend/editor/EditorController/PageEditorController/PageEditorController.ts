@@ -1,6 +1,6 @@
 import path from 'path';
 import { VisualEditorController } from '../VisualEditorController';
-import { readTextFile } from '../../../FileHelper';
+import { readTextFile } from '../../../file-helper';
 
 export class PageEditorController extends VisualEditorController {
     async get(params) {
