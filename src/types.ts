@@ -1,5 +1,5 @@
 import { ParsedQs } from 'qs';
-import { PageData } from './common';
+import { PageData } from './common/ModelData/PageData';
 
 export type Scalar = string | number | boolean;
 
