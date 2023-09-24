@@ -32232,12 +32232,26 @@ class Helper {
             throw new Error('Helper.decodeObject: no object');
         const obj = {};
         for (const name in eObj) {
+            if (typeof obj[name] !== 'string') {
+                throw new Error(`decodeObject: cannot decode: ${name}, type: ${typeof obj[name]}`);
+            }
             obj[name] = Helper.decodeValue(eObj[name]);
         }
         return obj;
     }
     static decodeValue(raw) {
-        return JSON.parse(raw, Helper.dateTimeReviver);
+        if (raw === undefined)
+            throw new Error('decodeValue: undefined');
+        if (raw === null)
+            throw new Error('decodeValue: null');
+        if (raw === '')
+            throw new Error('decodeValue: empty string');
+        try {
+            return JSON.parse(raw, Helper.dateTimeReviver);
+        }
+        catch (err) {
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${raw}"`);
+        }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -32475,6 +32489,42 @@ class Helper {
     }
     static keyToKeyTuple(key) {
         return JSON.parse(key);
+    }
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
+    }
+    static getFirstField(object) {
+        const [key] = Object.keys(object);
+        if (!key)
+            throw new Error('getFirstField: no fields');
+        return object[key];
+    }
+    static mapObject(object, cb) {
+        return Object.keys(object).reduce((obj, key) => {
+            const [newKey, newVal] = cb(key, object[key]);
+            obj[newKey] = newVal;
+            return obj;
+        }, {});
+    }
+    static templateArray(arr) {
+        return arr.map((item) => {
+            const type = typeof item;
+            if (type === 'number' || type === 'boolean') {
+                return item;
+            }
+            if (type === 'string') {
+                return `'${item}'`;
+            }
+            throw new Error(`wrong type for array item: ${type}`);
+        });
     }
 }
 Helper.registerGlobalClass(Helper);

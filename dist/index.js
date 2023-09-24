@@ -1459,27 +1459,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_0__);
 
 class BkHelper {
-    static moveArrItem(arr, item, offset) {
-        const oldIndex = arr.indexOf(item);
-        if (oldIndex === -1)
-            throw new Error('cannot find element');
-        const newIndex = oldIndex + offset;
-        if (newIndex < 0)
-            throw new Error('cannot up top element');
-        if (newIndex > arr.length - 1)
-            throw new Error('cannot down bottom element');
-        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-    }
-    static mapObject(object, cb) {
-        return Object.keys(object).reduce((obj, key) => {
-            const [newKey, newVal] = cb(key, object[key]);
-            obj[newKey] = newVal;
-            return obj;
-        }, {});
-    }
-    static fillArray(n) {
-        return Array.from(Array(n).keys());
-    }
     static argvAsKeyValue(argv, slice = 2) {
         return argv
             .slice(slice)
@@ -1488,18 +1467,6 @@ class BkHelper {
             record[key] = value;
             return record;
         }, {});
-    }
-    static templateArray(arr) {
-        return arr.map((item) => {
-            const type = typeof item;
-            if (type === 'number' || type === 'boolean') {
-                return item;
-            }
-            if (type === 'string') {
-                return `'${item}'`;
-            }
-            throw new Error(`wrong type for array item: ${type}`);
-        });
     }
     static registerGlobalClass(Class) {
         if (global[Class.name])
@@ -2865,10 +2832,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../BaseModel */ "./src/backend/BaseModel.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../backend */ "./src/backend/index.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../console */ "./src/console.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../backend */ "./src/backend/index.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../console */ "./src/console.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
 
 const ejs = __webpack_require__(/*! ejs */ "ejs");
 
@@ -2887,31 +2854,31 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         return this.editorPath;
     }
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.exists2)(newFilePath);
+        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.exists2)(newFilePath);
         if (exists) {
             throw new Error(`File ${path__WEBPACK_IMPORTED_MODULE_0___default().basename(newFilePath)} already exists.`);
         }
-        const template = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.readTextFile)(templateFilePath);
+        const template = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.readTextFile)(templateFilePath);
         const content = ejs.render(template, params);
-        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.writeFile2)(newFilePath, content);
+        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.writeFile2)(newFilePath, content);
         return content;
     }
     async getFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Editor.getFile', filePath);
-        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.exists2)(filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('Editor.getFile', filePath);
+        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.exists2)(filePath);
         if (exists) {
-            return await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.readTextFile)(filePath);
+            return await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.readTextFile)(filePath);
         }
     }
     async saveFile(filePath, content) {
-        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.exists2)(filePath);
+        const exists = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.exists2)(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_5__.writeFile2)(filePath, content);
+        await (0,_file_helper__WEBPACK_IMPORTED_MODULE_4__.writeFile2)(filePath, content);
     }
     async getCustomFile(ext) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Editor.getCustomFile', ext);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
@@ -2933,7 +2900,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         return path__WEBPACK_IMPORTED_MODULE_0___default().join(customDirPath, this.getName() + '.' + ext);
     }
     moveDataColItem(colName, name, offset) {
-        _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+        _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     setColData(colName, newData) {
         return this.getParent().replaceDataColItem(colName, this.data, newData);
@@ -2941,7 +2908,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
     createItemEditor(colName, itemName) {
         const data = this.getColItemData(colName, itemName);
         const className = _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getClassName(data);
-        const Class = _backend__WEBPACK_IMPORTED_MODULE_3__[`${className}Editor`];
+        const Class = _backend__WEBPACK_IMPORTED_MODULE_2__[`${className}Editor`];
         return new Class(data, this, this.editorPath);
     }
     async getCustomDirPath() {
@@ -2958,12 +2925,12 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         this.moveDataColItem(colName, itemName, 1);
     }
     newItemData(className, colName, params) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('Editor.newItemData', className, colName, params);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('Editor.newItemData', className, colName, params);
         const { name } = params;
         if (!name)
             throw new Error('no name');
         const editorClassName = `${className}Editor`;
-        const Class = _backend__WEBPACK_IMPORTED_MODULE_3__[editorClassName];
+        const Class = _backend__WEBPACK_IMPORTED_MODULE_2__[editorClassName];
         if (!Class)
             throw new Error(`no class ${editorClassName}`);
         const data = Class.createData(params);
@@ -2981,7 +2948,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
                 const name = data['@attributes'] ? _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data) : data.name;
                 throw new Error(`${name}: no class in data`);
             }
-            return _backend__WEBPACK_IMPORTED_MODULE_3__[`${params.class}Editor`].createData(params);
+            return _backend__WEBPACK_IMPORTED_MODULE_2__[`${params.class}Editor`].createData(params);
         }
         catch (err) {
             const name = data['@attributes'] ? _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data) : data.name;
@@ -7326,9 +7293,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkPersistentDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkPersistentDataSource/BkPersistentDataSource.ts");
 /* harmony import */ var _BkDataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -7449,7 +7416,7 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         return [rawRows, count];
     }
     async create(context, _values = null) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('SqlDataSource.create');
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('SqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7462,11 +7429,11 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         const values = _values ? _values : this.decodeRow(body.row);
         const autoColumnTypes = this.getAutoColumnTypes();
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('newRow:', newRow);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('newRow:', newRow);
         const key = this.getKeyFromValues(newRow);
         if (!key)
             throw new Error('insert: cannot calc row key');
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('key:', key);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('key:', key);
         const keyParams = _BkDataSource__WEBPACK_IMPORTED_MODULE_1__.BkDataSource.keyToParams(key);
         const singleQuery = this.getSingleQuery(context);
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
@@ -7474,13 +7441,13 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
             throw new Error('singleQuery does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        const result = new _Result__WEBPACK_IMPORTED_MODULE_3__.Result();
-        _Result__WEBPACK_IMPORTED_MODULE_3__.Result.addInsertToResult(result, database, table, key);
-        _Result__WEBPACK_IMPORTED_MODULE_3__.Result.addInsertExToResult(result, database, table, key, rawRow);
+        const result = new _Result__WEBPACK_IMPORTED_MODULE_2__.Result();
+        _Result__WEBPACK_IMPORTED_MODULE_2__.Result.addInsertToResult(result, database, table, key);
+        _Result__WEBPACK_IMPORTED_MODULE_2__.Result.addInsertExToResult(result, database, table, key, rawRow);
         return result;
     }
     async update(context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('SqlDataSource.update');
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('SqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -7493,24 +7460,24 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = _BkHelper__WEBPACK_IMPORTED_MODULE_2__.BkHelper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = _BkDataSource__WEBPACK_IMPORTED_MODULE_1__.BkDataSource.keyToParams(newKey);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('key:', key);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('newKey:', newKey);
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('newKeyParams:', newKeyParams);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('key:', key);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('newKey:', newKey);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('newKeyParams:', newKeyParams);
         const selectQuery = this.getSingleQuery(context);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        const result = new _Result__WEBPACK_IMPORTED_MODULE_3__.Result();
-        _Result__WEBPACK_IMPORTED_MODULE_3__.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
-        _Result__WEBPACK_IMPORTED_MODULE_3__.Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
+        const result = new _Result__WEBPACK_IMPORTED_MODULE_2__.Result();
+        _Result__WEBPACK_IMPORTED_MODULE_2__.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
+        _Result__WEBPACK_IMPORTED_MODULE_2__.Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
     async delete(context) {
@@ -7523,8 +7490,8 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = new _Result__WEBPACK_IMPORTED_MODULE_3__.Result();
-        _Result__WEBPACK_IMPORTED_MODULE_3__.Result.addDeleteToResult(result, database, table, key);
+        const result = new _Result__WEBPACK_IMPORTED_MODULE_2__.Result();
+        _Result__WEBPACK_IMPORTED_MODULE_2__.Result.addDeleteToResult(result, database, table, key);
         return result;
     }
     fillAttributes(response) {
@@ -10949,6 +10916,25 @@ class Helper {
         if (!key)
             throw new Error('getFirstField: no fields');
         return object[key];
+    }
+    static mapObject(object, cb) {
+        return Object.keys(object).reduce((obj, key) => {
+            const [newKey, newVal] = cb(key, object[key]);
+            obj[newKey] = newVal;
+            return obj;
+        }, {});
+    }
+    static templateArray(arr) {
+        return arr.map((item) => {
+            const type = typeof item;
+            if (type === 'number' || type === 'boolean') {
+                return item;
+            }
+            if (type === 'string') {
+                return `'${item}'`;
+            }
+            throw new Error(`wrong type for array item: ${type}`);
+        });
     }
 }
 Helper.registerGlobalClass(Helper);

@@ -327,7 +327,7 @@ export class Helper {
         return new Date(date.getTime());
     }
 
-    static fillArray(n: number) {
+    static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());
     }
 
@@ -460,6 +460,27 @@ export class Helper {
         const [key] = Object.keys(object);
         if (!key) throw new Error('getFirstField: no fields');
         return object[key];
+    }
+
+    static mapObject(object: any, cb: any) {
+        return Object.keys(object).reduce((obj: any, key) => {
+            const [newKey, newVal] = cb(key, object[key]) as [string, any];
+            obj[newKey] = newVal;
+            return obj;
+        }, {});
+    }
+
+    static templateArray(arr: any[]) {
+        return arr.map((item) => {
+            const type = typeof item;
+            if (type === 'number' || type === 'boolean') {
+                return item;
+            }
+            if (type === 'string') {
+                return `'${item}'`;
+            }
+            throw new Error(`wrong type for array item: ${type}`);
+        });
     }
 }
 

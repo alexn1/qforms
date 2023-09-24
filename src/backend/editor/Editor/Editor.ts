@@ -7,6 +7,7 @@ import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
 import { exists2, readTextFile, writeFile2 } from '../../file-helper';
+import { Helper } from '../../../frontend';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,
@@ -113,8 +114,8 @@ export class Editor<
         return new DataSourceClass(data, this);
     } */
 
-    moveDataColItem(colName, name, offset) {
-        BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+    moveDataColItem(colName: string, name: string, offset: number) {
+        Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
 
     /* async newActionData(params) {

@@ -10,7 +10,7 @@ export declare class Editor<TBkModelData extends ModelScheme = ModelScheme> exte
     getCustomFile(ext: string): Promise<string | undefined>;
     saveCustomFile(ext: string, text: string): Promise<void>;
     getCustomFilePath(ext: any): Promise<string>;
-    moveDataColItem(colName: any, name: any, offset: any): void;
+    moveDataColItem(colName: string, name: string, offset: number): void;
     setColData(colName: string, newData: ModelScheme): any;
     createItemEditor(colName: string, itemName: string): any;
     getCustomDirPath(): Promise<string>;

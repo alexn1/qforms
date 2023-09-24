@@ -44,4 +44,6 @@ export declare class Helper {
     static keyToKeyTuple(key: Key): KeyTuple;
     static currentTime(): string;
     static getFirstField(object: any): any;
+    static mapObject(object: any, cb: any): any;
+    static templateArray(arr: any[]): any[];
 }

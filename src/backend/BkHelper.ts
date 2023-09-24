@@ -10,22 +10,14 @@ export class BkHelper {
         });
     } */
 
-    static moveArrItem(arr: any[], item: any, offset: number) {
+    /* static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
         const newIndex = oldIndex + offset;
         if (newIndex < 0) throw new Error('cannot up top element');
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-    }
-
-    static mapObject(object: any, cb: any) {
-        return Object.keys(object).reduce((obj: any, key) => {
-            const [newKey, newVal] = cb(key, object[key]) as [string, any];
-            obj[newKey] = newVal;
-            return obj;
-        }, {});
-    }
+    } */
 
     /* static dateTimeReviver(key: any, value: string | number | Date) {
         if (typeof value === 'string') {
@@ -63,9 +55,9 @@ export class BkHelper {
         return dObj;
     } */
 
-    static fillArray(n: number): number[] {
+    /* static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());
-    }
+    } */
 
     /* static formatDate(date: Date, format: string) {
         const YYYY = date.getFullYear();
@@ -96,19 +88,6 @@ export class BkHelper {
             }, {} as Record<string, string>);
     }
 
-    static templateArray(arr: any[]) {
-        return arr.map((item) => {
-            const type = typeof item;
-            if (type === 'number' || type === 'boolean') {
-                return item;
-            }
-            if (type === 'string') {
-                return `'${item}'`;
-            }
-            throw new Error(`wrong type for array item: ${type}`);
-        });
-    }
-
     /* static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
     } */
@@ -125,7 +104,6 @@ export class BkHelper {
         const [type, data] = value.split(';');
         const contentType = type.split(':')[1];
         const base64string = data.split(',')[1];
-        // debug('base64string:', base64string);
         const buffer = Buffer.from(base64string, 'base64');
         return [contentType, buffer];
     }
