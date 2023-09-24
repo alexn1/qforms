@@ -7,6 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { pConsole } from '../../pConsole';
+import { getWebSocketIP } from '../WebScoketHelper';
 
 const pkg = require('../../../package.json');
 
@@ -76,7 +77,7 @@ export class MonitorModule {
                             uuid: webSocket.uuid,
                             // @ts-ignore
                             userId: webSocket.userId,
-                            ip: BkHelper.getWebSocketIP(webSocket),
+                            ip: getWebSocketIP(webSocket),
                             // @ts-ignore
                             version: webSocket.customFields.version,
                         };

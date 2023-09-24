@@ -1463,11 +1463,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(node_fetch__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! node:fs/promises */ "node:fs/promises");
 /* harmony import */ var node_fs_promises__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(node_fs_promises__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "uuid");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../console */ "./src/console.ts");
-/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
-
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../console */ "./src/console.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
 
 
 
@@ -1489,11 +1486,11 @@ class BkHelper {
         return result;
     }
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return (0,_FileHelper__WEBPACK_IMPORTED_MODULE_7__._getFilePathsSync)(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
+        return (0,_FileHelper__WEBPACK_IMPORTED_MODULE_6__._getFilePathsSync)(path__WEBPACK_IMPORTED_MODULE_1___default().join(publicDirPath, subDirPath), ext);
     }
     static async getFilePaths(dirPath, ext) {
         const filePaths = [];
-        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_7__._getFilePaths2)(dirPath, ext, filePaths);
+        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_6__._getFilePaths2)(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths;
         return relativeFilePaths;
     }
@@ -1541,7 +1538,7 @@ class BkHelper {
         return fs__WEBPACK_IMPORTED_MODULE_0___default().readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.readBinaryFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().readFile(filePath, (err, data) => {
                 if (err) {
@@ -1575,7 +1572,7 @@ class BkHelper {
         }
     }
     static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.createDirIfNotExists'), dirPath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
                 if (exists) {
@@ -1641,7 +1638,7 @@ class BkHelper {
         }
     }
     static writeFile(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFile'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs__WEBPACK_IMPORTED_MODULE_0___default().writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -1654,7 +1651,7 @@ class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_6__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFileSync'), filePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_5__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().blue('BkHelper.writeFileSync'), filePath);
         return fs__WEBPACK_IMPORTED_MODULE_0___default().writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
@@ -1787,16 +1784,6 @@ class BkHelper {
             return record;
         }, {});
     }
-    static getWebSocketIP(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-ip']
-            ? webSocket.upgradeReq.headers['x-real-ip']
-            : webSocket.upgradeReq.socket.remoteAddress;
-    }
-    static getWebSocketPort(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-port']
-            ? webSocket.upgradeReq.headers['x-real-port']
-            : webSocket.upgradeReq.socket.remotePort;
-    }
     static templateArray(arr) {
         return arr.map((item) => {
             const type = typeof item;
@@ -1856,9 +1843,6 @@ class BkHelper {
         if (response.ok)
             return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
-    }
-    static newClientId() {
-        return (0,uuid__WEBPACK_IMPORTED_MODULE_5__.v4)();
     }
 }
 BkHelper.registerGlobalClass(BkHelper);
@@ -2617,6 +2601,39 @@ function Session_save(session) {
             }
         });
     });
+}
+
+
+/***/ }),
+
+/***/ "./src/backend/WebScoketHelper.ts":
+/*!****************************************!*\
+  !*** ./src/backend/WebScoketHelper.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWebSocketIP": () => (/* binding */ getWebSocketIP),
+/* harmony export */   "getWebSocketPort": () => (/* binding */ getWebSocketPort),
+/* harmony export */   "newClientId": () => (/* binding */ newClientId)
+/* harmony export */ });
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! uuid */ "uuid");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_0__);
+
+function getWebSocketIP(webSocket) {
+    return webSocket.upgradeReq.headers['x-real-ip']
+        ? webSocket.upgradeReq.headers['x-real-ip']
+        : webSocket.upgradeReq.socket.remoteAddress;
+}
+function getWebSocketPort(webSocket) {
+    return webSocket.upgradeReq.headers['x-real-port']
+        ? webSocket.upgradeReq.headers['x-real-port']
+        : webSocket.upgradeReq.socket.remotePort;
+}
+function newClientId() {
+    return (0,uuid__WEBPACK_IMPORTED_MODULE_0__.v4)();
 }
 
 
@@ -5857,6 +5874,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
 /* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+
 
 
 
@@ -5913,7 +5932,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.getWebSocketIP(webSocket),
+                            ip: (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_8__.getWebSocketIP)(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),
@@ -6399,6 +6418,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../FileHelper */ "./src/backend/FileHelper.ts");
+/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+
 
 
 
@@ -6498,7 +6519,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         response.text = this.getText();
         response.menu = this.menu;
         response.nav = this.nav;
-        response.uuid = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.newClientId();
+        response.uuid = (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_13__.newClientId)();
         response.actions = this.getCol('actions').map((action) => ({
             name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
             caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),

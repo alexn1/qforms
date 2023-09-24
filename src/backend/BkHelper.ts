@@ -4,7 +4,6 @@ import path from 'path';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { access } from 'node:fs/promises';
-import { v4 as uuidv4 } from 'uuid';
 import { JSONString } from '../types';
 import { debug } from '../console';
 import { _getFilePathsSync, _getFilePaths2 } from './FileHelper';
@@ -59,17 +58,6 @@ export class BkHelper {
             return 'undefined';
         });
     }
-
-    /* static replaceKey(obj, key1, key2) {
-        const keys   = Object.keys(obj);
-        const values = _.filter(obj, () => {return true;});
-        const index  = keys.indexOf(key1);
-        if (index !== -1) {
-            keys[index] = key2;
-            obj = _.object(keys, values);
-        }
-        return obj;
-    } */
 
     static readTextFile(path: string): Promise<string> {
         // debug(colors.blue('BkHelper.readTextFile'), path);
@@ -128,7 +116,6 @@ export class BkHelper {
         for (let i = 1; i <= arr.length; i++) {
             const dirPath = BkHelper.createPath(arr.slice(0, i));
             const exists = await BkHelper.exists2(dirPath);
-            // debug('dirPath', i, dirPath, exists);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
             }
@@ -161,25 +148,6 @@ export class BkHelper {
         }
     }
 
-    /* static moveObjProp(obj, prop, offset) {
-        const keys     = _.keys(obj);
-        const values   = _.values(obj);
-        const oldIndex = keys.indexOf(prop);
-        if (oldIndex === -1) {
-            throw new Error('cannot find element');
-        }
-        const newIndex = oldIndex + offset;
-        if (newIndex < 0) {
-            throw new Error('cannot up top element');
-        }
-        if (newIndex > values.length - 1) {
-            throw new Error('cannot down bottom element');
-        }
-        keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
-        values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
-        return _.object(keys, values);
-    } */
-
     static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
@@ -188,28 +156,6 @@ export class BkHelper {
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-
-    /* static getTempSubDirPath3(tempDirPath) {
-        return new Promise((resolve, reject) => {
-            const subDirName = BkHelper.getRandomString(8);
-            const tempSubSirPath = path.join(tempDirPath, subDirName);
-            fs.exists(tempSubSirPath, exists => {
-                if (!exists) {
-                    fs.mkdir(tempSubSirPath, err => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(tempSubSirPath);
-                        }
-                    });
-                } else {
-                    BkHelper.getTempSubDirPath(tempDirPath, () => {
-                        resolve();
-                    });
-                }
-            });
-        });
-    } */
 
     static copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -227,17 +173,6 @@ export class BkHelper {
             rd.pipe(wr);
         });
     }
-
-    /*
-    // fs.exists deprecated in node and not supported in bun
-    static exists(path: fs.PathLike): Promise<boolean> {
-        // debug(colors.blue('BkHelper.exists'), path);
-        return new Promise((resolve) => {
-            fs.exists(path, (exists) => {
-                resolve(exists);
-            });
-        });
-    } */
 
     static async exists2(path: fs.PathLike): Promise<boolean> {
         try {
@@ -264,6 +199,7 @@ export class BkHelper {
             });
         });
     }
+
     static writeFileSync(filePath: string, content: string) {
         debug(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
         return fs.writeFileSync(filePath, content, 'utf8');
@@ -295,7 +231,9 @@ export class BkHelper {
         });
     }
 
-    // timeOffset number in minutes
+    /*
+     * timeOffset number in minutes
+     */
     static today(timeOffset: number) {
         // debug('BkHelper.today', timeOffset);
         let ts = Date.now();
@@ -422,18 +360,6 @@ export class BkHelper {
             }, {} as Record<string, string>);
     }
 
-    static getWebSocketIP(webSocket: any) {
-        return webSocket.upgradeReq.headers['x-real-ip']
-            ? webSocket.upgradeReq.headers['x-real-ip']
-            : webSocket.upgradeReq.socket.remoteAddress;
-    }
-
-    static getWebSocketPort(webSocket: any) {
-        return webSocket.upgradeReq.headers['x-real-port']
-            ? webSocket.upgradeReq.headers['x-real-port']
-            : webSocket.upgradeReq.socket.remotePort;
-    }
-
     static templateArray(arr: any[]) {
         return arr.map((item) => {
             const type = typeof item;
@@ -446,17 +372,6 @@ export class BkHelper {
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
-
-    /* static createEmptyPromise<T = any>(): EmptyPromise<T> {
-        let _resolve, _reject;
-        const promise = new EmptyPromise<T>(function (resolve, reject) {
-            _resolve = resolve;
-            _reject = reject;
-        });
-        promise.resolve = _resolve;
-        promise.reject = _reject;
-        return promise;
-    } */
 
     static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
@@ -511,10 +426,6 @@ export class BkHelper {
         });
         if (response.ok) return await response.json();
         throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
-    }
-
-    static newClientId() {
-        return uuidv4();
     }
 }
 

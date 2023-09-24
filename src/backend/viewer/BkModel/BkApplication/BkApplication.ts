@@ -29,6 +29,7 @@ import { Link, Nullable } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
 import { _glob } from '../../../FileHelper';
+import { newClientId } from '../../../WebScoketHelper';
 
 const pkg = require('../../../../../package.json');
 
@@ -170,7 +171,7 @@ export class BkApplication<
         response.nav = this.nav;
 
         // uuid
-        response.uuid = BkHelper.newClientId();
+        response.uuid = newClientId();
 
         // actions
         response.actions = this.getCol('actions').map((action: ActionScheme) => ({

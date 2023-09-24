@@ -43,13 +43,10 @@ export declare class BkHelper {
     static formatDate(date: Date, format: string): string;
     static getFirstField(object: any): any;
     static argvAsKeyValue(argv: string[], slice?: number): Record<string, string>;
-    static getWebSocketIP(webSocket: any): any;
-    static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any[]): any[];
     static formatNumber(value: number): string;
     static formatTime2(_sec: number): string;
     static registerGlobalClass(Class: any): void;
     static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer];
     static post(url: string, data: any): Promise<any>;
-    static newClientId(): string;
 }

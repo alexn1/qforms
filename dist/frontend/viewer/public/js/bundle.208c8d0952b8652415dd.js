@@ -32267,9 +32267,6 @@ class Helper {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
         return component;
     }
-    static destroyReactComponent(root) {
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
-    }
     static readFileAsDataURL(file) {
         return new Promise((resolve) => {
             const reader = new FileReader();
