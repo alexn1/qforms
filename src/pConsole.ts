@@ -37,6 +37,7 @@ export const pConsole = new Proxy(console, {
                 if (methodLevel >= logLevel) {
                     // @ts-ignore
                     if (!isJest()) {
+                        // @ts-ignore
                         return target[prop].apply(receiver, args);
                     }
                     if (prop === 'error') {
