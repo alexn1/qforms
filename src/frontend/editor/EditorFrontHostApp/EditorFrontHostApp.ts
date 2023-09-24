@@ -5,7 +5,7 @@ import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { EdPageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';
 import { EdDocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
-import { Helper } from '../../common';
+import { Helper, ReactHelper } from '../../common';
 import { EdModalController } from '../EdModalController/EdModalController';
 
 export class EditorFrontHostApp extends FrontHostApp {
@@ -53,7 +53,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.items = [applicationController];
 
         // view
-        this.view = Helper.createReactComponent(
+        this.view = ReactHelper.createReactComponent(
             document.querySelector('.editor__root')!,
             EditorFrontHostAppView,
             { ctrl: this, key: 'editor' },

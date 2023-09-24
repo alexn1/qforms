@@ -1,5 +1,5 @@
 import { LoginController } from './Controller/LoginController/LoginController';
-import { FrontHostApp, Helper } from '../common';
+import { FrontHostApp, Helper, ReactHelper } from '../common';
 
 export class LoginFrontHostApp extends FrontHostApp {
     constructor(private data) {
@@ -14,9 +14,13 @@ export class LoginFrontHostApp extends FrontHostApp {
             `.${loginController.getViewClassCssBlockName()}__root`,
         );
         if (!rootElement) throw new Error('no root element');
-        const loginView = Helper.createReactComponent(rootElement, loginController.getViewClass(), {
-            ctrl: loginController,
-        });
+        const loginView = ReactHelper.createReactComponent(
+            rootElement,
+            loginController.getViewClass(),
+            {
+                ctrl: loginController,
+            },
+        );
     }
 
     getText() {

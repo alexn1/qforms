@@ -1,6 +1,4 @@
-import { ReactNode } from 'react';
 import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
-import { ReactComponent } from './ReactComponent';
 export declare class Helper {
     static formatNumber(value: number): string;
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
@@ -8,8 +6,6 @@ export declare class Helper {
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: string, value: any): any;
-    static createReactComponent(rootElement: Element, type: any, props?: {}, children?: ReactNode[]): ReactComponent | undefined;
-    static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: ReactNode[]): ReactComponent | undefined;
     static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null>;
     static templateToJsString(value: string, params: Record<string, any>): string;
     static moveArrItem(arr: any[], item: any, offset: number): void;

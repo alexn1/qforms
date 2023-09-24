@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom';
-
 import { Application } from './Model/Application/Application';
 import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
-import { FrontHostApp, Helper, FrontHostAppOptions } from '../common';
+import { FrontHostApp, Helper, FrontHostAppOptions, ReactHelper } from '../common';
 import { AlertController } from './Controller/AlertController/AlertController';
 import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
 import { ApplicationData } from '../../common/ModelData/ApplicationData';
@@ -124,7 +123,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
                         },
                     }));
                     // console.debug('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {
+                    const view = ReactHelper.createReactComponent(root, ctrl.getViewClass(), {
                         ctrl,
                         key: 0,
                     });
@@ -159,7 +158,9 @@ export class ViewerFrontHostApp extends FrontHostApp {
                         },
                     }));
                     // console.debug('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = ReactHelper.createReactComponent(root, ctrl.getViewClass(), {
+                        ctrl,
+                    });
                     // console.debug('view', view);
                 } else {
                     reject(new Error('confirm already exists'));

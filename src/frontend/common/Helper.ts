@@ -1,7 +1,4 @@
-import React, { ReactNode } from 'react';
-import ReactDOM from 'react-dom';
 import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
-import { ReactComponent } from './ReactComponent';
 import { debug } from '../../console';
 
 export class Helper {
@@ -63,59 +60,6 @@ export class Helper {
         }
         return value;
     }
-
-    static createReactComponent(
-        rootElement: Element,
-        type: any,
-        props = {},
-        children?: ReactNode[],
-    ): ReactComponent | undefined {
-        // debug('Helper.createReactComponent', rootElement, type);
-        let component: ReactComponent | undefined = undefined;
-        const reactRootElement = React.createElement(React.StrictMode, {}, [
-            React.createElement(
-                type,
-                {
-                    ...props,
-                    onCreate: (c: ReactComponent, name: string) => {
-                        component = c;
-                    },
-                } as any,
-                children,
-            ),
-        ]);
-        ReactDOM.render(reactRootElement, rootElement);
-        return component;
-    }
-
-    static createReactComponent2(
-        rootElement: Element,
-        type: any,
-        props = {},
-        children?: ReactNode[],
-    ): ReactComponent | undefined {
-        // debug('Helper.createReactComponent2', rootElement, type);
-        let component: ReactComponent | undefined = undefined;
-        const reactRootElement = React.createElement(React.StrictMode, {}, [
-            React.createElement(
-                type,
-                {
-                    ...props,
-                    onCreate: (c: ReactComponent, name: string) => {
-                        component = c;
-                    },
-                } as any,
-                children,
-            ),
-        ]);
-        // ReactDOM.render(reactRootElement, rootElement);
-        ReactDOM.hydrate(reactRootElement, rootElement);
-        return component;
-    }
-
-    /* static destroyReactComponent(root) {
-        ReactDOM.unmountComponentAtNode(root);
-    } */
 
     static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null> {
         return new Promise<string | ArrayBuffer | null>((resolve) => {

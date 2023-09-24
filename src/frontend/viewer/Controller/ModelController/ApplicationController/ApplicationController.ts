@@ -11,7 +11,7 @@ import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
 import { WebSocketClient } from '../../../WebSocketClient';
-import { FrontHostApp, Helper } from '../../../../common';
+import { FrontHostApp, Helper, ReactHelper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
@@ -92,7 +92,7 @@ export class ApplicationController extends ModelController<Application> {
 
     createView(rootElement: Element) {
         // console.debug('ApplicationController.createView');
-        this.view = Helper.createReactComponent2(rootElement, this.getViewClass(), {
+        this.view = ReactHelper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });

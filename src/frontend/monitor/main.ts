@@ -1,6 +1,5 @@
 import { MonitorView } from './MonitorView/MonitorView';
-import { Helper } from '../common/Helper';
-
+import { ReactHelper } from '../common';
 import './style/monitor.less';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,5 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('script[type="application/json"]')!.textContent!,
     );
     console.debug('data:', data);
-    Helper.createReactComponent(document.querySelector('.monitor__root')!, MonitorView, { data });
+    ReactHelper.createReactComponent(document.querySelector('.monitor__root')!, MonitorView, {
+        data,
+    });
 });

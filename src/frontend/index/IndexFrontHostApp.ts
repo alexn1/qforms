@@ -1,5 +1,5 @@
 import { IndexView } from './IndexView/IndexView';
-import { Helper, FrontHostApp } from '../common';
+import { Helper, FrontHostApp, ReactHelper } from '../common';
 
 export class IndexFrontHostApp {
     // data: any;
@@ -32,7 +32,7 @@ export class IndexFrontHostApp {
     }
 
     createView(root) {
-        this.view = Helper.createReactComponent(root, IndexView, {
+        this.view = ReactHelper.createReactComponent(root, IndexView, {
             ctrl: this,
         });
     }
