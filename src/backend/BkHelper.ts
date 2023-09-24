@@ -3,7 +3,13 @@ import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { JSONString } from '../types';
 import { debug } from '../console';
-import { createPath, exists2, getDirPath } from './FileHelper';
+import {
+    createDirIfNotExists,
+    createDirIfNotExists2,
+    createPath,
+    exists2,
+    getDirPath,
+} from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -38,44 +44,6 @@ export class BkHelper {
             }
             return 'undefined';
         });
-    }
-
-    static async createDirIfNotExists2(originalDirPath: string) {
-        // debug('BkHelper.createDirIfNotExists2', originalDirPath);
-        const arr = originalDirPath.split('/');
-        for (let i = 1; i <= arr.length; i++) {
-            const dirPath = createPath(arr.slice(0, i));
-            const exists = await exists2(dirPath);
-            if (!exists) {
-                await BkHelper.createDirIfNotExists(dirPath);
-            }
-        }
-    }
-
-    static createDirIfNotExists(dirPath: string): Promise<void> {
-        debug(colors.blue('BkHelper.createDirIfNotExists'), dirPath);
-        return new Promise((resolve, reject) => {
-            fs.exists(dirPath, (exists) => {
-                if (exists) {
-                    resolve();
-                } else {
-                    fs.mkdir(dirPath, (err) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve();
-                        }
-                    });
-                }
-            });
-        });
-    }
-
-    static createDirIfNotExistsSync(dirPath: string) {
-        // debug(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath);
-        }
     }
 
     static moveArrItem(arr: any[], item: any, offset: number) {
@@ -124,7 +92,7 @@ export class BkHelper {
 
     static async writeFile2(filePath: string, content: string) {
         const dirPath = getDirPath(filePath);
-        await BkHelper.createDirIfNotExists2(dirPath);
+        await createDirIfNotExists2(dirPath);
         return await BkHelper.writeFile(filePath, content);
     }
 

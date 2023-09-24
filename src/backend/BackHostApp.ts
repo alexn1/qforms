@@ -31,6 +31,7 @@ import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './private-helper';
 import { Router } from './Router';
+import { createDirIfNotExists, createDirIfNotExistsSync } from './FileHelper';
 
 const pkg = require('../../package.json');
 
@@ -132,8 +133,8 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     createTempDirsIfNotExistSync(): void {
-        BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
-        BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+        createDirIfNotExistsSync(this.runtimeDirPath);
+        createDirIfNotExistsSync(this.sessionDirPath);
     }
 
     private createEventLog(): void {
@@ -383,7 +384,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
         if (!name) throw new Error(`name required: ${name}`);
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
-        await BkHelper.createDirIfNotExists(appDirPath);
+        await createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;

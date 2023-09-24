@@ -127,3 +127,42 @@ export function getDirPath(filePath: string) {
     const arr = filePath.split('/');
     return createPath(arr.slice(0, arr.length - 1));
 }
+
+export function createDirIfNotExists(dirPath: string): Promise<void> {
+    pConsole.debug(colors.blue('createDirIfNotExists'), dirPath);
+    return new Promise((resolve, reject) => {
+        fs.exists(dirPath, (exists) => {
+            if (exists) {
+                resolve();
+            } else {
+                fs.mkdir(dirPath, (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+        });
+    });
+}
+
+export async function createDirIfNotExists2(originalDirPath: string) {
+    // debug('createDirIfNotExists2', originalDirPath);
+    const arr = originalDirPath.split('/');
+    for (let i = 1; i <= arr.length; i++) {
+        const dirPath = createPath(arr.slice(0, i));
+        const exists = await exists2(dirPath);
+        if (!exists) {
+            await createDirIfNotExists(dirPath);
+        }
+    }
+}
+
+
+export function createDirIfNotExistsSync(dirPath: string) {
+    // debug(colors.blue('createDirIfNotExistsSync'), dirPath);
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath);
+    }
+}

@@ -775,12 +775,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _e500__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./e500 */ "./src/backend/e500.ts");
 /* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
+/* harmony import */ var _FileHelper__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./FileHelper */ "./src/backend/FileHelper.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -859,8 +861,8 @@ class BackHostApp {
         }
     }
     createTempDirsIfNotExistSync() {
-        _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
-        _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+        (0,_FileHelper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExistsSync)(this.runtimeDirPath);
+        (0,_FileHelper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExistsSync)(this.sessionDirPath);
     }
     createEventLog() {
         this.eventLog = new _EventLog__WEBPACK_IMPORTED_MODULE_20__.EventLog(this.params.logger);
@@ -1045,7 +1047,7 @@ class BackHostApp {
             throw new Error(`name required: ${name}`);
         const appDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.appsDirPath, folder);
         const appFilePath = path__WEBPACK_IMPORTED_MODULE_4___default().join(appDirPath, name + '.json');
-        await _BkHelper__WEBPACK_IMPORTED_MODULE_9__.BkHelper.createDirIfNotExists(appDirPath);
+        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_28__.createDirIfNotExists)(appDirPath);
         await _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_18__.ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_11__.BkApplication.getAppInfos(this.appsDirPath);
         return appInfos;
@@ -1498,41 +1500,6 @@ class BkHelper {
             return 'undefined';
         });
     }
-    static async createDirIfNotExists2(originalDirPath) {
-        const arr = originalDirPath.split('/');
-        for (let i = 1; i <= arr.length; i++) {
-            const dirPath = (0,_FileHelper__WEBPACK_IMPORTED_MODULE_4__.createPath)(arr.slice(0, i));
-            const exists = await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_4__.exists2)(dirPath);
-            if (!exists) {
-                await BkHelper.createDirIfNotExists(dirPath);
-            }
-        }
-    }
-    static createDirIfNotExists(dirPath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().blue('BkHelper.createDirIfNotExists'), dirPath);
-        return new Promise((resolve, reject) => {
-            fs__WEBPACK_IMPORTED_MODULE_0___default().exists(dirPath, (exists) => {
-                if (exists) {
-                    resolve();
-                }
-                else {
-                    fs__WEBPACK_IMPORTED_MODULE_0___default().mkdir(dirPath, (err) => {
-                        if (err) {
-                            reject(err);
-                        }
-                        else {
-                            resolve();
-                        }
-                    });
-                }
-            });
-        });
-    }
-    static createDirIfNotExistsSync(dirPath) {
-        if (!fs__WEBPACK_IMPORTED_MODULE_0___default().existsSync(dirPath)) {
-            fs__WEBPACK_IMPORTED_MODULE_0___default().mkdirSync(dirPath);
-        }
-    }
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1)
@@ -1579,7 +1546,7 @@ class BkHelper {
     }
     static async writeFile2(filePath, content) {
         const dirPath = (0,_FileHelper__WEBPACK_IMPORTED_MODULE_4__.getDirPath)(filePath);
-        await BkHelper.createDirIfNotExists2(dirPath);
+        await (0,_FileHelper__WEBPACK_IMPORTED_MODULE_4__.createDirIfNotExists2)(dirPath);
         return await BkHelper.writeFile(filePath, content);
     }
     static mapObject(object, cb) {
@@ -2121,6 +2088,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "_getFilePaths2": () => (/* binding */ _getFilePaths2),
 /* harmony export */   "_getFilePathsSync": () => (/* binding */ _getFilePathsSync),
 /* harmony export */   "_glob": () => (/* binding */ _glob),
+/* harmony export */   "createDirIfNotExists": () => (/* binding */ createDirIfNotExists),
+/* harmony export */   "createDirIfNotExists2": () => (/* binding */ createDirIfNotExists2),
+/* harmony export */   "createDirIfNotExistsSync": () => (/* binding */ createDirIfNotExistsSync),
 /* harmony export */   "createPath": () => (/* binding */ createPath),
 /* harmony export */   "exists2": () => (/* binding */ exists2),
 /* harmony export */   "getDirPath": () => (/* binding */ getDirPath),
@@ -2250,6 +2220,41 @@ function createPath(arr) {
 function getDirPath(filePath) {
     const arr = filePath.split('/');
     return createPath(arr.slice(0, arr.length - 1));
+}
+function createDirIfNotExists(dirPath) {
+    _pConsole__WEBPACK_IMPORTED_MODULE_5__.pConsole.debug(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().blue('createDirIfNotExists'), dirPath);
+    return new Promise((resolve, reject) => {
+        fs__WEBPACK_IMPORTED_MODULE_2___default().exists(dirPath, (exists) => {
+            if (exists) {
+                resolve();
+            }
+            else {
+                fs__WEBPACK_IMPORTED_MODULE_2___default().mkdir(dirPath, (err) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        resolve();
+                    }
+                });
+            }
+        });
+    });
+}
+async function createDirIfNotExists2(originalDirPath) {
+    const arr = originalDirPath.split('/');
+    for (let i = 1; i <= arr.length; i++) {
+        const dirPath = createPath(arr.slice(0, i));
+        const exists = await exists2(dirPath);
+        if (!exists) {
+            await createDirIfNotExists(dirPath);
+        }
+    }
+}
+function createDirIfNotExistsSync(dirPath) {
+    if (!fs__WEBPACK_IMPORTED_MODULE_2___default().existsSync(dirPath)) {
+        fs__WEBPACK_IMPORTED_MODULE_2___default().mkdirSync(dirPath);
+    }
 }
 
 

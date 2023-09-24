@@ -12,3 +12,6 @@ export declare function getFileContentSync(filePath: string): string | null;
 export declare function readBinaryFile(filePath: string): Promise<unknown>;
 export declare function createPath(arr: string[]): string;
 export declare function getDirPath(filePath: string): string;
+export declare function createDirIfNotExists(dirPath: string): Promise<void>;
+export declare function createDirIfNotExists2(originalDirPath: string): Promise<void>;
+export declare function createDirIfNotExistsSync(dirPath: string): void;
