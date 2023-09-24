@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import { JSONString } from '../types';
 import { Helper } from '../frontend';
 
 export class BkHelper {
@@ -72,15 +71,15 @@ export class BkHelper {
         return JSON.stringify(value) as JSONString;
     } */
 
-    static decodeObject(obj: any): Record<string, any> {
+    /* static decodeObject(obj: any): Record<string, any> {
         const dObj: any = {};
         for (const name in obj) {
             if (typeof obj[name] !== 'string')
-                throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
+                throw new Error(`decodeObject: cannot decode: ${name}, type: ${typeof obj[name]}`);
             dObj[name] = Helper.decodeValue(obj[name]);
         }
         return dObj;
-    }
+    } */
 
     static SECOND(): number {
         return 1000;

@@ -54,6 +54,9 @@ export class Helper {
         if (!eObj) throw new Error('Helper.decodeObject: no object');
         const obj = {} as Record<string, any>;
         for (const name in eObj) {
+            if (typeof obj[name] !== 'string') {
+                throw new Error(`decodeObject: cannot decode: ${name}, type: ${typeof obj[name]}`);
+            }
             obj[name] = Helper.decodeValue(eObj[name]);
         }
         return obj;

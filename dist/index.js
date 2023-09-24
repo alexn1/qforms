@@ -1499,15 +1499,6 @@ class BkHelper {
         }
         return new Date(ts);
     }
-    static decodeObject(obj) {
-        const dObj = {};
-        for (const name in obj) {
-            if (typeof obj[name] !== 'string')
-                throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(obj[name]);
-        }
-        return dObj;
-    }
     static SECOND() {
         return 1000;
     }
@@ -1631,9 +1622,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Context": () => (/* binding */ Context)
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1654,7 +1645,7 @@ class Context {
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
-            return _BkHelper__WEBPACK_IMPORTED_MODULE_1__.BkHelper.decodeObject(req.query.params);
+            return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
         }
         return {};
     }
@@ -1818,7 +1809,7 @@ class Context {
     destroy() { }
 }
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_3__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_2__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_2__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_1__.LogLevel.debug)
 ], Context.prototype, "destroy", null);
 
 
@@ -10680,6 +10671,9 @@ class Helper {
             throw new Error('Helper.decodeObject: no object');
         const obj = {};
         for (const name in eObj) {
+            if (typeof obj[name] !== 'string') {
+                throw new Error(`decodeObject: cannot decode: ${name}, type: ${typeof obj[name]}`);
+            }
             obj[name] = Helper.decodeValue(eObj[name]);
         }
         return obj;

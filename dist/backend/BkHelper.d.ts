@@ -4,7 +4,6 @@ export declare class BkHelper {
     static moveArrItem(arr: any[], item: any, offset: number): void;
     static mapObject(object: any, cb: any): any;
     static today(timeOffset: number): Date;
-    static decodeObject(obj: any): Record<string, any>;
     static SECOND(): number;
     static MINUTE(): number;
     static HOUR(): number;

@@ -1,11 +1,12 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Action, BaseDto, BaseQuery, Nullable, Optional } from '../types';
+import { Action, BaseDto, BaseQuery, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { BkHelper } from './BkHelper';
 import { LogLevel, pConsole } from '../pConsole';
 import { log } from '../decorators';
+import { Helper } from '../frontend';
 
 export type RequestEx = Request & {
     session: Session;
@@ -57,7 +58,7 @@ export class Context {
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && [Action.page, Action.read].includes(action) && req.query.params) {
-            return BkHelper.decodeObject(req.query.params);
+            return Helper.decodeObject(req.query.params as Record<string, JSONString>);
         }
         return {};
     }
