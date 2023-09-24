@@ -40,14 +40,6 @@ export class BkHelper {
         });
     }
 
-    static getFileContentSync(filePath: string) {
-        // debug(colors.blue('BkHelper.getFileContentSync'), filePath);
-        if (!fs.existsSync(filePath)) {
-            return null;
-        }
-        return fs.readFileSync(filePath, 'utf8');
-    }
-
     static readBinaryFile(filePath: string) {
         debug(colors.blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {

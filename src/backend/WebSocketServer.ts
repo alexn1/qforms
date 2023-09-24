@@ -4,7 +4,7 @@ import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
 import { debug, log, error } from '../console';
-import { getWebsocketUrl } from './private-helper';
+import { getWebsocketUrl } from './WebScoketHelper';
 
 export class WebSocketServer {
     options: any;
@@ -25,7 +25,7 @@ export class WebSocketServer {
         error('WebSocketServer.onError', err);
     }
 
-    async onConnection(webSocket) {
+    async onConnection(webSocket: any) {
         debug('WebSocketServer.onConnection', getWebsocketUrl(webSocket));
         log('wss:', colors.bgYellow(colors.black(decodeURIComponent(getWebsocketUrl(webSocket)))));
         const parts = url.parse(getWebsocketUrl(webSocket), true);

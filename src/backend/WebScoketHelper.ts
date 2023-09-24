@@ -15,3 +15,12 @@ export function getWebSocketPort(webSocket: any) {
 export function newClientId() {
     return uuidv4();
 }
+
+/*
+ * for Node.js and Bun compatibility
+ */
+export function getWebsocketUrl(webSocket: any): string {
+    const url = webSocket.url || webSocket.upgradeReq?.url;
+    if (!url) throw new Error('getWebsocketUrl: cannot get webSocket url');
+    return url;
+}

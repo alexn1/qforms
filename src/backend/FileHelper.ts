@@ -93,3 +93,11 @@ export async function getFileContent(filePath: string) {
     }
     return null;
 }
+
+export function getFileContentSync(filePath: string) {
+    // debug(colors.blue('getFileContentSync'), filePath);
+    if (!fs.existsSync(filePath)) {
+        return null;
+    }
+    return fs.readFileSync(filePath, 'utf8');
+}

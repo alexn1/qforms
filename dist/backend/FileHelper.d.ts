@@ -8,3 +8,4 @@ export declare function getFilePaths(dirPath: string, ext: string): Promise<stri
 export declare function readTextFile(path: string): Promise<string>;
 export declare function exists2(path: fs.PathLike): Promise<boolean>;
 export declare function getFileContent(filePath: string): Promise<string | null>;
+export declare function getFileContentSync(filePath: string): string | null;
