@@ -9,3 +9,6 @@ export declare function readTextFile(path: string): Promise<string>;
 export declare function exists2(path: fs.PathLike): Promise<boolean>;
 export declare function getFileContent(filePath: string): Promise<string | null>;
 export declare function getFileContentSync(filePath: string): string | null;
+export declare function readBinaryFile(filePath: string): Promise<unknown>;
+export declare function createPath(arr: string[]): string;
+export declare function getDirPath(filePath: string): string;

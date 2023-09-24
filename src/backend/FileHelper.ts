@@ -1,7 +1,9 @@
+import colors from 'colors/safe';
 import path from 'path';
 import fs from 'fs';
 import glob from 'glob';
 import { access } from 'node:fs/promises';
+import { pConsole } from '../pConsole';
 // import slash from 'slash';
 
 export function _getFilePathsSync(dirPath: string, ext: string) {
@@ -100,4 +102,28 @@ export function getFileContentSync(filePath: string) {
         return null;
     }
     return fs.readFileSync(filePath, 'utf8');
+}
+
+export function readBinaryFile(filePath: string) {
+    pConsole.debug(colors.blue('readBinaryFile'), filePath);
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+export function createPath(arr: string[]) {
+    if (arr.length === 0) throw new Error('no path elements');
+    if (arr.length === 1) return '/';
+    return arr.join('/');
+}
+
+export function getDirPath(filePath: string) {
+    const arr = filePath.split('/');
+    return createPath(arr.slice(0, arr.length - 1));
 }

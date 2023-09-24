@@ -3,7 +3,7 @@ import colors from 'colors/safe';
 import fetch from 'node-fetch';
 import { JSONString } from '../types';
 import { debug } from '../console';
-import { exists2 } from './FileHelper';
+import { createPath, exists2, getDirPath } from './FileHelper';
 
 export class BkHelper {
     static getRandomString(length: number) {
@@ -40,35 +40,11 @@ export class BkHelper {
         });
     }
 
-    static readBinaryFile(filePath: string) {
-        debug(colors.blue('BkHelper.readBinaryFile'), filePath);
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(data);
-                }
-            });
-        });
-    }
-
-    static createPath(arr: string[]) {
-        if (arr.length === 0) throw new Error('no path elements');
-        if (arr.length === 1) return '/';
-        return arr.join('/');
-    }
-
-    static getDirPath(filePath: string) {
-        const arr = filePath.split('/');
-        return BkHelper.createPath(arr.slice(0, arr.length - 1));
-    }
-
     static async createDirIfNotExists2(originalDirPath: string) {
         // debug('BkHelper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
-            const dirPath = BkHelper.createPath(arr.slice(0, i));
+            const dirPath = createPath(arr.slice(0, i));
             const exists = await exists2(dirPath);
             if (!exists) {
                 await BkHelper.createDirIfNotExists(dirPath);
@@ -147,7 +123,7 @@ export class BkHelper {
     }
 
     static async writeFile2(filePath: string, content: string) {
-        const dirPath = BkHelper.getDirPath(filePath);
+        const dirPath = getDirPath(filePath);
         await BkHelper.createDirIfNotExists2(dirPath);
         return await BkHelper.writeFile(filePath, content);
     }

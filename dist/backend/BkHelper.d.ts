@@ -6,9 +6,6 @@ export declare class BkHelper {
     static getRandomString(length: number): string;
     static currentTime(): string;
     static templateToJsString(value: string, params: Record<string, any>): string;
-    static readBinaryFile(filePath: string): Promise<unknown>;
-    static createPath(arr: string[]): string;
-    static getDirPath(filePath: string): string;
     static createDirIfNotExists2(originalDirPath: string): Promise<void>;
     static createDirIfNotExists(dirPath: string): Promise<void>;
     static createDirIfNotExistsSync(dirPath: string): void;
