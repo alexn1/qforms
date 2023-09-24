@@ -1510,7 +1510,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common */ "./src/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/Helper */ "./src/common/Helper.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1531,7 +1531,7 @@ class Context {
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
-            return _common__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
+            return _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
         }
         return {};
     }
@@ -10018,8 +10018,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
 /* harmony export */ });
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common */ "./src/common/index.ts");
-
 class DateTimeHelper {
     static today(timeOffset) {
         let ts = Date.now();
@@ -10140,7 +10138,6 @@ class DateTimeHelper {
         }
     }
 }
-_common__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
 
 
 /***/ }),
@@ -11084,8 +11081,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Helper */ "./src/common/Helper.ts");
-
 
 
 class ReactHelper {
@@ -11110,7 +11105,6 @@ class ReactHelper {
         return component;
     }
 }
-_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(ReactHelper);
 
 
 /***/ }),
@@ -12496,9 +12490,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
 /* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 /* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
@@ -12558,12 +12552,12 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         if (value) {
             let format = this.getFormat();
             if (this.isDebugMode()) {
-                const time = _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = _common__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, format);
+            return _common__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, format);
         }
         return '';
     }

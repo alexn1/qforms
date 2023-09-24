@@ -5,7 +5,7 @@ import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { LogLevel, pConsole } from '../pConsole';
 import { log } from '../decorators';
-import { Helper } from '../common';
+import { Helper } from '../common/Helper';
 
 export type RequestEx = Request & {
     session: Session;

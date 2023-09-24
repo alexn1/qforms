@@ -58,4 +58,4 @@ export class ReactHelper {
     } */
 }
 
-Helper.registerGlobalClass(ReactHelper);
+// Helper.registerGlobalClass(ReactHelper);

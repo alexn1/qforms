@@ -1,29 +1,30 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
-import { inspect } from 'util';
-import supertest from 'supertest';
-import { BackHostApp } from '../src';
+import { BackHostApp } from '../dist';
+import { HttpClient } from './core/HttpClient';
 
 describe('BackHostApp', () => {
     let app: BackHostApp;
     let httpServer: any;
+    let httpClient: HttpClient;
 
     beforeAll(async () => {
         app = new BackHostApp({ port: 7002 });
         await app.init();
         httpServer = app.getHttpServer();
-        // console.debug(`httpServer`, inspect(httpServer, false, 1));
-        // await app.run();
+        httpClient = new HttpClient(httpServer);
     });
 
-    afterAll(() => {});
+    afterAll(async () => {
+        await app.shutdown();
+    });
 
     test('/monitor', async () => {
-        const { status } = await supertest(httpServer).get('/monitor');
+        const { status } = await httpClient.get('/monitor');
         expect(status).toBe(200);
     });
 
     test('/viewer/test/test/local/localhost/', async () => {
-        const { status } = await supertest(httpServer).get('/viewer/test/test/local/localhost/');
+        const { status } = await httpClient.get('/viewer/test/test/local/localhost/');
         expect(status).toBe(200);
     });
 });

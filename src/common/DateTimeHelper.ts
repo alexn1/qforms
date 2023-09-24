@@ -145,4 +145,4 @@ export class DateTimeHelper {
     }
 }
 
-Helper.registerGlobalClass(DateTimeHelper);
+// Helper.registerGlobalClass(DateTimeHelper);
