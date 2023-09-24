@@ -121,6 +121,7 @@ export class BkApplication<
 
     getText(): any {
         const lang = this.getAttr('lang') || 'en';
+        // @ts-ignore
         return text[lang];
     }
 
