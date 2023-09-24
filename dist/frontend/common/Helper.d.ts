@@ -2,9 +2,7 @@ import { ReactNode } from 'react';
 import { JSONString, Scalar, Query, QueryRecord, KeyTuple, Key } from '../../types';
 import { ReactComponent } from './ReactComponent';
 export declare class Helper {
-    static formatDate(date: Date, format: string): string;
     static formatNumber(value: number): string;
-    static today(): Date;
     static getStartOfDay(date: Date): Date;
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
     static encodeValue<T>(value: T): JSONString<T>;

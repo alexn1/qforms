@@ -10033,6 +10033,10 @@ class DateTimeHelper {
         }
         return new Date(ts);
     }
+    static today2() {
+        const now = new Date();
+        return _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.getStartOfDay(now);
+    }
     static SECOND() {
         return 1000;
     }
@@ -10082,6 +10086,21 @@ class DateTimeHelper {
         else {
             return `${sign}${h}h:${m}m:${s}s`;
         }
+    }
+    static formatDate(date, format) {
+        const YYYY = date.getFullYear();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        const MM = M < 10 ? `0${M}` : M;
+        const DD = D < 10 ? `0${D}` : D;
+        const hh = h < 10 ? `0${h}` : h;
+        const mm = m < 10 ? `0${m}` : m;
+        const ss = s < 10 ? `0${s}` : s;
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
 }
 _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
@@ -10602,27 +10621,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Helper {
-    static formatDate(date, format) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
-    }
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
-    }
-    static today() {
-        const now = new Date();
-        return Helper.getStartOfDay(now);
     }
     static getStartOfDay(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -12157,11 +12157,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_DatePicker_less__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_DatePicker_less__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
 
 
 
@@ -12234,7 +12234,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         }
         else {
-            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+            const dates = [_common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             const date = new Date(Math.min(...dates));
@@ -12295,14 +12295,14 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     }
     render() {
         const date = this.getFirstDateOfTable();
-        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+        const today = _common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         const highlightedDate = this.props.highlightedDate
             ?
                 new Date(...this.props.highlightedDate)
             : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
                             const classList = [];
                             if (j === 5 || j === 6)
                                 classList.push('weekend');
@@ -12425,13 +12425,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
 
 
 
@@ -12491,12 +12491,12 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         if (value) {
             let format = this.getFormat();
             if (this.isDebugMode()) {
-                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+            return _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, format);
         }
         return '';
     }
@@ -12530,13 +12530,13 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
     }
     renderCloseIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })));
     }
     renderDateIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__.DateIcon, {}) })));
     }
     renderDatePicker() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
@@ -17445,6 +17445,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+
 
 
 
@@ -17455,7 +17457,7 @@ class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IM
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -17508,6 +17510,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+
 
 
 
@@ -17518,7 +17522,7 @@ class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPAC
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }

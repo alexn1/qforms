@@ -9,8 +9,6 @@ export class Helper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 
-
-
     static getStartOfDay(date: Date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
@@ -123,7 +121,7 @@ export class Helper {
         ReactDOM.unmountComponentAtNode(root);
     } */
 
-    static readFileAsDataURL(file: Blob) {
+    static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null> {
         return new Promise<string | ArrayBuffer | null>((resolve) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);

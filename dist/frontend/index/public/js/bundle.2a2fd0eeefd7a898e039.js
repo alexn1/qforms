@@ -350,6 +350,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/frontend/index/IndexView/IndexView.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/AlertController/AlertView.less":
 /*!***********************************************************************!*\
   !*** ./src/frontend/viewer/Controller/AlertController/AlertView.less ***!
@@ -31903,6 +31915,275 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/common/DateTimeHelper.ts":
+/*!**************************************!*\
+  !*** ./src/common/DateTimeHelper.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
+/* harmony export */ });
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+
+class DateTimeHelper {
+    static today(timeOffset) {
+        let ts = Date.now();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts += DateTimeHelper.MINUTE() * timeOffset;
+        }
+        const date = new Date(ts);
+        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts -= DateTimeHelper.MINUTE() * timeOffset;
+        }
+        return new Date(ts);
+    }
+    static today2() {
+        const now = new Date();
+        return _frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.getStartOfDay(now);
+    }
+    static SECOND() {
+        return 1000;
+    }
+    static MINUTE() {
+        return 60 * DateTimeHelper.SECOND();
+    }
+    static HOUR() {
+        return 60 * DateTimeHelper.MINUTE();
+    }
+    static DAY() {
+        return 24 * DateTimeHelper.HOUR();
+    }
+    static WEEK() {
+        return 7 * DateTimeHelper.DAY();
+    }
+    static addMinutes(date, minutes) {
+        date.setMinutes(date.getMinutes() + minutes);
+    }
+    static removeTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, -date.getTimezoneOffset());
+    }
+    static addTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, date.getTimezoneOffset());
+    }
+    static cloneDate(date) {
+        return new Date(date.getTime());
+    }
+    static formatTime2(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
+    }
+    static formatDate(date, format) {
+        const YYYY = date.getFullYear();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        const MM = M < 10 ? `0${M}` : M;
+        const DD = D < 10 ? `0${D}` : D;
+        const hh = h < 10 ? `0${h}` : h;
+        const mm = m < 10 ? `0${m}` : m;
+        const ss = s < 10 ? `0${s}` : s;
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+    }
+}
+_frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/ActionData.ts":
+/*!********************************************!*\
+  !*** ./src/common/ModelData/ActionData.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/ApplicationData.ts":
+/*!*************************************************!*\
+  !*** ./src/common/ModelData/ApplicationData.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/ColumnData.ts":
+/*!********************************************!*\
+  !*** ./src/common/ModelData/ColumnData.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/DataSourceData.ts":
+/*!************************************************!*\
+  !*** ./src/common/ModelData/DataSourceData.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/DatabaseData.ts":
+/*!**********************************************!*\
+  !*** ./src/common/ModelData/DatabaseData.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/FieldData.ts":
+/*!*******************************************!*\
+  !*** ./src/common/ModelData/FieldData.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/FormData.ts":
+/*!******************************************!*\
+  !*** ./src/common/ModelData/FormData.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/ModelData.ts":
+/*!*******************************************!*\
+  !*** ./src/common/ModelData/ModelData.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/PageData.ts":
+/*!******************************************!*\
+  !*** ./src/common/ModelData/PageData.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/TableData.ts":
+/*!*******************************************!*\
+  !*** ./src/common/ModelData/TableData.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+
+
+
+/***/ }),
+
+/***/ "./src/common/ModelData/index.ts":
+/*!***************************************!*\
+  !*** ./src/common/ModelData/index.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ActionData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionData */ "./src/common/ModelData/ActionData.ts");
+/* harmony import */ var _ApplicationData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ApplicationData */ "./src/common/ModelData/ApplicationData.ts");
+/* harmony import */ var _ColumnData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ColumnData */ "./src/common/ModelData/ColumnData.ts");
+/* harmony import */ var _DatabaseData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DatabaseData */ "./src/common/ModelData/DatabaseData.ts");
+/* harmony import */ var _DataSourceData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DataSourceData */ "./src/common/ModelData/DataSourceData.ts");
+/* harmony import */ var _FieldData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FieldData */ "./src/common/ModelData/FieldData.ts");
+/* harmony import */ var _FormData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormData */ "./src/common/ModelData/FormData.ts");
+/* harmony import */ var _PageData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./PageData */ "./src/common/ModelData/PageData.ts");
+/* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/ModelData.ts");
+/* harmony import */ var _TableData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TableData */ "./src/common/ModelData/TableData.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/common/index.ts":
+/*!*****************************!*\
+  !*** ./src/common/index.ts ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper)
+/* harmony export */ });
+/* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
+/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
+
+
+
+
+/***/ }),
+
 /***/ "./src/console.ts":
 /*!************************!*\
   !*** ./src/console.ts ***!
@@ -32192,27 +32473,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Helper {
-    static formatDate(date, format) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
-    }
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
-    }
-    static today() {
-        const now = new Date();
-        return Helper.getStartOfDay(now);
     }
     static getStartOfDay(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -33673,10 +33935,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
 
 
 
@@ -33749,7 +34011,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         }
         else {
-            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+            const dates = [_common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             const date = new Date(Math.min(...dates));
@@ -33810,14 +34072,14 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     }
     render() {
         const date = this.getFirstDateOfTable();
-        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+        const today = _common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         const highlightedDate = this.props.highlightedDate
             ?
                 new Date(...this.props.highlightedDate)
             : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
                             const classList = [];
                             if (j === 5 || j === 6)
                                 classList.push('weekend');
@@ -33935,12 +34197,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
 
 
 
@@ -34000,12 +34262,12 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         if (value) {
             let format = this.getFormat();
             if (this.isDebugMode()) {
-                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+            return _common__WEBPACK_IMPORTED_MODULE_7__.DateTimeHelper.formatDate(value, format);
         }
         return '';
     }
@@ -34039,13 +34301,13 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
     }
     renderCloseIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })));
     }
     renderDateIcon() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__.DateIcon, {}) })));
     }
     renderDatePicker() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__.DatePicker, { minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
@@ -35774,6 +36036,301 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/frontend/index.ts":
+/*!*******************************!*\
+  !*** ./src/frontend/index.ts ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ApplicationController),
+/* harmony export */   "ApplicationView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ApplicationView),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CheckBox),
+/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxField),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CheckBoxList),
+/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxListField),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon2),
+/* harmony export */   "Column": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Column),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ComboBox),
+/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ComboBoxField),
+/* harmony export */   "DataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DataSource),
+/* harmony export */   "Database": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Database),
+/* harmony export */   "DateField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DateField),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DatePicker),
+/* harmony export */   "DateTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DateTimeField),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Expand),
+/* harmony export */   "FileField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.FileField),
+/* harmony export */   "Form": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Form),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.LeftIcon),
+/* harmony export */   "LinkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LinkField),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.LocationIcon),
+/* harmony export */   "LoginController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginController),
+/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginFrontHostApp),
+/* harmony export */   "LoginView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginView),
+/* harmony export */   "Menu": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.MoreVertIcon),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.NoSqlDataSource),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewIcon),
+/* harmony export */   "Page": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Page),
+/* harmony export */   "PageController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageController),
+/* harmony export */   "PageView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageView),
+/* harmony export */   "Password": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Password),
+/* harmony export */   "PasswordField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PasswordField),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PasswordIcon),
+/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PersistentDataSource),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PhoneBox),
+/* harmony export */   "PhoneField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PhoneField),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Radio),
+/* harmony export */   "RadioField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RadioField),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.RightIcon),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowForm),
+/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldView),
+/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldController),
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldView),
+/* harmony export */   "RowFormController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormController),
+/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateFieldController),
+/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateFieldView),
+/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateTimeFieldController),
+/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateTimeFieldView),
+/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldController),
+/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView),
+/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFileFieldController),
+/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormLinkFieldController),
+/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPasswordFieldController),
+/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldController),
+/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldView),
+/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormRadioFieldController),
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldController),
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldView),
+/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldController),
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldView),
+/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTimeFieldController),
+/* harmony export */   "RowFormView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormView),
+/* harmony export */   "Search": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Slider),
+/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.SqlDataSource),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tab2),
+/* harmony export */   "Table": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Table),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableForm),
+/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldController),
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldView),
+/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldController),
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldView),
+/* harmony export */   "TableFormController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormController),
+/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldController),
+/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldView),
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldController),
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldView),
+/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormLinkFieldController),
+/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormPhoneFieldController),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldController),
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldView),
+/* harmony export */   "TableFormView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormView),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TextArea),
+/* harmony export */   "TextAreaField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TextAreaField),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TextBox),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TextBoxField),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tooltip),
+/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewer */ "./src/frontend/viewer/index.ts");
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexFrontHostApp.ts":
+/*!*************************************************!*\
+  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+
+
+class IndexFrontHostApp {
+    constructor(data) {
+        this.data = data;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
+        this.onAppChange = (fullName) => {
+            console.debug('IndexFrontHostApp.onAppChange', fullName);
+            this.currentAppFullName = fullName;
+            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
+            if (!appInfo)
+                throw new Error(`no appInfo ${fullName}`);
+            this.currentAppEnv = appInfo.envs[0];
+            this.view.rerender();
+        };
+        this.onEnvChange = (env) => {
+            console.debug('IndexFrontHostApp.onEnvChange', env);
+            this.currentAppEnv = env;
+        };
+        this.run = (e) => {
+            if (this.currentAppFullName) {
+                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.debug('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.edit = (e) => {
+            if (this.currentAppFullName) {
+                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.debug('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.btnCreate_Click = async (e) => {
+            this.modals.push({ id: 1 });
+            await this.view.rerender();
+            this.folderNameTextBox.getElement().focus();
+        };
+        this.closeModal = () => {
+            console.debug('IndexFrontHostApp.closeModal');
+            this.modals.pop();
+            this.view.rerender();
+        };
+        this.onFolderNameCreate = (textBox) => {
+            console.debug('IndexFrontHostApp.onFolderNameCreate');
+            this.folderNameTextBox = textBox;
+        };
+        this.onFolderNameChange = (folderName) => {
+            this.folderName = folderName;
+        };
+        this.onAppNameChange = (appName) => {
+            this.appName = appName;
+        };
+        this.onCreateClick = async (e) => {
+            console.debug('IndexFrontHostApp.onCreateClick');
+            console.debug(this.folderName, this.appName);
+            this.closeModal();
+            await this.createApp(this.folderName, this.appName);
+        };
+        console.debug('IndexFrontHostApp.constructor', data);
+    }
+    init() {
+        const appInfo = this.data.appInfos[0];
+        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.createView(document.querySelector('#root'));
+    }
+    createView(root) {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
+            ctrl: this,
+        });
+    }
+    getAppItems() {
+        return this.data.appInfos.map((appInfo) => ({
+            value: appInfo.fullName,
+            title: appInfo.fullName,
+        }));
+    }
+    getEnvItems() {
+        if (this.currentAppFullName) {
+            const appInfo = this.getAppInfo(this.currentAppFullName);
+            if (appInfo) {
+                return appInfo.envs.map((env) => ({ value: env, title: env }));
+            }
+        }
+        return [];
+    }
+    getAppInfo(fullName) {
+        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
+    }
+    async createApp(folderName, appName) {
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+            action: 'new',
+            folder: folderName,
+            name: appName,
+        });
+        console.debug('data:', data);
+        if (data.appInfos) {
+            this.data.appInfos = data.appInfos;
+            this.currentAppFullName = `${folderName}/${appName}`;
+            this.view.rerender();
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexView/IndexView.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexView": () => (/* binding */ IndexView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _IndexView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IndexView.less */ "./src/frontend/index/IndexView/IndexView.less");
+
+
+
+class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    renderModals() {
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
+    }
+    render() {
+        console.debug('IndexView.render');
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
+    }
+}
 
 
 /***/ }),
@@ -38657,6 +39214,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+
 
 
 
@@ -38667,7 +39226,7 @@ class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IM
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -38716,6 +39275,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+
 
 
 
@@ -38726,7 +39287,7 @@ class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPAC
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -43376,140 +43937,19 @@ function parseJson(json) {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*******************************!*\
-  !*** ./src/frontend/index.ts ***!
-  \*******************************/
+/*!************************************!*\
+  !*** ./src/frontend/index/main.ts ***!
+  \************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplicationController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ApplicationController),
-/* harmony export */   "ApplicationView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ApplicationView),
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ArrowIcon),
-/* harmony export */   "Box": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CheckBox),
-/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxField),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CheckBoxList),
-/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.CheckBoxListField),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon2),
-/* harmony export */   "Column": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Column),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ComboBox),
-/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ComboBoxField),
-/* harmony export */   "DataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DataSource),
-/* harmony export */   "Database": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Database),
-/* harmony export */   "DateField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DateField),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DatePicker),
-/* harmony export */   "DateTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DateTimeField),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Expand),
-/* harmony export */   "FileField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.FileField),
-/* harmony export */   "Form": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Form),
-/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridRow),
-/* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.LeftIcon),
-/* harmony export */   "LinkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LinkField),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.LocationIcon),
-/* harmony export */   "LoginController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginController),
-/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginFrontHostApp),
-/* harmony export */   "LoginView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LoginView),
-/* harmony export */   "Menu": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.MoreVertIcon),
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.NoSqlDataSource),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewIcon),
-/* harmony export */   "Page": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Page),
-/* harmony export */   "PageController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageController),
-/* harmony export */   "PageView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageView),
-/* harmony export */   "Password": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Password),
-/* harmony export */   "PasswordField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PasswordField),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PasswordIcon),
-/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PersistentDataSource),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PhoneBox),
-/* harmony export */   "PhoneField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PhoneField),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Radio),
-/* harmony export */   "RadioField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RadioField),
-/* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.RightIcon),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowForm),
-/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxFieldController),
-/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldController),
-/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldView),
-/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldController),
-/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldView),
-/* harmony export */   "RowFormController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormController),
-/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateFieldController),
-/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateFieldView),
-/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateTimeFieldController),
-/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormDateTimeFieldView),
-/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldController),
-/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView),
-/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormFileFieldController),
-/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormLinkFieldController),
-/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPasswordFieldController),
-/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldController),
-/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldView),
-/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormRadioFieldController),
-/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldController),
-/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldView),
-/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldController),
-/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldView),
-/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormTimeFieldController),
-/* harmony export */   "RowFormView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.RowFormView),
-/* harmony export */   "Search": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Slider),
-/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.SqlDataSource),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tab2),
-/* harmony export */   "Table": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Table),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableForm),
-/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldController),
-/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldView),
-/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldController),
-/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldView),
-/* harmony export */   "TableFormController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormController),
-/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldController),
-/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldView),
-/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldController),
-/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldView),
-/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormLinkFieldController),
-/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormPhoneFieldController),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldController),
-/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldView),
-/* harmony export */   "TableFormView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TableFormView),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TextArea),
-/* harmony export */   "TextAreaField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TextAreaField),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TextBox),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.TextBoxField),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tooltip),
-/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityOffIcon)
-/* harmony export */ });
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewer */ "./src/frontend/viewer/index.ts");
+/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
 
-
+document.addEventListener('DOMContentLoaded', () => {
+    console.debug('DOMContentLoaded');
+    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
+});
 
 })();
 
-window.qforms = __webpack_exports__;
 /******/ })()
 ;
