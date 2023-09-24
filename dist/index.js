@@ -10018,7 +10018,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
 /* harmony export */ });
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common */ "./src/common/index.ts");
 
 class DateTimeHelper {
     static today(timeOffset) {
@@ -10140,7 +10140,7 @@ class DateTimeHelper {
         }
     }
 }
-_frontend__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
+_common__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
 
 
 /***/ }),
@@ -10479,6 +10479,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/common/dto.ts":
+/*!***************************!*\
+  !*** ./src/common/dto.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createReadQuery": () => (/* binding */ createReadQuery)
+/* harmony export */ });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
+
+
+function createReadQuery(page, form, ds, params) {
+    const query = {
+        action: _types__WEBPACK_IMPORTED_MODULE_0__.Action.read,
+        page,
+        form,
+        ds,
+    };
+    if (params) {
+        query.params = _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeObject(params);
+    }
+    return query;
+}
+
+
+/***/ }),
+
 /***/ "./src/common/index.ts":
 /*!*****************************!*\
   !*** ./src/common/index.ts ***!
@@ -10489,11 +10520,14 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper),
-/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper)
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)
 /* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
 /* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
+
 
 
 
@@ -12195,9 +12229,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 /* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 /* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
-/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_DatePicker_less__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_DatePicker_less__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -12270,7 +12304,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         }
         else {
-            const dates = [_common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2().getTime()];
+            const dates = [_common__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             const date = new Date(Math.min(...dates));
@@ -12331,7 +12365,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     }
     render() {
         const date = this.getFirstDateOfTable();
-        const today = _common__WEBPACK_IMPORTED_MODULE_5__.DateTimeHelper.today2();
+        const today = _common__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         const highlightedDate = this.props.highlightedDate
@@ -22892,6 +22926,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
 /* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
 /* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
 /* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
 /* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson)
