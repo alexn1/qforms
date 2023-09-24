@@ -1,5 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
-import { Helper } from '../../Helper';
+import { Helper } from '../../../../common/Helper';
 import { LeftIcon } from '../../icon/LeftIcon';
 import { RightIcon } from '../../icon/RightIcon';
 import './DatePicker.less';

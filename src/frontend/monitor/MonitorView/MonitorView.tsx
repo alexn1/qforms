@@ -1,4 +1,4 @@
-import { Helper } from '../../common/Helper';
+import { Helper } from '../../../common/Helper';
 import { ReactComponent } from '../../common/ReactComponent';
 
 import './MonitorView.less';

@@ -6,7 +6,7 @@ import {
     ApplicationController,
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../../../../common/Helper';
 import { CSSProperties } from 'react';
 import { RawRow } from '../../../../../types';
 

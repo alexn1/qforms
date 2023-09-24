@@ -1,7 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormCheckBoxListFieldView } from './RowFormCheckBoxListFieldView';
 import { CheckBoxListField } from '../../../../../Model/Field/CheckBoxListField/CheckBoxListField';
-import { Helper } from '../../../../../../common/Helper';
+import { Helper } from '../../../../../../../common/Helper';
 
 export class RowFormCheckBoxListFieldController extends RowFormFieldController<CheckBoxListField> {
     init() {

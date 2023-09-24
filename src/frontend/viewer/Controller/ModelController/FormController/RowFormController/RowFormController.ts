@@ -3,7 +3,7 @@ import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
-import { Helper } from '../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 import { RawRow } from '../../../../../../types';
 import { PageController } from '../../PageController/PageController';
 

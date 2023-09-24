@@ -1,5 +1,5 @@
 import { Query, ReadActionQuery, Action } from '../../types';
-import { Helper } from './Helper';
+import { Helper } from '../../common/Helper';
 
 export class DtoHelper {
     static createReadQuery(

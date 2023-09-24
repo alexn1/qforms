@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { Table } from '../Table/Table';
-import { Helper } from '../../../common/Helper';
+import { Helper } from '../../../../common/Helper';
 import { DatabaseResult } from '../../../../Result';
 import { DatabaseData } from '../../../../common/ModelData/DatabaseData';
 

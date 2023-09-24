@@ -1,4 +1,4 @@
-import { Helper } from '../common/Helper';
+import { Helper } from '../../common/Helper';
 import { Search } from '../common/Search';
 import { debug } from '../../console';
 import { Action, Query } from '../../types';

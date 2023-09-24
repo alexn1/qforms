@@ -1,7 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormRadioFieldView } from './RowFormRadioFieldView';
 import { RadioField } from '../../../../../Model/Field/RadioField/RadioField';
-import { Helper } from '../../../../../../common/Helper';
+import { Helper } from '../../../../../../../common/Helper';
 
 export class RowFormRadioFieldController extends RowFormFieldController<RadioField> {
     getViewClass() {

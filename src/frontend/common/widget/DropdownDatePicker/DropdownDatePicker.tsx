@@ -1,5 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
-import { Helper } from '../../Helper';
+import { Helper } from '../../../../common/Helper';
 import { CloseIcon } from '../../icon/CloseIcon';
 import { DateIcon } from '../../icon/DateIcon';
 import { CloseIcon2 } from '../../icon/CloseIcon2';

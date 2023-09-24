@@ -2,7 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormLinkFieldView } from './RowFormLinkFieldView';
 import { LinkField } from '../../../../../Model/Field/LinkField/LinkField';
 import { SyntheticEvent } from 'react';
-import { Helper } from '../../../../../../common/Helper';
+import { Helper } from '../../../../../../../common/Helper';
 
 export class RowFormLinkFieldController extends RowFormFieldController<LinkField> {
     getViewClass() {

@@ -1,4 +1,4 @@
-import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
+import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../types';
 
 export class Helper {
     static formatNumber(value: number): string {

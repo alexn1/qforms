@@ -1,6 +1,6 @@
 import { Key, keyToKeyTuple } from '../../../../../types';
 import { ModelController } from '../ModelController';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../../../../common/Helper';
 import { FormController } from '../FormController/FormController';
 import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
