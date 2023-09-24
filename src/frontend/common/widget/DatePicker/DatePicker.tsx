@@ -1,9 +1,8 @@
 import { ReactComponent } from '../../ReactComponent';
-import { Helper } from '../../../../common/Helper';
 import { LeftIcon } from '../../icon/LeftIcon';
 import { RightIcon } from '../../icon/RightIcon';
-import './DatePicker.less';
 import { DateTimeHelper } from '../../../../common';
+import './DatePicker.less';
 
 // props
 //  visible boolean true

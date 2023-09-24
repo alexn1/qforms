@@ -1,4 +1,4 @@
-import { Helper } from '../frontend';
+import { Helper } from '../common';
 
 export class DateTimeHelper {
     /*

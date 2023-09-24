@@ -1,7 +1,7 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
 import { inspect } from 'util';
 import supertest from 'supertest';
-import { BackHostApp } from '../dist';
+import { BackHostApp } from '../src';
 
 describe('BackHostApp', () => {
     let app: BackHostApp;
