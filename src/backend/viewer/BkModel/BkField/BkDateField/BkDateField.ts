@@ -1,6 +1,5 @@
 import { BkField } from '../BkField';
-import { BkHelper } from '../../../../BkHelper';
-import { Helper } from '../../../../../frontend';
+import { Helper } from '../../../../../common';
 import { JSONString } from '../../../../../types';
 import { DateTimeHelper } from '../../../../../common';
 

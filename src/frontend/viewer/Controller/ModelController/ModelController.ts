@@ -1,7 +1,7 @@
 import { Controller } from '../Controller';
 import { ModelView } from './ModelView';
 import { Model } from '../../Model/Model';
-import { Helper } from '../../../common';
+import { Helper } from '../../../../common';
 
 export abstract class ModelController<TModel extends Model = Model> extends Controller {
     deinited: boolean = false;

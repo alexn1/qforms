@@ -12,12 +12,11 @@ import {
     UpdateActionDto,
     CreateActionDto,
 } from '../../../../../../types';
-import { BkHelper } from '../../../../../BkHelper';
 import { BkForm } from '../../../BkForm/BkForm';
 import { BkModel } from '../../../BkModel';
 import { debug } from '../../../../../../console';
 import { DataSourceScheme } from '../../../../../common/Scheme/DataSourceScheme';
-import { Helper } from '../../../../../../frontend';
+import { Helper } from '../../../../../../common';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;

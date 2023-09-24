@@ -1,5 +1,5 @@
 import { Field } from '../Field';
-import { Helper } from '../../../../common';
+import { Helper } from '../../../../../common';
 
 export class TextAreaField extends Field {
     getRows() {

@@ -7,7 +7,7 @@ import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { CreateActionDto, Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 import { debug } from '../../../../../../console';
-import { Helper } from '../../../../../../frontend';
+import { Helper } from '../../../../../../common';
 
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     async fill(context: Context) {

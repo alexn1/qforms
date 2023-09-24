@@ -1,5 +1,6 @@
 import { IndexView } from './IndexView/IndexView';
-import { Helper, FrontHostApp, ReactHelper } from '../common';
+import { FrontHostApp, ReactHelper } from '../common';
+import { Helper } from '../../common';
 
 export class IndexFrontHostApp {
     // data: any;

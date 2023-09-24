@@ -1,6 +1,7 @@
 import React from 'react';
 import { RowFormFieldView } from '../RowFormFieldView';
-import { Helper, Image, Button, BinaryHelper } from '../../../../../../common';
+import { Helper } from '../../../../../../../common';
+import { Image, Button, BinaryHelper } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
 import { RowFormFileFieldController } from './RowFormFileFieldController';
 import './RowFormFileFieldView.less';

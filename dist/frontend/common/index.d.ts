@@ -1,5 +1,4 @@
 export * from './FrontHostApp';
-export * from '../../common/Helper';
 export * from './ReactComponent';
 export * from './Search';
 export * from './ReactHelper';

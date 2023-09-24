@@ -6,14 +6,14 @@ import { pConsole } from '../../../pConsole';
 import { Links } from '../../Links';
 import { Scripts } from '../../Scripts';
 import { ViewerModule } from '../ViewerModule';
-import { FrontHostApp, ApplicationController, Helper } from '../../../frontend';
+import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
 import { LoginActionDto, RpcActionDto } from '../../../types';
-import { BkHelper } from '../../BkHelper';
 import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';
+import { Helper } from '../../../common';
 
 const { version } = require('../../../../package.json');
 

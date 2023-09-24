@@ -5,13 +5,12 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkColumn } from '../BkColumn/BkColumn';
-import { BkHelper } from '../../../BkHelper';
 import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';
 import { JSONString, RawRow } from '../../../../types';
 import { Context } from '../../../Context';
 import { FieldScheme } from '../../../common/Scheme/FieldScheme/FieldScheme';
 import { FieldData } from '../../../../common/ModelData/FieldData';
-import { Helper } from '../../../../frontend';
+import { Helper } from '../../../../common';
 
 export class BkField<TFieldScheme extends FieldScheme = FieldScheme> extends BkModel<TFieldScheme> {
     fillAttributes(response: FieldData): void {

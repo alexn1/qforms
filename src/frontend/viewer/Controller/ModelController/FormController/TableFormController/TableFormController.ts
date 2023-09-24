@@ -5,7 +5,8 @@ import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow, Key } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
-import { Grid, Helper } from '../../../../../common';
+import { Grid } from '../../../../../common';
+import { Helper } from '../../../../../../common';
 
 export interface TableFormControllerFields extends FormControllerFields {
     [name: string]: TableFormFieldController;

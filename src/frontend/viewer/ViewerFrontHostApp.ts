@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom';
 import { Application } from './Model/Application/Application';
 import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
-import { FrontHostApp, Helper, FrontHostAppOptions, ReactHelper } from '../common';
+import { FrontHostApp, FrontHostAppOptions, ReactHelper } from '../common';
 import { AlertController } from './Controller/AlertController/AlertController';
 import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
 import { ApplicationData } from '../../common/ModelData/ApplicationData';
+import { Helper } from '../../common';
 
 // style
 import './style/application.less';

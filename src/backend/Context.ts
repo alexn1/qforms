@@ -3,10 +3,9 @@ import { Request, Response } from 'express';
 import { Action, BaseDto, BaseQuery, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
-import { BkHelper } from './BkHelper';
 import { LogLevel, pConsole } from '../pConsole';
 import { log } from '../decorators';
-import { Helper } from '../frontend';
+import { Helper } from '../common';
 
 export type RequestEx = Request & {
     session: Session;

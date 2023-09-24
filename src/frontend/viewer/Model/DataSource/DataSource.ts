@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-import { Helper } from '../../../common';
+import { Helper } from '../../../../common';
 import {
     Key,
     KeyTuple,

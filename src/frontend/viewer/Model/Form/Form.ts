@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Helper } from '../../../common';
+import { Helper } from '../../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
 import { Key, RawRow, Row, RpcActionDto, Scalar } from '../../../../types';

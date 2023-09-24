@@ -32,7 +32,7 @@ import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './private-helper';
 import { Router } from './Router';
 import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
-import { Helper } from '../frontend';
+import { Helper } from '../common';
 
 const pkg = require('../../package.json');
 

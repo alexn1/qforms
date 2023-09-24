@@ -1,13 +1,11 @@
 import path from 'path';
 const ejs = require('ejs');
-
 import { BaseModel } from '../../BaseModel';
-import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
 import { exists2, readTextFile, writeFile2 } from '../../file-helper';
-import { Helper } from '../../../frontend';
+import { Helper } from '../../../common';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,

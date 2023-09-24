@@ -1,4 +1,4 @@
-import { Helper } from '../../common';
+import { Helper } from '../../../common';
 
 export class EdModelController {
     model: any;

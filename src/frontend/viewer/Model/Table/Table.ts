@@ -7,11 +7,6 @@ import { TableData } from '../../../../common/ModelData/TableData';
 export class Table extends Model<TableData> {
     columns: Column[] = [];
 
-    /* constructor(data, parent) {
-        super(data, parent);
-        this.columns = [];
-    } */
-
     init() {
         // console.debug('Table.init', this.getFullName());
         for (const data of this.getData().columns) {

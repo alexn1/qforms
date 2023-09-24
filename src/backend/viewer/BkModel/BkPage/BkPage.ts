@@ -11,8 +11,7 @@ import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { Action, Optional, PageActionDto, PageActionQuery } from '../../../../types';
-import { BkHelper } from '../../../BkHelper';
-import { Helper } from '../../../../frontend';
+import { Helper } from '../../../../common';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,

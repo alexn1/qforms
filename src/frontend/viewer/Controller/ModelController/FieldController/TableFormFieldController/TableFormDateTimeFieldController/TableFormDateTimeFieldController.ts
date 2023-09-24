@@ -1,6 +1,6 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormDateTimeFieldView } from './TableFormDateTimeFieldView';
-import { Helper } from '../../../../../../common';
+import { Helper } from '../../../../../../../common';
 import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
 import { RawRow } from '../../../../../../../types';
 import { DateTimeHelper } from '../../../../../../../common';
