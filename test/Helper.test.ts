@@ -1,4 +1,4 @@
-import { Helper } from '../src/common/Helper';
+import { Helper } from '../src/frontend';
 
 describe('Helper', () => {
     test('Helper.formatNumber', async () => {
