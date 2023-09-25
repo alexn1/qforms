@@ -7,7 +7,6 @@ import { EdModelController } from '../EdModelController/EdModelController';
 import { EdDocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { ReactHelper } from '../../common';
 import { EdModalController } from '../EdModalController/EdModalController';
-import { Helper } from '../../../common';
 
 export class EditorFrontHostApp extends FrontHostApp {
     public static editorApp: any;

@@ -16,7 +16,7 @@ import { BkForm } from '../../../BkForm/BkForm';
 import { BkModel } from '../../../BkModel';
 import { debug } from '../../../../../../console';
 import { DataSourceScheme } from '../../../../../common/Scheme/DataSourceScheme';
-import { Helper } from '../../../../../../common';
+import { Helper } from '../../../../../../frontend';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;

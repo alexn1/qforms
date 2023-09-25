@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../../common/Helper';
 import { ColumnData } from '../../../../common/ModelData/ColumnData';
 
 export class Column extends Model<ColumnData> {

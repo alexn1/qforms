@@ -775,7 +775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _private_helper__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./private-helper */ "./src/backend/private-helper.ts");
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -940,7 +940,7 @@ class BackHostApp {
     useMiddlewares() {
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().json({
             limit: '20mb',
-            reviver: _common__WEBPACK_IMPORTED_MODULE_28__.Helper.dateTimeReviver,
+            reviver: _frontend__WEBPACK_IMPORTED_MODULE_28__.Helper.dateTimeReviver,
         }));
         this.express.use(body_parser__WEBPACK_IMPORTED_MODULE_5___default().urlencoded({ extended: false }));
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
@@ -1516,7 +1516,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend/common/Helper */ "./src/frontend/common/Helper.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1537,7 +1537,7 @@ class Context {
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
-            return _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
+            return _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
         }
         return {};
     }
@@ -2834,7 +2834,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../backend */ "./src/backend/index.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../console */ "./src/console.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../file-helper */ "./src/backend/file-helper.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
 
 const ejs = __webpack_require__(/*! ejs */ "ejs");
 
@@ -2899,7 +2899,7 @@ class Editor extends _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel {
         return path__WEBPACK_IMPORTED_MODULE_0___default().join(customDirPath, this.getName() + '.' + ext);
     }
     moveDataColItem(colName, name, offset) {
-        _common__WEBPACK_IMPORTED_MODULE_5__.Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+        _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     setColData(colName, newData) {
         return this.getParent().replaceDataColItem(colName, this.data, newData);
@@ -5905,7 +5905,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
 /* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../common */ "./src/common/index.ts");
 
 
 
@@ -5994,7 +5993,7 @@ class BkApplicationController {
                     session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = _common__WEBPACK_IMPORTED_MODULE_11__.Helper.decodeValue(tzOffset);
+                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_6__.Helper.decodeValue(tzOffset);
                 res.redirect(req.url);
                 this.viewerModule
                     .getHostApp()
@@ -6743,7 +6742,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -6857,7 +6856,7 @@ class BkDataSource extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         }
         else {
             for (const name in row) {
-                rawRow[name] = _common__WEBPACK_IMPORTED_MODULE_9__.Helper.encodeValue(row[name]);
+                rawRow[name] = _frontend__WEBPACK_IMPORTED_MODULE_9__.Helper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -7021,7 +7020,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
 /* harmony import */ var _BkDataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -7213,7 +7212,7 @@ class BkNoSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE
         }
         else {
             for (const name in row) {
-                rawRow[name] = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(row[name]);
+                rawRow[name] = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -7300,7 +7299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkDataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../BkDataSource */ "./src/backend/viewer/BkModel/BkDataSource/BkDataSource.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../Result */ "./src/Result.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -7465,8 +7464,8 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         const newKey = this.calcNewKey(key, values);
@@ -8536,7 +8535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BkDateField": () => (/* binding */ BkDateField)
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -8554,19 +8554,19 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
-            raw = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
-            raw = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
         return raw;
     }
     rawToValue(raw) {
-        const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -8587,7 +8587,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "BkDateTimeField": () => (/* binding */ BkDateTimeField)
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -8605,19 +8606,19 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
-            raw = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
-            raw = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
+            raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
         return raw;
     }
     rawToValue(raw) {
-        const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
+        const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -8640,7 +8641,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -8670,7 +8671,7 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
             return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getAllParams();
-        const js = _common__WEBPACK_IMPORTED_MODULE_2__.Helper.templateToJsString(defaultValue, params);
+        const js = _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.templateToJsString(defaultValue, params);
         let value;
         try {
             value = eval(js);
@@ -8713,10 +8714,10 @@ class BkField extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
     valueToRaw(value) {
-        return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
+        return _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeValue(value);
     }
     rawToValue(raw) {
-        return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
+        return _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(raw);
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';
@@ -9331,7 +9332,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
 
 
 
@@ -9376,7 +9377,7 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         const query = context.getQuery();
         if (action === _types__WEBPACK_IMPORTED_MODULE_4__.Action.page && query.newMode !== undefined) {
             if (['true', 'false'].includes(query.newMode)) {
-                return _common__WEBPACK_IMPORTED_MODULE_5__.Helper.decodeValue(query.newMode);
+                return _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.decodeValue(query.newMode);
             }
             throw new Error('getNewModeFromContext: newMode required');
         }
@@ -10148,178 +10149,6 @@ class DateTimeHelper {
 
 /***/ }),
 
-/***/ "./src/common/Helper.ts":
-/*!******************************!*\
-  !*** ./src/common/Helper.ts ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Helper": () => (/* binding */ Helper)
-/* harmony export */ });
-class Helper {
-    static formatNumber(value) {
-        return new Intl.NumberFormat('ru-RU').format(value);
-    }
-    static encodeObject(obj) {
-        const eObj = {};
-        for (const name in obj) {
-            eObj[name] = Helper.encodeValue(obj[name]);
-        }
-        return eObj;
-    }
-    static encodeValue(value) {
-        return JSON.stringify(value);
-    }
-    static decodeObject(eObj) {
-        if (!eObj)
-            throw new Error('Helper.decodeObject: no object');
-        const obj = {};
-        for (const name in eObj) {
-            if (typeof eObj[name] !== 'string') {
-                throw new Error(`decodeObject: cannot decode field: ${name}, type: ${typeof eObj[name]}, value: ${eObj[name]}`);
-            }
-            obj[name] = Helper.decodeValue(eObj[name]);
-        }
-        return obj;
-    }
-    static decodeValue(raw) {
-        if (raw === undefined)
-            throw new Error('decodeValue: undefined');
-        if (raw === null)
-            throw new Error('decodeValue: null');
-        if (raw === '')
-            throw new Error('decodeValue: empty string');
-        try {
-            return JSON.parse(raw, Helper.dateTimeReviver);
-        }
-        catch (err) {
-            throw new Error(`decodeValue failed: ${err.message}, raw: "${raw}"`);
-        }
-    }
-    static dateTimeReviver(key, value) {
-        if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
-            if (a)
-                return new Date(value);
-        }
-        return value;
-    }
-    static moveArrItem(arr, item, offset) {
-        const oldIndex = arr.indexOf(item);
-        if (oldIndex === -1)
-            throw new Error('cannot find element');
-        const newIndex = oldIndex + offset;
-        if (newIndex < 0)
-            throw new Error('cannot up top element');
-        if (newIndex > arr.length - 1)
-            throw new Error('cannot down bottom element');
-        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-    }
-    static fillArray(n) {
-        return Array.from(Array(n).keys());
-    }
-    static sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-    static registerGlobalClass(Class) {
-        if (typeof window === 'object') {
-            if (window[Class.name])
-                throw new Error(`window.${Class.name} already used`);
-            window[Class.name] = Class;
-        }
-        else {
-            if (global[Class.name])
-                throw new Error(`global.${Class.name} already used`);
-            global[Class.name] = Class;
-        }
-    }
-    static getGlobalClass(className) {
-        return typeof window === 'object' ? window[className] : global[className];
-    }
-    static addClassToDocumentElement(className) {
-        if (typeof document === 'object') {
-            document.documentElement.classList.add(className);
-        }
-    }
-    static headersToRecord(headers) {
-        return Array.from(headers.entries()).reduce((acc, header) => {
-            const [name, value] = header;
-            acc[name] = value;
-            return acc;
-        }, {});
-    }
-    static queryToString(query) {
-        return Object.keys(query)
-            .filter((name) => query[name] !== undefined)
-            .map((name) => {
-            const value = query[name];
-            if (typeof value === 'string') {
-                return `${name}=${encodeURIComponent(value)}`;
-            }
-            return Helper.queryRecordToString(name, value);
-        })
-            .join('&');
-    }
-    static queryRecordToString(name, record) {
-        return Object.keys(record)
-            .filter((field) => record[field] !== undefined)
-            .map((field) => {
-            const val = encodeURIComponent(record[field])
-                .replace(/^%22/, '"')
-                .replace(/%22$/, '"')
-                .replace(/%20/g, '+');
-            return `${name}[${field}]=${val}`;
-        })
-            .join('&');
-    }
-    static keyTupleToKey(keyArray) {
-        return JSON.stringify(keyArray);
-    }
-    static keyToKeyTuple(key) {
-        return JSON.parse(key);
-    }
-    static getFirstField(object) {
-        const [key] = Object.keys(object);
-        if (!key)
-            throw new Error('getFirstField: no fields');
-        return object[key];
-    }
-    static mapObject(object, cb) {
-        return Object.keys(object).reduce((obj, key) => {
-            const [newKey, newVal] = cb(key, object[key]);
-            obj[newKey] = newVal;
-            return obj;
-        }, {});
-    }
-    static templateArray(arr) {
-        return arr.map((item) => {
-            const type = typeof item;
-            if (type === 'number' || type === 'boolean') {
-                return item;
-            }
-            if (type === 'string') {
-                return `'${item}'`;
-            }
-            throw new Error(`wrong type for array item: ${type}`);
-        });
-    }
-    static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
-            if (params.hasOwnProperty(name)) {
-                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
-            }
-            return 'undefined';
-        });
-    }
-}
-Helper.registerGlobalClass(Helper);
-
-
-/***/ }),
-
 /***/ "./src/common/ModelData/ActionData.ts":
 /*!********************************************!*\
   !*** ./src/common/ModelData/ActionData.ts ***!
@@ -10494,7 +10323,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createReadQuery": () => (/* binding */ createReadQuery)
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../frontend/common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 function createReadQuery(page, form, ds, params) {
@@ -10505,7 +10334,7 @@ function createReadQuery(page, form, ds, params) {
         ds,
     };
     if (params) {
-        query.params = _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeObject(params);
+        query.params = _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeObject(params);
     }
     return query;
 }
@@ -10554,17 +10383,14 @@ function getGlobal(name) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper),
-/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
-/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
-/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_2__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_3__.getGlobal),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_3__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
 /* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
-/* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
-
+/* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
 
 
 
@@ -10802,7 +10628,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
 /* harmony export */ });
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
@@ -10888,7 +10714,7 @@ class FrontHostApp {
             const response = await fetch(url, Object.assign({ method,
                 body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
             if (response.ok) {
-                const headers = _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
+                const headers = _Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.headersToRecord(response.headers);
                 const data = await response.json();
                 return [headers, data];
             }
@@ -10988,6 +10814,178 @@ class FrontHostApp {
         return this.getOptions().url;
     }
 }
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/Helper.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Helper.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Helper": () => (/* binding */ Helper)
+/* harmony export */ });
+class Helper {
+    static formatNumber(value) {
+        return new Intl.NumberFormat('ru-RU').format(value);
+    }
+    static encodeObject(obj) {
+        const eObj = {};
+        for (const name in obj) {
+            eObj[name] = Helper.encodeValue(obj[name]);
+        }
+        return eObj;
+    }
+    static encodeValue(value) {
+        return JSON.stringify(value);
+    }
+    static decodeObject(eObj) {
+        if (!eObj)
+            throw new Error('Helper.decodeObject: no object');
+        const obj = {};
+        for (const name in eObj) {
+            if (typeof eObj[name] !== 'string') {
+                throw new Error(`decodeObject: cannot decode field: ${name}, type: ${typeof eObj[name]}, value: ${eObj[name]}`);
+            }
+            obj[name] = Helper.decodeValue(eObj[name]);
+        }
+        return obj;
+    }
+    static decodeValue(raw) {
+        if (raw === undefined)
+            throw new Error('decodeValue: undefined');
+        if (raw === null)
+            throw new Error('decodeValue: null');
+        if (raw === '')
+            throw new Error('decodeValue: empty string');
+        try {
+            return JSON.parse(raw, Helper.dateTimeReviver);
+        }
+        catch (err) {
+            throw new Error(`decodeValue failed: ${err.message}, raw: "${raw}"`);
+        }
+    }
+    static dateTimeReviver(key, value) {
+        if (typeof value === 'string') {
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
+            if (a)
+                return new Date(value);
+        }
+        return value;
+    }
+    static moveArrItem(arr, item, offset) {
+        const oldIndex = arr.indexOf(item);
+        if (oldIndex === -1)
+            throw new Error('cannot find element');
+        const newIndex = oldIndex + offset;
+        if (newIndex < 0)
+            throw new Error('cannot up top element');
+        if (newIndex > arr.length - 1)
+            throw new Error('cannot down bottom element');
+        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+    }
+    static fillArray(n) {
+        return Array.from(Array(n).keys());
+    }
+    static sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    static registerGlobalClass(Class) {
+        if (typeof window === 'object') {
+            if (window[Class.name])
+                throw new Error(`window.${Class.name} already used`);
+            window[Class.name] = Class;
+        }
+        else {
+            if (global[Class.name])
+                throw new Error(`global.${Class.name} already used`);
+            global[Class.name] = Class;
+        }
+    }
+    static getGlobalClass(className) {
+        return typeof window === 'object' ? window[className] : global[className];
+    }
+    static addClassToDocumentElement(className) {
+        if (typeof document === 'object') {
+            document.documentElement.classList.add(className);
+        }
+    }
+    static headersToRecord(headers) {
+        return Array.from(headers.entries()).reduce((acc, header) => {
+            const [name, value] = header;
+            acc[name] = value;
+            return acc;
+        }, {});
+    }
+    static queryToString(query) {
+        return Object.keys(query)
+            .filter((name) => query[name] !== undefined)
+            .map((name) => {
+            const value = query[name];
+            if (typeof value === 'string') {
+                return `${name}=${encodeURIComponent(value)}`;
+            }
+            return Helper.queryRecordToString(name, value);
+        })
+            .join('&');
+    }
+    static queryRecordToString(name, record) {
+        return Object.keys(record)
+            .filter((field) => record[field] !== undefined)
+            .map((field) => {
+            const val = encodeURIComponent(record[field])
+                .replace(/^%22/, '"')
+                .replace(/%22$/, '"')
+                .replace(/%20/g, '+');
+            return `${name}[${field}]=${val}`;
+        })
+            .join('&');
+    }
+    static keyTupleToKey(keyArray) {
+        return JSON.stringify(keyArray);
+    }
+    static keyToKeyTuple(key) {
+        return JSON.parse(key);
+    }
+    static getFirstField(object) {
+        const [key] = Object.keys(object);
+        if (!key)
+            throw new Error('getFirstField: no fields');
+        return object[key];
+    }
+    static mapObject(object, cb) {
+        return Object.keys(object).reduce((obj, key) => {
+            const [newKey, newVal] = cb(key, object[key]);
+            obj[newKey] = newVal;
+            return obj;
+        }, {});
+    }
+    static templateArray(arr) {
+        return arr.map((item) => {
+            const type = typeof item;
+            if (type === 'number' || type === 'boolean') {
+                return item;
+            }
+            if (type === 'string') {
+                return `'${item}'`;
+            }
+            throw new Error(`wrong type for array item: ${type}`);
+        });
+    }
+    static templateToJsString(value, params) {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
+            if (params.hasOwnProperty(name)) {
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
+            }
+            return 'undefined';
+        });
+    }
+}
+Helper.registerGlobalClass(Helper);
 
 
 /***/ }),
@@ -11830,61 +11828,62 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.ArrowIcon),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.ArrowIcon),
 /* harmony export */   "BinaryHelper": () => (/* reexport safe */ _BinaryHelper__WEBPACK_IMPORTED_MODULE_5__.BinaryHelper),
-/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.CheckBoxList),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBoxList),
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_6__.ClipboardHelper),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.ComboBox),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.ComboBox),
 /* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_4__.CookieHelper),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DatePicker),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Expand),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.GridRow),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Radio),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_7__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent),
 /* harmony export */   "ReactHelper": () => (/* reexport safe */ _ReactHelper__WEBPACK_IMPORTED_MODULE_3__.ReactHelper),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.RightIcon),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_2__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_8__.Tooltip),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityOffIcon)
 /* harmony export */ });
 /* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -11893,8 +11892,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CookieHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CookieHelper */ "./src/frontend/common/CookieHelper.ts");
 /* harmony import */ var _BinaryHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BinaryHelper */ "./src/frontend/common/BinaryHelper.ts");
 /* harmony import */ var _ClipboardHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ClipboardHelper */ "./src/frontend/common/ClipboardHelper.ts");
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
-/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
+/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+
 
 
 
@@ -12455,7 +12456,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 /* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
 /* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
@@ -12508,7 +12509,7 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactC
                         this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : undefined }, { children: action.title }), action.name))) }))] })));
     }
 }
-_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DropdownButton);
+_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DropdownButton);
 
 
 /***/ }),
@@ -13029,7 +13030,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _GridCell_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GridCell.less */ "./src/frontend/common/widget/GridCell/GridCell.less");
 /* harmony import */ var _GridCell_less__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_GridCell_less__WEBPACK_IMPORTED_MODULE_4__);
 
@@ -13048,7 +13049,7 @@ class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return this.span.current.offsetWidth;
     }
     renderCellValue(rawValue) {
-        const value = this.props.grid.props.decodeValue ? _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
+        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
         if (typeof value === 'boolean')
             return value.toString();
         return value;
@@ -14481,6 +14482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Grid),
 /* harmony export */   "GridCell": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridCell),
 /* harmony export */   "GridRow": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Helper),
 /* harmony export */   "Image": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Image),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.LeftIcon),
 /* harmony export */   "LinkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.LinkField),
@@ -14818,7 +14820,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
 /* harmony import */ var _LoginView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
 
@@ -15043,9 +15045,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
 /* harmony import */ var _ApplicationView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
 /* harmony import */ var _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
 
 
 
@@ -15141,7 +15142,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return super.getViewClass() || _ApplicationView__WEBPACK_IMPORTED_MODULE_2__.ApplicationView;
     }
     createView(rootElement) {
-        this.view = _common__WEBPACK_IMPORTED_MODULE_5__.ReactHelper.createReactComponent2(rootElement, this.getViewClass(), {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.ReactHelper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });
@@ -15167,7 +15168,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             throw new Error('no options.modal');
         const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page(pageData, this.getModel(), options);
         pageModel.init();
-        const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__.PageController.create(pageModel, this, `c${this.getNextId()}`);
+        const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
         return pc;
     }
@@ -15314,7 +15315,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         if (this.activePage)
             this.activePage.invalidate();
         this.modals
-            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__.PageController)
+            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController)
             .forEach((page) => page.invalidate());
     }
     async alert(options) {
@@ -15467,7 +15468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FieldController": () => (/* binding */ FieldController)
 /* harmony export */ });
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
@@ -15594,7 +15595,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -15664,7 +15665,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormCheckBoxListFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -15780,7 +15781,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../types */ "./src/types.ts");
 
 
@@ -15990,7 +15991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -16055,7 +16056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -16629,7 +16630,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormFileFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormFileFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -16659,11 +16660,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/ImageDialogController/ImageDialogController */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts");
-/* harmony import */ var _RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RowFormFileFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less");
-/* harmony import */ var _RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/ImageDialogController/ImageDialogController */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts");
+/* harmony import */ var _RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RowFormFileFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less");
+/* harmony import */ var _RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -16683,7 +16683,7 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         this.onChange = async (e) => {
             const file = e.target.files[0];
             if (file) {
-                const widgetValue = (await _common__WEBPACK_IMPORTED_MODULE_4__.BinaryHelper.readFileAsDataURL(file));
+                const widgetValue = (await _common__WEBPACK_IMPORTED_MODULE_3__.BinaryHelper.readFileAsDataURL(file));
                 this.getCtrl().onChange(widgetValue);
             }
         };
@@ -16692,7 +16692,7 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
             const ctrl = this.getCtrl();
             const app = ctrl.getApp();
             const src = ctrl.getValueForWidget();
-            const imageDialogCtrl = new _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_5__.ImageDialogController({
+            const imageDialogCtrl = new _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_4__.ImageDialogController({
                 app,
                 id: app.getNewId(),
                 src,
@@ -16727,7 +16727,7 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         const ctrl = this.getCtrl();
         const row = ctrl.getRow();
         const value = ctrl.getValueForWidget();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
     }
     componentDidMount() {
         setTimeout(() => this.updateSize(), 0);
@@ -16753,7 +16753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormLinkFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -16848,7 +16848,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormPasswordFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormPasswordFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -16944,7 +16944,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17050,7 +17050,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormRadioFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormRadioFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17135,7 +17135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextAreaFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17207,7 +17207,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17299,7 +17299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17402,7 +17402,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17467,7 +17467,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17553,7 +17553,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -17565,7 +17566,7 @@ class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IM
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -17617,7 +17618,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -17629,7 +17631,7 @@ class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPAC
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -17737,7 +17739,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormLinkFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17802,7 +17804,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -17857,7 +17859,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 
 
 
@@ -17884,7 +17886,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
 /* harmony import */ var _TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TableFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less");
 /* harmony import */ var _TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__);
@@ -17916,7 +17918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FormController": () => (/* binding */ FormController)
 /* harmony export */ });
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
 
 
@@ -18063,7 +18065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
 /* harmony import */ var _RowFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -18347,7 +18349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
 /* harmony import */ var _TableFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 
 
 
@@ -18630,7 +18632,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../../console */ "./src/console.ts");
 /* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
 /* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_TableFormView_less__WEBPACK_IMPORTED_MODULE_7__);
@@ -18738,7 +18740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
 /* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
 
@@ -18858,7 +18860,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
@@ -19508,7 +19510,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Controller/LoginController/LoginController */ "./src/frontend/viewer/Controller/LoginController/LoginController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/common/index.ts");
 
 
 
@@ -19535,7 +19536,7 @@ class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostAp
         return this.data;
     }
 }
-_common__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(LoginFrontHostApp);
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(LoginFrontHostApp);
 
 
 /***/ }),
@@ -19555,7 +19556,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -19688,7 +19689,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Column": () => (/* binding */ Column)
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class Column extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
@@ -19726,7 +19727,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
 /* harmony import */ var _Page_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
 /* harmony import */ var _Application_Application__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 /* harmony import */ var _Field_Field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Field/Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
@@ -20239,7 +20240,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NoSqlDataSource": () => (/* binding */ NoSqlDataSource)
 /* harmony export */ });
 /* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class NoSqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
@@ -20263,7 +20264,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
 /* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 
@@ -20485,7 +20486,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SqlDataSource": () => (/* binding */ SqlDataSource)
 /* harmony export */ });
 /* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
@@ -20508,7 +20509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _Table_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Table/Table */ "./src/frontend/viewer/Model/Table/Table.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -20562,7 +20563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CheckBoxField": () => (/* binding */ CheckBoxField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class CheckBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -20584,7 +20585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CheckBoxListField": () => (/* binding */ CheckBoxListField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -20651,7 +20652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ComboBoxField": () => (/* binding */ ComboBoxField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -20718,7 +20719,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DateField": () => (/* binding */ DateField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -20729,15 +20731,15 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(raw) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -20763,7 +20765,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DateTimeField": () => (/* binding */ DateTimeField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -20774,15 +20777,15 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(rawValue) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -20808,7 +20811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Field": () => (/* binding */ Field)
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
 
 
@@ -21004,7 +21007,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FileField": () => (/* binding */ FileField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class FileField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21026,7 +21029,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LinkField": () => (/* binding */ LinkField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class LinkField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21048,7 +21051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PasswordField": () => (/* binding */ PasswordField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class PasswordField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21070,7 +21073,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PhoneField": () => (/* binding */ PhoneField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class PhoneField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21092,7 +21095,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RadioField": () => (/* binding */ RadioField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21162,7 +21165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TextAreaField": () => (/* binding */ TextAreaField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
 class TextAreaField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21190,7 +21193,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TextBoxField": () => (/* binding */ TextBoxField)
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class TextBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
@@ -21212,7 +21215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Form": () => (/* binding */ Form)
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 
 
@@ -21347,7 +21350,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowForm": () => (/* binding */ RowForm)
 /* harmony export */ });
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Form */ "./src/frontend/viewer/Model/Form/Form.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
@@ -21422,7 +21425,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableForm": () => (/* binding */ TableForm)
 /* harmony export */ });
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Form */ "./src/frontend/viewer/Model/Form/Form.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class TableForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
@@ -21444,7 +21447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Model": () => (/* binding */ Model)
 /* harmony export */ });
 /* harmony import */ var _EventEmitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
@@ -21557,7 +21560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
@@ -21746,7 +21749,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _Column_Column__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Column/Column */ "./src/frontend/viewer/Model/Column/Column.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -21899,43 +21902,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controller/AlertController/AlertController */ "./src/frontend/viewer/Controller/AlertController/AlertController.ts");
 /* harmony import */ var _Controller_ConfirmController_ConfirmController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Controller/ConfirmController/ConfirmController */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common */ "./src/common/index.ts");
-/* harmony import */ var _style_application_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/application.less */ "./src/frontend/viewer/style/application.less");
-/* harmony import */ var _style_application_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_application_less__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _style_field_less__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style/field.less */ "./src/frontend/viewer/style/field.less");
-/* harmony import */ var _style_field_less__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_style_field_less__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _style_form_less__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style/form.less */ "./src/frontend/viewer/style/form.less");
-/* harmony import */ var _style_form_less__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_form_less__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _style_page_less__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./style/page.less */ "./src/frontend/viewer/style/page.less");
-/* harmony import */ var _style_page_less__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_style_page_less__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _style_paging_less__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style/paging.less */ "./src/frontend/viewer/style/paging.less");
-/* harmony import */ var _style_paging_less__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_paging_less__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./style/toolbar-button.less */ "./src/frontend/viewer/style/toolbar-button.less");
-/* harmony import */ var _style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./style/toolbar-dropdown-button.less */ "./src/frontend/viewer/style/toolbar-dropdown-button.less");
-/* harmony import */ var _style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _style_version_notification_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./style/version-notification.less */ "./src/frontend/viewer/style/version-notification.less");
-/* harmony import */ var _style_version_notification_less__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_style_version_notification_less__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
-/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
-/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_less__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
-/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../common/style/flex-max.less */ "./src/frontend/common/style/flex-max.less");
-/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../common/style/frame.less */ "./src/frontend/common/style/frame.less");
-/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_common_style_frame_less__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../common/style/full.less */ "./src/frontend/common/style/full.less");
-/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_common_style_full_less__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../common/style/global.less */ "./src/frontend/common/style/global.less");
-/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_common_style_global_less__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../common/style/grid-gap-5.less */ "./src/frontend/common/style/grid-gap-5.less");
-/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
-/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
-/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_common_style_wait_less__WEBPACK_IMPORTED_MODULE_24__);
+/* harmony import */ var _style_application_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style/application.less */ "./src/frontend/viewer/style/application.less");
+/* harmony import */ var _style_application_less__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_application_less__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _style_field_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/field.less */ "./src/frontend/viewer/style/field.less");
+/* harmony import */ var _style_field_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_field_less__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _style_form_less__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style/form.less */ "./src/frontend/viewer/style/form.less");
+/* harmony import */ var _style_form_less__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_style_form_less__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _style_page_less__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style/page.less */ "./src/frontend/viewer/style/page.less");
+/* harmony import */ var _style_page_less__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_page_less__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _style_paging_less__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./style/paging.less */ "./src/frontend/viewer/style/paging.less");
+/* harmony import */ var _style_paging_less__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_style_paging_less__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style/toolbar-button.less */ "./src/frontend/viewer/style/toolbar-button.less");
+/* harmony import */ var _style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./style/toolbar-dropdown-button.less */ "./src/frontend/viewer/style/toolbar-dropdown-button.less");
+/* harmony import */ var _style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _style_version_notification_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./style/version-notification.less */ "./src/frontend/viewer/style/version-notification.less");
+/* harmony import */ var _style_version_notification_less__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_style_version_notification_less__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
+/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
+/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_less__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
+/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../common/style/flex-max.less */ "./src/frontend/common/style/flex-max.less");
+/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../common/style/frame.less */ "./src/frontend/common/style/frame.less");
+/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_common_style_frame_less__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../common/style/full.less */ "./src/frontend/common/style/full.less");
+/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_common_style_full_less__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../common/style/global.less */ "./src/frontend/common/style/global.less");
+/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_common_style_global_less__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../common/style/grid-gap-5.less */ "./src/frontend/common/style/grid-gap-5.less");
+/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
+/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
+/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_common_style_wait_less__WEBPACK_IMPORTED_MODULE_23__);
 
 
 
@@ -22072,7 +22074,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         });
     }
 }
-_common__WEBPACK_IMPORTED_MODULE_6__.Helper.registerGlobalClass(ViewerFrontHostApp);
+_common__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(ViewerFrontHostApp);
 
 
 /***/ }),
@@ -22840,7 +22842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Grid": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Grid),
 /* harmony export */   "GridCell": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridCell),
 /* harmony export */   "GridRow": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridRow),
-/* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.Helper),
+/* harmony export */   "Helper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper),
 /* harmony export */   "Image": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Image),
 /* harmony export */   "ImageFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ImageFieldEditor),
 /* harmony export */   "InsertExResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.InsertExResult),

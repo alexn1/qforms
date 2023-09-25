@@ -11,7 +11,7 @@ import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
 import { WebSocketClient } from '../../../WebSocketClient';
-import { Helper } from '../../../../../common';
+import { Helper } from '../../../../common';
 import { FrontHostApp, ReactHelper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';

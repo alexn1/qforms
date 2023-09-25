@@ -1,7 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormPhoneFieldView } from './RowFormPhoneFieldView';
 import { PhoneField } from '../../../../../Model/Field/PhoneField/PhoneField';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormPhoneFieldController extends RowFormFieldController<PhoneField> {
     getViewClass() {

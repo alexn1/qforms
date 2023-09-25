@@ -13,7 +13,7 @@ import { LoginActionDto, RpcActionDto } from '../../../types';
 import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';
-import { Helper } from '../../../common';
+import { Helper } from '../../../frontend';
 
 const { version } = require('../../../../package.json');
 

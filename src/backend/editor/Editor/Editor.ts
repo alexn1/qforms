@@ -5,7 +5,7 @@ import * as backend from '../../../backend';
 import { ModelScheme } from '../../common/Scheme/ModelScheme';
 import { debug } from '../../../console';
 import { exists2, readTextFile, writeFile2 } from '../../file-helper';
-import { Helper } from '../../../common';
+import { Helper } from '../../../frontend';
 
 export class Editor<
     TBkModelData extends ModelScheme = ModelScheme,

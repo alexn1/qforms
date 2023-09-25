@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Helper } from '../../../../common';
+import { Helper } from '../../../common';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../types';
 import { DataSource } from '../DataSource/DataSource';

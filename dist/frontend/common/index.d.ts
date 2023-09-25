@@ -5,5 +5,6 @@ export * from './ReactHelper';
 export * from './CookieHelper';
 export * from './BinaryHelper';
 export * from './ClipboardHelper';
+export * from './Helper';
 export * from './icon';
 export * from './widget';

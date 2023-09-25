@@ -2,7 +2,7 @@ import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormComboBoxFieldView } from './TableFormComboBoxFieldView';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 import { RawRow } from '../../../../../../../types';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 
 export class TableFormComboBoxFieldController extends TableFormFieldController<ComboBoxField> {
     init() {

@@ -2,7 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormDateTimeFieldView } from './RowFormDateTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 import { RowFormController } from '../../../FormController/RowFormController/RowFormController';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController<DateTimeField> {

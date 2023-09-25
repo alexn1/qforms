@@ -1,5 +1,5 @@
 import { Field } from '../Field';
-import { Helper } from '../../../../../common';
+import { Helper } from '../../../../common';
 import { JSONString, RawRow } from '../../../../../types';
 import { DataSource } from '../../DataSource/DataSource';
 

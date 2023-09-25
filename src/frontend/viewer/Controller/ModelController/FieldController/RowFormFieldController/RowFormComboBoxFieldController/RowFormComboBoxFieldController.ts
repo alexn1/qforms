@@ -1,6 +1,6 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 import { Key, keyToKeyTuple, keyTupleToKey } from '../../../../../../../types';
 

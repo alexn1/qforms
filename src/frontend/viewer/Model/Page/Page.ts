@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { DataSource } from '../DataSource/DataSource';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { Action, Key, RpcActionDto } from '../../../../types';

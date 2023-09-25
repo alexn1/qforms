@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactComponent } from '../../ReactComponent';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../Helper';
 import { JSONString } from '../../../../types';
 
 import './GridCell.less';

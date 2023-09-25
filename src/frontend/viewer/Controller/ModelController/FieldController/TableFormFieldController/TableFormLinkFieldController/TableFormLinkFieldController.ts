@@ -1,7 +1,7 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormLinkFieldView } from './TableFormLinkFieldView';
 import { LinkField } from '../../../../../Model/Field/LinkField/LinkField';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 
 export class TableFormLinkFieldController extends TableFormFieldController<LinkField> {
     getViewClass() {

@@ -1,6 +1,6 @@
 import { Key, RawRow } from '../../../../../types';
 import { Form } from '../Form';
-import { Helper } from '../../../../../common/Helper';
+import { Helper } from '../../../../common/Helper';
 
 export class RowForm extends Form {
     init() {

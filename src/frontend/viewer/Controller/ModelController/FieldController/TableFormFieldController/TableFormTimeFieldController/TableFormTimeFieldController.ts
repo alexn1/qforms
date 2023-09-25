@@ -2,7 +2,7 @@ import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormTimeFieldView } from './TableFormTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { TimeField } from '../../../../../Model/Field/TimeField/TimeField';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 import { RawRow } from '../../../../../../../types';
 
 export class TableFormTimeFieldController extends TableFormFieldController<TimeField> {

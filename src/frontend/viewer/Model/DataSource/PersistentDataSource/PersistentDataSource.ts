@@ -13,7 +13,7 @@ import {
 } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
-import { Helper } from '../../../../../common';
+import { Helper } from '../../../../common';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {

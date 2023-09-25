@@ -1,4 +1,4 @@
-import { Helper } from '../../../../../../../common';
+import { Helper } from '../../../../../../common';
 import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormTextBoxFieldController } from './TableFormTextBoxFieldController';
 

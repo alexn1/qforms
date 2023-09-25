@@ -1,4 +1,4 @@
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../Helper';
 import { ReactComponent } from '../../ReactComponent';
 import { Button } from '../Button';
 

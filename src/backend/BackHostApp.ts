@@ -32,7 +32,7 @@ import { e500 } from './e500';
 import { checkNodeVersion, getSecretSync } from './private-helper';
 import { Router } from './Router';
 import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
-import { Helper } from '../common';
+import { Helper } from '../frontend';
 
 const pkg = require('../../package.json');
 
@@ -43,7 +43,6 @@ const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT
 const MIN_NODE_VERSION = 14;
 
 export interface BackHostAppParams {
-    // [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;

@@ -1,5 +1,5 @@
 import { ModelController } from '../ModelController';
-import { Helper } from '../../../../../common';
+import { Helper } from '../../../../common';
 import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';

@@ -25,7 +25,7 @@ import { debug } from '../../../../console';
 import { DataSourceScheme } from '../../../common/Scheme/DataSourceScheme';
 import { DataSourceData } from '../../../../common/ModelData/DataSourceData';
 import { exists2, readTextFile } from '../../../file-helper';
-import { Helper } from '../../../../common';
+import { Helper } from '../../../../frontend';
 
 export type ReadResult = [RawRow[], Nullable<number>];
 

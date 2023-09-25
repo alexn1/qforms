@@ -1,7 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTextAreaFieldView } from './RowFormTextAreaFieldView';
 import { TextAreaField } from '../../../../../Model/Field/TextAreaField/TextAreaField';
-import { Helper } from '../../../../../../../common/Helper';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormTextAreaFieldController extends RowFormFieldController<TextAreaField> {
     getViewClass() {

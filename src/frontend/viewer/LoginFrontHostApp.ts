@@ -1,6 +1,6 @@
 import { LoginController } from './Controller/LoginController/LoginController';
 import { FrontHostApp, ReactHelper } from '../common';
-import { Helper } from '../../common';
+import { Helper } from '../common';
 
 export class LoginFrontHostApp extends FrontHostApp {
     constructor(private data) {

@@ -1,6 +1,6 @@
 import { Controller } from '../Controller';
 import { LoginView } from './LoginView';
-import { Helper } from '../../../../common';
+import { Helper } from '../../../common';
 
 export class LoginController extends Controller {
     frontHostApp: any;

@@ -4,7 +4,7 @@ import { Database } from '../Database/Database';
 import { FrontHostApp, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
-import { Helper } from '../../../../common/Helper';
+import { Helper } from '../../../common/Helper';
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 
 export class Application extends Model<ApplicationData> {

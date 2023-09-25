@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { ReactComponent } from './ReactComponent';
-import { Helper } from '../../common/Helper';
 
 export class ReactHelper {
     static createReactComponent(

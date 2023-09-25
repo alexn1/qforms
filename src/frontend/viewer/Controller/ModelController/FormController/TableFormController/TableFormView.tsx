@@ -11,7 +11,7 @@ import {
     Grid,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
-import { Helper } from '../../../../../../common/Helper';
+import { Helper } from '../../../../../common/Helper';
 import { PageController } from '../../PageController/PageController';
 import { debug } from '../../../../../../console';
 

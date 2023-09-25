@@ -4,7 +4,7 @@ import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
-    fill(context: Context): Promise<import("../../../../../../common").DataSourceData>;
+    fill(context: Context): Promise<import("../../../../../..").DataSourceData>;
     getKeyColumns(): string[];
     getCountQuery(context: Context): string;
     getSingleQuery(context: Context): string;
