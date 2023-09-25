@@ -1,10 +1,6 @@
 import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
 
 export class Helper {
-    static formatNumber(value: number): string {
-        return new Intl.NumberFormat('ru-RU').format(value);
-    }
-
     static encodeObject(obj: Record<string, any>): Record<string, JSONString> {
         const eObj = {} as Record<string, any>;
         for (const name in obj) {

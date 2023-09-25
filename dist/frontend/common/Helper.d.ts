@@ -1,6 +1,5 @@
 import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
 export declare class Helper {
-    static formatNumber(value: number): string;
     static encodeObject(obj: Record<string, any>): Record<string, JSONString>;
     static encodeValue<T>(value: T): JSONString<T>;
     static decodeObject(eObj: Record<string, JSONString>): Record<string, any>;

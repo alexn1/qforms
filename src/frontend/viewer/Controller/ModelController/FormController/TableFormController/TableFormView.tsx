@@ -11,10 +11,9 @@ import {
     Grid,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
-import { Helper } from '../../../../../common/Helper';
 import { PageController } from '../../PageController/PageController';
 import { debug } from '../../../../../../console';
-
+import { FormatHelper } from '../../../../../common/FormatHelper';
 import './TableFormView.less';
 
 export class TableFormView<
@@ -79,7 +78,7 @@ export class TableFormView<
                     <span className="count">
                         {dataSource.getRowsLength()}{' '}
                         {dataSource.getLimit() &&
-                            `of ${Helper.formatNumber(dataSource.getCount())}`}
+                            `of ${FormatHelper.formatNumber(dataSource.getCount())}`}
                     </span>
                 </div>
                 {dataSource.getLimit() && (
@@ -93,7 +92,7 @@ export class TableFormView<
                         />
                         <div className="paging__framesCount">
                             {' '}
-                            / {Helper.formatNumber(dataSource.getFramesCount())}{' '}
+                            / {FormatHelper.formatNumber(dataSource.getFramesCount())}{' '}
                         </div>
                         <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick}>
                             <RightIcon size={18} />

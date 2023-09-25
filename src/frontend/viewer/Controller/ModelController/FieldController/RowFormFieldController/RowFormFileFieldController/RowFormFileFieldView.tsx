@@ -5,6 +5,7 @@ import { Image, Button, BinaryHelper } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
 import { RowFormFileFieldController } from './RowFormFileFieldController';
 import './RowFormFileFieldView.less';
+import { FormatHelper } from '../../../../../../common/FormatHelper';
 
 export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldController> {
     image: React.RefObject<any> = React.createRef();
@@ -76,7 +77,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
                         />
                         <span className={`${this.getCssBlockName()}__size`} ref={this.div}></span>
                         <span className={`${this.getCssBlockName()}__length`}>
-                            {Helper.formatNumber(value.length)}
+                            {FormatHelper.formatNumber(value.length)}
                         </span>
                     </div>
                 ) : (
