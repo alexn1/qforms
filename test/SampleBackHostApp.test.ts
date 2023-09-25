@@ -13,9 +13,9 @@ import {
     RawRow,
     CreateActionDto,
     DeleteActionDto,
+    Action,
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
-import { Action } from '../dist';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
