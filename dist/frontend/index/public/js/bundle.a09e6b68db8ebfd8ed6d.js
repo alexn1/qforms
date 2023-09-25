@@ -31409,6 +31409,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
 /* harmony export */ });
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
+
 class DateTimeHelper {
     static today(timeOffset) {
         let ts = Date.now();
@@ -31529,6 +31531,7 @@ class DateTimeHelper {
         }
     }
 }
+(0,_global__WEBPACK_IMPORTED_MODULE_0__.registerGlobal)(DateTimeHelper);
 
 
 /***/ }),
@@ -31885,6 +31888,36 @@ function createReadQuery(page, form, ds, params) {
 
 /***/ }),
 
+/***/ "./src/common/global.ts":
+/*!******************************!*\
+  !*** ./src/common/global.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getGlobal": () => (/* binding */ getGlobal),
+/* harmony export */   "registerGlobal": () => (/* binding */ registerGlobal)
+/* harmony export */ });
+function registerGlobal(fn) {
+    if (typeof window === 'object') {
+        if (window[fn.name])
+            throw new Error(`window.${fn.name} already used`);
+        window[fn.name] = fn;
+    }
+    else {
+        if (global[fn.name])
+            throw new Error(`global.${fn.name} already used`);
+        global[fn.name] = fn;
+    }
+}
+function getGlobal(name) {
+    return typeof window === 'object' ? window[name] : global[name];
+}
+
+
+/***/ }),
+
 /***/ "./src/common/index.ts":
 /*!*****************************!*\
   !*** ./src/common/index.ts ***!
@@ -31895,12 +31928,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
 /* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
 /* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
+
 
 
 

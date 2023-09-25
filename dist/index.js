@@ -10555,12 +10555,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
 /* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Helper */ "./src/common/Helper.ts");
 /* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
+
 
 
 
@@ -22958,9 +22962,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
 /* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
 /* harmony export */   "createReadQuery": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.getGlobal),
 /* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
 /* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
-/* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson)
+/* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/types.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Result */ "./src/Result.ts");
