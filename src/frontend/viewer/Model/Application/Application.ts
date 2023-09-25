@@ -1,4 +1,4 @@
-import { RpcActionDto, Action } from '../../../../types';
+import { Action } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp, RequestMethod } from '../../../common';
@@ -6,6 +6,7 @@ import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
+import { RpcActionDto } from '../../../common';
 
 export class Application extends Model<ApplicationData> {
     databases: Database[] = [];

@@ -1,6 +1,7 @@
 import { DataSource } from '../DataSource';
-import { Key, RawRow, ReadActionResponse } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 import { Result } from '../../../../../Result';
+import { ReadActionResponse } from '../../../../common';
 export declare class PersistentDataSource extends DataSource {
     insert(row: RawRow): Promise<Result>;
     update(): Promise<Result | null>;

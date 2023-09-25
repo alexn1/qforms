@@ -9,7 +9,7 @@ import { ViewerModule } from '../ViewerModule';
 import { FrontHostApp, ApplicationController } from '../../../frontend';
 import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
-import { LoginActionDto, RpcActionDto } from '../../../types';
+import { LoginActionDto, RpcActionDto } from '../../../frontend';
 import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';

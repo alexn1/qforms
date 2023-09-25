@@ -1,11 +1,11 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Action, BaseDto, BaseQuery, JSONString, Nullable, Optional } from '../types';
+import { Action, JSONString, Nullable, Optional } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { LogLevel, pConsole } from '../pConsole';
 import { log } from '../decorators';
-import { Helper } from '../frontend/common/Helper';
+import { Helper, BaseDto, BaseQuery } from '../frontend';
 
 export type RequestEx = Request & {
     session: Session;

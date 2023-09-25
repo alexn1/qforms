@@ -2,11 +2,12 @@ import { Model } from '../Model';
 import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { Key, RawRow, Row, RpcActionDto, Scalar } from '../../../../types';
+import { Key, RawRow, Row } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { FormData } from '../../../../common/ModelData/FormData';
 import { Action } from '../../../../types';
+import { RpcActionDto } from '../../../common';
 
 export class Form extends Model<FormData> {
     dataSources: DataSource[] = [];

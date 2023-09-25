@@ -10,7 +10,7 @@ import {
     CreateActionDto,
     UpdateActionDto,
     DeleteActionDto,
-} from '../../../types';
+} from '../../../frontend';
 
 export class BkDataSourceController {
     constructor(private viewerModule: ViewerModule) {}

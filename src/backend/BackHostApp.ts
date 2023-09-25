@@ -8,7 +8,6 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 import { WebSocketServer } from './WebSocketServer';
-import { BkHelper } from './BkHelper';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
@@ -17,11 +16,11 @@ import { IndexModule } from './index/IndexModule';
 import { HttpError } from './HttpError';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
-import { FileSessionStore } from './FileSessionStore';
+import { FileSessionStore, getSecretSync } from './FileSessionStore';
 import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { CreateAppDto, Optional, Scalar, Route } from '../types';
+import { Optional, Scalar, Route } from '../types';
 import { EVEvent, EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { debug, error } from '../console';
@@ -29,10 +28,10 @@ import { Nullable } from '../types';
 import { log, time } from '../decorators';
 import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
-import { checkNodeVersion, getSecretSync } from './private-helper';
+import { checkNodeVersion } from './private-helper';
 import { Router } from './Router';
 import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
-import { Helper } from '../frontend';
+import { Helper, CreateAppDto } from '../frontend';
 
 const pkg = require('../../package.json');
 
@@ -657,9 +656,6 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
             }
         }
     }
-
-    // @log(LogLevel.debug)
-    // static test(): void {}
 
     getLogger(): EventLog {
         return this.eventLog;

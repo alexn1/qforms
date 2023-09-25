@@ -1,7 +1,7 @@
 import path from 'path';
 import { Store, SessionData } from 'express-session';
 import { debug } from '../console';
-import { getFileContent, writeFile } from './file-helper';
+import { getFileContent, writeFile, getFileContentSync, writeFileSync } from './file-helper';
 
 export class FileSessionStore extends Store {
     store: Record<string, SessionData> = {};
@@ -48,4 +48,28 @@ export class FileSessionStore extends Store {
         delete this.store[sid];
         cb(null);
     }
+}
+
+export function getSecretSync(secretFilePath: string): string {
+    let secret;
+    secret = getFileContentSync(secretFilePath);
+    if (secret) {
+        return secret;
+    }
+    secret = getRandomString(20);
+    writeFileSync(secretFilePath, secret);
+    return secret;
+}
+
+export function getRandomString(length: number) {
+    function getRandomInt(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const index = getRandomInt(0, chars.length - 1);
+        result += chars.substr(index, 1);
+    }
+    return result;
 }

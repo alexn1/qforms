@@ -1,12 +1,4 @@
-import {
-    JSONString,
-    Key,
-    PageActionDto,
-    PageActionQuery,
-    Nullable,
-    Query,
-    PageActionResponse,
-} from '../../../../../types';
+import { JSONString, Key, Nullable, Query } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -18,6 +10,7 @@ import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
 import { PageData } from '../../../../../common/ModelData/PageData';
 import { ModalController } from '../../ModalController/ModalController';
+import { PageActionQuery, PageActionResponse } from '../../../../common';
 
 export interface OpenPageOptions {
     name: string;

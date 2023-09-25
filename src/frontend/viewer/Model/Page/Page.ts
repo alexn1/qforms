@@ -4,9 +4,10 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
-import { Action, Key, RpcActionDto } from '../../../../types';
+import { Action, Key } from '../../../../types';
 import { Application } from '../Application/Application';
 import { debug } from '../../../../console';
+import { RpcActionDto } from '../../../common';
 
 export interface PageOptions {
     id?: string;

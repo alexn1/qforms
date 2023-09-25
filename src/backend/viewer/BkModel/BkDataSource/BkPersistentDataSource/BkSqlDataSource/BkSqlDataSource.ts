@@ -3,10 +3,11 @@ import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
-import { CreateActionDto, Key } from '../../../../../../types';
+import { Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 import { debug } from '../../../../../../console';
 import { Helper } from '../../../../../../frontend';
+import { CreateActionDto } from '../../../../../../frontend';
 
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     async fill(context: Context) {
@@ -221,8 +222,14 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
 
         // update row
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = Helper.mapObject(values, (name: string, value: any) => [`val_${name}`, value]);
-        const _where = Helper.mapObject(where, (name: string, value: any) => [`key_${name}`, value]);
+        const _values = Helper.mapObject(values, (name: string, value: any) => [
+            `val_${name}`,
+            value,
+        ]);
+        const _where = Helper.mapObject(where, (name: string, value: any) => [
+            `key_${name}`,
+            value,
+        ]);
         const params = { ..._values, ..._where };
         await this.getDatabase().queryResult(context, updateQuery, params);
 

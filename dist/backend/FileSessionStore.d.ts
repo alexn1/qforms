@@ -7,3 +7,5 @@ export declare class FileSessionStore extends Store {
     get(sid: string, cb: (err: any, session?: SessionData | null) => void): void;
     destroy(sid: string, cb: (err?: any) => void): void;
 }
+export declare function getSecretSync(secretFilePath: string): string;
+export declare function getRandomString(length: number): string;

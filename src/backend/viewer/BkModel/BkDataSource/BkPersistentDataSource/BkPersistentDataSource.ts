@@ -1,10 +1,11 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
-import { RawRow, ChangesByKey, Key, Row, UpdateActionDto } from '../../../../../types';
+import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
 import { BkModel } from '../../BkModel';
 import { Context } from '../../../../Context';
 import { DataSourceScheme } from '../../../../common/Scheme/DataSourceScheme';
+import { UpdateActionDto } from '../../../../../frontend';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,

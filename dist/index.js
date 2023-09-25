@@ -946,7 +946,7 @@ class BackHostApp {
         this.express.use(cookie_parser__WEBPACK_IMPORTED_MODULE_6___default()());
         this.express.use(express_session__WEBPACK_IMPORTED_MODULE_7___default()({
             store: new _FileSessionStore__WEBPACK_IMPORTED_MODULE_16__.FileSessionStore(this.sessionDirPath),
-            secret: (0,_private_helper__WEBPACK_IMPORTED_MODULE_25__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
+            secret: (0,_FileSessionStore__WEBPACK_IMPORTED_MODULE_16__.getSecretSync)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'secret.txt')),
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -1516,7 +1516,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
-/* harmony import */ var _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend/common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1537,7 +1537,7 @@ class Context {
         const req = this.getReq();
         const action = this.getAction();
         if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
-            return _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
+            return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
         }
         return {};
     }
@@ -1847,7 +1847,9 @@ class EventLog {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FileSessionStore": () => (/* binding */ FileSessionStore)
+/* harmony export */   "FileSessionStore": () => (/* binding */ FileSessionStore),
+/* harmony export */   "getRandomString": () => (/* binding */ getRandomString),
+/* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
@@ -1902,6 +1904,28 @@ class FileSessionStore extends express_session__WEBPACK_IMPORTED_MODULE_1__.Stor
         delete this.store[sid];
         cb(null);
     }
+}
+function getSecretSync(secretFilePath) {
+    let secret;
+    secret = (0,_file_helper__WEBPACK_IMPORTED_MODULE_3__.getFileContentSync)(secretFilePath);
+    if (secret) {
+        return secret;
+    }
+    secret = getRandomString(20);
+    (0,_file_helper__WEBPACK_IMPORTED_MODULE_3__.writeFileSync)(secretFilePath, secret);
+    return secret;
+}
+function getRandomString(length) {
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const index = getRandomInt(0, chars.length - 1);
+        result += chars.substr(index, 1);
+    }
+    return result;
 }
 
 
@@ -5843,38 +5867,16 @@ class MonitorModule {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "checkNodeVersion": () => (/* binding */ checkNodeVersion),
-/* harmony export */   "getRandomString": () => (/* binding */ getRandomString),
-/* harmony export */   "getSecretSync": () => (/* binding */ getSecretSync)
+/* harmony export */   "isDev": () => (/* binding */ isDev)
 /* harmony export */ });
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
-
-function getRandomString(length) {
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        const index = getRandomInt(0, chars.length - 1);
-        result += chars.substr(index, 1);
-    }
-    return result;
-}
 function checkNodeVersion(minNodeVersion) {
     const [majorNodeVersion] = process.versions.node.split('.');
     if (parseInt(majorNodeVersion) < minNodeVersion) {
         throw new Error(`min node version required ${minNodeVersion}, current ${majorNodeVersion}`);
     }
 }
-function getSecretSync(secretFilePath) {
-    let secret;
-    secret = (0,_file_helper__WEBPACK_IMPORTED_MODULE_0__.getFileContentSync)(secretFilePath);
-    if (secret) {
-        return secret;
-    }
-    secret = getRandomString(20);
-    (0,_file_helper__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(secretFilePath, secret);
-    return secret;
+function isDev() {
+    return process.env.NODE_ENV === 'dev';
 }
 
 
@@ -7464,8 +7466,14 @@ class BkSqlDataSource extends _BkPersistentDataSource__WEBPACK_IMPORTED_MODULE_0
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(values, (name, value) => [
+            `val_${name}`,
+            value,
+        ]);
+        const _where = _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper.mapObject(where, (name, value) => [
+            `key_${name}`,
+            value,
+        ]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         const newKey = this.calcNewKey(key, values);

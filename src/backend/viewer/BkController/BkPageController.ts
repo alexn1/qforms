@@ -1,7 +1,7 @@
 import { Context } from '../../Context';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
 import { pConsole } from '../../../pConsole';
-import { PageActionQuery, PageActionResponse } from '../../../types';
+import { PageActionQuery, PageActionResponse } from '../../../frontend';
 
 export class BkPageController {
     async page(context: Context, application: BkApplication): Promise<void> {
