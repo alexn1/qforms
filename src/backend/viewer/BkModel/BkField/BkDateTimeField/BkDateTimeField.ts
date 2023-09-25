@@ -1,7 +1,7 @@
 import { BkField } from '../BkField';
 import { Helper } from '../../../../../frontend';
 import { JSONString } from '../../../../../types';
-import { DateTimeHelper } from '../../../../../common';
+import { DateTimeHelper } from '../../../../../frontend';
 
 export class BkDateTimeField extends BkField {
     fillAttributes(response: any): void {

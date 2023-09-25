@@ -1,7 +1,7 @@
 import { ReactComponent } from '../../ReactComponent';
 import { LeftIcon } from '../../icon/LeftIcon';
 import { RightIcon } from '../../icon/RightIcon';
-import { DateTimeHelper } from '../../../../common';
+import { DateTimeHelper } from '../../DateTimeHelper';
 import './DatePicker.less';
 
 // props

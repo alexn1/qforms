@@ -1,4 +1,4 @@
-import { registerGlobal } from './global';
+import { Helper } from './Helper';
 
 export class DateTimeHelper {
     /*
@@ -145,4 +145,4 @@ export class DateTimeHelper {
     }
 }
 
-registerGlobal(DateTimeHelper);
+Helper.registerGlobalClass(DateTimeHelper);

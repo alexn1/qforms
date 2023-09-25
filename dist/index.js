@@ -8536,8 +8536,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
-
 
 
 class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
@@ -8554,8 +8552,8 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
+            _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
             raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -8566,7 +8564,7 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     rawToValue(raw) {
         const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
+            _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -8588,7 +8586,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BkField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkField */ "./src/backend/viewer/BkModel/BkField/BkField.ts");
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../frontend */ "./src/frontend/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -8606,8 +8603,8 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
+            _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
             raw = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -8618,7 +8615,7 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     rawToValue(raw) {
         const value = _frontend__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
+            _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
@@ -10011,144 +10008,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/common/DateTimeHelper.ts":
-/*!**************************************!*\
-  !*** ./src/common/DateTimeHelper.ts ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
-/* harmony export */ });
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
-
-class DateTimeHelper {
-    static today(timeOffset) {
-        let ts = Date.now();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts += DateTimeHelper.MINUTE() * timeOffset;
-        }
-        const date = new Date(ts);
-        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-        if (timeOffset !== undefined && timeOffset !== null) {
-            ts -= DateTimeHelper.MINUTE() * timeOffset;
-        }
-        return new Date(ts);
-    }
-    static today2() {
-        const now = new Date();
-        return DateTimeHelper.getStartOfDay(now);
-    }
-    static getStartOfDay(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    }
-    static SECOND() {
-        return 1000;
-    }
-    static MINUTE() {
-        return 60 * DateTimeHelper.SECOND();
-    }
-    static HOUR() {
-        return 60 * DateTimeHelper.MINUTE();
-    }
-    static DAY() {
-        return 24 * DateTimeHelper.HOUR();
-    }
-    static WEEK() {
-        return 7 * DateTimeHelper.DAY();
-    }
-    static addMinutes(date, minutes) {
-        date.setMinutes(date.getMinutes() + minutes);
-    }
-    static removeTimezoneOffset(date) {
-        DateTimeHelper.addMinutes(date, -date.getTimezoneOffset());
-    }
-    static addTimezoneOffset(date) {
-        DateTimeHelper.addMinutes(date, date.getTimezoneOffset());
-    }
-    static cloneDate(date) {
-        return new Date(date.getTime());
-    }
-    static formatDate(date, format) {
-        const YYYY = date.getFullYear();
-        const M = date.getMonth() + 1;
-        const D = date.getDate();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        const MM = M < 10 ? `0${M}` : M;
-        const DD = D < 10 ? `0${D}` : D;
-        const hh = h < 10 ? `0${h}` : h;
-        const mm = m < 10 ? `0${m}` : m;
-        const ss = s < 10 ? `0${s}` : s;
-        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
-    }
-    static currentTime() {
-        const now = new Date();
-        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
-        const arrS = arrN.map((n) => n.toString());
-        for (let i = 0; i < arrN.length; i++) {
-            if (arrN[i] < 10) {
-                arrS[i] = '0' + arrS[i];
-            }
-        }
-        return arrS.join(':');
-    }
-    static formatTime(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}:${s}`;
-        }
-        else {
-            return `${sign}${h}:${m}:${s}`;
-        }
-    }
-    static formatTime2(_sec) {
-        let sec = _sec;
-        let sign = '';
-        if (_sec < 0) {
-            sec = -sec;
-            sign = '-';
-        }
-        let h = Math.floor(sec / 3600);
-        let m = Math.floor((sec - h * 3600) / 60);
-        let s = Math.floor(sec - h * 3600 - m * 60);
-        if (h < 10)
-            h = '0' + h;
-        if (m < 10)
-            m = '0' + m;
-        if (s < 10)
-            s = '0' + s;
-        if (Math.floor(sec / 3600) === 0) {
-            return `${sign}${m}m:${s}s`;
-        }
-        else {
-            return `${sign}${h}h:${m}m:${s}s`;
-        }
-    }
-}
-(0,_global__WEBPACK_IMPORTED_MODULE_0__.registerGlobal)(DateTimeHelper);
-
-
-/***/ }),
-
 /***/ "./src/common/ModelData/ActionData.ts":
 /*!********************************************!*\
   !*** ./src/common/ModelData/ActionData.ts ***!
@@ -10311,68 +10170,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/common/dto.ts":
-/*!***************************!*\
-  !*** ./src/common/dto.ts ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createReadQuery": () => (/* binding */ createReadQuery)
-/* harmony export */ });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
-/* harmony import */ var _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../frontend/common/Helper */ "./src/frontend/common/Helper.ts");
-
-
-function createReadQuery(page, form, ds, params) {
-    const query = {
-        action: _types__WEBPACK_IMPORTED_MODULE_0__.Action.read,
-        page,
-        form,
-        ds,
-    };
-    if (params) {
-        query.params = _frontend_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeObject(params);
-    }
-    return query;
-}
-
-
-/***/ }),
-
-/***/ "./src/common/global.ts":
-/*!******************************!*\
-  !*** ./src/common/global.ts ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getGlobal": () => (/* binding */ getGlobal),
-/* harmony export */   "registerGlobal": () => (/* binding */ registerGlobal)
-/* harmony export */ });
-function registerGlobal(fn) {
-    if (typeof window === 'object') {
-        if (window[fn.name])
-            throw new Error(`window.${fn.name} already used`);
-        window[fn.name] = fn;
-    }
-    else {
-        if (global[fn.name])
-            throw new Error(`global.${fn.name} already used`);
-        global[fn.name] = fn;
-    }
-}
-function getGlobal(name) {
-    return typeof window === 'object' ? window[name] : global[name];
-}
-
-
-/***/ }),
-
 /***/ "./src/common/index.ts":
 /*!*****************************!*\
   !*** ./src/common/index.ts ***!
@@ -10381,19 +10178,7 @@ function getGlobal(name) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_2__.createReadQuery),
-/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_3__.getGlobal),
-/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_3__.registerGlobal)
-/* harmony export */ });
 /* harmony import */ var _ModelData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelData */ "./src/common/ModelData/index.ts");
-/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/common/DateTimeHelper.ts");
-/* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dto */ "./src/common/dto.ts");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global */ "./src/common/global.ts");
-
-
-
 
 
 
@@ -10613,6 +10398,144 @@ class CookieHelper {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 }
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/DateTimeHelper.ts":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/DateTimeHelper.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeHelper": () => (/* binding */ DateTimeHelper)
+/* harmony export */ });
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+
+class DateTimeHelper {
+    static today(timeOffset) {
+        let ts = Date.now();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts += DateTimeHelper.MINUTE() * timeOffset;
+        }
+        const date = new Date(ts);
+        ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        if (timeOffset !== undefined && timeOffset !== null) {
+            ts -= DateTimeHelper.MINUTE() * timeOffset;
+        }
+        return new Date(ts);
+    }
+    static today2() {
+        const now = new Date();
+        return DateTimeHelper.getStartOfDay(now);
+    }
+    static getStartOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+    static SECOND() {
+        return 1000;
+    }
+    static MINUTE() {
+        return 60 * DateTimeHelper.SECOND();
+    }
+    static HOUR() {
+        return 60 * DateTimeHelper.MINUTE();
+    }
+    static DAY() {
+        return 24 * DateTimeHelper.HOUR();
+    }
+    static WEEK() {
+        return 7 * DateTimeHelper.DAY();
+    }
+    static addMinutes(date, minutes) {
+        date.setMinutes(date.getMinutes() + minutes);
+    }
+    static removeTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, -date.getTimezoneOffset());
+    }
+    static addTimezoneOffset(date) {
+        DateTimeHelper.addMinutes(date, date.getTimezoneOffset());
+    }
+    static cloneDate(date) {
+        return new Date(date.getTime());
+    }
+    static formatDate(date, format) {
+        const YYYY = date.getFullYear();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        const MM = M < 10 ? `0${M}` : M;
+        const DD = D < 10 ? `0${D}` : D;
+        const hh = h < 10 ? `0${h}` : h;
+        const mm = m < 10 ? `0${m}` : m;
+        const ss = s < 10 ? `0${s}` : s;
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+    }
+    static currentTime() {
+        const now = new Date();
+        const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
+        const arrS = arrN.map((n) => n.toString());
+        for (let i = 0; i < arrN.length; i++) {
+            if (arrN[i] < 10) {
+                arrS[i] = '0' + arrS[i];
+            }
+        }
+        return arrS.join(':');
+    }
+    static formatTime(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}:${s}`;
+        }
+        else {
+            return `${sign}${h}:${m}:${s}`;
+        }
+    }
+    static formatTime2(_sec) {
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        if (h < 10)
+            h = '0' + h;
+        if (m < 10)
+            m = '0' + m;
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
+    }
+}
+_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(DateTimeHelper);
 
 
 /***/ }),
@@ -11184,6 +11107,68 @@ class Search {
         }
         return Search.objToString(newObj);
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/dto.ts":
+/*!************************************!*\
+  !*** ./src/frontend/common/dto.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createReadQuery": () => (/* binding */ createReadQuery)
+/* harmony export */ });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+
+
+function createReadQuery(page, form, ds, params) {
+    const query = {
+        action: _types__WEBPACK_IMPORTED_MODULE_0__.Action.read,
+        page,
+        form,
+        ds,
+    };
+    if (params) {
+        query.params = _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeObject(params);
+    }
+    return query;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/global.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/global.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getGlobal": () => (/* binding */ getGlobal),
+/* harmony export */   "registerGlobal": () => (/* binding */ registerGlobal)
+/* harmony export */ });
+function registerGlobal(fn) {
+    if (typeof window === 'object') {
+        if (window[fn.name])
+            throw new Error(`window.${fn.name} already used`);
+        window[fn.name] = fn;
+    }
+    else {
+        if (global[fn.name])
+            throw new Error(`global.${fn.name} already used`);
+        global[fn.name] = fn;
+    }
+}
+function getGlobal(name) {
+    return typeof window === 'object' ? window[name] : global[name];
 }
 
 
@@ -11828,73 +11813,83 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.ArrowIcon),
-/* harmony export */   "BinaryHelper": () => (/* reexport safe */ _BinaryHelper__WEBPACK_IMPORTED_MODULE_5__.BinaryHelper),
-/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.CheckBoxList),
-/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_6__.ClipboardHelper),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.ComboBox),
-/* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_4__.CookieHelper),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DatePicker),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Expand),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.ArrowIcon),
+/* harmony export */   "BinaryHelper": () => (/* reexport safe */ _BinaryHelper__WEBPACK_IMPORTED_MODULE_6__.BinaryHelper),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.CheckBoxList),
+/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__.ClipboardHelper),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.ComboBox),
+/* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_5__.CookieHelper),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.DatePicker),
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _DateTimeHelper__WEBPACK_IMPORTED_MODULE_8__.DateTimeHelper),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.GridRow),
-/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_7__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Radio),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent),
-/* harmony export */   "ReactHelper": () => (/* reexport safe */ _ReactHelper__WEBPACK_IMPORTED_MODULE_3__.ReactHelper),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.RightIcon),
+/* harmony export */   "ReactHelper": () => (/* reexport safe */ _ReactHelper__WEBPACK_IMPORTED_MODULE_4__.ReactHelper),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_2__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_9__.Tooltip),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_8__.VisibilityOffIcon)
+/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_12__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _dto__WEBPACK_IMPORTED_MODULE_9__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_10__.getGlobal),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_10__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 /* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
-/* harmony import */ var _ReactHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReactHelper */ "./src/frontend/common/ReactHelper.ts");
-/* harmony import */ var _CookieHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CookieHelper */ "./src/frontend/common/CookieHelper.ts");
-/* harmony import */ var _BinaryHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BinaryHelper */ "./src/frontend/common/BinaryHelper.ts");
-/* harmony import */ var _ClipboardHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ClipboardHelper */ "./src/frontend/common/ClipboardHelper.ts");
-/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
-/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ReactHelper */ "./src/frontend/common/ReactHelper.ts");
+/* harmony import */ var _CookieHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CookieHelper */ "./src/frontend/common/CookieHelper.ts");
+/* harmony import */ var _BinaryHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BinaryHelper */ "./src/frontend/common/BinaryHelper.ts");
+/* harmony import */ var _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ClipboardHelper */ "./src/frontend/common/ClipboardHelper.ts");
+/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DateTimeHelper */ "./src/frontend/common/DateTimeHelper.ts");
+/* harmony import */ var _dto__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dto */ "./src/frontend/common/dto.ts");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./global */ "./src/frontend/common/global.ts");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
+/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
+
+
+
 
 
 
@@ -12262,7 +12257,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 /* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 /* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../DateTimeHelper */ "./src/frontend/common/DateTimeHelper.ts");
 /* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
 /* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_DatePicker_less__WEBPACK_IMPORTED_MODULE_5__);
 
@@ -12337,7 +12332,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         }
         else {
-            const dates = [_common__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2().getTime()];
+            const dates = [_DateTimeHelper__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             const date = new Date(Math.min(...dates));
@@ -12398,7 +12393,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     }
     render() {
         const date = this.getFirstDateOfTable();
-        const today = _common__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2();
+        const today = _DateTimeHelper__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper.today2();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         const highlightedDate = this.props.highlightedDate
@@ -12532,7 +12527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
 /* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 /* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../common */ "./src/common/index.ts");
+/* harmony import */ var _DateTimeHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../DateTimeHelper */ "./src/frontend/common/DateTimeHelper.ts");
 /* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
 /* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__);
 
@@ -12594,12 +12589,12 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         if (value) {
             let format = this.getFormat();
             if (this.isDebugMode()) {
-                const time = _common__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = _DateTimeHelper__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return _common__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, format);
+            return _DateTimeHelper__WEBPACK_IMPORTED_MODULE_6__.DateTimeHelper.formatDate(value, format);
         }
         return '';
     }
@@ -14469,6 +14464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DateIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DateIcon),
 /* harmony export */   "DatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DatePicker),
 /* harmony export */   "DateTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.DateTimeField),
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DateTimeHelper),
 /* harmony export */   "DeleteIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DeleteIcon),
 /* harmony export */   "DoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DoneIcon),
 /* harmony export */   "DownIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.DownIcon),
@@ -14569,7 +14565,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Tooltip": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.Tooltip),
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityOffIcon)
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.VisibilityOffIcon),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.getGlobal),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewer */ "./src/frontend/viewer/index.ts");
@@ -17554,7 +17553,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -17566,7 +17564,7 @@ class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IM
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -17619,7 +17617,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 /* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -17631,7 +17628,7 @@ class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPAC
     getValueForWidget(row) {
         const value = this.getModel().getValue(row);
         if (value)
-            return _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
@@ -20720,7 +20717,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -20731,15 +20727,15 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(raw) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -20766,7 +20762,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/common/index.ts");
 
 
 
@@ -20777,15 +20772,15 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     rawToValue(rawValue) {
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue);
         if (value && this.getAttr('timezone') === 'false') {
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.addTimezoneOffset(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.addTimezoneOffset(value);
         }
         return value;
     }
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.cloneDate(value);
-            _common__WEBPACK_IMPORTED_MODULE_2__.DateTimeHelper.removeTimezoneOffset(v);
+            const v = _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
@@ -22823,7 +22818,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DatePicker),
 /* harmony export */   "DateTimeField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeField),
 /* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateTimeFieldEditor),
-/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.DateTimeHelper),
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper),
 /* harmony export */   "DeleteIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
 /* harmony export */   "DoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
 /* harmony export */   "DownIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
@@ -22963,12 +22958,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
 /* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery),
-/* harmony export */   "getGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.getGlobal),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
 /* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
 /* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
 /* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson),
-/* harmony export */   "registerGlobal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_3__.registerGlobal)
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
 /* harmony export */ });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/types.ts");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Result */ "./src/Result.ts");

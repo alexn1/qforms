@@ -1,5 +1,5 @@
-import { Query, ReadActionQuery, Action } from '../types';
-import { Helper } from '../frontend/common/Helper';
+import { Query, ReadActionQuery, Action } from '../../types';
+import { Helper } from './Helper';
 
 export function createReadQuery(
     page: string,

@@ -3,7 +3,7 @@ import { TableFormDateTimeFieldView } from './TableFormDateTimeFieldView';
 import { Helper } from '../../../../../../common';
 import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
 import { RawRow } from '../../../../../../../types';
-import { DateTimeHelper } from '../../../../../../../common';
+import { DateTimeHelper } from '../../../../../../common';
 
 export class TableFormDateTimeFieldController extends TableFormFieldController<DateTimeField> {
     getViewClass() {

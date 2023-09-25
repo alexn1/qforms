@@ -1,7 +1,7 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../common';
 import { JSONString } from '../../../../../types';
-import { DateTimeHelper } from '../../../../../common';
+import { DateTimeHelper } from '../../../../common';
 
 export class DateTimeField extends Field {
     getFormat() {
