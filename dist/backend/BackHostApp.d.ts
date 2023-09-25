@@ -14,10 +14,11 @@ import { Optional, Scalar, Route } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { Nullable } from '../types';
-export interface BackHostAppParams {
+export interface BackHostAppConfig {
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
+    codeRootDirPath?: string;
     handleException?: boolean;
     host?: string;
     port?: number;
@@ -28,8 +29,8 @@ export interface BackHostAppParams {
         password: string;
     };
 }
-export declare class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> {
-    private params;
+export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
+    private config;
     applications: {
         [route: string]: BkApplication;
     };
@@ -52,7 +53,7 @@ export declare class BackHostApp<TParams extends BackHostAppParams = BackHostApp
         [route: string]: Nullable<Array<EmptyPromise<BkApplication>>>;
     };
     private eventLog;
-    constructor(params?: TParams);
+    constructor(config?: TParams);
     init(): Promise<void>;
     run(): Promise<void>;
     getHost(): string;
@@ -65,6 +66,7 @@ export declare class BackHostApp<TParams extends BackHostAppParams = BackHostApp
     initModules(): Promise<void>;
     createWebSocketServer(): void;
     initDirPaths(): void;
+    getCodeRootDirPath(): string;
     composeStartMessage(): string;
     listenProcessEvents(): void;
     createExpressServer(): void;

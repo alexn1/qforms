@@ -776,6 +776,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./file-helper */ "./src/backend/file-helper.ts");
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../index */ "./src/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -811,19 +812,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
-const CODE_ROOT_DIR_PATH = __dirname;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 const MIN_NODE_VERSION = 14;
 class BackHostApp {
-    constructor(params = {}) {
-        this.params = params;
+    constructor(config = {}) {
+        this.config = config;
         this.applications = {};
         this.startTime = new Date();
         this.createAppQueue = {};
-        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.constructor', params);
+        (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.constructor', config);
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.debug('CODE_ROOT_DIR_PATH:', _index__WEBPACK_IMPORTED_MODULE_29__.CODE_ROOT_DIR_PATH);
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.debug('this.getCodeRootDirPath():', this.getCodeRootDirPath());
     }
     async init() {
         (0,_private_helper__WEBPACK_IMPORTED_MODULE_25__.checkNodeVersion)(MIN_NODE_VERSION);
@@ -844,10 +847,10 @@ class BackHostApp {
         _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(this.composeStartMessage());
     }
     getHost() {
-        return this.params.host || LISTEN_HOST;
+        return this.config.host || LISTEN_HOST;
     }
     getPort() {
-        const { port } = this.params;
+        const { port } = this.config;
         if (port && typeof port !== 'number')
             throw new Error(`getPort: type port error: ${typeof port}`);
         return port || LISTEN_PORT;
@@ -865,7 +868,7 @@ class BackHostApp {
         (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__.createDirIfNotExistsSync)(this.sessionDirPath);
     }
     createEventLog() {
-        this.eventLog = new _EventLog__WEBPACK_IMPORTED_MODULE_19__.EventLog(this.params.logger);
+        this.eventLog = new _EventLog__WEBPACK_IMPORTED_MODULE_19__.EventLog(this.config.logger);
     }
     initRouter() {
         this.router = new _Router__WEBPACK_IMPORTED_MODULE_26__.Router(this);
@@ -887,12 +890,15 @@ class BackHostApp {
         });
     }
     initDirPaths() {
-        this.appsDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.params.appsDirPath || APPS_DIR_PATH);
-        this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.backendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(CODE_ROOT_DIR_PATH, 'backend');
-        this.frontendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(CODE_ROOT_DIR_PATH, 'frontend');
-        this.runtimeDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.params.runtimeDirPath || './runtime');
+        this.appsDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.config.appsDirPath || APPS_DIR_PATH);
+        this.distDirPath = this.config.distDirPath || this.appsDirPath;
+        this.backendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.getCodeRootDirPath(), 'backend');
+        this.frontendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.getCodeRootDirPath(), 'frontend');
+        this.runtimeDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.config.runtimeDirPath || './runtime');
         this.sessionDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'session');
+    }
+    getCodeRootDirPath() {
+        return this.config.codeRootDirPath || _index__WEBPACK_IMPORTED_MODULE_29__.CODE_ROOT_DIR_PATH;
     }
     composeStartMessage() {
         const host = this.getHost();
@@ -934,7 +940,7 @@ class BackHostApp {
     }
     initExpressServer() {
         var _a;
-        this.express.set('handleException', (_a = this.params.handleException) !== null && _a !== void 0 ? _a : true);
+        this.express.set('handleException', (_a = this.config.handleException) !== null && _a !== void 0 ? _a : true);
         this.express.enable('strict routing');
     }
     useMiddlewares() {
@@ -1283,7 +1289,7 @@ class BackHostApp {
         return this.eventLog;
     }
     getFrontLogUrl() {
-        return this.params.frontLogUrl;
+        return this.config.frontLogUrl;
     }
     getHttpServer() {
         return this.httpServer;
@@ -1298,7 +1304,7 @@ class BackHostApp {
         return this.getNodeEnv() === 'dev';
     }
     getParams() {
-        return this.params;
+        return this.config;
     }
     getExpress() {
         return this.express;
@@ -22307,6 +22313,259 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Action": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.Action),
+/* harmony export */   "ActionEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ActionEditor),
+/* harmony export */   "ActionEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ActionEditorController),
+/* harmony export */   "ApplicationController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ApplicationController),
+/* harmony export */   "ApplicationEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ApplicationEditor),
+/* harmony export */   "ApplicationEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ApplicationEditorController),
+/* harmony export */   "ApplicationView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ApplicationView),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon),
+/* harmony export */   "BackHostApp": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BackHostApp),
+/* harmony export */   "BaseModel": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BaseModel),
+/* harmony export */   "BinaryHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.BinaryHelper),
+/* harmony export */   "BkAction": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkAction),
+/* harmony export */   "BkApplication": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkApplication),
+/* harmony export */   "BkCheckBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkCheckBoxField),
+/* harmony export */   "BkCheckBoxListField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkCheckBoxListField),
+/* harmony export */   "BkColumn": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkColumn),
+/* harmony export */   "BkComboBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkComboBoxField),
+/* harmony export */   "BkDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDataSource),
+/* harmony export */   "BkDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDatabase),
+/* harmony export */   "BkDateField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDateField),
+/* harmony export */   "BkDateTimeField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDateTimeField),
+/* harmony export */   "BkField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkField),
+/* harmony export */   "BkFileField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkFileField),
+/* harmony export */   "BkForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkForm),
+/* harmony export */   "BkHelper": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkHelper),
+/* harmony export */   "BkImageField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkImageField),
+/* harmony export */   "BkLabelField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkLabelField),
+/* harmony export */   "BkLinkField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkLinkField),
+/* harmony export */   "BkModel": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkModel),
+/* harmony export */   "BkMongoDbDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkMongoDbDatabase),
+/* harmony export */   "BkMySqlDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkMySqlDatabase),
+/* harmony export */   "BkNoSqlDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkNoSqlDataSource),
+/* harmony export */   "BkPage": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPage),
+/* harmony export */   "BkPageLink": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPageLink),
+/* harmony export */   "BkParam": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkParam),
+/* harmony export */   "BkPasswordField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPasswordField),
+/* harmony export */   "BkPhoneField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPhoneField),
+/* harmony export */   "BkPostgreSqlDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPostgreSqlDatabase),
+/* harmony export */   "BkRadioField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkRadioField),
+/* harmony export */   "BkRowForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkRowForm),
+/* harmony export */   "BkSqlDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkSqlDataSource),
+/* harmony export */   "BkTable": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTable),
+/* harmony export */   "BkTableForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTableForm),
+/* harmony export */   "BkTextAreaField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTextAreaField),
+/* harmony export */   "BkTextBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTextBoxField),
+/* harmony export */   "BkTimeField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTimeField),
+/* harmony export */   "Box": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Button),
+/* harmony export */   "CODE_ROOT_DIR_PATH": () => (/* binding */ CODE_ROOT_DIR_PATH),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBox),
+/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxField),
+/* harmony export */   "CheckBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.CheckBoxFieldEditor),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxList),
+/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxListField),
+/* harmony export */   "CheckBoxListFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.CheckBoxListFieldEditor),
+/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ClipboardHelper),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
+/* harmony export */   "Column": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Column),
+/* harmony export */   "ColumnEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditor),
+/* harmony export */   "ColumnEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditorController),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ComboBox),
+/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ComboBoxField),
+/* harmony export */   "ComboBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ComboBoxFieldEditor),
+/* harmony export */   "Context": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.Context),
+/* harmony export */   "Converter": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.Converter),
+/* harmony export */   "CookieHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CookieHelper),
+/* harmony export */   "DataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DataSource),
+/* harmony export */   "DataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor),
+/* harmony export */   "DataSourceEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditorController),
+/* harmony export */   "Database": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Database),
+/* harmony export */   "DatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DatabaseEditor),
+/* harmony export */   "DatabaseEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DatabaseEditorController),
+/* harmony export */   "DatabaseResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.DatabaseResult),
+/* harmony export */   "DateField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateField),
+/* harmony export */   "DateFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateFieldEditor),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DatePicker),
+/* harmony export */   "DateTimeField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeField),
+/* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateTimeFieldEditor),
+/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Expand),
+/* harmony export */   "FieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FieldEditor),
+/* harmony export */   "FieldEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FieldEditorController),
+/* harmony export */   "FileField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FileField),
+/* harmony export */   "FileFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FileFieldEditor),
+/* harmony export */   "Form": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Form),
+/* harmony export */   "FormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FormEditor),
+/* harmony export */   "FormEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FormEditorController),
+/* harmony export */   "FormatHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FormatHelper),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Image),
+/* harmony export */   "ImageFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ImageFieldEditor),
+/* harmony export */   "InsertExResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.InsertExResult),
+/* harmony export */   "JsonFile": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.JsonFile),
+/* harmony export */   "KeyColumnEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.KeyColumnEditor),
+/* harmony export */   "KeyColumnEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.KeyColumnEditorController),
+/* harmony export */   "LabelFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.LabelFieldEditor),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LeftIcon),
+/* harmony export */   "LinkField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LinkField),
+/* harmony export */   "LinkFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.LinkFieldEditor),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LocationIcon),
+/* harmony export */   "LoginController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginController),
+/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginFrontHostApp),
+/* harmony export */   "LoginView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginView),
+/* harmony export */   "Menu": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Modal),
+/* harmony export */   "MongoDbDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.MongoDbDatabaseEditor),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "MySqlDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.MySqlDatabaseEditor),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.NoSqlDataSource),
+/* harmony export */   "NoSqlDataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.NoSqlDataSourceEditor),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
+/* harmony export */   "Page": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Page),
+/* harmony export */   "PageController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PageController),
+/* harmony export */   "PageEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageEditor),
+/* harmony export */   "PageEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageEditorController),
+/* harmony export */   "PageLinkEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageLinkEditor),
+/* harmony export */   "PageLinkEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageLinkEditorController),
+/* harmony export */   "PageView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PageView),
+/* harmony export */   "ParamEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ParamEditor),
+/* harmony export */   "ParamEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ParamEditorController),
+/* harmony export */   "Password": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Password),
+/* harmony export */   "PasswordField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PasswordField),
+/* harmony export */   "PasswordFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PasswordFieldEditor),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PasswordIcon),
+/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PersistentDataSource),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneBox),
+/* harmony export */   "PhoneField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneField),
+/* harmony export */   "PhoneFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PhoneFieldEditor),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneIcon),
+/* harmony export */   "PostgreSqlDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PostgreSqlDatabaseEditor),
+/* harmony export */   "Radio": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Radio),
+/* harmony export */   "RadioField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RadioField),
+/* harmony export */   "RadioFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.RadioFieldEditor),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ReactComponent),
+/* harmony export */   "ReactHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ReactHelper),
+/* harmony export */   "Result": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.Result),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowForm),
+/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxListFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxListFieldView),
+/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormComboBoxFieldController),
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormComboBoxFieldView),
+/* harmony export */   "RowFormController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormController),
+/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateFieldController),
+/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateFieldView),
+/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateTimeFieldController),
+/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateTimeFieldView),
+/* harmony export */   "RowFormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.RowFormEditor),
+/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFieldController),
+/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFieldView),
+/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFileFieldController),
+/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormLinkFieldController),
+/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPasswordFieldController),
+/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPhoneFieldController),
+/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPhoneFieldView),
+/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormRadioFieldController),
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextAreaFieldController),
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextAreaFieldView),
+/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextBoxFieldController),
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextBoxFieldView),
+/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTimeFieldController),
+/* harmony export */   "RowFormView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormView),
+/* harmony export */   "Search": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Slider),
+/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.SqlDataSource),
+/* harmony export */   "SqlDataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.SqlDataSourceEditor),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tab2),
+/* harmony export */   "Table": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Table),
+/* harmony export */   "TableEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableEditor),
+/* harmony export */   "TableEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableEditorController),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableForm),
+/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormCheckBoxFieldController),
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormCheckBoxFieldView),
+/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormComboBoxFieldController),
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormComboBoxFieldView),
+/* harmony export */   "TableFormController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormController),
+/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateFieldController),
+/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateFieldView),
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateTimeFieldController),
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateTimeFieldView),
+/* harmony export */   "TableFormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableFormEditor),
+/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormLinkFieldController),
+/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormPhoneFieldController),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormTextBoxFieldController),
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormTextBoxFieldView),
+/* harmony export */   "TableFormView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormView),
+/* harmony export */   "TableResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.TableResult),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextArea),
+/* harmony export */   "TextAreaField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextAreaField),
+/* harmony export */   "TextAreaFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TextAreaFieldEditor),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextBox),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextBoxField),
+/* harmony export */   "TextBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TextBoxFieldEditor),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeBox2),
+/* harmony export */   "TimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TimeFieldEditor),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tooltip),
+/* harmony export */   "UpdateEx": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateEx),
+/* harmony export */   "UpdateResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateResult),
+/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ViewerFrontHostApp),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
+/* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
+/* harmony export */   "createReadQuery": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.createReadQuery),
+/* harmony export */   "getGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
+/* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
+/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
+/* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson),
+/* harmony export */   "registerGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
+/* harmony export */ });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/types.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Result */ "./src/Result.ts");
+/* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./backend */ "./src/backend/index.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./common */ "./src/common/index.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frontend */ "./src/frontend/index.ts");
+
+
+
+
+
+const CODE_ROOT_DIR_PATH = __dirname;
+
+
+/***/ }),
+
 /***/ "./src/pConsole.ts":
 /*!*************************!*\
   !*** ./src/pConsole.ts ***!
@@ -22666,7 +22925,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.43.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev bun apps-ts/sample/start.ts","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"QFORMS_LOG_LEVEL=error jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.43.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"scripts":{"webpack-back-index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack-front-editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack-front-index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack-front-viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"npx gulp build-dev","build:prod":"npx gulp build-prod","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev bun apps-ts/sample/start.ts","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon-start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"QFORMS_LOG_LEVEL=error jest --runInBand","test:debug":"QFORMS_LOG_LEVEL=debug jest --runInBand","test:path":"jest --runTestsByPath","test:cov":"jest --coverage","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\""},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 
@@ -22760,256 +23019,12 @@ module.exports = JSON.parse('{"login":{"login":"Вход","signIn":"Войти",
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Action": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.Action),
-/* harmony export */   "ActionEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ActionEditor),
-/* harmony export */   "ActionEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ActionEditorController),
-/* harmony export */   "ApplicationController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ApplicationController),
-/* harmony export */   "ApplicationEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ApplicationEditor),
-/* harmony export */   "ApplicationEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ApplicationEditorController),
-/* harmony export */   "ApplicationView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ApplicationView),
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon),
-/* harmony export */   "BackHostApp": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BackHostApp),
-/* harmony export */   "BaseModel": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BaseModel),
-/* harmony export */   "BinaryHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.BinaryHelper),
-/* harmony export */   "BkAction": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkAction),
-/* harmony export */   "BkApplication": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkApplication),
-/* harmony export */   "BkCheckBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkCheckBoxField),
-/* harmony export */   "BkCheckBoxListField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkCheckBoxListField),
-/* harmony export */   "BkColumn": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkColumn),
-/* harmony export */   "BkComboBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkComboBoxField),
-/* harmony export */   "BkDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDataSource),
-/* harmony export */   "BkDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDatabase),
-/* harmony export */   "BkDateField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDateField),
-/* harmony export */   "BkDateTimeField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkDateTimeField),
-/* harmony export */   "BkField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkField),
-/* harmony export */   "BkFileField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkFileField),
-/* harmony export */   "BkForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkForm),
-/* harmony export */   "BkHelper": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkHelper),
-/* harmony export */   "BkImageField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkImageField),
-/* harmony export */   "BkLabelField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkLabelField),
-/* harmony export */   "BkLinkField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkLinkField),
-/* harmony export */   "BkModel": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkModel),
-/* harmony export */   "BkMongoDbDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkMongoDbDatabase),
-/* harmony export */   "BkMySqlDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkMySqlDatabase),
-/* harmony export */   "BkNoSqlDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkNoSqlDataSource),
-/* harmony export */   "BkPage": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPage),
-/* harmony export */   "BkPageLink": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPageLink),
-/* harmony export */   "BkParam": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkParam),
-/* harmony export */   "BkPasswordField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPasswordField),
-/* harmony export */   "BkPhoneField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPhoneField),
-/* harmony export */   "BkPostgreSqlDatabase": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkPostgreSqlDatabase),
-/* harmony export */   "BkRadioField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkRadioField),
-/* harmony export */   "BkRowForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkRowForm),
-/* harmony export */   "BkSqlDataSource": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkSqlDataSource),
-/* harmony export */   "BkTable": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTable),
-/* harmony export */   "BkTableForm": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTableForm),
-/* harmony export */   "BkTextAreaField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTextAreaField),
-/* harmony export */   "BkTextBoxField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTextBoxField),
-/* harmony export */   "BkTimeField": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.BkTimeField),
-/* harmony export */   "Box": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBox),
-/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxField),
-/* harmony export */   "CheckBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.CheckBoxFieldEditor),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxList),
-/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CheckBoxListField),
-/* harmony export */   "CheckBoxListFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.CheckBoxListFieldEditor),
-/* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ClipboardHelper),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
-/* harmony export */   "Column": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Column),
-/* harmony export */   "ColumnEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditor),
-/* harmony export */   "ColumnEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditorController),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ComboBox),
-/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ComboBoxField),
-/* harmony export */   "ComboBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ComboBoxFieldEditor),
-/* harmony export */   "Context": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.Context),
-/* harmony export */   "Converter": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.Converter),
-/* harmony export */   "CookieHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CookieHelper),
-/* harmony export */   "DataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DataSource),
-/* harmony export */   "DataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor),
-/* harmony export */   "DataSourceEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditorController),
-/* harmony export */   "Database": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Database),
-/* harmony export */   "DatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DatabaseEditor),
-/* harmony export */   "DatabaseEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DatabaseEditorController),
-/* harmony export */   "DatabaseResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.DatabaseResult),
-/* harmony export */   "DateField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateField),
-/* harmony export */   "DateFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateFieldEditor),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DatePicker),
-/* harmony export */   "DateTimeField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeField),
-/* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.DateTimeFieldEditor),
-/* harmony export */   "DateTimeHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DateTimeHelper),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Expand),
-/* harmony export */   "FieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FieldEditor),
-/* harmony export */   "FieldEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FieldEditorController),
-/* harmony export */   "FileField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FileField),
-/* harmony export */   "FileFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FileFieldEditor),
-/* harmony export */   "Form": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Form),
-/* harmony export */   "FormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FormEditor),
-/* harmony export */   "FormEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.FormEditorController),
-/* harmony export */   "FormatHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FormatHelper),
-/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.GridRow),
-/* harmony export */   "Helper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Image),
-/* harmony export */   "ImageFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ImageFieldEditor),
-/* harmony export */   "InsertExResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.InsertExResult),
-/* harmony export */   "JsonFile": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.JsonFile),
-/* harmony export */   "KeyColumnEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.KeyColumnEditor),
-/* harmony export */   "KeyColumnEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.KeyColumnEditorController),
-/* harmony export */   "LabelFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.LabelFieldEditor),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LeftIcon),
-/* harmony export */   "LinkField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LinkField),
-/* harmony export */   "LinkFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.LinkFieldEditor),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LocationIcon),
-/* harmony export */   "LoginController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginController),
-/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginFrontHostApp),
-/* harmony export */   "LoginView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.LoginView),
-/* harmony export */   "Menu": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Modal),
-/* harmony export */   "MongoDbDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.MongoDbDatabaseEditor),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
-/* harmony export */   "MySqlDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.MySqlDatabaseEditor),
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.NoSqlDataSource),
-/* harmony export */   "NoSqlDataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.NoSqlDataSourceEditor),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
-/* harmony export */   "Page": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Page),
-/* harmony export */   "PageController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PageController),
-/* harmony export */   "PageEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageEditor),
-/* harmony export */   "PageEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageEditorController),
-/* harmony export */   "PageLinkEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageLinkEditor),
-/* harmony export */   "PageLinkEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageLinkEditorController),
-/* harmony export */   "PageView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PageView),
-/* harmony export */   "ParamEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ParamEditor),
-/* harmony export */   "ParamEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ParamEditorController),
-/* harmony export */   "Password": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Password),
-/* harmony export */   "PasswordField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PasswordField),
-/* harmony export */   "PasswordFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PasswordFieldEditor),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PasswordIcon),
-/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PersistentDataSource),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneBox),
-/* harmony export */   "PhoneField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneField),
-/* harmony export */   "PhoneFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PhoneFieldEditor),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PhoneIcon),
-/* harmony export */   "PostgreSqlDatabaseEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PostgreSqlDatabaseEditor),
-/* harmony export */   "Radio": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Radio),
-/* harmony export */   "RadioField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RadioField),
-/* harmony export */   "RadioFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.RadioFieldEditor),
-/* harmony export */   "ReactComponent": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ReactComponent),
-/* harmony export */   "ReactHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ReactHelper),
-/* harmony export */   "Result": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.Result),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
-/* harmony export */   "RowForm": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowForm),
-/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxFieldController),
-/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxListFieldController),
-/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxListFieldView),
-/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormComboBoxFieldController),
-/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormComboBoxFieldView),
-/* harmony export */   "RowFormController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormController),
-/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateFieldController),
-/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateFieldView),
-/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateTimeFieldController),
-/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormDateTimeFieldView),
-/* harmony export */   "RowFormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.RowFormEditor),
-/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFieldController),
-/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFieldView),
-/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormFileFieldController),
-/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormLinkFieldController),
-/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPasswordFieldController),
-/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPhoneFieldController),
-/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormPhoneFieldView),
-/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormRadioFieldController),
-/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextAreaFieldController),
-/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextAreaFieldView),
-/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextBoxFieldController),
-/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTextBoxFieldView),
-/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormTimeFieldController),
-/* harmony export */   "RowFormView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormView),
-/* harmony export */   "Search": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Slider),
-/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.SqlDataSource),
-/* harmony export */   "SqlDataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.SqlDataSourceEditor),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tab2),
-/* harmony export */   "Table": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Table),
-/* harmony export */   "TableEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableEditor),
-/* harmony export */   "TableEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableEditorController),
-/* harmony export */   "TableForm": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableForm),
-/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormCheckBoxFieldController),
-/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormCheckBoxFieldView),
-/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormComboBoxFieldController),
-/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormComboBoxFieldView),
-/* harmony export */   "TableFormController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormController),
-/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateFieldController),
-/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateFieldView),
-/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateTimeFieldController),
-/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormDateTimeFieldView),
-/* harmony export */   "TableFormEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TableFormEditor),
-/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormLinkFieldController),
-/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormPhoneFieldController),
-/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormTextBoxFieldController),
-/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormTextBoxFieldView),
-/* harmony export */   "TableFormView": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TableFormView),
-/* harmony export */   "TableResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.TableResult),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextArea),
-/* harmony export */   "TextAreaField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextAreaField),
-/* harmony export */   "TextAreaFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TextAreaFieldEditor),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextBox),
-/* harmony export */   "TextBoxField": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TextBoxField),
-/* harmony export */   "TextBoxFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TextBoxFieldEditor),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeBox2),
-/* harmony export */   "TimeFieldEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.TimeFieldEditor),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Tooltip),
-/* harmony export */   "UpdateEx": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateEx),
-/* harmony export */   "UpdateResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateResult),
-/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ViewerFrontHostApp),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon),
-/* harmony export */   "VisualEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.VisualEditorController),
-/* harmony export */   "createReadQuery": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.createReadQuery),
-/* harmony export */   "getGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.getGlobal),
-/* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
-/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey),
-/* harmony export */   "parseJson": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.parseJson),
-/* harmony export */   "registerGlobal": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.registerGlobal)
-/* harmony export */ });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./src/types.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Result */ "./src/Result.ts");
-/* harmony import */ var _backend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./backend */ "./src/backend/index.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./common */ "./src/common/index.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./frontend */ "./src/frontend/index.ts");
-
-
-
-
-
-
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
+/******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;

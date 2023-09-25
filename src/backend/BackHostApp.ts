@@ -32,19 +32,20 @@ import { checkNodeVersion } from './private-helper';
 import { Router } from './Router';
 import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
 import { Helper, CreateAppDto } from '../frontend';
+import { CODE_ROOT_DIR_PATH } from '../index';
 
 const pkg = require('../../package.json');
 
-const CODE_ROOT_DIR_PATH = __dirname;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 const MIN_NODE_VERSION = 14;
 
-export interface BackHostAppParams {
+export interface BackHostAppConfig {
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
+    codeRootDirPath?: string; // for testing source files with jest
     handleException?: boolean;
     host?: string;
     port?: number;
@@ -56,7 +57,7 @@ export interface BackHostAppParams {
     };
 }
 
-export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> {
+export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     applications: { [route: string]: BkApplication } = {};
     private express: Express;
     httpServer: Server;
@@ -82,8 +83,10 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     createAppQueue: { [route: string]: Nullable<Array<EmptyPromise<BkApplication>>> } = {};
     private eventLog: EventLog;
 
-    constructor(private params: TParams = {} as TParams) {
-        debug('BackHostApp.constructor', params);
+    constructor(private config: TParams = {} as TParams) {
+        debug('BackHostApp.constructor', config);
+        pConsole.debug('CODE_ROOT_DIR_PATH:', CODE_ROOT_DIR_PATH);
+        pConsole.debug('this.getCodeRootDirPath():', this.getCodeRootDirPath());
     }
 
     @log(LogLevel.debug)
@@ -111,11 +114,11 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     getHost(): string {
-        return this.params.host || LISTEN_HOST;
+        return this.config.host || LISTEN_HOST;
     }
 
     getPort(): number {
-        const { port } = this.params;
+        const { port } = this.config;
         if (port && typeof port !== 'number')
             throw new Error(`getPort: type port error: ${typeof port}`);
         return port || LISTEN_PORT;
@@ -137,7 +140,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     private createEventLog(): void {
-        this.eventLog = new EventLog(this.params.logger);
+        this.eventLog = new EventLog(this.config.logger);
     }
 
     initRouter() {
@@ -163,12 +166,16 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     initDirPaths(): void {
-        this.appsDirPath = path.resolve(this.params.appsDirPath || APPS_DIR_PATH);
-        this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.backendDirPath = path.join(CODE_ROOT_DIR_PATH, 'backend');
-        this.frontendDirPath = path.join(CODE_ROOT_DIR_PATH, 'frontend');
-        this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
+        this.appsDirPath = path.resolve(this.config.appsDirPath || APPS_DIR_PATH);
+        this.distDirPath = this.config.distDirPath || this.appsDirPath;
+        this.backendDirPath = path.join(this.getCodeRootDirPath(), 'backend');
+        this.frontendDirPath = path.join(this.getCodeRootDirPath(), 'frontend');
+        this.runtimeDirPath = path.resolve(this.config.runtimeDirPath || './runtime');
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
+    }
+
+    getCodeRootDirPath(): string {
+        return this.config.codeRootDirPath || CODE_ROOT_DIR_PATH;
     }
 
     composeStartMessage(): string {
@@ -216,7 +223,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     initExpressServer() {
-        this.express.set('handleException', this.params.handleException ?? true);
+        this.express.set('handleException', this.config.handleException ?? true);
         this.express.enable('strict routing');
     }
 
@@ -662,7 +669,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     }
 
     getFrontLogUrl(): Optional<string> {
-        return this.params.frontLogUrl;
+        return this.config.frontLogUrl;
     }
 
     getHttpServer(): Server {
@@ -686,7 +693,7 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     } */
 
     getParams(): TParams {
-        return this.params;
+        return this.config;
     }
 
     getExpress(): Express {

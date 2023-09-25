@@ -1,14 +1,16 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
-import { BackHostApp } from '../dist';
+// import { BackHostApp } from '../dist';
+import { BackHostApp } from '../src';
 import { HttpClient } from './core/HttpClient';
+import { Server } from 'http';
 
 describe('BackHostApp', () => {
     let app: BackHostApp;
-    let httpServer: any;
+    let httpServer: Server;
     let httpClient: HttpClient;
 
     beforeAll(async () => {
-        app = new BackHostApp({ port: 7002 });
+        app = new BackHostApp({ codeRootDirPath: './dist' });
         await app.init();
         httpServer = app.getHttpServer();
         httpClient = new HttpClient(httpServer);
