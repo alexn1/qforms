@@ -35,7 +35,7 @@ import { Helper, CreateAppDto } from '../frontend';
 
 const pkg = require('../../package.json');
 
-const BACKEND_DIR_PATH = path.join(__dirname, 'backend');
+const CODE_ROOT_DIR_PATH = __dirname;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
@@ -165,8 +165,8 @@ export class BackHostApp<TParams extends BackHostAppParams = BackHostAppParams> 
     initDirPaths(): void {
         this.appsDirPath = path.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.backendDirPath = BACKEND_DIR_PATH;
-        this.frontendDirPath = path.resolve(path.join(BACKEND_DIR_PATH, '../frontend'));
+        this.backendDirPath = path.join(CODE_ROOT_DIR_PATH, 'backend');
+        this.frontendDirPath = path.join(CODE_ROOT_DIR_PATH, 'frontend');
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
     }

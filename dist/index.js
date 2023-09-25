@@ -812,7 +812,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
-const BACKEND_DIR_PATH = path__WEBPACK_IMPORTED_MODULE_4___default().join(__dirname, 'backend');
+const CODE_ROOT_DIR_PATH = __dirname;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
@@ -889,8 +889,8 @@ class BackHostApp {
     initDirPaths() {
         this.appsDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.backendDirPath = BACKEND_DIR_PATH;
-        this.frontendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(path__WEBPACK_IMPORTED_MODULE_4___default().join(BACKEND_DIR_PATH, '../frontend'));
+        this.backendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(CODE_ROOT_DIR_PATH, 'backend');
+        this.frontendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(CODE_ROOT_DIR_PATH, 'frontend');
         this.runtimeDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.params.runtimeDirPath || './runtime');
         this.sessionDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.runtimeDirPath, 'session');
     }
