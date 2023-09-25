@@ -11,8 +11,5 @@ export declare class DateTimeHelper {
     static removeTimezoneOffset(date: Date): void;
     static addTimezoneOffset(date: Date): void;
     static cloneDate(date: Date): Date;
-    static formatDate(date: Date, format: string): string;
     static currentTime(): string;
-    static formatTime(_sec: number): string;
-    static formatTime2(_sec: number): string;
 }

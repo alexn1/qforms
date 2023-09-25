@@ -7,6 +7,7 @@ export * from './CookieHelper';
 export * from './BinaryHelper';
 export * from './ClipboardHelper';
 export * from './DateTimeHelper';
+export * from './FormatHelper';
 export * from './dto';
 export * from './global';
 export * from './icon';
