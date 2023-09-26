@@ -7,7 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { pConsole } from '../../pConsole';
-import { getWebSocketIP } from '../WebScoketHelper';
+import { getWebSocketIP } from '../websocket-helper';
 import { getFilePaths } from '../file-helper';
 
 const pkg = require('../../../package.json');

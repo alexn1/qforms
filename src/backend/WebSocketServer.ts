@@ -4,7 +4,7 @@ import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
 import { debug, log, error } from '../console';
-import { getWebsocketUrl } from './WebScoketHelper';
+import { getWebsocketUrl } from './websocket-helper';
 
 export class WebSocketServer {
     options: any;
