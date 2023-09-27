@@ -19,4 +19,20 @@ export class HttpClient {
         }
         return await req;
     }
+
+    async patch(url: string, body: any, headers?: object): Promise<Response> {
+        let req = supertest(this.httpServer).patch(url).send(body);
+        if (headers) {
+            req = req.set(headers);
+        }
+        return await req;
+    }
+
+    async delete(url: string, body: any, headers?: object) {
+        let req = supertest(this.httpServer).delete(url).send(body);
+        if (headers) {
+            req = req.set(headers);
+        }
+        return await req;
+    }
 }

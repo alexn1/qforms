@@ -16,11 +16,13 @@ import {
     Action,
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
+import { HttpClient } from './core/HttpClient';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
     let httpServer: Server;
-    const PATHNAME = '/viewer/sample/sample/local/localhost/';
+    let httpClient: HttpClient;
+    const PATHNAME = '/viewer/sample/sample/local/domain/';
     const PAGE = 'Person';
     const FORM = 'Person';
 
@@ -30,6 +32,7 @@ describe('SampleBackHostApp', () => {
         });
         await app.init();
         httpServer = app.getHttpServer();
+        httpClient = new HttpClient(httpServer);
     });
 
     afterAll(async () => {
@@ -37,7 +40,7 @@ describe('SampleBackHostApp', () => {
     });
 
     test('page action', async () => {
-        const { status, body } = await supertest(httpServer).get(
+        const { status, body } = await httpClient.get(
             `${PATHNAME}?action=${Action.page}&page=${PAGE}&params[key]=1`,
         );
         expect(status).toBe(200);
@@ -76,7 +79,7 @@ describe('SampleBackHostApp', () => {
                 page: PAGE,
                 row: rawRow,
             };
-            const { status, body } = await supertest(httpServer).post(PATHNAME).send(data);
+            const { status, body } = await httpClient.post(PATHNAME, data);
             expect(status).toBe(201);
             const result: Result = body;
             [key] = result.default.person.insert!;
@@ -84,7 +87,7 @@ describe('SampleBackHostApp', () => {
 
         test('read', async () => {
             const [id] = keyToKeyTuple(key) as [number];
-            const { status, body } = await supertest(httpServer).get(
+            const { status, body } = await httpClient.get(
                 `${PATHNAME}?action=${Action.read}&page=${PAGE}&form=${FORM}&ds=default&params[key]=${id}`,
             );
             expect(status).toBe(200);
@@ -102,7 +105,7 @@ describe('SampleBackHostApp', () => {
                 form: FORM,
                 changes: { [key]: rawRow },
             };
-            const { status, body } = await supertest(httpServer).patch(PATHNAME).send(data);
+            const { status, body } = await httpClient.patch(PATHNAME, data);
             expect(status).toBe(200);
             const result: Result = body;
             const first_name = Helper.decodeValue(
@@ -119,7 +122,7 @@ describe('SampleBackHostApp', () => {
                 form: FORM,
                 params: { key },
             };
-            const { status, body } = await supertest(httpServer).delete(PATHNAME).send(data);
+            const { status, body } = await httpClient.delete(PATHNAME, data);
             expect(status).toBe(200);
             const result: Result = body;
             expect(result.default.person.delete).toEqual([key]);
