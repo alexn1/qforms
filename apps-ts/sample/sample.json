@@ -50,6 +50,13 @@
                         "name": "password",
                         "value": "\"example\""
                     }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "port",
+                        "value": "process.env.PORT | 5432"
+                    }
                 }
             ],
             "tables": [
