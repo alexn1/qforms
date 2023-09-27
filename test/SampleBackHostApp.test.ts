@@ -29,7 +29,7 @@ describe('SampleBackHostApp', () => {
 
     beforeAll(async () => {
         await restartLocalDb();
-        await sleep(2000);
+        await sleep(2500);
         await createDatabase('demo');
         await query(
             'demo',
@@ -46,7 +46,7 @@ describe('SampleBackHostApp', () => {
         await app.init();
         httpServer = app.getHttpServer();
         httpClient = new HttpClient(httpServer);
-    });
+    }, 20000);
 
     afterAll(async () => {
         await app.shutdown();
