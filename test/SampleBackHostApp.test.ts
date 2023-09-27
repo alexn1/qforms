@@ -1,6 +1,5 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
 import { Server } from 'http';
-import supertest from 'supertest';
 import {
     Key,
     Helper,
@@ -14,9 +13,11 @@ import {
     CreateActionDto,
     DeleteActionDto,
     Action,
+    BkHelper,
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
 import { HttpClient } from './core/HttpClient';
+import { createDatabase, restartLocalDb, sleep, query } from './core/helper';
 
 describe('SampleBackHostApp', () => {
     let app: SampleBackHostApp;
@@ -27,9 +28,21 @@ describe('SampleBackHostApp', () => {
     const FORM = 'Person';
 
     beforeAll(async () => {
-        app = new SampleBackHostApp({
-            appsDirPath: './apps-ts',
-        });
+        await restartLocalDb();
+        await sleep(2000);
+        await createDatabase('demo');
+        await query(
+            'demo',
+            `CREATE TABLE public.person (
+            id serial NOT NULL,
+            created timestamp with time zone,
+            updated timestamp with time zone,
+            first_name character varying(255),
+            last_name character varying(255)
+        )`,
+        );
+        process.env.PORT = '5433';
+        app = new SampleBackHostApp({ appsDirPath: './apps-ts' });
         await app.init();
         httpServer = app.getHttpServer();
         httpClient = new HttpClient(httpServer);
@@ -61,7 +74,7 @@ describe('SampleBackHostApp', () => {
     });
 
     describe('crud', () => {
-        const UUID = '561fe598-6d9f-4deb-aec3-80247187d35a';
+        const UUID = BkHelper.newClientId();
         let row = {
             created: new Date(),
             updated: new Date(),
