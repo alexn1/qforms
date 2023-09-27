@@ -33,13 +33,13 @@ describe('SampleBackHostApp', () => {
         await createDatabase('demo');
         await query(
             'demo',
-            `CREATE TABLE public.person (
-            id serial NOT NULL,
-            created timestamp with time zone,
-            updated timestamp with time zone,
-            first_name character varying(255),
-            last_name character varying(255)
-        )`,
+            `create table person (
+                id serial NOT NULL,
+                created timestamptz,
+                updated timestamptz,
+                first_name varchar(255),
+                last_name varchar(255)
+            )`,
         );
         process.env.PORT = '5433';
         app = new SampleBackHostApp({ appsDirPath: './apps-ts' });
