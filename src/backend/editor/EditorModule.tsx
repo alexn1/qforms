@@ -162,6 +162,7 @@ export class EditorModule {
             throw new Error(`unknown action ${body.action}`);
         }
         const editorControllerClassName = `${body.controller}EditorController`;
+        // @ts-ignore
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
 
