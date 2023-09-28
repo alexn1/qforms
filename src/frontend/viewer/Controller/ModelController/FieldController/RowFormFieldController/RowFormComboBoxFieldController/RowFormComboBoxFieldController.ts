@@ -44,7 +44,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
 
     getPlaceholder() {
         if (this.getModel().getAttr('placeholder')) return this.getModel().getAttr('placeholder');
-        return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
+        return this.getApp().isDebugMode() ? '[null]' : null;
     }
 
     onEditButtonClick = async (e) => {

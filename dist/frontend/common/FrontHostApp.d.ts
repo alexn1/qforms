@@ -1,5 +1,4 @@
 export interface FrontHostAppOptions {
-    debug: boolean;
     url: URL;
     cookies: {
         [name: string]: string;
@@ -47,7 +46,6 @@ export declare class FrontHostApp {
     }): Promise<boolean>;
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
-    isDebugMode(): boolean;
     createLink(params?: {
         [name: string]: any;
     } | null): string;

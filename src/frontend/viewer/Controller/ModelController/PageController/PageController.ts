@@ -237,7 +237,7 @@ export class PageController<
         const keyPart = key ? this.getKeyPart(key) : null;
         return [
             model.getCaption(),
-            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

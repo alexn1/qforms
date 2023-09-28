@@ -34,7 +34,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
                 highlightedDate={ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null}
                 selectToday={ctrl.getSelectToday ? ctrl.getSelectToday() : null}
                 minDate={ctrl.getMinDate ? ctrl.getMinDate() : null}
-                debug={ctrl.getApp().getHostApp().isDebugMode()}
+                debug={ctrl.getApp().isDebugMode()}
             />
         );
     }

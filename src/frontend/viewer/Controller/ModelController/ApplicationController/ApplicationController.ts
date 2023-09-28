@@ -44,7 +44,7 @@ export class ApplicationController extends ModelController<Application> {
         // console.debug(
         //     'ApplicationController.create',
         //     'debug:',
-        //     this.getHostApp().isDebugMode(),
+        //     this.isDebugMode(),
         //     model,
         // );
         const { ctrlClass } = model.getData();
@@ -464,6 +464,10 @@ export class ApplicationController extends ModelController<Application> {
 
     getBaseUrl() {
         return `/${this.getDomain()}`;
+    }
+
+    isDebugMode(): boolean {
+        return this.getModel().getData().nodeEnv === 'dev';
     }
 }
 

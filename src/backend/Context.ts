@@ -222,14 +222,13 @@ export class Context {
         return params[name];
     }
 
-    isDebugMode(): boolean {
+    /* isDebugMode(): boolean {
         return this.getQuery()['debug'] === '1';
-    }
+    } */
 
     getUrl(): URL {
         const req = this.getReq()!;
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-        // debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }
 

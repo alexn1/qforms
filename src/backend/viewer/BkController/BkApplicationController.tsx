@@ -14,6 +14,7 @@ import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';
 import { Helper } from '../../../frontend';
+import { isDev } from '../../private-helper';
 
 const { version } = require('../../../../package.json');
 
@@ -47,7 +48,7 @@ export class BkApplicationController {
 
         // frontHostApp
         const frontHostApp = new FrontHostApp({
-            debug: context.isDebugMode(),
+            // debug: isDev(),
             url: context.getUrl(),
             cookies: context.getCookies(),
         });

@@ -20,7 +20,7 @@ export class RowFormDateFieldView extends RowFormFieldView<RowFormDateFieldContr
                     oldDates={this.props.oldDates}
                     // getMinDate={this.props.getMinDate}
                     minDate={this.props.minDate}
-                    debug={ctrl.getApp().getHostApp().isDebugMode()}
+                    debug={ctrl.getApp().isDebugMode()}
                 />
             </div>
         );

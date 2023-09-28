@@ -87,4 +87,5 @@ export declare class ApplicationController extends ModelController<Application> 
     }): Promise<any>;
     getDomain(): string;
     getBaseUrl(): string;
+    isDebugMode(): boolean;
 }

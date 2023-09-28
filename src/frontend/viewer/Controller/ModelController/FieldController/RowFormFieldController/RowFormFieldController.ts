@@ -203,7 +203,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
     getPlaceholder() {
         // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
         if (this.getModel().getAttr('placeholder')) return this.getModel().getAttr('placeholder');
-        if (this.getApp().getHostApp().isDebugMode()) {
+        if (this.getApp().isDebugMode()) {
             const value = this.getValue();
             if (value === undefined) return 'undefined';
             if (value === null) return 'null';

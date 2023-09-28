@@ -5,7 +5,7 @@ import { Action, Query } from '../../types';
 import { CookieHelper } from './CookieHelper';
 
 export interface FrontHostAppOptions {
-    debug: boolean;
+    // debug: boolean;
     url: URL;
     cookies: { [name: string]: string };
 }
@@ -176,13 +176,13 @@ export class FrontHostApp {
         return this.documentTitle;
     }
 
-    isDebugMode() {
+    /* isDebugMode(): boolean {
         if (typeof window === 'object') {
             return Search.getObj()['debug'] === '1';
         } else {
             return this.getOptions().debug;
         }
-    }
+    } */
 
     createLink(params: { [name: string]: any } | null = null): string {
         const path =
@@ -191,7 +191,7 @@ export class FrontHostApp {
             return [
                 path,
                 [
-                    ...(this.isDebugMode() ? ['debug=1'] : []),
+                    // ...(this.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');

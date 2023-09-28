@@ -1678,9 +1678,6 @@ class Context {
         const params = this.getAllParams();
         return params[name];
     }
-    isDebugMode() {
-        return this.getQuery()['debug'] === '1';
-    }
     getUrl() {
         const req = this.getReq();
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
@@ -4964,7 +4961,8 @@ class EditorModule {
         };
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?`;
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink }), runAppLink, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
     async post(req, res, next) {
@@ -5918,7 +5916,6 @@ class BkApplicationController {
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...bkApplication.scripts] }));
         const data = await bkApplication.fill(context);
         const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_6__.FrontHostApp({
-            debug: context.isDebugMode(),
             url: context.getUrl(),
             cookies: context.getCookies(),
         });
@@ -10718,21 +10715,12 @@ class FrontHostApp {
         }
         return this.documentTitle;
     }
-    isDebugMode() {
-        if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
-        }
-        else {
-            return this.getOptions().debug;
-        }
-    }
     createLink(params = null) {
         const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
             return [
                 path,
                 [
-                    ...(this.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
@@ -15425,6 +15413,9 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     getBaseUrl() {
         return `/${this.getDomain()}`;
     }
+    isDebugMode() {
+        return this.getModel().getData().nodeEnv === 'dev';
+    }
 }
 _common__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(ApplicationController);
 
@@ -15943,7 +15934,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
     getPlaceholder() {
         if (this.getModel().getAttr('placeholder'))
             return this.getModel().getAttr('placeholder');
-        return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
+        return this.getApp().isDebugMode() ? '[null]' : null;
     }
 }
 _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormComboBoxFieldController);
@@ -16075,7 +16066,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormDateFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
     render() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, minDate: this.props.minDate, debug: ctrl.getApp().getHostApp().isDebugMode() }) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, minDate: this.props.minDate, debug: ctrl.getApp().isDebugMode() }) })));
     }
 }
 
@@ -16339,7 +16330,7 @@ class RowFormDateTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     }
     renderDatePart() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().getHostApp().isDebugMode() }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().isDebugMode() }));
     }
     renderTimePart() {
         const ctrl = this.getCtrl();
@@ -16522,7 +16513,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
     getPlaceholder() {
         if (this.getModel().getAttr('placeholder'))
             return this.getModel().getAttr('placeholder');
-        if (this.getApp().getHostApp().isDebugMode()) {
+        if (this.getApp().isDebugMode()) {
             const value = this.getValue();
             if (value === undefined)
                 return 'undefined';
@@ -19094,7 +19085,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.Model
         const keyPart = key ? this.getKeyPart(key) : null;
         return [
             model.getCaption(),
-            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

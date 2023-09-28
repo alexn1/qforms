@@ -51,7 +51,6 @@ export declare class Context {
     setParam(name: string, value: any): void;
     getParams(): Record<string, any>;
     getAllParam(name: string): any;
-    isDebugMode(): boolean;
     getUrl(): URL;
     getAction(): Nullable<Action>;
     static getIpFromReq(req: Request): string;
