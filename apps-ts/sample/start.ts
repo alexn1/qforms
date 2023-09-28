@@ -12,7 +12,7 @@ async function start(...argv: string[]): Promise<Optional<number>> {
     try {
         const backHostApp = new SampleBackHostApp({
             ...BkHelper.argvAsKeyValue(argv),
-            appsDirPath: join(__dirname, '../'),
+            srcDirPath: join(__dirname, '../'),
             port: 7001,
         });
         await backHostApp.init();

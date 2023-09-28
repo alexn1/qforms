@@ -55,9 +55,9 @@ export class IndexModule {
     }
 
     async fill() {
-        // const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
+        // const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.getSrcDirPath());
         const appInfos = await BkApplication.getAppInfos(
-            this.hostApp.appsDirPath /* , distDirPath */,
+            this.hostApp.getSrcDirPath() /* , distDirPath */,
         );
         // debug('appInfos:', appInfos);
         return {

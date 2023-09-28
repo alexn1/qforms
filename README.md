@@ -7,7 +7,7 @@ Supports MySql, Postgres, MongoDB.
 ## CLI Options
 
 ```bash
-appsDirPath=../name/apps
+srcDirPath=../name/apps
 ```
 
 ## Make npm module ready for linking

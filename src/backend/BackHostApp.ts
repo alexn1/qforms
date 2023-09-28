@@ -42,7 +42,7 @@ const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT
 const MIN_NODE_VERSION = 14;
 
 export interface BackHostAppConfig {
-    appsDirPath?: string;
+    srcDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
     codeRootDirPath?: string; // for testing source files with jest
@@ -64,7 +64,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     wsServer: WebSocketServer;
 
     // dir path
-    appsDirPath: string;
+    private srcDirPath: string;
     distDirPath: string;
     backendDirPath: string;
     frontendDirPath: string;
@@ -129,8 +129,8 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     }
 
     checkApplicationFolder(): void {
-        if (!fs.existsSync(this.appsDirPath)) {
-            throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
+        if (!fs.existsSync(this.srcDirPath)) {
+            throw new Error(`Application folder '${this.srcDirPath}' doesn't exist`);
         }
     }
 
@@ -166,8 +166,8 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     }
 
     initDirPaths(): void {
-        this.appsDirPath = path.resolve(this.config.appsDirPath || APPS_DIR_PATH);
-        this.distDirPath = this.config.distDirPath || this.appsDirPath;
+        this.srcDirPath = path.resolve(this.config.srcDirPath || APPS_DIR_PATH);
+        this.distDirPath = this.config.distDirPath || this.srcDirPath;
         this.backendDirPath = path.join(this.getCodeRootDirPath(), 'backend');
         this.frontendDirPath = path.join(this.getCodeRootDirPath(), 'frontend');
         this.runtimeDirPath = path.resolve(this.config.runtimeDirPath || './runtime');
@@ -189,7 +189,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
             this.isDevelopment() ? '/index2' : ''
         }\n`;
         message += `\tcwd: ${process.cwd()}\n`;
-        message += `\tappsDirPath: ${this.appsDirPath}\n`;
+        message += `\tsrcDirPath: ${this.srcDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
         message += `\tbackendDirPath: ${this.backendDirPath}\n`;
         message += `\tfrontendDirPath: ${this.frontendDirPath}\n`;
@@ -342,7 +342,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
 
     getSrcAppFilePath(context: Context): string {
         return path.join(
-            this.appsDirPath,
+            this.srcDirPath,
             context.getAppDirName(),
             context.getAppFileName() + '.json',
         );
@@ -388,11 +388,11 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         const { folder, name } = req.body as CreateAppDto;
         if (!folder) throw new Error(`folder required: ${folder}`);
         if (!name) throw new Error(`name required: ${name}`);
-        const appDirPath = path.join(this.appsDirPath, folder);
+        const appDirPath = path.join(this.srcDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
         await createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await BkApplication.getAppInfos(this.appsDirPath);
+        const appInfos = await BkApplication.getAppInfos(this.srcDirPath);
         return appInfos;
     }
 
@@ -698,5 +698,9 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
 
     getExpress(): Express {
         return this.express;
+    }
+
+    getSrcDirPath(): string {
+        return this.srcDirPath;
     }
 }

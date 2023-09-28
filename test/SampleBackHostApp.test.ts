@@ -42,7 +42,7 @@ describe('SampleBackHostApp', () => {
             )`,
         );
         process.env.PORT = '5433';
-        app = new SampleBackHostApp({ appsDirPath: './apps-ts' });
+        app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
         await app.init();
         httpServer = app.getHttpServer();
         httpClient = new HttpClient(httpServer);

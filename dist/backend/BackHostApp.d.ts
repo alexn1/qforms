@@ -15,7 +15,7 @@ import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { Nullable } from '../types';
 export interface BackHostAppConfig {
-    appsDirPath?: string;
+    srcDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
     codeRootDirPath?: string;
@@ -37,7 +37,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     private express;
     httpServer: Server;
     wsServer: WebSocketServer;
-    appsDirPath: string;
+    private srcDirPath;
     distDirPath: string;
     backendDirPath: string;
     frontendDirPath: string;
@@ -126,4 +126,5 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     isDevelopment(): boolean;
     getParams(): TParams;
     getExpress(): Express;
+    getSrcDirPath(): string;
 }

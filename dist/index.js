@@ -859,8 +859,8 @@ class BackHostApp {
         this.httpServer = (0,http__WEBPACK_IMPORTED_MODULE_0__.createServer)(this.express);
     }
     checkApplicationFolder() {
-        if (!fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(this.appsDirPath)) {
-            throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
+        if (!fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(this.srcDirPath)) {
+            throw new Error(`Application folder '${this.srcDirPath}' doesn't exist`);
         }
     }
     createTempDirsIfNotExistSync() {
@@ -890,8 +890,8 @@ class BackHostApp {
         });
     }
     initDirPaths() {
-        this.appsDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.config.appsDirPath || APPS_DIR_PATH);
-        this.distDirPath = this.config.distDirPath || this.appsDirPath;
+        this.srcDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.config.srcDirPath || APPS_DIR_PATH);
+        this.distDirPath = this.config.distDirPath || this.srcDirPath;
         this.backendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.getCodeRootDirPath(), 'backend');
         this.frontendDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.getCodeRootDirPath(), 'frontend');
         this.runtimeDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().resolve(this.config.runtimeDirPath || './runtime');
@@ -909,7 +909,7 @@ class BackHostApp {
         message += '\n';
         message += `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
         message += `\tcwd: ${process.cwd()}\n`;
-        message += `\tappsDirPath: ${this.appsDirPath}\n`;
+        message += `\tsrcDirPath: ${this.srcDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
         message += `\tbackendDirPath: ${this.backendDirPath}\n`;
         message += `\tfrontendDirPath: ${this.frontendDirPath}\n`;
@@ -1021,7 +1021,7 @@ class BackHostApp {
         return this.applications[route];
     }
     getSrcAppFilePath(context) {
-        return path__WEBPACK_IMPORTED_MODULE_4___default().join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
+        return path__WEBPACK_IMPORTED_MODULE_4___default().join(this.srcDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     getDistAppFilePath(context) {
         return path__WEBPACK_IMPORTED_MODULE_4___default().join(this.distDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
@@ -1051,11 +1051,11 @@ class BackHostApp {
             throw new Error(`folder required: ${folder}`);
         if (!name)
             throw new Error(`name required: ${name}`);
-        const appDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.appsDirPath, folder);
+        const appDirPath = path__WEBPACK_IMPORTED_MODULE_4___default().join(this.srcDirPath, folder);
         const appFilePath = path__WEBPACK_IMPORTED_MODULE_4___default().join(appDirPath, name + '.json');
         await (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__.createDirIfNotExists)(appDirPath);
         await _editor_Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_17__.ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication.getAppInfos(this.appsDirPath);
+        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication.getAppInfos(this.srcDirPath);
         return appInfos;
     }
     async logError(err, req) {
@@ -1308,6 +1308,9 @@ class BackHostApp {
     }
     getExpress() {
         return this.express;
+    }
+    getSrcDirPath() {
+        return this.srcDirPath;
     }
 }
 __decorate([
@@ -2233,40 +2236,6 @@ function Session_save(session) {
 
 /***/ }),
 
-/***/ "./src/backend/WebScoketHelper.ts":
-/*!****************************************!*\
-  !*** ./src/backend/WebScoketHelper.ts ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getWebSocketIP": () => (/* binding */ getWebSocketIP),
-/* harmony export */   "getWebSocketPort": () => (/* binding */ getWebSocketPort),
-/* harmony export */   "getWebsocketUrl": () => (/* binding */ getWebsocketUrl)
-/* harmony export */ });
-function getWebSocketIP(webSocket) {
-    return webSocket.upgradeReq.headers['x-real-ip']
-        ? webSocket.upgradeReq.headers['x-real-ip']
-        : webSocket.upgradeReq.socket.remoteAddress;
-}
-function getWebSocketPort(webSocket) {
-    return webSocket.upgradeReq.headers['x-real-port']
-        ? webSocket.upgradeReq.headers['x-real-port']
-        : webSocket.upgradeReq.socket.remotePort;
-}
-function getWebsocketUrl(webSocket) {
-    var _a;
-    const url = webSocket.url || ((_a = webSocket.upgradeReq) === null || _a === void 0 ? void 0 : _a.url);
-    if (!url)
-        throw new Error('getWebsocketUrl: cannot get webSocket url');
-    return url;
-}
-
-
-/***/ }),
-
 /***/ "./src/backend/WebSocketServer.ts":
 /*!****************************************!*\
   !*** ./src/backend/WebSocketServer.ts ***!
@@ -2286,7 +2255,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../console */ "./src/console.ts");
-/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+/* harmony import */ var _websocket_helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./websocket-helper */ "./src/backend/websocket-helper.ts");
 
 
 
@@ -2307,9 +2276,9 @@ class WebSocketServer {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.error)('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket));
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent((0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket)))));
-        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse((0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket), true);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', (0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket));
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent((0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket)))));
+        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse((0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket), true);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)
@@ -5675,7 +5644,7 @@ class IndexModule {
         }
     }
     async fill() {
-        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.getAppInfos(this.hostApp.appsDirPath);
+        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__.BkApplication.getAppInfos(this.hostApp.getSrcDirPath());
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -5746,7 +5715,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
 /* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _WebScoketHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../WebScoketHelper */ "./src/backend/WebScoketHelper.ts");
+/* harmony import */ var _websocket_helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../websocket-helper */ "./src/backend/websocket-helper.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../file-helper */ "./src/backend/file-helper.ts");
 
 
@@ -5805,7 +5774,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: (0,_WebScoketHelper__WEBPACK_IMPORTED_MODULE_7__.getWebSocketIP)(webSocket),
+                            ip: (0,_websocket_helper__WEBPACK_IMPORTED_MODULE_7__.getWebSocketIP)(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),
@@ -6563,8 +6532,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
-    static async getAppInfos(appsDirPath) {
-        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(appsDirPath, '*/*.json'));
+    static async getAppInfos(srcDirPath) {
+        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(srcDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -10018,6 +9987,40 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/***/ }),
+
+/***/ "./src/backend/websocket-helper.ts":
+/*!*****************************************!*\
+  !*** ./src/backend/websocket-helper.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWebSocketIP": () => (/* binding */ getWebSocketIP),
+/* harmony export */   "getWebSocketPort": () => (/* binding */ getWebSocketPort),
+/* harmony export */   "getWebsocketUrl": () => (/* binding */ getWebsocketUrl)
+/* harmony export */ });
+function getWebSocketIP(webSocket) {
+    return webSocket.upgradeReq.headers['x-real-ip']
+        ? webSocket.upgradeReq.headers['x-real-ip']
+        : webSocket.upgradeReq.socket.remoteAddress;
+}
+function getWebSocketPort(webSocket) {
+    return webSocket.upgradeReq.headers['x-real-port']
+        ? webSocket.upgradeReq.headers['x-real-port']
+        : webSocket.upgradeReq.socket.remotePort;
+}
+function getWebsocketUrl(webSocket) {
+    var _a;
+    const url = webSocket.url || ((_a = webSocket.upgradeReq) === null || _a === void 0 ? void 0 : _a.url);
+    if (!url)
+        throw new Error('getWebsocketUrl: cannot get webSocket url');
+    return url;
+}
 
 
 /***/ }),

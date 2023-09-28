@@ -413,9 +413,9 @@ export class BkApplication<
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath: string /* , distDirPath?: string */): Promise<AppInfo[]> {
-        // debug('BkApplication.getAppInfos', appsDirPath);
-        const appFilesPaths = await _glob(path.join(appsDirPath, '*/*.json'));
+    static async getAppInfos(srcDirPath: string /* , distDirPath?: string */): Promise<AppInfo[]> {
+        // debug('BkApplication.getAppInfos', srcDirPath);
+        const appFilesPaths = await _glob(path.join(srcDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
