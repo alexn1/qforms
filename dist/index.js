@@ -4961,7 +4961,7 @@ class EditorModule {
         };
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
-        const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?`;
+        const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/`;
         const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink }), runAppLink, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }

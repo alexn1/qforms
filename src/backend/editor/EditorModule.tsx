@@ -117,7 +117,7 @@ export class EditorModule {
         const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={this.getScripts()} />,
         );
-        const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?`;
+        const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/`;
         const html = home(
             pkg.version,
             {
