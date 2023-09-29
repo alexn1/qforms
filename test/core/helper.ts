@@ -24,6 +24,7 @@ export async function restartLocalDb(port: number = 5433): Promise<void> {
     await exec(
         `docker run --name postgres-test -p ${port}:5432 -e POSTGRES_PASSWORD=example -d postgres:12-alpine`,
     );
+    await sleep(2500);
 }
 
 export async function createDatabase(dbName: string) {

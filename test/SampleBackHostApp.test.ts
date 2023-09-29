@@ -29,7 +29,6 @@ describe('SampleBackHostApp', () => {
 
     beforeAll(async () => {
         await restartLocalDb();
-        await sleep(2500);
         await createDatabase('demo');
         await query(
             'demo',
