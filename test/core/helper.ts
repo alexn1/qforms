@@ -4,10 +4,10 @@ export async function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function exec(cmd: string, quiet = true): Promise<void> {
+export async function exec(cmd: string, quiet = true, throwError = true): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
-            if (err) {
+            if (throwError && err) {
                 reject(err);
             } else {
                 resolve();
@@ -19,10 +19,8 @@ export async function exec(cmd: string, quiet = true): Promise<void> {
 }
 
 export async function restartLocalDb(port: number = 5433): Promise<void> {
-    try {
-        await exec('docker stop postgres-test');
-        await exec('docker rm postgres-test');
-    } catch (err) {}
+    await exec('docker stop postgres-test', true, false);
+    await exec('docker rm postgres-test', true, false);
     await exec(
         `docker run --name postgres-test -p ${port}:5432 -e POSTGRES_PASSWORD=example -d postgres:12-alpine`,
     );
