@@ -20,6 +20,9 @@ export type RawRow = {
 } & {
     type: 'RawRow';
 };
+export type RawModel<T> = {
+    [K in keyof T]: JSONString<K>;
+};
 export type ChangesByKey = {
     [key: Key]: RawRow;
 };

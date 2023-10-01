@@ -1,5 +1,3 @@
-
-
 export type Scalar = string | number | boolean;
 
 export type JSONString<T = any> = string & { type: 'JSONString' };
@@ -21,6 +19,10 @@ export type Row = {
 export type RawRow = {
     [column: string]: JSONString;
 } & { type: 'RawRow' };
+
+export type RawModel<T> = {
+    [K in keyof T]: JSONString<T[K]>;
+};
 
 export type ChangesByKey = {
     [key: Key]: RawRow;
@@ -54,9 +56,6 @@ export enum Action {
     login = 'login',
     logout = 'logout',
 }
-
-
-
 
 export interface Link {
     href: string;
