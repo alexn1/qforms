@@ -65,7 +65,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getUsers(context: Context): Promise<null>;
     rpc(name: string, context: Context): Promise<any>;
     getEnv(): string;
-    getEnvVarValue(name: string): any;
     getApp(): BkApplication;
     findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;

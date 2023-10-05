@@ -357,7 +357,7 @@ export class BkApplication<
         return this.env;
     }
 
-    getEnvVarValue(name: string) {
+    /* getEnvVarValue(name: string) {
         // debug(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
@@ -365,7 +365,7 @@ export class BkApplication<
         if (!obj) throw new Error(`no env ${env}`);
         if (obj[name]) return obj[name];
         throw new Error(`no env ${name} in ${env}`);
-    }
+    } */
 
     getApp(): BkApplication {
         return this;

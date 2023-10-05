@@ -83,7 +83,7 @@ export class BkDatabase<TConnection = any> extends BkModel<DatabaseScheme> {
         throw new Error(`${this.constructor.name}.commit not implemented`);
     }
 
-    async rollback(context: Context, err): Promise<void> {
+    async rollback(context: Context, err: any): Promise<void> {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
 
