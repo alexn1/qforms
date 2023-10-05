@@ -21,7 +21,7 @@ export type RawRow = {
     type: 'RawRow';
 };
 export type RawModel<T> = {
-    [K in keyof T]: JSONString<K>;
+    [K in keyof T]: JSONString<T[K]>;
 };
 export type ChangesByKey = {
     [key: Key]: RawRow;

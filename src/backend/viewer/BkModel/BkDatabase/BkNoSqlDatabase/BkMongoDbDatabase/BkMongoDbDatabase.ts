@@ -74,7 +74,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
 
     private getDbLink(context: Context): Db {
         const client = this.getConnection(context).client;
-        const { database } = this.getConfig();
+        const { database } = this.getConfig(context);
         return client.db(database);
     }
 

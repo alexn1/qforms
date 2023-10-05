@@ -5,8 +5,8 @@ import { Row } from '../../../../../../types';
 export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     pool: Pool | null;
     deinit(): Promise<void>;
-    getPool(): Pool;
-    getConfig(): any;
+    getPool(context: Context): Pool;
+    getConfig(context?: Context): any;
     static Pool_getConnection(pool: Pool): Promise<PoolConnection>;
     queryRows(context: Context, query: string, params?: {
         [name: string]: any;

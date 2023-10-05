@@ -26,20 +26,20 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         }
     }
 
-    getPool(): Pool {
+    getPool(context: Context): Pool {
         //debug('MySqlDatabase.getPool');
         if (!this.pool) {
             //debug('creating connection pool for: ' + database);
-            this.pool = createPool(this.getConfig());
+            this.pool = createPool(this.getConfig(context));
         }
         //debug('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
 
-    getConfig(): any {
+    getConfig(context?: Context): any {
         debug('MySqlDatabase.getConfig');
         return {
-            ...super.getConfig(),
+            ...super.getConfig(context),
             queryFormat: BkMySqlDatabase.queryFormat,
         };
     }
@@ -324,7 +324,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
+        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool(context));
     }
 
     async release(context: Context): Promise<void> {

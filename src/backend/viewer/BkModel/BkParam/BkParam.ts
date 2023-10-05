@@ -1,9 +1,10 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { ParamScheme } from '../../../common/Scheme/ParamScheme';
+import { Context } from '../../../Context';
 
 export class BkParam extends BkModel<ParamScheme> {
-    getValue() {
+    getValue(context?: Context) {
         // debug('Param.getValue', this.getName());
         const value = this.getAttr('value');
         /* const app = this.getApp();

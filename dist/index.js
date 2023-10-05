@@ -7569,17 +7569,17 @@ class BkDatabase extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
     getDatabaseName(context) {
-        return this.getParam('database').getValue();
+        return this.getParam('database').getValue(context);
     }
     getConfig(context) {
         const config = {
-            host: this.getParam('host').getValue(),
+            host: this.getParam('host').getValue(context),
             database: this.getDatabaseName(context),
-            user: this.getParam('user').getValue(),
-            password: this.getParam('password').getValue(),
+            user: this.getParam('user').getValue(context),
+            password: this.getParam('password').getValue(context),
         };
         if (this.isData('params', 'port')) {
-            config.port = this.getParam('port').getValue();
+            config.port = this.getParam('port').getValue(context);
         }
         return config;
     }
@@ -7721,7 +7721,7 @@ class BkMongoDbDatabase extends _BkNoSqlDatabase__WEBPACK_IMPORTED_MODULE_1__.Bk
     }
     getDbLink(context) {
         const client = this.getConnection(context).client;
-        const { database } = this.getConfig();
+        const { database } = this.getConfig(context);
         return client.db(database);
     }
     async queryResult(context, query, params = null) {
@@ -7837,15 +7837,15 @@ class BkMySqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_1__.BkSqlD
             this.pool = null;
         }
     }
-    getPool() {
+    getPool(context) {
         if (!this.pool) {
-            this.pool = (0,mysql__WEBPACK_IMPORTED_MODULE_0__.createPool)(this.getConfig());
+            this.pool = (0,mysql__WEBPACK_IMPORTED_MODULE_0__.createPool)(this.getConfig(context));
         }
         return this.pool;
     }
-    getConfig() {
+    getConfig(context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('MySqlDatabase.getConfig');
-        return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: BkMySqlDatabase.queryFormat });
+        return Object.assign(Object.assign({}, super.getConfig(context)), { queryFormat: BkMySqlDatabase.queryFormat });
     }
     static async Pool_getConnection(pool) {
         return new Promise((resolve, reject) => {
@@ -8063,7 +8063,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
+        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool(context));
     }
     async release(context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)('MySqlDatabase.release', this.getName());
@@ -9438,7 +9438,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
 
 class BkParam extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
-    getValue() {
+    getValue(context) {
         const value = this.getAttr('value');
         try {
             return eval(value);

@@ -88,18 +88,18 @@ export class BkDatabase<TConnection = any> extends BkModel<DatabaseScheme> {
     }
 
     getDatabaseName(context?: Context): string {
-        return this.getParam('database').getValue();
+        return this.getParam('database').getValue(context);
     }
 
     getConfig(context?: Context): DbConfig {
         const config: DbConfig = {
-            host: this.getParam('host').getValue(),
+            host: this.getParam('host').getValue(context),
             database: this.getDatabaseName(context),
-            user: this.getParam('user').getValue(),
-            password: this.getParam('password').getValue(),
+            user: this.getParam('user').getValue(context),
+            password: this.getParam('password').getValue(context),
         };
         if (this.isData('params', 'port')) {
-            config.port = this.getParam('port').getValue();
+            config.port = this.getParam('port').getValue(context);
         }
         return config;
     }
