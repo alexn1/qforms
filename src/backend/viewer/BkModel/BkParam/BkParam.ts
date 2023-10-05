@@ -12,6 +12,8 @@ export class BkParam extends BkModel<ParamScheme> {
             return app.getEnvVarValue(name);
         }); */
 
+        const env = context?.getEnv();
+
         try {
             return eval(value);
         } catch (err) {

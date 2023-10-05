@@ -9429,6 +9429,7 @@ __webpack_require__.r(__webpack_exports__);
 class BkParam extends _BkModel__WEBPACK_IMPORTED_MODULE_0__.BkModel {
     getValue(context) {
         const value = this.getAttr('value');
+        const env = context === null || context === void 0 ? void 0 : context.getEnv();
         try {
             return eval(value);
         }
