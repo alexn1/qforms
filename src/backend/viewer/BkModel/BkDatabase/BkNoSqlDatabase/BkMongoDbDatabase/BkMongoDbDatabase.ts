@@ -17,7 +17,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
             throw new Error(`already connected: ${name}`);
         }
 
-        const url = this.getUrl();
+        const url = this.getUrl(context);
         const client = new MongoClient(url);
         debug(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
@@ -25,9 +25,9 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         context.connections[name] = { client, session };
     }
 
-    getUrl() {
+    getUrl(context: Context) {
         // debug('config', this.getConfig());
-        const { host, user, password, port } = this.getConfig();
+        const { host, user, password, port } = this.getConfig(context);
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
         return `mongodb://${userPassword}${host2}:${

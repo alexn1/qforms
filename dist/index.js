@@ -7663,15 +7663,15 @@ class BkMongoDbDatabase extends _BkNoSqlDatabase__WEBPACK_IMPORTED_MODULE_1__.Bk
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        const url = this.getUrl();
+        const url = this.getUrl(context);
         const client = new mongodb__WEBPACK_IMPORTED_MODULE_0__.MongoClient(url);
         (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
         const session = client.startSession();
         context.connections[name] = { client, session };
     }
-    getUrl() {
-        const { host, user, password, port } = this.getConfig();
+    getUrl(context) {
+        const { host, user, password, port } = this.getConfig(context);
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
         return `mongodb://${userPassword}${host2}:${port || this.getDefaultPort()}/?directConnection=true`;

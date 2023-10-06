@@ -7,7 +7,7 @@ export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     session: ClientSession;
 }> {
     connect(context: Context): Promise<void>;
-    getUrl(): string;
+    getUrl(context: Context): string;
     release(context: Context): Promise<void>;
     updateOne(context: Context, colName: string, filter: any, update: any): Promise<any>;
     insertOne(context: Context, colName: string, document: any): Promise<any>;
