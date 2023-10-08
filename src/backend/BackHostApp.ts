@@ -478,7 +478,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
                     ? error.message
                     : 'Internal Software Error';
             const stack: string = this.isDevelopment() && error.status !== 404 ? error.stack : '';
-            res.end(e500(status, message, stack));
+            res.setHeader('Content-Type', 'text/html').end(e500(status, message, stack));
         }
         await this.logError(error, req);
     }

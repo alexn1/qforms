@@ -1129,7 +1129,7 @@ class BackHostApp {
                 ? error.message
                 : 'Internal Software Error';
             const stack = this.isDevelopment() && error.status !== 404 ? error.stack : '';
-            res.end((0,_e500__WEBPACK_IMPORTED_MODULE_24__.e500)(status, message, stack));
+            res.setHeader('Content-Type', 'text/html').end((0,_e500__WEBPACK_IMPORTED_MODULE_24__.e500)(status, message, stack));
         }
         await this.logError(error, req);
     }
