@@ -37,7 +37,7 @@ function isJest() {
     return typeof jest !== 'undefined';
 }
 const pConsole = new Proxy(console, {
-    get: function (target, prop, receiver) {
+    get(target, prop, receiver) {
         if (typeof target[prop] === 'function') {
             return function (...args) {
                 const methodLevel = LogLevels.indexOf(prop);

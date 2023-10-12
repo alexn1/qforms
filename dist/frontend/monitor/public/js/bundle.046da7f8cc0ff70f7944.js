@@ -230,10 +230,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/index/IndexView/IndexView.less":
-/*!*****************************************************!*\
-  !*** ./src/frontend/index/IndexView/IndexView.less ***!
-  \*****************************************************/
+/***/ "./src/frontend/monitor/MonitorView/MonitorView.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/monitor/MonitorView/MonitorView.less ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/monitor/style/monitor.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/monitor/style/monitor.less ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -35464,157 +35476,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/index/IndexFrontHostApp.ts":
-/*!*************************************************!*\
-  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
-  \*************************************************/
+/***/ "./src/frontend/monitor/MonitorView/MonitorView.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/monitor/MonitorView/MonitorView.tsx ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
-/* harmony export */ });
-/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
-
-
-class IndexFrontHostApp {
-    constructor(data) {
-        this.data = data;
-        this.view = null;
-        this.currentAppFullName = undefined;
-        this.currentAppEnv = undefined;
-        this.modals = [];
-        this.folderNameTextBox = null;
-        this.folderName = null;
-        this.appName = null;
-        this.onAppChange = (fullName) => {
-            console.debug('IndexFrontHostApp.onAppChange', fullName);
-            this.currentAppFullName = fullName;
-            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
-            if (!appInfo)
-                throw new Error(`no appInfo ${fullName}`);
-            this.currentAppEnv = appInfo.envs[0];
-            this.view.rerender();
-        };
-        this.onEnvChange = (env) => {
-            console.debug('IndexFrontHostApp.onEnvChange', env);
-            this.currentAppEnv = env;
-        };
-        this.run = (e) => {
-            if (this.currentAppFullName) {
-                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.debug('href:', href);
-                window.location.href = href;
-            }
-        };
-        this.edit = (e) => {
-            if (this.currentAppFullName) {
-                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.debug('href:', href);
-                window.location.href = href;
-            }
-        };
-        this.btnCreate_Click = async (e) => {
-            this.modals.push({ id: 1 });
-            await this.view.rerender();
-            this.folderNameTextBox.getElement().focus();
-        };
-        this.closeModal = () => {
-            console.debug('IndexFrontHostApp.closeModal');
-            this.modals.pop();
-            this.view.rerender();
-        };
-        this.onFolderNameCreate = (textBox) => {
-            console.debug('IndexFrontHostApp.onFolderNameCreate');
-            this.folderNameTextBox = textBox;
-        };
-        this.onFolderNameChange = (folderName) => {
-            this.folderName = folderName;
-        };
-        this.onAppNameChange = (appName) => {
-            this.appName = appName;
-        };
-        this.onCreateClick = async (e) => {
-            console.debug('IndexFrontHostApp.onCreateClick');
-            console.debug(this.folderName, this.appName);
-            this.closeModal();
-            await this.createApp(this.folderName, this.appName);
-        };
-        console.debug('IndexFrontHostApp.constructor', data);
-    }
-    init() {
-        const appInfo = this.data.appInfos[0];
-        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
-        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
-        this.createView(document.querySelector('#root'));
-    }
-    createView(root) {
-        this.view = _common__WEBPACK_IMPORTED_MODULE_1__.ReactHelper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
-            ctrl: this,
-        });
-    }
-    getAppItems() {
-        return this.data.appInfos.map((appInfo) => ({
-            value: appInfo.fullName,
-            title: appInfo.fullName,
-        }));
-    }
-    getEnvItems() {
-        if (this.currentAppFullName) {
-            const appInfo = this.getAppInfo(this.currentAppFullName);
-            if (appInfo) {
-                return appInfo.envs.map((env) => ({ value: env, title: env }));
-            }
-        }
-        return [];
-    }
-    getAppInfo(fullName) {
-        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
-    }
-    async createApp(folderName, appName) {
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            action: 'new',
-            folder: folderName,
-            name: appName,
-        });
-        console.debug('data:', data);
-        if (data.appInfos) {
-            this.data.appInfos = data.appInfos;
-            this.currentAppFullName = `${folderName}/${appName}`;
-            this.view.rerender();
-        }
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/index/IndexView/IndexView.tsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexView": () => (/* binding */ IndexView)
+/* harmony export */   "MonitorView": () => (/* binding */ MonitorView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _IndexView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IndexView.less */ "./src/frontend/index/IndexView/IndexView.less");
+/* harmony import */ var _common_FormatHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/FormatHelper */ "./src/frontend/common/FormatHelper.ts");
+/* harmony import */ var _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _MonitorView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonitorView.less */ "./src/frontend/monitor/MonitorView/MonitorView.less");
 
 
 
-class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    renderModals() {
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
+
+class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    renderApplication(app) {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [app.route, " ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ style: { color: 'gray' } }, { children: ["version: ", app.version] }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "pages:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.pages.map((page) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", { children: page.name }, page.name))) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "clients:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.clients.map((client) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [client.uuid, "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'blue' } }, { children: client.ip })), "\u00A0 v", client.version, "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: {
+                                                    color: 'green',
+                                                } }, { children: `userId: ${client.userId}` }))] }, client.uuid))) })] })] })] }, app.route));
     }
     render() {
-        console.debug('IndexView.render');
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
+        console.debug('MonitorView.render', this.props.data);
+        const data = this.props.data;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "MonitorView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["nodeEnv: ", data.nodeEnv] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["uptime: ", _common_FormatHelper__WEBPACK_IMPORTED_MODULE_1__.FormatHelper.formatNumber(data.uptime), " ms"] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "applications:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })] })));
     }
 }
 
@@ -35656,7 +35545,7 @@ function isJest() {
     return typeof jest !== 'undefined';
 }
 const pConsole = new Proxy(console, {
-    get: function (target, prop, receiver) {
+    get(target, prop, receiver) {
         if (typeof target[prop] === 'function') {
             return function (...args) {
                 const methodLevel = LogLevels.indexOf(prop);
@@ -35777,16 +35666,22 @@ function parseJson(json) {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************!*\
-  !*** ./src/frontend/index/main.ts ***!
-  \************************************/
+/*!**************************************!*\
+  !*** ./src/frontend/monitor/main.ts ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
+/* harmony import */ var _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MonitorView/MonitorView */ "./src/frontend/monitor/MonitorView/MonitorView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _style_monitor_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/monitor.less */ "./src/frontend/monitor/style/monitor.less");
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.debug('DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
+    console.debug('data:', data);
+    _common__WEBPACK_IMPORTED_MODULE_1__.ReactHelper.createReactComponent(document.querySelector('.monitor__root'), _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__.MonitorView, {
+        data,
+    });
 });
 
 })();

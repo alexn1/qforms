@@ -28,7 +28,7 @@ function isJest() {
 }
 
 export const pConsole = new Proxy(console, {
-    get: function (target, prop, receiver) {
+    get(target, prop, receiver) {
         // @ts-ignore
         if (typeof target[prop] === 'function') {
             return function (...args: any[]) {
