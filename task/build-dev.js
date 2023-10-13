@@ -1,7 +1,7 @@
 const Lib = require('./core/Lib');
 
 async function main() {
-    await Lib.exec('npx gulp clean');
+    await Lib.exec('npm run clean');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.back.index.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.back.start.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.editor.js');
