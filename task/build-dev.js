@@ -1,7 +1,5 @@
 const Lib = require('./core/Lib');
 
-main();
-
 async function main() {
     await Lib.exec('npm run clean');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.back.index.js');
@@ -11,3 +9,5 @@ async function main() {
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.monitor.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.viewer.js');
 }
+
+module.exports = main;

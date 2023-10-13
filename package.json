@@ -13,7 +13,7 @@
         "webpack-front-index": "NODE_ENV=dev webpack --config webpack.config.index.js",
         "webpack-front-monitor": "NODE_ENV=dev webpack --config webpack.config.monitor.js",
         "webpack-front-viewer": "NODE_ENV=dev webpack --config webpack.config.viewer.js",
-        "build": "node task/build-dev.js",
+        "build": "gulp build-dev",
         "build:prod": "node task/build-prod.js",
         "start": "NODE_ENV=dev node dist/start.js",
         "start:sample": "NODE_ENV=dev bun apps-ts/sample/start.ts",
