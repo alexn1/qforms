@@ -1,7 +1,9 @@
 const Lib = require('./core/Lib');
 
-module.exports = async () => {
+main();
+
+async function main() {
     await Lib.exec('git checkout release');
     await Lib.exec('npm publish', false);
     await Lib.exec('git checkout master');
-};
+}

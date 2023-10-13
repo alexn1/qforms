@@ -21,14 +21,15 @@
         "nodemon-start": "NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js",
         "test": "QFORMS_LOG_LEVEL=error jest --runInBand",
         "test:log": "clear; jest --runInBand",
-        "test:debug": "QFORMS_LOG_LEVEL=debug jest --runInBand",
-        "test:path": "jest --runTestsByPath",
+        "test:debug": "clear; QFORMS_LOG_LEVEL=debug jest --runInBand",
         "test:cov": "jest --coverage",
         "docker:build": "node task/docker-build.js",
         "docker:run": "node task/docker-run.js",
         "prettier:write": "prettier --write \"src/**/*.{ts,tsx,less}\"",
         "convert": "node task/convert.js",
-        "clean": "node task/clean.js"
+        "clean": "node task/clean.js",
+        "release": "node task/release.js",
+        "deploy": "node task/deploy.js"
     },
     "dependencies": {
         "body-parser": "^1.19.1",

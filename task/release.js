@@ -1,6 +1,8 @@
 const Lib = require('./core/Lib');
 
-async function release() {
+main();
+
+async function main() {
     // master branch
     await Lib.exec('git checkout -q master');
     await Lib.exec('git pull -q origin master');
@@ -29,5 +31,3 @@ async function release() {
     await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
-
-module.exports = release;

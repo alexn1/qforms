@@ -25,7 +25,7 @@ $ npm run build
 ## Release
 
 ```bash
-$ npx gulp release
+$ npm run release
 ```
 
 ## Deploy
