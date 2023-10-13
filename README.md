@@ -19,7 +19,7 @@ $ npm link
 ## Build
 
 ```bash
-$ npx gulp build-dev
+$ npm run build
 ```
 
 ## Release
