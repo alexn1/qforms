@@ -26,7 +26,8 @@
         "test:cov": "jest --coverage",
         "docker:build": "gulp docker-build",
         "docker:run": "gulp docker-run",
-        "prettier:write": "prettier --write \"src/**/*.{ts,tsx,less}\""
+        "prettier:write": "prettier --write \"src/**/*.{ts,tsx,less}\"",
+        "convert": "node task/convert.js"
     },
     "dependencies": {
         "body-parser": "^1.19.1",

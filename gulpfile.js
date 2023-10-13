@@ -11,4 +11,3 @@ module.exports['release'] = require('./task/release');
 module.exports['deploy'] = require('./task/deploy');
 module.exports['docker-build'] = require('./task/docker-build');
 module.exports['docker-run'] = require('./task/docker-run');
-module.exports['convert'] = require('./task/convert');
