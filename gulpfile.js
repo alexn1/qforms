@@ -9,5 +9,3 @@ module.exports['build-dev'] = require('./task/build-dev');
 module.exports['build-prod'] = require('./task/build-prod');
 module.exports['release'] = require('./task/release');
 module.exports['deploy'] = require('./task/deploy');
-module.exports['docker-build'] = require('./task/docker-build');
-module.exports['docker-run'] = require('./task/docker-run');

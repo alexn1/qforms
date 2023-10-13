@@ -24,8 +24,8 @@
         "test:debug": "QFORMS_LOG_LEVEL=debug jest --runInBand",
         "test:path": "jest --runTestsByPath",
         "test:cov": "jest --coverage",
-        "docker:build": "gulp docker-build",
-        "docker:run": "gulp docker-run",
+        "docker:build": "node task/docker-build.js",
+        "docker:run": "node task/docker-run.js",
         "prettier:write": "prettier --write \"src/**/*.{ts,tsx,less}\"",
         "convert": "node task/convert.js"
     },

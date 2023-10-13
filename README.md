@@ -37,6 +37,6 @@ $ npx gulp deploy
 ## Docker
 
 ```
-$ npx gulp docker-build
-$ npx gulp docker-run
+$ npm run docker:build
+$ npm run docker:run
 ```
