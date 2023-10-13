@@ -1,4 +1,4 @@
-const Lib = require('./Lib');
+const Lib = require('./core/Lib');
 
 async function release() {
     // master branch

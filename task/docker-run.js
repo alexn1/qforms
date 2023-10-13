@@ -1,4 +1,4 @@
-const Lib = require('./Lib');
+const Lib = require('./core/Lib');
 
 // "docker-run": "docker run -p 7000:7000 -v qforms-runtime:/app/runtime --rm qforms",
 // "docker-run-detach": "docker run -d -p 7000:7000 -v qforms-runtime:/app/runtime --rm qforms"

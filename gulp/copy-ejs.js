@@ -1,5 +1,5 @@
-const path = require('path');
 const gulp = require('gulp');
+const path = require('path');
 
 const SRC_PATH = './src';
 const BUILD_PATH = './dist';

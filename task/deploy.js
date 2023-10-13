@@ -1,4 +1,4 @@
-const Lib = require('./Lib');
+const Lib = require('./core/Lib');
 
 module.exports = async () => {
     await Lib.exec('git checkout release');

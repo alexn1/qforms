@@ -1,6 +1,6 @@
-const Lib = require('../gulp/Lib');
+const Lib = require('./core/Lib');
 
-module.exports = async () => {
+async function main() {
     await Lib.exec('npx gulp clean');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.back.index.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.back.start.js');
@@ -8,4 +8,6 @@ module.exports = async () => {
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.index.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.monitor.js');
     await Lib.exec('NODE_ENV=dev webpack --config webpack.config.viewer.js');
-};
+}
+
+module.exports = main;
