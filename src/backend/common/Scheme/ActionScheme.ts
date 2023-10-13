@@ -5,7 +5,7 @@ export interface ActionAttributes extends ModelAttributes {
     caption: string;
 }
 
-export interface ActionScheme extends ModelScheme  {
+export interface ActionScheme extends ModelScheme {
     '@class': 'Action';
     '@attributes': ActionAttributes;
-};
+}

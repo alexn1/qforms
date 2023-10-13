@@ -9,7 +9,7 @@ export interface ReactComponentProps {
     disabled: boolean;
     onCreate: any;
     onUnmount: any;
-    ctrl: Controller
+    ctrl: Controller;
 }
 
 export interface ReactComponentState {

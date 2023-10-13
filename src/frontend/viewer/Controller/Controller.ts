@@ -22,7 +22,7 @@ export abstract class Controller extends EventEmitter {
     }
 
     getView() {
-        if (!this.view) throw new Error('no view')
+        if (!this.view) throw new Error('no view');
         return this.view;
     }
 

@@ -36,4 +36,3 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView<RowFormCheckB
         return <div className={this.getCssClassNames()}>{this.renderCheckBoxList()}</div>;
     }
 }
-

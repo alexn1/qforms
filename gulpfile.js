@@ -1,5 +1,5 @@
 // build
-module.exports['build-dev'] = require('./gulp/build-dev');
+module.exports['build-dev'] = require('./task/build-dev');
 module.exports['build-prod'] = require('./gulp/build-prod');
 
 // release/deploy

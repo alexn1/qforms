@@ -13,8 +13,8 @@
         "webpack-front-index": "NODE_ENV=dev webpack --config webpack.config.index.js",
         "webpack-front-monitor": "NODE_ENV=dev webpack --config webpack.config.monitor.js",
         "webpack-front-viewer": "NODE_ENV=dev webpack --config webpack.config.viewer.js",
-        "build": "npx gulp build-dev",
-        "build:prod": "npx gulp build-prod",
+        "build": "gulp build-dev",
+        "build:prod": "gulp build-prod",
         "start": "NODE_ENV=dev node dist/start.js",
         "start:sample": "NODE_ENV=dev bun apps-ts/sample/start.ts",
         "start:apps": "NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js",
@@ -24,9 +24,9 @@
         "test:debug": "QFORMS_LOG_LEVEL=debug jest --runInBand",
         "test:path": "jest --runTestsByPath",
         "test:cov": "jest --coverage",
-        "docker:build": "npx gulp docker-build",
-        "docker:run": "npx gulp docker-run",
-        "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\""
+        "docker:build": "gulp docker-build",
+        "docker:run": "gulp docker-run",
+        "prettier:write": "prettier --write \"src/**/*.{ts,tsx,less}\""
     },
     "dependencies": {
         "body-parser": "^1.19.1",
