@@ -1,7 +1,7 @@
 /// <reference types="express-session" />
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Action, Nullable, Optional } from '../types';
+import { Action, Nullable, Optional, Scalar } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 export type RequestEx = Request & {
@@ -23,7 +23,7 @@ export declare class Context {
         [name: string]: any;
     };
     constructor(options?: ContextOptions);
-    getQueryParams(): Record<string, any>;
+    getQueryParams(): Record<string, Nullable<Scalar>>;
     getBodyParams(): Record<string, any>;
     getRoute(): string;
     getVirtualPath(): string;

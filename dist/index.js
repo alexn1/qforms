@@ -9336,6 +9336,7 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
         response.newMode = BkPage.getNewModeFromContext(context);
+        response.params = context.getQueryParams();
         return response;
     }
     static getNewModeFromContext(context) {

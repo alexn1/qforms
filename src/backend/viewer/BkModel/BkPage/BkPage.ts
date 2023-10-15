@@ -48,6 +48,7 @@ export class BkPage<
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'forms', context);
         response.newMode = BkPage.getNewModeFromContext(context);
+        response.params = context.getQueryParams();
         return response;
     }
 

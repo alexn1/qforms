@@ -1,6 +1,6 @@
 import { ParsedQs } from 'qs';
 import { Request, Response } from 'express';
-import { Action, JSONString, Nullable, Optional } from '../types';
+import { Action, JSONString, Nullable, Optional, Scalar } from '../types';
 import { ServerUser } from './viewer';
 import { Session } from './Session';
 import { LogLevel, pConsole } from '../pConsole';
@@ -52,7 +52,7 @@ export class Context {
         } */
     }
 
-    getQueryParams(): Record<string, any> {
+    getQueryParams(): Record<string, Nullable<Scalar>> {
         // pConsole.debug('getQueryParams:', this.getReq()?.query?.params);
         const req = this.getReq();
         const action = this.getAction();

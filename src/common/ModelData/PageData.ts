@@ -1,5 +1,6 @@
 import { ModelData } from './ModelData';
 import { FormData } from './FormData';
+import { Nullable, Scalar } from '../../types';
 
 export interface PageData extends ModelData {
     caption: string;
@@ -8,6 +9,6 @@ export interface PageData extends ModelData {
     ctrlClass: string;
     newMode: boolean;
     formInTab: string;
-
+    params: Record<string, Nullable<Scalar>>;
     forms: FormData[];
 }
