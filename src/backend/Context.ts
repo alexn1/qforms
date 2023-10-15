@@ -33,8 +33,6 @@ export class Context {
         [name: string]: any;
     } = {}; */
 
-    // querytimeParams: Record<string, any> = {}; // for runtime query params
-
     constructor(public options: ContextOptions = {}) {
         // debug('Context', options);
 
@@ -128,7 +126,6 @@ export class Context {
             ...this.getCookies(),
             ...this.getQuery(),
             ...this.params,
-            // ...this.querytimeParams,
             ...(user ? { userId: user.id, userName: user.name } : {}),
             ...(timeOffset !== null ? { timeOffset } : {}),
         };
