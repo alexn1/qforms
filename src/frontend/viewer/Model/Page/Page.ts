@@ -71,9 +71,9 @@ export class Page extends Model<PageData> {
         }
     }
 
-    /*getId() {
+    /* getId() {
         return this.options.id;
-    }*/
+    } */
 
     getParams() {
         return {
@@ -171,7 +171,7 @@ export class Page extends Model<PageData> {
         return !!this.options.modal;
     }
 
-    onFormInsert(e) {
+    onFormInsert(e: any) {
         debug('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key); // key params to page params
