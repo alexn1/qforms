@@ -69,6 +69,7 @@ describe('SampleBackHostApp', () => {
             ctrlClass: '',
             formInTab: 'false',
             newMode: false,
+            params: { key: 1 },
         });
     });
 
