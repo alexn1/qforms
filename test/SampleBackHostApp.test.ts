@@ -75,7 +75,7 @@ describe('SampleBackHostApp', () => {
 
     describe('crud', () => {
         const UUID = BkHelper.newClientId();
-        let row = {
+        const row = {
             created: new Date(),
             updated: new Date(),
             first_name: 'first',
