@@ -185,7 +185,7 @@ export class FrontHostApp {
         return path;
     }
 
-    getOptions() {
+    getOptions(): FrontHostAppOptions {
         if (!this.options) {
             throw new Error('no options');
         }

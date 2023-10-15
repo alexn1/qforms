@@ -95,7 +95,7 @@ export class PageController<
         window.open(link, '_blank');
     };
 
-    createOpenInNewLink(pageName: string, key: Key) {
+    createOpenInNewLink(pageName: string, key: Key): string {
         return this.getApp()
             .getHostApp()
             .createLink({
