@@ -24,7 +24,7 @@ export interface PageActionDto extends BaseDto {
 }
 
 export interface PageActionQuery extends ParsedQs {
-    action: string;
+    action: Action;
     page: string;
     newMode?: JSONString<boolean>;
     params?: Record<string, JSONString<Nullable<Scalar>>>;
@@ -35,11 +35,11 @@ export interface PageActionResponse {
 }
 
 export interface ReadActionQuery extends ParsedQs {
-    action: string;
+    action: Action;
     page?: string;
     form?: string;
     ds: string;
-    params?: Record<string, JSONString<any>>;
+    params?: Record<string, JSONString<Nullable<Scalar>>>;
 }
 
 export interface ReadActionResponse {
@@ -85,10 +85,10 @@ export interface CreateAppDto {
 }
 
 export function createReadQuery(
-    page: string,
-    form: string,
+    page: string | undefined,
+    form: string | undefined,
     ds: string,
-    params?: Record<string, any>,
+    params?: Record<string, Nullable<Scalar>>,
 ): Query {
     const query: ReadActionQuery = {
         action: Action.read,

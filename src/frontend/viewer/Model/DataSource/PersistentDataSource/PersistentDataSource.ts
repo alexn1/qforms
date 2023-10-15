@@ -2,7 +2,7 @@ import { DataSource } from '../DataSource';
 import { Key, Query, RawRow, Action, Scalar, Nullable } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
-import { Helper } from '../../../../common';
+import { Helper, createReadQuery } from '../../../../common';
 import {
     DeleteActionDto,
     ReadActionResponse,
@@ -247,21 +247,20 @@ export class PersistentDataSource extends DataSource {
         await this.fill(this.lastFrame);
     }
 
-    async select(params: Record<string, any> = {}): Promise<ReadActionResponse> {
+    async select(params: Record<string, Nullable<Scalar>> = {}): Promise<ReadActionResponse> {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
 
-        const query: ReadActionQuery = {
-            action: Action.read,
-            page: page ? page.getName() : undefined,
-            form: form ? form.getName() : undefined,
-            ds: this.getName(),
-            params: Helper.encodeObject({
+        const query = createReadQuery(
+            page ? page.getName() : undefined,
+            form ? form.getName() : undefined,
+            this.getName(),
+            Helper.encodeObject({
                 ...this.getPageParams(),
                 ...params,
             }),
-        };
+        );
         const response = (await this.getApp().request2(
             'GET',
             `${window.location.pathname}?${Helper.queryToString(query as Query)}`,

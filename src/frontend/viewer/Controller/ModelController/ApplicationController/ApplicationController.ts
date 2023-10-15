@@ -1,4 +1,4 @@
-import { JSONString, Key, Nullable, Query } from '../../../../../types';
+import { Action, JSONString, Key, Nullable, Query } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -159,16 +159,8 @@ export class ApplicationController extends ModelController<Application> {
             return pageController;
         }
 
-        /* const body: PageActionDto = {
-            action: 'page',
-            page: options.name,
-            newMode: !!options.newMode,
-            params: options.params,
-        };
-        const { page: pageData } = await this.getModel().request('POST', body); */
-
         const query: PageActionQuery = {
-            action: 'page',
+            action: Action.page,
             page: options.name,
             newMode:
                 options.newMode !== undefined

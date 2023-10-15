@@ -15,6 +15,6 @@ export declare class PersistentDataSource extends DataSource {
     refill(): Promise<void>;
     fill(frame: number): Promise<void>;
     more(): Promise<void>;
-    select(params?: Record<string, any>): Promise<ReadActionResponse>;
+    select(params?: Record<string, Nullable<Scalar>>): Promise<ReadActionResponse>;
     isPersistent(): boolean;
 }

@@ -36406,12 +36406,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ApplicationController": () => (/* binding */ ApplicationController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
-/* harmony import */ var _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
-/* harmony import */ var _ApplicationView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
-/* harmony import */ var _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../types */ "./src/types.ts");
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _Model_Page_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
+/* harmony import */ var _ApplicationView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
+/* harmony import */ var _WebSocketClient__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
 
 
 
@@ -36419,7 +36420,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+
+class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.ModelController {
     constructor(model, frontHostApp) {
         super(model);
         this.frontHostApp = frontHostApp;
@@ -36479,7 +36481,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     static create(model, frontHostApp) {
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.getGlobalClass(ctrlClass);
+            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_5__.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, frontHostApp);
@@ -36503,10 +36505,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         super.deinit();
     }
     getViewClass() {
-        return super.getViewClass() || _ApplicationView__WEBPACK_IMPORTED_MODULE_2__.ApplicationView;
+        return super.getViewClass() || _ApplicationView__WEBPACK_IMPORTED_MODULE_3__.ApplicationView;
     }
     createView(rootElement) {
-        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.ReactHelper.createReactComponent2(rootElement, this.getViewClass(), {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_5__.ReactHelper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });
@@ -36530,9 +36532,9 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     createPage(pageData, options) {
         if (options.modal === undefined)
             throw new Error('no options.modal');
-        const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page(pageData, this.getModel(), options);
+        const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page(pageData, this.getModel(), options);
         pageModel.init();
-        const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController.create(pageModel, this, `c${this.getNextId()}`);
+        const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__.PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
         return pc;
     }
@@ -36546,16 +36548,16 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             return pageController;
         }
         const query = {
-            action: 'page',
+            action: _types__WEBPACK_IMPORTED_MODULE_0__.Action.page,
             page: options.name,
             newMode: options.newMode !== undefined
-                ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeValue(options.newMode)
+                ? _common__WEBPACK_IMPORTED_MODULE_5__.Helper.encodeValue(options.newMode)
                 : undefined,
             params: options.params
-                ? _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(options.params)
+                ? _common__WEBPACK_IMPORTED_MODULE_5__.Helper.encodeObject(options.params)
                 : undefined,
         };
-        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_4__.Helper.queryToString(query)}`));
+        const { page: pageData } = (await this.getModel().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_5__.Helper.queryToString(query)}`));
         if (options.modal === undefined) {
             options.modal = true;
         }
@@ -36679,7 +36681,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         if (this.activePage)
             this.activePage.invalidate();
         this.modals
-            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController)
+            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_6__.PageController)
             .forEach((page) => page.invalidate());
     }
     async alert(options) {
@@ -36730,7 +36732,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     }
     async connect() {
         const data = this.getModel().getData();
-        this.webSocketClient = new _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__.WebSocketClient({
+        this.webSocketClient = new _WebSocketClient__WEBPACK_IMPORTED_MODULE_4__.WebSocketClient({
             applicationController: this,
             protocol: window.location.protocol === 'https:' ? 'wss' : 'ws',
             route: data.route,
@@ -36753,7 +36755,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return this.getModel().getData().nodeEnv === 'dev';
     }
 }
-_common__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(ApplicationController);
+_common__WEBPACK_IMPORTED_MODULE_5__.Helper.registerGlobalClass(ApplicationController);
 
 
 /***/ }),
@@ -41703,13 +41705,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const query = {
-            action: _types__WEBPACK_IMPORTED_MODULE_1__.Action.read,
-            page: page ? page.getName() : undefined,
-            form: form ? form.getName() : undefined,
-            ds: this.getName(),
-            params: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)),
-        };
+        const query = (0,_common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)(page ? page.getName() : undefined, form ? form.getName() : undefined, this.getName(), _common__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)));
         const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_3__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');
