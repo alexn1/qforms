@@ -8,5 +8,5 @@ test('queryToString', () => {
         ds: 'default',
         params: {},
     });
-    console.log(queryString);
+    expect(queryString).toBe('action=read&page=Company&form=Company&ds=default');
 });

@@ -126,7 +126,12 @@ export class Helper {
     static queryToString(query: Query) {
         pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
-            .filter((name: keyof Query) => query[name] !== undefined)
+            .filter((name: keyof Query) => {
+                if (typeof query[name] === 'object' && query[name] !== null) {
+                    return Object.keys(query[name]).length > 0;
+                }
+                return query[name] !== undefined;
+            })
             .map((name: keyof Query) => {
                 const value = query[name];
                 if (typeof value === 'string') {
