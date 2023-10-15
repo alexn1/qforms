@@ -149,11 +149,9 @@ export class ApplicationController extends ModelController<Application> {
     async openPage(options: OpenPageOptions): Promise<PageController> {
         console.debug('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
-        // if (options.key) throw new Error('openPage: key param is deprecated');
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
-        // console.debug('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
             return pageController;
@@ -191,7 +189,6 @@ export class ApplicationController extends ModelController<Application> {
             };
         }
         const pc = this.createPage(pageData, options);
-        // console.debug('pc:', pc);
 
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
