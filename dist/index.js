@@ -1522,17 +1522,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Context": () => (/* binding */ Context)
 /* harmony export */ });
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types */ "./src/types.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _decorators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../decorators */ "./src/decorators.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -1544,9 +1542,9 @@ class Context {
     }
     getQueryParams() {
         const req = this.getReq();
-        const action = this.getAction();
-        if (req && action && [_types__WEBPACK_IMPORTED_MODULE_0__.Action.page, _types__WEBPACK_IMPORTED_MODULE_0__.Action.read].includes(action) && req.query.params) {
-            return _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeObject(req.query.params);
+        if (req &&
+            req.query.params) {
+            return _frontend__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeObject(req.query.params);
         }
         return {};
     }
@@ -1604,7 +1602,7 @@ class Context {
     getAllParams() {
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
-        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.getQuery()), this.params), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
+        return Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.params), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
         return this.options.req;
@@ -1707,7 +1705,7 @@ class Context {
     destroy() { }
 }
 __decorate([
-    (0,_decorators__WEBPACK_IMPORTED_MODULE_2__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_1__.LogLevel.debug)
+    (0,_decorators__WEBPACK_IMPORTED_MODULE_1__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_0__.LogLevel.debug)
 ], Context.prototype, "destroy", null);
 
 

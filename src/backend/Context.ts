@@ -53,8 +53,11 @@ export class Context {
     getQueryParams(): Record<string, Nullable<Scalar>> {
         // pConsole.debug('getQueryParams:', this.getReq()?.query?.params);
         const req = this.getReq();
-        const action = this.getAction();
-        if (req && action && [Action.page, Action.read].includes(action) && req.query.params) {
+        // const action = this.getAction();
+        if (
+            req &&
+            req.query.params /* && action && [Action.page, Action.read].includes(action) */
+        ) {
             return Helper.decodeObject(req.query.params as Record<string, JSONString>);
         }
         return {};
@@ -124,7 +127,7 @@ export class Context {
         const timeOffset = this.getTimeOffset();
         return {
             ...this.getCookies(),
-            ...this.getQuery(),
+            // ...this.getQuery(),
             ...this.params,
             ...(user ? { userId: user.id, userName: user.name } : {}),
             ...(timeOffset !== null ? { timeOffset } : {}),
