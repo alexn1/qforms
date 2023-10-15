@@ -10863,7 +10863,12 @@ class Helper {
     static queryToString(query) {
         _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
-            .filter((name) => query[name] !== undefined)
+            .filter((name) => {
+            if (typeof query[name] === 'object' && query[name] !== null) {
+                return Object.keys(query[name]).length > 0;
+            }
+            return query[name] !== undefined;
+        })
             .map((name) => {
             const value = query[name];
             if (typeof value === 'string') {
