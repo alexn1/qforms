@@ -65,7 +65,7 @@ export class ApplicationController extends ModelController<Application> {
         this.activePage = pageData
             ? this.createPage(pageData, {
                   modal: false,
-                  params: this.getGlobalParams(),
+                  //   params: this.getGlobalParams(),
               })
             : null;
         // this.frontHostApp.setDocumentTitle(this.getTitle());

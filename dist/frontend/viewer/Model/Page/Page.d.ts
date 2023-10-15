@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { Form } from '../Form/Form';
-import { Key } from '../../../../types';
+import { Key, Nullable, Scalar } from '../../../../types';
 import { Application } from '../Application/Application';
 export interface PageOptions {
     id?: string;
@@ -9,7 +9,6 @@ export interface PageOptions {
     newMode?: boolean;
     selectMode?: boolean;
     selectedKey?: Key;
-    params?: Record<string, any>;
     onCreate?: (page: Page) => void | Promise<void>;
     onSelect?: (key: Key | null) => void | Promise<void>;
     onClose?: () => void | Promise<void>;
@@ -25,9 +24,7 @@ export declare class Page extends Model<PageData> {
     getOptions(): PageOptions;
     createForms(): void;
     deinitForms(): void;
-    getParams(): {
-        [x: string]: any;
-    };
+    getParams(): Record<string, Nullable<Scalar>>;
     setParam(name: string, value: any): void;
     update(): Promise<void>;
     discard(): void;

@@ -10769,6 +10769,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Helper": () => (/* binding */ Helper)
 /* harmony export */ });
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
+
 class Helper {
     static encodeObject(obj) {
         const eObj = {};
@@ -10859,6 +10861,7 @@ class Helper {
         }, {});
     }
     static queryToString(query) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
             .filter((name) => query[name] !== undefined)
             .map((name) => {
@@ -15145,7 +15148,6 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         this.activePage = pageData
             ? this.createPage(pageData, {
                 modal: false,
-                params: this.getGlobalParams(),
             })
             : null;
         const activePageName = this.getActivePageName();
@@ -21628,7 +21630,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     getParams() {
-        return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
+        return Object.assign(Object.assign({}, this.getData().params), this.params);
     }
     setParam(name, value) {
         this.params[name] = value !== undefined ? value : null;

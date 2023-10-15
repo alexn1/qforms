@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import { Key, Query, RawRow, Action } from '../../../../../types';
+import { Key, Query, RawRow, Action, Scalar, Nullable } from '../../../../../types';
 import { Result } from '../../../../../Result';
 import { Form } from '../../Form/Form';
 import { Helper } from '../../../../common';
@@ -210,7 +210,7 @@ export class PersistentDataSource extends DataSource {
         this.emit('refresh', e);
     };
 
-    getPageParams(): Record<string, any> {
+    getPageParams(): Record<string, Nullable<Scalar>> {
         const page = this.getPage();
         return page ? page.getParams() : {};
     }

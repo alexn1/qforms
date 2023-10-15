@@ -1,3 +1,4 @@
+import { pConsole } from '../../pConsole';
 import { JSONString, Query, QueryRecord, KeyTuple, Key } from '../../types';
 
 export class Helper {
@@ -123,7 +124,7 @@ export class Helper {
     }
 
     static queryToString(query: Query) {
-        // pConsole.debug('Helper.queryToString', query);
+        pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
             .filter((name: keyof Query) => query[name] !== undefined)
             .map((name: keyof Query) => {

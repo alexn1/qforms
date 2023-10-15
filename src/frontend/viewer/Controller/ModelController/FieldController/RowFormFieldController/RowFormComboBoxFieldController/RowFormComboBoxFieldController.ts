@@ -63,7 +63,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         }
     };
 
-    onCreateButtonClick = async (e) => {
+    onCreateButtonClick = async (e: any) => {
         console.debug('RowFormComboBoxFieldController.onCreateButtonClick');
         const newRowMode = this.getModel().getAttr('newRowMode');
         const itemCreateForm = this.getModel().getAttr('itemCreateForm');

@@ -156,10 +156,9 @@ export class TableFormController extends FormController<TableForm> {
             const result = await this.getModel().getDefaultDataSource().insert(row);
             const database = this.getModel().getDefaultDataSource().getAttr('database');
             const table = this.getModel().getDefaultDataSource().getAttr('table');
-            const [key] = result[database][table].insert;
+            const [key] = result[database][table].insert as [Key];
             await this.openPage({
                 name: this.getModel().getAttr('itemEditPage'),
-                // key  : key,
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key),

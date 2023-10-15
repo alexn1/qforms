@@ -4,7 +4,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
-import { Action, Key } from '../../../../types';
+import { Action, Key, Nullable, Scalar } from '../../../../types';
 import { Application } from '../Application/Application';
 import { debug } from '../../../../console';
 import { RpcActionDto } from '../../../common';
@@ -15,7 +15,7 @@ export interface PageOptions {
     newMode?: boolean;
     selectMode?: boolean;
     selectedKey?: Key;
-    params?: Record<string, any>;
+    // params?: Record<string, any>;
     onCreate?: (page: Page) => void | Promise<void>;
     onSelect?: (key: Key | null) => void | Promise<void>;
     onClose?: () => void | Promise<void>;
@@ -75,9 +75,10 @@ export class Page extends Model<PageData> {
         return this.options.id;
     } */
 
-    getParams() {
+    getParams(): Record<string, Nullable<Scalar>> {
         return {
-            ...(this.options.params || {}),
+            // ...(this.options.params || {}),
+            ...this.getData().params,
             ...this.params,
         };
     }
