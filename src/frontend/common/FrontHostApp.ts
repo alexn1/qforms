@@ -176,25 +176,11 @@ export class FrontHostApp {
         return this.documentTitle;
     }
 
-    /* isDebugMode(): boolean {
-        if (typeof window === 'object') {
-            return Search.getObj()['debug'] === '1';
-        } else {
-            return this.getOptions().debug;
-        }
-    } */
-
-    createLink(params: { [name: string]: any } | null = null): string {
+    createLink(query?: Query): string {
         const path =
             typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
-        if (params) {
-            return [
-                path,
-                [
-                    // ...(this.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+        if (query) {
+            return [path, Helper.queryToString(query)].join('?');
         }
         return path;
     }

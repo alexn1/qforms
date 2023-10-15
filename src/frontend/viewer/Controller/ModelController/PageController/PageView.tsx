@@ -23,6 +23,37 @@ export class PageView<
         this.el = React.createRef();
     }
 
+    render() {
+        debug('PageView.render', this.getCtrl().getModel().getFullName());
+        return (
+            <div
+                className={`${this.getCssClassNames()} ${
+                    this.getCtrl().isModal() ? '' : 'full'
+                } flex-column`}
+                style={this.getStyle()}
+                ref={this.el}
+                tabIndex={0}
+                onKeyDown={this.getCtrl().onKeyDown}>
+                {this.renderHeader()}
+                {this.renderMain()}
+                {this.getCtrl().isModal() && this.renderFooter()}
+            </div>
+        );
+    }
+
+    renderHeader() {
+        const model = this.getCtrl().getModel();
+        return (
+            <div className={`${this.getCssBlockName()}__header`}>
+                {this.renderTitle()}
+                {model.isModal() && [
+                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
+                    this.renderClosePageHeaderButton(),
+                ]}
+            </div>
+        );
+    }
+
     onActionsClick = async (li) => {
         // debug('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
@@ -41,8 +72,8 @@ export class PageView<
     isToolbar() {
         const model = this.getCtrl().getModel();
         return model.hasActions();
-        //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
-        //|| model.isSelectMode();
+        // || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+        // || model.isSelectMode();
     }
 
     getFormTabs(forms) {
@@ -210,19 +241,6 @@ export class PageView<
         );
     }
 
-    renderHeader() {
-        const model = this.getCtrl().getModel();
-        return (
-            <div className={`${this.getCssBlockName()}__header`}>
-                {this.renderTitle()}
-                {model.isModal() && [
-                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
-                    this.renderClosePageHeaderButton(),
-                ]}
-            </div>
-        );
-    }
-
     renderMain() {
         return (
             <div className={`${this.getCssBlockName()}__main flex-max frame`}>
@@ -262,24 +280,6 @@ export class PageView<
                     model.hasRowFormWithDefaultSqlDataSource() &&
                     this.renderSaveAndCloseButton()}
                 {model.isSelectMode() && this.renderSelectButton()}
-            </div>
-        );
-    }
-
-    render() {
-        debug('PageView.render', this.getCtrl().getModel().getFullName());
-        return (
-            <div
-                className={`${this.getCssClassNames()} ${
-                    this.getCtrl().isModal() ? '' : 'full'
-                } flex-column`}
-                style={this.getStyle()}
-                ref={this.el}
-                tabIndex={0}
-                onKeyDown={this.getCtrl().onKeyDown}>
-                {this.renderHeader()}
-                {this.renderMain()}
-                {this.getCtrl().isModal() && this.renderFooter()}
             </div>
         );
     }

@@ -124,7 +124,7 @@ export class Helper {
     }
 
     static queryToString(query: Query) {
-        pConsole.debug('Helper.queryToString', query);
+        // pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
             .filter((name: keyof Query) => {
                 if (typeof query[name] === 'object' && query[name] !== null) {

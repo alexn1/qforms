@@ -10704,15 +10704,10 @@ class FrontHostApp {
         }
         return this.documentTitle;
     }
-    createLink(params = null) {
+    createLink(query) {
         const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
-        if (params) {
-            return [
-                path,
-                [
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+        if (query) {
+            return [path, _Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)].join('?');
         }
         return path;
     }
@@ -10769,8 +10764,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Helper": () => (/* binding */ Helper)
 /* harmony export */ });
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-
 class Helper {
     static encodeObject(obj) {
         const eObj = {};
@@ -10861,7 +10854,6 @@ class Helper {
         }, {});
     }
     static queryToString(query) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
             .filter((name) => {
             if (typeof query[name] === 'object' && query[name] !== null) {
@@ -18981,7 +18973,10 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.Model
     createOpenInNewLink(pageName, key) {
         return this.getApp()
             .getHostApp()
-            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
+            .createLink({
+            page: pageName,
+            params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)),
+        });
     }
     async close() {
         const changed = this.isChanged();
@@ -19167,6 +19162,17 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         this.checkParent();
         this.el = react__WEBPACK_IMPORTED_MODULE_1___default().createRef();
     }
+    render() {
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('PageView.render', this.getCtrl().getModel().getFullName());
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
+    }
+    renderHeader() {
+        const model = this.getCtrl().getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [this.renderTitle(), model.isModal() && [
+                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
+                    this.renderClosePageHeaderButton(),
+                ]] })));
+    }
     isToolbar() {
         const model = this.getCtrl().getModel();
         return model.hasActions();
@@ -19245,13 +19251,6 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }), 'close'));
     }
-    renderHeader() {
-        const model = this.getCtrl().getModel();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [this.renderTitle(), model.isModal() && [
-                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
-                    this.renderClosePageHeaderButton(),
-                ]] })));
-    }
     renderMain() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.getCtrl().getModel().isFormInTab()
                         ? this.renderForms2()
@@ -19272,10 +19271,6 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [this.renderCloseButton(), model.isModal() &&
                     model.hasRowFormWithDefaultSqlDataSource() &&
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
-    }
-    render() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('PageView.render', this.getCtrl().getModel().getFullName());
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {
         if (this.getCtrl().isModal()) {

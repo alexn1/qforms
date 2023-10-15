@@ -31883,15 +31883,10 @@ class FrontHostApp {
         }
         return this.documentTitle;
     }
-    createLink(params = null) {
+    createLink(query) {
         const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
-        if (params) {
-            return [
-                path,
-                [
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+        if (query) {
+            return [path, _Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.queryToString(query)].join('?');
         }
         return path;
     }
@@ -31947,8 +31942,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Helper": () => (/* binding */ Helper)
 /* harmony export */ });
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
-
 class Helper {
     static encodeObject(obj) {
         const eObj = {};
@@ -32039,7 +32032,6 @@ class Helper {
         }, {});
     }
     static queryToString(query) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('Helper.queryToString', query);
         return Object.keys(query)
             .filter((name) => {
             if (typeof query[name] === 'object' && query[name] !== null) {

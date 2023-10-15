@@ -1,4 +1,4 @@
-import { Key, keyToKeyTuple } from '../../../../../types';
+import { Key, Query, keyToKeyTuple } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Helper } from '../../../../common/Helper';
 import { FormController } from '../FormController/FormController';
@@ -100,8 +100,10 @@ export class PageController<
             .getHostApp()
             .createLink({
                 page: pageName,
-                ...DataSource.keyToParams(key),
-            });
+                params: {
+                    ...DataSource.keyToParams(key),
+                },
+            } as Query);
     }
 
     async close(): Promise<void> {

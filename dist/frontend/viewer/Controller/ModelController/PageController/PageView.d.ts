@@ -5,6 +5,8 @@ import { FormController } from '../FormController/FormController';
 import './PageView.less';
 export declare class PageView<TPageController extends PageController = PageController> extends ModelView<TPageController> {
     constructor(props: any);
+    render(): JSX.Element;
+    renderHeader(): JSX.Element;
     onActionsClick: (li: any) => Promise<void>;
     isToolbar(): boolean;
     getFormTabs(forms: any): any;
@@ -21,12 +23,10 @@ export declare class PageView<TPageController extends PageController = PageContr
     renderTableForms(): any;
     renderOpenPageHeaderButton(): JSX.Element;
     renderClosePageHeaderButton(): JSX.Element;
-    renderHeader(): JSX.Element;
     renderMain(): JSX.Element;
     renderForms(): any;
     renderForms2(): JSX.Element;
     renderFooter(): JSX.Element;
-    render(): JSX.Element;
     getStyle(): {
         width: number;
         height: number;

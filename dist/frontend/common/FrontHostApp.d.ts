@@ -1,3 +1,4 @@
+import { Query } from '../../types';
 export interface FrontHostAppOptions {
     url: URL;
     cookies: {
@@ -46,9 +47,7 @@ export declare class FrontHostApp {
     }): Promise<boolean>;
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
-    createLink(params?: {
-        [name: string]: any;
-    } | null): string;
+    createLink(query?: Query): string;
     getOptions(): FrontHostAppOptions;
     filterSearch(...names: string[]): string;
     getSearchParams(): any;
