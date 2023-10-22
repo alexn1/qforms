@@ -3,6 +3,7 @@ import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { pConsole } from '../pConsole';
 import { Nullable, Scalar, Route } from '../types';
+import { Helper } from '../frontend';
 
 export type ExpressMethod = 'get' | 'post' | 'patch' | 'delete';
 
@@ -141,8 +142,9 @@ export class Router {
                 if (query) {
                     const params = BackHostApp.getQueryFromParams(req, query);
                     for (const name in params) {
-                        if (!req.query[name]) {
-                            req.query[name] = params[name];
+                        if (!req.query.params) req.query.params = {};
+                        if (!req.query.params[name]) {
+                            req.query.params[name] = Helper.encodeValue(params[name]);
                         }
                     }
                 }

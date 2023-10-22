@@ -2060,6 +2060,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BackHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackHostApp */ "./src/backend/BackHostApp.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
+
 
 
 
@@ -2161,8 +2163,11 @@ class Router {
             if (query) {
                 const params = _BackHostApp__WEBPACK_IMPORTED_MODULE_1__.BackHostApp.getQueryFromParams(req, query);
                 for (const name in params) {
-                    if (!req.query[name]) {
-                        req.query[name] = params[name];
+                    if (!req.query.params) {
+                        req.query.params = {};
+                    }
+                    if (!req.query.params[name]) {
+                        req.query.params[name] = _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeValue(params[name]);
                     }
                 }
             }
