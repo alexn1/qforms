@@ -17,41 +17,41 @@ import {
 } from '../dist';
 import { SampleBackHostApp } from '../apps-ts/sample';
 import { HttpClient } from './core/HttpClient';
-import { createDatabase, restartLocalDb, sleep, query } from './core/helper';
+import { createDatabase, restartLocalDb, query } from './core/helper';
 
-describe('SampleBackHostApp', () => {
-    let app: SampleBackHostApp;
-    let httpServer: Server;
-    let httpClient: HttpClient;
+let app: SampleBackHostApp;
+let httpServer: Server;
+let httpClient: HttpClient;
+
+beforeAll(async () => {
+    await restartLocalDb();
+    await createDatabase('demo');
+    await query(
+        'demo',
+        `create table person (
+            id serial NOT NULL,
+            created timestamptz,
+            updated timestamptz,
+            first_name varchar(255),
+            last_name varchar(255)
+        )`,
+    );
+    process.env.PORT = '5433';
+    app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
+    await app.init();
+    httpServer = app.getHttpServer();
+    httpClient = new HttpClient(httpServer);
+}, 20000);
+
+afterAll(async () => {
+    await app.shutdown();
+});
+
+describe('Person', () => {
     const PATHNAME = '/viewer/sample/sample/local/domain/';
     const PAGE = 'Person';
-    const FORM = 'Person';
 
-    beforeAll(async () => {
-        await restartLocalDb();
-        await createDatabase('demo');
-        await query(
-            'demo',
-            `create table person (
-                id serial NOT NULL,
-                created timestamptz,
-                updated timestamptz,
-                first_name varchar(255),
-                last_name varchar(255)
-            )`,
-        );
-        process.env.PORT = '5433';
-        app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
-        await app.init();
-        httpServer = app.getHttpServer();
-        httpClient = new HttpClient(httpServer);
-    }, 20000);
-
-    afterAll(async () => {
-        await app.shutdown();
-    });
-
-    test('page action', async () => {
+    test('page', async () => {
         const { status, body } = await httpClient.get(
             `${PATHNAME}?action=${Action.page}&page=${PAGE}&params[key]=1`,
         );
@@ -74,6 +74,7 @@ describe('SampleBackHostApp', () => {
     });
 
     describe('crud', () => {
+        const FORM = 'Person';
         const UUID = BkHelper.newClientId();
         const row = {
             created: new Date(),
@@ -140,5 +141,14 @@ describe('SampleBackHostApp', () => {
             const result: Result = body;
             expect(result.default.person.delete).toEqual([key]);
         });
+    });
+});
+
+describe('Page1', () => {
+    test('index', async () => {
+        const { status, text } = await httpClient.get('/page/Page1/100-some-title');
+        expect(status).toBe(200);
+        expect(typeof text).toBe('string');
+        expect(text.length).toBe(text.length);
     });
 });
