@@ -4,6 +4,14 @@ A fullstack framework/platform based on Express and React for building Web UI fo
 
 Supports MySql, Postgres, MongoDB.
 
+## Demo database
+
+```bash
+cd db/postgres
+./docker.create.sh
+./docker.restore.sh
+```
+
 ## CLI Options
 
 ```bash
