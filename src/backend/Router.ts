@@ -3,9 +3,14 @@ import colors from 'colors/safe';
 import { BackHostApp } from './BackHostApp';
 import { pConsole } from '../pConsole';
 import { Nullable, Scalar, Route } from '../types';
-import { Helper } from '../frontend';
 
 export type ExpressMethod = 'get' | 'post' | 'patch' | 'delete';
+
+export type CustomRoute = [
+    path: string | RegExp,
+    route: Route,
+    options?: Record<string, Nullable<Scalar>> | ((req: Request) => void),
+];
 
 export class Router {
     constructor(private hostApp: BackHostApp) {}
@@ -125,7 +130,7 @@ export class Router {
         path: string | RegExp,
         [module, appDirName, appFileName, env, domain]: Route,
         fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete',
-        query?: Record<string, Nullable<Scalar>>,
+        optionsOrCallback?: Record<string, Nullable<Scalar>> | ((req: Request) => void),
     ) {
         this.hostApp
             .getExpress()
@@ -139,13 +144,16 @@ export class Router {
                 if (domain) {
                     req.params.domain = domain;
                 }
-                if (query) {
-                    const params = BackHostApp.getQueryFromParams(req, query);
-                    for (const name in params) {
-                        if (!req.query.params) req.query.params = {};
-                        if (!req.query.params[name]) {
-                            req.query.params[name] = Helper.encodeValue(params[name]);
+                if (optionsOrCallback) {
+                    if (typeof optionsOrCallback !== 'function') {
+                        const params = BackHostApp.getQueryFromParams(req, optionsOrCallback);
+                        for (const name in params) {
+                            if (!req.query[name]) {
+                                req.query[name] = params[name];
+                            }
                         }
+                    } else {
+                        optionsOrCallback(req);
                     }
                 }
                 // @ts-ignore

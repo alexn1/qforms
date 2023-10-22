@@ -644,12 +644,12 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     createCustomRoute(
         path: string | RegExp,
         route: Route,
-        query?: Record<string, Nullable<Scalar>>,
+        optionsOrCallBack?: Record<string, Nullable<Scalar>> | ((req: Request) => void),
     ): void {
-        this.router.alias('get', path, route, 'moduleGet', query);
-        this.router.alias('post', path, route, 'modulePost', query);
-        this.router.alias('patch', path, route, 'modulePatch', query);
-        this.router.alias('delete', path, route, 'moduleDelete', query);
+        this.router.alias('get', path, route, 'moduleGet', optionsOrCallBack);
+        this.router.alias('post', path, route, 'modulePost', optionsOrCallBack);
+        this.router.alias('patch', path, route, 'modulePatch', optionsOrCallBack);
+        this.router.alias('delete', path, route, 'moduleDelete', optionsOrCallBack);
     }
 
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void {

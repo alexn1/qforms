@@ -1267,11 +1267,11 @@ class BackHostApp {
             return acc;
         }, {});
     }
-    createCustomRoute(path, route, query) {
-        this.router.alias('get', path, route, 'moduleGet', query);
-        this.router.alias('post', path, route, 'modulePost', query);
-        this.router.alias('patch', path, route, 'modulePatch', query);
-        this.router.alias('delete', path, route, 'moduleDelete', query);
+    createCustomRoute(path, route, optionsOrCallBack) {
+        this.router.alias('get', path, route, 'moduleGet', optionsOrCallBack);
+        this.router.alias('post', path, route, 'modulePost', optionsOrCallBack);
+        this.router.alias('patch', path, route, 'modulePatch', optionsOrCallBack);
+        this.router.alias('delete', path, route, 'moduleDelete', optionsOrCallBack);
     }
     broadcastResult(sourceApplication, context, result) {
         (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.broadcastResult');
@@ -2060,8 +2060,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _BackHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BackHostApp */ "./src/backend/BackHostApp.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../frontend */ "./src/frontend/index.ts");
-
 
 
 
@@ -2148,7 +2146,7 @@ class Router {
             next();
         }
     }
-    alias(method, path, [module, appDirName, appFileName, env, domain], fn, query) {
+    alias(method, path, [module, appDirName, appFileName, env, domain], fn, optionsOrCallback) {
         this.hostApp
             .getExpress()[method](path, async (req, res, next) => {
             req.params.module = module;
@@ -2160,15 +2158,17 @@ class Router {
             if (domain) {
                 req.params.domain = domain;
             }
-            if (query) {
-                const params = _BackHostApp__WEBPACK_IMPORTED_MODULE_1__.BackHostApp.getQueryFromParams(req, query);
-                for (const name in params) {
-                    if (!req.query.params) {
-                        req.query.params = {};
+            if (optionsOrCallback) {
+                if (typeof optionsOrCallback !== 'function') {
+                    const params = _BackHostApp__WEBPACK_IMPORTED_MODULE_1__.BackHostApp.getQueryFromParams(req, optionsOrCallback);
+                    for (const name in params) {
+                        if (!req.query[name]) {
+                            req.query[name] = params[name];
+                        }
                     }
-                    if (!req.query.params[name]) {
-                        req.query.params[name] = _frontend__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeValue(params[name]);
-                    }
+                }
+                else {
+                    optionsOrCallback(req);
                 }
             }
             await this[fn](req, res, next);
@@ -5467,93 +5467,94 @@ function fsUnlink(filePath) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ActionEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ActionEditor),
-/* harmony export */   "ActionEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ActionEditorController),
-/* harmony export */   "ApplicationEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ApplicationEditor),
-/* harmony export */   "ApplicationEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ApplicationEditorController),
+/* harmony export */   "ActionEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ActionEditor),
+/* harmony export */   "ActionEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ActionEditorController),
+/* harmony export */   "ApplicationEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ApplicationEditor),
+/* harmony export */   "ApplicationEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ApplicationEditorController),
 /* harmony export */   "BackHostApp": () => (/* reexport safe */ _BackHostApp__WEBPACK_IMPORTED_MODULE_3__.BackHostApp),
 /* harmony export */   "BaseModel": () => (/* reexport safe */ _BaseModel__WEBPACK_IMPORTED_MODULE_2__.BaseModel),
-/* harmony export */   "BkAction": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkAction),
-/* harmony export */   "BkApplication": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkApplication),
-/* harmony export */   "BkCheckBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkCheckBoxField),
-/* harmony export */   "BkCheckBoxListField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkCheckBoxListField),
-/* harmony export */   "BkColumn": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkColumn),
-/* harmony export */   "BkComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkComboBoxField),
-/* harmony export */   "BkDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkDataSource),
-/* harmony export */   "BkDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkDatabase),
-/* harmony export */   "BkDateField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkDateField),
-/* harmony export */   "BkDateTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkDateTimeField),
-/* harmony export */   "BkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkField),
-/* harmony export */   "BkFileField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkFileField),
-/* harmony export */   "BkForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkForm),
+/* harmony export */   "BkAction": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkAction),
+/* harmony export */   "BkApplication": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkApplication),
+/* harmony export */   "BkCheckBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkCheckBoxField),
+/* harmony export */   "BkCheckBoxListField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkCheckBoxListField),
+/* harmony export */   "BkColumn": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkColumn),
+/* harmony export */   "BkComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkComboBoxField),
+/* harmony export */   "BkDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkDataSource),
+/* harmony export */   "BkDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkDatabase),
+/* harmony export */   "BkDateField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkDateField),
+/* harmony export */   "BkDateTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkDateTimeField),
+/* harmony export */   "BkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkField),
+/* harmony export */   "BkFileField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkFileField),
+/* harmony export */   "BkForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkForm),
 /* harmony export */   "BkHelper": () => (/* reexport safe */ _BkHelper__WEBPACK_IMPORTED_MODULE_0__.BkHelper),
-/* harmony export */   "BkImageField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkImageField),
-/* harmony export */   "BkLabelField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkLabelField),
-/* harmony export */   "BkLinkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkLinkField),
-/* harmony export */   "BkModel": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkModel),
-/* harmony export */   "BkMongoDbDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkMongoDbDatabase),
-/* harmony export */   "BkMySqlDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkMySqlDatabase),
-/* harmony export */   "BkNoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkNoSqlDataSource),
-/* harmony export */   "BkPage": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkPage),
-/* harmony export */   "BkPageLink": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkPageLink),
-/* harmony export */   "BkParam": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkParam),
-/* harmony export */   "BkPasswordField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkPasswordField),
-/* harmony export */   "BkPhoneField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkPhoneField),
-/* harmony export */   "BkPostgreSqlDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkPostgreSqlDatabase),
-/* harmony export */   "BkRadioField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkRadioField),
-/* harmony export */   "BkRowForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkRowForm),
-/* harmony export */   "BkSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkSqlDataSource),
-/* harmony export */   "BkTable": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkTable),
-/* harmony export */   "BkTableForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkTableForm),
-/* harmony export */   "BkTextAreaField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkTextAreaField),
-/* harmony export */   "BkTextBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkTextBoxField),
-/* harmony export */   "BkTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_7__.BkTimeField),
-/* harmony export */   "CheckBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.CheckBoxFieldEditor),
-/* harmony export */   "CheckBoxListFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.CheckBoxListFieldEditor),
-/* harmony export */   "ColumnEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ColumnEditor),
-/* harmony export */   "ColumnEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ColumnEditorController),
-/* harmony export */   "ComboBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ComboBoxFieldEditor),
+/* harmony export */   "BkImageField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkImageField),
+/* harmony export */   "BkLabelField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkLabelField),
+/* harmony export */   "BkLinkField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkLinkField),
+/* harmony export */   "BkModel": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkModel),
+/* harmony export */   "BkMongoDbDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkMongoDbDatabase),
+/* harmony export */   "BkMySqlDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkMySqlDatabase),
+/* harmony export */   "BkNoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkNoSqlDataSource),
+/* harmony export */   "BkPage": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkPage),
+/* harmony export */   "BkPageLink": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkPageLink),
+/* harmony export */   "BkParam": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkParam),
+/* harmony export */   "BkPasswordField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkPasswordField),
+/* harmony export */   "BkPhoneField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkPhoneField),
+/* harmony export */   "BkPostgreSqlDatabase": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkPostgreSqlDatabase),
+/* harmony export */   "BkRadioField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkRadioField),
+/* harmony export */   "BkRowForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkRowForm),
+/* harmony export */   "BkSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkSqlDataSource),
+/* harmony export */   "BkTable": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkTable),
+/* harmony export */   "BkTableForm": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkTableForm),
+/* harmony export */   "BkTextAreaField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkTextAreaField),
+/* harmony export */   "BkTextBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkTextBoxField),
+/* harmony export */   "BkTimeField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_8__.BkTimeField),
+/* harmony export */   "CheckBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.CheckBoxFieldEditor),
+/* harmony export */   "CheckBoxListFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.CheckBoxListFieldEditor),
+/* harmony export */   "ColumnEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ColumnEditor),
+/* harmony export */   "ColumnEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ColumnEditorController),
+/* harmony export */   "ComboBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ComboBoxFieldEditor),
 /* harmony export */   "Context": () => (/* reexport safe */ _Context__WEBPACK_IMPORTED_MODULE_1__.Context),
 /* harmony export */   "Converter": () => (/* reexport safe */ _Converter__WEBPACK_IMPORTED_MODULE_4__.Converter),
-/* harmony export */   "DataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DataSourceEditor),
-/* harmony export */   "DataSourceEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DataSourceEditorController),
-/* harmony export */   "DatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DatabaseEditor),
-/* harmony export */   "DatabaseEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DatabaseEditorController),
-/* harmony export */   "DateFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DateFieldEditor),
-/* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.DateTimeFieldEditor),
-/* harmony export */   "FieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.FieldEditor),
-/* harmony export */   "FieldEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.FieldEditorController),
-/* harmony export */   "FileFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.FileFieldEditor),
-/* harmony export */   "FormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.FormEditor),
-/* harmony export */   "FormEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.FormEditorController),
-/* harmony export */   "ImageFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ImageFieldEditor),
+/* harmony export */   "DataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DataSourceEditor),
+/* harmony export */   "DataSourceEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DataSourceEditorController),
+/* harmony export */   "DatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DatabaseEditor),
+/* harmony export */   "DatabaseEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DatabaseEditorController),
+/* harmony export */   "DateFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DateFieldEditor),
+/* harmony export */   "DateTimeFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.DateTimeFieldEditor),
+/* harmony export */   "FieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.FieldEditor),
+/* harmony export */   "FieldEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.FieldEditorController),
+/* harmony export */   "FileFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.FileFieldEditor),
+/* harmony export */   "FormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.FormEditor),
+/* harmony export */   "FormEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.FormEditorController),
+/* harmony export */   "ImageFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ImageFieldEditor),
 /* harmony export */   "JsonFile": () => (/* reexport safe */ _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile),
-/* harmony export */   "KeyColumnEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.KeyColumnEditor),
-/* harmony export */   "KeyColumnEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.KeyColumnEditorController),
-/* harmony export */   "LabelFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.LabelFieldEditor),
-/* harmony export */   "LinkFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.LinkFieldEditor),
-/* harmony export */   "MongoDbDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.MongoDbDatabaseEditor),
-/* harmony export */   "MySqlDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.MySqlDatabaseEditor),
-/* harmony export */   "NoSqlDataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.NoSqlDataSourceEditor),
-/* harmony export */   "PageEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PageEditor),
-/* harmony export */   "PageEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PageEditorController),
-/* harmony export */   "PageLinkEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PageLinkEditor),
-/* harmony export */   "PageLinkEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PageLinkEditorController),
-/* harmony export */   "ParamEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ParamEditor),
-/* harmony export */   "ParamEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.ParamEditorController),
-/* harmony export */   "PasswordFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PasswordFieldEditor),
-/* harmony export */   "PhoneFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PhoneFieldEditor),
-/* harmony export */   "PostgreSqlDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.PostgreSqlDatabaseEditor),
-/* harmony export */   "RadioFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.RadioFieldEditor),
-/* harmony export */   "RowFormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.RowFormEditor),
-/* harmony export */   "SqlDataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.SqlDataSourceEditor),
-/* harmony export */   "TableEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TableEditor),
-/* harmony export */   "TableEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TableEditorController),
-/* harmony export */   "TableFormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TableFormEditor),
-/* harmony export */   "TextAreaFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TextAreaFieldEditor),
-/* harmony export */   "TextBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TextBoxFieldEditor),
-/* harmony export */   "TimeFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.TimeFieldEditor),
-/* harmony export */   "VisualEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_8__.VisualEditorController)
+/* harmony export */   "KeyColumnEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.KeyColumnEditor),
+/* harmony export */   "KeyColumnEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.KeyColumnEditorController),
+/* harmony export */   "LabelFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.LabelFieldEditor),
+/* harmony export */   "LinkFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.LinkFieldEditor),
+/* harmony export */   "MongoDbDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.MongoDbDatabaseEditor),
+/* harmony export */   "MySqlDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.MySqlDatabaseEditor),
+/* harmony export */   "NoSqlDataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSourceEditor),
+/* harmony export */   "PageEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PageEditor),
+/* harmony export */   "PageEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PageEditorController),
+/* harmony export */   "PageLinkEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PageLinkEditor),
+/* harmony export */   "PageLinkEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PageLinkEditorController),
+/* harmony export */   "ParamEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ParamEditor),
+/* harmony export */   "ParamEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.ParamEditorController),
+/* harmony export */   "PasswordFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PasswordFieldEditor),
+/* harmony export */   "PhoneFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PhoneFieldEditor),
+/* harmony export */   "PostgreSqlDatabaseEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.PostgreSqlDatabaseEditor),
+/* harmony export */   "RadioFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.RadioFieldEditor),
+/* harmony export */   "Router": () => (/* reexport safe */ _Router__WEBPACK_IMPORTED_MODULE_7__.Router),
+/* harmony export */   "RowFormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.RowFormEditor),
+/* harmony export */   "SqlDataSourceEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.SqlDataSourceEditor),
+/* harmony export */   "TableEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TableEditor),
+/* harmony export */   "TableEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TableEditorController),
+/* harmony export */   "TableFormEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TableFormEditor),
+/* harmony export */   "TextAreaFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TextAreaFieldEditor),
+/* harmony export */   "TextBoxFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TextBoxFieldEditor),
+/* harmony export */   "TimeFieldEditor": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.TimeFieldEditor),
+/* harmony export */   "VisualEditorController": () => (/* reexport safe */ _editor__WEBPACK_IMPORTED_MODULE_9__.VisualEditorController)
 /* harmony export */ });
 /* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BkHelper */ "./src/backend/BkHelper.ts");
 /* harmony import */ var _Context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Context */ "./src/backend/Context.ts");
@@ -5562,8 +5563,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Converter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Converter */ "./src/backend/Converter.ts");
 /* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./JsonFile */ "./src/backend/JsonFile.ts");
 /* harmony import */ var _AppInfo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AppInfo */ "./src/backend/AppInfo.ts");
-/* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./viewer */ "./src/backend/viewer/index.ts");
-/* harmony import */ var _editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor */ "./src/backend/editor/index.ts");
+/* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Router */ "./src/backend/Router.ts");
+/* harmony import */ var _viewer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./viewer */ "./src/backend/viewer/index.ts");
+/* harmony import */ var _editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editor */ "./src/backend/editor/index.ts");
+
 
 
 
@@ -22458,6 +22461,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ReactHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ReactHelper),
 /* harmony export */   "Result": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.Result),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
+/* harmony export */   "Router": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.Router),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowForm),
 /* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxFieldController),
 /* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.RowFormCheckBoxListFieldController),

@@ -5,5 +5,6 @@ export * from './BackHostApp';
 export * from './Converter';
 export * from './JsonFile';
 export * from './AppInfo';
+export * from './Router';
 export * from './viewer';
 export * from './editor';
