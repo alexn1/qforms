@@ -1114,7 +1114,7 @@ class BackHostApp {
     }
     async _e500(err, req, res, next) {
         (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().magenta('module.exports.e500:'), req.method, req.originalUrl, err);
-        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('_e500:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('_e500:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgRed(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().white(err.message)));
         const error = typeof err === 'string' ? new _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&

@@ -458,7 +458,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     async _e500(err: any, req: Request, res: Response, next: NextFunction): Promise<void> {
         debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
-        pConsole.log('_e500:', colors.red(err.message));
+        pConsole.log('_e500:', colors.bgRed(colors.white(err.message)));
 
         const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
