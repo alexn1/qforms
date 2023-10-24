@@ -397,7 +397,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     }
 
     async logError(err: Error, req?: Request): Promise<void> {
-        pConsole.log('BackHostApp.logError:', colors.red(err.message));
+        pConsole.log('BackHostApp.logError:', colors.bgRed(colors.white(err.message)));
         try {
             await this.eventLog.log({
                 type: 'error',

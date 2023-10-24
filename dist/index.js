@@ -1059,7 +1059,7 @@ class BackHostApp {
         return appInfos;
     }
     async logError(err, req) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('BackHostApp.logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().red(err.message));
+        _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log('BackHostApp.logError:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgRed(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().white(err.message)));
         try {
             await this.eventLog.log({
                 type: 'error',
