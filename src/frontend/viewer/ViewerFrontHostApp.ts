@@ -171,10 +171,6 @@ export class ViewerFrontHostApp extends FrontHostApp {
             }
         });
     }
-
-    /* isDebugMode(): boolean {
-        return this.applicationController!.getModel().getData().nodeEnv === 'dev';
-    } */
 }
 
 Helper.registerGlobalClass(ViewerFrontHostApp);

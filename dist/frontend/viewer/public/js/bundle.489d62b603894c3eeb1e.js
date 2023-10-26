@@ -36752,6 +36752,9 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_1_
         return `/${this.getDomain()}`;
     }
     isDebugMode() {
+        return this.isDev();
+    }
+    isDev() {
         return this.getModel().getData().nodeEnv === 'dev';
     }
 }

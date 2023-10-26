@@ -86,14 +86,14 @@ export class DropdownDatePicker extends ReactComponent {
         return '';
     }
 
-    /*getMinDate() {
+    /* getMinDate() {
         if (this.props.getMinDate) {
             return this.props.getMinDate();
         } else if (this.props.oldDates === false) {
             return DatePicker.getTodayArr();
         }
         return null;
-    }*/
+    } */
 
     getSelectedMonth() {
         if (this.getValue()) {

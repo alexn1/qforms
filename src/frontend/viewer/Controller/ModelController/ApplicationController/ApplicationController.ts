@@ -436,14 +436,14 @@ export class ApplicationController extends ModelController<Application> {
 
     async rpc(name: string, params: { [name: string]: any } = {}) {
         const result = await this.getModel().rpc(name, params);
-        /*if (result.errorMessage) {
+        /* if (result.errorMessage) {
             this.getHostApp().logError(new Error(result.errorMessage));
             await this.alert({
                 title     : this.getModel().getText().application.error,
                 titleStyle: {color: 'red'},
                 message   : result.errorMessage
             });
-        }*/
+        } */
         return result;
     }
 
@@ -456,6 +456,10 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     isDebugMode(): boolean {
+        return this.isDev();
+    }
+
+    isDev() {
         return this.getModel().getData().nodeEnv === 'dev';
     }
 }

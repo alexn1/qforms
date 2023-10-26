@@ -88,4 +88,5 @@ export declare class ApplicationController extends ModelController<Application> 
     getDomain(): string;
     getBaseUrl(): string;
     isDebugMode(): boolean;
+    isDev(): boolean;
 }
