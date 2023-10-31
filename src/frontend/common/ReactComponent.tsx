@@ -2,14 +2,14 @@ import { Component, RefObject } from 'react';
 import { Controller } from '../viewer/Controller/Controller';
 
 export interface ReactComponentProps {
-    name: string;
-    parent: any;
-    classList: string[];
-    enabled: boolean;
-    disabled: boolean;
-    onCreate: any;
-    onUnmount: any;
-    ctrl: Controller;
+    ctrl?: Controller;
+    name?: string;
+    parent?: any;
+    classList?: string[];
+    enabled?: boolean;
+    disabled?: boolean;
+    onCreate?: any;
+    onUnmount?: any;
 }
 
 export interface ReactComponentState {

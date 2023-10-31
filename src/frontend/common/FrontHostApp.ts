@@ -177,12 +177,17 @@ export class FrontHostApp {
     }
 
     createLink(query?: Query): string {
-        const path =
-            typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
+        const path = this.getPathName();
         if (query) {
             return [path, Helper.queryToString(query)].join('?');
         }
         return path;
+    }
+
+    getPathName() {
+        return typeof window === 'object'
+            ? window.location.pathname
+            : this.getOptions().url.pathname;
     }
 
     getOptions(): FrontHostAppOptions {

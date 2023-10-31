@@ -1,8 +1,14 @@
 /// <reference types="react" />
-import { ReactComponent } from '../../ReactComponent';
+import { FrontHostApp } from '../../FrontHostApp';
+import { ReactComponent, ReactComponentProps } from '../../ReactComponent';
 import './Menu.less';
-export declare class Menu extends ReactComponent {
-    constructor(props: any);
+export interface MenuProps extends ReactComponentProps {
+    items: any[];
+    onClick: any;
+    hostApp: FrontHostApp;
+}
+export declare class Menu extends ReactComponent<MenuProps> {
+    constructor(props: MenuProps);
     onMenuClick: (e: any) => Promise<void>;
     onBlur: (e: any) => Promise<void>;
     toggleMenu(menu: any): Promise<void>;

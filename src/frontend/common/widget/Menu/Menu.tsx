@@ -1,8 +1,16 @@
-import { ReactComponent } from '../../ReactComponent';
+import { FrontHostApp } from '../../FrontHostApp';
+import { ReactComponent, ReactComponentProps } from '../../ReactComponent';
+
 import './Menu.less';
 
-export class Menu extends ReactComponent {
-    constructor(props) {
+export interface MenuProps extends ReactComponentProps {
+    items: any[];
+    onClick: any;
+    hostApp: FrontHostApp;
+}
+
+export class Menu extends ReactComponent<MenuProps> {
+    constructor(props: MenuProps) {
         // console.debug('Menu.constructor', props);
         super(props);
         this.state = {};
@@ -68,6 +76,7 @@ export class Menu extends ReactComponent {
                                 {menu.items.map((item) => (
                                     <a
                                         key={item.name}
+                                        href={this.props.hostApp.createLink({ page: item.name })}
                                         data-menu={menu.name}
                                         data-type={item.type}
                                         data-name={item.name}>

@@ -48,6 +48,7 @@ export declare class FrontHostApp {
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
     createLink(query?: Query): string;
+    getPathName(): string;
     getOptions(): FrontHostAppOptions;
     filterSearch(...names: string[]): string;
     getSearchParams(): any;

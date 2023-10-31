@@ -10,6 +10,34 @@ import './ApplicationView.less';
 export class ApplicationView<
     TApplicationController extends ApplicationController = ApplicationController,
 > extends ModelView<TApplicationController> {
+    render() {
+        debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        return (
+            <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
+                {this.renderHeader()}
+                {this.renderMain()}
+                {this.renderFooter()}
+                {this.renderModals()}
+            </div>
+        );
+    }
+
+    renderHeader() {
+        return (
+            <header className={`${this.getCssBlockName()}__header`}>
+                <Menu
+                    items={this.getCtrl().getMenuItemsProp()}
+                    onClick={this.getCtrl().onMenuItemClick}
+                    hostApp={this.getCtrl().getHostApp()}
+                />
+            </header>
+        );
+    }
+
+    renderMain() {
+        return <main className={`${this.getCssBlockName()}__main`}>{this.renderActivePage()}</main>;
+    }
+
     renderActivePage(): any {
         const { ctrl } = this.props;
         if (ctrl.activePage) {
@@ -27,30 +55,6 @@ export class ApplicationView<
         });
     }
 
-    renderModals() {
-        return this.getCtrl().modals.map((ctrl) => {
-            if (ctrl instanceof PageController) {
-                return <Modal key={ctrl.getId()}>{this.renderView(ctrl)}</Modal>;
-            }
-            return this.renderView(ctrl, { key: ctrl.getId() });
-        });
-    }
-
-    renderHeader() {
-        return (
-            <header className={`${this.getCssBlockName()}__header`}>
-                <Menu
-                    items={this.getCtrl().getMenuItemsProp()}
-                    onClick={this.getCtrl().onMenuItemClick}
-                />
-            </header>
-        );
-    }
-
-    renderMain() {
-        return <main className={`${this.getCssBlockName()}__main`}>{this.renderActivePage()}</main>;
-    }
-
     renderFooter() {
         return (
             <footer className={`${this.getCssBlockName()}__footer`}>
@@ -59,15 +63,12 @@ export class ApplicationView<
         );
     }
 
-    render() {
-        debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
-        return (
-            <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
-                {this.renderHeader()}
-                {this.renderMain()}
-                {this.renderFooter()}
-                {this.renderModals()}
-            </div>
-        );
+    renderModals() {
+        return this.getCtrl().modals.map((ctrl) => {
+            if (ctrl instanceof PageController) {
+                return <Modal key={ctrl.getId()}>{this.renderView(ctrl)}</Modal>;
+            }
+            return this.renderView(ctrl, { key: ctrl.getId() });
+        });
     }
 }

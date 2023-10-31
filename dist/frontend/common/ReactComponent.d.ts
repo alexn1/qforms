@@ -1,14 +1,14 @@
 import { Component, RefObject } from 'react';
 import { Controller } from '../viewer/Controller/Controller';
 export interface ReactComponentProps {
-    name: string;
-    parent: any;
-    classList: string[];
-    enabled: boolean;
-    disabled: boolean;
-    onCreate: any;
-    onUnmount: any;
-    ctrl: Controller;
+    ctrl?: Controller;
+    name?: string;
+    parent?: any;
+    classList?: string[];
+    enabled?: boolean;
+    disabled?: boolean;
+    onCreate?: any;
+    onUnmount?: any;
 }
 export interface ReactComponentState {
     classList: string[];
@@ -20,7 +20,7 @@ export declare class ReactComponent<P extends ReactComponentProps = any, S exten
     el: RefObject<any>;
     constructor(props: P);
     getElement(): any;
-    getParent(): P["parent"];
+    getParent(): P["parent"] | undefined;
     checkParent(): void;
     getClassList(): string[];
     addCssClass(className: string): void;
@@ -33,7 +33,7 @@ export declare class ReactComponent<P extends ReactComponentProps = any, S exten
     enableRerender(): void;
     componentWillUnmount(): void;
     isEnabled(): boolean;
-    isDisabled(): boolean | S["disabled"] | P["disabled"];
+    isDisabled(): boolean | S["disabled"] | (P["disabled"] & {});
     disable(): void;
     enable(): void;
 }
