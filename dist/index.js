@@ -8149,7 +8149,7 @@ class BkPostgreSqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.B
         }
         _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('sql:', sql);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('sql:', colors__WEBPACK_IMPORTED_MODULE_0___default().bgBlue(colors__WEBPACK_IMPORTED_MODULE_0___default().white(sql)));
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('values:', values);
         const result = await this.getConnection(context).query(sql, values);
         return result;
@@ -8162,6 +8162,7 @@ class BkPostgreSqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.B
         return result;
     }
     async queryRows(context, query, params = null) {
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('PostgreSqlDatabase.queryRows', colors__WEBPACK_IMPORTED_MODULE_0___default().bgGreen(colors__WEBPACK_IMPORTED_MODULE_0___default().white(query)), params);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
@@ -20489,7 +20490,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const query = (0,_common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)(page ? page.getName() : undefined, form ? form.getName() : undefined, this.getName(), _common__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)));
+        const query = (0,_common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)(page ? page.getName() : undefined, form ? form.getName() : undefined, this.getName(), Object.assign(Object.assign({}, this.getPageParams()), params));
         const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_3__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');

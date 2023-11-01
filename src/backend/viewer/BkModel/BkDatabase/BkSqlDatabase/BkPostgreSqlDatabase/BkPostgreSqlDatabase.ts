@@ -83,7 +83,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // if (context.getReq() && context.getQuery().sql) {
-        debug('sql:', sql);
+        debug('sql:', colors.bgBlue(colors.white(sql)));
         debug('values:', values);
         // }
         const result = await this.getConnection(context).query(sql, values);
@@ -114,7 +114,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
-        // debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
+        debug('PostgreSqlDatabase.queryRows', colors.bgGreen(colors.white(query)), params);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
