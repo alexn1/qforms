@@ -256,10 +256,10 @@ export class PersistentDataSource extends DataSource {
             page ? page.getName() : undefined,
             form ? form.getName() : undefined,
             this.getName(),
-            Helper.encodeObject({
+            {
                 ...this.getPageParams(),
                 ...params,
-            }),
+            },
         );
         const response = (await this.getApp().request2(
             'GET',

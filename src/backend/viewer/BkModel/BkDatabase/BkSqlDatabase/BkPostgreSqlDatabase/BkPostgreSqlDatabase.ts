@@ -82,10 +82,10 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         }
         BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        if (context.getReq() && context.getQuery().sql) {
-            debug('sql:', sql);
-            debug('values:', values);
-        }
+        // if (context.getReq() && context.getQuery().sql) {
+        debug('sql:', sql);
+        debug('values:', values);
+        // }
         const result = await this.getConnection(context).query(sql, values);
         // debug('cnn.query result:', result);
         return result;

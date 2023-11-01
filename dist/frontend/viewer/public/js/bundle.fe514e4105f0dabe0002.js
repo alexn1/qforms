@@ -41713,7 +41713,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const query = (0,_common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)(page ? page.getName() : undefined, form ? form.getName() : undefined, this.getName(), _common__WEBPACK_IMPORTED_MODULE_3__.Helper.encodeObject(Object.assign(Object.assign({}, this.getPageParams()), params)));
+        const query = (0,_common__WEBPACK_IMPORTED_MODULE_3__.createReadQuery)(page ? page.getName() : undefined, form ? form.getName() : undefined, this.getName(), Object.assign(Object.assign({}, this.getPageParams()), params));
         const response = (await this.getApp().request2('GET', `${window.location.pathname}?${_common__WEBPACK_IMPORTED_MODULE_3__.Helper.queryToString(query)}`));
         if (!(response.rows instanceof Array))
             throw new Error('rows must be array');

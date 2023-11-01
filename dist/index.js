@@ -8149,10 +8149,8 @@ class BkPostgreSqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.B
         }
         _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        if (context.getReq() && context.getQuery().sql) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('sql:', sql);
-            (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('values:', values);
-        }
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('sql:', sql);
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('values:', values);
         const result = await this.getConnection(context).query(sql, values);
         return result;
     }
