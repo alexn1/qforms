@@ -106,7 +106,7 @@
                         "table": "person",
                         "modelClass": "",
                         "singleQuery": "select\n    \"id\",\n    \"created\",\n    \"updated\",\n    \"first_name\",\n    \"last_name\"\nfrom \"person\"\nwhere id = {key}",
-                        "multipleQuery": "select\n    \"id\",\n    \"created\",\n    \"updated\",\n    \"first_name\",\n    \"last_name\"\nfrom \"person\"\nwhere\n\tfirst_name ilike concat('%', {Persons.Filter.first_name}::varchar, '%')\n\tand \n\tlast_name ilike concat('%', {Persons.Filter.last_name}::varchar, '%')\norder by \"id\"\nlimit {limit}\noffset {offset}",
+                        "multipleQuery": "select\n    \"id\",\n    \"created\",\n    \"updated\",\n    \"first_name\",\n    \"last_name\"\nfrom \"person\"\nwhere\nfirst_name ilike concat('%', {Persons.Filter.first_name}::varchar, '%')\nand \nlast_name ilike concat('%', {Persons.Filter.last_name}::varchar, '%')\norder by \"id\"\nlimit {limit}\noffset {offset}",
                         "countQuery": "select count(*) from \"person\"",
                         "limit": "100"
                     },

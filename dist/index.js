@@ -8140,13 +8140,12 @@ class BkPostgreSqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.B
         this.getConnection(context).release();
         context.connections[this.getName()] = null;
     }
+    async queryRows(context, query, params = null) {
+        const result = await this.queryResult(context, query, params);
+        return result.rows;
+    }
     async queryResult(context, query, params = null) {
-        if (context.getReq() && context.getQuery().sql) {
-            (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)(colors__WEBPACK_IMPORTED_MODULE_0___default().blue('PostgreSqlDatabase.queryResult'), {
-                query,
-                params,
-            });
-        }
+        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('PostgreSqlDatabase.queryResult', colors__WEBPACK_IMPORTED_MODULE_0___default().bgGreen(colors__WEBPACK_IMPORTED_MODULE_0___default().white(query)), params);
         _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('sql:', colors__WEBPACK_IMPORTED_MODULE_0___default().bgBlue(colors__WEBPACK_IMPORTED_MODULE_0___default().white(sql)));
@@ -8160,11 +8159,6 @@ class BkPostgreSqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_2__.B
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         const result = await pool.query(sql, values);
         return result;
-    }
-    async queryRows(context, query, params = null) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('PostgreSqlDatabase.queryRows', colors__WEBPACK_IMPORTED_MODULE_0___default().bgGreen(colors__WEBPACK_IMPORTED_MODULE_0___default().white(query)), params);
-        const result = await this.queryResult(context, query, params);
-        return result.rows;
     }
     async begin(context) {
         (0,_console__WEBPACK_IMPORTED_MODULE_3__.debug)('PostgreSqlDatabase.begin', this.getName());

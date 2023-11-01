@@ -66,20 +66,29 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         context.connections[this.getName()] = null;
     }
 
+    async queryRows(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } | null = null,
+    ): Promise<Row[]> {
+        // debug('PostgreSqlDatabase.queryRows', colors.bgGreen(colors.white(query)), params);
+        const result = await this.queryResult(context, query, params);
+        return result.rows;
+    }
+
     async queryResult(
         context: Context,
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
-        if (context.getReq() && context.getQuery().sql) {
-            debug(
-                colors.blue('PostgreSqlDatabase.queryResult'),
-                {
-                    query,
-                    params,
-                } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
-            );
-        }
+        // if (context.getReq() && context.getQuery().sql) {
+        debug(
+            'PostgreSqlDatabase.queryResult',
+            colors.bgGreen(colors.white(query)),
+            params,
+            /* , params ? Object.keys(params).map(name => typeof params[name]) : null */
+        );
+        // }
         BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // if (context.getReq() && context.getQuery().sql) {
@@ -107,16 +116,6 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         const result = await pool.query(sql, values);
         // debug('cnn.query result:', result);
         return result;
-    }
-
-    async queryRows(
-        context: Context,
-        query: string,
-        params: { [name: string]: any } | null = null,
-    ): Promise<Row[]> {
-        debug('PostgreSqlDatabase.queryRows', colors.bgGreen(colors.white(query)), params);
-        const result = await this.queryResult(context, query, params);
-        return result.rows;
     }
 
     async begin(context: Context): Promise<void> {

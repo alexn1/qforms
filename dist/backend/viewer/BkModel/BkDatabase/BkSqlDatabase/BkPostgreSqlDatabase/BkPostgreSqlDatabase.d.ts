@@ -12,15 +12,15 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     static createPool(config: DbConfig): Pool;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
+    queryRows(context: Context, query: string, params?: {
+        [name: string]: any;
+    } | null): Promise<Row[]>;
     queryResult(context: Context, query: string, params?: {
         [name: string]: any;
     } | null): Promise<any>;
     static queryResult(pool: Pool, query: string, params?: {
         [name: string]: any;
     } | null): Promise<any>;
-    queryRows(context: Context, query: string, params?: {
-        [name: string]: any;
-    } | null): Promise<Row[]>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
