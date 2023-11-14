@@ -30,8 +30,10 @@ export declare class PageController<TApplicationController extends ApplicationCo
     getForm<TFormController extends FormController = FormController>(name: string): TFormController;
     onActionClick(name: string): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
-    getKeyPart(key: Key): string;
     getTitle(): string;
+    composeTitle(): string;
+    getKeyPart(): string | null;
+    composeKeyPart(key: Key): string;
     getSelectedRowKey(): Key | null;
     onSelectClick: (e: any) => Promise<void>;
     onResetClick: (e: any) => Promise<void>;

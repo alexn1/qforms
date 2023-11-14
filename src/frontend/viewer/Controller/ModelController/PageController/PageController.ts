@@ -225,23 +225,30 @@ export class PageController<
         }
     };
 
-    getKeyPart(key: Key): string {
+    getTitle(): string {
+        return `${this.composeTitle()} - ${this.getApp().getModel().getCaption()}`;
+    }
+
+    composeTitle(): string {
+        const keyPart = this.getKeyPart();
+        return [
+            this.getModel().getCaption(),
+            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(keyPart ? [keyPart] : []),
+        ].join(' ');
+    }
+
+    getKeyPart(): string | null {
+        const key = this.getModel().getKey();
+        return key ? this.composeKeyPart(key) : null;
+    }
+
+    composeKeyPart(key: Key): string {
         const arr = keyToKeyTuple(key);
         if (arr.length === 1 && typeof arr[0] === 'number') {
             return `#${arr[0]}`;
         }
         return `${key}`;
-    }
-
-    getTitle(): string {
-        const model = this.getModel();
-        const key = model.getKey();
-        const keyPart = key ? this.getKeyPart(key) : null;
-        return [
-            model.getCaption(),
-            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
-            ...(keyPart ? [keyPart] : []),
-        ].join(' ');
     }
 
     getSelectedRowKey() {

@@ -355,7 +355,7 @@ export class ApplicationController extends ModelController<Application> {
     getTitle() {
         // console.debug('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
-            return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
+            return this.activePage.getTitle();
         }
         return this.getModel().getCaption();
     }

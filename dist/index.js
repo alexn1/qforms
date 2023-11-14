@@ -15331,7 +15331,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_1_
     }
     getTitle() {
         if (this.activePage) {
-            return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
+            return this.activePage.getTitle();
         }
         return this.getModel().getCaption();
     }
@@ -19074,22 +19074,27 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.Model
     async onActionClick(name) {
         console.debug('PageController.onActionClick', name);
     }
-    getKeyPart(key) {
+    getTitle() {
+        return `${this.composeTitle()} - ${this.getApp().getModel().getCaption()}`;
+    }
+    composeTitle() {
+        const keyPart = this.getKeyPart();
+        return [
+            this.getModel().getCaption(),
+            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(keyPart ? [keyPart] : []),
+        ].join(' ');
+    }
+    getKeyPart() {
+        const key = this.getModel().getKey();
+        return key ? this.composeKeyPart(key) : null;
+    }
+    composeKeyPart(key) {
         const arr = (0,_types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple)(key);
         if (arr.length === 1 && typeof arr[0] === 'number') {
             return `#${arr[0]}`;
         }
         return `${key}`;
-    }
-    getTitle() {
-        const model = this.getModel();
-        const key = model.getKey();
-        const keyPart = key ? this.getKeyPart(key) : null;
-        return [
-            model.getCaption(),
-            ...(this.getApp().isDebugMode() ? [`(${this.getId()})`] : []),
-            ...(keyPart ? [keyPart] : []),
-        ].join(' ');
     }
     getSelectedRowKey() {
         for (const form of this.forms) {
