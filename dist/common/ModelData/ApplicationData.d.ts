@@ -1,4 +1,4 @@
-import { ClientUser } from '../../backend';
+import { ClientUser } from '../../types';
 import { Nullable } from '../../types';
 import { DatabaseData } from './DatabaseData';
 import { ModelData } from './ModelData';

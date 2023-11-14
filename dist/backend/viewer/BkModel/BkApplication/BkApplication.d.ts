@@ -14,15 +14,11 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
-import { Link, Nullable } from '../../../../types';
+import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 export interface ServerUser {
     id: number;
     name: string;
-}
-export interface ClientUser {
-    id: number;
-    login: string;
 }
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<ApplicationScheme> {
     private appInfo;

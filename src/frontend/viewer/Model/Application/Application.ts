@@ -1,4 +1,4 @@
-import { Action } from '../../../../types';
+import { Action, ClientUser } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp, RequestMethod } from '../../../common';
@@ -101,15 +101,15 @@ export class Application extends Model<ApplicationData> {
         return this.getData().text;
     }
 
-    getUser() {
+    getUser(): ClientUser | null {
         return this.getData().user;
     }
 
-    getDomain() {
+    getDomain(): string {
         return this.getAttr('domain');
     }
 
-    getVirtualPath() {
+    getVirtualPath(): string {
         return this.getData().virtualPath;
     }
 

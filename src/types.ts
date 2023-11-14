@@ -88,3 +88,8 @@ export type Route = [
     env: string,
     domain?: string,
 ];
+
+export interface ClientUser {
+    id: number;
+    login: string;
+}

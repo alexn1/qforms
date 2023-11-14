@@ -25,7 +25,7 @@ import { NextFunction } from 'express';
 import { debug } from '../../../../console';
 import { ActionScheme } from '../../../common/Scheme/ActionScheme';
 import { PageLinkScheme } from '../../../common/Scheme/PageLinkScheme';
-import { Link, Nullable } from '../../../../types';
+import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
 import { _glob, exists2, getFilePaths, readTextFile } from '../../../file-helper';
@@ -35,11 +35,6 @@ const pkg = require('../../../../../package.json');
 export interface ServerUser {
     id: number;
     name: string;
-}
-
-export interface ClientUser {
-    id: number;
-    login: string;
 }
 
 export class BkApplication<

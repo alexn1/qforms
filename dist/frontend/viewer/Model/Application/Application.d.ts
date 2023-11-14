@@ -1,3 +1,4 @@
+import { ClientUser } from '../../../../types';
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { RequestMethod } from '../../../common';
@@ -18,7 +19,7 @@ export declare class Application extends Model<ApplicationData> {
     findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     getText(): any;
-    getUser(): import("../../../../types").Nullable<import("../../../..").ClientUser>;
+    getUser(): ClientUser | null;
     getDomain(): string;
     getVirtualPath(): string;
     rpc(name: string, params: Record<string, any>): Promise<any>;
