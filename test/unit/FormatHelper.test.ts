@@ -1,4 +1,4 @@
-import { FormatHelper } from '../src/frontend';
+import { FormatHelper } from '../../src/frontend';
 
 describe('FormatHelper', () => {
     test('FormatHelper.formatNumber', async () => {

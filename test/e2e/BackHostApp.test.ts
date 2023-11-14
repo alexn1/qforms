@@ -1,7 +1,7 @@
 import { test, describe, expect, beforeAll, afterAll } from '@jest/globals';
 // import { BackHostApp } from '../dist';
-import { BackHostApp } from '../src';
-import { HttpClient } from './core/HttpClient';
+import { BackHostApp } from '../../src';
+import { HttpClient } from '../core/HttpClient';
 import { Server } from 'http';
 
 describe('BackHostApp', () => {

@@ -1,4 +1,4 @@
-import { keyTupleToKey, keyToKeyTuple, Key } from '../src/types';
+import { keyTupleToKey, keyToKeyTuple, Key } from '../../src/types';
 
 describe('types', () => {
     test('keyTupleToKey', () => {

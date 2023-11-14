@@ -14,10 +14,10 @@ import {
     DeleteActionDto,
     Action,
     BkHelper,
-} from '../dist';
-import { SampleBackHostApp } from '../apps-ts/sample';
-import { HttpClient } from './core/HttpClient';
-import { createDatabase, restartLocalDb, query } from './core/helper';
+} from '../../dist';
+import { SampleBackHostApp } from '../../apps-ts/sample';
+import { HttpClient } from '../core/HttpClient';
+import { createDatabase, restartLocalDb, query } from '../core/helper';
 
 let app: SampleBackHostApp;
 let httpServer: Server;

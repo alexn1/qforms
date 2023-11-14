@@ -1,4 +1,4 @@
-import { Search } from '../src/frontend/common/Search';
+import { Search } from '../../src/frontend/common/Search';
 
 describe('Search', () => {
     beforeAll(() => {
