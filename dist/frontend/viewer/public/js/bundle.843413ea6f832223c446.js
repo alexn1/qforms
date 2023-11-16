@@ -38168,7 +38168,7 @@ class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, (0,_types__WEBPACK_IMPORTED_MODULE_1__.keyTupleToKey)([value]));
         }
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank', rel: 'noreferrer' }, { children: displayValue })) })));
     }
 }
 
@@ -40228,7 +40228,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_1__.Model
             .getHostApp()
             .createLink({
             page: pageName,
-            params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)),
+            params: _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.encodeObject(Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key))),
         });
     }
     async close() {

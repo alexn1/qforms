@@ -17,7 +17,7 @@
         "build:prod": "node task/build-prod.js",
         "start": "NODE_ENV=dev node dist/start.js",
         "start:sample": "NODE_ENV=dev bun apps-ts/sample/start.ts",
-        "start:apps": "NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps LISTEN_PORT=7000 node dist/start.js",
+        "start:apps": "NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/project/qforms-apps LISTEN_PORT=7000 node dist/start.js",
         "nodemon:start": "NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js",
         "test": "clear; QFORMS_LOG_LEVEL=error jest --runInBand",
         "test:log": "clear; jest --runInBand",

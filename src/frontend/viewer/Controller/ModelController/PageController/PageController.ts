@@ -100,9 +100,9 @@ export class PageController<
             .getHostApp()
             .createLink({
                 page: pageName,
-                params: {
+                params: Helper.encodeObject({
                     ...DataSource.keyToParams(key),
-                },
+                }),
             } as Query);
     }
 

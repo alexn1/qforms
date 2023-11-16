@@ -25,7 +25,7 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
 
         return (
             <div className={this.getCssClassNames()}>
-                <a href={href} onClick={ctrl.onClick} target={'_blank'}>
+                <a href={href} onClick={ctrl.onClick} target={'_blank'} rel={'noreferrer'}>
                     {displayValue}
                 </a>
             </div>
