@@ -23,7 +23,7 @@ export class DataSource extends Model<DataSourceData> {
     rowsByKey: { [key: Key]: RawRow } | null = null;
     news: RawRow[] = [];
     changes = new Map<RawRow, RawRow>();
-    frame: number = 1;
+    private frame: number = 1;
     count: number | null = null;
     lastFrame: number = 1;
 
@@ -576,12 +576,12 @@ export class DataSource extends Model<DataSourceData> {
         return this.frame;
     }
 
-    getLastFrame(): number {
-        return this.lastFrame;
-    }
-
     setFrame(frame: number) {
         this.frame = frame;
+    }
+
+    getLastFrame(): number {
+        return this.lastFrame;
     }
 
     getFramesCount(): number {

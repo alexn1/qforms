@@ -227,7 +227,7 @@ export class PersistentDataSource extends DataSource {
         console.debug('PersistentDataSource.refill', this.getFullName());
         if (this.isChanged())
             throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
-        const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
+        const data = await this.select(this.getLimit() ? { frame: this.getFrame() } : {});
         this.count = data.count;
         this.setRows(data.rows);
         this.lastFrame = 1;

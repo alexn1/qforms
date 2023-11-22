@@ -12,7 +12,7 @@ export declare class DataSource extends Model<DataSourceData> {
     } | null;
     news: RawRow[];
     changes: Map<RawRow, RawRow>;
-    frame: number;
+    private frame;
     count: number | null;
     lastFrame: number;
     constructor(data: any, parent: Model);
@@ -63,8 +63,8 @@ export declare class DataSource extends Model<DataSourceData> {
     getLimit(): number | null;
     getCount(): number;
     getFrame(): number;
-    getLastFrame(): number;
     setFrame(frame: number): void;
+    getLastFrame(): number;
     getFramesCount(): number;
     hasMore(): boolean;
     isPersistent(): boolean;

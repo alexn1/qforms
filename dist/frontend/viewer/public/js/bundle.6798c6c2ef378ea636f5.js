@@ -39648,6 +39648,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         };
         this.onRefreshClick = async (e) => {
             console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
+            this.getModel().getDefaultDataSource().setFrame(1);
             await this.getModel().refresh();
         };
         this.onDeleteClick = async (e) => {
@@ -41464,11 +41465,11 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getFrame() {
         return this.frame;
     }
-    getLastFrame() {
-        return this.lastFrame;
-    }
     setFrame(frame) {
         this.frame = frame;
+    }
+    getLastFrame() {
+        return this.lastFrame;
     }
     getFramesCount() {
         if (this.count === null)
@@ -41696,7 +41697,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.refill', this.getFullName());
         if (this.isChanged())
             throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
-        const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
+        const data = await this.select(this.getLimit() ? { frame: this.getFrame() } : {});
         this.count = data.count;
         this.setRows(data.rows);
         this.lastFrame = 1;
