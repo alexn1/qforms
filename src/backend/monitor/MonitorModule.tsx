@@ -123,7 +123,7 @@ export class MonitorModule {
         const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={this.getScripts()} />,
         );
-        const data = JSON.stringify(this.fill() /*, null, 4*/);
+        const data = JSON.stringify(this.fill() /* , null, 4 */);
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">
 <head>
