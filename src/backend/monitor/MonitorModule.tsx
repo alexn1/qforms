@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import colors from 'colors/safe';
 import { BackHostApp } from '../BackHostApp';
-import { BkHelper } from '../BkHelper';
 import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
@@ -104,9 +103,6 @@ export class MonitorModule {
     }
 
     authorize(req): boolean {
-        if (this.hostApp.isDevelopment()) {
-            return true;
-        }
         if (!this.hostApp.getParams().monitor) {
             throw new Error('no monitor params');
         }

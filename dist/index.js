@@ -5800,9 +5800,6 @@ class MonitorModule {
             password === this.hostApp.getParams().monitor.password);
     }
     authorize(req) {
-        if (this.hostApp.isDevelopment()) {
-            return true;
-        }
         if (!this.hostApp.getParams().monitor) {
             throw new Error('no monitor params');
         }
