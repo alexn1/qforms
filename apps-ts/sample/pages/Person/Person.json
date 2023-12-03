@@ -8,7 +8,7 @@
         "viewClass": "",
         "ctrlClass": "",
         "modelClass": "",
-        "formInTab": "false"
+        "formInTab": "true"
     },
     "dataSources": [],
     "actions": [],
