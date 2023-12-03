@@ -36,7 +36,7 @@ beforeAll(async () => {
             last_name varchar(255)
         )`,
     );
-    process.env.PORT = '5433';
+    process.env.PORT = '5434';
     app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
     await app.init();
     httpServer = app.getHttpServer();
