@@ -7,19 +7,19 @@ Supports MySql, Postgres, MongoDB.
 ## Containers
 
 ```
-name                      image                 port    password
-----------------------------------------------------------------
-postgres-qforms-test      postgres:12-alpine    5433    example
-postgres-qforms-sample    postgres:12-alpine    5434    example
+name                      image                 port    user:password
+------------------------------------------------------------------------
+postgres-qforms-test      postgres:12-alpine    5433    postgres:example
+postgres-qforms-sample    postgres:12-alpine    5434    postgres:example
 ```
 
 ## sample database
 
 ```bash
 cd db/postgres
-./docker.run.sh
-./docker.create.sh
-./docker.restore.sh
+./docker.run.sh         # run docker container
+./docker.create.sh      # create sample database
+./docker.restore.sh     # restore db from sample.sql
 ```
 
 ## CLI Options
