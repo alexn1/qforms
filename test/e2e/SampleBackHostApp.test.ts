@@ -25,9 +25,9 @@ let httpClient: HttpClient;
 
 beforeAll(async () => {
     await restartLocalDb();
-    await createDatabase('demo');
+    await createDatabase('sample');
     await query(
-        'demo',
+        'sample',
         `create table person (
             id serial NOT NULL,
             created timestamptz,

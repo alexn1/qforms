@@ -34,7 +34,7 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "database",
-                        "value": "\"demo\""
+                        "value": "\"sample\""
                     }
                 },
                 {
@@ -55,7 +55,7 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "port",
-                        "value": "process.env.PORT | 5432"
+                        "value": "process.env.PORT | 5434"
                     }
                 }
             ],
