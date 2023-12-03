@@ -1,0 +1,1 @@
+docker run --name postgres-qforms-sample -p 5434:5432 -e POSTGRES_PASSWORD=example -d postgres:12-alpine
