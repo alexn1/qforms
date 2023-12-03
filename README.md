@@ -4,6 +4,12 @@ A fullstack framework/platform based on Express and React for building Web UI fo
 
 Supports MySql, Postgres, MongoDB.
 
+## Containers
+
+```
+postgres-qforms-test    postgres:12-alpine  5433
+```
+
 ## Demo database
 
 ```bash
