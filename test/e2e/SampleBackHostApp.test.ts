@@ -67,7 +67,7 @@ describe('Person', () => {
             cssBlock: '',
             viewClass: '',
             ctrlClass: '',
-            formInTab: 'false',
+            formInTab: 'true',
             newMode: false,
             params: { key: 1 },
         });
