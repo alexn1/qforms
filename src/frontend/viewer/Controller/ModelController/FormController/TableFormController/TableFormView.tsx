@@ -9,11 +9,13 @@ import {
     LeftIcon,
     RightIcon,
     Grid,
+    Helper,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
 import { PageController } from '../../PageController/PageController';
 import { debug } from '../../../../../../console';
 import { FormatHelper } from '../../../../../common/FormatHelper';
+import { Key } from '../../../../../../types';
 import './TableFormView.less';
 
 export class TableFormView<
@@ -174,13 +176,16 @@ export class TableFormView<
         );
     }
 
-    createLinkCallback = (key) => {
+    createLinkCallback = (key: Key) => {
+        // console.debug('TableFormView.createLinkCallback', key);
         return this.getCtrl()
             .getApp()
             .getHostApp()
             .createLink({
                 page: this.getCtrl().getModel().getAttr('itemEditPage'),
-                ...DataSource.keyToParams(key),
+                params: Helper.encodeObject({
+                    ...DataSource.keyToParams(key),
+                }),
             });
     };
 }

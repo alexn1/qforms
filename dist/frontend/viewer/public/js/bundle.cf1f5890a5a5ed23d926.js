@@ -39931,7 +39931,10 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
             return this.getCtrl()
                 .getApp()
                 .getHostApp()
-                .createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
+                .createLink({
+                page: this.getCtrl().getModel().getAttr('itemEditPage'),
+                params: _common__WEBPACK_IMPORTED_MODULE_4__.Helper.encodeObject(Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key))),
+            });
         };
     }
     renderToolbar() {
