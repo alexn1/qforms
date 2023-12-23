@@ -5858,10 +5858,10 @@ function isDev() {
 
 /***/ }),
 
-/***/ "./src/backend/viewer/BkController/BkApplicationController.tsx":
-/*!*********************************************************************!*\
-  !*** ./src/backend/viewer/BkController/BkApplicationController.tsx ***!
-  \*********************************************************************/
+/***/ "./src/backend/viewer/BkController/BkApplicationController.ts":
+/*!********************************************************************!*\
+  !*** ./src/backend/viewer/BkController/BkApplicationController.ts ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5869,21 +5869,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BkApplicationController": () => (/* binding */ BkApplicationController)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Scripts */ "./src/backend/Scripts.tsx");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
-/* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
-/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
 
 
 
@@ -5901,7 +5898,7 @@ class BkApplicationController {
         this.viewerModule = viewerModule;
     }
     async index(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.index');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -5913,31 +5910,41 @@ class BkApplicationController {
             await bkApplication.release(context);
         }
     }
+    createLinksElement(application) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_3__.Links, {
+            links: [...this.viewerModule.getLinks(), ...application.links],
+        });
+    }
+    createScriptsElement(application) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_4__.Scripts, {
+            scripts: [...this.viewerModule.getScripts(), ...application.scripts],
+        });
+    }
     async renderHtml(bkApplication, context) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.renderHtml');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...bkApplication.links] }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...bkApplication.scripts] }));
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.renderHtml');
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(bkApplication));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(bkApplication));
         const data = await bkApplication.fill(context);
-        const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_6__.FrontHostApp({
+        const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_5__.FrontHostApp({
             url: context.getUrl(),
             cookies: context.getCookies(),
         });
-        const application = new _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_7__.Application(data);
+        const application = new _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_6__.Application(data);
         application.init();
-        const applicationController = _frontend__WEBPACK_IMPORTED_MODULE_6__.ApplicationController.create(application, frontHostApp);
+        const applicationController = _frontend__WEBPACK_IMPORTED_MODULE_5__.ApplicationController.create(application, frontHostApp);
         applicationController.init();
-        const element = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
+        const element = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
-        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
+        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToString(element);
         const html = bkApplication.renderIndexHtml(context, applicationController, version, links, scripts, data, appViewHtml);
         return html;
     }
     async loginGet(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.loginGet');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...application.links] }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...application.scripts] }));
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(version, context, application, links, scripts, {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginGet');
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(application));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(application));
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_7__.login)(version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -5947,7 +5954,7 @@ class BkApplicationController {
         context.getRes().end(html);
     }
     async loginPost(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.loginPost');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginPost');
         const { tzOffset, username, password } = context.getBody();
         if (tzOffset === undefined)
             throw new Error('no tzOffset');
@@ -5970,16 +5977,16 @@ class BkApplicationController {
                     session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_6__.Helper.decodeValue(tzOffset);
+                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.decodeValue(tzOffset);
                 res.redirect(req.url);
                 this.viewerModule
                     .getHostApp()
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_4__.Links, { links: [...this.viewerModule.getLinks(), ...application.links] }));
-                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_5__.Scripts, { scripts: [...this.viewerModule.getScripts(), ...application.scripts] }));
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_8__.login)(version, context, application, links, scripts, {
+                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(application));
+                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(application));
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_7__.login)(version, context, application, links, scripts, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
@@ -5995,19 +6002,19 @@ class BkApplicationController {
         }
     }
     async logout(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.logout');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
             throw new Error(`no user for route ${route}`);
         }
         const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_9__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_9__.Session_save)(session);
+        (0,_Session__WEBPACK_IMPORTED_MODULE_8__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_8__.Session_save)(session);
         context.getRes().json(null);
     }
     async rpc(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_3__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
         const dto = context.getBody();
         const res = context.getRes();
         const model = await BkApplicationController.getModel(context, application);
@@ -6018,14 +6025,14 @@ class BkApplicationController {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_10__.Result)) {
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_9__.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.viewerModule.getHostApp().broadcastResult(application, context, _result);
             }
             else {
                 res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_10__.Result) {
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_9__.Result) {
                     this.viewerModule.getHostApp().broadcastResult(application, context, result);
                 }
             }
@@ -9508,7 +9515,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../console */ "./src/console.ts");
 /* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pConsole */ "./src/pConsole.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
-/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.tsx");
+/* harmony import */ var _BkController_BkApplicationController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./BkController/BkApplicationController */ "./src/backend/viewer/BkController/BkApplicationController.ts");
 /* harmony import */ var _BkController_BkPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BkController/BkPageController */ "./src/backend/viewer/BkController/BkPageController.ts");
 /* harmony import */ var _BkController_BkDataSourceController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BkController/BkDataSourceController */ "./src/backend/viewer/BkController/BkDataSourceController.ts");
 /* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../file-helper */ "./src/backend/file-helper.ts");

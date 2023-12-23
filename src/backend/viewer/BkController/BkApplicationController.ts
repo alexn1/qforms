@@ -34,14 +34,24 @@ export class BkApplicationController {
         }
     }
 
+    createLinksElement(application: BkApplication) {
+        return React.createElement(Links, {
+            links: [...this.viewerModule.getLinks(), ...application.links],
+        });
+    }
+
+    createScriptsElement(application: BkApplication) {
+        return React.createElement(Scripts, {
+            scripts: [...this.viewerModule.getScripts(), ...application.scripts],
+        });
+    }
+
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
         pConsole.debug('BkApplicationController.renderHtml');
 
-        const links = ReactDOMServer.renderToStaticMarkup(
-            <Links links={[...this.viewerModule.getLinks(), ...bkApplication.links]} />,
-        );
+        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement(bkApplication));
         const scripts = ReactDOMServer.renderToStaticMarkup(
-            <Scripts scripts={[...this.viewerModule.getScripts(), ...bkApplication.scripts]} />,
+            this.createScriptsElement(bkApplication),
         );
         const data = await bkApplication.fill(context);
 
@@ -81,12 +91,8 @@ export class BkApplicationController {
 
     async loginGet(context: Context, application: BkApplication) {
         pConsole.debug('BkApplicationController.loginGet');
-        const links = ReactDOMServer.renderToStaticMarkup(
-            <Links links={[...this.viewerModule.getLinks(), ...application.links]} />,
-        );
-        const scripts = ReactDOMServer.renderToStaticMarkup(
-            <Scripts scripts={[...this.viewerModule.getScripts(), ...application.scripts]} />,
-        );
+        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement(application));
+        const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement(application));
         const html = login(version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
@@ -129,12 +135,10 @@ export class BkApplicationController {
             } else {
                 // const users = await application.getUsers(context);
                 const links = ReactDOMServer.renderToStaticMarkup(
-                    <Links links={[...this.viewerModule.getLinks(), ...application.links]} />,
+                    this.createLinksElement(application),
                 );
                 const scripts = ReactDOMServer.renderToStaticMarkup(
-                    <Scripts
-                        scripts={[...this.viewerModule.getScripts(), ...application.scripts]}
-                    />,
+                    this.createScriptsElement(application),
                 );
                 const html = login(version, context, application, links, scripts, {
                     name: application.getName(),
