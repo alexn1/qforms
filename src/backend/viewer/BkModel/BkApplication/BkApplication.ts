@@ -1,5 +1,7 @@
 import path, { join } from 'path';
 import { WebSocket } from 'ws';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 // import axios from 'axios';
 // import colors from 'colors/safe';
 import { AppInfo } from '../../../AppInfo';
@@ -29,6 +31,12 @@ import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
 import { _glob, exists2, getFilePaths, readTextFile } from '../../../file-helper';
+import { Links } from '../../../Links';
+import { Scripts } from '../../../Scripts';
+import { FrontHostApp } from '../../../../frontend';
+import { Application } from '../../../../frontend/viewer/Model/Application/Application';
+
+const { version } = require('../../../../../package.json');
 
 const pkg = require('../../../../../package.json');
 
@@ -554,6 +562,52 @@ export class BkApplication<
         */
     }
 
+    static getEnvList(data: ApplicationScheme): string[] {
+        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
+        return ['local', ...list];
+    }
+
+    async renderHtml(context: Context): Promise<string> {
+        pConsole.debug('BkApplicationController.renderHtml');
+
+        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement());
+        const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement());
+        const data = await this.fill(context);
+
+        // frontHostApp
+        const frontHostApp = new FrontHostApp({
+            url: context.getUrl(),
+            cookies: context.getCookies(),
+        });
+
+        // application
+        const application = new Application(data);
+        application.init();
+
+        // applicationController
+        const applicationController = ApplicationController.create(application, frontHostApp);
+        applicationController.init();
+
+        const element = React.createElement(applicationController.getViewClass(), {
+            ctrl: applicationController,
+        });
+
+        const appViewHtml = ReactDOMServer.renderToString(element);
+        // debug('appViewHtml:', appViewHtml);
+
+        const html = this.renderIndexHtml(
+            context,
+            applicationController,
+            version,
+            links,
+            scripts,
+            data,
+            appViewHtml,
+        );
+
+        return html;
+    }
+
     renderIndexHtml(
         context: Context,
         applicationController: ApplicationController,
@@ -575,8 +629,15 @@ export class BkApplication<
         );
     }
 
-    static getEnvList(data: ApplicationScheme): string[] {
-        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
-        return ['local', ...list];
+    createLinksElement() {
+        return React.createElement(Links, {
+            links: [...this.hostApp.viewerModule.getLinks(), ...this.links],
+        });
+    }
+
+    createScriptsElement() {
+        return React.createElement(Scripts, {
+            scripts: [...this.hostApp.viewerModule.getScripts(), ...this.scripts],
+        });
     }
 }

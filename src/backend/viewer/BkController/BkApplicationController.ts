@@ -1,13 +1,8 @@
-import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Context } from '../../Context';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
 import { pConsole } from '../../../pConsole';
-import { Links } from '../../Links';
-import { Scripts } from '../../Scripts';
 import { ViewerModule } from '../ViewerModule';
-import { FrontHostApp, ApplicationController } from '../../../frontend';
-import { Application } from '../../../frontend/viewer/Model/Application/Application';
 import { login } from '../login';
 import { LoginActionDto, RpcActionDto } from '../../../frontend';
 import { Session_deleteUser, Session_save } from '../../Session';
@@ -27,72 +22,17 @@ export class BkApplicationController {
         await bkApplication.connect(context);
         try {
             await bkApplication.initContext(context);
-            const html = await this.renderHtml(bkApplication, context);
+            const html = await bkApplication.renderHtml(context);
             res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
         } finally {
             await bkApplication.release(context);
         }
     }
 
-    createLinksElement(application: BkApplication) {
-        return React.createElement(Links, {
-            links: [...this.viewerModule.getLinks(), ...application.links],
-        });
-    }
-
-    createScriptsElement(application: BkApplication) {
-        return React.createElement(Scripts, {
-            scripts: [...this.viewerModule.getScripts(), ...application.scripts],
-        });
-    }
-
-    async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
-        pConsole.debug('BkApplicationController.renderHtml');
-
-        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement(bkApplication));
-        const scripts = ReactDOMServer.renderToStaticMarkup(
-            this.createScriptsElement(bkApplication),
-        );
-        const data = await bkApplication.fill(context);
-
-        // frontHostApp
-        const frontHostApp = new FrontHostApp({
-            url: context.getUrl(),
-            cookies: context.getCookies(),
-        });
-
-        // application
-        const application = new Application(data);
-        application.init();
-
-        // applicationController
-        const applicationController = ApplicationController.create(application, frontHostApp);
-        applicationController.init();
-
-        const element = React.createElement(applicationController.getViewClass(), {
-            ctrl: applicationController,
-        });
-
-        const appViewHtml = ReactDOMServer.renderToString(element);
-        // debug('appViewHtml:', appViewHtml);
-
-        const html = bkApplication.renderIndexHtml(
-            context,
-            applicationController,
-            version,
-            links,
-            scripts,
-            data,
-            appViewHtml,
-        );
-
-        return html;
-    }
-
     async loginGet(context: Context, application: BkApplication) {
         pConsole.debug('BkApplicationController.loginGet');
-        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement(application));
-        const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement(application));
+        const links = ReactDOMServer.renderToStaticMarkup(application.createLinksElement());
+        const scripts = ReactDOMServer.renderToStaticMarkup(application.createScriptsElement());
         const html = login(version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
@@ -134,11 +74,9 @@ export class BkApplicationController {
                     );
             } else {
                 // const users = await application.getUsers(context);
-                const links = ReactDOMServer.renderToStaticMarkup(
-                    this.createLinksElement(application),
-                );
+                const links = ReactDOMServer.renderToStaticMarkup(application.createLinksElement());
                 const scripts = ReactDOMServer.renderToStaticMarkup(
-                    this.createScriptsElement(application),
+                    application.createScriptsElement(),
                 );
                 const html = login(version, context, application, links, scripts, {
                     name: application.getName(),

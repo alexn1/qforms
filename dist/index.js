@@ -5869,23 +5869,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BkApplicationController": () => (/* binding */ BkApplicationController)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Links */ "./src/backend/Links.tsx");
-/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
 /* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
-/* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
-/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
-
-
-
-
-
 
 
 
@@ -5898,53 +5888,23 @@ class BkApplicationController {
         this.viewerModule = viewerModule;
     }
     async index(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.index');
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
             await bkApplication.initContext(context);
-            const html = await this.renderHtml(bkApplication, context);
+            const html = await bkApplication.renderHtml(context);
             res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
         }
         finally {
             await bkApplication.release(context);
         }
     }
-    createLinksElement(application) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_3__.Links, {
-            links: [...this.viewerModule.getLinks(), ...application.links],
-        });
-    }
-    createScriptsElement(application) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_4__.Scripts, {
-            scripts: [...this.viewerModule.getScripts(), ...application.scripts],
-        });
-    }
-    async renderHtml(bkApplication, context) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.renderHtml');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(bkApplication));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(bkApplication));
-        const data = await bkApplication.fill(context);
-        const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_5__.FrontHostApp({
-            url: context.getUrl(),
-            cookies: context.getCookies(),
-        });
-        const application = new _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_6__.Application(data);
-        application.init();
-        const applicationController = _frontend__WEBPACK_IMPORTED_MODULE_5__.ApplicationController.create(application, frontHostApp);
-        applicationController.init();
-        const element = react__WEBPACK_IMPORTED_MODULE_0___default().createElement(applicationController.getViewClass(), {
-            ctrl: applicationController,
-        });
-        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToString(element);
-        const html = bkApplication.renderIndexHtml(context, applicationController, version, links, scripts, data, appViewHtml);
-        return html;
-    }
     async loginGet(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginGet');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(application));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(application));
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_7__.login)(version, context, application, links, scripts, {
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginGet');
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement());
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement());
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -5954,7 +5914,7 @@ class BkApplicationController {
         context.getRes().end(html);
     }
     async loginPost(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginPost');
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginPost');
         const { tzOffset, username, password } = context.getBody();
         if (tzOffset === undefined)
             throw new Error('no tzOffset');
@@ -5984,9 +5944,9 @@ class BkApplicationController {
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createLinksElement(application));
-                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(this.createScriptsElement(application));
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_7__.login)(version, context, application, links, scripts, {
+                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement());
+                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement());
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(version, context, application, links, scripts, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
@@ -6002,19 +5962,19 @@ class BkApplicationController {
         }
     }
     async logout(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.logout');
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
             throw new Error(`no user for route ${route}`);
         }
         const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_8__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_8__.Session_save)(session);
+        (0,_Session__WEBPACK_IMPORTED_MODULE_3__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_3__.Session_save)(session);
         context.getRes().json(null);
     }
     async rpc(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
         const dto = context.getBody();
         const res = context.getRes();
         const model = await BkApplicationController.getModel(context, application);
@@ -6025,14 +5985,14 @@ class BkApplicationController {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_9__.Result)) {
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_4__.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.viewerModule.getHostApp().broadcastResult(application, context, _result);
             }
             else {
                 res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_9__.Result) {
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_4__.Result) {
                     this.viewerModule.getHostApp().broadcastResult(application, context, result);
                 }
             }
@@ -6237,18 +6197,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ "path");
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../BaseModel */ "./src/backend/BaseModel.ts");
-/* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
-/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
-/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
-/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
-/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
-/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BaseModel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../BaseModel */ "./src/backend/BaseModel.ts");
+/* harmony import */ var _BkModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../BkModel */ "./src/backend/viewer/BkModel/BkModel.ts");
+/* harmony import */ var _BkHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../BkHelper */ "./src/backend/BkHelper.ts");
+/* harmony import */ var _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../BkPageLink/BkPageLink */ "./src/backend/viewer/BkModel/BkPageLink/BkPageLink.ts");
+/* harmony import */ var _JsonFile__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../JsonFile */ "./src/backend/JsonFile.ts");
+/* harmony import */ var _HttpError__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../HttpError */ "./src/backend/HttpError.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../Result */ "./src/Result.ts");
+/* harmony import */ var _frontend_viewer_Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../home */ "./src/backend/viewer/home.tsx");
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../text */ "./src/backend/viewer/text/index.ts");
+/* harmony import */ var _console__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../../console */ "./src/console.ts");
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _file_helper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../file-helper */ "./src/backend/file-helper.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../Scripts */ "./src/backend/Scripts.tsx");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../../../frontend/viewer/Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 
 
 
@@ -6262,8 +6231,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+const { version } = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
 const pkg = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
-class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
+class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     constructor(appInfo, hostApp, env = 'local') {
         super(appInfo.appFile.data);
         this.appInfo = appInfo;
@@ -6291,16 +6268,16 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('publicDirPath:', publicDirPath);
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('publicDirPath:', publicDirPath);
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)(`Application.deinit: ${this.getName()}`);
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)(`Application.deinit: ${this.getName()}`);
         await super.deinit();
         for (const database of this.databases) {
             await database.deinit();
@@ -6315,7 +6292,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
-        return _text__WEBPACK_IMPORTED_MODULE_9__[lang];
+        return _text__WEBPACK_IMPORTED_MODULE_12__[lang];
     }
     getVersion() {
         return null;
@@ -6348,10 +6325,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         response.text = this.getText();
         response.menu = this.menu;
         response.nav = this.nav;
-        response.uuid = _BkHelper__WEBPACK_IMPORTED_MODULE_3__.BkHelper.newClientId();
+        response.uuid = _BkHelper__WEBPACK_IMPORTED_MODULE_5__.BkHelper.newClientId();
         response.actions = this.getCol('actions').map((action) => ({
-            name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
-            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),
+            name: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getName(action),
+            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getAttr(action, 'caption'),
         }));
         response.pages = await this.fillPages(context);
         response.user = this.isAuthentication()
@@ -6378,7 +6355,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = pageLink.getPageFilePath();
-                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(pageFilePath);
+                const pageFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_7__.JsonFile(pageFilePath);
                 await pageFile.read();
                 if (!menu[pageLinkMenu]) {
                     menu[pageLinkMenu] = [];
@@ -6401,8 +6378,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         if (actions.length) {
             menu['Actions'] = actions.map((action) => ({
                 type: 'action',
-                action: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(action),
-                caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(action, 'caption'),
+                action: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getName(action),
+                caption: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getAttr(action, 'caption'),
             }));
         }
         this.menu = menu;
@@ -6410,7 +6387,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_4__.BkPageLink(data, this);
+        return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_6__.BkPageLink(data, this);
     }
     async createPage(context, pageLinkName) {
         if (!this.isData('pageLinks', pageLinkName)) {
@@ -6419,7 +6396,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getDirPath(), relFilePath);
-        const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.readTextFile)(pageFilePath);
+        const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.readTextFile)(pageFilePath);
         const data = JSON.parse(content);
         const page = (await this.createChildModel('pages', data));
         await page.init(context);
@@ -6429,7 +6406,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug('Application.getPage', pageLinkName);
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -6441,8 +6418,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
-            .filter((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(data, 'startup') === 'true')
-            .map((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data));
+            .filter((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getAttr(data, 'startup') === 'true')
+            .map((data) => _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getName(data));
     }
     getPageLinksToFill(context) {
         const pageLinkName = context.getPage();
@@ -6462,7 +6439,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return pages;
     }
     async authenticate(ctx, username, password) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.authenticate');
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -6478,10 +6455,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         return null;
     }
     async rpc(name, context) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('BkApplication.rpc', name, context.getBody());
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('BkApplication.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new _HttpError__WEBPACK_IMPORTED_MODULE_6__.HttpError({
+        throw new _HttpError__WEBPACK_IMPORTED_MODULE_8__.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -6509,8 +6486,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         const fileName = path__WEBPACK_IMPORTED_MODULE_0___default().basename(filePath, path__WEBPACK_IMPORTED_MODULE_0___default().extname(filePath));
         return {
             appFile,
-            name: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getName(data),
-            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_1__.BaseModel.getAttr(data, 'caption'),
+            name: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getName(data),
+            caption: _BaseModel__WEBPACK_IMPORTED_MODULE_3__.BaseModel.getAttr(data, 'caption'),
             fullName: (0,path__WEBPACK_IMPORTED_MODULE_0__.join)(dirName, fileName),
             envs: BkApplication.getEnvList(data),
             dirName,
@@ -6522,14 +6499,14 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         };
     }
     static async loadAppInfo(appFilePath) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.loadAppInfo', appFilePath);
-        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_5__.JsonFile(appFilePath);
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('Application.loadAppInfo', appFilePath);
+        const appFile = new _JsonFile__WEBPACK_IMPORTED_MODULE_7__.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
     static async getAppInfos(srcDirPath) {
-        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(srcDirPath, '*/*.json'));
+        const appFilesPaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__._glob)(path__WEBPACK_IMPORTED_MODULE_0___default().join(srcDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -6582,7 +6559,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         this.clients.splice(i, 1);
     }
     broadcastDomesticResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6595,7 +6572,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
         }
     }
     broadcastForeignResultToClients(context, result) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_10__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -6619,7 +6596,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
                     const table = database.findTable(tableName);
                     if (table) {
                         if (!fResult)
-                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_7__.Result();
+                            fResult = new _Result__WEBPACK_IMPORTED_MODULE_9__.Result();
                         if (!fResult[databaseName])
                             fResult[databaseName] = {};
                         fResult[databaseName][tableName] = { refresh: true };
@@ -6640,8 +6617,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
     }
     async handleGetFile(context, next) {
         const filePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), context.getUri());
-        _pConsole__WEBPACK_IMPORTED_MODULE_11__.pConsole.debug(`filePath: ${filePath}`);
-        if (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_12__.exists2)(filePath)) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug(`filePath: ${filePath}`);
+        if (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.exists2)(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {
@@ -6649,12 +6626,42 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_2__.BkModel {
             await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
     }
-    renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
-        return (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
-    }
     static getEnvList(data) {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
+    }
+    async renderHtml(context) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplicationController.renderHtml');
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createLinksElement());
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createScriptsElement());
+        const data = await this.fill(context);
+        const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_18__.FrontHostApp({
+            url: context.getUrl(),
+            cookies: context.getCookies(),
+        });
+        const application = new _frontend_viewer_Model_Application_Application__WEBPACK_IMPORTED_MODULE_19__.Application(data);
+        application.init();
+        const applicationController = _frontend_viewer_Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_10__.ApplicationController.create(application, frontHostApp);
+        applicationController.init();
+        const element = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
+            ctrl: applicationController,
+        });
+        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
+        const html = this.renderIndexHtml(context, applicationController, version, links, scripts, data, appViewHtml);
+        return html;
+    }
+    renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
+        return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
+    }
+    createLinksElement() {
+        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, {
+            links: [...this.hostApp.viewerModule.getLinks(), ...this.links],
+        });
+    }
+    createScriptsElement() {
+        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, {
+            scripts: [...this.hostApp.viewerModule.getScripts(), ...this.scripts],
+        });
     }
 }
 
