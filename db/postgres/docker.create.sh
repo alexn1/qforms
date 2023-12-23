@@ -1,1 +1,1 @@
-docker exec -i postgres-qforms-sample psql -U postgres -c 'create database sample'
+docker exec -i qforms-postgres-sample psql -U postgres -c 'create database sample'

@@ -1,1 +1,1 @@
-cat sample.sql | docker exec -i postgres-qforms-sample psql -U postgres -d sample
+cat sample.sql | docker exec -i qforms-postgres-sample psql -U postgres -d sample

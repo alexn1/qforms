@@ -1,6 +1,6 @@
 import child_process from 'child_process';
 
-const DB_CONTAINER_NAME = 'postgres-qforms-test';
+const DB_CONTAINER_NAME = 'qforms-postgres-test';
 
 export async function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
