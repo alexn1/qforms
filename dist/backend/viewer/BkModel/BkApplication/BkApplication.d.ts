@@ -17,6 +17,8 @@ import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
+import { LinksProps } from '../../../Links';
+import { ScriptsProps } from '../../../Scripts';
 export interface ServerUser {
     id: number;
     name: string;
@@ -87,6 +89,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     renderIndexResponse(context: Context): Promise<[contentType: string, response: string]>;
     renderHtml(context: Context): Promise<string>;
     createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
-    createLinksElement(): React.FunctionComponentElement<import("../../../Links").LinksProps>;
-    createScriptsElement(): React.FunctionComponentElement<import("../../../Scripts").ScriptsProps>;
+    createLinksElement(context: Context): React.FunctionComponentElement<LinksProps>;
+    createScriptsElement(context: Context): React.FunctionComponentElement<ScriptsProps>;
 }
