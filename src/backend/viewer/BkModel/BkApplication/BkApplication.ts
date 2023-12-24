@@ -36,8 +36,6 @@ import { Scripts } from '../../../Scripts';
 import { FrontHostApp } from '../../../../frontend';
 import { Application } from '../../../../frontend/viewer/Model/Application/Application';
 
-const { version } = require('../../../../../package.json');
-
 const pkg = require('../../../../../package.json');
 
 export interface ServerUser {
@@ -567,6 +565,11 @@ export class BkApplication<
         return ['local', ...list];
     }
 
+    async renderIndexResponse(context: Context): Promise<[string, string]> {
+        pConsole.debug('BkApplicationController.renderIndexResponse');
+        return ['text/html; charset=utf-8', await this.renderHtml(context)];
+    }
+
     async renderHtml(context: Context): Promise<string> {
         pConsole.debug('BkApplicationController.renderHtml');
 
@@ -598,7 +601,7 @@ export class BkApplication<
         const html = this.renderIndexHtml(
             context,
             applicationController,
-            version,
+            pkg.version,
             links,
             scripts,
             data,

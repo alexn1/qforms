@@ -84,6 +84,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: NextFunction): Promise<void>;
     static getEnvList(data: ApplicationScheme): string[];
+    renderIndexResponse(context: Context): Promise<[string, string]>;
     renderHtml(context: Context): Promise<string>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
     createLinksElement(): React.FunctionComponentElement<import("../../../Links").LinksProps>;

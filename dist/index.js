@@ -5893,8 +5893,8 @@ class BkApplicationController {
         await bkApplication.connect(context);
         try {
             await bkApplication.initContext(context);
-            const html = await bkApplication.renderHtml(context);
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
+            const [contentType, response] = await bkApplication.renderIndexResponse(context);
+            res.setHeader('Content-Type', contentType).end(response);
         }
         finally {
             await bkApplication.release(context);
@@ -6238,7 +6238,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { version } = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
 const pkg = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
 class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     constructor(appInfo, hostApp, env = 'local') {
@@ -6630,6 +6629,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }
+    async renderIndexResponse(context) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplicationController.renderIndexResponse');
+        return ['text/html; charset=utf-8', await this.renderHtml(context)];
+    }
     async renderHtml(context) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplicationController.renderHtml');
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createLinksElement());
@@ -6647,7 +6650,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
             ctrl: applicationController,
         });
         const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
-        const html = this.renderIndexHtml(context, applicationController, version, links, scripts, data, appViewHtml);
+        const html = this.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {

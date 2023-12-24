@@ -22,8 +22,8 @@ export class BkApplicationController {
         await bkApplication.connect(context);
         try {
             await bkApplication.initContext(context);
-            const html = await bkApplication.renderHtml(context);
-            res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
+            const [contentType, response] = await bkApplication.renderIndexResponse(context);
+            res.setHeader('Content-Type', contentType).end(response);
         } finally {
             await bkApplication.release(context);
         }
