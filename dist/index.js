@@ -6630,11 +6630,11 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         return ['local', ...list];
     }
     async renderIndexResponse(context) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplicationController.renderIndexResponse');
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderIndexResponse');
         return ['text/html; charset=utf-8', await this.renderHtml(context)];
     }
     async renderHtml(context) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplicationController.renderHtml');
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createLinksElement());
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createScriptsElement());
         const data = await this.fill(context);
@@ -6650,11 +6650,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
             ctrl: applicationController,
         });
         const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
-        const html = this.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
-    }
-    renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
-        return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
     createLinksElement() {
         return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, {

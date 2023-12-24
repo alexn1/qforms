@@ -565,13 +565,13 @@ export class BkApplication<
         return ['local', ...list];
     }
 
-    async renderIndexResponse(context: Context): Promise<[string, string]> {
-        pConsole.debug('BkApplicationController.renderIndexResponse');
+    async renderIndexResponse(context: Context): Promise<[contentType: string, response: string]> {
+        pConsole.debug('BkApplication.renderIndexResponse');
         return ['text/html; charset=utf-8', await this.renderHtml(context)];
     }
 
     async renderHtml(context: Context): Promise<string> {
-        pConsole.debug('BkApplicationController.renderHtml');
+        pConsole.debug('BkApplication.renderHtml');
 
         const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement());
         const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement());
@@ -598,7 +598,8 @@ export class BkApplication<
         const appViewHtml = ReactDOMServer.renderToString(element);
         // debug('appViewHtml:', appViewHtml);
 
-        const html = this.renderIndexHtml(
+        const html = home(
+            this,
             context,
             applicationController,
             pkg.version,
@@ -609,27 +610,6 @@ export class BkApplication<
         );
 
         return html;
-    }
-
-    renderIndexHtml(
-        context: Context,
-        applicationController: ApplicationController,
-        qformsVersion: string,
-        links: string,
-        scripts: string,
-        data: ApplicationData,
-        appViewHtml: string,
-    ): string {
-        return home(
-            this,
-            context,
-            applicationController,
-            qformsVersion,
-            links,
-            scripts,
-            data,
-            appViewHtml,
-        );
     }
 
     createLinksElement() {

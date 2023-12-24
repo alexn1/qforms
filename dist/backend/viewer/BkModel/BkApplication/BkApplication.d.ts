@@ -11,7 +11,6 @@ import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
-import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
@@ -84,9 +83,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: NextFunction): Promise<void>;
     static getEnvList(data: ApplicationScheme): string[];
-    renderIndexResponse(context: Context): Promise<[string, string]>;
+    renderIndexResponse(context: Context): Promise<[contentType: string, response: string]>;
     renderHtml(context: Context): Promise<string>;
-    renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
     createLinksElement(): React.FunctionComponentElement<import("../../../Links").LinksProps>;
     createScriptsElement(): React.FunctionComponentElement<import("../../../Scripts").ScriptsProps>;
 }
