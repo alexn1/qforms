@@ -10,8 +10,6 @@ import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';
 import { Helper } from '../../../frontend';
 
-const { version } = require('../../../../package.json');
-
 export class BkApplicationController {
     constructor(private viewerModule: ViewerModule) {}
 
@@ -33,13 +31,20 @@ export class BkApplicationController {
         pConsole.debug('BkApplicationController.loginGet');
         const links = ReactDOMServer.renderToStaticMarkup(application.createLinksElement());
         const scripts = ReactDOMServer.renderToStaticMarkup(application.createScriptsElement());
-        const html = login(version, context, application, links, scripts, {
-            name: application.getName(),
-            text: application.getText(),
-            title: application.getTitle(context),
-            errMsg: null,
-            username: context.getQuery().username,
-        });
+        const html = login(
+            this.viewerModule.getHostApp().getPlatformVersion(),
+            context,
+            application,
+            links,
+            scripts,
+            {
+                name: application.getName(),
+                text: application.getText(),
+                title: application.getTitle(context),
+                errMsg: null,
+                username: context.getQuery().username,
+            },
+        );
         context.getRes().end(html);
     }
 
@@ -78,14 +83,21 @@ export class BkApplicationController {
                 const scripts = ReactDOMServer.renderToStaticMarkup(
                     application.createScriptsElement(),
                 );
-                const html = login(version, context, application, links, scripts, {
-                    name: application.getName(),
-                    text: application.getText(),
-                    title: application.getTitle(context),
-                    errMsg: application.getText().login.WrongUsernameOrPassword,
-                    username: username,
-                    password: password,
-                });
+                const html = login(
+                    this.viewerModule.getHostApp().getPlatformVersion(),
+                    context,
+                    application,
+                    links,
+                    scripts,
+                    {
+                        name: application.getName(),
+                        text: application.getText(),
+                        title: application.getTitle(context),
+                        errMsg: application.getText().login.WrongUsernameOrPassword,
+                        username: username,
+                        password: password,
+                    },
+                );
                 res.status(401).end(html);
             }
         } finally {

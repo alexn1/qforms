@@ -1,9 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import ReactDOMServer from 'react-dom/server';
+import { Request, Response, NextFunction } from 'express';
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
-import { BkHelper } from '../BkHelper';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
@@ -12,8 +11,6 @@ import { home } from './home';
 import { debug } from '../../console';
 import { EditorPostDto, Nullable } from '../../types';
 import { getFilePaths } from '../file-helper';
-
-const pkg = require('../../../package.json');
 
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -119,7 +116,7 @@ export class EditorModule {
         );
         const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/`;
         const html = home(
-            pkg.version,
+            this.hostApp.getPlatformVersion(),
             {
                 ...data,
                 runAppLink,

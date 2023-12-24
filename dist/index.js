@@ -907,7 +907,7 @@ class BackHostApp {
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
         message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
         message += '\n';
-        message += `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+        message += `QForms server v${this.getPlatformVersion()} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
         message += `\tcwd: ${process.cwd()}\n`;
         message += `\tsrcDirPath: ${this.srcDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
@@ -1083,7 +1083,7 @@ class BackHostApp {
             host: req.headers.host,
             originalUrl: req.originalUrl,
             uri: req.params['0'],
-            platformVersion: pkg.version,
+            platformVersion: this.getPlatformVersion(),
             appVersion: route && this.applications[route] ? this.applications[route].getVersion() : null,
             body: req.body,
             status: err instanceof _HttpError__WEBPACK_IMPORTED_MODULE_13__.HttpError ? err.status || null : null,
@@ -1311,6 +1311,9 @@ class BackHostApp {
     }
     getSrcDirPath() {
         return this.srcDirPath;
+    }
+    getPlatformVersion() {
+        return pkg.version;
     }
 }
 __decorate([
@@ -4881,7 +4884,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 const EDITOR_CONTROLLERS = [
     'Application',
     'Database',
@@ -4965,7 +4967,7 @@ class EditorModule {
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
         const runAppLink = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/`;
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink }), runAppLink, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_8__.home)(this.hostApp.getPlatformVersion(), Object.assign(Object.assign({}, data), { runAppLink }), runAppLink, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
     }
     async post(req, res, next) {
@@ -5593,12 +5595,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! colors/safe */ "colors/safe");
-/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! colors/safe */ "colors/safe");
+/* harmony import */ var colors_safe__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(colors_safe__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../viewer/BkModel/BkApplication/BkApplication */ "./src/backend/viewer/BkModel/BkApplication/BkApplication.ts");
 /* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Links */ "./src/backend/Links.tsx");
 /* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Scripts */ "./src/backend/Scripts.tsx");
@@ -5613,17 +5615,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 class IndexModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
-        this.js = (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_2___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+        this.css = (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_8__.getFilePaths)(path__WEBPACK_IMPORTED_MODULE_1___default().join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
     }
     async get(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexGet'));
+        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_3___default().magenta('indexGet'));
         try {
             const html = await this.hostApp.indexModule.render();
             res.setHeader('Content-Type', 'text/html; charset=utf-8').end(html);
@@ -5633,7 +5634,7 @@ class IndexModule {
         }
     }
     async post(req, res, next) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_1___default().magenta('indexPost'), req.params);
+        _pConsole__WEBPACK_IMPORTED_MODULE_7__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_3___default().magenta('indexPost'), req.params);
         try {
             const appInfos = await this.hostApp.createAppInfos(req);
             res.json({
@@ -5664,16 +5665,16 @@ class IndexModule {
         return this.js;
     }
     async render() {
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_3___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
+        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Links__WEBPACK_IMPORTED_MODULE_5__.Links, { links: this.getLinks() }));
+        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Scripts__WEBPACK_IMPORTED_MODULE_6__.Scripts, { scripts: this.getScripts() }));
         const data = await this.fill();
         const data2 = JSON.stringify(data);
         return `<!DOCTYPE html>
 <html>
 <head>
-    <!-- ${pkg.version}> -->
+    <!-- ${this.hostApp.getPlatformVersion()}> -->
     <meta charSet="utf-8">
-    <title>QForms v${pkg.version}</title>
+    <title>QForms v${this.hostApp.getPlatformVersion()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->
@@ -5730,7 +5731,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 class MonitorModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -5814,9 +5814,9 @@ class MonitorModule {
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">
 <head>
-    <!-- ${pkg.version}> -->
+    <!-- ${this.hostApp.getPlatformVersion()}> -->
     <meta charSet="utf-8">
-    <title>QForms monitor v${pkg.version}</title>
+    <title>QForms monitor v${this.hostApp.getPlatformVersion()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->
@@ -5882,7 +5882,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const { version } = __webpack_require__(/*! ../../../../package.json */ "./package.json");
 class BkApplicationController {
     constructor(viewerModule) {
         this.viewerModule = viewerModule;
@@ -5904,7 +5903,7 @@ class BkApplicationController {
         _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginGet');
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement());
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement());
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(version, context, application, links, scripts, {
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -5946,7 +5945,7 @@ class BkApplicationController {
             else {
                 const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement());
                 const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement());
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(version, context, application, links, scripts, {
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, links, scripts, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
@@ -6238,7 +6237,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pkg = __webpack_require__(/*! ../../../../../package.json */ "./package.json");
 class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     constructor(appInfo, hostApp, env = 'local') {
         super(appInfo.appFile.data);
@@ -6314,7 +6312,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         response.virtualPath = context.getVirtualPath();
         response.logErrorUrl = this.getHostApp().getFrontLogUrl() || '/error';
         response.versions = {
-            platform: pkg.version,
+            platform: this.hostApp.getPlatformVersion(),
             app: this.getVersion(),
         };
         await this.fillCollection(response, 'databases', context);
@@ -6650,7 +6648,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
             ctrl: applicationController,
         });
         const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, pkg.version, links, scripts, data, appViewHtml);
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), links, scripts, data, appViewHtml);
         return html;
     }
     createLinksElement() {
@@ -9536,7 +9534,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pkg = __webpack_require__(/*! ../../../package.json */ "./package.json");
 class ViewerModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -9612,16 +9609,16 @@ class ViewerModule {
         const action = context.getAction();
         if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.page) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.pageController.page(context, application);
         }
         else if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.read) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.select(context, application);
         }
         else {
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             if (application.isAuthentication() && !context.getUser()) {
                 await this.applicationController.loginGet(context, application);
             }
@@ -9657,7 +9654,7 @@ class ViewerModule {
         }
         else {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.logout) {
                 await this.applicationController.logout(context, application);
             }
@@ -9698,7 +9695,7 @@ class ViewerModule {
             throw new Error('no action');
         if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action.update) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.update(context, application);
         }
         else {
@@ -9731,7 +9728,7 @@ class ViewerModule {
             throw new Error('no action');
         if (action === _types__WEBPACK_IMPORTED_MODULE_5__.Action["delete"]) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.delete(context, application);
         }
         else {

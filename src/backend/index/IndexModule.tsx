@@ -1,16 +1,13 @@
-import colors from 'colors/safe';
-import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import ReactDOMServer from 'react-dom/server';
+import colors from 'colors/safe';
+import { Request, Response, NextFunction } from 'express';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
-import { BkHelper } from '../BkHelper';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { BackHostApp } from '../BackHostApp';
 import { pConsole } from '../../pConsole';
 import { getFilePaths } from '../file-helper';
-
-const pkg = require('../../../package.json');
 
 export class IndexModule {
     css: string[];
@@ -84,13 +81,13 @@ export class IndexModule {
             <Scripts scripts={this.getScripts()} />,
         );
         const data = await this.fill();
-        const data2 = JSON.stringify(data /*, null, 4*/);
+        const data2 = JSON.stringify(data /* , null, 4 */);
         return `<!DOCTYPE html>
 <html>
 <head>
-    <!-- ${pkg.version}> -->
+    <!-- ${this.hostApp.getPlatformVersion()}> -->
     <meta charSet="utf-8">
-    <title>QForms v${pkg.version}</title>
+    <title>QForms v${this.hostApp.getPlatformVersion()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->

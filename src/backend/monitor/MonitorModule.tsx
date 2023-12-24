@@ -9,8 +9,6 @@ import { pConsole } from '../../pConsole';
 import { getWebSocketIP } from '../websocket-helper';
 import { getFilePaths } from '../file-helper';
 
-const pkg = require('../../../package.json');
-
 export class MonitorModule {
     hostApp: BackHostApp;
     css: string[];
@@ -123,9 +121,9 @@ export class MonitorModule {
         return `<!DOCTYPE html>
 <html class="monitor" lang="en">
 <head>
-    <!-- ${pkg.version}> -->
+    <!-- ${this.hostApp.getPlatformVersion()}> -->
     <meta charSet="utf-8">
-    <title>QForms monitor v${pkg.version}</title>
+    <title>QForms monitor v${this.hostApp.getPlatformVersion()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->

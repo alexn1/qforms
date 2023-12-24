@@ -36,8 +36,6 @@ import { Scripts } from '../../../Scripts';
 import { FrontHostApp } from '../../../../frontend';
 import { Application } from '../../../../frontend/viewer/Model/Application/Application';
 
-const pkg = require('../../../../../package.json');
-
 export interface ServerUser {
     id: number;
     name: string;
@@ -151,7 +149,7 @@ export class BkApplication<
         response.virtualPath = context.getVirtualPath();
         response.logErrorUrl = this.getHostApp().getFrontLogUrl() || '/error';
         response.versions = {
-            platform: pkg.version,
+            platform: this.hostApp.getPlatformVersion(),
             app: this.getVersion(),
         };
 
@@ -602,7 +600,7 @@ export class BkApplication<
             this,
             context,
             applicationController,
-            pkg.version,
+            this.hostApp.getPlatformVersion(),
             links,
             scripts,
             data,

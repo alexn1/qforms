@@ -13,8 +13,6 @@ import { BkDataSourceController } from './BkController/BkDataSourceController';
 import { getFilePaths } from '../file-helper';
 import { BaseDto } from '../../frontend';
 
-const pkg = require('../../../package.json');
-
 // to compile without using
 /* export {
     TableForm,
@@ -115,14 +113,14 @@ export class ViewerModule {
         const action = context.getAction();
         if (action === Action.page) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.pageController.page(context, application);
         } else if (action === Action.read) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.select(context, application);
         } else {
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             if (application.isAuthentication() && !context.getUser()) {
                 await this.applicationController.loginGet(context, application);
             } else {
@@ -157,7 +155,7 @@ export class ViewerModule {
             await this.applicationController.loginPost(context, application);
         } else {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             if (action === Action.logout) {
                 await this.applicationController.logout(context, application);
             } else if (action === Action.rpc) {
@@ -194,7 +192,7 @@ export class ViewerModule {
         if (!action) throw new Error('no action');
         if (action === Action.update) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.update(context, application);
         } else {
             throw new Error(`unknown action: ${action}`);
@@ -226,7 +224,7 @@ export class ViewerModule {
         if (!action) throw new Error('no action');
         if (action === Action.delete) {
             this.checkAuthorization(context, application);
-            context.setVersionHeaders(pkg.version, application.getVersion());
+            context.setVersionHeaders(this.hostApp.getPlatformVersion(), application.getVersion());
             await this.dataSourceController.delete(context, application);
         } else {
             throw new Error(`unknown action: ${action}`);

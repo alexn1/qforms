@@ -93,7 +93,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
         host: string | undefined;
         originalUrl: string;
         uri: string;
-        platformVersion: any;
+        platformVersion: string;
         appVersion: string | null;
         body: any;
         status: number | null;
@@ -127,4 +127,5 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     getParams(): TParams;
     getExpress(): Express;
     getSrcDirPath(): string;
+    getPlatformVersion(): string;
 }
