@@ -6636,6 +6636,15 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createLinksElement());
         const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createScriptsElement());
         const data = await this.fill(context);
+        const applicationController = this.createFrontApplicationController(context, data);
+        const element = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
+            ctrl: applicationController,
+        });
+        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
+        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), links, scripts, data, appViewHtml);
+        return html;
+    }
+    createFrontApplicationController(context, data) {
         const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_18__.FrontHostApp({
             url: context.getUrl(),
             cookies: context.getCookies(),
@@ -6644,12 +6653,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         application.init();
         const applicationController = _frontend_viewer_Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_10__.ApplicationController.create(application, frontHostApp);
         applicationController.init();
-        const element = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
-            ctrl: applicationController,
-        });
-        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), links, scripts, data, appViewHtml);
-        return html;
+        return applicationController;
     }
     createLinksElement() {
         return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, {

@@ -574,7 +574,30 @@ export class BkApplication<
         const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement());
         const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement());
         const data = await this.fill(context);
+        const applicationController = this.createFrontApplicationController(context, data);
+        const element = React.createElement(applicationController.getViewClass(), {
+            ctrl: applicationController,
+        });
+        const appViewHtml = ReactDOMServer.renderToString(element);
 
+        const html = home(
+            this,
+            context,
+            applicationController,
+            this.hostApp.getPlatformVersion(),
+            links,
+            scripts,
+            data,
+            appViewHtml,
+        );
+
+        return html;
+    }
+
+    createFrontApplicationController(
+        context: Context,
+        data: ApplicationData,
+    ): ApplicationController {
         // frontHostApp
         const frontHostApp = new FrontHostApp({
             url: context.getUrl(),
@@ -589,25 +612,7 @@ export class BkApplication<
         const applicationController = ApplicationController.create(application, frontHostApp);
         applicationController.init();
 
-        const element = React.createElement(applicationController.getViewClass(), {
-            ctrl: applicationController,
-        });
-
-        const appViewHtml = ReactDOMServer.renderToString(element);
-        // debug('appViewHtml:', appViewHtml);
-
-        const html = home(
-            this,
-            context,
-            applicationController,
-            this.hostApp.getPlatformVersion(),
-            links,
-            scripts,
-            data,
-            appViewHtml,
-        );
-
-        return html;
+        return applicationController;
     }
 
     createLinksElement() {

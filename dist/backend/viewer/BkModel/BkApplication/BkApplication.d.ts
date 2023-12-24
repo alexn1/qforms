@@ -11,6 +11,7 @@ import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
+import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
@@ -85,6 +86,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     static getEnvList(data: ApplicationScheme): string[];
     renderIndexResponse(context: Context): Promise<[contentType: string, response: string]>;
     renderHtml(context: Context): Promise<string>;
+    createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
     createLinksElement(): React.FunctionComponentElement<import("../../../Links").LinksProps>;
     createScriptsElement(): React.FunctionComponentElement<import("../../../Scripts").ScriptsProps>;
 }
