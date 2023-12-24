@@ -571,8 +571,8 @@ export class BkApplication<
     async renderHtml(context: Context): Promise<string> {
         pConsole.debug('BkApplication.renderHtml');
 
-        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement());
-        const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement());
+        const links = ReactDOMServer.renderToStaticMarkup(this.createLinksElement(context));
+        const scripts = ReactDOMServer.renderToStaticMarkup(this.createScriptsElement(context));
         const data = await this.fill(context);
         const applicationController = this.createFrontApplicationController(context, data);
         const element = React.createElement(applicationController.getViewClass(), {
@@ -615,13 +615,13 @@ export class BkApplication<
         return applicationController;
     }
 
-    createLinksElement() {
+    createLinksElement(context: Context) {
         return React.createElement(Links, {
             links: [...this.hostApp.viewerModule.getLinks(), ...this.links],
         });
     }
 
-    createScriptsElement() {
+    createScriptsElement(context: Context) {
         return React.createElement(Scripts, {
             scripts: [...this.hostApp.viewerModule.getScripts(), ...this.scripts],
         });
