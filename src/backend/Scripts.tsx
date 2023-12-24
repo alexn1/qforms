@@ -1,4 +1,4 @@
-interface ScriptsProps {
+export interface ScriptsProps {
     scripts: any[];
 }
 

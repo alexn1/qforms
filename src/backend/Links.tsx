@@ -1,4 +1,4 @@
-interface LinksProps {
+export interface LinksProps {
     links: any[];
 }
 
