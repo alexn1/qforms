@@ -16,10 +16,10 @@ qforms-postgres-sample    postgres:12-alpine    5434    postgres:example
 ## sample database
 
 ```bash
-cd db/postgres
-./docker.run.sh         # run docker container
-./docker.create.sh      # create sample database
-./docker.restore.sh     # restore db from sample.sql
+cd db/postgres/sample
+./01-docker.run.sh         # run docker container
+./02-docker.create.sh      # create sample database
+./03-docker.restore.sh     # restore db from sample.sql
 ```
 
 ## CLI Options
