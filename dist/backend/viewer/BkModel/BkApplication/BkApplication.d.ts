@@ -1,5 +1,4 @@
 import { WebSocket } from 'ws';
-import React from 'react';
 import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { BkModel } from '../BkModel';
@@ -17,8 +16,6 @@ import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { LinksProps } from '../../../Links';
-import { ScriptsProps } from '../../../Scripts';
 export interface ServerUser {
     id: number;
     name: string;
@@ -91,6 +88,4 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
     getAllLinks(): (string | Link)[];
     getAllScripts(): string[];
-    createLinksElement(context: Context): React.FunctionComponentElement<LinksProps>;
-    createScriptsElement(context: Context): React.FunctionComponentElement<ScriptsProps>;
 }

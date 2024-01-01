@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Context } from '../../Context';
 import { BkApplication } from '../BkModel/BkApplication/BkApplication';
@@ -9,6 +10,8 @@ import { Session_deleteUser, Session_save } from '../../Session';
 import { Result } from '../../../Result';
 import { BkModel } from '../BkModel/BkModel';
 import { Helper } from '../../../frontend';
+import { Links } from '../../Links';
+import { Scripts } from '../../Scripts';
 
 export class BkApplicationController {
     constructor(private viewerModule: ViewerModule) {}
@@ -30,10 +33,10 @@ export class BkApplicationController {
     async loginGet(context: Context, application: BkApplication) {
         pConsole.debug('BkApplicationController.loginGet');
         const linksMarkup = ReactDOMServer.renderToStaticMarkup(
-            application.createLinksElement(context),
+            React.createElement(Links, { links: application.getAllLinks() }),
         );
         const scriptsMarkup = ReactDOMServer.renderToStaticMarkup(
-            application.createScriptsElement(context),
+            React.createElement(Scripts, { scripts: application.getAllScripts() }),
         );
         const html = login(
             this.viewerModule.getHostApp().getPlatformVersion(),
@@ -84,10 +87,10 @@ export class BkApplicationController {
             } else {
                 // const users = await application.getUsers(context);
                 const linksMakrup = ReactDOMServer.renderToStaticMarkup(
-                    application.createLinksElement(context),
+                    React.createElement(Links, { links: application.getAllLinks() }),
                 );
                 const scriptsMakrup = ReactDOMServer.renderToStaticMarkup(
-                    application.createScriptsElement(context),
+                    React.createElement(Scripts, { scripts: application.getAllLinks() }),
                 );
                 const html = login(
                     this.viewerModule.getHostApp().getPlatformVersion(),

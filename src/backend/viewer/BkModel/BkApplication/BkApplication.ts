@@ -31,8 +31,8 @@ import { Link, Nullable, ClientUser } from '../../../../types';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { pConsole } from '../../../../pConsole';
 import { _glob, exists2, getFilePaths, readTextFile } from '../../../file-helper';
-import { Links, LinksProps } from '../../../Links';
-import { Scripts, ScriptsProps } from '../../../Scripts';
+import { Links } from '../../../Links';
+import { Scripts } from '../../../Scripts';
 import { FrontHostApp } from '../../../../frontend';
 import { Application } from '../../../../frontend/viewer/Model/Application/Application';
 
@@ -621,15 +621,5 @@ export class BkApplication<
 
     getAllScripts() {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
-    }
-
-    createLinksElement(context: Context): React.FunctionComponentElement<LinksProps> {
-        const links = this.getAllLinks();
-        return React.createElement(Links, { links });
-    }
-
-    createScriptsElement(context: Context): React.FunctionComponentElement<ScriptsProps> {
-        const scripts = this.getAllScripts();
-        return React.createElement(Scripts, { scripts });
     }
 }

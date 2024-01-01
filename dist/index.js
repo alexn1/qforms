@@ -5869,13 +5869,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BkApplicationController": () => (/* binding */ BkApplicationController)
 /* harmony export */ });
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
-/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
-/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
-/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
-/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
+/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _pConsole__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../pConsole */ "./src/pConsole.ts");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../login */ "./src/backend/viewer/login.tsx");
+/* harmony import */ var _Session__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Session */ "./src/backend/Session.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Result */ "./src/Result.ts");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../frontend */ "./src/frontend/index.ts");
+/* harmony import */ var _Links__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Links */ "./src/backend/Links.tsx");
+/* harmony import */ var _Scripts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Scripts */ "./src/backend/Scripts.tsx");
+
+
+
 
 
 
@@ -5887,7 +5894,7 @@ class BkApplicationController {
         this.viewerModule = viewerModule;
     }
     async index(context, bkApplication) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.index');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.index');
         const res = context.getRes();
         await bkApplication.connect(context);
         try {
@@ -5900,10 +5907,10 @@ class BkApplicationController {
         }
     }
     async loginGet(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginGet');
-        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
-        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMarkup, scriptsMarkup, {
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginGet');
+        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getAllLinks() }));
+        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getAllScripts() }));
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMarkup, scriptsMarkup, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -5913,7 +5920,7 @@ class BkApplicationController {
         context.getRes().end(html);
     }
     async loginPost(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginPost');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginPost');
         const { tzOffset, username, password } = context.getBody();
         if (tzOffset === undefined)
             throw new Error('no tzOffset');
@@ -5936,16 +5943,16 @@ class BkApplicationController {
                     session.user = {};
                 session.user[context.getRoute()] = user;
                 session.ip = context.getIp();
-                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_5__.Helper.decodeValue(tzOffset);
+                session.tzOffset = _frontend__WEBPACK_IMPORTED_MODULE_6__.Helper.decodeValue(tzOffset);
                 res.redirect(req.url);
                 this.viewerModule
                     .getHostApp()
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
-                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMakrup, scriptsMakrup, {
+                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getAllLinks() }));
+                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getAllLinks() }));
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMakrup, scriptsMakrup, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
@@ -5961,19 +5968,19 @@ class BkApplicationController {
         }
     }
     async logout(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.logout');
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.logout');
         const user = context.getUser();
         const route = context.getRoute();
         if (!user) {
             throw new Error(`no user for route ${route}`);
         }
         const session = context.getSession();
-        (0,_Session__WEBPACK_IMPORTED_MODULE_3__.Session_deleteUser)(session, route);
-        await (0,_Session__WEBPACK_IMPORTED_MODULE_3__.Session_save)(session);
+        (0,_Session__WEBPACK_IMPORTED_MODULE_4__.Session_deleteUser)(session, route);
+        await (0,_Session__WEBPACK_IMPORTED_MODULE_4__.Session_save)(session);
         context.getRes().json(null);
     }
     async rpc(context, application) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
+        _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.rpc', context.getReq().body);
         const dto = context.getBody();
         const res = context.getRes();
         const model = await BkApplicationController.getModel(context, application);
@@ -5984,14 +5991,14 @@ class BkApplicationController {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 res.json(response);
-                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_4__.Result)) {
+                if (!(_result instanceof _Result__WEBPACK_IMPORTED_MODULE_5__.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.viewerModule.getHostApp().broadcastResult(application, context, _result);
             }
             else {
                 res.json(result);
-                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_4__.Result) {
+                if (result instanceof _Result__WEBPACK_IMPORTED_MODULE_5__.Result) {
                     this.viewerModule.getHostApp().broadcastResult(application, context, result);
                 }
             }
@@ -6659,14 +6666,6 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     }
     getAllScripts() {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
-    }
-    createLinksElement(context) {
-        const links = this.getAllLinks();
-        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links });
-    }
-    createScriptsElement(context) {
-        const scripts = this.getAllScripts();
-        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts });
     }
 }
 
