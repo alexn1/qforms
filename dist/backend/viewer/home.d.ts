@@ -2,4 +2,14 @@ import { ApplicationController } from '../../frontend/viewer/Controller/ModelCon
 import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { ApplicationData } from '../../common/ModelData/ApplicationData';
-export declare const home: (application: BkApplication, context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string) => string;
+export interface HomeProps {
+    context: Context;
+    platformVersion: string;
+    application: BkApplication;
+    appData: ApplicationData;
+    applicationController: ApplicationController;
+    linksMarkup: string;
+    scriptsMarkup: string;
+    appViewMarkup: string;
+}
+export declare function home({ context, platformVersion, application, appData, applicationController, linksMarkup, scriptsMarkup, appViewMarkup, }: HomeProps): string;

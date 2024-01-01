@@ -3,16 +3,27 @@ import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { ApplicationData } from '../../common/ModelData/ApplicationData';
 
-export const home = (
-    application: BkApplication,
-    context: Context,
-    applicationController: ApplicationController,
-    qformsVersion: string,
-    links: string,
-    scripts: string,
-    data: ApplicationData,
-    appViewHtml: string,
-) => {
+export interface HomeProps {
+    context: Context;
+    platformVersion: string;
+    application: BkApplication;
+    appData: ApplicationData;
+    applicationController: ApplicationController;
+    linksMarkup: string;
+    scriptsMarkup: string;
+    appViewMarkup: string;
+}
+
+export function home({
+    context,
+    platformVersion,
+    application,
+    appData,
+    applicationController,
+    linksMarkup,
+    scriptsMarkup,
+    appViewMarkup,
+}: HomeProps) {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
         context.getQuery().debug === '1' ? 'debug' : ''
@@ -20,15 +31,15 @@ export const home = (
         'lang',
     )}">
 <head>
-    <!-- qforms v${qformsVersion} -->
+    <!-- qforms v${platformVersion} -->
     <!-- app v${application.getVersion()}  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${applicationController.getTitle()}</title>
     <!-- links -->
-    ${links}
+    ${linksMarkup}
     <!-- scripts -->
-    ${scripts}
+    ${scriptsMarkup}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const dataScriptElement = document.querySelector('script[type="application/json"]');
@@ -38,11 +49,11 @@ export const home = (
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json">${JSON.stringify(data /* , null, 4 */)}</script>
+    <script type="application/json">${JSON.stringify(appData)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
-    <div class="${application.getViewClassName()}__root">${appViewHtml}</div>
+    <div class="${application.getViewClassName()}__root">${appViewMarkup}</div>
     <div class="alert-root"></div>
 </body>
 </html>`;
-};
+}

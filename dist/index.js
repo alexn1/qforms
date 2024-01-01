@@ -6650,17 +6650,26 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     async renderHtml(context) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
         const pageName = context.getPage();
-        const data = await this.fill(context);
+        const appData = await this.fill(context);
         const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
         const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
-        const applicationController = this.createFrontApplicationController(context, data);
+        const applicationController = this.createFrontApplicationController(context, appData);
         const appElement = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
-        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links }));
-        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts }));
+        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links }));
+        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts }));
         const appViewMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(appElement);
-        return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), linksMakrup, scriptsMakrup, data, appViewMarkup);
+        return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)({
+            context,
+            application: this,
+            applicationController,
+            platformVersion: this.hostApp.getPlatformVersion(),
+            linksMarkup,
+            scriptsMarkup,
+            appData,
+            appViewMarkup,
+        });
     }
     createFrontApplicationController(context, data) {
         const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_18__.FrontHostApp({
@@ -9796,19 +9805,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "home": () => (/* binding */ home)
 /* harmony export */ });
-const home = (application, context, applicationController, qformsVersion, links, scripts, data, appViewHtml) => {
+function home({ context, platformVersion, application, appData, applicationController, linksMarkup, scriptsMarkup, appViewMarkup, }) {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.getQuery().debug === '1' ? 'debug' : ''} ${context.getQuery().frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr('lang')}">
 <head>
-    <!-- qforms v${qformsVersion} -->
+    <!-- qforms v${platformVersion} -->
     <!-- app v${application.getVersion()}  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${applicationController.getTitle()}</title>
     <!-- links -->
-    ${links}
+    ${linksMarkup}
     <!-- scripts -->
-    ${scripts}
+    ${scriptsMarkup}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const dataScriptElement = document.querySelector('script[type="application/json"]');
@@ -9818,14 +9827,14 @@ const home = (application, context, applicationController, qformsVersion, links,
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json">${JSON.stringify(data)}</script>
+    <script type="application/json">${JSON.stringify(appData)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
-    <div class="${application.getViewClassName()}__root">${appViewHtml}</div>
+    <div class="${application.getViewClassName()}__root">${appViewMarkup}</div>
     <div class="alert-root"></div>
 </body>
 </html>`;
-};
+}
 
 
 /***/ }),
