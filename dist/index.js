@@ -6649,13 +6649,16 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     }
     async renderHtml(context) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
+        const pageName = context.getPage();
         const data = await this.fill(context);
+        const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
+        const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
         const applicationController = this.createFrontApplicationController(context, data);
         const appElement = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
-        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links: this.getLinks() }));
-        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts: this.getScripts() }));
+        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links }));
+        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts }));
         const appViewMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(appElement);
         return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), linksMakrup, scriptsMakrup, data, appViewMarkup);
     }
@@ -9405,6 +9408,12 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
         if (!ds)
             throw new Error(`${this.getName()}: no form ${name}`);
         return ds;
+    }
+    getLinks() {
+        return this.getApp().getLinks();
+    }
+    getScripts() {
+        return this.getApp().getScripts();
     }
 }
 

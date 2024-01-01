@@ -6,7 +6,7 @@ import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { Optional } from '../../../../types';
+import { Link, Optional } from '../../../../types';
 export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel<PageScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -22,4 +22,6 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     getForm(name: string): BkForm;
     findDataSource(name: string): Optional<BkDataSource>;
     getDataSource(name: string): BkDataSource;
+    getLinks(): (string | Link)[];
+    getScripts(): string[];
 }

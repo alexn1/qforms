@@ -38,7 +38,7 @@ export const home = (
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+    <script type="application/json">${JSON.stringify(data /* , null, 4 */)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
     <div class="${application.getViewClassName()}__root">${appViewHtml}</div>

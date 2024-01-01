@@ -580,16 +580,19 @@ export class BkApplication<
 
     async renderHtml(context: Context): Promise<string> {
         pConsole.debug('BkApplication.renderHtml');
+        const pageName = context.getPage();
         const data = await this.fill(context);
+        const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
+        const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
         const applicationController = this.createFrontApplicationController(context, data);
         const appElement = React.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
         const linksMakrup = ReactDOMServer.renderToStaticMarkup(
-            React.createElement(Links, { links: this.getLinks() }),
+            React.createElement(Links, { links }),
         );
         const scriptsMakrup = ReactDOMServer.renderToStaticMarkup(
-            React.createElement(Scripts, { scripts: this.getScripts() }),
+            React.createElement(Scripts, { scripts }),
         );
         const appViewMarkup = ReactDOMServer.renderToString(appElement);
         return home(

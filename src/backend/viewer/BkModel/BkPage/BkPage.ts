@@ -9,7 +9,7 @@ import { HttpError } from '../../../HttpError';
 import { debug } from '../../../../console';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
-import { Action, Optional } from '../../../../types';
+import { Action, Link, Optional } from '../../../../types';
 import { Helper } from '../../../../frontend';
 import { PageActionDto, PageActionQuery } from '../../../../frontend';
 
@@ -99,5 +99,13 @@ export class BkPage<
         const ds = this.findDataSource(name);
         if (!ds) throw new Error(`${this.getName()}: no form ${name}`);
         return ds;
+    }
+
+    getLinks(): (string | Link)[] {
+        return this.getApp().getLinks();
+    }
+
+    getScripts(): string[] {
+        return this.getApp().getScripts();
     }
 }
