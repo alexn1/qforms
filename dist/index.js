@@ -5899,7 +5899,8 @@ class BkApplicationController {
         await bkApplication.connect(context);
         try {
             await bkApplication.initContext(context);
-            const [contentType, response] = await bkApplication.renderIndexResponse(context);
+            const appData = await bkApplication.fill(context);
+            const [contentType, response] = bkApplication.renderIndexResponse(context, appData);
             res.setHeader('Content-Type', contentType).end(response);
         }
         finally {
@@ -6643,14 +6644,13 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }
-    async renderIndexResponse(context) {
+    renderIndexResponse(context, appData) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderIndexResponse');
-        return ['text/html; charset=utf-8', await this.renderHtml(context)];
+        return ['text/html; charset=utf-8', this.renderHtml(context, appData)];
     }
-    async renderHtml(context) {
+    renderHtml(context, appData) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
         const pageName = context.getPage();
-        const appData = await this.fill(context);
         const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
         const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
         const applicationController = this.createFrontApplicationController(context, appData);

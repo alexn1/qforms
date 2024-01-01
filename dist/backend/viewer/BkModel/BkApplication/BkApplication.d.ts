@@ -85,8 +85,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: NextFunction): Promise<void>;
     static getEnvList(data: ApplicationScheme): string[];
-    renderIndexResponse(context: Context): Promise<[contentType: string, response: string]>;
-    renderHtml(context: Context): Promise<string>;
+    renderIndexResponse(context: Context, appData: ApplicationData): [contentType: string, response: string];
+    renderHtml(context: Context, appData: ApplicationData): string;
     createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
     getLinks(): (string | Link)[];
     getScripts(): string[];

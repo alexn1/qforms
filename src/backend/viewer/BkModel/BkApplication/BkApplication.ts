@@ -534,7 +534,7 @@ export class BkApplication<
         return fResult;
     }
 
-    getTitle(context: Context) {
+    getTitle(context: Context): string {
         return this.getAttr('caption');
     }
 
@@ -573,15 +573,17 @@ export class BkApplication<
         return ['local', ...list];
     }
 
-    async renderIndexResponse(context: Context): Promise<[contentType: string, response: string]> {
+    renderIndexResponse(
+        context: Context,
+        appData: ApplicationData,
+    ): [contentType: string, response: string] {
         pConsole.debug('BkApplication.renderIndexResponse');
-        return ['text/html; charset=utf-8', await this.renderHtml(context)];
+        return ['text/html; charset=utf-8', this.renderHtml(context, appData)];
     }
 
-    async renderHtml(context: Context): Promise<string> {
+    renderHtml(context: Context, appData: ApplicationData): string {
         pConsole.debug('BkApplication.renderHtml');
         const pageName = context.getPage();
-        const appData = await this.fill(context);
         const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
         const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
         const applicationController = this.createFrontApplicationController(context, appData);
