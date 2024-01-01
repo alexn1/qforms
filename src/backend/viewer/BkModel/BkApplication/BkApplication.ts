@@ -68,9 +68,9 @@ export class BkApplication<
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
+        await this.createMenu(context);
         this.links = await this.findLinks(context);
         this.scripts = await this.findScripts(context);
-        await this.createMenu(context);
     }
 
     getHostApp(): THostApp {
@@ -576,10 +576,10 @@ export class BkApplication<
             ctrl: applicationController,
         });
         const linksMakrup = ReactDOMServer.renderToStaticMarkup(
-            React.createElement(Links, { links: this.getAllLinks() }),
+            React.createElement(Links, { links: this.getLinks() }),
         );
         const scriptsMakrup = ReactDOMServer.renderToStaticMarkup(
-            React.createElement(Scripts, { scripts: this.getAllScripts() }),
+            React.createElement(Scripts, { scripts: this.getScripts() }),
         );
         const appViewMarkup = ReactDOMServer.renderToString(appElement);
         return home(
@@ -615,11 +615,11 @@ export class BkApplication<
         return applicationController;
     }
 
-    getAllLinks() {
+    getLinks() {
         return [...this.hostApp.viewerModule.getLinks(), ...this.links];
     }
 
-    getAllScripts() {
+    getScripts() {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
     }
 }

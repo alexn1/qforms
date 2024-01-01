@@ -5908,8 +5908,8 @@ class BkApplicationController {
     }
     async loginGet(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginGet');
-        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getAllLinks() }));
-        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getAllScripts() }));
+        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks() }));
+        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getScripts() }));
         const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMarkup, scriptsMarkup, {
             name: application.getName(),
             text: application.getText(),
@@ -5950,8 +5950,8 @@ class BkApplicationController {
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getAllLinks() }));
-                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getAllLinks() }));
+                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks() }));
+                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getLinks() }));
                 const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMakrup, scriptsMakrup, {
                     name: application.getName(),
                     text: application.getText(),
@@ -6263,9 +6263,9 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
+        await this.createMenu(context);
         this.links = await this.findLinks(context);
         this.scripts = await this.findScripts(context);
-        await this.createMenu(context);
     }
     getHostApp() {
         return this.hostApp;
@@ -6645,8 +6645,8 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const appElement = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
-        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links: this.getAllLinks() }));
-        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts: this.getAllScripts() }));
+        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links: this.getLinks() }));
+        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts: this.getScripts() }));
         const appViewMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(appElement);
         return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), linksMakrup, scriptsMakrup, data, appViewMarkup);
     }
@@ -6661,10 +6661,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         applicationController.init();
         return applicationController;
     }
-    getAllLinks() {
+    getLinks() {
         return [...this.hostApp.viewerModule.getLinks(), ...this.links];
     }
-    getAllScripts() {
+    getScripts() {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
     }
 }

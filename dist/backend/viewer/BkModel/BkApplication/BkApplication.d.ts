@@ -86,6 +86,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     renderIndexResponse(context: Context): Promise<[contentType: string, response: string]>;
     renderHtml(context: Context): Promise<string>;
     createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
-    getAllLinks(): (string | Link)[];
-    getAllScripts(): string[];
+    getLinks(): (string | Link)[];
+    getScripts(): string[];
 }
