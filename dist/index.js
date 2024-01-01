@@ -6393,11 +6393,28 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const data = this.getColItemData('pageLinks', name);
         return new _BkPageLink_BkPageLink__WEBPACK_IMPORTED_MODULE_6__.BkPageLink(data, this);
     }
-    async createPage(context, pageLinkName) {
-        if (!this.isData('pageLinks', pageLinkName)) {
-            throw new Error(`no page with name: ${pageLinkName}`);
+    async createPageIfNotExists(context, pageName) {
+        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('Application.createPageIfNotExists', pageName);
+        this.authorizeUser(context, pageName);
+        if (this.pages[pageName]) {
+            return this.pages[pageName];
         }
-        const pageLink = this.createPageLink(pageLinkName);
+        return (this.pages[pageName] = await this.createPage(context, pageName));
+    }
+    authorizeUser(context, pageName) {
+        const user = context.getUser();
+        if (user && this.authorizePage(user, pageName) === false) {
+            throw new Error('authorization error');
+        }
+    }
+    authorizePage(user, pageName) {
+        return true;
+    }
+    async createPage(context, pageName) {
+        if (!this.isData('pageLinks', pageName)) {
+            throw new Error(`no page with name: ${pageName}`);
+        }
+        const pageLink = this.createPageLink(pageName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getDirPath(), relFilePath);
         const content = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.readTextFile)(pageFilePath);
@@ -6406,19 +6423,11 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         await page.init(context);
         return page;
     }
-    authorizePage(user, pageName) {
-        return true;
-    }
-    async createPageIfNotExists(context, pageLinkName) {
-        _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('Application.getPage', pageLinkName);
-        const user = context.getUser();
-        if (user && this.authorizePage(user, pageLinkName) === false) {
-            throw new Error('authorization error');
-        }
-        if (this.pages[pageLinkName]) {
-            return this.pages[pageLinkName];
-        }
-        return (this.pages[pageLinkName] = await this.createPage(context, pageLinkName));
+    getPage(name) {
+        const page = this.pages[name];
+        if (!page)
+            throw new Error(`getPage: no page with name ${name}`);
+        return page;
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')

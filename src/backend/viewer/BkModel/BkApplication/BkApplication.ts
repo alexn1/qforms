@@ -256,12 +256,32 @@ export class BkApplication<
         return new BkPageLink(data, this);
     }
 
-    async createPage(context: Context, pageLinkName: string): Promise<BkPage> {
-        // debug('Application.createPage', pageLinkName);
-        if (!this.isData('pageLinks', pageLinkName)) {
-            throw new Error(`no page with name: ${pageLinkName}`);
+    async createPageIfNotExists(context: Context, pageName: string): Promise<BkPage> {
+        pConsole.debug('Application.createPageIfNotExists', pageName);
+        this.authorizeUser(context, pageName);
+        if (this.pages[pageName]) {
+            return this.pages[pageName];
         }
-        const pageLink = this.createPageLink(pageLinkName);
+        return (this.pages[pageName] = await this.createPage(context, pageName));
+    }
+
+    authorizeUser(context: Context, pageName: string): void {
+        const user = context.getUser();
+        if (user && this.authorizePage(user, pageName) === false) {
+            throw new Error('authorization error');
+        }
+    }
+
+    authorizePage(user: ServerUser, pageName: string): boolean {
+        return true;
+    }
+
+    async createPage(context: Context, pageName: string): Promise<BkPage> {
+        // debug('Application.createPage', pageName);
+        if (!this.isData('pageLinks', pageName)) {
+            throw new Error(`no page with name: ${pageName}`);
+        }
+        const pageLink = this.createPageLink(pageName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await readTextFile(pageFilePath);
@@ -271,20 +291,10 @@ export class BkApplication<
         return page;
     }
 
-    authorizePage(user: any, pageName: string): boolean {
-        return true;
-    }
-
-    async createPageIfNotExists(context: Context, pageLinkName: string): Promise<BkPage> {
-        pConsole.debug('Application.getPage', pageLinkName);
-        const user = context.getUser();
-        if (user && this.authorizePage(user, pageLinkName) === false) {
-            throw new Error('authorization error');
-        }
-        if (this.pages[pageLinkName]) {
-            return this.pages[pageLinkName];
-        }
-        return (this.pages[pageLinkName] = await this.createPage(context, pageLinkName));
+    getPage(name: string): BkPage {
+        const page = this.pages[name];
+        if (!page) throw new Error(`getPage: no page with name ${name}`);
+        return page;
     }
 
     getStartupPageLinkNames(): string[] {
