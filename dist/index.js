@@ -6014,7 +6014,7 @@ class BkApplicationController {
     static async getModel(context, application) {
         const body = context.getBody();
         if (body.page) {
-            const page = await application.getPage(context, body.page);
+            const page = await application.createPageIfNotExists(context, body.page);
             if (body.form) {
                 return page.getForm(body.form);
             }
@@ -6065,7 +6065,7 @@ class BkDataSourceController {
     async insert(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkDataSourceController.insert', context.getReq().body.page);
         const body = context.getBody();
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -6083,7 +6083,7 @@ class BkDataSourceController {
     async update(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkDataSourceController.update', context.getReq().body.page);
         const body = context.getBody();
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -6101,7 +6101,7 @@ class BkDataSourceController {
     async delete(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_0__.pConsole.debug('BkDataSourceController.delete', context.getReq().body.page);
         const body = context.getBody();
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -6118,7 +6118,7 @@ class BkDataSourceController {
     }
     static async getDataSource(context, application, { page, form, ds }) {
         if (page) {
-            const bkPage = await application.getPage(context, page);
+            const bkPage = await application.createPageIfNotExists(context, page);
             if (form) {
                 return bkPage.getForm(form).getDataSource(ds);
             }
@@ -6151,7 +6151,7 @@ class BkPageController {
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, pageLinkName);
+            const page = await application.createPageIfNotExists(context, pageLinkName);
             const pageData = await page.fill(context);
             if (pageData === undefined)
                 throw new Error('page action: pageData is undefined');
@@ -6409,7 +6409,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     authorizePage(user, pageName) {
         return true;
     }
-    async getPage(context, pageLinkName) {
+    async createPageIfNotExists(context, pageLinkName) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
@@ -6436,7 +6436,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         const pages = [];
         const pageLinksNames = this.getPageLinksToFill(context);
         for (const pageLinkName of pageLinksNames) {
-            const page = await this.getPage(context, pageLinkName);
+            const page = await this.createPageIfNotExists(context, pageLinkName);
             const response = await page.fill(context);
             pages.push(response);
         }

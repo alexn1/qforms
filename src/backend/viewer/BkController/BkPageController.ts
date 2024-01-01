@@ -10,7 +10,7 @@ export class BkPageController {
         await application.connect(context);
         try {
             await application.initContext(context);
-            const page = await application.getPage(context, pageLinkName);
+            const page = await application.createPageIfNotExists(context, pageLinkName);
             const pageData = await page.fill(context);
             if (pageData === undefined) throw new Error('page action: pageData is undefined');
             const response: PageActionResponse = { page: pageData };

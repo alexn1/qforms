@@ -52,7 +52,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     createPageLink(name: string): BkPageLink;
     createPage(context: Context, pageLinkName: string): Promise<BkPage>;
     authorizePage(user: any, pageName: string): boolean;
-    getPage(context: Context, pageLinkName: string): Promise<BkPage>;
+    createPageIfNotExists(context: Context, pageLinkName: string): Promise<BkPage>;
     getStartupPageLinkNames(): string[];
     getPageLinksToFill(context: Context): string[];
     fillPages(context: Context): Promise<PageData[]>;

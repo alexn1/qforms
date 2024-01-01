@@ -275,7 +275,7 @@ export class BkApplication<
         return true;
     }
 
-    async getPage(context: Context, pageLinkName: string): Promise<BkPage> {
+    async createPageIfNotExists(context: Context, pageLinkName: string): Promise<BkPage> {
         pConsole.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
@@ -306,7 +306,7 @@ export class BkApplication<
         const pages: PageData[] = [];
         const pageLinksNames = this.getPageLinksToFill(context);
         for (const pageLinkName of pageLinksNames) {
-            const page = await this.getPage(context, pageLinkName);
+            const page = await this.createPageIfNotExists(context, pageLinkName);
             const response = await page.fill(context);
             pages.push(response);
         }

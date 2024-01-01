@@ -39,7 +39,7 @@ export class BkDataSourceController {
     async insert(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkDataSourceController.insert', context.getReq()!.body.page);
         const body = context.getBody() as CreateActionDto;
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -58,7 +58,7 @@ export class BkDataSourceController {
     async update(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkDataSourceController.update', context.getReq()!.body.page);
         const body = context.getBody() as UpdateActionDto;
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -77,7 +77,7 @@ export class BkDataSourceController {
     async delete(context: Context, application: BkApplication): Promise<void> {
         pConsole.debug('BkDataSourceController.delete', context.getReq()!.body.page);
         const body = context.getBody() as DeleteActionDto;
-        const page = await application.getPage(context, body.page);
+        const page = await application.createPageIfNotExists(context, body.page);
         const form = page.getForm(body.form);
         const dataSource = form.getDataSource('default');
         await dataSource.getDatabase().use(context, async (database) => {
@@ -98,7 +98,7 @@ export class BkDataSourceController {
         { page, form, ds }: { page?: string; form?: string; ds: string },
     ): Promise<BkDataSource> {
         if (page) {
-            const bkPage = await application.getPage(context, page);
+            const bkPage = await application.createPageIfNotExists(context, page);
             if (form) {
                 return bkPage.getForm(form).getDataSource(ds);
             }

@@ -162,7 +162,7 @@ export class BkApplicationController {
     static async getModel(context: Context, application: BkApplication): Promise<BkModel> {
         const body = context.getBody() as RpcActionDto;
         if (body.page) {
-            const page = await application.getPage(context, body.page);
+            const page = await application.createPageIfNotExists(context, body.page);
             if (body.form) {
                 return page.getForm(body.form);
             }
