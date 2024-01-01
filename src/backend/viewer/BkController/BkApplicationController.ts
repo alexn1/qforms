@@ -29,16 +29,18 @@ export class BkApplicationController {
 
     async loginGet(context: Context, application: BkApplication) {
         pConsole.debug('BkApplicationController.loginGet');
-        const links = ReactDOMServer.renderToStaticMarkup(application.createLinksElement(context));
-        const scripts = ReactDOMServer.renderToStaticMarkup(
+        const linksMarkup = ReactDOMServer.renderToStaticMarkup(
+            application.createLinksElement(context),
+        );
+        const scriptsMarkup = ReactDOMServer.renderToStaticMarkup(
             application.createScriptsElement(context),
         );
         const html = login(
             this.viewerModule.getHostApp().getPlatformVersion(),
             context,
             application,
-            links,
-            scripts,
+            linksMarkup,
+            scriptsMarkup,
             {
                 name: application.getName(),
                 text: application.getText(),
@@ -81,18 +83,18 @@ export class BkApplicationController {
                     );
             } else {
                 // const users = await application.getUsers(context);
-                const links = ReactDOMServer.renderToStaticMarkup(
+                const linksMakrup = ReactDOMServer.renderToStaticMarkup(
                     application.createLinksElement(context),
                 );
-                const scripts = ReactDOMServer.renderToStaticMarkup(
+                const scriptsMakrup = ReactDOMServer.renderToStaticMarkup(
                     application.createScriptsElement(context),
                 );
                 const html = login(
                     this.viewerModule.getHostApp().getPlatformVersion(),
                     context,
                     application,
-                    links,
-                    scripts,
+                    linksMakrup,
+                    scriptsMakrup,
                     {
                         name: application.getName(),
                         text: application.getText(),

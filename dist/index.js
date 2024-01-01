@@ -5901,9 +5901,9 @@ class BkApplicationController {
     }
     async loginGet(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('BkApplicationController.loginGet');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
-        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, links, scripts, {
+        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
+        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
+        const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMarkup, scriptsMarkup, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -5943,9 +5943,9 @@ class BkApplicationController {
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const links = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
-                const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
-                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, links, scripts, {
+                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createLinksElement(context));
+                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_0___default().renderToStaticMarkup(application.createScriptsElement(context));
+                const html = (0,_login__WEBPACK_IMPORTED_MODULE_2__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMakrup, scriptsMakrup, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
@@ -6633,16 +6633,15 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     }
     async renderHtml(context) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
-        const links = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createLinksElement(context));
-        const scripts = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(this.createScriptsElement(context));
         const data = await this.fill(context);
         const applicationController = this.createFrontApplicationController(context, data);
-        const element = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
+        const appElement = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
         });
-        const appViewHtml = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(element);
-        const html = (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), links, scripts, data, appViewHtml);
-        return html;
+        const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links: this.getAllLinks() }));
+        const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts: this.getAllScripts() }));
+        const appViewMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default().renderToString(appElement);
+        return (0,_home__WEBPACK_IMPORTED_MODULE_11__.home)(this, context, applicationController, this.hostApp.getPlatformVersion(), linksMakrup, scriptsMakrup, data, appViewMarkup);
     }
     createFrontApplicationController(context, data) {
         const frontHostApp = new _frontend__WEBPACK_IMPORTED_MODULE_18__.FrontHostApp({
