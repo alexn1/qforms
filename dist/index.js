@@ -6655,15 +6655,19 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         applicationController.init();
         return applicationController;
     }
+    getAllLinks() {
+        return [...this.hostApp.viewerModule.getLinks(), ...this.links];
+    }
+    getAllScripts() {
+        return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
+    }
     createLinksElement(context) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, {
-            links: [...this.hostApp.viewerModule.getLinks(), ...this.links],
-        });
+        const links = this.getAllLinks();
+        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_16__.Links, { links });
     }
     createScriptsElement(context) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, {
-            scripts: [...this.hostApp.viewerModule.getScripts(), ...this.scripts],
-        });
+        const scripts = this.getAllScripts();
+        return react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_17__.Scripts, { scripts });
     }
 }
 

@@ -615,15 +615,21 @@ export class BkApplication<
         return applicationController;
     }
 
+    getAllLinks() {
+        return [...this.hostApp.viewerModule.getLinks(), ...this.links];
+    }
+
+    getAllScripts() {
+        return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
+    }
+
     createLinksElement(context: Context): React.FunctionComponentElement<LinksProps> {
-        return React.createElement(Links, {
-            links: [...this.hostApp.viewerModule.getLinks(), ...this.links],
-        });
+        const links = this.getAllLinks();
+        return React.createElement(Links, { links });
     }
 
     createScriptsElement(context: Context): React.FunctionComponentElement<ScriptsProps> {
-        return React.createElement(Scripts, {
-            scripts: [...this.hostApp.viewerModule.getScripts(), ...this.scripts],
-        });
+        const scripts = this.getAllScripts();
+        return React.createElement(Scripts, { scripts });
     }
 }
