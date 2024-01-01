@@ -68,8 +68,8 @@ export class BkApplication<
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
-        this.links = await this.getLinks(context);
-        this.scripts = await this.getScripts(context);
+        this.links = await this.findLinks(context);
+        this.scripts = await this.findScripts(context);
         await this.createMenu(context);
     }
 
@@ -77,14 +77,14 @@ export class BkApplication<
         return this.hostApp;
     }
 
-    async getLinks(context: Context): Promise<Array<Link | string>> {
+    async findLinks(context: Context): Promise<Array<Link | string>> {
         const virtualPath = context.getVirtualPath();
         return (await getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
 
-    async getScripts(context: Context): Promise<string[]> {
+    async findScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         debug('publicDirPath:', publicDirPath);

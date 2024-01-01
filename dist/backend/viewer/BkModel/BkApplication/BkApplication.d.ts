@@ -38,8 +38,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
-    getLinks(context: Context): Promise<Array<Link | string>>;
-    getScripts(context: Context): Promise<string[]>;
+    findLinks(context: Context): Promise<Array<Link | string>>;
+    findScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
     getPublicDirPath(): string;

@@ -6263,18 +6263,18 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
-        this.links = await this.getLinks(context);
-        this.scripts = await this.getScripts(context);
+        this.links = await this.findLinks(context);
+        this.scripts = await this.findScripts(context);
         await this.createMenu(context);
     }
     getHostApp() {
         return this.hostApp;
     }
-    async getLinks(context) {
+    async findLinks(context) {
         const virtualPath = context.getVirtualPath();
         return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
-    async getScripts(context) {
+    async findScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('publicDirPath:', publicDirPath);
