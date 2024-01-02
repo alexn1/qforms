@@ -12,6 +12,8 @@ import { PageData } from '../../../../common/ModelData/PageData';
 import { Action, Link, Optional } from '../../../../types';
 import { Helper } from '../../../../frontend';
 import { PageActionDto, PageActionQuery } from '../../../../frontend';
+import { ApplicationData } from '../../../../common';
+import { pConsole } from '../../../../pConsole';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,
@@ -107,5 +109,12 @@ export class BkPage<
 
     getScripts(ctx: Context): string[] {
         return this.getApp().getScripts(ctx);
+    }
+
+    renderIndexResponse(
+        context: Context,
+        appData: ApplicationData,
+    ): [contentType: string, response: string] {
+        return this.getApp().renderIndexResponse(context, appData);
     }
 }

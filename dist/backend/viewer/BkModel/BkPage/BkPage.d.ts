@@ -7,6 +7,7 @@ import { Context } from '../../../Context';
 import { PageScheme } from '../../../common/Scheme/PageScheme';
 import { PageData } from '../../../../common/ModelData/PageData';
 import { Link, Optional } from '../../../../types';
+import { ApplicationData } from '../../../../common';
 export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel<PageScheme> {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -24,4 +25,5 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     getDataSource(name: string): BkDataSource;
     getLinks(ctx: Context): (string | Link)[];
     getScripts(ctx: Context): string[];
+    renderIndexResponse(context: Context, appData: ApplicationData): [contentType: string, response: string];
 }

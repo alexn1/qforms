@@ -5900,7 +5900,10 @@ class BkApplicationController {
         try {
             await bkApplication.initContext(context);
             const appData = await bkApplication.fill(context);
-            const [contentType, response] = bkApplication.renderIndexResponse(context, appData);
+            const pageName = context.getPage();
+            const [contentType, response] = pageName
+                ? bkApplication.getPage(pageName).renderIndexResponse(context, appData)
+                : bkApplication.renderIndexResponse(context, appData);
             res.setHeader('Content-Type', contentType).end(response);
         }
         finally {
@@ -9425,6 +9428,9 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
     }
     getScripts(ctx) {
         return this.getApp().getScripts(ctx);
+    }
+    renderIndexResponse(context, appData) {
+        return this.getApp().renderIndexResponse(context, appData);
     }
 }
 
