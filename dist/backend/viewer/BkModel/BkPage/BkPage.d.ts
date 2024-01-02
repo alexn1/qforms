@@ -22,6 +22,6 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     getForm(name: string): BkForm;
     findDataSource(name: string): Optional<BkDataSource>;
     getDataSource(name: string): BkDataSource;
-    getLinks(): (string | Link)[];
-    getScripts(): string[];
+    getLinks(ctx: Context): (string | Link)[];
+    getScripts(ctx: Context): string[];
 }

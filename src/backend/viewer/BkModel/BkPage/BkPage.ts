@@ -101,11 +101,11 @@ export class BkPage<
         return ds;
     }
 
-    getLinks(): (string | Link)[] {
-        return this.getApp().getLinks();
+    getLinks(ctx: Context): (string | Link)[] {
+        return this.getApp().getLinks(ctx);
     }
 
-    getScripts(): string[] {
-        return this.getApp().getScripts();
+    getScripts(ctx: Context): string[] {
+        return this.getApp().getScripts(ctx);
     }
 }

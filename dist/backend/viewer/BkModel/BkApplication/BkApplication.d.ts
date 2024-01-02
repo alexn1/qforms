@@ -38,8 +38,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
-    findLinks(context: Context): Promise<Array<Link | string>>;
-    findScripts(context: Context): Promise<string[]>;
+    private findLinks;
+    private findScripts;
     deinit(): Promise<void>;
     getDirPath(): string;
     getPublicDirPath(): string;
@@ -88,6 +88,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     renderIndexResponse(context: Context, appData: ApplicationData): [contentType: string, response: string];
     renderHtml(context: Context, appData: ApplicationData): string;
     createFrontApplicationController(context: Context, data: ApplicationData): ApplicationController;
-    getLinks(): (string | Link)[];
-    getScripts(): string[];
+    getLinks(ctx: Context): (string | Link)[];
+    getScripts(ctx: Context): string[];
 }

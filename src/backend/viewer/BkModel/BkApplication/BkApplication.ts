@@ -77,14 +77,14 @@ export class BkApplication<
         return this.hostApp;
     }
 
-    async findLinks(context: Context): Promise<Array<Link | string>> {
+    private async findLinks(context: Context): Promise<Array<Link | string>> {
         const virtualPath = context.getVirtualPath();
         return (await getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
 
-    async findScripts(context: Context): Promise<string[]> {
+    private async findScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         debug('publicDirPath:', publicDirPath);
@@ -584,8 +584,10 @@ export class BkApplication<
     renderHtml(context: Context, appData: ApplicationData): string {
         pConsole.debug('BkApplication.renderHtml');
         const pageName = context.getPage();
-        const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
-        const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
+        const links = pageName ? this.getPage(pageName).getLinks(context) : this.getLinks(context);
+        const scripts = pageName
+            ? this.getPage(pageName).getScripts(context)
+            : this.getScripts(context);
         const applicationController = this.createFrontApplicationController(context, appData);
         const appElement = React.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
@@ -630,11 +632,11 @@ export class BkApplication<
         return applicationController;
     }
 
-    getLinks() {
+    getLinks(ctx: Context) {
         return [...this.hostApp.viewerModule.getLinks(), ...this.links];
     }
 
-    getScripts() {
+    getScripts(ctx: Context) {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
     }
 }

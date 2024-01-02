@@ -5909,8 +5909,8 @@ class BkApplicationController {
     }
     async loginGet(context, application) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.debug('BkApplicationController.loginGet');
-        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks() }));
-        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getScripts() }));
+        const linksMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks(context) }));
+        const scriptsMarkup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getScripts(context) }));
         const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMarkup, scriptsMarkup, {
             name: application.getName(),
             text: application.getText(),
@@ -5951,8 +5951,8 @@ class BkApplicationController {
                     .logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             }
             else {
-                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks() }));
-                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getLinks() }));
+                const linksMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Links__WEBPACK_IMPORTED_MODULE_7__.Links, { links: application.getLinks(context) }));
+                const scriptsMakrup = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default().renderToStaticMarkup(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Scripts__WEBPACK_IMPORTED_MODULE_8__.Scripts, { scripts: application.getLinks(context) }));
                 const html = (0,_login__WEBPACK_IMPORTED_MODULE_3__.login)(this.viewerModule.getHostApp().getPlatformVersion(), context, application, linksMakrup, scriptsMakrup, {
                     name: application.getName(),
                     text: application.getText(),
@@ -6651,8 +6651,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     renderHtml(context, appData) {
         _pConsole__WEBPACK_IMPORTED_MODULE_14__.pConsole.debug('BkApplication.renderHtml');
         const pageName = context.getPage();
-        const links = pageName ? this.getPage(pageName).getLinks() : this.getLinks();
-        const scripts = pageName ? this.getPage(pageName).getScripts() : this.getScripts();
+        const links = pageName ? this.getPage(pageName).getLinks(context) : this.getLinks(context);
+        const scripts = pageName
+            ? this.getPage(pageName).getScripts(context)
+            : this.getScripts(context);
         const applicationController = this.createFrontApplicationController(context, appData);
         const appElement = react__WEBPACK_IMPORTED_MODULE_1___default().createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
@@ -6682,10 +6684,10 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         applicationController.init();
         return applicationController;
     }
-    getLinks() {
+    getLinks(ctx) {
         return [...this.hostApp.viewerModule.getLinks(), ...this.links];
     }
-    getScripts() {
+    getScripts(ctx) {
         return [...this.hostApp.viewerModule.getScripts(), ...this.scripts];
     }
 }
@@ -9418,11 +9420,11 @@ class BkPage extends _BkModel__WEBPACK_IMPORTED_MODULE_1__.BkModel {
             throw new Error(`${this.getName()}: no form ${name}`);
         return ds;
     }
-    getLinks() {
-        return this.getApp().getLinks();
+    getLinks(ctx) {
+        return this.getApp().getLinks(ctx);
     }
-    getScripts() {
-        return this.getApp().getScripts();
+    getScripts(ctx) {
+        return this.getApp().getScripts(ctx);
     }
 }
 
