@@ -1,3 +1,5 @@
+import { Link } from '../types';
+
 export interface LinksProps {
     links: any[];
 }
@@ -5,7 +7,7 @@ export interface LinksProps {
 export const Links = ({ links }: LinksProps) => {
     return (
         <>
-            {links.map((link, i) => {
+            {links.map((link: string | Link, i) => {
                 if (typeof link === 'string') {
                     return <link key={i} rel={'stylesheet'} href={link} />;
                 } else if (typeof link === 'object') {
@@ -13,8 +15,9 @@ export const Links = ({ links }: LinksProps) => {
                         <link
                             key={i}
                             rel={link.rel}
+                            type={link.type}
                             href={link.href}
-                            crossOrigin={link.crossorigin ? 'anonymous' : undefined}
+                            crossOrigin={link.crossorigin}
                         />
                     );
                 }

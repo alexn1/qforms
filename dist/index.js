@@ -2040,7 +2040,7 @@ const Links = ({ links }) => {
                 return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", { rel: 'stylesheet', href: link }, i);
             }
             else if (typeof link === 'object') {
-                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", { rel: link.rel, href: link.href, crossOrigin: link.crossorigin ? 'anonymous' : undefined }, i));
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("link", { rel: link.rel, type: link.type, href: link.href, crossOrigin: link.crossorigin }, i));
             }
         }) }));
 };

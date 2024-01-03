@@ -58,8 +58,15 @@ export enum Action {
 }
 
 export interface Link {
-    href: string;
     rel: string;
+    type?: string;
+    href: string;
+    crossorigin?: string;
+}
+
+export interface Script {
+    type: string;
+    src: string;
 }
 
 export interface Access {
