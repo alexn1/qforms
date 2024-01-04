@@ -14,6 +14,7 @@ import { Optional, Scalar, Route } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 import { Nullable } from '../types';
+import { Router } from './Router';
 export interface BackHostAppConfig {
     srcDirPath?: string;
     distDirPath?: string;
@@ -128,4 +129,5 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     getExpress(): Express;
     getSrcDirPath(): string;
     getPlatformVersion(): string;
+    getRouter(): Router;
 }

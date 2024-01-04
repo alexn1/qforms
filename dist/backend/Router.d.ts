@@ -16,6 +16,6 @@ export declare class Router {
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePatch(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleDelete(req: Request, res: Response, next: NextFunction): Promise<void>;
-    alias(method: ExpressMethod, path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete', optionsOrCallback?: Record<string, Nullable<Scalar>> | ((req: Request) => void)): void;
+    alias(method: ExpressMethod, path: string | RegExp, [module, appDirName, appFileName, env, domain]: Route, fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete' | 'moduleGetFile', optionsOrCallback?: Record<string, Nullable<Scalar>> | ((req: Request) => void)): void;
     static logRequestWithBody(req: Request): void;
 }

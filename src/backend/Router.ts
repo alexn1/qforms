@@ -129,7 +129,7 @@ export class Router {
         method: ExpressMethod,
         path: string | RegExp,
         [module, appDirName, appFileName, env, domain]: Route,
-        fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete',
+        fn: 'moduleGet' | 'modulePost' | 'modulePatch' | 'moduleDelete' | 'moduleGetFile',
         optionsOrCallback?: Record<string, Nullable<Scalar>> | ((req: Request) => void),
     ) {
         this.hostApp

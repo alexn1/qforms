@@ -707,4 +707,8 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     getPlatformVersion(): string {
         return pkg.version;
     }
+
+    getRouter(): Router {
+        return this.router;
+    }
 }

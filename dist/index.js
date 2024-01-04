@@ -1315,6 +1315,9 @@ class BackHostApp {
     getPlatformVersion() {
         return pkg.version;
     }
+    getRouter() {
+        return this.router;
+    }
 }
 __decorate([
     (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug),
