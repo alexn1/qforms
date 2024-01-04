@@ -6276,13 +6276,13 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
     }
     async findLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        const dirPath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), 'css');
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(dirPath, 'css')).map((src) => `${virtualPath}/css/${src}`);
     }
     async findScripts(context) {
         const virtualPath = context.getVirtualPath();
-        const publicDirPath = this.getPublicDirPath();
-        (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)('publicDirPath:', publicDirPath);
-        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        const dirPath = path__WEBPACK_IMPORTED_MODULE_0___default().join(this.getPublicDirPath(), 'js');
+        return (await (0,_file_helper__WEBPACK_IMPORTED_MODULE_15__.getFilePaths)(dirPath, 'js')).map((src) => `${virtualPath}/js/${src}`);
     }
     async deinit() {
         (0,_console__WEBPACK_IMPORTED_MODULE_13__.debug)(`Application.deinit: ${this.getName()}`);

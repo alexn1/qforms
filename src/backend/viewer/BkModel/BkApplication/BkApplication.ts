@@ -79,18 +79,14 @@ export class BkApplication<
 
     private async findLinks(context: Context): Promise<Array<Link | string>> {
         const virtualPath = context.getVirtualPath();
-        return (await getFilePaths(this.getPublicDirPath(), 'css')).map(
-            (src) => `${virtualPath}/${src}`,
-        );
+        const dirPath = path.join(this.getPublicDirPath(), 'css');
+        return (await getFilePaths(dirPath, 'css')).map((src) => `${virtualPath}/css/${src}`);
     }
 
     private async findScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
-        const publicDirPath = this.getPublicDirPath();
-        debug('publicDirPath:', publicDirPath);
-        return (await getFilePaths(publicDirPath, 'js')).map(
-            (src: string) => `${virtualPath}/${src}`,
-        );
+        const dirPath = path.join(this.getPublicDirPath(), 'js');
+        return (await getFilePaths(dirPath, 'js')).map((src: string) => `${virtualPath}/js/${src}`);
     }
 
     async deinit(): Promise<void> {
