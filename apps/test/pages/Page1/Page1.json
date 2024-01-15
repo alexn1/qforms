@@ -12,5 +12,49 @@
     },
     "dataSources": [],
     "actions": [],
-    "forms": []
+    "forms": [
+        {
+            "@class": "RowForm",
+            "@attributes": {
+                "name": "Form1",
+                "caption": "Form1",
+                "visible": "true",
+                "cssBlock": "",
+                "viewClass": "",
+                "ctrlClass": "",
+                "modelClass": "",
+                "newMode": "",
+                "backOnly": "false",
+                "refreshButton": "true"
+            },
+            "dataSources": [],
+            "actions": [],
+            "fields": [
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "field1",
+                        "caption": "field1",
+                        "column": "field1",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "string",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                }
+            ]
+        }
+    ]
 }
