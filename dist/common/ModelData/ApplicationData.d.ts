@@ -9,6 +9,10 @@ export interface MenuItem {
     page?: string;
     action?: string;
 }
+export interface NavItem {
+    page: string;
+    caption: string;
+}
 export interface ApplicationData extends ModelData {
     class: string;
     caption: string;
@@ -31,7 +35,7 @@ export interface ApplicationData extends ModelData {
     user: Nullable<ClientUser>;
     text: any;
     menu: Record<string, MenuItem[]>;
-    nav: any;
+    nav: Record<string, NavItem[]>;
     params?: {
         [name: string]: any;
     };

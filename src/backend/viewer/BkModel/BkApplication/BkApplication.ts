@@ -21,7 +21,7 @@ import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { home } from '../../home';
 import * as text from '../../text';
-import { ApplicationData, MenuItem } from '../../../../common/ModelData/ApplicationData';
+import { ApplicationData, MenuItem, NavItem } from '../../../../common/ModelData/ApplicationData';
 import { ApplicationScheme } from '../../../common/Scheme/ApplicationScheme';
 import { NextFunction } from 'express';
 import { debug } from '../../../../console';
@@ -50,8 +50,8 @@ export class BkApplication<
     pages: { [pageLinkName: string]: BkPage } = {};
     links: Array<Link | string>;
     scripts: string[];
-    menu: Record<string, any[]>;
-    nav: Record<string, any[]>;
+    menu: Record<string, MenuItem[]>;
+    nav: Record<string, NavItem[]>;
     clients: WebSocket[] = [];
 
     constructor(
@@ -200,7 +200,7 @@ export class BkApplication<
     async createMenu(ctx: Context): Promise<void> {
         // debug('Application.createMenu');
         const menu: Record<string, MenuItem[]> = {};
-        const nav: Record<string, any[]> = {};
+        const nav: Record<string, NavItem[]> = {};
 
         // pages
         const pageLinkNames = this.getItemNames('pageLinks');

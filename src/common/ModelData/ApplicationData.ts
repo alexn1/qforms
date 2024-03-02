@@ -11,6 +11,11 @@ export interface MenuItem {
     action?: string;
 }
 
+export interface NavItem {
+    page: string;
+    caption: string;
+}
+
 export interface ApplicationData extends ModelData {
     class: string;
     caption: string;
@@ -35,7 +40,7 @@ export interface ApplicationData extends ModelData {
     // any
     text: any;
     menu: Record<string, MenuItem[]>;
-    nav: any;
+    nav: Record<string, NavItem[]>;
 
     params?: {
         [name: string]: any;
