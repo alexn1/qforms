@@ -63,11 +63,11 @@ export class ReactComponent<
         this.state.classList.splice(this.state.classList.indexOf(className), 1);
     }
 
-    getCssBlockName() {
+    getCssBlockName(): string {
         return this.constructor.name;
     }
 
-    getCssClassNames() {
+    getCssClassNames(): string {
         return this.getClassList().join(' ');
     }
 

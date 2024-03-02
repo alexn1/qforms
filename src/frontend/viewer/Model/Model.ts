@@ -19,7 +19,7 @@ export class Model<TModelData extends ModelData = ModelData> extends EventEmitte
         this.deinited = true;
     }
 
-    static getAttr(data: ModelData, name: string): string {
+    static getAttr(data: ModelData, name: string): any {
         // @ts-ignore
         return data[name];
     }
@@ -29,19 +29,19 @@ export class Model<TModelData extends ModelData = ModelData> extends EventEmitte
         return data[name];
     }
 
-    static getName(data: ModelData) {
+    static getName(data: ModelData): string {
         return Model.getAttr(data, 'name');
     }
 
-    static getClassName(data: ModelData) {
+    static getClassName(data: ModelData): string {
         return Model.getAttr(data, 'class');
     }
 
-    isAttr(name: string) {
+    isAttr(name: string): boolean {
         return this.data.hasOwnProperty(name);
     }
 
-    getAttr(name: string): string {
+    getAttr(name: string): any {
         // @ts-ignore
         return this.data[name];
     }

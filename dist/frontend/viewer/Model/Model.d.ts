@@ -9,12 +9,12 @@ export declare class Model<TModelData extends ModelData = ModelData> extends Eve
     constructor(data: TModelData, parent?: Model<ModelData> | undefined);
     init(): void;
     deinit(): void;
-    static getAttr(data: ModelData, name: string): string;
+    static getAttr(data: ModelData, name: string): any;
     static getCol(data: ModelData, name: string): any;
     static getName(data: ModelData): string;
     static getClassName(data: ModelData): string;
     isAttr(name: string): boolean;
-    getAttr(name: string): string;
+    getAttr(name: string): any;
     getCol(name: string): any;
     getClassName(): string;
     getName(): string;

@@ -4,7 +4,7 @@ import { JSONString } from '../../../../../types';
 import { DateTimeHelper } from '../../../../common';
 
 export class DateField extends Field {
-    getFormat() {
+    getFormat(): string {
         return this.getAttr('format');
     }
 

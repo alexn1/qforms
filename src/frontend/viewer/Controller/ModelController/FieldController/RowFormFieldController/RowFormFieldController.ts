@@ -200,7 +200,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         this.state.changed = this.calcChangedState(this.getRow());
     }
 
-    getPlaceholder() {
+    getPlaceholder(): string | null {
         // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
         if (this.getModel().getAttr('placeholder')) return this.getModel().getAttr('placeholder');
         if (this.getApp().isDebugMode()) {

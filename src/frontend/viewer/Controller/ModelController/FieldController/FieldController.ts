@@ -106,7 +106,7 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return this.getModel().getAttr('autoFocus') === 'true';
     }
 
-    getAutocomplete() {
+    getAutocomplete(): string | null {
         return this.getModel().getAttr('autocomplete') || null;
     }
 

@@ -42,7 +42,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         return this.getModel().getComboBoxDataSource()!.getRows();
     }
 
-    getPlaceholder() {
+    getPlaceholder(): string | null {
         if (this.getModel().getAttr('placeholder')) return this.getModel().getAttr('placeholder');
         return this.getApp().isDebugMode() ? '[null]' : null;
     }

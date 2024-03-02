@@ -24,7 +24,7 @@ export class ModelView<T extends ModelController<Model>> extends View<T> {
             });
     }
 
-    getCssBlockName() {
+    getCssBlockName(): string {
         const model = this.getCtrl().getModel();
         if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
             return model.getAttr('cssBlock');
