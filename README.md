@@ -49,7 +49,7 @@ $ npm run release
 ## Deploy
 
 ```bash
-$ npx gulp deploy
+$ npx run deploy
 ```
 
 ## Docker
