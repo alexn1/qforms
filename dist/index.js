@@ -19762,6 +19762,9 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_1__.Model {
     getRoute() {
         return this.getAttr('route');
     }
+    getNav() {
+        return this.getData().nav;
+    }
 }
 _common_Helper__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(Application);
 

@@ -5,7 +5,7 @@ import { FrontHostApp, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
-import { ApplicationData } from '../../../../common/ModelData/ApplicationData';
+import { ApplicationData, NavItem } from '../../../../common/ModelData/ApplicationData';
 import { RpcActionDto } from '../../../common';
 
 export class Application extends Model<ApplicationData> {
@@ -148,6 +148,10 @@ export class Application extends Model<ApplicationData> {
 
     getRoute(): string {
         return this.getAttr('route');
+    }
+
+    getNav(): Record<string, NavItem[]> {
+        return this.getData().nav;
     }
 }
 
