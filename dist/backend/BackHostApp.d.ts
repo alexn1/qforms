@@ -128,6 +128,8 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     getParams(): TParams;
     getExpress(): Express;
     getSrcDirPath(): string;
-    getPlatformVersion(): string;
     getRouter(): Router;
+    getName(): string | null;
+    getVersion(): string | null;
+    getPlatformVersion(): string;
 }

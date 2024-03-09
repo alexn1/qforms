@@ -11,6 +11,7 @@ export declare class Router {
     private hostApp;
     constructor(hostApp: BackHostApp);
     createRoutes(): void;
+    getVersion(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;

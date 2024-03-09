@@ -121,7 +121,7 @@ export class BkApplication<
     }
 
     getVersion(): string | null {
-        return null;
+        return this.getHostApp().getVersion();
     }
 
     fillAttributes(response: ApplicationData): void {

@@ -1312,11 +1312,17 @@ class BackHostApp {
     getSrcDirPath() {
         return this.srcDirPath;
     }
-    getPlatformVersion() {
-        return pkg.version;
-    }
     getRouter() {
         return this.router;
+    }
+    getName() {
+        return null;
+    }
+    getVersion() {
+        return null;
+    }
+    getPlatformVersion() {
+        return pkg.version;
     }
 }
 __decorate([
@@ -2078,6 +2084,7 @@ class Router {
             this.hostApp.getExpress().get('/index2', this.hostApp.indexModule.get.bind(this));
             this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
+        this.hostApp.getExpress().get('/version', this.getVersion.bind(this));
         this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
         this.hostApp
             .getExpress()
@@ -2094,6 +2101,13 @@ class Router {
         this.hostApp
             .getExpress()
             .delete('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleDelete.bind(this));
+    }
+    async getVersion(req, res, next) {
+        res.json({
+            name: this.hostApp.getName(),
+            app: this.hostApp.getVersion(),
+            platform: this.hostApp.getPlatformVersion(),
+        });
     }
     async moduleGet(req, res, next) {
         _pConsole__WEBPACK_IMPORTED_MODULE_2__.pConsole.log(colors_safe__WEBPACK_IMPORTED_MODULE_0___default().magenta.underline('GET'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`);
@@ -6306,7 +6320,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         return _text__WEBPACK_IMPORTED_MODULE_12__[lang];
     }
     getVersion() {
-        return null;
+        return this.getHostApp().getVersion();
     }
     fillAttributes(response) {
         response.class = this.getClassName();

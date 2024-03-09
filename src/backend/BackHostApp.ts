@@ -704,11 +704,21 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         return this.srcDirPath;
     }
 
-    getPlatformVersion(): string {
-        return pkg.version;
-    }
-
     getRouter(): Router {
         return this.router;
+    }
+
+    /* host app name */
+    getName(): string | null {
+        return null;
+    }
+
+    /* host app version */
+    getVersion(): string | null {
+        return null;
+    }
+
+    getPlatformVersion(): string {
+        return pkg.version;
     }
 }

@@ -23,6 +23,9 @@ export class Router {
             this.hostApp.getExpress().post('/index2', this.hostApp.indexModule.post.bind(this));
         }
 
+        // version
+        this.hostApp.getExpress().get('/version', this.getVersion.bind(this));
+
         // monitor module
         this.hostApp.getExpress().get('/monitor', this.hostApp.monitorModule.get.bind(this));
 
@@ -55,6 +58,14 @@ export class Router {
                 '/:module/:appDirName/:appFileName/:env/:domain/',
                 this.moduleDelete.bind(this),
             );
+    }
+
+    async getVersion(req: Request, res: Response, next: NextFunction): Promise<void> {
+        res.json({
+            name: this.hostApp.getName(),
+            app: this.hostApp.getVersion(),
+            platform: this.hostApp.getPlatformVersion(),
+        });
     }
 
     async moduleGet(req: Request, res: Response, next: NextFunction): Promise<void> {
