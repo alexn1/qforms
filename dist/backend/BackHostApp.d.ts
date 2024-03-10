@@ -130,6 +130,6 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     getSrcDirPath(): string;
     getRouter(): Router;
     getName(): string | null;
-    getVersion(): string | null;
+    getHostVersion(): string | null;
     getPlatformVersion(): string;
 }

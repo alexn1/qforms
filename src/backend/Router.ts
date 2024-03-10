@@ -63,7 +63,7 @@ export class Router {
     async getVersion(req: Request, res: Response, next: NextFunction): Promise<void> {
         res.json({
             name: this.hostApp.getName(),
-            app: this.hostApp.getVersion(),
+            host: this.hostApp.getHostVersion(),
             platform: this.hostApp.getPlatformVersion(),
         });
     }

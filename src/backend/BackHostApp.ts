@@ -714,7 +714,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     }
 
     /* host app version */
-    getVersion(): string | null {
+    getHostVersion(): string | null {
         return null;
     }
 

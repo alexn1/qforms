@@ -1318,7 +1318,7 @@ class BackHostApp {
     getName() {
         return null;
     }
-    getVersion() {
+    getHostVersion() {
         return null;
     }
     getPlatformVersion() {
@@ -2105,7 +2105,7 @@ class Router {
     async getVersion(req, res, next) {
         res.json({
             name: this.hostApp.getName(),
-            app: this.hostApp.getVersion(),
+            host: this.hostApp.getHostVersion(),
             platform: this.hostApp.getPlatformVersion(),
         });
     }
@@ -6320,7 +6320,7 @@ class BkApplication extends _BkModel__WEBPACK_IMPORTED_MODULE_4__.BkModel {
         return _text__WEBPACK_IMPORTED_MODULE_12__[lang];
     }
     getVersion() {
-        return this.getHostApp().getVersion();
+        return this.getHostApp().getHostVersion();
     }
     fillAttributes(response) {
         response.class = this.getClassName();
