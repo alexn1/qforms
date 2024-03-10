@@ -54,29 +54,26 @@ class Lib {
         });
     }
 
-    static async exec(cmd, quiet = true) {
-        console.log(cmd);
+    static exec(cmd, quiet = true) {
         return new Promise((resolve, reject) => {
+            console.log(cmd);
+            let exitCode;
             const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
                 if (err) {
                     console.error('callback:', JSON.stringify({ err, stdout, stderr }, null, 4));
+                    err.code = exitCode;
+                    err.stdout = stdout;
+                    err.stderr = stderr;
                     reject(err);
                 } else {
-                    resolve();
+                    resolve(stdout);
                 }
             });
-            if (!quiet) childProcess.stdout.on('data', (data) => process.stdout.write(data));
-            if (!quiet) childProcess.stderr.on('data', (data) => process.stderr.write(data));
-            /* childProcess.on('exit', (code) => {
-                // console.debug('exit:', code, typeof code);
-                if (code) {
-                    const err = new Error(`"${cmd}" process exited with code: ${code}`);
-                    err.code = code;
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            }); */
+            childProcess.on('exit', (code) => (exitCode = code));
+            if (!quiet) {
+                childProcess.stdout.on('data', (data) => process.stdout.write(data));
+                childProcess.stderr.on('data', (data) => process.stderr.write(data));
+            }
         });
     }
 

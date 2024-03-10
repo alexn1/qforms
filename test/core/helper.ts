@@ -6,17 +6,26 @@ export async function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function exec(cmd: string, quiet = true, throwError = true): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+export function exec(cmd: string, quiet = true, throwError = true): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        let exitCode: number | null;
         const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
             if (throwError && err) {
+                err.code = exitCode ?? undefined;
+                // @ts-ignore
+                err.stdout = stdout;
+                // @ts-ignore
+                err.stderr = stderr;
                 reject(err);
             } else {
-                resolve();
+                resolve(stdout);
             }
         });
-        if (!quiet) childProcess.stdout!.on('data', (data) => process.stdout.write(data));
-        if (!quiet) childProcess.stderr!.on('data', (data) => process.stderr.write(data));
+        childProcess.on('exit', (code: number | null) => (exitCode = code));
+        if (!quiet) {
+            childProcess.stdout!.on('data', (data) => process.stdout.write(data));
+            childProcess.stderr!.on('data', (data) => process.stderr.write(data));
+        }
     });
 }
 
