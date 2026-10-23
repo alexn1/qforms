@@ -15,7 +15,46 @@
         "modelClass": ""
     },
     "env": {},
-    "databases": [],
+    "databases": [
+        {
+            "@class": "MySqlDatabase",
+            "@attributes": {
+                "name": "default",
+                "modelClass": ""
+            },
+            "params": [
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "\"localhost\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "\"pnd\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "\"pnd\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "\"pnd\""
+                    }
+                }
+            ],
+            "tables": []
+        }
+    ],
     "dataSources": [],
     "actions": [],
     "pageLinks": [
