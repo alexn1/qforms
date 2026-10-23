@@ -207,6 +207,11 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         if (['DATE', 'DATETIME', 'TIME', 'TIMESTAMP'].includes(field.type)) {
             return field.string();
         }
+        // tinyint(1) is boolean (as in PostgreSQL), see getColumnTypeByDataType
+        if (field.type === 'TINY' && field.length === 1) {
+            const value = field.string();
+            return value === null ? null : value !== '0';
+        }
         return next();
     }
 
@@ -302,6 +307,30 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             default:
                 return null;
         }
+    }
+
+    getDeleteQuery(tableName: string, rowKeyValues: any): string {
+        const whereString = Object.keys(rowKeyValues)
+            .map((keyColumn) => `\`${keyColumn}\` = {${keyColumn}}`)
+            .join(' and ');
+        return `delete from \`${tableName}\` where ${whereString}`;
+    }
+
+    getUpdateQuery(tableName: string, values: any, where: any): string {
+        const valueKeys = Object.keys(values);
+        const whereKeys = Object.keys(where);
+        if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
+        if (whereKeys.length === 0) throw new Error('getUpdateQuery: no where');
+        const valuesString = valueKeys.map((name) => `\`${name}\` = {val_${name}}`).join(', ');
+        const whereString = whereKeys.map((name) => `\`${name}\` = {key_${name}}`).join(' and ');
+        return `update \`${tableName}\` set ${valuesString} where ${whereString}`;
+    }
+
+    getInsertQuery(tableName: string, values: any): string {
+        const columns = Object.keys(values);
+        const columnsString = columns.map((column) => `\`${column}\``).join(', ');
+        const valuesString = columns.map((column) => `{${column}}`).join(', ');
+        return `insert into \`${tableName}\`(${columnsString}) values (${valuesString})`;
     }
 
     async insertRow(context, table, values, autoColumnTypes = {}): Promise<Row> {

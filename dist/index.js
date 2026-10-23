@@ -8038,6 +8038,10 @@ class BkMySqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_1__.BkSqlD
         if (['DATE', 'DATETIME', 'TIME', 'TIMESTAMP'].includes(field.type)) {
             return field.string();
         }
+        if (field.type === 'TINY' && field.length === 1) {
+            const value = field.string();
+            return value === null ? null : value !== '0';
+        }
         return next();
     }
     async getTableList() {
@@ -8128,6 +8132,29 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             default:
                 return null;
         }
+    }
+    getDeleteQuery(tableName, rowKeyValues) {
+        const whereString = Object.keys(rowKeyValues)
+            .map((keyColumn) => `\`${keyColumn}\` = {${keyColumn}}`)
+            .join(' and ');
+        return `delete from \`${tableName}\` where ${whereString}`;
+    }
+    getUpdateQuery(tableName, values, where) {
+        const valueKeys = Object.keys(values);
+        const whereKeys = Object.keys(where);
+        if (valueKeys.length === 0)
+            throw new Error('getUpdateQuery: no values');
+        if (whereKeys.length === 0)
+            throw new Error('getUpdateQuery: no where');
+        const valuesString = valueKeys.map((name) => `\`${name}\` = {val_${name}}`).join(', ');
+        const whereString = whereKeys.map((name) => `\`${name}\` = {key_${name}}`).join(' and ');
+        return `update \`${tableName}\` set ${valuesString} where ${whereString}`;
+    }
+    getInsertQuery(tableName, values) {
+        const columns = Object.keys(values);
+        const columnsString = columns.map((column) => `\`${column}\``).join(', ');
+        const valuesString = columns.map((column) => `{${column}}`).join(', ');
+        return `insert into \`${tableName}\`(${columnsString}) values (${valuesString})`;
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
         (0,_console__WEBPACK_IMPORTED_MODULE_2__.debug)(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
