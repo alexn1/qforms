@@ -56,3 +56,23 @@ Use `pConsole` / `debug` from `src/pConsole.ts` / `src/console.ts` rather than `
 ## Language
 
 Communicate with the user in Russian: write all replies and explanations in Russian (code, identifiers and commit messages follow the project conventions and stay in English).
+
+## Migrating old apps (pnd-admin → pnd-admin-2)
+
+Sibling repos `../pnd-admin` (old format) and `../pnd-admin-2` (current format, `npm link qforms` → uses local `dist/`, so run `npm run build` here first). Pages are migrated one by one; done: `Users`, `User`. Server: `cd ../pnd-admin-2 && node apps/pnd/start.js` (port 3010, user usually already runs it; it re-reads page JSON per request, no restart needed for page edits).
+
+Format differences (old → new), best reference is `apps-ts/sample/pages/Persons/Persons.json`:
+- Collections `forms`/`fields`/`dataSources`/`keyColumns` are arrays (old: name→object maps); add `actions: []`, page/form attrs `formatVersion`, `cssBlock`, `viewClass`, `ctrlClass`, `modelClass`, `visible` (old `isVisible`).
+- Data source `query` → `multipleQuery` (table) / `singleQuery` (row, `where id = {key}`; composite key → `{key1}`, `{key2}`...), plus `countQuery`, `limit`. `keyColumns` stay empty: keys come from the table in `App.json` (`key="true"`).
+- Field attrs need the full set (`type` is required even if empty, else `no attribute 'type'`); copy from the sample. `width: "0"` → `""`. Date columns → `DateTimeField` (`timezone: "false"` for MySQL wall-clock values).
+- Query params: `{this.Filter.x}` → `{Page.Filter.x}`; `{this.Form.id}` needs the field to be `param="true"`. Page key is `{key}`.
+- DB names: old `default` (MySQL) → `pnd` in pnd-admin-2 (`default` is MongoDB there). Table `acc` was renamed `balance`. Tables must exist in `App.json` (add them before migrating a page; check all columns used by the page exist and have non-empty `type`).
+- Old custom JS in `pages/*/forms/*/fields/*.js` is not migrated; `LinkField` with `page="X"` replaces the click handlers that opened a page.
+- Add a `PageLink` to `App.json`; `menu: ""` for pages opened only from other pages.
+
+Testing without a browser: `curl -H "Accept: application/json" "http://127.0.0.1:3010/viewer/pnd/App/dev/local/?action=page&page=User&params%5Bkey%5D=1"` returns page data (rows/count per form); `?page=Users` returns the HTML shell (500 shows the error in `<title>`).
+
+Known quirks:
+- A `RowForm` without data sources gets a surrogate row with `id = '[1]'` (`BkForm._getSurrogateDataSourceResponse`), which shows up as `[    1]` in a filter field whose column is `id`. Avoid a filter column named `id` (rename) or fix in qforms.
+- MySQL: driver returns dates as strings (`BkMySqlDatabase.typeCast`) and `tinyint(1)` as boolean; `getColumnTypeByDataType` maps by base type; identifiers are backtick-quoted in generated insert/update/delete.
+- `npx tsc --noEmit` prints many pre-existing implicit-any errors; compare only the files you touched.
