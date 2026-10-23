@@ -15,10 +15,12 @@ export class BkDateTimeField extends BkField {
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 
-    valueToRaw(value: Date) {
+    valueToRaw(value: Date | string) {
         let raw;
+        // MySQL driver returns dates as strings (see BkMySqlDatabase.typeCast)
+        if (typeof value === 'string') value = new Date(value);
         if (value && !this.isTimezone()) {
-            const v = DateTimeHelper.cloneDate(value);
+            const v = DateTimeHelper.cloneDate(value as Date);
             DateTimeHelper.removeTimezoneOffset(v);
             raw = Helper.encodeValue(v);
         } else {

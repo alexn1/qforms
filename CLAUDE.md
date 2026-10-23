@@ -52,3 +52,7 @@ Each webpack config produces one bundle into `dist/` (`webpack.helper.js` holds 
 
 ### Logging
 Use `pConsole` / `debug` from `src/pConsole.ts` / `src/console.ts` rather than `console`; verbosity is controlled by `QFORMS_LOG_LEVEL`. `@log` and `@time` decorators (`src/decorators.ts`) are used on lifecycle methods.
+
+## Language
+
+Communicate with the user in Russian: write all replies and explanations in Russian (code, identifiers and commit messages follow the project conventions and stay in English).

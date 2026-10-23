@@ -7950,6 +7950,19 @@ class BkMySqlDatabase extends _BkSqlDatabase__WEBPACK_IMPORTED_MODULE_1__.BkSqlD
             });
         });
     }
+    async queryScalar(context, query, params = null) {
+        const rows = await this.queryRows(context, query, params);
+        const row = rows[0];
+        if (!row)
+            throw new Error('queryScalar must return one row');
+        const [column] = Object.keys(row);
+        if (!column)
+            throw new Error('no column in result set');
+        const value = row[column];
+        if (value === undefined)
+            throw new Error('scalar value undefined');
+        return value;
+    }
     _getRows(result, fields) {
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
@@ -8079,16 +8092,39 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         });
     }
     getColumnTypeByDataType(dataType) {
-        switch (dataType) {
-            case 'int(10) unsigned':
-            case 'int unsigned':
+        const type = dataType.toLowerCase();
+        if (type === 'tinyint(1)' || type === 'bit(1)')
+            return 'boolean';
+        const base = type.split(/[\s(]/)[0];
+        switch (base) {
+            case 'tinyint':
+            case 'smallint':
+            case 'mediumint':
+            case 'int':
+            case 'integer':
+            case 'bigint':
+            case 'decimal':
+            case 'numeric':
+            case 'float':
+            case 'double':
+            case 'year':
                 return 'number';
-            case 'varchar(255)':
-            case 'varchar(15)':
+            case 'char':
+            case 'varchar':
+            case 'tinytext':
             case 'text':
+            case 'mediumtext':
+            case 'longtext':
+            case 'enum':
+            case 'set':
+            case 'time':
                 return 'string';
+            case 'date':
             case 'datetime':
+            case 'timestamp':
                 return 'date';
+            case 'json':
+                return 'object';
             default:
                 return null;
         }
@@ -8577,6 +8613,8 @@ class BkDateField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     }
     valueToRaw(value) {
         let raw;
+        if (typeof value === 'string')
+            value = new Date(value);
         if (value && !this.isTimezone()) {
             const v = _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
             _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
@@ -8628,6 +8666,8 @@ class BkDateTimeField extends _BkField__WEBPACK_IMPORTED_MODULE_0__.BkField {
     }
     valueToRaw(value) {
         let raw;
+        if (typeof value === 'string')
+            value = new Date(value);
         if (value && !this.isTimezone()) {
             const v = _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.cloneDate(value);
             _frontend__WEBPACK_IMPORTED_MODULE_1__.DateTimeHelper.removeTimezoneOffset(v);
