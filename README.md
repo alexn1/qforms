@@ -56,6 +56,7 @@ $ npm run release
 ## Deploy
 
 ```bash
+$ npm login
 $ npx run deploy
 ```
 
