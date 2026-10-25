@@ -31,7 +31,14 @@ srcDirPath=../name/apps
 ## Make npm module ready for linking
 
 ```bash
-$ npm link
+$ npm link # for qforms
+$ npm link qforms # for consumer
+```
+
+```bash
+$ npm unlink --no-save qforms # for consumer
+$ npm install forms # for consumer
+$ npm uninstall -g # for qforms
 ```
 
 ## Build
