@@ -1166,9 +1166,11 @@ div.CheckBox:not(.disabled):hover {
 .IndexView__list option:hover {
   background: #eff6ff;
 }
-.IndexView__list option:checked {
+.IndexView__list option:checked,
+.IndexView__list:focus option:checked {
   background: #2563eb linear-gradient(0deg, #2563eb, #2563eb);
-  color: #fff;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
 }
 .IndexView__actions {
   flex: 0 0 180px;

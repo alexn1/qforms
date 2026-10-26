@@ -81,9 +81,11 @@
     background: #eff6ff;
   }
 
-  option:checked {
+  option:checked,
+  &:focus option:checked {
     background: @accent linear-gradient(0deg, @accent, @accent);
-    color: #fff;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff;
   }
 }
 
