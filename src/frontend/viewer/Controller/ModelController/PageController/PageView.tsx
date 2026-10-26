@@ -118,7 +118,7 @@ export class PageView<
         const model = ctrl.getModel();
         return (
             <h1 className={`${this.getCssBlockName()}__title`}>
-                {ctrl.getTitle()}
+                {ctrl.composeTitle()}
                 {model.hasRowFormWithDefaultSqlDataSource() &&
                     (ctrl.isChanged() || model.hasNew()) && [
                         ' ',

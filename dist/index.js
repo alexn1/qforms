@@ -11203,7 +11203,7 @@ class ReactHelper {
     static createReactComponent(rootElement, type, props = {}, children) {
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), {}, [
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(type, Object.assign(Object.assign({ key: 'root' }, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -11213,7 +11213,7 @@ class ReactHelper {
     static createReactComponent2(rootElement, type, props = {}, children) {
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), {}, [
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(type, Object.assign(Object.assign({ key: 'root' }, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -19359,7 +19359,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     renderTitle() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: [ctrl.getTitle(), model.hasRowFormWithDefaultSqlDataSource() &&
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: [ctrl.composeTitle(), model.hasRowFormWithDefaultSqlDataSource() &&
                     (ctrl.isChanged() || model.hasNew()) && [
                     ' ',
                     (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__star` }, { children: "*" }), 'star'),
