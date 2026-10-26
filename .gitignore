@@ -3,3 +3,4 @@ node_modules
 runtime/
 tsconfig.back.tsbuildinfo
 coverage/
+.playwright-mcp/

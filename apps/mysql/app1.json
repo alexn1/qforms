@@ -1,0 +1,125 @@
+{
+    "@class": "Application",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "app1",
+        "caption": "app1",
+        "authentication": "false",
+        "user": "admin",
+        "password": "admin",
+        "lang": "en",
+        "theme": "standard",
+        "cssBlock": "",
+        "viewClass": "",
+        "ctrlClass": "",
+        "modelClass": ""
+    },
+    "env": {},
+    "databases": [
+        {
+            "@class": "MySqlDatabase",
+            "@attributes": {
+                "name": "default",
+                "modelClass": ""
+            },
+            "params": [
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "\"localhost\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "\"qforms\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "\"qforms\""
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "\"qforms\""
+                    }
+                }
+            ],
+            "tables": [
+                {
+                    "@class": "Table",
+                    "@attributes": {
+                        "name": "employee"
+                    },
+                    "columns": [
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "id",
+                                "caption": "id",
+                                "type": "number",
+                                "dbType": "int unsigned",
+                                "key": "true",
+                                "auto": "true",
+                                "nullable": "false"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "first_name",
+                                "caption": "first_name",
+                                "type": "string",
+                                "dbType": "varchar(255)",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "false"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "last_name",
+                                "caption": "last_name",
+                                "type": "string",
+                                "dbType": "varchar(255)",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "false"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "dataSources": [],
+    "actions": [],
+    "pageLinks": [
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "page1",
+                "fileName": "pages/page1/page1.json",
+                "menu": "Pages",
+                "startup": "true"
+            }
+        },
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "page2",
+                "fileName": "pages/page2/page2.json",
+                "menu": "",
+                "startup": "false"
+            }
+        }
+    ]
+}

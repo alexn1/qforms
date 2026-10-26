@@ -8,48 +8,39 @@ export class IndexView extends ReactComponent {
             <div>
                 {ctrl.modals.map((modal) => (
                     <Modal key={modal.id.toString()}>
-                        <div className="modal-dialog modal-sm">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <Button classList={['close']} onClick={ctrl.closeModal}>
-                                        <span>&times;</span>
-                                    </Button>
-                                    <h4 className="modal-title">New Application</h4>
+                        <div className="IndexView__dialog">
+                            <div className="IndexView__dialog-header">
+                                <h4 className="IndexView__dialog-title">New Application</h4>
+                                <Button
+                                    classList={['IndexView__dialog-close']}
+                                    onClick={ctrl.closeModal}>
+                                    &times;
+                                </Button>
+                            </div>
+                            <div className="IndexView__dialog-body">
+                                <div className="IndexView__field">
+                                    <label htmlFor="folderName">Folder Name</label>
+                                    <TextBox
+                                        id="folderName"
+                                        onCreate={ctrl.onFolderNameCreate}
+                                        onChange={ctrl.onFolderNameChange}
+                                    />
                                 </div>
-                                <div className="modal-body">
-                                    <div>
-                                        <label htmlFor="folderName">Folder Name</label>
-                                        <TextBox
-                                            id="folderName"
-                                            onCreate={ctrl.onFolderNameCreate}
-                                            onChange={ctrl.onFolderNameChange}
-                                        />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="appName">Application Name</label>
-                                        <TextBox id="appName" onChange={ctrl.onAppNameChange} />
-                                    </div>
+                                <div className="IndexView__field">
+                                    <label htmlFor="appName">Application Name</label>
+                                    <TextBox id="appName" onChange={ctrl.onAppNameChange} />
                                 </div>
-                                <div className="modal-footer">
-                                    {/*<button
-                                        name="create"
-                                        type="button"
-                                        className="btn btn-primary"
-                                    >
-                                        Create
-                                    </button>*/}
-                                    <Button
-                                        name="create"
-                                        classList={['btn', 'btn-primary']}
-                                        onClick={ctrl.onCreateClick}>
-                                        Create
-                                    </Button>
-                                    <Button
-                                        classList={['btn', 'btn-default']}
-                                        onClick={ctrl.closeModal}>
-                                        Close
-                                    </Button>
-                                </div>
+                            </div>
+                            <div className="IndexView__dialog-footer">
+                                <Button
+                                    name="create"
+                                    classList={['IndexView__btn', 'IndexView__btn_primary']}
+                                    onClick={ctrl.onCreateClick}>
+                                    Create
+                                </Button>
+                                <Button classList={['IndexView__btn']} onClick={ctrl.closeModal}>
+                                    Close
+                                </Button>
                             </div>
                         </div>
                     </Modal>
@@ -63,41 +54,44 @@ export class IndexView extends ReactComponent {
         const { ctrl } = this.props;
         return (
             <div className="IndexView">
-                <div className="container" style={{ backgroundColor: '#eee' }}>
-                    <div className="row" style={{ margin: '50px 0' }}>
-                        <div>
+                <div className="IndexView__card">
+                    <div className="IndexView__header">
+                        <h1 className="IndexView__title">QForms</h1>
+                        <div className="IndexView__subtitle">Select an application</div>
+                    </div>
+                    <div className="IndexView__content">
+                        <div className="IndexView__apps">
                             <ComboBox
+                                id="appList"
+                                classList={['IndexView__list']}
                                 value={ctrl.currentAppFullName}
                                 items={ctrl.getAppItems()}
                                 size={15}
-                                style={{ width: '100%' }}
                                 onDoubleClick={ctrl.run}
                                 onChange={ctrl.onAppChange}
                             />
                         </div>
-                        <div>
-                            <div>
-                                <ComboBox
-                                    value={ctrl.currentAppEnv}
-                                    items={ctrl.getEnvItems()}
-                                    onChange={ctrl.onEnvChange}
-                                />
-                            </div>
+                        <div className="IndexView__actions">
+                            <label className="IndexView__label">Environment</label>
+                            <ComboBox
+                                classList={['IndexView__env']}
+                                value={ctrl.currentAppEnv}
+                                items={ctrl.getEnvItems()}
+                                onChange={ctrl.onEnvChange}
+                            />
                             <Button
-                                classList={['btn', 'btn-primary', 'btn-block']}
+                                classList={['IndexView__btn', 'IndexView__btn_primary']}
                                 onClick={ctrl.run}>
                                 Run
                             </Button>
                             {ctrl.data.nodeEnv === 'dev' && (
-                                <Button
-                                    classList={['btn', 'btn-default', 'btn-block']}
-                                    onClick={ctrl.edit}>
+                                <Button classList={['IndexView__btn']} onClick={ctrl.edit}>
                                     Edit
                                 </Button>
                             )}
                             {ctrl.data.nodeEnv === 'dev' && (
                                 <Button
-                                    classList={['btn', 'btn-default', 'btn-block']}
+                                    classList={['IndexView__btn']}
                                     onClick={ctrl.btnCreate_Click}>
                                     New...
                                 </Button>

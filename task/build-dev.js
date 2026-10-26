@@ -3,6 +3,7 @@ const Lib = require('./core/Lib');
 async function main() {
     await Lib.exec('npm run clean');
     await Promise.all([back(), front()]);
+    Lib.createChromeDevtoolsStub();
 }
 
 async function back() {

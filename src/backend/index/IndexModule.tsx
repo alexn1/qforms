@@ -83,10 +83,11 @@ export class IndexModule {
         const data = await this.fill();
         const data2 = JSON.stringify(data /* , null, 4 */);
         return `<!DOCTYPE html>
-<html>
+<html class="index" lang="en">
 <head>
     <!-- ${this.hostApp.getPlatformVersion()}> -->
     <meta charSet="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>QForms v${this.hostApp.getPlatformVersion()}</title>
     <!-- links -->
     ${links}
@@ -101,8 +102,8 @@ export class IndexModule {
         });
     </script>-->
 </head>
-<body>
-<div id="root"></div>
+<body class="index__body">
+<div id="root" class="index__root"></div>
 </body>
 </html>`;
     }

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { ModelView } from '../ModelView';
 import {
     Button,
@@ -7,6 +7,7 @@ import {
     Tab2,
     OpenInNewIcon,
     CloseIcon2,
+    ReactComponentProps,
 } from '../../../../common';
 import { PageController } from './PageController';
 import { FormController } from '../FormController/FormController';
@@ -17,13 +18,13 @@ import './PageView.less';
 export class PageView<
     TPageController extends PageController = PageController,
 > extends ModelView<TPageController> {
-    constructor(props) {
+    constructor(props: ReactComponentProps) {
         super(props);
         this.checkParent();
         this.el = React.createRef();
     }
 
-    render() {
+    render(): ReactNode {
         debug('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
@@ -41,7 +42,7 @@ export class PageView<
         );
     }
 
-    renderHeader() {
+    renderHeader(): ReactNode {
         const model = this.getCtrl().getModel();
         return (
             <div className={`${this.getCssBlockName()}__header`}>
@@ -54,11 +55,14 @@ export class PageView<
         );
     }
 
-    onActionsClick = async (li) => {
+    onActionsClick = async (li: HTMLElement): Promise<void> => {
         // debug('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
+            if (!name) {
+                throw new Error('no action name');
+            }
             const result = await ctrl.onActionClick(name);
             if (!result) {
                 throw new Error(`no handler for action '${name}'`);
@@ -69,14 +73,14 @@ export class PageView<
         }
     };
 
-    isToolbar() {
+    isToolbar(): boolean {
         const model = this.getCtrl().getModel();
         return model.hasActions();
         // || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
         // || model.isSelectMode();
     }
 
-    getFormTabs(forms) {
+    getFormTabs(forms: FormController[]): { name: string; title: string; content: ReactNode }[] {
         return forms.map((form) => {
             return {
                 name: form.getModel().getName(),
@@ -86,19 +90,19 @@ export class PageView<
         });
     }
 
-    getRowForms() {
+    getRowForms(): FormController[] {
         return this.getCtrl()
             .forms.filter((form) => form.getModel().getClassName() === 'RowForm')
             .filter((form) => form.isVisible());
     }
 
-    getTableForms() {
+    getTableForms(): FormController[] {
         return this.getCtrl()
             .forms.filter((form) => form.getModel().getClassName() === 'TableForm')
             .filter((form) => form.isVisible());
     }
 
-    renderForm(formCtrl: FormController, props = {}): any {
+    renderForm(formCtrl: FormController, props: Partial<ReactComponentProps> = {}): ReactElement {
         return React.createElement(formCtrl.getViewClass(), {
             parent: this,
             key: formCtrl.getModel().getName(),
@@ -109,7 +113,7 @@ export class PageView<
         });
     }
 
-    renderRowForms(): any {
+    renderRowForms(): ReactElement[] {
         return this.getRowForms().map((form) => this.renderForm(form));
     }
 
@@ -118,7 +122,7 @@ export class PageView<
         const model = ctrl.getModel();
         return (
             <h1 className={`${this.getCssBlockName()}__title`}>
-                {ctrl.getTitle()}
+                {ctrl.composeTitle()}
                 {model.hasRowFormWithDefaultSqlDataSource() &&
                     (ctrl.isChanged() || model.hasNew()) && [
                         ' ',
@@ -130,7 +134,7 @@ export class PageView<
         );
     }
 
-    renderSelectButton() {
+    renderSelectButton(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
@@ -144,7 +148,7 @@ export class PageView<
         );
     }
 
-    renderSaveAndCloseButton() {
+    renderSaveAndCloseButton(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
@@ -158,7 +162,7 @@ export class PageView<
         );
     }
 
-    renderCloseButton() {
+    renderCloseButton(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
@@ -168,7 +172,7 @@ export class PageView<
         );
     }
 
-    renderActionsDropdownButton() {
+    renderActionsDropdownButton(): ReactNode {
         return (
             <DropdownButton
                 classList={['toolbar-dropdown-button']}
@@ -179,7 +183,7 @@ export class PageView<
         );
     }
 
-    renderToolbar() {
+    renderToolbar(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
@@ -199,7 +203,7 @@ export class PageView<
         return false;
     } */
 
-    renderTableForms() {
+    renderTableForms(): ReactNode {
         const tableForms = this.getTableForms();
         if (tableForms.length === 1) {
             return this.renderForm(tableForms[0]);
@@ -217,7 +221,7 @@ export class PageView<
         }
     }
 
-    renderOpenPageHeaderButton() {
+    renderOpenPageHeaderButton(): ReactNode {
         const ctrl = this.getCtrl();
         return (
             <div
@@ -229,7 +233,7 @@ export class PageView<
         );
     }
 
-    renderClosePageHeaderButton() {
+    renderClosePageHeaderButton(): ReactNode {
         const ctrl = this.getCtrl();
         return (
             <div
@@ -241,7 +245,7 @@ export class PageView<
         );
     }
 
-    renderMain() {
+    renderMain(): ReactNode {
         return (
             <div className={`${this.getCssBlockName()}__main flex-max frame`}>
                 <div className={'frame__container flex-column grid-gap-10'}>
@@ -254,7 +258,7 @@ export class PageView<
         );
     }
 
-    renderForms(): any {
+    renderForms(): ReactNode[] {
         const model = this.getCtrl().getModel();
         return [
             ...(model.hasRowForm() ? [this.renderRowForms()] : []),
@@ -262,7 +266,7 @@ export class PageView<
         ];
     }
 
-    renderForms2() {
+    renderForms2(): ReactNode {
         return (
             <Tab2
                 tabs={this.getFormTabs(this.getCtrl().forms.filter((form) => form.isVisible()))}
@@ -271,7 +275,7 @@ export class PageView<
         );
     }
 
-    renderFooter() {
+    renderFooter(): ReactNode {
         const model = this.getCtrl().getModel();
         return (
             <div className={`${this.getCssBlockName()}__footer`}>
@@ -284,7 +288,7 @@ export class PageView<
         );
     }
 
-    getStyle() {
+    getStyle(): { width: number; height: number } | undefined {
         if (this.getCtrl().isModal()) {
             return {
                 width: 1000,
@@ -293,7 +297,7 @@ export class PageView<
         }
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         // debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         } else {
@@ -301,7 +305,7 @@ export class PageView<
         }
     }
 
-    focus() {
+    focus(): void {
         // debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
             // debug('focus', this.getElement());
