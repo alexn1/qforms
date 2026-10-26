@@ -9,6 +9,7 @@ export declare class IndexFrontHostApp {
     appName: string | null;
     constructor(data: any);
     init(): void;
+    onKeyDown: (e: KeyboardEvent) => void;
     createView(root: any): void;
     getAppItems(): any;
     getEnvItems(): any;

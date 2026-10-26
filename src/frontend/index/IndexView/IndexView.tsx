@@ -62,6 +62,7 @@ export class IndexView extends ReactComponent {
                     <div className="IndexView__content">
                         <div className="IndexView__apps">
                             <ComboBox
+                                id="appList"
                                 classList={['IndexView__list']}
                                 value={ctrl.currentAppFullName}
                                 items={ctrl.getAppItems()}

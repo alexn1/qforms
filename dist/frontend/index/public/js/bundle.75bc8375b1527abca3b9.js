@@ -35505,6 +35505,16 @@ class IndexFrontHostApp {
         this.folderNameTextBox = null;
         this.folderName = null;
         this.appName = null;
+        this.onKeyDown = (e) => {
+            var _a;
+            if (e.key !== 'Enter' || this.modals.length > 0)
+                return;
+            if ((_a = e.target) === null || _a === void 0 ? void 0 : _a.closest('button'))
+                return;
+            if (this.currentAppFullName) {
+                this.run(e);
+            }
+        };
         this.onAppChange = (fullName) => {
             console.debug('IndexFrontHostApp.onAppChange', fullName);
             this.currentAppFullName = fullName;
@@ -35561,10 +35571,13 @@ class IndexFrontHostApp {
         console.debug('IndexFrontHostApp.constructor', data);
     }
     init() {
+        var _a;
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
         this.createView(document.querySelector('#root'));
+        (_a = document.getElementById('appList')) === null || _a === void 0 ? void 0 : _a.focus();
+        document.addEventListener('keydown', this.onKeyDown);
     }
     createView(root) {
         this.view = _common__WEBPACK_IMPORTED_MODULE_1__.ReactHelper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
@@ -35631,7 +35644,7 @@ class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     render() {
         console.debug('IndexView.render');
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__card" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", Object.assign({ className: "IndexView__title" }, { children: "QForms" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "IndexView__subtitle" }, { children: "Select an application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "IndexView__apps" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { classList: ['IndexView__list'], value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__actions" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ className: "IndexView__label" }, { children: "Environment" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { classList: ['IndexView__env'], value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn', 'IndexView__btn_primary'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] }))] }))] })), this.renderModals()] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__card" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", Object.assign({ className: "IndexView__title" }, { children: "QForms" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "IndexView__subtitle" }, { children: "Select an application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "IndexView__apps" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "appList", classList: ['IndexView__list'], value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView__actions" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ className: "IndexView__label" }, { children: "Environment" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { classList: ['IndexView__env'], value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn', 'IndexView__btn_primary'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'dev' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['IndexView__btn'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] }))] }))] })), this.renderModals()] })));
     }
 }
 

@@ -28,7 +28,18 @@ export class IndexFrontHostApp {
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
         this.createView(document.querySelector('#root'));
+        document.getElementById('appList')?.focus();
+        document.addEventListener('keydown', this.onKeyDown);
     }
+
+    onKeyDown = (e: KeyboardEvent) => {
+        if (e.key !== 'Enter' || this.modals.length > 0) return;
+        // Enter on a focused button must trigger that button, not the default action
+        if ((e.target as HTMLElement | null)?.closest('button')) return;
+        if (this.currentAppFullName) {
+            this.run(e);
+        }
+    };
 
     createView(root) {
         this.view = ReactHelper.createReactComponent(root, IndexView, {
