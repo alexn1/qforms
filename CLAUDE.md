@@ -58,6 +58,10 @@ Each webpack config produces one bundle into `dist/` (`webpack.helper.js` holds 
 
 Use `pConsole` / `debug` from `src/pConsole.ts` / `src/console.ts` rather than `console`; verbosity is controlled by `QFORMS_LOG_LEVEL`. `@log` and `@time` decorators (`src/decorators.ts`) are used on lifecycle methods.
 
+## Git
+
+The user makes all commits themselves, whenever they decide to. Do not commit, do not offer or suggest committing, and do not make assumptions about commit state (changes may already be committed between turns).
+
 ## Language
 
 Communicate with the user in Russian: write all replies and explanations in Russian (code, identifiers and commit messages follow the project conventions and stay in English).
