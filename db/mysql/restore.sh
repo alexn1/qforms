@@ -1,1 +1,1 @@
-mysql -u demo -p demo < data.sql
+mysql -u qforms -p qforms < data.sql
