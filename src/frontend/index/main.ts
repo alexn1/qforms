@@ -1,3 +1,4 @@
+import './style/index.less';
 import { IndexFrontHostApp } from './IndexFrontHostApp';
 
 document.addEventListener('DOMContentLoaded', () => {
