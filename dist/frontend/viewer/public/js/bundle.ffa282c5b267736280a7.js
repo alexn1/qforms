@@ -40407,6 +40407,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
+                if (!name) {
+                    throw new Error('no action name');
+                }
                 const result = await ctrl.onActionClick(name);
                 if (!result) {
                     throw new Error(`no handler for action '${name}'`);
