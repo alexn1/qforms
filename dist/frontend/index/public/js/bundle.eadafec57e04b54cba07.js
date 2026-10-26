@@ -32241,7 +32241,7 @@ class ReactHelper {
     static createReactComponent(rootElement, type, props = {}, children) {
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({ key: 'root' }, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -32251,7 +32251,7 @@ class ReactHelper {
     static createReactComponent2(rootElement, type, props = {}, children) {
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({ key: 'root' }, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);

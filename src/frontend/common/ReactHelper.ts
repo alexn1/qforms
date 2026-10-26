@@ -15,6 +15,7 @@ export class ReactHelper {
             React.createElement(
                 type,
                 {
+                    key: 'root',
                     ...props,
                     onCreate: (c: ReactComponent, name: string) => {
                         component = c;
@@ -39,6 +40,7 @@ export class ReactHelper {
             React.createElement(
                 type,
                 {
+                    key: 'root',
                     ...props,
                     onCreate: (c: ReactComponent, name: string) => {
                         component = c;
