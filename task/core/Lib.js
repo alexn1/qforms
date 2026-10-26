@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const child_process = require('child_process');
 
 class Lib {
@@ -108,6 +109,13 @@ class Lib {
         const packageLockJson = await Lib.getJsonFileData('package-lock.json');
         packageLockJson.version = packageLockJson.packages[''].version = version;
         await Lib.putJsonFileData('package-lock.json', packageLockJson);
+    }
+
+    // stub for Chrome DevTools to avoid 404 on /.well-known/appspecific/com.chrome.devtools.json
+    static createChromeDevtoolsStub() {
+        const dirPath = path.join('dist', 'frontend', '.well-known', 'appspecific');
+        fs.mkdirSync(dirPath, { recursive: true });
+        fs.writeFileSync(path.join(dirPath, 'com.chrome.devtools.json'), '{}\n');
     }
 
     static async isDiff() {
