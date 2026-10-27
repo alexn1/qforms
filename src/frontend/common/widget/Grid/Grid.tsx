@@ -6,6 +6,8 @@ import { ClipboardHelper } from '../../ClipboardHelper';
 import './Grid.less';
 
 export class Grid extends ReactComponent {
+    static DEFAULT_COLUMN_WIDTH = 100;
+
     columns: any;
     head: React.RefObject<any>;
 
@@ -256,6 +258,20 @@ export class Grid extends ReactComponent {
         return column.width;
     }
 
+    /**
+     * Columns without an explicit width share the free space, which squeezes them when there are
+     * many columns. Give each column a minimum width so that the table becomes wider than the grid
+     * and the body gets a horizontal scroll instead.
+     */
+    getTableStyle(): React.CSSProperties {
+        const columns: { width?: number | null }[] = this.props.columns || [];
+        const minWidth = columns.reduce(
+            (sum, column, i) => sum + (this.getColumnWidth(i) || Grid.DEFAULT_COLUMN_WIDTH),
+            0,
+        );
+        return { minWidth };
+    }
+
     renderColumns() {
         return this.props.columns.map((column, i) => (
             <div
@@ -359,7 +375,9 @@ export class Grid extends ReactComponent {
                 tabIndex={0}
                 onKeyDown={this.onKeyDown}>
                 <div className={`${this.getCssBlockName()}__head`} ref={this.head}>
-                    <div className={`${this.getCssBlockName()}__table`}>
+                    <div
+                        className={`${this.getCssBlockName()}__table`}
+                        style={this.getTableStyle()}>
                         <div className={`${this.getCssBlockName()}__tr`}>
                             {this.props.columns && this.renderColumns()}
                             {!!this.props.extraColumn && (
@@ -369,7 +387,9 @@ export class Grid extends ReactComponent {
                     </div>
                 </div>
                 <div className={`${this.getCssBlockName()}__body`} onScroll={this.onBodyScroll}>
-                    <div className={`${this.getCssBlockName()}__table`}>
+                    <div
+                        className={`${this.getCssBlockName()}__table`}
+                        style={this.getTableStyle()}>
                         {this.props.rows && this.renderRows()}
                     </div>
                 </div>

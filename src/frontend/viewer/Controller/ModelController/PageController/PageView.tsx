@@ -29,7 +29,7 @@ export class PageView<
         return (
             <div
                 className={`${this.getCssClassNames()} ${
-                    this.getCtrl().isModal() ? '' : 'full'
+                    this.getCtrl().isModal() ? `${this.getCssBlockName()}--modal` : 'full'
                 } flex-column`}
                 style={this.getStyle()}
                 ref={this.el}
@@ -258,12 +258,14 @@ export class PageView<
         );
     }
 
-    renderForms(): ReactNode[] {
+    renderForms(): ReactNode {
         const model = this.getCtrl().getModel();
-        return [
-            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
-            ...(model.hasTableForm() ? [this.renderTableForms()] : []),
-        ];
+        return (
+            <>
+                {model.hasRowForm() && this.renderRowForms()}
+                {model.hasTableForm() && this.renderTableForms()}
+            </>
+        );
     }
 
     renderForms2(): ReactNode {
@@ -286,15 +288,6 @@ export class PageView<
                 {model.isSelectMode() && this.renderSelectButton()}
             </div>
         );
-    }
-
-    getStyle(): { width: number; height: number } | undefined {
-        if (this.getCtrl().isModal()) {
-            return {
-                width: 1000,
-                height: 750,
-            };
-        }
     }
 
     componentDidMount(): void {

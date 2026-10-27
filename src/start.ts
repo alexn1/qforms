@@ -11,7 +11,7 @@ start(...process.argv).then((code) => {
 });
 
 async function start(...argv: string[]): Promise<Optional<number>> {
-    pConsole.debug('start');
+    pConsole.debug('start:', argv, { APPS_DIR_PATH: process.env.APPS_DIR_PATH });
     try {
         const params = BkHelper.argvAsKeyValue(argv);
         const backHostApp = new BackHostApp({

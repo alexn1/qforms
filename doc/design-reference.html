@@ -1,0 +1,719 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Заказ на закупку 4500017342</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: shell bar → object header с ключевыми цифрами → вкладки → секции формы в сетке из 12 колонок → закреплённая панель действий */
+:root{
+  --bg:#eef1f4; --surface:#ffffff; --surface-2:#f6f8fa; --line:#d5dbe2; --line-strong:#a9b4c0;
+  --fg:#1c2733; --fg-2:#55636f; --fg-3:#7b8894;
+  --accent:#0a6e73; --accent-fg:#ffffff; --accent-soft:#e1f1f1;
+  --shell:#16323a; --shell-fg:#e6eef0;
+  --ok:#2b7a3d; --ok-soft:#e3f2e6; --warn:#a15c00; --warn-soft:#fdf0dc; --err:#b42318; --err-soft:#fde8e6;
+  --focus:#1a8cff; --shadow:0 12px 40px rgba(16,32,48,.22);
+  --f-ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:4px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1519; --surface:#172026; --surface-2:#1d2830; --line:#2c3a44; --line-strong:#476070;
+  --fg:#e3eaee; --fg-2:#a3b2bc; --fg-3:#7d8e99;
+  --accent:#3fb7b9; --accent-fg:#06272a; --accent-soft:#183a3d;
+  --shell:#0b1215; --shell-fg:#d6e2e5;
+  --ok:#6fcf86; --ok-soft:#173222; --warn:#f0a94a; --warn-soft:#3a2a12; --err:#ff8a7e; --err-soft:#3d1a17;
+  --focus:#5cb0ff; --shadow:0 12px 40px rgba(0,0,0,.55); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1519; --surface:#172026; --surface-2:#1d2830; --line:#2c3a44; --line-strong:#476070;
+  --fg:#e3eaee; --fg-2:#a3b2bc; --fg-3:#7d8e99;
+  --accent:#3fb7b9; --accent-fg:#06272a; --accent-soft:#183a3d;
+  --shell:#0b1215; --shell-fg:#d6e2e5;
+  --ok:#6fcf86; --ok-soft:#173222; --warn:#f0a94a; --warn-soft:#3a2a12; --err:#ff8a7e; --err-soft:#3d1a17;
+  --focus:#5cb0ff; --shadow:0 12px 40px rgba(0,0,0,.55); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:14px/1.45 var(--f-ui);padding-bottom:72px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* Shell */
+.shell{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--shell);color:var(--shell-fg);display:flex;align-items:center;gap:16px;padding:0 16px;height:44px}
+.shell .logo{font-weight:600;letter-spacing:.02em;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.shell .logo b{background:var(--accent);color:var(--accent-fg);border-radius:3px;padding:1px 6px;font-size:12px;font-family:var(--f-mono)}
+.shell .tcode{font-family:var(--f-mono);font-size:12px;opacity:.7;white-space:nowrap}
+.shell .sp{flex:1}
+.shell .user{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-size:12px;font-weight:600}
+.shell input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:var(--r);padding:4px 10px;width:220px;max-width:30vw;color:var(--shell-fg)}
+.shell input::placeholder{color:var(--shell-fg);opacity:.6}
+
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px}
+.crumbs{font-size:12px;color:var(--fg-2);padding-block:12px 4px;display:flex;gap:6px;flex-wrap:wrap}
+.crumbs a{color:var(--accent);text-decoration:none}
+
+/* Object header */
+.ohead{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:16px 32px;align-items:start}
+.ohead h1{margin:0;font-size:20px;font-weight:600;text-wrap:balance}
+.ohead .sub{color:var(--fg-2);margin-top:2px}
+.kfs{display:flex;gap:28px;flex-wrap:wrap}
+.kf .l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-3)}
+.kf .v{font-size:18px;font-weight:500;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;border-radius:20px;padding:2px 10px;border:1px solid transparent}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok);background:var(--ok-soft)} .pill.warn{color:var(--warn);background:var(--warn-soft)} .pill.err{color:var(--err);background:var(--err-soft)} .pill.info{color:var(--accent);background:var(--accent-soft)}
+.hmeta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+
+/* Tabs */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-top:16px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;color:var(--fg-2);cursor:pointer;white-space:nowrap;font-weight:500}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .cnt{font-family:var(--f-mono);font-size:11px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:0 6px;margin-left:6px}
+
+/* Sections & form grid */
+.panel{display:grid;gap:16px;padding-block:16px}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.sec>header{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.sec>header h2{margin:0;font-size:15px;font-weight:600;flex:1}
+.sec .body{padding:16px 20px 20px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px 20px}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media (max-width:900px){.c3{grid-column:span 6}.c4,.c8{grid-column:span 12}.c6{grid-column:span 12}}
+@media (max-width:560px){.c3{grid-column:span 12}.ohead{grid-template-columns:1fr}.shell input,.shell .tcode{display:none}}
+
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f>label,.f>.lbl{font-size:12px;color:var(--fg-2);font-weight:500}
+.req::after{content:" *";color:var(--err)}
+.ctl{width:100%;height:34px;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r);padding:0 10px;min-width:0}
+textarea.ctl{height:auto;min-height:84px;padding:8px 10px;resize:vertical}
+.ctl:hover{border-color:var(--fg-3)}
+.ctl:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 2px color-mix(in srgb,var(--focus) 25%,transparent)}
+.ctl[readonly]{background:var(--surface-2);border-style:dashed;color:var(--fg-2)}
+.ctl:disabled{opacity:.55}
+.ctl.inv{border-color:var(--err);background:var(--err-soft)}
+.hint{font-size:12px;color:var(--fg-3)} .hint.err{color:var(--err)}
+.num{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ig{display:flex;min-width:0}
+.ig .ctl{border-radius:var(--r) 0 0 var(--r)}
+.ig .addon{flex:none;border:1px solid var(--line-strong);border-left:0;background:var(--surface-2);border-radius:0 var(--r) var(--r) 0;padding:0 10px;display:grid;place-items:center;min-width:34px;cursor:pointer;color:var(--fg-2)}
+.ig .addon:hover{color:var(--accent)}
+.ig select.ctl{border-radius:0 var(--r) var(--r) 0;border-left:0;width:90px;flex:none}
+.ig .ctl+select.ctl{}
+
+/* Combobox */
+.cb{position:relative}
+.cb-list{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 2px);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r);box-shadow:var(--shadow);max-height:240px;overflow:auto;margin:0;padding:4px;list-style:none}
+.cb-list li{padding:6px 8px;border-radius:3px;cursor:pointer;display:flex;justify-content:space-between;gap:12px}
+.cb-list li small{color:var(--fg-3);font-family:var(--f-mono)}
+.cb-list li[aria-selected="true"],.cb-list li:hover{background:var(--accent-soft)}
+.cb-list li.empty{color:var(--fg-3);cursor:default;background:none}
+
+/* Checkbox, radio, switch */
+.chk{display:flex;align-items:center;gap:8px;cursor:pointer;min-height:28px}
+.chk input{width:16px;height:16px;accent-color:var(--accent);margin:0}
+.group{display:flex;flex-wrap:wrap;gap:4px 18px;padding-top:4px}
+.sw{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:34px}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw .track{width:38px;height:20px;border-radius:10px;background:var(--line-strong);position:relative;transition:background .15s;flex:none}
+.sw .track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--surface);transition:transform .15s}
+.sw input:checked+.track{background:var(--accent)}
+.sw input:checked+.track::after{transform:translateX(18px)}
+.sw input:focus-visible+.track{outline:2px solid var(--focus);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r);overflow:hidden}
+.seg label{padding:6px 12px;cursor:pointer;border-right:1px solid var(--line-strong);color:var(--fg-2)}
+.seg label:last-child{border-right:0}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg input:checked+span{color:var(--accent)}
+.seg label:has(input:checked){background:var(--accent-soft);color:var(--accent);font-weight:500}
+.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:-2px}
+
+/* Listbox */
+.lb{border:1px solid var(--line-strong);border-radius:var(--r);background:var(--surface);max-height:178px;overflow:auto;padding:4px}
+.lb [role=option]{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:3px;cursor:pointer;user-select:none}
+.lb [role=option] .code{font-family:var(--f-mono);font-size:12px;color:var(--fg-3);width:44px}
+.lb [role=option][aria-selected="true"]{background:var(--accent-soft);color:var(--fg)}
+.lb [role=option][aria-selected="true"]::after{content:"✓";margin-left:auto;color:var(--accent);font-weight:600}
+.lb [role=option].cur{outline:1px dashed var(--accent)}
+.lb:focus{outline:none;border-color:var(--focus)}
+
+/* Tokens (multi-input) */
+.tokens{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:34px;border:1px solid var(--line-strong);border-radius:var(--r);padding:4px 6px;background:var(--surface)}
+.tokens:focus-within{border-color:var(--focus)}
+.tok{display:inline-flex;align-items:center;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:3px;padding:1px 4px 1px 8px;font-size:13px}
+.tok button{border:0;background:none;cursor:pointer;color:var(--fg-3);padding:0 4px;line-height:1}
+.tokens input{border:0;outline:none;background:none;flex:1;min-width:120px;height:24px}
+
+/* Buttons */
+.btn{height:32px;border-radius:var(--r);border:1px solid var(--line-strong);background:var(--surface);padding:0 14px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:var(--surface-2)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:transparent;background:none;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.btn.danger{color:var(--err);border-color:var(--err)}
+.btn.ico{width:30px;padding:0;justify-content:center;height:28px}
+
+/* Table */
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:820px}
+th{text-align:left;font-weight:500;font-size:12px;color:var(--fg-2);background:var(--surface-2);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:hover{background:var(--surface-2)}
+tbody tr.sel{background:var(--accent-soft)}
+td.num,th.num{text-align:right}
+tfoot td{font-weight:600;background:var(--surface-2);border-bottom:0}
+.tbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tbar .search{height:30px;width:200px}
+
+/* Footer bar */
+.footer{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;justify-content:flex-end;align-items:center;box-shadow:0 -4px 16px rgba(16,32,48,.06)}
+.footer .msgs{margin-right:auto;display:flex;gap:8px;align-items:center;color:var(--fg-2);font-size:13px}
+.msgbtn{border:1px solid var(--err);color:var(--err);background:var(--err-soft);border-radius:var(--r);padding:3px 10px;cursor:pointer;font-weight:500}
+
+/* Message strip */
+.strip{display:flex;gap:10px;align-items:flex-start;border:1px solid;border-radius:var(--r);padding:10px 14px;font-size:13px}
+.strip.info{border-color:var(--accent);background:var(--accent-soft)}
+.strip.warn{border-color:var(--warn);background:var(--warn-soft)}
+
+/* Dialog */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(10,20,28,.45);display:grid;place-items:center;padding:16px}
+.dlg{background:var(--surface);border-radius:6px;box-shadow:var(--shadow);width:min(720px,100%);max-height:calc(100vh - 32px);display:flex;flex-direction:column;border:1px solid var(--line)}
+.dlg.sm{width:min(420px,100%)}
+.dlg>header{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.dlg>header h3{margin:0;font-size:16px;font-weight:600;flex:1}
+.dlg .dbody{padding:18px 20px;overflow:auto}
+.dlg>footer{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;border-top:1px solid var(--line);background:var(--surface-2);border-radius:0 0 6px 6px}
+.dlg .x{border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:var(--fg-3);padding:4px 8px;border-radius:3px}
+.dlg .x:hover{background:var(--surface-2)}
+.vh-tbl{min-width:0}
+.vh-tbl tbody tr{cursor:pointer}
+
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:var(--r);z-index:60;box-shadow:var(--shadow);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="shell">
+  <div class="logo"><b>ERP</b> Закупки</div>
+  <span class="tcode">ME22N · Изменить заказ</span>
+  <span class="sp"></span>
+  <input id="globalSearch" type="search" placeholder="Поиск по системе" aria-label="Поиск по системе">
+  <div class="user" title="Ершова Н. А.">НЕ</div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Навигация"><a href="#">Закупки</a>›<a href="#">Заказы на закупку</a>›<span>4500017342</span></nav>
+
+  <section class="ohead">
+    <div>
+      <h1>Заказ на закупку <span class="mono">4500017342</span></h1>
+      <div class="sub" id="hdrSupplier">ООО «Уралмет-Снаб» · 100231</div>
+      <div class="hmeta">
+        <span class="pill warn" id="hdrStatus">На утверждении</span>
+        <span class="pill info">NB · Стандартный заказ</span>
+        <span class="hint">Изменил: Ершова Н. А., 08.10.2026 16:42</span>
+      </div>
+    </div>
+    <div class="kfs">
+      <div class="kf"><div class="l">Сумма нетто</div><div class="v" id="kfNet">0,00</div></div>
+      <div class="kf"><div class="l">Позиций</div><div class="v" id="kfCnt">0</div></div>
+      <div class="kf"><div class="l">Поставка до</div><div class="v" id="kfDate">—</div></div>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="general" id="t-general">Общие данные</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="items" id="t-items">Позиции <span class="cnt" id="tabCnt">0</span></button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="terms" id="t-terms">Условия и поставка</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="notes" id="t-notes">Тексты</button>
+  </div>
+
+  <form id="poForm" novalidate>
+  <!-- Общие данные -->
+  <div class="panel" data-panel="general">
+    <div class="strip info"><span>ℹ</span><span>Это тестовый шаблон формы. Данные примерные. Поля со звёздочкой обязательны, кнопка <b>F4</b> рядом с полем открывает справочник.</span></div>
+
+    <section class="sec">
+      <header><h2>Заголовок документа</h2></header>
+      <div class="body grid">
+        <div class="f c3"><label for="poNum">Номер заказа</label><input class="ctl mono" id="poNum" value="4500017342" readonly></div>
+        <div class="f c3"><label for="docType" class="req">Вид документа</label>
+          <select class="ctl" id="docType" required>
+            <option value="NB" selected>NB — Стандартный заказ</option>
+            <option value="FO">FO — Рамочный заказ</option>
+            <option value="UB">UB — Перемещение запаса</option>
+            <option value="ZK">ZK — Консигнация</option>
+          </select></div>
+        <div class="f c3"><label for="docDate" class="req">Дата документа</label><input class="ctl" type="date" id="docDate" value="2026-10-08" required></div>
+        <div class="f c3"><label for="purchOrg" class="req">Закупочная организация</label>
+          <select class="ctl" id="purchOrg" required>
+            <option value="">— выберите —</option>
+            <option value="1000" selected>1000 — Центральные закупки</option>
+            <option value="2000">2000 — Закупки Урал</option>
+            <option value="3000">3000 — Закупки Сибирь</option>
+          </select></div>
+
+        <div class="f c6"><label for="supplier" class="req">Поставщик</label>
+          <div class="cb">
+            <div class="ig">
+              <input class="ctl" id="supplier" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="supplierList" autocomplete="off" required>
+              <button type="button" class="addon" id="supplierF4" title="Справочник поставщиков (F4)">F4</button>
+            </div>
+            <ul class="cb-list" id="supplierList" role="listbox" hidden></ul>
+          </div>
+          <span class="hint" id="supplierHint">Начните вводить название или код</span></div>
+        <div class="f c3"><label for="purchGroup">Группа закупок</label>
+          <input class="ctl" id="purchGroup" list="pgList" value="A12 — Металлопрокат">
+          <datalist id="pgList"><option value="A10 — Сырьё"><option value="A12 — Металлопрокат"><option value="B03 — Запчасти"><option value="C01 — Услуги"></datalist>
+          <span class="hint">Комбобокс на основе datalist</span></div>
+        <div class="f c3"><label for="company">Балансовая единица</label><input class="ctl" id="company" value="RU01 — АО «Промтех»" readonly></div>
+
+        <div class="f c4"><label for="extRef">Ссылка поставщика</label><input class="ctl" id="extRef" value="КП-2026/0915" maxlength="35"><span class="hint">До 35 символов</span></div>
+        <div class="f c4"><label for="contact">Контактное лицо</label><input class="ctl" id="contact" value="Лаптев Игорь Олегович"></div>
+        <div class="f c4"><label for="email">E-mail для подтверждения</label><input class="ctl" type="email" id="email" value="orders@uralmet-snab.ru"></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <header><h2>Признаки и маршрутизация</h2></header>
+      <div class="body grid">
+        <div class="f c4"><span class="lbl">Признаки заказа</span>
+          <div class="group" style="flex-direction:column">
+            <label class="chk"><input type="checkbox" id="fUrgent" checked> Срочный заказ</label>
+            <label class="chk"><input type="checkbox" id="fQC"> Требуется входной контроль качества</label>
+            <label class="chk"><input type="checkbox" id="fGR" checked> Ожидается поступление (WE)</label>
+            <label class="chk"><input type="checkbox" id="fIR" checked> Ожидается счёт (RE)</label>
+          </div></div>
+        <div class="f c4"><span class="lbl">Блокировки</span>
+          <label class="sw"><input type="checkbox" id="payBlock"><span class="track"></span> Блокировать к оплате</label>
+          <label class="sw"><input type="checkbox" id="outBlock" checked><span class="track"></span> Не отправлять поставщику до утверждения</label>
+          <span class="lbl" style="margin-top:8px">Приоритет</span>
+          <div class="seg" role="radiogroup" aria-label="Приоритет">
+            <label><input type="radio" name="prio" value="low"><span>Низкий</span></label>
+            <label><input type="radio" name="prio" value="norm" checked><span>Обычный</span></label>
+            <label><input type="radio" name="prio" value="high"><span>Высокий</span></label>
+          </div></div>
+        <div class="f c4"><span class="lbl" id="plantsLbl">Заводы-получатели (множественный выбор)</span>
+          <div class="lb" id="plants" role="listbox" aria-multiselectable="true" aria-labelledby="plantsLbl" tabindex="0"></div>
+          <span class="hint" id="plantsHint"></span></div>
+
+        <div class="f c12"><label for="approverInput">Утверждающие</label>
+          <div class="tokens" id="approvers"><input id="approverInput" placeholder="Введите ФИО и нажмите Enter"></div>
+          <span class="hint">Мульти-ввод с токенами. Backspace в пустом поле удаляет последний.</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Позиции -->
+  <div class="panel" data-panel="items" hidden>
+    <section class="sec">
+      <header>
+        <h2>Позиции заказа</h2>
+        <div class="tbar">
+          <input class="ctl search" id="itemSearch" type="search" placeholder="Фильтр позиций" aria-label="Фильтр позиций">
+          <button type="button" class="btn pri" id="addItem">+ Добавить</button>
+          <button type="button" class="btn" id="copyItem" disabled>Копировать</button>
+          <button type="button" class="btn danger" id="delItem" disabled>Удалить</button>
+        </div>
+      </header>
+      <div class="tblwrap">
+        <table id="itemsTbl">
+          <thead><tr>
+            <th style="width:32px"><input type="checkbox" id="selAll" aria-label="Выбрать все"></th>
+            <th>Поз.</th><th>Материал</th><th>Краткий текст</th><th class="num">Кол-во</th><th>ЕИ</th><th class="num">Цена нетто</th><th class="num">Сумма</th><th>Завод</th><th>Дата поставки</th><th>Статус</th><th></th>
+          </tr></thead>
+          <tbody></tbody>
+          <tfoot><tr><td colspan="7">Итого нетто</td><td class="num mono" id="tblTotal"></td><td colspan="4"></td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Условия -->
+  <div class="panel" data-panel="terms" hidden>
+    <section class="sec">
+      <header><h2>Условия оплаты и поставки</h2><button type="button" class="btn ghost" id="editTermsBtn">Изменить в диалоге…</button></header>
+      <div class="body grid">
+        <div class="f c4"><label for="payTerms">Условия платежа</label>
+          <select class="ctl" id="payTerms">
+            <option value="Z030" selected>Z030 — 30 дней нетто</option>
+            <option value="Z045">Z045 — 45 дней нетто</option>
+            <option value="Z102">Z102 — 2% скидка за 10 дней, 30 нетто</option>
+            <option value="Z000">Z000 — Предоплата 100%</option>
+          </select></div>
+        <div class="f c4"><label for="incoterms">Инкотермс</label>
+          <select class="ctl" id="incoterms">
+            <optgroup label="Любой вид транспорта"><option>EXW</option><option>FCA</option><option selected>CPT</option><option>DAP</option><option>DDP</option></optgroup>
+            <optgroup label="Морской транспорт"><option>FOB</option><option>CIF</option></optgroup>
+          </select></div>
+        <div class="f c4"><label for="incoPlace">Место по Инкотермс</label><input class="ctl" id="incoPlace" value="Екатеринбург, склад 0001"></div>
+
+        <div class="f c4"><label for="currency">Валюта / курс</label>
+          <div class="ig"><input class="ctl num" id="rate" type="number" step="0.0001" value="1.0000" aria-label="Курс"><select class="ctl" id="currency" aria-label="Валюта"><option selected>RUB</option><option>EUR</option><option>USD</option><option>CNY</option></select></div></div>
+        <div class="f c4"><label for="validFrom">Срок действия с / по</label>
+          <div class="ig"><input class="ctl" type="date" id="validFrom" value="2026-10-08" style="border-radius:var(--r) 0 0 var(--r)"><input class="ctl" type="date" id="validTo" value="2026-12-31" aria-label="по" style="border-radius:0 var(--r) var(--r) 0;border-left:0"></div>
+          <span class="hint err" id="validErr" hidden>Дата «по» раньше даты «с»</span></div>
+        <div class="f c4"><label for="downPay">Аванс, %</label>
+          <div class="ig"><input class="ctl num" type="number" id="downPay" min="0" max="100" value="0"><span class="addon">%</span></div></div>
+
+        <div class="f c6"><span class="lbl">Способ доставки</span>
+          <div class="group">
+            <label class="chk"><input type="radio" name="ship" value="auto" checked> Автотранспорт</label>
+            <label class="chk"><input type="radio" name="ship" value="rail"> Ж/д</label>
+            <label class="chk"><input type="radio" name="ship" value="self"> Самовывоз</label>
+            <label class="chk"><input type="radio" name="ship" value="courier" disabled> Курьер (недоступно)</label>
+          </div></div>
+        <div class="f c6"><label for="tolerance">Допуск сверхпоставки: <b class="mono" id="tolVal">5</b> %</label>
+          <input type="range" id="tolerance" min="0" max="20" value="5" style="accent-color:var(--accent);width:100%"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Тексты -->
+  <div class="panel" data-panel="notes" hidden>
+    <section class="sec">
+      <header><h2>Тексты заголовка</h2></header>
+      <div class="body grid">
+        <div class="f c6"><label for="headerText">Текст для поставщика</label><textarea class="ctl" id="headerText" maxlength="500">Поставка партиями по графику. Сертификаты качества прикладывать к каждой партии.</textarea><span class="hint" id="htCount"></span></div>
+        <div class="f c6"><label for="internalNote">Внутреннее примечание</label><textarea class="ctl" id="internalNote">Цена согласована по итогам тендера Т-2026-118.</textarea></div>
+      </div>
+    </section>
+  </div>
+  </form>
+</main>
+
+<div class="footer">
+  <div class="msgs" id="msgArea"></div>
+  <button type="button" class="btn" id="checkBtn">Проверить</button>
+  <button type="button" class="btn" id="cancelBtn">Отменить</button>
+  <button type="button" class="btn pri" id="saveBtn">Сохранить</button>
+</div>
+
+<!-- Диалог: позиция -->
+<div class="ov" id="dlgItem" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgItemTitle">
+    <header><h3 id="dlgItemTitle">Позиция</h3><button type="button" class="x" data-close aria-label="Закрыть">×</button></header>
+    <div class="dbody grid">
+      <div class="f c3"><label for="iPos">Позиция</label><input class="ctl mono" id="iPos" readonly></div>
+      <div class="f c3"><label for="iCat">Тип позиции</label>
+        <select class="ctl" id="iCat"><option value="">Стандарт</option><option value="K">K — Консигнация</option><option value="L">L — Давальческое</option><option value="D">D — Услуга</option></select></div>
+      <div class="f c6"><label for="iMat" class="req">Материал</label>
+        <div class="cb"><div class="ig"><input class="ctl mono" id="iMat" role="combobox" aria-expanded="false" aria-controls="iMatList" autocomplete="off"><button type="button" class="addon" id="iMatF4" title="Справочник материалов">F4</button></div>
+        <ul class="cb-list" id="iMatList" role="listbox" hidden></ul></div></div>
+      <div class="f c12"><label for="iText" class="req">Краткий текст</label><input class="ctl" id="iText" maxlength="40"></div>
+      <div class="f c4"><label for="iQty" class="req">Количество</label>
+        <div class="ig"><input class="ctl num" type="number" id="iQty" min="0" step="0.001"><select class="ctl" id="iUom" aria-label="Единица измерения"><option>ШТ</option><option>КГ</option><option>Т</option><option>М</option><option>Л</option><option>ЧАС</option></select></div></div>
+      <div class="f c4"><label for="iPrice" class="req">Цена нетто, RUB</label><input class="ctl num" type="number" id="iPrice" min="0" step="0.01"></div>
+      <div class="f c4"><label for="iSum">Сумма</label><input class="ctl num" id="iSum" readonly></div>
+      <div class="f c4"><label for="iPlant" class="req">Завод</label><select class="ctl" id="iPlant"></select></div>
+      <div class="f c4"><label for="iDate" class="req">Дата поставки</label><input class="ctl" type="date" id="iDate"></div>
+      <div class="f c4"><label for="iTax">Налоговый код</label>
+        <select class="ctl" id="iTax"><option value="V2">V2 — НДС 22%</option><option value="V1">V1 — НДС 10%</option><option value="V0">V0 — Без НДС</option></select></div>
+      <div class="f c12"><span class="lbl">Параметры</span>
+        <div class="group">
+          <label class="chk"><input type="checkbox" id="iGR"> Поступление</label>
+          <label class="chk"><input type="checkbox" id="iIR"> Счёт</label>
+          <label class="chk"><input type="checkbox" id="iFree"> Бесплатная поставка</label>
+          <label class="chk"><input type="checkbox" id="iDel"> Окончательная поставка</label>
+        </div></div>
+      <div class="f c12"><span class="hint err" id="iErr" hidden></span></div>
+    </div>
+    <footer><button type="button" class="btn" data-close>Отмена</button><button type="button" class="btn pri" id="iSave">Применить</button></footer>
+  </div>
+</div>
+
+<!-- Диалог: справочник (F4) -->
+<div class="ov" id="dlgVH" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="vhTitle">
+    <header><h3 id="vhTitle">Справочник</h3><button type="button" class="x" data-close aria-label="Закрыть">×</button></header>
+    <div class="dbody" style="display:grid;gap:12px">
+      <div class="grid">
+        <div class="f c6"><label for="vhQ">Поиск</label><input class="ctl" id="vhQ" type="search" placeholder="Код или наименование"></div>
+        <div class="f c6"><label for="vhFilter" id="vhFilterLbl">Фильтр</label><select class="ctl" id="vhFilter"></select></div>
+      </div>
+      <div class="tblwrap"><table class="vh-tbl"><thead id="vhHead"></thead><tbody id="vhBody"></tbody></table></div>
+      <span class="hint" id="vhCount"></span>
+    </div>
+    <footer><button type="button" class="btn" data-close>Отмена</button></footer>
+  </div>
+</div>
+
+<!-- Диалог: условия -->
+<div class="ov" id="dlgTerms" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTermsTitle">
+    <header><h3 id="dlgTermsTitle">Изменение условий заказа</h3><button type="button" class="x" data-close aria-label="Закрыть">×</button></header>
+    <div class="dbody grid">
+      <div class="f c6"><label for="dPay">Условия платежа</label><select class="ctl" id="dPay"></select></div>
+      <div class="f c6"><label for="dInco">Инкотермс</label><select class="ctl" id="dInco"></select></div>
+      <div class="f c12"><label for="dPlace">Место по Инкотермс</label><input class="ctl" id="dPlace"></div>
+      <div class="f c6"><label for="dFrom">Действует с</label><input class="ctl" type="date" id="dFrom"></div>
+      <div class="f c6"><label for="dTo">Действует по</label><input class="ctl" type="date" id="dTo"></div>
+      <div class="f c12"><label class="sw"><input type="checkbox" id="dApply"><span class="track"></span> Применить новую дату поставки ко всем позициям</label></div>
+      <div class="f c12"><label for="dReason">Причина изменения</label><textarea class="ctl" id="dReason" placeholder="Например: дополнительное соглашение №2"></textarea></div>
+    </div>
+    <footer><button type="button" class="btn" data-close>Отмена</button><button type="button" class="btn pri" id="dSave">Применить</button></footer>
+  </div>
+</div>
+
+<!-- Диалог: подтверждение -->
+<div class="ov" id="dlgConfirm" hidden>
+  <div class="dlg sm" role="alertdialog" aria-modal="true" aria-labelledby="cfTitle" aria-describedby="cfText">
+    <header><h3 id="cfTitle">Подтверждение</h3></header>
+    <div class="dbody"><p id="cfText" style="margin:0"></p></div>
+    <footer><button type="button" class="btn" data-close>Отмена</button><button type="button" class="btn pri" id="cfOk">ОК</button></footer>
+  </div>
+</div>
+
+<!-- Диалог: сообщения -->
+<div class="ov" id="dlgMsgs" hidden>
+  <div class="dlg sm" role="dialog" aria-modal="true" aria-labelledby="msTitle">
+    <header><h3 id="msTitle">Сообщения проверки</h3><button type="button" class="x" data-close aria-label="Закрыть">×</button></header>
+    <div class="dbody"><ul id="msList" style="margin:0;padding-left:18px;display:grid;gap:6px"></ul></div>
+    <footer><button type="button" class="btn pri" data-close>Закрыть</button></footer>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>(+n||0).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fdate=d=>d?d.split('-').reverse().join('.'):'—';
+
+/* ---------- справочные данные ---------- */
+const SUPPLIERS=[
+ {id:'100231',name:'ООО «Уралмет-Снаб»',city:'Екатеринбург',grp:'Металл'},
+ {id:'100245',name:'АО «СибТрубПром»',city:'Новосибирск',grp:'Металл'},
+ {id:'100302',name:'ООО «Техно-Подшипник»',city:'Самара',grp:'Комплектующие'},
+ {id:'100318',name:'ПАО «ВолгаХим»',city:'Казань',grp:'Химия'},
+ {id:'100410',name:'ООО «Северный крепёж»',city:'Санкт-Петербург',grp:'Комплектующие'},
+ {id:'100422',name:'ИП Гарипов Р. Ф.',city:'Уфа',grp:'Услуги'},
+ {id:'100507',name:'ООО «ПромЛогистик»',city:'Челябинск',grp:'Услуги'}];
+const MATERIALS=[
+ {id:'M-200145',name:'Лист г/к 10 мм, Ст3сп',uom:'Т',price:78500,grp:'Прокат'},
+ {id:'M-200188',name:'Труба проф. 60×40×3',uom:'М',price:412.4,grp:'Прокат'},
+ {id:'M-200210',name:'Уголок 50×50×5',uom:'Т',price:81200,grp:'Прокат'},
+ {id:'C-310077',name:'Подшипник 6205-2RS',uom:'ШТ',price:286,grp:'Комплектующие'},
+ {id:'C-310112',name:'Болт М12×60 DIN 933',uom:'ШТ',price:18.9,grp:'Комплектующие'},
+ {id:'X-400031',name:'Эмаль ПФ-115 серая',uom:'КГ',price:245,grp:'Химия'},
+ {id:'S-900005',name:'Резка металла на ленточнопильном станке',uom:'ЧАС',price:1850,grp:'Услуги'}];
+const PLANTS=[{id:'1010',name:'Екатеринбург, цех 1'},{id:'1020',name:'Екатеринбург, цех 2'},{id:'1100',name:'Пермь'},{id:'1200',name:'Челябинск'},{id:'1300',name:'Тюмень'},{id:'1400',name:'Курган'}];
+const STATUS={open:['info','Открыта'],part:['warn','Частично'],done:['ok','Поставлено'],blk:['err','Блокирована']};
+
+let items=[
+ {pos:10,cat:'',mat:'M-200145',text:'Лист г/к 10 мм, Ст3сп',qty:12.5,uom:'Т',price:78500,plant:'1010',date:'2026-10-20',tax:'V2',gr:true,ir:true,free:false,del:false,st:'part'},
+ {pos:20,cat:'',mat:'M-200188',text:'Труба проф. 60×40×3',qty:1800,uom:'М',price:412.4,plant:'1010',date:'2026-10-27',tax:'V2',gr:true,ir:true,free:false,del:false,st:'open'},
+ {pos:30,cat:'',mat:'C-310112',text:'Болт М12×60 DIN 933',qty:5000,uom:'ШТ',price:18.9,plant:'1200',date:'2026-11-05',tax:'V2',gr:true,ir:true,free:false,del:false,st:'open'},
+ {pos:40,cat:'D',mat:'S-900005',text:'Резка металла на ленточнопильном станке',qty:24,uom:'ЧАС',price:1850,plant:'1020',date:'2026-11-12',tax:'V2',gr:false,ir:true,free:false,del:false,st:'blk'}];
+let selected=new Set(), dirty=false;
+
+/* ---------- вкладки ---------- */
+function showTab(name){
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===name));
+  $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==name);
+  try{localStorage.setItem('erpTab',name)}catch(e){}
+}
+$$('.tab').forEach(t=>t.onclick=()=>showTab(t.dataset.tab));
+try{const s=localStorage.getItem('erpTab'); if(s) showTab(s)}catch(e){}
+
+/* ---------- комбобокс ---------- */
+function combobox(input,list,data,toLabel,onPick){
+  let idx=-1,view=[];
+  const close=()=>{list.hidden=true;input.setAttribute('aria-expanded','false');idx=-1};
+  const render=()=>{
+    const q=input.value.trim().toLowerCase();
+    view=data.filter(d=>(d.id+' '+d.name).toLowerCase().includes(q)).slice(0,8);
+    list.innerHTML=view.length?view.map((d,i)=>`<li role="option" id="${list.id}-${i}" aria-selected="${i===idx}" data-i="${i}">${d.name}<small>${d.id}</small></li>`).join(''):'<li class="empty">Ничего не найдено</li>';
+    list.hidden=false;input.setAttribute('aria-expanded','true');
+    input.setAttribute('aria-activedescendant',idx>=0?`${list.id}-${idx}`:'');
+  };
+  const pick=d=>{input.value=toLabel(d);close();onPick&&onPick(d)};
+  input.addEventListener('input',()=>{idx=-1;render()});
+  input.addEventListener('focus',render);
+  input.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();if(list.hidden)render();idx=Math.min(idx+1,view.length-1);render()}
+    else if(e.key==='ArrowUp'){e.preventDefault();idx=Math.max(idx-1,0);render()}
+    else if(e.key==='Enter'&&!list.hidden&&idx>=0){e.preventDefault();pick(view[idx])}
+    else if(e.key==='Escape'&&!list.hidden){e.stopPropagation();close()}
+  });
+  list.addEventListener('mousedown',e=>{const li=e.target.closest('li[data-i]');if(li){e.preventDefault();pick(view[+li.dataset.i])}});
+  input.addEventListener('blur',()=>setTimeout(close,120));
+}
+const supLabel=s=>`${s.id} — ${s.name}`;
+function setSupplier(s){
+  $('#supplier').value=supLabel(s);
+  $('#hdrSupplier').textContent=`${s.name} · ${s.id}`;
+  $('#supplierHint').textContent=`${s.city} · группа «${s.grp}»`;
+  $('#supplier').classList.remove('inv');markDirty();
+}
+combobox($('#supplier'),$('#supplierList'),SUPPLIERS,supLabel,setSupplier);
+setSupplier(SUPPLIERS[0]);dirty=false;
+
+/* ---------- listbox заводов ---------- */
+const plantSel=new Set(['1010','1020','1200']);let plantCur=0;
+function renderPlants(){
+  $('#plants').innerHTML=PLANTS.map((p,i)=>`<div role="option" id="pl-${p.id}" data-id="${p.id}" aria-selected="${plantSel.has(p.id)}" class="${i===plantCur?'cur':''}"><span class="code">${p.id}</span>${p.name}</div>`).join('');
+  $('#plantsHint').textContent=`Выбрано: ${plantSel.size} из ${PLANTS.length}. Клик или Пробел — переключить`;
+  $('#iPlant').innerHTML=PLANTS.map(p=>`<option value="${p.id}">${p.id} — ${p.name}</option>`).join('');
+}
+$('#plants').addEventListener('click',e=>{const o=e.target.closest('[role=option]');if(!o)return;const id=o.dataset.id;plantSel.has(id)?plantSel.delete(id):plantSel.add(id);plantCur=PLANTS.findIndex(p=>p.id===id);renderPlants();markDirty()});
+$('#plants').addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();plantCur=Math.max(0,Math.min(PLANTS.length-1,plantCur+(e.key==='ArrowDown'?1:-1)));renderPlants()}
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();const id=PLANTS[plantCur].id;plantSel.has(id)?plantSel.delete(id):plantSel.add(id);renderPlants();markDirty()}
+});
+renderPlants();
+
+/* ---------- токены ---------- */
+const approvers=['Ершова Н. А.','Смирнов Д. В.'];
+function renderTokens(){
+  $$('#approvers .tok').forEach(t=>t.remove());
+  approvers.forEach((a,i)=>{const t=document.createElement('span');t.className='tok';t.innerHTML=`${a}<button type="button" aria-label="Удалить ${a}">×</button>`;t.querySelector('button').onclick=()=>{approvers.splice(i,1);renderTokens();markDirty()};$('#approverInput').before(t)});
+}
+$('#approverInput').addEventListener('keydown',e=>{
+  const v=e.target.value.trim();
+  if(e.key==='Enter'){e.preventDefault();if(v&&!approvers.includes(v)){approvers.push(v);e.target.value='';renderTokens();markDirty()}}
+  if(e.key==='Backspace'&&!e.target.value&&approvers.length){approvers.pop();renderTokens();markDirty()}
+});
+renderTokens();
+
+/* ---------- таблица позиций ---------- */
+function renderItems(){
+  const q=$('#itemSearch').value.trim().toLowerCase();
+  const rows=items.filter(i=>!q||(i.mat+' '+i.text).toLowerCase().includes(q));
+  $('#itemsTbl tbody').innerHTML=rows.map(i=>{const [c,l]=STATUS[i.st];return `<tr class="${selected.has(i.pos)?'sel':''}" data-pos="${i.pos}">
+    <td><input type="checkbox" class="rsel" ${selected.has(i.pos)?'checked':''} aria-label="Выбрать позицию ${i.pos}"></td>
+    <td class="mono">${String(i.pos).padStart(5,'0')}</td><td class="mono">${i.mat}</td><td>${i.text}${i.cat?` <span class="pill info" style="font-size:11px">${i.cat}</span>`:''}</td>
+    <td class="num mono">${(+i.qty).toLocaleString('ru-RU')}</td><td>${i.uom}</td><td class="num mono">${fmt(i.price)}</td><td class="num mono">${fmt(i.qty*i.price)}</td>
+    <td class="mono">${i.plant}</td><td class="mono">${fdate(i.date)}</td><td><span class="pill ${c}">${l}</span></td>
+    <td><button type="button" class="btn ico ghost edit" title="Изменить позицию" aria-label="Изменить позицию ${i.pos}">✎</button></td></tr>`}).join('')
+    ||`<tr><td colspan="12" style="text-align:center;color:var(--fg-3);padding:24px">Позиций нет. Нажмите «Добавить».</td></tr>`;
+  const total=items.reduce((s,i)=>s+i.qty*i.price,0);
+  $('#tblTotal').textContent=fmt(total);$('#kfNet').textContent=fmt(total)+' ₽';
+  $('#kfCnt').textContent=items.length;$('#tabCnt').textContent=items.length;
+  const maxd=items.map(i=>i.date).sort().pop();$('#kfDate').textContent=fdate(maxd);
+  $('#delItem').disabled=$('#copyItem').disabled=!selected.size;
+  $('#selAll').checked=items.length&&selected.size===items.length;
+}
+$('#itemsTbl tbody').addEventListener('click',e=>{
+  const tr=e.target.closest('tr[data-pos]');if(!tr)return;const pos=+tr.dataset.pos;
+  if(e.target.closest('.edit'))return openItem(items.find(i=>i.pos===pos));
+  if(e.target.classList.contains('rsel')){e.target.checked?selected.add(pos):selected.delete(pos);renderItems()}
+});
+$('#itemsTbl tbody').addEventListener('dblclick',e=>{const tr=e.target.closest('tr[data-pos]');if(tr)openItem(items.find(i=>i.pos===+tr.dataset.pos))});
+$('#selAll').onchange=e=>{selected=new Set(e.target.checked?items.map(i=>i.pos):[]);renderItems()};
+$('#itemSearch').oninput=renderItems;
+$('#addItem').onclick=()=>openItem(null);
+$('#copyItem').onclick=()=>{let next=Math.max(0,...items.map(i=>i.pos));items.filter(i=>selected.has(i.pos)).forEach(i=>{next+=10;items.push({...i,pos:next,st:'open'})});toast(`Скопировано позиций: ${selected.size}`);selected.clear();renderItems();markDirty()};
+$('#delItem').onclick=()=>confirmDlg(`Удалить выбранные позиции (${selected.size})? Действие можно отменить кнопкой «Отменить» до сохранения.`,()=>{items=items.filter(i=>!selected.has(i.pos));toast(`Удалено позиций: ${selected.size}`);selected.clear();renderItems();markDirty()},'Удалить');
+
+/* ---------- модальные окна ---------- */
+let lastFocus=[];
+function openDlg(id){const o=$(id);lastFocus.push(document.activeElement);o.hidden=false;const f=o.querySelector('input:not([readonly]):not([type=hidden]),select,textarea,button.pri');f&&f.focus()}
+function closeDlg(id){const o=typeof id==='string'?$(id):id;o.hidden=true;const f=lastFocus.pop();f&&f.focus&&f.focus()}
+$$('.ov').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o||e.target.closest('[data-close]'))closeDlg(o)});
+  o.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();closeDlg(o)}
+    if(e.key==='Tab'){const fs=[...o.querySelectorAll('button,input,select,textarea,[tabindex="0"]')].filter(x=>!x.disabled&&x.offsetParent);const a=fs[0],z=fs[fs.length-1];
+      if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+  });
+});
+
+/* диалог позиции */
+let editing=null;
+const iF=['cat','mat','text','qty','uom','price','plant','date','tax'];
+function calcSum(){$('#iSum').value=fmt((+$('#iQty').value||0)*(+$('#iPrice').value||0))}
+function openItem(it){
+  editing=it;
+  const d=it||{pos:Math.max(0,...items.map(i=>i.pos))+10,cat:'',mat:'',text:'',qty:'',uom:'ШТ',price:'',plant:'1010',date:$('#docDate').value,tax:'V2',gr:true,ir:true,free:false,del:false};
+  $('#dlgItemTitle').textContent=it?`Изменить позицию ${String(d.pos).padStart(5,'0')}`:'Новая позиция';
+  $('#iPos').value=String(d.pos).padStart(5,'0');
+  iF.forEach(k=>$('#i'+k[0].toUpperCase()+k.slice(1)).value=d[k]);
+  $('#iGR').checked=d.gr;$('#iIR').checked=d.ir;$('#iFree').checked=d.free;$('#iDel').checked=d.del;
+  $('#iErr').hidden=true;$$('#dlgItem .ctl').forEach(c=>c.classList.remove('inv'));
+  calcSum();openDlg('#dlgItem');
+}
+$('#iQty').oninput=calcSum;$('#iPrice').oninput=calcSum;
+$('#iFree').onchange=e=>{$('#iPrice').disabled=e.target.checked;if(e.target.checked)$('#iPrice').value=0;calcSum()};
+combobox($('#iMat'),$('#iMatList'),MATERIALS,m=>m.id,applyMat);
+function applyMat(m){$('#iMat').value=m.id;$('#iText').value=m.name;$('#iUom').value=m.uom;$('#iPrice').value=m.price;$('#iCat').value=m.grp==='Услуги'?'D':'';calcSum()}
+$('#iSave').onclick=()=>{
+  const bad=[];
+  [['#iMat','Материал'],['#iText','Краткий текст'],['#iDate','Дата поставки']].forEach(([s,l])=>{const ok=$(s).value.trim();$(s).classList.toggle('inv',!ok);if(!ok)bad.push(l)});
+  const q=+$('#iQty').value;$('#iQty').classList.toggle('inv',!(q>0));if(!(q>0))bad.push('Количество больше 0');
+  if($('#iDate').value&&$('#iDate').value<$('#docDate').value){bad.push('Дата поставки не раньше даты документа');$('#iDate').classList.add('inv')}
+  if(bad.length){$('#iErr').textContent='Проверьте поля: '+bad.join(', ');$('#iErr').hidden=false;return}
+  const d={pos:+$('#iPos').value};iF.forEach(k=>d[k]=$('#i'+k[0].toUpperCase()+k.slice(1)).value);
+  d.qty=+d.qty;d.price=+d.price||0;d.gr=$('#iGR').checked;d.ir=$('#iIR').checked;d.free=$('#iFree').checked;d.del=$('#iDel').checked;
+  d.st=d.del?'done':(editing?editing.st:'open');
+  if(editing)Object.assign(editing,d);else items.push(d);
+  closeDlg('#dlgItem');renderItems();markDirty();toast(editing?`Позиция ${d.pos} изменена`:`Позиция ${d.pos} добавлена`);
+};
+
+/* справочник F4 */
+let vhCfg;
+function openVH(cfg){
+  vhCfg=cfg;$('#vhTitle').textContent=cfg.title;$('#vhQ').value='';$('#vhFilterLbl').textContent=cfg.filterLabel;
+  $('#vhFilter').innerHTML='<option value="">Все</option>'+[...new Set(cfg.data.map(d=>d.grp))].map(g=>`<option>${g}</option>`).join('');
+  $('#vhHead').innerHTML='<tr>'+cfg.cols.map(c=>`<th class="${c.num?'num':''}">${c.l}</th>`).join('')+'</tr>';
+  renderVH();openDlg('#dlgVH');$('#vhQ').focus();
+}
+function renderVH(){
+  const q=$('#vhQ').value.toLowerCase(),g=$('#vhFilter').value;
+  const rows=vhCfg.data.filter(d=>(!g||d.grp===g)&&(d.id+' '+d.name).toLowerCase().includes(q));
+  $('#vhBody').innerHTML=rows.map(d=>`<tr data-id="${d.id}" tabindex="0">`+vhCfg.cols.map(c=>`<td class="${c.num?'num mono':c.mono?'mono':''}">${c.f?c.f(d):d[c.k]}</td>`).join('')+'</tr>').join('');
+  $('#vhCount').textContent=`Найдено: ${rows.length}. Выберите строку щелчком или Enter.`;
+}
+$('#vhQ').oninput=renderVH;$('#vhFilter').onchange=renderVH;
+const vhPick=tr=>{const d=vhCfg.data.find(x=>x.id===tr.dataset.id);closeDlg('#dlgVH');vhCfg.pick(d)};
+$('#vhBody').addEventListener('click',e=>{const tr=e.target.closest('tr');if(tr)vhPick(tr)});
+$('#vhBody').addEventListener('keydown',e=>{if(e.key==='Enter'){const tr=e.target.closest('tr');if(tr)vhPick(tr)}});
+const vhSup=()=>openVH({title:'Выбор поставщика',filterLabel:'Группа',data:SUPPLIERS,cols:[{l:'Код',k:'id',mono:1},{l:'Наименование',k:'name'},{l:'Город',k:'city'},{l:'Группа',k:'grp'}],pick:setSupplier});
+const vhMat=()=>openVH({title:'Выбор материала',filterLabel:'Группа материалов',data:MATERIALS,cols:[{l:'Материал',k:'id',mono:1},{l:'Наименование',k:'name'},{l:'ЕИ',k:'uom'},{l:'Цена',num:1,f:d=>fmt(d.price)}],pick:applyMat});
+$('#supplierF4').onclick=vhSup;$('#iMatF4').onclick=vhMat;
+$('#supplier').addEventListener('keydown',e=>{if(e.key==='F4'){e.preventDefault();vhSup()}});
+$('#iMat').addEventListener('keydown',e=>{if(e.key==='F4'){e.preventDefault();vhMat()}});
+
+/* диалог условий */
+$('#dPay').innerHTML=$('#payTerms').innerHTML;$('#dInco').innerHTML=$('#incoterms').innerHTML;
+$('#editTermsBtn').onclick=()=>{$('#dPay').value=$('#payTerms').value;$('#dInco').value=$('#incoterms').value;$('#dPlace').value=$('#incoPlace').value;$('#dFrom').value=$('#validFrom').value;$('#dTo').value=$('#validTo').value;$('#dApply').checked=false;$('#dReason').value='';openDlg('#dlgTerms')};
+$('#dSave').onclick=()=>{
+  if($('#dTo').value<$('#dFrom').value){$('#dTo').classList.add('inv');return}
+  $('#payTerms').value=$('#dPay').value;$('#incoterms').value=$('#dInco').value;$('#incoPlace').value=$('#dPlace').value;$('#validFrom').value=$('#dFrom').value;$('#validTo').value=$('#dTo').value;
+  if($('#dApply').checked){items.forEach(i=>i.date=$('#dTo').value);renderItems()}
+  $('#dTo').classList.remove('inv');closeDlg('#dlgTerms');checkValid();markDirty();toast('Условия обновлены');
+};
+
+/* подтверждение */
+let cfAction;
+function confirmDlg(text,fn,okLabel='ОК'){$('#cfText').textContent=text;$('#cfOk').textContent=okLabel;cfAction=fn;openDlg('#dlgConfirm')}
+$('#cfOk').onclick=()=>{closeDlg('#dlgConfirm');cfAction&&cfAction()};
+
+/* ---------- прочее ---------- */
+function checkValid(){const bad=$('#validTo').value<$('#validFrom').value;$('#validErr').hidden=!bad;$('#validTo').classList.toggle('inv',bad)}
+$('#validFrom').onchange=$('#validTo').onchange=checkValid;
+$('#tolerance').oninput=e=>$('#tolVal').textContent=e.target.value;
+const ht=$('#headerText'),htc=()=>$('#htCount').textContent=`${ht.value.length} / 500`;ht.oninput=htc;htc();
+$('#poForm').addEventListener('input',markDirty);$('#poForm').addEventListener('change',markDirty);
+function markDirty(){dirty=true;$('#hdrStatus').className='pill warn';$('#hdrStatus').textContent='Есть несохранённые изменения'}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2400)}
+
+function validate(){
+  const msgs=[];
+  if(!SUPPLIERS.some(s=>supLabel(s)===$('#supplier').value)){msgs.push('Поставщик не выбран из справочника');$('#supplier').classList.add('inv')}
+  if(!$('#purchOrg').value){msgs.push('Не указана закупочная организация');$('#purchOrg').classList.add('inv')}else $('#purchOrg').classList.remove('inv');
+  if(!items.length)msgs.push('В заказе нет позиций');
+  items.forEach(i=>{if(!plantSel.has(i.plant))msgs.push(`Позиция ${i.pos}: завод ${i.plant} не входит в список заводов-получателей`)});
+  if(!approvers.length)msgs.push('Не указан ни один утверждающий');
+  if($('#validTo').value<$('#validFrom').value)msgs.push('Неверный срок действия');
+  $('#msgArea').innerHTML=msgs.length?`<button type="button" class="msgbtn" id="msgBtn">⚠ ${msgs.length}</button> Найдены ошибки`:'';
+  $('#msList').innerHTML=msgs.map(m=>`<li>${m}</li>`).join('');
+  if(msgs.length)$('#msgBtn').onclick=()=>openDlg('#dlgMsgs');
+  return msgs;
+}
+$('#checkBtn').onclick=()=>{const m=validate();m.length?openDlg('#dlgMsgs'):toast('Проверка пройдена, ошибок нет')};
+$('#saveBtn').onclick=()=>{const m=validate();if(m.length)return openDlg('#dlgMsgs');dirty=false;$('#hdrStatus').className='pill ok';$('#hdrStatus').textContent='Сохранено';toast('Заказ 4500017342 сохранён')};
+$('#cancelBtn').onclick=()=>dirty?confirmDlg('Отменить все несохранённые изменения? Страница вернётся к исходным данным.',()=>location.reload(),'Отменить изменения'):toast('Изменений нет');
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();$('#saveBtn').click()}});
+
+renderItems();dirty=false;$('#hdrStatus').className='pill warn';$('#hdrStatus').textContent='На утверждении';
+</script>
+
+</body></html>

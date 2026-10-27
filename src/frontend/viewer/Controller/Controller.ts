@@ -26,7 +26,7 @@ export abstract class Controller extends EventEmitter {
         return this.view;
     }
 
-    getViewClass() {
+    getViewClass(): React.ComponentType<any> {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
 

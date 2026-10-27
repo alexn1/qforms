@@ -29,13 +29,9 @@ export declare class PageView<TPageController extends PageController = PageContr
     renderOpenPageHeaderButton(): ReactNode;
     renderClosePageHeaderButton(): ReactNode;
     renderMain(): ReactNode;
-    renderForms(): ReactNode[];
+    renderForms(): ReactNode;
     renderForms2(): ReactNode;
     renderFooter(): ReactNode;
-    getStyle(): {
-        width: number;
-        height: number;
-    } | undefined;
     componentDidMount(): void;
     focus(): void;
 }

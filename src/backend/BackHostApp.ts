@@ -165,7 +165,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         });
     }
 
-    initDirPaths(): void {
+    private initDirPaths(): void {
         this.srcDirPath = path.resolve(this.config.srcDirPath || APPS_DIR_PATH);
         this.distDirPath = this.config.distDirPath || this.srcDirPath;
         this.backendDirPath = path.join(this.getCodeRootDirPath(), 'backend');

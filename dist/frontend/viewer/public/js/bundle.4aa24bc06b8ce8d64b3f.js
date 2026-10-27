@@ -34562,6 +34562,11 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
         return column.width;
     }
+    getTableStyle() {
+        const columns = this.props.columns || [];
+        const minWidth = columns.reduce((sum, column, i) => sum + (this.getColumnWidth(i) || Grid.DEFAULT_COLUMN_WIDTH), 0);
+        return { minWidth };
+    }
     renderColumns() {
         return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
@@ -34595,12 +34600,13 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return true;
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table`, style: this.getTableStyle() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table`, style: this.getTableStyle() }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
         return !!this.props.createLinkCallback;
     }
 }
+Grid.DEFAULT_COLUMN_WIDTH = 100;
 if (typeof window === 'object') {
     window.Grid = Grid;
 }
@@ -36804,9 +36810,9 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("main", Object.assign({ className: `${this.getCssBlockName()}__main` }, { children: this.renderActivePage() }));
     }
     renderActivePage() {
-        const { ctrl } = this.props;
-        if (ctrl.activePage) {
-            return this.renderView(ctrl.activePage);
+        const { activePage } = this.getCtrl();
+        if (activePage) {
+            return this.renderView(activePage, { key: activePage.getId() });
         }
         return null;
     }
@@ -39075,7 +39081,7 @@ class TableFormLinkFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODUL
     render() {
         const row = this.props.row;
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: "#", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__link`, role: "link", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
 
@@ -40425,7 +40431,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     render() {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('PageView.render', this.getCtrl().getModel().getFullName());
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? `${this.getCssBlockName()}--modal` : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     renderHeader() {
         const model = this.getCtrl().getModel();
@@ -40519,10 +40525,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     renderForms() {
         const model = this.getCtrl().getModel();
-        return [
-            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
-            ...(model.hasTableForm() ? [this.renderTableForms()] : []),
-        ];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms()] }));
     }
     renderForms2() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Tab2, { tabs: this.getFormTabs(this.getCtrl().forms.filter((form) => form.isVisible())), classList: ['Tab-blue', 'full'] }));
@@ -40532,14 +40535,6 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [this.renderCloseButton(), model.isModal() &&
                     model.hasRowFormWithDefaultSqlDataSource() &&
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
-    }
-    getStyle() {
-        if (this.getCtrl().isModal()) {
-            return {
-                width: 1000,
-                height: 750,
-            };
-        }
     }
     componentDidMount() {
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
@@ -42184,6 +42179,10 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (this.getAttr('column')) {
             const dataSource = this.getDefaultDataSource();
             if (dataSource.isSurrogate()) {
+                if (!dataSource.getAttr('table')) {
+                    throw new Error(`${this.getFullName()}: cannot determine field type: ` +
+                        `set the "type" attribute on the field or the "table" attribute on data source "${dataSource.getName()}"`);
+                }
                 return dataSource.getType(this.getAttr('column'));
             }
             throw new Error('field type empty');
@@ -43315,6 +43314,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class WebSocketClient {
     constructor(options = {}) {
+        this.onPageHide = () => {
+            console.debug('WebSocketClient.onPageHide');
+            this.close();
+        };
+        this.onPageShow = (e) => {
+            console.debug('WebSocketClient.onPageShow', e.persisted);
+            if (e.persisted && !this.webSocket) {
+                void this.reconnect();
+            }
+        };
         this.options = options;
         if (!options.applicationController)
             throw new Error('no options.applicationController');
@@ -43323,8 +43332,24 @@ class WebSocketClient {
         this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
         this.webSocket = null;
         this.refreshTimeoutId = null;
+        this.reconnectTimeoutId = null;
         this.RECONNECT_TIMEOUT = 10;
         this.REFRESH_TIMEOUT = 60 * 60;
+        window.addEventListener('pagehide', this.onPageHide);
+        window.addEventListener('pageshow', this.onPageShow);
+    }
+    close() {
+        this.resetRefreshTimeout();
+        if (this.reconnectTimeoutId) {
+            clearTimeout(this.reconnectTimeoutId);
+            this.reconnectTimeoutId = null;
+        }
+        if (this.webSocket) {
+            this.webSocket.onclose = null;
+            this.webSocket.onmessage = null;
+            this.webSocket.close(1000);
+            this.webSocket = null;
+        }
     }
     createUriParamsString(options) {
         const params = {
@@ -43379,7 +43404,7 @@ class WebSocketClient {
         catch (err) {
             console.error(err);
             console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
-            setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
+            this.reconnectTimeoutId = setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
     async onClose(e) {

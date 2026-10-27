@@ -37,7 +37,7 @@ $ npm link qforms # for consumer
 
 ```bash
 $ npm unlink --no-save qforms # for consumer
-$ npm install forms # for consumer
+$ npm install qforms # for consumer
 $ npm uninstall -g # for qforms
 ```
 
