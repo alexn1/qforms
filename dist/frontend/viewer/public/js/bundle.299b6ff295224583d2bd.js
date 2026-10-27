@@ -32948,6 +32948,28 @@ if (typeof window === 'object') {
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/CloseThinIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/CloseThinIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseThinIcon": () => (/* binding */ CloseThinIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseThinIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: "22px", height: "22px", viewBox: "0 0 22 22" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M3.75 3.75L18.25 18.25M18.25 3.75L3.75 18.25", fill: "none", stroke: "currentColor", strokeWidth: "2" }) })));
+};
+if (typeof window === 'object') {
+    window.CloseThinIcon = CloseThinIcon;
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/DateIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/DateIcon.tsx ***!
@@ -33177,6 +33199,28 @@ if (typeof window === 'object') {
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/OpenInNewThinIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewThinIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewThinIcon": () => (/* binding */ OpenInNewThinIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const OpenInNewThinIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: "22px", height: "22px", viewBox: "0 0 22 22" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M10 4H4V18H18V12M13 4H18V9M18 4L9 13", fill: "none", stroke: "currentColor", strokeWidth: "2" }) })));
+};
+if (typeof window === 'object') {
+    window.OpenInNewThinIcon = OpenInNewThinIcon;
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/PasswordIcon.tsx":
 /*!***************************************************!*\
   !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
@@ -33365,47 +33409,53 @@ if (typeof window === 'object') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__.ArrowIcon),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_18__.ArrowIcon),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_13__.CancelIcon),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _CloseIcon__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_18__.DateIcon),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_10__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_17__.DownIcon),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_15__.EditIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_6__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _CloseThinIcon__WEBPACK_IMPORTED_MODULE_7__.CloseThinIcon),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_20__.DateIcon),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_16__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_12__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_19__.DownIcon),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_17__.EditIcon),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _LeftIcon__WEBPACK_IMPORTED_MODULE_1__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_10__.LocationIcon),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__.PasswordIcon),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__.PhoneIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _OpenInNewThinIcon__WEBPACK_IMPORTED_MODULE_4__.OpenInNewThinIcon),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_15__.PasswordIcon),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_14__.PhoneIcon),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _RightIcon__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__.SettingsIcon),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_19__.TimeIcon),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_11__.SettingsIcon),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_21__.TimeIcon),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_8__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_9__.VisibilityOffIcon)
 /* harmony export */ });
 /* harmony import */ var _CloseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
 /* harmony import */ var _LeftIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 /* harmony import */ var _RightIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
 /* harmony import */ var _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
-/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
-/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
-/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
-/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
-/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
-/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
-/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
-/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _OpenInNewThinIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OpenInNewThinIcon */ "./src/frontend/common/icon/OpenInNewThinIcon.tsx");
+/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _CloseThinIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CloseThinIcon */ "./src/frontend/common/icon/CloseThinIcon.tsx");
+/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
 
 
 
@@ -33448,6 +33498,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseThinIcon),
 /* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.ComboBox),
 /* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_5__.CookieHelper),
 /* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.DateIcon),
@@ -33473,6 +33524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.OpenInNewIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.OpenInNewThinIcon),
 /* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.Password),
 /* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.PasswordIcon),
 /* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.PhoneBox),
@@ -40564,11 +40616,11 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     renderOpenPageHeaderButton() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__open`, onClick: ctrl.onOpenPageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon, {}) }), 'open'));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__open`, onClick: ctrl.onOpenPageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.OpenInNewThinIcon, {}) }), 'open'));
     }
     renderClosePageHeaderButton() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }), 'close'));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseThinIcon, {}) }), 'close'));
     }
     renderMain() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.getCtrl().getModel().isFormInTab()
@@ -43755,6 +43807,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseThinIcon),
 /* harmony export */   "Column": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Column),
 /* harmony export */   "ComboBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ComboBox),
 /* harmony export */   "ComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ComboBoxField),
@@ -43793,6 +43846,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.MoreVertIcon),
 /* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.NoSqlDataSource),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewThinIcon),
 /* harmony export */   "Page": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Page),
 /* harmony export */   "PageController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageView),
