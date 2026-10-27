@@ -9,15 +9,33 @@
   }
 }
 
+// Modal dialog. Tokens and layout follow doc/desgin-reference.html (.dlg)
 .PageView--modal {
+  --dlg-surface: #fff;
+  --dlg-surface-2: #f6f8fa;
+  --dlg-line: #d5dbe2;
+  --dlg-line-strong: #a9b4c0;
+  --dlg-fg: #1c2733;
+  --dlg-fg-3: #7b8894;
+  --dlg-err: #b42318;
+  --dlg-focus: #1a8cff;
+  --accent-color: #0a6e73;
+  --accent-color-disabled: #8bb8ba;
+
   width: ~"min(1000px, 100vw - 40px)";
   height: ~"min(750px, 100vh - 40px)";
+  background-color: var(--dlg-surface);
+  color: var(--dlg-fg);
 }
 
 .PageView__main {
   > .frame__container {
     padding: 10px;
   }
+}
+
+.PageView--modal .PageView__main > .frame__container {
+  padding: 18px 20px;
 }
 
 .PageView__header {
@@ -29,13 +47,17 @@
   }
 }
 
-.Modal .PageView__header {
-  background-color: var(--accent-color);
-  display: flex;
-  grid-gap: 5px;
-  align-items: center;
+.PageView--modal .PageView__header {
+  grid-gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--dlg-line);
   .PageView__title {
-    color: white;
+    color: var(--dlg-fg);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .PageView__star {
+    color: var(--dlg-err);
   }
 }
 
@@ -61,15 +83,23 @@
 .PageView__open,
 .PageView__close {
   cursor: pointer;
-  //background-color: rgba(0,0,0,0.1);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  color: var(--dlg-fg-3);
   svg {
-    fill: white;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--dlg-surface-2);
+    color: var(--dlg-fg);
   }
   &:active {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--dlg-line);
   }
 }
 
@@ -79,4 +109,52 @@
   flex-direction: row-reverse;
   grid-gap: 5px;
   border-top: 1px solid #bbb;
+}
+
+.PageView--modal .PageView__footer {
+  flex-direction: row;
+  justify-content: flex-end;
+  grid-gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--dlg-line);
+  background-color: var(--dlg-surface-2);
+
+  .toolbar-button {
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--dlg-line-strong);
+    border-radius: 4px;
+    background-color: var(--dlg-surface);
+    color: var(--dlg-fg);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+    white-space: nowrap;
+
+    &:not(:disabled):hover {
+      background-color: var(--dlg-surface-2);
+    }
+    &:not(:disabled):active {
+      background-color: var(--dlg-line);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--dlg-focus);
+      outline-offset: 1px;
+    }
+
+    &.default {
+      border-color: var(--accent-color);
+      background-color: var(--accent-color);
+      color: #fff;
+      &:not(:disabled):hover,
+      &:not(:disabled):active {
+        background-color: var(--accent-color);
+        filter: brightness(1.08);
+      }
+      &:disabled {
+        border-color: var(--accent-color-disabled);
+        background-color: var(--accent-color-disabled);
+      }
+    }
+  }
 }

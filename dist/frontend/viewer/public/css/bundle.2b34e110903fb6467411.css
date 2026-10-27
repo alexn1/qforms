@@ -359,13 +359,16 @@ div.CheckBox:not(.disabled):hover {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.32);
+  background-color: rgba(10, 20, 28, 0.45);
   display: flex;
 }
 .Modal__container {
   background-color: white;
   margin: auto;
-  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+  border: 1px solid #d5dbe2;
+  border-radius: 6px;
+  box-shadow: 0 12px 40px rgba(16, 32, 48, 0.22);
+  overflow: hidden;
 }
 
 /*!********************************************************************************************************************************************!*\
@@ -1201,11 +1204,26 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 5px;
 }
 .PageView--modal {
+  --dlg-surface: #fff;
+  --dlg-surface-2: #f6f8fa;
+  --dlg-line: #d5dbe2;
+  --dlg-line-strong: #a9b4c0;
+  --dlg-fg: #1c2733;
+  --dlg-fg-3: #7b8894;
+  --dlg-err: #b42318;
+  --dlg-focus: #1a8cff;
+  --accent-color: #0a6e73;
+  --accent-color-disabled: #8bb8ba;
   width: min(1000px, 100vw - 40px);
   height: min(750px, 100vh - 40px);
+  background-color: var(--dlg-surface);
+  color: var(--dlg-fg);
 }
 .PageView__main > .frame__container {
   padding: 10px;
+}
+.PageView--modal .PageView__main > .frame__container {
+  padding: 18px 20px;
 }
 .PageView__header {
   display: flex;
@@ -1215,14 +1233,18 @@ div.CheckBox:not(.disabled):hover {
 .PageView__header .PageView__title {
   flex-grow: 1;
 }
-.Modal .PageView__header {
-  background-color: var(--accent-color);
-  display: flex;
-  grid-gap: 5px;
-  align-items: center;
+.PageView--modal .PageView__header {
+  grid-gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--dlg-line);
 }
-.Modal .PageView__header .PageView__title {
-  color: white;
+.PageView--modal .PageView__header .PageView__title {
+  color: var(--dlg-fg);
+  font-size: 16px;
+  font-weight: 600;
+}
+.PageView--modal .PageView__header .PageView__star {
+  color: var(--dlg-err);
 }
 .PageView__title {
   margin: 0;
@@ -1242,18 +1264,27 @@ div.CheckBox:not(.disabled):hover {
 .PageView__open,
 .PageView__close {
   cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  color: var(--dlg-fg-3);
 }
 .PageView__open svg,
 .PageView__close svg {
-  fill: white;
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 .PageView__open:hover,
 .PageView__close:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--dlg-surface-2);
+  color: var(--dlg-fg);
 }
 .PageView__open:active,
 .PageView__close:active {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--dlg-line);
 }
 .PageView__footer {
   padding: 10px;
@@ -1261,6 +1292,50 @@ div.CheckBox:not(.disabled):hover {
   flex-direction: row-reverse;
   grid-gap: 5px;
   border-top: 1px solid #bbb;
+}
+.PageView--modal .PageView__footer {
+  flex-direction: row;
+  justify-content: flex-end;
+  grid-gap: 8px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--dlg-line);
+  background-color: var(--dlg-surface-2);
+}
+.PageView--modal .PageView__footer .toolbar-button {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--dlg-line-strong);
+  border-radius: 4px;
+  background-color: var(--dlg-surface);
+  color: var(--dlg-fg);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  white-space: nowrap;
+}
+.PageView--modal .PageView__footer .toolbar-button:not(:disabled):hover {
+  background-color: var(--dlg-surface-2);
+}
+.PageView--modal .PageView__footer .toolbar-button:not(:disabled):active {
+  background-color: var(--dlg-line);
+}
+.PageView--modal .PageView__footer .toolbar-button:focus-visible {
+  outline: 2px solid var(--dlg-focus);
+  outline-offset: 1px;
+}
+.PageView--modal .PageView__footer .toolbar-button.default {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: #fff;
+}
+.PageView--modal .PageView__footer .toolbar-button.default:not(:disabled):hover,
+.PageView--modal .PageView__footer .toolbar-button.default:not(:disabled):active {
+  background-color: var(--accent-color);
+  filter: brightness(1.08);
+}
+.PageView--modal .PageView__footer .toolbar-button.default:disabled {
+  border-color: var(--accent-color-disabled);
+  background-color: var(--accent-color-disabled);
 }
 
 /*!************************************************************************************************************************************************************************************!*\
