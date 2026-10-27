@@ -161,7 +161,7 @@ start(...process.argv).then((code) => {
         process.exit(code);
 });
 async function start(...argv) {
-    _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('start:', argv);
+    _pConsole__WEBPACK_IMPORTED_MODULE_1__.pConsole.debug('start:', argv, { APPS_DIR_PATH: process.env.APPS_DIR_PATH });
     try {
         const params = _index__WEBPACK_IMPORTED_MODULE_0__.BkHelper.argvAsKeyValue(argv);
         const backHostApp = new _index__WEBPACK_IMPORTED_MODULE_0__.BackHostApp(Object.assign(Object.assign({}, params), { port: params.port ? parseInt(params.port) : undefined, monitor: MONITOR_CONFIG }));
