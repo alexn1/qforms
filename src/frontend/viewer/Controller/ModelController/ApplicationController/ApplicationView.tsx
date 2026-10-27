@@ -2,6 +2,7 @@ import React from 'react';
 import { ModelView } from '../ModelView';
 import { PageController } from '../PageController/PageController';
 import { Modal, Menu, Statusbar } from '../../../../common';
+import { ModalController } from '../../ModalController/ModalController';
 import { ApplicationController } from './ApplicationController';
 import { debug } from '../../../../../console';
 
@@ -10,7 +11,7 @@ import './ApplicationView.less';
 export class ApplicationView<
     TApplicationController extends ApplicationController = ApplicationController,
 > extends ModelView<TApplicationController> {
-    render() {
+    render(): React.ReactElement {
         debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return (
             <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
@@ -22,7 +23,7 @@ export class ApplicationView<
         );
     }
 
-    renderHeader() {
+    renderHeader(): React.ReactElement {
         return (
             <header className={`${this.getCssBlockName()}__header`}>
                 <Menu
@@ -34,19 +35,22 @@ export class ApplicationView<
         );
     }
 
-    renderMain() {
+    renderMain(): React.ReactElement {
         return <main className={`${this.getCssBlockName()}__main`}>{this.renderActivePage()}</main>;
     }
 
-    renderActivePage(): any {
-        const { ctrl } = this.props;
-        if (ctrl.activePage) {
-            return this.renderView(ctrl.activePage, { key: ctrl.activePage.getId() });
+    renderActivePage(): React.ReactElement | null {
+        const { activePage } = this.getCtrl();
+        if (activePage) {
+            return this.renderView(activePage, { key: activePage.getId() });
         }
         return null;
     }
 
-    renderView(ctrl, props = {}): any {
+    renderView(
+        ctrl: PageController | ModalController,
+        props: Record<string, unknown> = {},
+    ): React.ReactElement {
         return React.createElement(ctrl.getViewClass(), {
             parent: this,
             ctrl: ctrl,
@@ -55,7 +59,7 @@ export class ApplicationView<
         });
     }
 
-    renderFooter() {
+    renderFooter(): React.ReactElement {
         return (
             <footer className={`${this.getCssBlockName()}__footer`}>
                 <Statusbar onCreate={this.getCtrl().onStatusbarCreate} />
@@ -63,7 +67,7 @@ export class ApplicationView<
         );
     }
 
-    renderModals() {
+    renderModals(): React.ReactElement[] {
         return this.getCtrl().modals.map((ctrl) => {
             if (ctrl instanceof PageController) {
                 return <Modal key={ctrl.getId()}>{this.renderView(ctrl)}</Modal>;

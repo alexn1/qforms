@@ -15595,9 +15595,9 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("main", Object.assign({ className: `${this.getCssBlockName()}__main` }, { children: this.renderActivePage() }));
     }
     renderActivePage() {
-        const { ctrl } = this.props;
-        if (ctrl.activePage) {
-            return this.renderView(ctrl.activePage, { key: ctrl.activePage.getId() });
+        const { activePage } = this.getCtrl();
+        if (activePage) {
+            return this.renderView(activePage, { key: activePage.getId() });
         }
         return null;
     }
