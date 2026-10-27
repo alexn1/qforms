@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 import './Grid.less';
 export declare class Grid extends ReactComponent {
+    static DEFAULT_COLUMN_WIDTH: number;
     columns: any;
     head: React.RefObject<any>;
     constructor(props: any);
@@ -28,6 +29,7 @@ export declare class Grid extends ReactComponent {
     getMaxColumnWidth(column: any): number;
     onResizeDoubleClick: (e: any) => Promise<void>;
     getColumnWidth(i: any): any;
+    getTableStyle(): React.CSSProperties;
     renderColumns(): any;
     renderRows(): any;
     getRowKey(row: any): any;
