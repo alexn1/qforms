@@ -258,12 +258,14 @@ export class PageView<
         );
     }
 
-    renderForms(): ReactNode[] {
+    renderForms(): ReactNode {
         const model = this.getCtrl().getModel();
-        return [
-            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
-            ...(model.hasTableForm() ? [this.renderTableForms()] : []),
-        ];
+        return (
+            <>
+                {model.hasRowForm() && this.renderRowForms()}
+                {model.hasTableForm() && this.renderTableForms()}
+            </>
+        );
     }
 
     renderForms2(): ReactNode {

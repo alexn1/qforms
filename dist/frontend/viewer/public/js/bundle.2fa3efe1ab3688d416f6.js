@@ -40519,10 +40519,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     renderForms() {
         const model = this.getCtrl().getModel();
-        return [
-            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
-            ...(model.hasTableForm() ? [this.renderTableForms()] : []),
-        ];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [model.hasRowForm() && this.renderRowForms(), model.hasTableForm() && this.renderTableForms()] }));
     }
     renderForms2() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Tab2, { tabs: this.getFormTabs(this.getCtrl().forms.filter((form) => form.isVisible())), classList: ['Tab-blue', 'full'] }));
