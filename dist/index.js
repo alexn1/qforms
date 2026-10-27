@@ -13344,47 +13344,97 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
-/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Menu_less__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Menu_less__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
-class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onMenuClick = async (e) => {
-            await this.toggleMenu(e.currentTarget.dataset.menu);
-        };
-        this.onBlur = async (e) => {
-            await this.closeMenu(e.currentTarget.dataset.menu);
-        };
-        this.onMouseDown = (e) => {
-            e.preventDefault();
-        };
-        this.onMenuItemClick = async (e) => {
-            e.persist();
-            const { menu, type, name } = e.target.dataset;
-            await this.closeMenu(menu);
-            if (this.props.onClick) {
-                this.props.onClick(menu, type, name);
+        this.onDocumentMouseDown = (e) => {
+            const el = this.getElement();
+            if (el && e.target instanceof Node && !el.contains(e.target)) {
+                this.closeMenu();
             }
         };
-        this.state = {};
-    }
-    toggleMenu(menu) {
-        return new Promise((resolve) => {
+        this.onDocumentKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.closeMenu();
+            }
+        };
+        this.onMenuClick = (e) => {
+            const menu = e.currentTarget.dataset.menu;
             this.setState((prevState) => ({
-                [menu]: !prevState[menu],
-            }), resolve);
-        });
+                openMenu: prevState.openMenu === menu ? null : menu,
+            }));
+        };
+        this.onGroupBlur = (e) => {
+            const next = e.relatedTarget;
+            if (next instanceof Node && e.currentTarget.contains(next)) {
+                return;
+            }
+            if (next) {
+                this.closeMenu();
+            }
+        };
+        this.onMenuItemClick = async (e) => {
+            const { menu, type, name } = e.currentTarget.dataset;
+            if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
+                return;
+            }
+            e.preventDefault();
+            this.closeMenu();
+            if (this.props.onClick) {
+                try {
+                    await this.props.onClick(menu, type, name);
+                }
+                catch (err) {
+                    console.error(err);
+                }
+            }
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1___default().createRef();
+        this.state = {
+            classList: [],
+            enabled: true,
+            disabled: false,
+            openMenu: null,
+        };
     }
-    closeMenu(menu) {
-        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.openMenu !== null && prevState.openMenu === null) {
+            document.addEventListener('mousedown', this.onDocumentMouseDown);
+            document.addEventListener('keydown', this.onDocumentKeyDown);
+        }
+        else if (this.state.openMenu === null && prevState.openMenu !== null) {
+            this.removeDocumentListeners();
+        }
+    }
+    componentWillUnmount() {
+        this.removeDocumentListeners();
+    }
+    removeDocumentListeners() {
+        document.removeEventListener('mousedown', this.onDocumentMouseDown);
+        document.removeEventListener('keydown', this.onDocumentKeyDown);
+    }
+    closeMenu() {
+        this.setState({ openMenu: null });
+    }
+    renderItem(menu, item) {
+        const isPage = item.type === 'page';
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ role: "menuitem", href: isPage ? this.props.hostApp.createLink({ page: item.name }) : '#', "data-menu": menu.name, "data-type": item.type, "data-name": item.name, onClick: this.onMenuItemClick }, { children: item.title }), item.name));
+    }
+    renderGroup(menu) {
+        const isOpen = this.state.openMenu === menu.name;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: isOpen ? 'active' : undefined, onBlur: this.onGroupBlur }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, "aria-haspopup": "menu", "aria-expanded": isOpen, onClick: this.onMenuClick }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ role: "menu" }, { children: menu.items.map((item) => this.renderItem(menu, item)) }))] }), menu.name));
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: this.props.hostApp.createLink({ page: item.name }), "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu", ref: this.el }, { children: this.props.items && this.props.items.map((menu) => this.renderGroup(menu)) })));
     }
 }
 if (typeof window === 'object') {
@@ -15432,11 +15482,14 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_1_
                     title: key,
                     items: this.getModel()
                         .getData()
-                        .menu[key].map((item) => ({
-                        type: item.type,
-                        name: item.page || item.action,
-                        title: item.caption,
-                    })),
+                        .menu[key].map((item) => {
+                        var _a, _b;
+                        return ({
+                            type: item.type,
+                            name: (_b = (_a = item.page) !== null && _a !== void 0 ? _a : item.action) !== null && _b !== void 0 ? _b : '',
+                            title: item.caption,
+                        });
+                    }),
                 }))
                 : []),
             ...(this.getModel().getUser()

@@ -1,3 +1,7 @@
+/*!********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/monitor/MonitorView/MonitorView.less ***!
+  \********************************************************************************************************************************************/
+
 /*!**********************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
   \**********************************************************************************************************************************/
@@ -422,13 +426,13 @@ div.CheckBox:not(.disabled):hover {
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
   \************************************************************************************************************************************/
 .Menu {
-  overflow: hidden;
   background-color: #333;
   display: flex;
+  flex-wrap: wrap;
   min-height: 46px;
 }
 .Menu > div {
-  overflow: hidden;
+  position: relative;
 }
 .Menu > div.active > button {
   background-color: black;
@@ -439,8 +443,8 @@ div.CheckBox:not(.disabled):hover {
 }
 .Menu > div > button {
   font-size: inherit;
+  font-family: inherit;
   border: none;
-  outline: none;
   color: #bbb;
   padding: 14px 16px;
   background-color: inherit;
@@ -451,11 +455,18 @@ div.CheckBox:not(.disabled):hover {
 .Menu > div > button:hover {
   color: white;
 }
+.Menu > div > button:focus-visible {
+  outline: 2px solid #8ab4f8;
+  outline-offset: -2px;
+}
 .Menu > div > div {
   display: none;
   position: absolute;
+  top: 100%;
+  left: 0;
   background-color: #f9f9f9;
   min-width: 160px;
+  max-width: 90vw;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
@@ -465,10 +476,16 @@ div.CheckBox:not(.disabled):hover {
   text-decoration: none;
   display: block;
   text-align: left;
+  white-space: nowrap;
   cursor: pointer;
 }
 .Menu > div > div > a:hover {
   background-color: #ddd;
+}
+.Menu > div > div > a:focus-visible {
+  background-color: #ddd;
+  outline: 2px solid #1a73e8;
+  outline-offset: -2px;
 }
 
 /*!**********************************************************************************************************************************************!*\
@@ -1084,385 +1101,10 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 10px;
 }
 
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less ***!
-  \*****************************************************************************************************************************************************************************************************/
-.EdSqlDataSourceView .toolbar {
-  background-color: white;
-  padding: 5px;
-}
-.EdSqlDataSourceView .edit {
-  overflow: auto;
-  position: relative;
-}
-.EdSqlDataSourceView .edit > div {
-  position: absolute;
-}
-.EdSqlDataSourceView .edit .cm-container > div {
-  height: 100%;
-}
-
-/*!*******************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
-  \*******************************************************************************************************************************************************************************************************/
-.EdNoSqlDataSourceView .toolbar {
-  background-color: white;
-  padding: 5px;
-}
-.EdNoSqlDataSourceView .edit {
-  overflow: auto;
-  position: relative;
-}
-.EdNoSqlDataSourceView .edit > div {
-  position: absolute;
-}
-.EdNoSqlDataSourceView .edit .cm-container > div {
-  height: 100%;
-}
-
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less ***!
-  \****************************************************************************************************************************************************************************************/
-.EdTableView {
-  height: 100%;
-  background-color: white;
-}
-.EdTableView .client {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-/*!*****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/TreeWidget/TreeWidget.less ***!
-  \*****************************************************************************************************************************************/
-.TreeWidget {
-  cursor: default;
-  -moz-user-select: none;
-  overflow: auto;
-}
-.TreeWidget ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-}
-.TreeWidget li > ul {
-  display: none;
-}
-.TreeWidget li.opened > ul {
-  display: block;
-}
-.TreeWidget li > div {
-  padding: 1px;
-}
-.TreeWidget li > .active {
-  background-color: #428bca;
-}
-.TreeWidget li > .active > span {
-  color: white !important;
-}
-.TreeWidget .node {
-  display: inline-block;
-  height: 11px;
-  width: 11px;
-  background-image: url(../539b6ba27b8c34db9f27.png);
-  background-repeat: no-repeat;
-  background-position: 0 0;
-}
-.TreeWidget .leaf {
-  display: inline-block;
-  height: 11px;
-  width: 11px;
-}
-.TreeWidget .opened > div > span.node {
-  background-position: 0 -11px;
-}
-
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less ***!
-  \**********************************************************************************************************************************************************************************************/
-.EdDatabaseView {
-  height: 100%;
-  background-color: white;
-}
-.EdDatabaseView .sidebar {
-  position: absolute;
-  width: 200px;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background-color: lightgoldenrodyellow;
-}
-.EdDatabaseView .client {
-  position: absolute;
-  top: 0;
-  left: 200px;
-  bottom: 0;
-  right: 0;
-}
-
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less ***!
-  \******************************************************************************************************************************************************************************************/
-.EdVisualView .toolbar {
-  background-color: white;
-  padding: 5px;
-}
-.EdVisualView .edit {
-  overflow: auto;
-}
-.EdVisualView .edit .cm-container > div {
-  height: 100%;
-}
-.CodeMirror {
-  font-size: 14px;
-}
-
-/*!*********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/PropertyGrid/PropertyGrid.less ***!
-  \*********************************************************************************************************************************************/
-.PropertyGrid {
-  background-color: #eee;
-  overflow: auto;
-}
-.PropertyGrid__table {
-  background-color: white;
-  width: 100%;
-  table-layout: fixed;
-}
-.PropertyGrid__table > tbody > tr > td {
-  border: 1px solid #d3d3d3;
-  font-weight: bold;
-}
-.PropertyGrid__table > tbody > tr > td > input {
-  font-weight: normal;
-  border-width: 0;
-  outline: none;
-  padding-left: 4px;
-  width: 100%;
-}
-.PropertyGrid__table > tbody > tr > td > select {
-  font-weight: normal;
-  border-width: 0;
-  outline: none;
-  padding: 0;
-  width: 100%;
-}
-
-/*!*************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/EdModalView.less ***!
-  \*************************************************************************************************************************************************/
-.EdModalView {
-  background-color: white;
-  width: 300px;
-  margin: auto;
-}
-
-/*!**************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/NewModelView.less ***!
-  \**************************************************************************************************************************************************/
-.NewModelView {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 20px;
-  background-color: #eeeeee;
-  width: 300px;
-  margin: auto;
-  padding: 20px;
-}
-.NewModelView input,
-.NewModelView select {
-  width: 100%;
-}
-.NewModelView__header {
-  display: flex;
-  grid-gap: 10px;
-  align-items: center;
-}
-.NewModelView__title {
-  flex-grow: 1;
-}
-.NewModelView__body {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 5px;
-}
-.NewModelView__footer {
-  display: flex;
-  flex-direction: row-reverse;
-  grid-gap: 10px;
-}
-
-/*!*************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
-  \*************************************************************************************************************************************************************/
-.EditorFrontHostAppView {
-  height: 100%;
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/monitor/style/monitor.less ***!
+  \**********************************************************************************************************************************/
+.monitor__body {
   font-family: sans-serif;
-  font-size: small;
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  --accent-color: #398bce;
-  --accent-color-disabled: #b4d3ec;
-}
-.EditorFrontHostAppView__sidebar {
-  display: grid;
-  grid-template-rows: max-content 1fr 1fr;
-}
-.EditorFrontHostAppView__client {
-  background-color: #d3d3d3;
-}
-
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/editor.less ***!
-  \********************************************************************************************************************************/
-.editor {
-  height: 100%;
-}
-.editor__body {
-  margin: 0;
-  height: 100%;
-}
-.editor__root {
-  height: 100%;
-}
-
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/error.less ***!
-  \*******************************************************************************************************************************/
-.error,
-.error:focus {
-  box-shadow: 0 0 2px red !important;
-  color: red;
-}
-
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/global.less ***!
-  \********************************************************************************************************************************/
-hr {
-  margin: 10px 0;
-}
-nav {
-  margin: 0 !important;
-}
-
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/tree-bar.less ***!
-  \**********************************************************************************************************************************/
-.tree-bar {
-  padding: 5px;
-  background-color: #f5f5f5;
-}
-
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/ellipsis.less ***!
-  \**********************************************************************************************************************************/
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex.less ***!
-  \******************************************************************************************************************************/
-.flex {
-  display: flex;
-}
-
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-column.less ***!
-  \*************************************************************************************************************************************/
-.flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-max.less ***!
-  \**********************************************************************************************************************************/
-.flex-max {
-  flex: 1 1 auto;
-}
-
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/frame.less ***!
-  \*******************************************************************************************************************************/
-.frame {
-  position: relative;
-  overflow: hidden;
-}
-.frame__container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  overflow: auto;
-}
-.hidden {
-  overflow: hidden;
-}
-.x-hidden {
-  overflow-x: hidden;
-}
-.y-hidden {
-  overflow-y: hidden;
-}
-.x-scroll {
-  overflow-x: scroll;
-}
-.y-scroll {
-  overflow-y: scroll;
-}
-
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/full.less ***!
-  \******************************************************************************************************************************/
-.full {
-  height: 100%;
-  width: 100%;
-}
-
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/global.less ***!
-  \********************************************************************************************************************************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-*:focus {
-  outline: 0 !important;
-}
-input[type="text"],
-select,
-img,
-svg {
-  display: block;
-}
-
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-5.less ***!
-  \************************************************************************************************************************************/
-.grid-gap-5 {
-  grid-gap: 5px;
-}
-
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-10.less ***!
-  \*************************************************************************************************************************************/
-.grid-gap-10 {
-  grid-gap: 10px;
-}
-
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/wait.less ***!
-  \******************************************************************************************************************************/
-.wait,
-.wait * {
-  cursor: wait !important;
 }
 
