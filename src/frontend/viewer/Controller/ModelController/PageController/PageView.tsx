@@ -29,7 +29,7 @@ export class PageView<
         return (
             <div
                 className={`${this.getCssClassNames()} ${
-                    this.getCtrl().isModal() ? '' : 'full'
+                    this.getCtrl().isModal() ? `${this.getCssBlockName()}--modal` : 'full'
                 } flex-column`}
                 style={this.getStyle()}
                 ref={this.el}
@@ -288,15 +288,6 @@ export class PageView<
                 {model.isSelectMode() && this.renderSelectButton()}
             </div>
         );
-    }
-
-    getStyle(): { width: number; height: number } | undefined {
-        if (this.getCtrl().isModal()) {
-            return {
-                width: 1000,
-                height: 750,
-            };
-        }
     }
 
     componentDidMount(): void {

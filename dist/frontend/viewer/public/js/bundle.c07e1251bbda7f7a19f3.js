@@ -40425,7 +40425,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     render() {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('PageView.render', this.getCtrl().getModel().getFullName());
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? `${this.getCssBlockName()}--modal` : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     renderHeader() {
         const model = this.getCtrl().getModel();
@@ -40529,14 +40529,6 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [this.renderCloseButton(), model.isModal() &&
                     model.hasRowFormWithDefaultSqlDataSource() &&
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
-    }
-    getStyle() {
-        if (this.getCtrl().isModal()) {
-            return {
-                width: 1000,
-                height: 750,
-            };
-        }
     }
     componentDidMount() {
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {

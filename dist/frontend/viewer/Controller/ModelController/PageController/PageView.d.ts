@@ -32,10 +32,6 @@ export declare class PageView<TPageController extends PageController = PageContr
     renderForms(): ReactNode;
     renderForms2(): ReactNode;
     renderFooter(): ReactNode;
-    getStyle(): {
-        width: number;
-        height: number;
-    } | undefined;
     componentDidMount(): void;
     focus(): void;
 }
