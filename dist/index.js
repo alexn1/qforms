@@ -21086,6 +21086,10 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (this.getAttr('column')) {
             const dataSource = this.getDefaultDataSource();
             if (dataSource.isSurrogate()) {
+                if (!dataSource.getAttr('table')) {
+                    throw new Error(`${this.getFullName()}: cannot determine field type: ` +
+                        `set the "type" attribute on the field or the "table" attribute on data source "${dataSource.getName()}"`);
+                }
                 return dataSource.getType(this.getAttr('column'));
             }
             throw new Error('field type empty');
