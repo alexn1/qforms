@@ -1228,8 +1228,8 @@ div.CheckBox:not(.disabled):hover {
   --dlg-fg-3: #7b8894;
   --dlg-err: #b42318;
   --dlg-focus: #1a8cff;
-  --accent-color: #0a6e73;
-  --accent-color-disabled: #8bb8ba;
+  --accent-color: #398bce;
+  --accent-color-disabled: #b4d3ec;
   width: min(1000px, 100vw - 40px);
   height: min(750px, 100vh - 40px);
   background-color: var(--dlg-surface);
