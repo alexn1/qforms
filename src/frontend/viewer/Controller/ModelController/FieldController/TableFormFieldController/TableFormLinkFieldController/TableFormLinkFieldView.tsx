@@ -8,9 +8,12 @@ export class TableFormLinkFieldView extends TableFormFieldView<TableFormLinkFiel
         const ctrl = this.getCtrl();
         return (
             <div className={`${this.getCssClassNames()} ellipsis`} style={this.getStyle(row)}>
-                <a href="#" onClick={ctrl.onClick}>
+                <span
+                    className={`${this.getCssBlockName()}__link`}
+                    role="link"
+                    onClick={ctrl.onClick}>
                     {ctrl.getValueForWidget(row)}
-                </a>
+                </span>
             </div>
         );
     }

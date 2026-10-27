@@ -39075,7 +39075,7 @@ class TableFormLinkFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODUL
     render() {
         const row = this.props.row;
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: "#", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__link`, role: "link", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
 
