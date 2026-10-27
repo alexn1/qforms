@@ -41,7 +41,7 @@ export class ApplicationView<
     renderActivePage(): any {
         const { ctrl } = this.props;
         if (ctrl.activePage) {
-            return this.renderView(ctrl.activePage);
+            return this.renderView(ctrl.activePage, { key: ctrl.activePage.getId() });
         }
         return null;
     }

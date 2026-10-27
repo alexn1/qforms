@@ -15597,7 +15597,7 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
     renderActivePage() {
         const { ctrl } = this.props;
         if (ctrl.activePage) {
-            return this.renderView(ctrl.activePage);
+            return this.renderView(ctrl.activePage, { key: ctrl.activePage.getId() });
         }
         return null;
     }
