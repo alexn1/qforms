@@ -3,6 +3,7 @@ export class WebSocketClient {
     url: string;
     webSocket: any;
     refreshTimeoutId: any;
+    reconnectTimeoutId: any;
     RECONNECT_TIMEOUT: number;
     REFRESH_TIMEOUT: number;
 
@@ -16,8 +17,39 @@ export class WebSocketClient {
         )}`;
         this.webSocket = null;
         this.refreshTimeoutId = null;
+        this.reconnectTimeoutId = null;
         this.RECONNECT_TIMEOUT = 10; // sec
         this.REFRESH_TIMEOUT = 60 * 60; // sec
+        window.addEventListener('pagehide', this.onPageHide);
+        window.addEventListener('pageshow', this.onPageShow);
+    }
+
+    // The browser closes sockets itself when the page enters the back-forward cache (code 1006),
+    // so close it cleanly before that and reconnect when the page is restored.
+    onPageHide = () => {
+        console.debug('WebSocketClient.onPageHide');
+        this.close();
+    };
+
+    onPageShow = (e: PageTransitionEvent) => {
+        console.debug('WebSocketClient.onPageShow', e.persisted);
+        if (e.persisted && !this.webSocket) {
+            void this.reconnect();
+        }
+    };
+
+    close() {
+        this.resetRefreshTimeout();
+        if (this.reconnectTimeoutId) {
+            clearTimeout(this.reconnectTimeoutId);
+            this.reconnectTimeoutId = null;
+        }
+        if (this.webSocket) {
+            this.webSocket.onclose = null;
+            this.webSocket.onmessage = null;
+            this.webSocket.close(1000);
+            this.webSocket = null;
+        }
     }
 
     createUriParamsString(options) {
@@ -82,7 +114,10 @@ export class WebSocketClient {
         } catch (err) {
             console.error(err);
             console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
-            setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
+            this.reconnectTimeoutId = setTimeout(
+                async () => await this.reconnect(),
+                this.RECONNECT_TIMEOUT * 1000,
+            );
         }
     }
 

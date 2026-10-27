@@ -43314,6 +43314,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class WebSocketClient {
     constructor(options = {}) {
+        this.onPageHide = () => {
+            console.debug('WebSocketClient.onPageHide');
+            this.close();
+        };
+        this.onPageShow = (e) => {
+            console.debug('WebSocketClient.onPageShow', e.persisted);
+            if (e.persisted && !this.webSocket) {
+                void this.reconnect();
+            }
+        };
         this.options = options;
         if (!options.applicationController)
             throw new Error('no options.applicationController');
@@ -43322,8 +43332,24 @@ class WebSocketClient {
         this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
         this.webSocket = null;
         this.refreshTimeoutId = null;
+        this.reconnectTimeoutId = null;
         this.RECONNECT_TIMEOUT = 10;
         this.REFRESH_TIMEOUT = 60 * 60;
+        window.addEventListener('pagehide', this.onPageHide);
+        window.addEventListener('pageshow', this.onPageShow);
+    }
+    close() {
+        this.resetRefreshTimeout();
+        if (this.reconnectTimeoutId) {
+            clearTimeout(this.reconnectTimeoutId);
+            this.reconnectTimeoutId = null;
+        }
+        if (this.webSocket) {
+            this.webSocket.onclose = null;
+            this.webSocket.onmessage = null;
+            this.webSocket.close(1000);
+            this.webSocket = null;
+        }
     }
     createUriParamsString(options) {
         const params = {
@@ -43378,7 +43404,7 @@ class WebSocketClient {
         catch (err) {
             console.error(err);
             console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
-            setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
+            this.reconnectTimeoutId = setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
     async onClose(e) {

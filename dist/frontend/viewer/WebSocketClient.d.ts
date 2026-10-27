@@ -3,9 +3,13 @@ export declare class WebSocketClient {
     url: string;
     webSocket: any;
     refreshTimeoutId: any;
+    reconnectTimeoutId: any;
     RECONNECT_TIMEOUT: number;
     REFRESH_TIMEOUT: number;
     constructor(options?: any);
+    onPageHide: () => void;
+    onPageShow: (e: PageTransitionEvent) => void;
+    close(): void;
     createUriParamsString(options: any): string;
     connect(): Promise<unknown>;
     onRefreshTimeout(): Promise<void>;
