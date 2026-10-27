@@ -66,7 +66,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     initRouter(): void;
     initModules(): Promise<void>;
     createWebSocketServer(): void;
-    initDirPaths(): void;
+    private initDirPaths;
     getCodeRootDirPath(): string;
     composeStartMessage(): string;
     listenProcessEvents(): void;
