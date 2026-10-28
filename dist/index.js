@@ -13028,6 +13028,39 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.state.resized = Date.now();
             await this.rerender();
         };
+        this.onResizeMouseDown = (e) => {
+            var _a;
+            if (e.button !== 0)
+                return;
+            e.preventDefault();
+            e.stopPropagation();
+            const i = parseInt((_a = e.currentTarget.dataset.i) !== null && _a !== void 0 ? _a : '');
+            const th = e.currentTarget.parentElement;
+            if (isNaN(i) || !th)
+                return;
+            const column = this.props.columns[i];
+            const startX = e.clientX;
+            const startWidth = th.getBoundingClientRect().width;
+            let busy = false;
+            const onMouseMove = async (ev) => {
+                const width = Math.max(Grid.MIN_COLUMN_WIDTH, Math.round(startWidth + ev.clientX - startX));
+                if (busy || this.state.columnWidth[column.name] === width)
+                    return;
+                busy = true;
+                this.state.columnWidth[column.name] = width;
+                this.state.resized = Date.now();
+                await this.rerender(false);
+                busy = false;
+            };
+            const onMouseUp = () => {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.body.style.cursor = '';
+            };
+            document.body.style.cursor = 'w-resize';
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        };
         this.onCellViewCreate = (c) => {
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
@@ -13182,7 +13215,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return { minWidth };
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onMouseDown: this.onResizeMouseDown, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
     renderRows() {
         return this.props.rows.map((row, i) => {
@@ -13221,6 +13254,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
 }
 Grid.DEFAULT_COLUMN_WIDTH = 100;
+Grid.MIN_COLUMN_WIDTH = 20;
 if (typeof window === 'object') {
     window.Grid = Grid;
 }

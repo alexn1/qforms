@@ -7,6 +7,7 @@ import './Grid.less';
 
 export class Grid extends ReactComponent {
     static DEFAULT_COLUMN_WIDTH = 100;
+    static MIN_COLUMN_WIDTH = 20;
 
     columns: any;
     head: React.RefObject<any>;
@@ -250,6 +251,40 @@ export class Grid extends ReactComponent {
         await this.rerender();
     };
 
+    onResizeMouseDown = (e: React.MouseEvent<HTMLElement>) => {
+        if (e.button !== 0) return;
+        e.preventDefault(); // prevent text selection while dragging
+        e.stopPropagation();
+        const i = parseInt(e.currentTarget.dataset.i ?? '');
+        const th = e.currentTarget.parentElement;
+        if (isNaN(i) || !th) return;
+        const column = this.props.columns[i];
+        const startX = e.clientX;
+        const startWidth = th.getBoundingClientRect().width;
+        let busy = false;
+        const onMouseMove = async (ev: MouseEvent) => {
+            const width = Math.max(
+                Grid.MIN_COLUMN_WIDTH,
+                Math.round(startWidth + ev.clientX - startX),
+            );
+            if (busy || this.state.columnWidth[column.name] === width) return;
+            busy = true;
+            this.state.columnWidth[column.name] = width;
+            // @ts-ignore
+            this.state.resized = Date.now();
+            await this.rerender(false);
+            busy = false;
+        };
+        const onMouseUp = () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            document.body.style.cursor = '';
+        };
+        document.body.style.cursor = 'w-resize';
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    };
+
     getColumnWidth(i) {
         const column = this.props.columns[i];
         if (this.state.columnWidth[column.name] !== undefined) {
@@ -284,6 +319,7 @@ export class Grid extends ReactComponent {
                 <span
                     className={'Grid__resize'}
                     data-i={i}
+                    onMouseDown={this.onResizeMouseDown}
                     onDoubleClick={this.onResizeDoubleClick}></span>
             </div>
         ));
