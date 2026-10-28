@@ -907,7 +907,7 @@ class BackHostApp {
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
         message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
         message += '\n';
-        message += `QForms server v${this.getPlatformVersion()} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+        message += `QForms server v${this.getPlatformVersion()}, node: ${process.versions.node}, listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
         message += `\tcwd: ${process.cwd()}\n`;
         message += `\tsrcDirPath: ${this.srcDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
