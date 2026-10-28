@@ -1,11 +1,11 @@
 .Menu {
-  overflow: hidden;
   background-color: #333;
   display: flex;
+  flex-wrap: wrap;
   min-height: 46px;
 
   > div {
-    overflow: hidden;
+    position: relative;
 
     &.active {
       > button {
@@ -18,26 +18,31 @@
     }
 
     > button {
-      //font-size: 16px;
       font-size: inherit;
+      font-family: inherit;
       border: none;
-      outline: none;
       color: #bbb;
       padding: 14px 16px;
       background-color: inherit;
-      //font-family: inherit; /* Important for vertical align on mobile phones */
       margin: 0; /* Important for vertical align on mobile phones */
       cursor: pointer;
       &:hover {
         color: white;
+      }
+      &:focus-visible {
+        outline: 2px solid #8ab4f8;
+        outline-offset: -2px;
       }
     }
 
     > div {
       display: none;
       position: absolute;
+      top: 100%;
+      left: 0;
       background-color: #f9f9f9;
       min-width: 160px;
+      max-width: 90vw;
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       z-index: 2;
       > a {
@@ -46,10 +51,16 @@
         text-decoration: none;
         display: block;
         text-align: left;
+        white-space: nowrap;
         cursor: pointer;
 
         &:hover {
           background-color: #ddd;
+        }
+        &:focus-visible {
+          background-color: #ddd;
+          outline: 2px solid #1a73e8;
+          outline-offset: -2px;
         }
       }
     }

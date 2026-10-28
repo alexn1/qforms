@@ -5,8 +5,8 @@ import {
     DropdownButton,
     MoreVertIcon,
     Tab2,
-    OpenInNewIcon,
-    CloseIcon2,
+    OpenInNewThinIcon,
+    CloseThinIcon,
     ReactComponentProps,
 } from '../../../../common';
 import { PageController } from './PageController';
@@ -228,7 +228,7 @@ export class PageView<
                 key={'open'}
                 className={`${this.getCssBlockName()}__open`}
                 onClick={ctrl.onOpenPageClick}>
-                <OpenInNewIcon />
+                <OpenInNewThinIcon />
             </div>
         );
     }
@@ -240,7 +240,7 @@ export class PageView<
                 key={'close'}
                 className={`${this.getCssBlockName()}__close`}
                 onClick={ctrl.onClosePageClick}>
-                <CloseIcon2 />
+                <CloseThinIcon />
             </div>
         );
     }

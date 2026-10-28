@@ -7,6 +7,7 @@ import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
 import { PageData } from '../../../../../common/ModelData/PageData';
 import { ModalController } from '../../ModalController/ModalController';
+import { MenuGroup } from '../../../../common';
 export interface OpenPageOptions {
     name: string;
     newMode?: boolean;
@@ -51,18 +52,10 @@ export declare class ApplicationController extends ModelController<Application> 
     onPageSelect(pc: PageController): void;
     closePage(pageController: PageController): Promise<void>;
     onActionClick(name: string): Promise<any>;
-    getMenuItemsProp(): {
-        name: string;
-        title: string;
-        items: {
-            type: string;
-            name: string | undefined;
-            title: string;
-        }[];
-    }[];
+    getMenuItemsProp(): MenuGroup[];
     onStatusbarCreate: (statusbar: any) => void;
     onLogout: () => Promise<void>;
-    onMenuItemClick: (menu: any, type: any, name: any) => Promise<void>;
+    onMenuItemClick: (menu: string, type: string, name: string) => Promise<void>;
     getActivePageName(): string | null;
     onWindowPopState(e: any): Promise<void>;
     getTitle(): string;

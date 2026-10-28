@@ -10,7 +10,7 @@ import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
 import { PageData } from '../../../../../common/ModelData/PageData';
 import { ModalController } from '../../ModalController/ModalController';
-import { PageActionQuery, PageActionResponse } from '../../../../common';
+import { PageActionQuery, PageActionResponse, MenuGroup } from '../../../../common';
 
 export interface OpenPageOptions {
     name: string;
@@ -259,7 +259,7 @@ export class ApplicationController extends ModelController<Application> {
         console.debug('ApplicationController.onActionClick', name);
     }
 
-    getMenuItemsProp() {
+    getMenuItemsProp(): MenuGroup[] {
         // console.debug('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
@@ -271,7 +271,7 @@ export class ApplicationController extends ModelController<Application> {
                           .getData()
                           .menu[key].map((item) => ({
                               type: item.type,
-                              name: item.page || item.action,
+                              name: item.page ?? item.action ?? '',
                               title: item.caption,
                           })),
                   }))
@@ -308,7 +308,7 @@ export class ApplicationController extends ModelController<Application> {
         location.reload();
     };
 
-    onMenuItemClick = async (menu, type, name) => {
+    onMenuItemClick = async (menu: string, type: string, name: string) => {
         console.debug('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
             await this.openPage({ name: name, modal: false });

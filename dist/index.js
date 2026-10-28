@@ -907,7 +907,7 @@ class BackHostApp {
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
         message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
         message += '\n';
-        message += `QForms server v${this.getPlatformVersion()} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+        message += `QForms server v${this.getPlatformVersion()}, node: ${process.versions.node}, listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
         message += `\tcwd: ${process.cwd()}\n`;
         message += `\tsrcDirPath: ${this.srcDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
@@ -11430,6 +11430,30 @@ if (typeof window === 'object') {
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/CloseThinIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/CloseThinIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseThinIcon": () => (/* binding */ CloseThinIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const CloseThinIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: "22px", height: "22px", viewBox: "0 0 22 22" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M3.75 3.75L18.25 18.25M18.25 3.75L3.75 18.25", fill: "none", stroke: "currentColor", strokeWidth: "2" }) })));
+};
+if (typeof window === 'object') {
+    window.CloseThinIcon = CloseThinIcon;
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/DateIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/DateIcon.tsx ***!
@@ -11684,6 +11708,30 @@ if (typeof window === 'object') {
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/OpenInNewThinIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewThinIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewThinIcon": () => (/* binding */ OpenInNewThinIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const OpenInNewThinIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: "22px", height: "22px", viewBox: "0 0 22 22" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M10 4H4V18H18V12M13 4H18V9M18 4L9 13", fill: "none", stroke: "currentColor", strokeWidth: "2" }) })));
+};
+if (typeof window === 'object') {
+    window.OpenInNewThinIcon = OpenInNewThinIcon;
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/PasswordIcon.tsx":
 /*!***************************************************!*\
   !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
@@ -11893,47 +11941,53 @@ if (typeof window === 'object') {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__.ArrowIcon),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_18__.ArrowIcon),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_13__.CancelIcon),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _CloseIcon__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_18__.DateIcon),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_10__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_17__.DownIcon),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_15__.EditIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_6__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _CloseThinIcon__WEBPACK_IMPORTED_MODULE_7__.CloseThinIcon),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_20__.DateIcon),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_16__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_12__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_19__.DownIcon),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_17__.EditIcon),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _LeftIcon__WEBPACK_IMPORTED_MODULE_1__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_10__.LocationIcon),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__.PasswordIcon),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__.PhoneIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _OpenInNewThinIcon__WEBPACK_IMPORTED_MODULE_4__.OpenInNewThinIcon),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_15__.PasswordIcon),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_14__.PhoneIcon),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _RightIcon__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__.SettingsIcon),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_19__.TimeIcon),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_11__.SettingsIcon),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_21__.TimeIcon),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_8__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_9__.VisibilityOffIcon)
 /* harmony export */ });
 /* harmony import */ var _CloseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
 /* harmony import */ var _LeftIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 /* harmony import */ var _RightIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
 /* harmony import */ var _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
-/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
-/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
-/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
-/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
-/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
-/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
-/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
-/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _OpenInNewThinIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./OpenInNewThinIcon */ "./src/frontend/common/icon/OpenInNewThinIcon.tsx");
+/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _CloseThinIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CloseThinIcon */ "./src/frontend/common/icon/CloseThinIcon.tsx");
+/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
 
 
 
@@ -11977,6 +12031,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _ClipboardHelper__WEBPACK_IMPORTED_MODULE_7__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.CloseThinIcon),
 /* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.ComboBox),
 /* harmony export */   "CookieHelper": () => (/* reexport safe */ _CookieHelper__WEBPACK_IMPORTED_MODULE_5__.CookieHelper),
 /* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.DateIcon),
@@ -12002,6 +12057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.OpenInNewIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.OpenInNewThinIcon),
 /* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.Password),
 /* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_12__.PasswordIcon),
 /* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_13__.PhoneBox),
@@ -12972,6 +13028,39 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.state.resized = Date.now();
             await this.rerender();
         };
+        this.onResizeMouseDown = (e) => {
+            var _a;
+            if (e.button !== 0)
+                return;
+            e.preventDefault();
+            e.stopPropagation();
+            const i = parseInt((_a = e.currentTarget.dataset.i) !== null && _a !== void 0 ? _a : '');
+            const th = e.currentTarget.parentElement;
+            if (isNaN(i) || !th)
+                return;
+            const column = this.props.columns[i];
+            const startX = e.clientX;
+            const startWidth = th.getBoundingClientRect().width;
+            let busy = false;
+            const onMouseMove = async (ev) => {
+                const width = Math.max(Grid.MIN_COLUMN_WIDTH, Math.round(startWidth + ev.clientX - startX));
+                if (busy || this.state.columnWidth[column.name] === width)
+                    return;
+                busy = true;
+                this.state.columnWidth[column.name] = width;
+                this.state.resized = Date.now();
+                await this.rerender(false);
+                busy = false;
+            };
+            const onMouseUp = () => {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.body.style.cursor = '';
+            };
+            document.body.style.cursor = 'w-resize';
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        };
         this.onCellViewCreate = (c) => {
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
@@ -13126,7 +13215,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return { minWidth };
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onMouseDown: this.onResizeMouseDown, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
     renderRows() {
         return this.props.rows.map((row, i) => {
@@ -13165,6 +13254,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
 }
 Grid.DEFAULT_COLUMN_WIDTH = 100;
+Grid.MIN_COLUMN_WIDTH = 20;
 if (typeof window === 'object') {
     window.Grid = Grid;
 }
@@ -13344,47 +13434,97 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
-/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Menu_less__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Menu_less__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
-class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onMenuClick = async (e) => {
-            await this.toggleMenu(e.currentTarget.dataset.menu);
-        };
-        this.onBlur = async (e) => {
-            await this.closeMenu(e.currentTarget.dataset.menu);
-        };
-        this.onMouseDown = (e) => {
-            e.preventDefault();
-        };
-        this.onMenuItemClick = async (e) => {
-            e.persist();
-            const { menu, type, name } = e.target.dataset;
-            await this.closeMenu(menu);
-            if (this.props.onClick) {
-                this.props.onClick(menu, type, name);
+        this.onDocumentMouseDown = (e) => {
+            const el = this.getElement();
+            if (el && e.target instanceof Node && !el.contains(e.target)) {
+                this.closeMenu();
             }
         };
-        this.state = {};
-    }
-    toggleMenu(menu) {
-        return new Promise((resolve) => {
+        this.onDocumentKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.closeMenu();
+            }
+        };
+        this.onMenuClick = (e) => {
+            const menu = e.currentTarget.dataset.menu;
             this.setState((prevState) => ({
-                [menu]: !prevState[menu],
-            }), resolve);
-        });
+                openMenu: prevState.openMenu === menu ? null : menu,
+            }));
+        };
+        this.onGroupBlur = (e) => {
+            const next = e.relatedTarget;
+            if (next instanceof Node && e.currentTarget.contains(next)) {
+                return;
+            }
+            if (next) {
+                this.closeMenu();
+            }
+        };
+        this.onMenuItemClick = async (e) => {
+            const { menu, type, name } = e.currentTarget.dataset;
+            if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
+                return;
+            }
+            e.preventDefault();
+            this.closeMenu();
+            if (this.props.onClick) {
+                try {
+                    await this.props.onClick(menu, type, name);
+                }
+                catch (err) {
+                    console.error(err);
+                }
+            }
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1___default().createRef();
+        this.state = {
+            classList: [],
+            enabled: true,
+            disabled: false,
+            openMenu: null,
+        };
     }
-    closeMenu(menu) {
-        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.openMenu !== null && prevState.openMenu === null) {
+            document.addEventListener('mousedown', this.onDocumentMouseDown);
+            document.addEventListener('keydown', this.onDocumentKeyDown);
+        }
+        else if (this.state.openMenu === null && prevState.openMenu !== null) {
+            this.removeDocumentListeners();
+        }
+    }
+    componentWillUnmount() {
+        this.removeDocumentListeners();
+    }
+    removeDocumentListeners() {
+        document.removeEventListener('mousedown', this.onDocumentMouseDown);
+        document.removeEventListener('keydown', this.onDocumentKeyDown);
+    }
+    closeMenu() {
+        this.setState({ openMenu: null });
+    }
+    renderItem(menu, item) {
+        const isPage = item.type === 'page';
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ role: "menuitem", href: isPage ? this.props.hostApp.createLink({ page: item.name }) : '#', "data-menu": menu.name, "data-type": item.type, "data-name": item.name, onClick: this.onMenuItemClick }, { children: item.title }), item.name));
+    }
+    renderGroup(menu) {
+        const isOpen = this.state.openMenu === menu.name;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: isOpen ? 'active' : undefined, onBlur: this.onGroupBlur }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, "aria-haspopup": "menu", "aria-expanded": isOpen, onClick: this.onMenuClick }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ role: "menu" }, { children: menu.items.map((item) => this.renderItem(menu, item)) }))] }), menu.name));
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: this.props.hostApp.createLink({ page: item.name }), "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu", ref: this.el }, { children: this.props.items && this.props.items.map((menu) => this.renderGroup(menu)) })));
     }
 }
 if (typeof window === 'object') {
@@ -14617,6 +14757,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.CloseThinIcon),
 /* harmony export */   "Column": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Column),
 /* harmony export */   "ComboBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.ComboBox),
 /* harmony export */   "ComboBoxField": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.ComboBoxField),
@@ -14655,6 +14796,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.MoreVertIcon),
 /* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.NoSqlDataSource),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_0__.OpenInNewThinIcon),
 /* harmony export */   "Page": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.Page),
 /* harmony export */   "PageController": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _viewer__WEBPACK_IMPORTED_MODULE_1__.PageView),
@@ -15432,11 +15574,14 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_1_
                     title: key,
                     items: this.getModel()
                         .getData()
-                        .menu[key].map((item) => ({
-                        type: item.type,
-                        name: item.page || item.action,
-                        title: item.caption,
-                    })),
+                        .menu[key].map((item) => {
+                        var _a, _b;
+                        return ({
+                            type: item.type,
+                            name: (_b = (_a = item.page) !== null && _a !== void 0 ? _a : item.action) !== null && _b !== void 0 ? _b : '',
+                            title: item.caption,
+                        });
+                    }),
                 }))
                 : []),
             ...(this.getModel().getUser()
@@ -19408,11 +19553,11 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     }
     renderOpenPageHeaderButton() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__open`, onClick: ctrl.onOpenPageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon, {}) }), 'open'));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__open`, onClick: ctrl.onOpenPageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.OpenInNewThinIcon, {}) }), 'open'));
     }
     renderClosePageHeaderButton() {
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }), 'close'));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseThinIcon, {}) }), 'close'));
     }
     renderMain() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.getCtrl().getModel().isFormInTab()
@@ -22545,6 +22690,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ClipboardHelper": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.ClipboardHelper),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
+/* harmony export */   "CloseThinIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.CloseThinIcon),
 /* harmony export */   "Column": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Column),
 /* harmony export */   "ColumnEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditor),
 /* harmony export */   "ColumnEditorController": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.ColumnEditorController),
@@ -22610,6 +22756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.NoSqlDataSource),
 /* harmony export */   "NoSqlDataSourceEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.NoSqlDataSourceEditor),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
+/* harmony export */   "OpenInNewThinIcon": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.OpenInNewThinIcon),
 /* harmony export */   "Page": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.Page),
 /* harmony export */   "PageController": () => (/* reexport safe */ _frontend__WEBPACK_IMPORTED_MODULE_4__.PageController),
 /* harmony export */   "PageEditor": () => (/* reexport safe */ _backend__WEBPACK_IMPORTED_MODULE_2__.PageEditor),
@@ -23090,7 +23237,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.64.0-dev","description":"Fullstack platform based on Express and React for building Web UI for databases","main":"dist/index.js","files":["dist"],"scripts":{"webpack:back:index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack:back:start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack:front:editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack:front:index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack:front:monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack:front:viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"gulp build-dev","build:prod":"node task/build-prod.js","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev bun apps-ts/sample/start.ts","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/project/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon:start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"clear; QFORMS_LOG_LEVEL=error jest --runInBand","test:log":"clear; jest --runInBand","test:debug":"clear; QFORMS_LOG_LEVEL=debug jest --runInBand","test:cov":"jest --coverage","docker:build":"node task/docker-build.js","docker:run":"node task/docker-run.js","prettier:write":"prettier --write \\"src/**/*.{ts,tsx,less}\\"","convert":"node task/convert.js","clean":"node task/clean.js","release":"node task/release.js","deploy":"node task/deploy.js"},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"git+https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.64.0-dev","description":"Fullstack platform based on Express and React for building Web UI for databases","main":"dist/index.js","files":["dist"],"scripts":{"webpack:back:index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack:back:start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack:front:editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack:front:index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack:front:monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack:front:viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"gulp build-dev","build:prod":"node task/build-prod.js","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev bun apps-ts/sample/start.ts","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/project/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon:start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"clear; QFORMS_LOG_LEVEL=error jest --runInBand","test:log":"clear; jest --runInBand","test:debug":"clear; QFORMS_LOG_LEVEL=debug jest --runInBand","test:cov":"jest --coverage","docker:build":"docker build --pull -t qforms:latest .","docker:run":"docker run -e LISTEN_HOST=0.0.0.0 -e DB_HOST=host.docker.internal -e APPS_DIR_PATH=/apps -p 7000:7000 -v qforms-apps:/app/apps -v ~/project/qforms-apps:/apps -v qforms-runtime:/app/runtime --rm qforms:latest","prettier:write":"prettier --write \\"src/**/*.{ts,tsx,less}\\"","convert":"node task/convert.js","clean":"node task/clean.js","release":"node task/release.js","deploy":"node task/deploy.js"},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"git+https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 
