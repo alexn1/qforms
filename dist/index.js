@@ -13019,12 +13019,17 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             }
         };
         this.onResizeDoubleClick = async (e) => {
+            var _a;
             console.debug('Grid.onResizeDoubleClick', e.target);
-            const i = parseInt(e.target.dataset.i);
-            const column = this.props.columns[i];
-            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+            const i = parseInt((_a = e.currentTarget.dataset.i) !== null && _a !== void 0 ? _a : '');
+            const th = e.currentTarget.parentElement;
+            if (isNaN(i) || !th)
                 return;
-            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+            const column = this.props.columns[i];
+            const width = Math.max(Grid.MIN_COLUMN_WIDTH, this.getMaxColumnWidth(column), this.getHeaderWidth(th));
+            if (this.state.columnWidth[column.name] === width)
+                return;
+            this.state.columnWidth[column.name] = width;
             this.state.resized = Date.now();
             await this.rerender();
         };
@@ -13201,6 +13206,18 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
     getMaxColumnWidth(column) {
         return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
+    }
+    getHeaderWidth(th) {
+        const title = th.firstElementChild;
+        if (!title)
+            return 0;
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        const style = window.getComputedStyle(th);
+        return Math.ceil(range.getBoundingClientRect().width +
+            parseFloat(style.paddingLeft) +
+            parseFloat(style.paddingRight) +
+            parseFloat(style.borderRightWidth || '0'));
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
