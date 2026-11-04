@@ -1,7 +1,7 @@
 # План: автозагрузка серверного кода приложения из apps/<app>/
 
 ## Context
-Сейчас для приложения с кастомным серверным кодом (`modelClass`, кастомные роуты) нужен свой `start.ts` и подкласс `BackHostApp` (см. `apps-ts/sample/start.ts`, `SampleBackHostApp.ts`). Цель: положить рядом с `apps/<app>/<appFileName>.json` файл `<appFileName>.ts` (или `.js`), и стандартный `dist/start.js` сам его подгрузит, без кастомного `start.ts`.
+Сейчас для приложения с кастомным серверным кодом (`modelClass`, кастомные роуты) нужен свой `start.ts` и подкласс `BackHostApp` (см. `apps/sample/start.ts`, `SampleBackHostApp.ts` (удалены, см. статус)). Цель: положить рядом с `apps/<app>/<appFileName>.json` файл `<appFileName>.ts` (или `.js`), и стандартный `dist/start.js` сам его подгрузит, без кастомного `start.ts`.
 
 Решения пользователя: исполняем «только готовый JS» (без esbuild/ts-node, `.ts` грузится как есть, значит на bun или Node ≥22.6 с type-stripping), файл ищем как `<appDir>/<appFileName>.ts`, кроме классов нужен хук для кастомных роутов.
 
@@ -21,16 +21,16 @@
 
 2. **Почему загрузка при `init()`, а не лениво.** Вы выбрали ленивую загрузку, но хук роутов требует регистрации в Express до `useErrors()` (404-обработчик). Поэтому модули приложений загружаются при старте, а экземпляры `BkApplication` по-прежнему создаются лениво (`createApplicationIfNotExists`). Если нужна именно ленивая загрузка, роуты придётся делать через один middleware-диспетчер, и они будут отдавать 404 до первого обращения к приложению. Подтвердите вариант при утверждении плана.
 
-3. **Sample (`apps-ts/sample`)**
+3. **Sample (`apps/sample`)**
    - Перенести `index.ts`/`SampleBkApplication.ts` в `sample.ts` (реэкспорт + `export function initCustomRoutes(app) { app.createCustomRoute(...) }` из `SampleBackHostApp`).
    - Удалить `start.ts` и `SampleBackHostApp.ts`.
-   - `package.json`: `start:sample` → `NODE_ENV=dev APPS_DIR_PATH=apps-ts LISTEN_PORT=7001 bun dist/start.js`.
+   - `package.json`: `start:sample` → `NODE_ENV=dev LISTEN_PORT=7001 node dist/start.js`.
    - Сохранить `require('./public/js/...')` для фронтовых файлов, если они нужны (проверить при переносе).
 
 4. **`AGENTS.md`**: коротко описать конвенцию в разделе «Server and routing» (файл `<appFileName>.ts|js`, `initCustomRoutes`, требование к рантайму для `.ts`).
 
 ## Ограничения (оговорить в документации)
-- Без транспиляции `.ts` исполним только на bun / Node с type-stripping: нет `enum`, parameter properties, нужны явные расширения в относительных импортах, файлы внутри `node_modules` не обрабатываются. На Node 16 (`.nvmrc`) надо отдавать `.js`.
+- Без транспиляции `.ts` исполним только на bun / Node с type-stripping: нет `enum`, parameter properties, нужны явные расширения в относительных импортах, файлы внутри `node_modules` не обрабатываются. На Node 24 (`.nvmrc`) надо отдавать `.js`.
 - Модульный кэш `require`: код грузится один раз, горячей перезагрузки нет (как и сейчас).
 - `registerGlobalClass` бросает при повторной регистрации имени, поэтому имена классов разных приложений должны быть уникальны.
 
@@ -45,3 +45,10 @@
 - Роуты регистрируются из экспорта модуля `initCustomRoutes(hostApp)`, который вызывается из `BackHostApp.initCustomRoutes()` до `useErrors()`. Диспетчер роутов и роуты на уровне класса `BkApplication` не нужны.
 - Экземпляры `BkApplication` по-прежнему создаются лениво (`createApplicationIfNotExists`).
 - Рассматривали и отвергли ленивую загрузку: Express не обрабатывает роуты, добавленные после 404-обработчика (нужен middleware-диспетчер), а кастомный URL давал бы 404 до первого захода на стандартный URL приложения.
+
+## Статус
+- [x] Шаг 1: `BackHostApp.loadAppModules()` на старте, `appModules`.
+- [x] Шаг 2: `apps-ts/sample` перенесён в `apps/sample`, обновлены ссылки.
+- [x] Шаг 3: `apps/sample/sample.ts` (класс + `initCustomRoutes`), `start.ts`/`SampleBackHostApp.ts` удалены, `BackHostApp.initCustomRoutes()` вызывает хуки модулей. Проверено: сборка, curl (стандартный и кастомный URL), `SampleBackHostApp.test.ts`.
+- [x] Документация `AGENTS.md`.
+- Ограничение: в `.ts` нельзя именованно импортировать из `dist` (CJS-бандл): `import type` + `require`.
