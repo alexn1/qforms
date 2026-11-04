@@ -287,10 +287,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
                 this.appModules[key] = __non_webpack_require__(filePath);
                 pConsole.log(`app module loaded: ${key}`);
             } catch (err) {
-                const hint = filePath.endsWith('.ts')
-                    ? ' (.ts needs bun or Node with type stripping, otherwise use .js)'
-                    : '';
-                pConsole.error(`app module '${filePath}' not loaded: ${err.message}${hint}`);
+                pConsole.error(`app module '${filePath}' not loaded: ${err.message}`);
             }
         }
     }

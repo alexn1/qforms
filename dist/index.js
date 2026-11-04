@@ -985,10 +985,7 @@ class BackHostApp {
                 _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(`app module loaded: ${key}`);
             }
             catch (err) {
-                const hint = filePath.endsWith('.ts')
-                    ? ' (.ts needs bun or Node with type stripping, otherwise use .js)'
-                    : '';
-                _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.error(`app module '${filePath}' not loaded: ${err.message}${hint}`);
+                _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.error(`app module '${filePath}' not loaded: ${err.message}`);
             }
         }
     }
