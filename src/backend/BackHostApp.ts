@@ -30,7 +30,7 @@ import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion } from './private-helper';
 import { Router } from './Router';
-import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
+import { _glob, createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
 import { Helper, CreateAppDto } from '../frontend';
 import { CODE_ROOT_DIR_PATH } from '../index';
 
@@ -275,14 +275,15 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         }
     }
 
-    // loads <appDir>/<appFileName>.js|ts (if exists) next to each application json file
+    // loads <appDir>/<appFileName>.js|ts (if exists) next to each application json file,
+    // json files are not parsed here, so a broken json doesn't stop the server
     async loadAppModules(): Promise<void> {
-        const appInfos = await BkApplication.getAppInfos(this.distDirPath);
-        for (const appInfo of appInfos) {
-            const base = path.join(appInfo.dirPath, appInfo.fileName);
+        const appFilePaths = await _glob(path.join(this.distDirPath, '*/*.json'));
+        for (const appFilePath of appFilePaths) {
+            const base = appFilePath.slice(0, -'.json'.length);
             const filePath = [`${base}.js`, `${base}.ts`].find((p) => fs.existsSync(p));
             if (!filePath) continue;
-            const key = `${appInfo.dirName}/${appInfo.fileName}`;
+            const key = `${path.basename(path.dirname(base))}/${path.basename(base)}`;
             try {
                 this.appModules[key] = __non_webpack_require__(filePath);
                 pConsole.log(`app module loaded: ${key}`);

@@ -973,13 +973,13 @@ class BackHostApp {
         }
     }
     async loadAppModules() {
-        const appInfos = await _viewer_BkModel_BkApplication_BkApplication__WEBPACK_IMPORTED_MODULE_10__.BkApplication.getAppInfos(this.distDirPath);
-        for (const appInfo of appInfos) {
-            const base = path__WEBPACK_IMPORTED_MODULE_4___default().join(appInfo.dirPath, appInfo.fileName);
+        const appFilePaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__._glob)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.distDirPath, '*/*.json'));
+        for (const appFilePath of appFilePaths) {
+            const base = appFilePath.slice(0, -'.json'.length);
             const filePath = [`${base}.js`, `${base}.ts`].find((p) => fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(p));
             if (!filePath)
                 continue;
-            const key = `${appInfo.dirName}/${appInfo.fileName}`;
+            const key = `${path__WEBPACK_IMPORTED_MODULE_4___default().basename(path__WEBPACK_IMPORTED_MODULE_4___default().dirname(base))}/${path__WEBPACK_IMPORTED_MODULE_4___default().basename(base)}`;
             try {
                 this.appModules[key] = require(filePath);
                 _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(`app module loaded: ${key}`);
