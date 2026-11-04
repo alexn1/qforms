@@ -30,11 +30,15 @@ export interface BackHostAppConfig {
         password: string;
     };
 }
+export interface AppModule {
+    initCustomRoutes?: (hostApp: BackHostApp) => void;
+}
 export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     private config;
     applications: {
         [route: string]: BkApplication;
     };
+    private shutdownPromise;
     private express;
     httpServer: Server;
     wsServer: WebSocketServer;
@@ -45,6 +49,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     runtimeDirPath: string;
     sessionDirPath: string;
     private router;
+    appModules: Record<string, AppModule>;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -75,6 +80,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     useMiddlewares(): void;
     initSystemRoutes(): void;
     initCustomRoutes(): void;
+    loadAppModules(): Promise<void>;
     useStatic(): void;
     useErrors(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;
@@ -111,6 +117,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     onUncaughtException(err: Error, origin: string): Promise<void>;
     onUnhandledRejection(reason: Error | any, promise: Promise<any>): Promise<void>;
     shutdown(): Promise<void>;
+    doShutdown(): Promise<void>;
     onHttpServerError(err: any): void;
     static getDomainFromRequest(req: Request): Nullable<string>;
     getDomain(req: Request): Nullable<string>;

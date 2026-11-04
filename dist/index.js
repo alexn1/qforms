@@ -817,11 +817,13 @@ const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const MIN_NODE_VERSION = 14;
+const MIN_NODE_VERSION = 24;
 class BackHostApp {
     constructor(config = {}) {
         this.config = config;
         this.applications = {};
+        this.shutdownPromise = null;
+        this.appModules = {};
         this.startTime = new Date();
         this.createAppQueue = {};
         (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.constructor', config);
@@ -835,6 +837,7 @@ class BackHostApp {
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
         this.initRouter();
+        await this.loadAppModules();
         await this.initModules();
         this.createExpressServer();
         this.createHttpServer();
@@ -963,7 +966,29 @@ class BackHostApp {
         this.express.options('/error', this.optionsError.bind(this));
         this.express.post('/error', this.postError.bind(this));
     }
-    initCustomRoutes() { }
+    initCustomRoutes() {
+        var _a;
+        for (const appModule of Object.values(this.appModules)) {
+            (_a = appModule.initCustomRoutes) === null || _a === void 0 ? void 0 : _a.call(appModule, this);
+        }
+    }
+    async loadAppModules() {
+        const appFilePaths = await (0,_file_helper__WEBPACK_IMPORTED_MODULE_27__._glob)(path__WEBPACK_IMPORTED_MODULE_4___default().join(this.distDirPath, '*/*.json'));
+        for (const appFilePath of appFilePaths) {
+            const base = appFilePath.slice(0, -'.json'.length);
+            const filePath = [`${base}.js`, `${base}.ts`].find((p) => fs__WEBPACK_IMPORTED_MODULE_3___default().existsSync(p));
+            if (!filePath)
+                continue;
+            const key = `${path__WEBPACK_IMPORTED_MODULE_4___default().basename(path__WEBPACK_IMPORTED_MODULE_4___default().dirname(base))}/${path__WEBPACK_IMPORTED_MODULE_4___default().basename(base)}`;
+            try {
+                this.appModules[key] = require(filePath);
+                _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.log(`app module loaded: ${key}`);
+            }
+            catch (err) {
+                _pConsole__WEBPACK_IMPORTED_MODULE_23__.pConsole.error(`app module '${filePath}' not loaded: ${err.message}`);
+            }
+        }
+    }
     useStatic() {
         this.express.use(express__WEBPACK_IMPORTED_MODULE_1___default()["static"](this.frontendDirPath, {
             setHeaders: (res, fullPath, stat) => {
@@ -1200,7 +1225,13 @@ class BackHostApp {
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
-    async shutdown() {
+    shutdown() {
+        if (!this.shutdownPromise) {
+            this.shutdownPromise = this.doShutdown();
+        }
+        return this.shutdownPromise;
+    }
+    async doShutdown() {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
@@ -1344,7 +1375,7 @@ __decorate([
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
 __decorate([
     (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
-], BackHostApp.prototype, "shutdown", null);
+], BackHostApp.prototype, "doShutdown", null);
 
 
 /***/ }),
@@ -2295,10 +2326,11 @@ class WebSocketServer {
     async onError(err) {
         (0,_console__WEBPACK_IMPORTED_MODULE_4__.error)('WebSocketServer.onError', err);
     }
-    async onConnection(webSocket) {
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', (0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket));
-        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent((0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket)))));
-        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse((0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket), true);
+    async onConnection(webSocket, req) {
+        const wsUrl = (0,_websocket_helper__WEBPACK_IMPORTED_MODULE_5__.getWebsocketUrl)(webSocket, req);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.debug)('WebSocketServer.onConnection', wsUrl);
+        (0,_console__WEBPACK_IMPORTED_MODULE_4__.log)('wss:', colors_safe__WEBPACK_IMPORTED_MODULE_2___default().bgYellow(colors_safe__WEBPACK_IMPORTED_MODULE_2___default().black(decodeURIComponent(wsUrl))));
+        const parts = url__WEBPACK_IMPORTED_MODULE_1___default().parse(wsUrl, true);
         if (!parts.query.route)
             throw new Error('no route');
         if (!parts.query.uuid)
@@ -10135,9 +10167,9 @@ function getWebSocketPort(webSocket) {
         ? webSocket.upgradeReq.headers['x-real-port']
         : webSocket.upgradeReq.socket.remotePort;
 }
-function getWebsocketUrl(webSocket) {
+function getWebsocketUrl(webSocket, req) {
     var _a;
-    const url = webSocket.url || ((_a = webSocket.upgradeReq) === null || _a === void 0 ? void 0 : _a.url);
+    const url = (req === null || req === void 0 ? void 0 : req.url) || ((_a = webSocket.upgradeReq) === null || _a === void 0 ? void 0 : _a.url) || webSocket.url;
     if (!url)
         throw new Error('getWebsocketUrl: cannot get webSocket url');
     return url;
@@ -13019,12 +13051,17 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             }
         };
         this.onResizeDoubleClick = async (e) => {
+            var _a;
             console.debug('Grid.onResizeDoubleClick', e.target);
-            const i = parseInt(e.target.dataset.i);
-            const column = this.props.columns[i];
-            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+            const i = parseInt((_a = e.currentTarget.dataset.i) !== null && _a !== void 0 ? _a : '');
+            const th = e.currentTarget.parentElement;
+            if (isNaN(i) || !th)
                 return;
-            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+            const column = this.props.columns[i];
+            const width = Math.max(Grid.MIN_COLUMN_WIDTH, this.getMaxColumnWidth(column), this.getHeaderWidth(th));
+            if (this.state.columnWidth[column.name] === width)
+                return;
+            this.state.columnWidth[column.name] = width;
             this.state.resized = Date.now();
             await this.rerender();
         };
@@ -13201,6 +13238,18 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     }
     getMaxColumnWidth(column) {
         return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
+    }
+    getHeaderWidth(th) {
+        const title = th.firstElementChild;
+        if (!title)
+            return 0;
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        const style = window.getComputedStyle(th);
+        return Math.ceil(range.getBoundingClientRect().width +
+            parseFloat(style.paddingLeft) +
+            parseFloat(style.paddingRight) +
+            parseFloat(style.borderRightWidth || '0'));
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
@@ -23237,7 +23286,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.65.0-dev","description":"Fullstack platform based on Express and React for building Web UI for databases","main":"dist/index.js","files":["dist"],"scripts":{"webpack:back:index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack:back:start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack:front:editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack:front:index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack:front:monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack:front:viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"gulp build-dev","build:prod":"node task/build-prod.js","start":"NODE_ENV=dev node dist/start.js","start:sample":"NODE_ENV=dev bun apps-ts/sample/start.ts","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/project/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon:start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"clear; QFORMS_LOG_LEVEL=error jest --runInBand","test:log":"clear; jest --runInBand","test:debug":"clear; QFORMS_LOG_LEVEL=debug jest --runInBand","test:cov":"jest --coverage","docker:build":"docker build --pull -t qforms:latest .","docker:run":"docker run -e LISTEN_HOST=0.0.0.0 -e DB_HOST=host.docker.internal -e APPS_DIR_PATH=/apps -p 7000:7000 -v qforms-apps:/app/apps -v ~/project/qforms-apps:/apps -v qforms-runtime:/app/runtime --rm qforms:latest","prettier:write":"prettier --write \\"src/**/*.{ts,tsx,less}\\"","convert":"node task/convert.js","clean":"node task/clean.js","release":"node task/release.js","deploy":"node task/deploy.js"},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"git+https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.65.0-dev","description":"Fullstack platform based on Express and React for building Web UI for databases","main":"dist/index.js","files":["dist"],"scripts":{"webpack:back:index":"NODE_ENV=dev webpack --config webpack.config.back.index.js","webpack:back:start":"NODE_ENV=dev webpack --config webpack.config.back.start.js","webpack:front:editor":"NODE_ENV=dev webpack --config webpack.config.editor.js","webpack:front:index":"NODE_ENV=dev webpack --config webpack.config.index.js","webpack:front:monitor":"NODE_ENV=dev webpack --config webpack.config.monitor.js","webpack:front:viewer":"NODE_ENV=dev webpack --config webpack.config.viewer.js","build":"gulp build-dev","build:prod":"node task/build-prod.js","start":"NODE_ENV=dev node dist/start.js","start:bun":"NODE_ENV=dev bun dist/start.js","start:sample":"NODE_ENV=dev QFORMS_LOG_LEVEL=log LISTEN_PORT=7001 node dist/start.js","start:apps":"NODE_ENV=dev QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/project/qforms-apps LISTEN_PORT=7000 node dist/start.js","nodemon:start":"NODE_ENV=dev nodemon --watch dist --watch apps dist/start.js","test":"clear; QFORMS_LOG_LEVEL=error jest --runInBand","test:log":"clear; jest --runInBand","test:debug":"clear; QFORMS_LOG_LEVEL=debug jest --runInBand","test:cov":"jest --coverage","docker:build":"docker build --pull -t qforms:latest .","docker:run":"docker run -e LISTEN_HOST=0.0.0.0 -e DB_HOST=host.docker.internal -e APPS_DIR_PATH=/apps -p 7000:7000 -v qforms-apps:/app/apps -v ~/project/qforms-apps:/apps -v qforms-runtime:/app/runtime --rm qforms:latest","prettier:write":"prettier --write \\"src/**/*.{ts,tsx,less}\\"","convert":"node task/convert.js","clean":"node task/clean.js","release":"node task/release.js","deploy":"node task/deploy.js"},"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/supertest":"^2.0.12","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","esbuild-loader":"^4.0.2","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","supertest":"^6.3.3","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"repository":{"type":"git","url":"git+https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 

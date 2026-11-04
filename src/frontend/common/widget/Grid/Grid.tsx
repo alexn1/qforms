@@ -240,12 +240,34 @@ export class Grid extends ReactComponent {
         );
     }
 
-    onResizeDoubleClick = async (e) => {
+    /** Width the header needs to show its title without ellipsis (padding and border included). */
+    getHeaderWidth(th: HTMLElement): number {
+        const title = th.firstElementChild;
+        if (!title) return 0;
+        const range = document.createRange();
+        range.selectNodeContents(title); // unlike offsetWidth, ignores clipping by overflow: hidden
+        const style = window.getComputedStyle(th);
+        return Math.ceil(
+            range.getBoundingClientRect().width +
+                parseFloat(style.paddingLeft) +
+                parseFloat(style.paddingRight) +
+                parseFloat(style.borderRightWidth || '0'),
+        );
+    }
+
+    onResizeDoubleClick = async (e: React.MouseEvent<HTMLElement>) => {
         console.debug('Grid.onResizeDoubleClick', e.target);
-        const i = parseInt(e.target.dataset.i);
+        const i = parseInt(e.currentTarget.dataset.i ?? '');
+        const th = e.currentTarget.parentElement;
+        if (isNaN(i) || !th) return;
         const column = this.props.columns[i];
-        if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
-        this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+        const width = Math.max(
+            Grid.MIN_COLUMN_WIDTH,
+            this.getMaxColumnWidth(column),
+            this.getHeaderWidth(th),
+        );
+        if (this.state.columnWidth[column.name] === width) return;
+        this.state.columnWidth[column.name] = width;
         // @ts-ignore
         this.state.resized = Date.now();
         await this.rerender();

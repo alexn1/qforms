@@ -14,30 +14,22 @@ import {
     DeleteActionDto,
     Action,
     BkHelper,
+    BackHostApp,
 } from '../../dist';
-import { SampleBackHostApp } from '../../apps-ts/sample';
 import { HttpClient } from '../core/HttpClient';
-import { createDatabase, restartLocalDb, query } from '../core/helper';
+import { createDatabase, dropDatabase } from '../core/helper';
 
-let app: SampleBackHostApp;
+const DB_NAME = 'sample-test';
+
+let app: BackHostApp;
 let httpServer: Server;
 let httpClient: HttpClient;
 
 beforeAll(async () => {
-    await restartLocalDb();
-    await createDatabase('sample');
-    await query(
-        'sample',
-        `create table person (
-            id serial NOT NULL,
-            created timestamptz,
-            updated timestamptz,
-            first_name varchar(255),
-            last_name varchar(255)
-        )`,
-    );
-    process.env.PORT = '5434';
-    app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
+    await dropDatabase(DB_NAME);
+    await createDatabase(DB_NAME);
+    process.env.DB_NAME = DB_NAME;
+    app = new BackHostApp({ srcDirPath: './apps' });
     await app.init();
     httpServer = app.getHttpServer();
     httpClient = new HttpClient(httpServer);
@@ -47,8 +39,19 @@ afterAll(async () => {
     await app.shutdown();
 });
 
+describe('app module', () => {
+    test('loaded from apps/postgres/sample.ts', () => {
+        expect(Object.keys(app.appModules)).toEqual(['postgres/sample']);
+    });
+
+    test('custom route from initCustomRoutes', async () => {
+        const { status } = await httpClient.get('/page/Page1/5-abc');
+        expect(status).toBe(200);
+    });
+});
+
 describe('Person', () => {
-    const PATHNAME = '/viewer/sample/sample/local/domain/';
+    const PATHNAME = '/viewer/postgres/sample/local/domain/';
     const PAGE = 'Person';
 
     test('page', async () => {

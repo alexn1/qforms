@@ -30,16 +30,19 @@ import { pConsole, LogLevel } from '../pConsole';
 import { e500 } from './e500';
 import { checkNodeVersion } from './private-helper';
 import { Router } from './Router';
-import { createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
+import { _glob, createDirIfNotExists, createDirIfNotExistsSync } from './file-helper';
 import { Helper, CreateAppDto } from '../frontend';
 import { CODE_ROOT_DIR_PATH } from '../index';
 
 const pkg = require('../../package.json');
 
+// real node require: webpack must not resolve dynamic paths
+declare const __non_webpack_require__: NodeRequire;
+
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const MIN_NODE_VERSION = 14;
+const MIN_NODE_VERSION = 24;
 
 export interface BackHostAppConfig {
     srcDirPath?: string;
@@ -57,8 +60,13 @@ export interface BackHostAppConfig {
     };
 }
 
+export interface AppModule {
+    initCustomRoutes?: (hostApp: BackHostApp) => void;
+}
+
 export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     applications: { [route: string]: BkApplication } = {};
+    private shutdownPromise: Promise<void> | null = null;
     private express: Express;
     httpServer: Server;
     wsServer: WebSocketServer;
@@ -72,6 +80,9 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     sessionDirPath: string;
 
     private router: Router;
+
+    // server modules of applications: '<appDirName>/<appFileName>' -> module exports
+    appModules: Record<string, AppModule> = {};
 
     // module
     indexModule: IndexModule;
@@ -98,6 +109,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
         this.initRouter();
+        await this.loadAppModules();
         await this.initModules();
         this.createExpressServer();
         this.createHttpServer();
@@ -256,7 +268,29 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         this.express.post('/error', this.postError.bind(this));
     }
 
-    initCustomRoutes(): void {}
+    initCustomRoutes(): void {
+        for (const appModule of Object.values(this.appModules)) {
+            appModule.initCustomRoutes?.(this);
+        }
+    }
+
+    // loads <appDir>/<appFileName>.js|ts (if exists) next to each application json file,
+    // json files are not parsed here, so a broken json doesn't stop the server
+    async loadAppModules(): Promise<void> {
+        const appFilePaths = await _glob(path.join(this.distDirPath, '*/*.json'));
+        for (const appFilePath of appFilePaths) {
+            const base = appFilePath.slice(0, -'.json'.length);
+            const filePath = [`${base}.js`, `${base}.ts`].find((p) => fs.existsSync(p));
+            if (!filePath) continue;
+            const key = `${path.basename(path.dirname(base))}/${path.basename(base)}`;
+            try {
+                this.appModules[key] = __non_webpack_require__(filePath);
+                pConsole.log(`app module loaded: ${key}`);
+            } catch (err) {
+                pConsole.error(`app module '${filePath}' not loaded: ${err.message}`);
+            }
+        }
+    }
 
     // handle static for index and monitor
     useStatic(): void {
@@ -555,8 +589,19 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         await this.logError(reason);
     }
 
+    /*
+     * idempotent: repeated signals (e.g. SIGINT delivered twice under Bun)
+     * wait for the first shutdown instead of deiniting applications again
+     */
+    shutdown(): Promise<void> {
+        if (!this.shutdownPromise) {
+            this.shutdownPromise = this.doShutdown();
+        }
+        return this.shutdownPromise;
+    }
+
     @log(LogLevel.debug)
-    async shutdown(): Promise<void> {
+    async doShutdown(): Promise<void> {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];

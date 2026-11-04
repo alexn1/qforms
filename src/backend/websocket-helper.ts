@@ -13,8 +13,9 @@ export function getWebSocketPort(webSocket: any) {
 /*
  * for Node.js and Bun compatibility
  */
-export function getWebsocketUrl(webSocket: any): string {
-    const url = webSocket.url || webSocket.upgradeReq?.url;
+export function getWebsocketUrl(webSocket: any, req?: { url?: string }): string {
+    // Node.js (ws 2.x): webSocket.upgradeReq.url; Bun: second 'connection' argument (req)
+    const url = req?.url || webSocket.upgradeReq?.url || webSocket.url;
     if (!url) throw new Error('getWebsocketUrl: cannot get webSocket url');
     return url;
 }

@@ -4,7 +4,9 @@ export declare class WebSocketServer {
     server: any;
     constructor(options: any);
     onError(err: any): Promise<void>;
-    onConnection(webSocket: any): Promise<void>;
+    onConnection(webSocket: any, req?: {
+        url?: string;
+    }): Promise<void>;
     onClose(webSocket: any, code: any, reason: any): Promise<void>;
     onMessage(webSocket: any, data: any, flags: any): Promise<void>;
     getHostApp(): BackHostApp;

@@ -28,7 +28,8 @@ export declare class Grid extends ReactComponent {
     selectCell(key: any, j: any): Promise<void>;
     selectRow(key: any): Promise<void>;
     getMaxColumnWidth(column: any): number;
-    onResizeDoubleClick: (e: any) => Promise<void>;
+    getHeaderWidth(th: HTMLElement): number;
+    onResizeDoubleClick: (e: React.MouseEvent<HTMLElement>) => Promise<void>;
     onResizeMouseDown: (e: React.MouseEvent<HTMLElement>) => void;
     getColumnWidth(i: any): any;
     getTableStyle(): React.CSSProperties;
