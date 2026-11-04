@@ -25,10 +25,11 @@ export class WebSocketServer {
         error('WebSocketServer.onError', err);
     }
 
-    async onConnection(webSocket: any) {
-        debug('WebSocketServer.onConnection', getWebsocketUrl(webSocket));
-        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(getWebsocketUrl(webSocket)))));
-        const parts = url.parse(getWebsocketUrl(webSocket), true);
+    async onConnection(webSocket: any, req?: { url?: string }) {
+        const wsUrl = getWebsocketUrl(webSocket, req);
+        debug('WebSocketServer.onConnection', wsUrl);
+        log('wss:', colors.bgYellow(colors.black(decodeURIComponent(wsUrl))));
+        const parts = url.parse(wsUrl, true);
         // debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
