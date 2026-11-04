@@ -1,31 +1,9 @@
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/index/style/index.less ***!
-  \******************************************************************************************************************************/
-.index,
-.index__body {
-  height: 100%;
-}
-.index__body {
-  margin: 0;
-  font-family: sans-serif;
-  background-color: #f3f4f6;
-}
-.index__root {
-  min-height: 100%;
-}
-
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
-  \**********************************************************************************************************************************/
 .Box {
   background-color: blue;
   height: 200px;
   width: 200px;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
-  \********************************************************************************************************************************************/
 div.CheckBox {
   display: inline-block;
   width: 16px;
@@ -40,9 +18,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab/Tab.less ***!
-  \**********************************************************************************************************************************/
 .Tab {
   display: flex;
   flex-direction: column;
@@ -168,9 +143,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 3px solid var(--accent-color);
 }
 
-/*!********************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
-  \********************************************************************************************************************************************************/
 .DropdownButton {
   position: relative;
   display: inline-block;
@@ -218,16 +190,10 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/GridCell/GridCell.less ***!
-  \********************************************************************************************************************************************/
 .Grid__td.active > .GridCell {
   color: white;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Grid/Grid.less ***!
-  \************************************************************************************************************************************/
 .Grid {
   font-family: sans-serif;
   font-size: 12px;
@@ -364,9 +330,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #e1f0fc !important;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Modal/Modal.less ***!
-  \**************************************************************************************************************************************/
 .Modal {
   position: fixed;
   z-index: 3;
@@ -387,9 +350,6 @@ div.CheckBox:not(.disabled):hover {
   overflow: hidden;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Password/Password.less ***!
-  \********************************************************************************************************************************************/
 .Password {
   position: relative;
 }
@@ -434,9 +394,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #333;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
-  \************************************************************************************************************************************/
 .Menu {
   background-color: #333;
   display: flex;
@@ -500,9 +457,6 @@ div.CheckBox:not(.disabled):hover {
   outline-offset: -2px;
 }
 
-/*!**********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Statusbar/Statusbar.less ***!
-  \**********************************************************************************************************************************************/
 .Statusbar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -514,9 +468,6 @@ div.CheckBox:not(.disabled):hover {
   font-size: small;
 }
 
-/*!******************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tooltip/Tooltip.less ***!
-  \******************************************************************************************************************************************/
 .Tooltip {
   display: inline-block;
   position: relative;
@@ -605,9 +556,6 @@ div.CheckBox:not(.disabled):hover {
   opacity: 1;
 }
 
-/*!************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DatePicker/DatePicker.less ***!
-  \************************************************************************************************************************************************/
 .DatePicker {
   color: #333;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -687,9 +635,6 @@ div.CheckBox:not(.disabled):hover {
   border: 1px solid orange;
 }
 
-/*!****************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
-  \****************************************************************************************************************************************************************/
 .DropdownDatePicker {
   position: relative;
 }
@@ -793,9 +738,6 @@ div.CheckBox:not(.disabled):hover {
   }
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Select/Select.less ***!
-  \****************************************************************************************************************************************/
 .Select {
   position: relative;
 }
@@ -868,9 +810,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab2/Tab2.less ***!
-  \************************************************************************************************************************************/
 .Tab2 {
   display: flex;
   flex-direction: column;
@@ -926,9 +865,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 2px solid var(--accent-color);
 }
 
-/*!****************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
-  \****************************************************************************************************************************************************/
 .TimeBox2 {
   position: relative;
 }
@@ -967,9 +903,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Image/Image.less ***!
-  \**************************************************************************************************************************************/
 .Image {
   cursor: pointer;
 }
@@ -986,9 +919,6 @@ div.CheckBox:not(.disabled):hover {
   z-index: 100;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Slider/Slider.less ***!
-  \****************************************************************************************************************************************/
 .Slider {
   width: 100%;
   height: 100%;
@@ -1085,9 +1015,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #eee;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Expand/Expand.less ***!
-  \****************************************************************************************************************************************/
 .Expand {
   padding: 5px 0;
 }
@@ -1116,204 +1043,313 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 10px;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/index/IndexView/IndexView.less ***!
-  \**************************************************************************************************************************************/
-.IndexView {
-  font-size: 14px;
-  color: #1f2937;
-  min-height: 100%;
-  box-sizing: border-box;
-  padding: 48px 16px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.EdSqlDataSourceView .toolbar {
+  background-color: white;
+  padding: 5px;
 }
-.IndexView *,
-.IndexView *::before,
-.IndexView *::after {
-  box-sizing: border-box;
+.EdSqlDataSourceView .edit {
+  overflow: auto;
+  position: relative;
 }
-.IndexView *:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.5);
-  outline-offset: 1px;
+.EdSqlDataSourceView .edit > div {
+  position: absolute;
 }
-.IndexView__card {
-  width: 100%;
-  max-width: 720px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
+.EdSqlDataSourceView .edit .cm-container > div {
+  height: 100%;
 }
-.IndexView__header {
-  padding: 24px 28px 16px;
-  border-bottom: 1px solid #eef0f3;
+
+.EdNoSqlDataSourceView .toolbar {
+  background-color: white;
+  padding: 5px;
 }
-.IndexView__title {
+.EdNoSqlDataSourceView .edit {
+  overflow: auto;
+  position: relative;
+}
+.EdNoSqlDataSourceView .edit > div {
+  position: absolute;
+}
+.EdNoSqlDataSourceView .edit .cm-container > div {
+  height: 100%;
+}
+
+.EdTableView {
+  height: 100%;
+  background-color: white;
+}
+.EdTableView .client {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.TreeWidget {
+  cursor: default;
+  -moz-user-select: none;
+  overflow: auto;
+}
+.TreeWidget ul {
+  list-style-type: none;
+  padding-left: 0;
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
 }
-.IndexView__subtitle {
-  margin-top: 4px;
-  color: #6b7280;
+.TreeWidget li > ul {
+  display: none;
 }
-.IndexView__content {
-  display: flex;
-  gap: 24px;
-  padding: 24px 28px 28px;
+.TreeWidget li.opened > ul {
+  display: block;
 }
-.IndexView__apps {
-  flex: 1 1 auto;
-  min-width: 0;
+.TreeWidget li > div {
+  padding: 1px;
 }
-.IndexView__list {
+.TreeWidget li > .active {
+  background-color: #428bca;
+}
+.TreeWidget li > .active > span {
+  color: white !important;
+}
+.TreeWidget .node {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+  background-image: url(../539b6ba27b8c34db9f27.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.TreeWidget .leaf {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+}
+.TreeWidget .opened > div > span.node {
+  background-position: 0 -11px;
+}
+
+.EdDatabaseView {
+  height: 100%;
+  background-color: white;
+}
+.EdDatabaseView .sidebar {
+  position: absolute;
+  width: 200px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: lightgoldenrodyellow;
+}
+.EdDatabaseView .client {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  bottom: 0;
+  right: 0;
+}
+
+.EdVisualView .toolbar {
+  background-color: white;
+  padding: 5px;
+}
+.EdVisualView .edit {
+  overflow: auto;
+}
+.EdVisualView .edit .cm-container > div {
+  height: 100%;
+}
+.CodeMirror {
+  font-size: 14px;
+}
+
+.PropertyGrid {
+  background-color: #eee;
+  overflow: auto;
+}
+.PropertyGrid__table {
+  background-color: white;
   width: 100%;
-  height: 340px;
-  padding: 4px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: inherit;
-  background: #fff;
+  table-layout: fixed;
 }
-.IndexView__list option {
-  padding: 8px 10px;
-  border-radius: 4px;
-  cursor: pointer;
+.PropertyGrid__table > tbody > tr > td {
+  border: 1px solid #d3d3d3;
+  font-weight: bold;
 }
-.IndexView__list option:hover {
-  background: #eff6ff;
+.PropertyGrid__table > tbody > tr > td > input {
+  font-weight: normal;
+  border-width: 0;
+  outline: none;
+  padding-left: 4px;
+  width: 100%;
 }
-.IndexView__list option:checked,
-.IndexView__list:focus option:checked {
-  background: #2563eb linear-gradient(0deg, #2563eb, #2563eb);
-  color: #fff !important;
-  -webkit-text-fill-color: #fff;
+.PropertyGrid__table > tbody > tr > td > select {
+  font-weight: normal;
+  border-width: 0;
+  outline: none;
+  padding: 0;
+  width: 100%;
 }
-.IndexView__actions {
-  flex: 0 0 180px;
+
+.EdModalView {
+  background-color: white;
+  width: 300px;
+  margin: auto;
+}
+
+.NewModelView {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-.IndexView__label {
-  color: #6b7280;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.IndexView__env {
-  width: 100%;
-  height: 36px;
-  padding: 0 32px 0 8px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  appearance: none;
-  background: #fff url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 12 12%27%3E%3Cpath d=%27M2 4.5l4 4 4-4%27 fill=%27none%27 stroke=%27%236b7280%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E") no-repeat right 12px center;
-  font-size: inherit;
-}
-.IndexView__btn {
-  height: 38px;
-  padding: 0 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background: #fff;
-  color: #1f2937;
-  font-size: inherit;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-.IndexView__btn:hover {
-  background: #f3f4f6;
-}
-.IndexView__btn:active {
-  background: #e5e7eb;
-}
-.IndexView__btn_primary {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: #fff;
-}
-.IndexView__btn_primary:hover {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
-}
-.IndexView__btn_primary:active {
-  background: #1e40af;
-}
-.IndexView__dialog {
-  width: 360px;
-  max-width: 100vw;
-  font-size: 14px;
-  color: #1f2937;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.IndexView__dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #eef0f3;
-}
-.IndexView__dialog-title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-.IndexView__dialog-close {
-  border: none;
-  background: none;
-  font-size: 24px;
-  line-height: 1;
-  color: #6b7280;
-  cursor: pointer;
-}
-.IndexView__dialog-close:hover {
-  color: #1f2937;
-}
-.IndexView__dialog-body {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  grid-gap: 20px;
+  background-color: #eeeeee;
+  width: 300px;
+  margin: auto;
   padding: 20px;
 }
-.IndexView__field {
+.NewModelView input,
+.NewModelView select {
+  width: 100%;
+}
+.NewModelView__header {
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
+}
+.NewModelView__title {
+  flex-grow: 1;
+}
+.NewModelView__body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  grid-gap: 5px;
 }
-.IndexView__field label {
-  color: #6b7280;
-  font-size: 12px;
-}
-.IndexView__field input {
-  height: 36px;
-  padding: 0 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: inherit;
-}
-.IndexView__dialog-footer {
+.NewModelView__footer {
   display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 12px 20px 20px;
+  flex-direction: row-reverse;
+  grid-gap: 10px;
 }
-@media (max-width: 600px) {
-  .IndexView {
-    padding: 16px 8px;
-  }
-  .IndexView__content {
-    flex-direction: column;
-    padding: 16px;
-  }
-  .IndexView__list {
-    height: 240px;
-  }
-  .IndexView__actions {
-    flex: none;
-  }
+
+.EditorFrontHostAppView {
+  height: 100%;
+  font-family: sans-serif;
+  font-size: small;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  --accent-color: #398bce;
+  --accent-color-disabled: #b4d3ec;
+}
+.EditorFrontHostAppView__sidebar {
+  display: grid;
+  grid-template-rows: max-content 1fr 1fr;
+}
+.EditorFrontHostAppView__client {
+  background-color: #d3d3d3;
+}
+
+.editor {
+  height: 100%;
+}
+.editor__body {
+  margin: 0;
+  height: 100%;
+}
+.editor__root {
+  height: 100%;
+}
+
+.error,
+.error:focus {
+  box-shadow: 0 0 2px red !important;
+  color: red;
+}
+
+hr {
+  margin: 10px 0;
+}
+nav {
+  margin: 0 !important;
+}
+
+.tree-bar {
+  padding: 5px;
+  background-color: #f5f5f5;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-max {
+  flex: 1 1 auto;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+.hidden {
+  overflow: hidden;
+}
+.x-hidden {
+  overflow-x: hidden;
+}
+.y-hidden {
+  overflow-y: hidden;
+}
+.x-scroll {
+  overflow-x: scroll;
+}
+.y-scroll {
+  overflow-y: scroll;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: 0 !important;
+}
+input[type="text"],
+select,
+img,
+svg {
+  display: block;
+}
+
+.grid-gap-5 {
+  grid-gap: 5px;
+}
+
+.grid-gap-10 {
+  grid-gap: 10px;
+}
+
+.wait,
+.wait * {
+  cursor: wait !important;
 }
 

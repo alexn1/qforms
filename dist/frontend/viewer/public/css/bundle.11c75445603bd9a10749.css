@@ -1,15 +1,9 @@
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
-  \**********************************************************************************************************************************/
 .Box {
   background-color: blue;
   height: 200px;
   width: 200px;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
-  \********************************************************************************************************************************************/
 div.CheckBox {
   display: inline-block;
   width: 16px;
@@ -24,9 +18,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab/Tab.less ***!
-  \**********************************************************************************************************************************/
 .Tab {
   display: flex;
   flex-direction: column;
@@ -152,9 +143,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 3px solid var(--accent-color);
 }
 
-/*!********************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
-  \********************************************************************************************************************************************************/
 .DropdownButton {
   position: relative;
   display: inline-block;
@@ -202,16 +190,10 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/GridCell/GridCell.less ***!
-  \********************************************************************************************************************************************/
 .Grid__td.active > .GridCell {
   color: white;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Grid/Grid.less ***!
-  \************************************************************************************************************************************/
 .Grid {
   font-family: sans-serif;
   font-size: 12px;
@@ -348,9 +330,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #e1f0fc !important;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Modal/Modal.less ***!
-  \**************************************************************************************************************************************/
 .Modal {
   position: fixed;
   z-index: 3;
@@ -371,9 +350,6 @@ div.CheckBox:not(.disabled):hover {
   overflow: hidden;
 }
 
-/*!********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Password/Password.less ***!
-  \********************************************************************************************************************************************/
 .Password {
   position: relative;
 }
@@ -418,9 +394,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #333;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
-  \************************************************************************************************************************************/
 .Menu {
   background-color: #333;
   display: flex;
@@ -484,9 +457,6 @@ div.CheckBox:not(.disabled):hover {
   outline-offset: -2px;
 }
 
-/*!**********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Statusbar/Statusbar.less ***!
-  \**********************************************************************************************************************************************/
 .Statusbar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -498,9 +468,6 @@ div.CheckBox:not(.disabled):hover {
   font-size: small;
 }
 
-/*!******************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tooltip/Tooltip.less ***!
-  \******************************************************************************************************************************************/
 .Tooltip {
   display: inline-block;
   position: relative;
@@ -589,9 +556,6 @@ div.CheckBox:not(.disabled):hover {
   opacity: 1;
 }
 
-/*!************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DatePicker/DatePicker.less ***!
-  \************************************************************************************************************************************************/
 .DatePicker {
   color: #333;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
@@ -671,9 +635,6 @@ div.CheckBox:not(.disabled):hover {
   border: 1px solid orange;
 }
 
-/*!****************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
-  \****************************************************************************************************************************************************************/
 .DropdownDatePicker {
   position: relative;
 }
@@ -777,9 +738,6 @@ div.CheckBox:not(.disabled):hover {
   }
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Select/Select.less ***!
-  \****************************************************************************************************************************************/
 .Select {
   position: relative;
 }
@@ -852,9 +810,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #eee;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab2/Tab2.less ***!
-  \************************************************************************************************************************************/
 .Tab2 {
   display: flex;
   flex-direction: column;
@@ -910,9 +865,6 @@ div.CheckBox:not(.disabled):hover {
   border-top: 2px solid var(--accent-color);
 }
 
-/*!****************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
-  \****************************************************************************************************************************************************/
 .TimeBox2 {
   position: relative;
 }
@@ -951,9 +903,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #aaa;
 }
 
-/*!**************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Image/Image.less ***!
-  \**************************************************************************************************************************************/
 .Image {
   cursor: pointer;
 }
@@ -970,9 +919,6 @@ div.CheckBox:not(.disabled):hover {
   z-index: 100;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Slider/Slider.less ***!
-  \****************************************************************************************************************************************/
 .Slider {
   width: 100%;
   height: 100%;
@@ -1069,9 +1015,6 @@ div.CheckBox:not(.disabled):hover {
   fill: #eee;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Expand/Expand.less ***!
-  \****************************************************************************************************************************************/
 .Expand {
   padding: 5px 0;
 }
@@ -1100,9 +1043,6 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 10px;
 }
 
-/*!********************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/LoginController/LoginView.less ***!
-  \********************************************************************************************************************************************************/
 .LoginView {
   height: 100%;
 }
@@ -1181,9 +1121,6 @@ div.CheckBox:not(.disabled):hover {
   height: 16px;
 }
 
-/*!*******************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less ***!
-  \*******************************************************************************************************************************************************************************************/
 .RowFormView {
   padding: 5px;
   font-size: small;
@@ -1213,9 +1150,6 @@ div.CheckBox:not(.disabled):hover {
   align-items: start;
 }
 
-/*!**********************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/PageController/PageView.less ***!
-  \**********************************************************************************************************************************************************************/
 .PageView .Tab2__page .TableFormView {
   padding-top: 5px;
 }
@@ -1354,9 +1288,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: var(--accent-color-disabled);
 }
 
-/*!************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less ***!
-  \************************************************************************************************************************************************************************************/
 .ApplicationView {
   height: 100%;
   --accent-color: #398bce;
@@ -1376,9 +1307,6 @@ div.CheckBox:not(.disabled):hover {
   grid-template-rows: max-content minmax(0, 1fr) max-content;
 }
 
-/*!********************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/AlertController/AlertView.less ***!
-  \********************************************************************************************************************************************************/
 .AlertView {
   position: fixed;
   z-index: 3;
@@ -1437,9 +1365,6 @@ div.CheckBox:not(.disabled):hover {
   cursor: pointer;
 }
 
-/*!************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ConfirmController/ConfirmView.less ***!
-  \************************************************************************************************************************************************************/
 .ConfirmView {
   position: fixed;
   z-index: 3;
@@ -1504,25 +1429,10 @@ div.CheckBox:not(.disabled):hover {
   cursor: pointer;
 }
 
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/application.less ***!
-  \*************************************************************************************************************************************/
 
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/field.less ***!
-  \*******************************************************************************************************************************/
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/form.less ***!
-  \******************************************************************************************************************************/
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/page.less ***!
-  \******************************************************************************************************************************/
 
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/paging.less ***!
-  \********************************************************************************************************************************/
 .paging {
   display: flex;
   justify-content: space-between;
@@ -1547,9 +1457,6 @@ div.CheckBox:not(.disabled):hover {
   padding-right: 30px;
 }
 
-/*!****************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-button.less ***!
-  \****************************************************************************************************************************************/
 .toolbar-button {
   display: flex;
   align-items: center;
@@ -1595,9 +1502,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #b4d3ec;
 }
 
-/*!*************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-dropdown-button.less ***!
-  \*************************************************************************************************************************************************/
 .toolbar-dropdown-button .DropdownButton__button {
   height: 30px;
   border: none;
@@ -1616,9 +1520,6 @@ div.CheckBox:not(.disabled):hover {
   background-color: #e1e1e1;
 }
 
-/*!**********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/version-notification.less ***!
-  \**********************************************************************************************************************************************/
 .version-notification {
   position: fixed;
   background-color: yellow;
@@ -1630,40 +1531,25 @@ div.CheckBox:not(.disabled):hover {
   font-size: small;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/ellipsis.less ***!
-  \**********************************************************************************************************************************/
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex.less ***!
-  \******************************************************************************************************************************/
 .flex {
   display: flex;
 }
 
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-column.less ***!
-  \*************************************************************************************************************************************/
 .flex-column {
   display: flex;
   flex-direction: column;
 }
 
-/*!**********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-max.less ***!
-  \**********************************************************************************************************************************/
 .flex-max {
   flex: 1 1 auto;
 }
 
-/*!*******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/frame.less ***!
-  \*******************************************************************************************************************************/
 .frame {
   position: relative;
   overflow: hidden;
@@ -1692,17 +1578,11 @@ div.CheckBox:not(.disabled):hover {
   overflow-y: scroll;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/full.less ***!
-  \******************************************************************************************************************************/
 .full {
   height: 100%;
   width: 100%;
 }
 
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/global.less ***!
-  \********************************************************************************************************************************/
 *,
 *:before,
 *:after {
@@ -1718,38 +1598,23 @@ svg {
   display: block;
 }
 
-/*!************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-5.less ***!
-  \************************************************************************************************************************************/
 .grid-gap-5 {
   grid-gap: 5px;
 }
 
-/*!*************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-10.less ***!
-  \*************************************************************************************************************************************/
 .grid-gap-10 {
   grid-gap: 10px;
 }
 
-/*!******************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/wait.less ***!
-  \******************************************************************************************************************************/
 .wait,
 .wait * {
   cursor: wait !important;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less ***!
-  \*************************************************************************************************************************************************************************************************************************************************/
 .Grid__td.active > .TableFormTextBoxFieldView {
   color: white;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.less ***!
-  \*************************************************************************************************************************************************************************************************************************************/
 .RowFormDateFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -1787,9 +1652,6 @@ svg {
   background-color: #eefdea;
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
 .RowFormComboBoxFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -1856,9 +1718,6 @@ svg {
   background-color: #eefdea;
 }
 
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.less ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
 .RowFormTextBoxFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -1915,20 +1774,11 @@ svg {
   background-color: #eefdea;
 }
 
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less ***!
-  \***********************************************************************************************************************************************************************************************/
 
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.less ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
 .Grid__td.active > .TableFormDateFieldView {
   color: white;
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
 .RowFormTextAreaFieldView {
   border: 1px solid #bbb;
 }
@@ -1961,9 +1811,6 @@ svg {
   background-color: #eefdea;
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
 .RowFormPasswordFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -2039,16 +1886,10 @@ svg {
   background-color: #eefdea;
 }
 
-/*!***************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.less ***!
-  \***************************************************************************************************************************************************************************************************************************************************/
 .TableFormCheckBoxFieldView input {
   pointer-events: none;
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
 .RowFormDateTimeFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -2110,9 +1951,6 @@ svg {
   background-color: #eefdea;
 }
 
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less ***!
-  \***************************************************************************************************************************************************************************************************************************************/
 .RowFormRadioFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -2167,9 +2005,6 @@ svg {
   color: var(--accent-color);
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.less ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
 .RowFormCheckBoxFieldView {
   height: 26px;
 }
@@ -2186,9 +2021,6 @@ svg {
   margin-top: 5px;
 }
 
-/*!************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less ***!
-  \************************************************************************************************************************************************************************************/
 .ImageDialogView {
   position: fixed;
   z-index: 3;
@@ -2226,9 +2058,6 @@ svg {
   fill: #eee;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less ***!
-  \*************************************************************************************************************************************************************************************************************************************/
 .RowFormFileFieldView {
   background-color: #eee;
 }
@@ -2280,9 +2109,6 @@ svg {
   display: block;
 }
 
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.less ***!
-  \***************************************************************************************************************************************************************************************************************************************/
 .RowFormPhoneFieldView {
   height: 26px;
   box-sizing: border-box;
@@ -2354,9 +2180,6 @@ svg {
   background-color: #eefdea;
 }
 
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.less ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
 .RowFormCheckBoxListFieldView__checkboxlist {
   margin: 0;
   padding: 0;
@@ -2375,9 +2198,6 @@ svg {
   cursor: pointer;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less ***!
-  \*************************************************************************************************************************************************************************************************************************************/
 .RowFormLinkFieldView {
   padding: 3px 5px 0 0;
 }
@@ -2385,18 +2205,12 @@ svg {
   color: blue;
 }
 
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.less ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
 .TableFormLinkFieldView > .TableFormLinkFieldView__link {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
 }
 
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.less ***!
-  \*************************************************************************************************************************************************************************************************************************************/
 .RowFormTimeFieldView {
   height: 26px;
   box-sizing: border-box;
