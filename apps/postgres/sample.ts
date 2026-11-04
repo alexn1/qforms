@@ -16,7 +16,7 @@ function initCustomRoutes(hostApp: BackHostApp): void {
     // page/Page1/{id}-{title}
     hostApp.createCustomRoute(
         /^\/page\/Page1\/(\d+)-([a-z0-9-]+)$/,
-        ['viewer', 'sample', 'sample', 'local', 'domain'],
+        ['viewer', 'postgres', 'sample', 'local', 'domain'],
         {
             page: 'Page1',
             id: '0', // id

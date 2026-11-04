@@ -40,8 +40,8 @@ afterAll(async () => {
 });
 
 describe('app module', () => {
-    test('loaded from apps/sample/sample.ts', () => {
-        expect(Object.keys(app.appModules)).toEqual(['sample/sample']);
+    test('loaded from apps/postgres/sample.ts', () => {
+        expect(Object.keys(app.appModules)).toEqual(['postgres/sample']);
     });
 
     test('custom route from initCustomRoutes', async () => {
@@ -51,7 +51,7 @@ describe('app module', () => {
 });
 
 describe('Person', () => {
-    const PATHNAME = '/viewer/sample/sample/local/domain/';
+    const PATHNAME = '/viewer/postgres/sample/local/domain/';
     const PAGE = 'Person';
 
     test('page', async () => {
