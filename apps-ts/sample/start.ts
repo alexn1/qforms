@@ -17,7 +17,7 @@ async function start(...argv: string[]): Promise<Optional<number>> {
         });
         await backHostApp.init();
         await backHostApp.run();
-    } catch (err) {
+    } catch (err: any) {
         console.error(err.message);
         return 1;
     }
