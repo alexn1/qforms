@@ -13,7 +13,6 @@ npm run build                 # dev build: clean, then webpack backend (index, s
 npm run webpack:front:viewer  # rebuild a single bundle (also :editor, :index, :monitor, webpack:back:index, webpack:back:start)
 npm run build:prod            # production build
 npm start                     # run dist/start.js, serves ./apps on http://localhost:7000 (dev index at /index2, monitor at /monitor)
-npm run start:sample          # run dist/start.js on port 7001 (serves ./apps, including the sample app in apps/postgres)
 
 npm test                                   # all jest tests (runInBand, QFORMS_LOG_LEVEL=error)
 npx jest test/unit/Helper.test.ts          # single test file
