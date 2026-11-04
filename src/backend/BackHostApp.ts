@@ -59,6 +59,7 @@ export interface BackHostAppConfig {
 
 export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     applications: { [route: string]: BkApplication } = {};
+    private shutdownPromise: Promise<void> | null = null;
     private express: Express;
     httpServer: Server;
     wsServer: WebSocketServer;
@@ -555,8 +556,19 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         await this.logError(reason);
     }
 
+    /*
+     * idempotent: repeated signals (e.g. SIGINT delivered twice under Bun)
+     * wait for the first shutdown instead of deiniting applications again
+     */
+    shutdown(): Promise<void> {
+        if (!this.shutdownPromise) {
+            this.shutdownPromise = this.doShutdown();
+        }
+        return this.shutdownPromise;
+    }
+
     @log(LogLevel.debug)
-    async shutdown(): Promise<void> {
+    async doShutdown(): Promise<void> {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];

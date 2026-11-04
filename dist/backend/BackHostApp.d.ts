@@ -35,6 +35,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     applications: {
         [route: string]: BkApplication;
     };
+    private shutdownPromise;
     private express;
     httpServer: Server;
     wsServer: WebSocketServer;
@@ -111,6 +112,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     onUncaughtException(err: Error, origin: string): Promise<void>;
     onUnhandledRejection(reason: Error | any, promise: Promise<any>): Promise<void>;
     shutdown(): Promise<void>;
+    doShutdown(): Promise<void>;
     onHttpServerError(err: any): void;
     static getDomainFromRequest(req: Request): Nullable<string>;
     getDomain(req: Request): Nullable<string>;

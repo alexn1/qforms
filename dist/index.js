@@ -822,6 +822,7 @@ class BackHostApp {
     constructor(config = {}) {
         this.config = config;
         this.applications = {};
+        this.shutdownPromise = null;
         this.startTime = new Date();
         this.createAppQueue = {};
         (0,_console__WEBPACK_IMPORTED_MODULE_21__.debug)('BackHostApp.constructor', config);
@@ -1200,7 +1201,13 @@ class BackHostApp {
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);
     }
-    async shutdown() {
+    shutdown() {
+        if (!this.shutdownPromise) {
+            this.shutdownPromise = this.doShutdown();
+        }
+        return this.shutdownPromise;
+    }
+    async doShutdown() {
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
@@ -1344,7 +1351,7 @@ __decorate([
 ], BackHostApp.prototype, "onProcessSIGTERM", null);
 __decorate([
     (0,_decorators__WEBPACK_IMPORTED_MODULE_22__.log)(_pConsole__WEBPACK_IMPORTED_MODULE_23__.LogLevel.debug)
-], BackHostApp.prototype, "shutdown", null);
+], BackHostApp.prototype, "doShutdown", null);
 
 
 /***/ }),
