@@ -55,7 +55,7 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "port",
-                        "value": "process.env.PORT | 5434"
+                        "value": "process.env.PORT || 5434"
                     }
                 }
             ],
