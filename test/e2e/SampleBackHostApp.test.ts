@@ -17,7 +17,7 @@ import {
 } from '../../dist';
 import { SampleBackHostApp } from '../../apps-ts/sample';
 import { HttpClient } from '../core/HttpClient';
-import { createDatabase, dropDatabase, query } from '../core/helper';
+import { createDatabase, dropDatabase } from '../core/helper';
 
 const DB_NAME = 'sample-test';
 
@@ -28,16 +28,6 @@ let httpClient: HttpClient;
 beforeAll(async () => {
     await dropDatabase(DB_NAME);
     await createDatabase(DB_NAME);
-    await query(
-        DB_NAME,
-        `create table person (
-            id serial NOT NULL,
-            created timestamptz,
-            updated timestamptz,
-            first_name varchar(255),
-            last_name varchar(255)
-        )`,
-    );
     process.env.DB_NAME = DB_NAME;
     app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
     await app.init();

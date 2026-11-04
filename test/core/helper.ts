@@ -27,6 +27,16 @@ export function exec(cmd: string, quiet = true, throwError = true): Promise<stri
 
 export async function createDatabase(dbName: string): Promise<void> {
     await query('postgres', `create database "${dbName}"`);
+    await query(
+        dbName,
+        `create table person (
+            id serial NOT NULL,
+            created timestamptz,
+            updated timestamptz,
+            first_name varchar(255),
+            last_name varchar(255)
+        )`,
+    );
 }
 
 export async function dropDatabase(dbName: string): Promise<void> {
