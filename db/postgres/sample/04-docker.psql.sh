@@ -1,1 +1,1 @@
-docker exec -it qforms-postgres-sample psql -U postgres
+docker exec -it postgres psql -U postgres

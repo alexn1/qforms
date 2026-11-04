@@ -9,8 +9,7 @@ Supports MySql, Postgres, MongoDB.
 ```
 name                      image                 port    user:password
 ------------------------------------------------------------------------
-qforms-postgres-test      postgres:12-alpine    5433    postgres:example
-qforms-postgres-sample    postgres:12-alpine    5434    postgres:example
+postgres                  postgres:12-alpine    5432    postgres:example
 ```
 
 ## sample database
