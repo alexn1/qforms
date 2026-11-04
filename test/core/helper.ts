@@ -38,6 +38,10 @@ export async function restartLocalDb(port: number = 5433): Promise<void> {
     await sleep(3500);
 }
 
+export async function stopLocalDb(): Promise<void> {
+    await exec(`docker stop ${DB_CONTAINER_NAME}`, true, false);
+}
+
 export async function createDatabase(dbName: string) {
     await query('postgres', `create database ${dbName}`);
 }

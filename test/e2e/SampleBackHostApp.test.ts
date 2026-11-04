@@ -17,7 +17,7 @@ import {
 } from '../../dist';
 import { SampleBackHostApp } from '../../apps-ts/sample';
 import { HttpClient } from '../core/HttpClient';
-import { createDatabase, restartLocalDb, query } from '../core/helper';
+import { createDatabase, restartLocalDb, stopLocalDb, query } from '../core/helper';
 
 let app: SampleBackHostApp;
 let httpServer: Server;
@@ -45,6 +45,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
     await app.shutdown();
+    await stopLocalDb();
 });
 
 describe('Person', () => {
