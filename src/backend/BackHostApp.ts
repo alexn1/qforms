@@ -36,6 +36,9 @@ import { CODE_ROOT_DIR_PATH } from '../index';
 
 const pkg = require('../../package.json');
 
+// real node require: webpack must not resolve dynamic paths
+declare const __non_webpack_require__: NodeRequire;
+
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
@@ -57,6 +60,10 @@ export interface BackHostAppConfig {
     };
 }
 
+export interface AppModule {
+    initCustomRoutes?: (hostApp: BackHostApp) => void;
+}
+
 export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     applications: { [route: string]: BkApplication } = {};
     private shutdownPromise: Promise<void> | null = null;
@@ -73,6 +80,9 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
     sessionDirPath: string;
 
     private router: Router;
+
+    // server modules of applications: '<appDirName>/<appFileName>' -> module exports
+    appModules: Record<string, AppModule> = {};
 
     // module
     indexModule: IndexModule;
@@ -99,6 +109,7 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         this.createTempDirsIfNotExistSync();
         this.createEventLog();
         this.initRouter();
+        await this.loadAppModules();
         await this.initModules();
         this.createExpressServer();
         this.createHttpServer();
@@ -257,7 +268,31 @@ export class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> 
         this.express.post('/error', this.postError.bind(this));
     }
 
-    initCustomRoutes(): void {}
+    initCustomRoutes(): void {
+        for (const appModule of Object.values(this.appModules)) {
+            appModule.initCustomRoutes?.(this);
+        }
+    }
+
+    // loads <appDir>/<appFileName>.js|ts (if exists) next to each application json file
+    async loadAppModules(): Promise<void> {
+        const appInfos = await BkApplication.getAppInfos(this.distDirPath);
+        for (const appInfo of appInfos) {
+            const base = path.join(appInfo.dirPath, appInfo.fileName);
+            const filePath = [`${base}.js`, `${base}.ts`].find((p) => fs.existsSync(p));
+            if (!filePath) continue;
+            const key = `${appInfo.dirName}/${appInfo.fileName}`;
+            try {
+                this.appModules[key] = __non_webpack_require__(filePath);
+                pConsole.log(`app module loaded: ${key}`);
+            } catch (err) {
+                const hint = filePath.endsWith('.ts')
+                    ? ' (.ts needs bun or Node with type stripping, otherwise use .js)'
+                    : '';
+                pConsole.error(`app module '${filePath}' not loaded: ${err.message}${hint}`);
+            }
+        }
+    }
 
     // handle static for index and monitor
     useStatic(): void {

@@ -30,6 +30,9 @@ export interface BackHostAppConfig {
         password: string;
     };
 }
+export interface AppModule {
+    initCustomRoutes?: (hostApp: BackHostApp) => void;
+}
 export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostAppConfig> {
     private config;
     applications: {
@@ -46,6 +49,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     runtimeDirPath: string;
     sessionDirPath: string;
     private router;
+    appModules: Record<string, AppModule>;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -76,6 +80,7 @@ export declare class BackHostApp<TParams extends BackHostAppConfig = BackHostApp
     useMiddlewares(): void;
     initSystemRoutes(): void;
     initCustomRoutes(): void;
+    loadAppModules(): Promise<void>;
     useStatic(): void;
     useErrors(): void;
     createApplicationIfNotExists(context: Context): Promise<BkApplication>;

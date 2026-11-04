@@ -13,7 +13,7 @@ npm run build                 # dev build: clean, then webpack backend (index, s
 npm run webpack:front:viewer  # rebuild a single bundle (also :editor, :index, :monitor, webpack:back:index, webpack:back:start)
 npm run build:prod            # production build
 npm start                     # run dist/start.js, serves ./apps on http://localhost:7000 (dev index at /index2, monitor at /monitor)
-npm run start:sample          # run the apps-ts/sample host app with bun
+npm run start:sample          # run the apps/sample host app with bun
 
 npm test                                   # all jest tests (runInBand, QFORMS_LOG_LEVEL=error)
 npx jest test/unit/Helper.test.ts          # single test file
@@ -36,7 +36,7 @@ Release flow: `npm run release` (tags release, then version bumps to `x.y.z-dev`
 
 ### Application definitions are JSON model trees
 
-A QForms "application" is a directory of JSON files (see `apps/test`, `apps/mongo`, `apps-ts/sample`). Each node has `@class`, `@attributes`, and child collections. The root `<name>.json` is an `Application` containing `databases` (→ tables → columns), `dataSources`, `actions`, and `pageLinks`; each page link points to a separate page JSON (`pages/<Page>/<Page>.json`) containing forms → fields/dataSources. The same model hierarchy is mirrored in three places:
+A QForms "application" is a directory of JSON files (see `apps/test`, `apps/mongo`, `apps/sample`). Each node has `@class`, `@attributes`, and child collections. The root `<name>.json` is an `Application` containing `databases` (→ tables → columns), `dataSources`, `actions`, and `pageLinks`; each page link points to a separate page JSON (`pages/<Page>/<Page>.json`) containing forms → fields/dataSources. The same model hierarchy is mirrored in three places:
 
 -   **Backend runtime** `src/backend/viewer/BkModel/` — `BkApplication`, `BkPage`, `BkForm` (`BkRowForm`/`BkTableForm`), `BkField` subtypes, `BkDataSource`/`BkPersistentDataSource`, `BkDatabase` (`BkSqlDatabase` → Postgres/MySQL, `BkNoSqlDatabase` → MongoDB). These load the JSON, execute queries, and serialize model data for the client.
 -   **Frontend runtime** `src/frontend/viewer/` — `Model/` (client-side data models) and `Controller/` (MVC: each `XxxController.ts` paired with a React `XxxView.tsx`, e.g. `ModelController/FormController/`).
@@ -46,7 +46,7 @@ Shared DTO/types between front and back live in `src/common` and `src/types.ts`.
 
 ### Server and routing
 
-`src/backend/BackHostApp.ts` is the server entry: resolves dir paths (`APPS_DIR_PATH` default `./apps`, `runtime/` for sessions), creates the Express + HTTP + WebSocket servers, and initializes four modules: `IndexModule`, `MonitorModule`, `ViewerModule`, `EditorModule`. Host projects extend it (e.g. `apps-ts/sample/SampleBackHostApp.ts`) and can subclass `BkApplication` for custom backend logic.
+`src/backend/BackHostApp.ts` is the server entry: resolves dir paths (`APPS_DIR_PATH` default `./apps`, `runtime/` for sessions), creates the Express + HTTP + WebSocket servers, and initializes four modules: `IndexModule`, `MonitorModule`, `ViewerModule`, `EditorModule`. Host projects extend it (e.g. `apps/sample/SampleBackHostApp.ts`) and can subclass `BkApplication` for custom backend logic.
 
 `src/backend/Router.ts` routes everything under `/:module/:appDirName/:appFileName/:env/:domain/` (GET/POST/PATCH/DELETE, plus `/*` for static files) to the viewer or editor module. `BkApplication` instances are created lazily per route and cached in `BackHostApp.applications`.
 

@@ -14,14 +14,14 @@ import {
     DeleteActionDto,
     Action,
     BkHelper,
+    BackHostApp,
 } from '../../dist';
-import { SampleBackHostApp } from '../../apps-ts/sample';
 import { HttpClient } from '../core/HttpClient';
 import { createDatabase, dropDatabase } from '../core/helper';
 
 const DB_NAME = 'sample-test';
 
-let app: SampleBackHostApp;
+let app: BackHostApp;
 let httpServer: Server;
 let httpClient: HttpClient;
 
@@ -29,7 +29,7 @@ beforeAll(async () => {
     await dropDatabase(DB_NAME);
     await createDatabase(DB_NAME);
     process.env.DB_NAME = DB_NAME;
-    app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
+    app = new BackHostApp({ srcDirPath: './apps' });
     await app.init();
     httpServer = app.getHttpServer();
     httpClient = new HttpClient(httpServer);
