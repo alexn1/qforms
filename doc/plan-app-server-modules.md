@@ -52,3 +52,4 @@
 - [x] Шаг 3: `apps/sample/sample.ts` (класс + `initCustomRoutes`), `start.ts`/`SampleBackHostApp.ts` удалены, `BackHostApp.initCustomRoutes()` вызывает хуки модулей. Проверено: сборка, curl (стандартный и кастомный URL), `SampleBackHostApp.test.ts`.
 - [x] Документация `AGENTS.md`.
 - Ограничение: в `.ts` нельзя именованно импортировать из `dist` (CJS-бандл): `import type` + `require`.
+- [x] `MIN_NODE_VERSION = '24'` (проверка major.minor). Технический минимум для `.ts` без компиляции — 22.18 (проверено: 22.17.1 не грузит, 22.18.0 грузит), но решено требовать 24, как в `.nvmrc` и `Dockerfile`.

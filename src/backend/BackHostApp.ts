@@ -42,7 +42,8 @@ declare const __non_webpack_require__: NodeRequire;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const MIN_NODE_VERSION = 14;
+// app modules may be .ts, loaded without compilation (type stripping)
+const MIN_NODE_VERSION = 24;
 
 export interface BackHostAppConfig {
     srcDirPath?: string;

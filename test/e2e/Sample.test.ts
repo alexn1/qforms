@@ -39,6 +39,17 @@ afterAll(async () => {
     await app.shutdown();
 });
 
+describe('app module', () => {
+    test('loaded from apps/sample/sample.ts', () => {
+        expect(Object.keys(app.appModules)).toEqual(['sample/sample']);
+    });
+
+    test('custom route from initCustomRoutes', async () => {
+        const { status } = await httpClient.get('/page/Page1/5-abc');
+        expect(status).toBe(200);
+    });
+});
+
 describe('Person', () => {
     const PATHNAME = '/viewer/sample/sample/local/domain/';
     const PAGE = 'Person';

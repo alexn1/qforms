@@ -817,7 +817,7 @@ const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const MIN_NODE_VERSION = 14;
+const MIN_NODE_VERSION = 24;
 class BackHostApp {
     constructor(config = {}) {
         this.config = config;

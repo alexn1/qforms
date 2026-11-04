@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, etc
 
 ## Overview
 
-QForms is a fullstack platform (Express backend + React 17 frontend, TypeScript) for building web UIs over databases (PostgreSQL, MySQL, MongoDB). It is published as an npm package (`main: dist/index.js`); host projects consume it and supply their own application definitions. Uses Node 24 (`.nvmrc`, `Dockerfile`); `MIN_NODE_VERSION` in `BackHostApp.ts` (currently 14) is the minimum enforced at runtime.
+QForms is a fullstack platform (Express backend + React 17 frontend, TypeScript) for building web UIs over databases (PostgreSQL, MySQL, MongoDB). It is published as an npm package (`main: dist/index.js`); host projects consume it and supply their own application definitions. Uses Node 24 (`.nvmrc`, `Dockerfile`); `MIN_NODE_VERSION` in `BackHostApp.ts` (currently 24) is the minimum enforced at runtime.
 
 ## Commands
 
@@ -28,7 +28,7 @@ npm run prettier:write        # format src (4 spaces, single quotes, printWidth 
 Testing caveats:
 
 -   e2e tests (`test/e2e/`) run against the **built** `dist/` (`codeRootDirPath: './dist'`, or `import ... from '../../dist'`), so run `npm run build` after changing `src/` before running them.
--   `SampleBackHostApp.test.ts` recreates a Docker Postgres container `qforms-postgres-test` on port 5433 (`test/core/helper.ts`); Docker must be running.
+-   `Sample.test.ts` recreates a Docker Postgres container `qforms-postgres-test` on port 5433 (`test/core/helper.ts`); Docker must be running.
 
 Release flow: `npm run release` (tags release, then version bumps to `x.y.z-dev`). Commit messages use short prefixes like `fix:`, `refactor:`.
 
@@ -46,7 +46,7 @@ Shared DTO/types between front and back live in `src/common` and `src/types.ts`.
 
 ### Server and routing
 
-`src/backend/BackHostApp.ts` is the server entry: resolves dir paths (`APPS_DIR_PATH` default `./apps`, `runtime/` for sessions), creates the Express + HTTP + WebSocket servers, and initializes four modules: `IndexModule`, `MonitorModule`, `ViewerModule`, `EditorModule`. Host projects can still extend it, but an application no longer needs a custom `start.ts`: during `init()` (`loadAppModules`) the server loads `<appDir>/<appFileName>.js` or `.ts` (`.js` wins) next to each application JSON file, e.g. `apps/sample/sample.ts`. Such a module registers its `BkApplication` subclass with `BkHelper.registerGlobalClass` (resolved via the `modelClass` attribute) and may export `initCustomRoutes(hostApp)`, which the default `BackHostApp.initCustomRoutes()` calls to add custom routes (`createCustomRoute`). A broken module is logged and skipped. `.ts` is loaded as is (no transpilation), which needs Node with type stripping (22.18+/23.6+, so fine on Node 24) or bun; the module is loaded with `require`, and `dist` is a CommonJS bundle, so import it with `import type` + `require('../../dist')`, not named ESM imports (see `apps/sample/sample.ts`).
+`src/backend/BackHostApp.ts` is the server entry: resolves dir paths (`APPS_DIR_PATH` default `./apps`, `runtime/` for sessions), creates the Express + HTTP + WebSocket servers, and initializes four modules: `IndexModule`, `MonitorModule`, `ViewerModule`, `EditorModule`. Host projects can still extend it, but an application no longer needs a custom `start.ts`: during `init()` (`loadAppModules`) the server loads `<appDir>/<appFileName>.js` or `.ts` (`.js` wins) next to each application JSON file, e.g. `apps/sample/sample.ts`. Such a module registers its `BkApplication` subclass with `BkHelper.registerGlobalClass` (resolved via the `modelClass` attribute) and may export `initCustomRoutes(hostApp)`, which the default `BackHostApp.initCustomRoutes()` calls to add custom routes (`createCustomRoute`). A broken module is logged and skipped. `.ts` is loaded as is (no transpilation), which needs Node with type stripping (enforced by `MIN_NODE_VERSION`) or bun; the module is loaded with `require`, and `dist` is a CommonJS bundle, so import it with `import type` + `require('../../dist')`, not named ESM imports (see `apps/sample/sample.ts`).
 
 `src/backend/Router.ts` routes everything under `/:module/:appDirName/:appFileName/:env/:domain/` (GET/POST/PATCH/DELETE, plus `/*` for static files) to the viewer or editor module. `BkApplication` instances are created lazily per route and cached in `BackHostApp.applications`.
 
