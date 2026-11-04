@@ -17,17 +17,19 @@ import {
 } from '../../dist';
 import { SampleBackHostApp } from '../../apps-ts/sample';
 import { HttpClient } from '../core/HttpClient';
-import { createDatabase, restartLocalDb, stopLocalDb, query } from '../core/helper';
+import { createDatabase, dropDatabase, query } from '../core/helper';
+
+const DB_NAME = 'sample-test';
 
 let app: SampleBackHostApp;
 let httpServer: Server;
 let httpClient: HttpClient;
 
 beforeAll(async () => {
-    await restartLocalDb();
-    await createDatabase('sample');
+    await dropDatabase(DB_NAME);
+    await createDatabase(DB_NAME);
     await query(
-        'sample',
+        DB_NAME,
         `create table person (
             id serial NOT NULL,
             created timestamptz,
@@ -36,7 +38,7 @@ beforeAll(async () => {
             last_name varchar(255)
         )`,
     );
-    process.env.PORT = '5433';
+    process.env.DB_NAME = DB_NAME;
     app = new SampleBackHostApp({ srcDirPath: './apps-ts' });
     await app.init();
     httpServer = app.getHttpServer();
@@ -45,7 +47,6 @@ beforeAll(async () => {
 
 afterAll(async () => {
     await app.shutdown();
-    await stopLocalDb();
 });
 
 describe('Person', () => {

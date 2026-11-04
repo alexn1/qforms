@@ -34,7 +34,7 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "database",
-                        "value": "\"sample\""
+                        "value": "process.env.DB_NAME || \"sample\""
                     }
                 },
                 {
